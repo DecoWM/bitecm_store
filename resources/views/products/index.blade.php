@@ -25,7 +25,7 @@
         <div class="col-xs-12">
           <div id="list-equipos">
             <div class="row">
-              @foreach ($products as $product)
+@foreach ($products as $product)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="producto">
                   <div class="content-product text-center">
@@ -39,7 +39,7 @@
                   </div>
                 </div>
               </div>
-              @endforeach
+@endforeach
             </div>
           </div>
         </div>
