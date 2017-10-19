@@ -13,6 +13,7 @@ class Product extends Model
     protected $visible = [
         'product_id',
         'product_name',
-        'product_brand'
+        'product_brand',
+        'product_price'
     ];
 }

@@ -11,8 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', 'ProductController@index');
 
-Route::get('/product', 'ProductController@getAll');
+Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
