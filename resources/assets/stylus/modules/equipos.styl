@@ -1,0 +1,450 @@
+// HOME STYLUS
+
+// $Color-Primary = #f4dd4a
+// $Color-Primary-Bold = #ffe741
+// $Color-Primary-UBold = #ffb212
+
+// $Color-Secundary-Light = #169599
+// $Color-Secundary = #008994
+// $Color-Secundary-Bold = #008b95
+// $Color-Secundary-UBold = #00838b
+
+
+// $Color-Gray-Thin = #e4e3e3
+// $Color-Gray-ULight = #cecece
+// $Color-Gray-Light = #797878
+// $Color-Gray = #4e4e4e
+
+.title-page
+	border-bottom 1px solid $Color-Gray-Bold
+	padding-bottom 20px
+	margin 40px 0
+	h2
+		margin-bottom 0
+		text-transform uppercase
+		color $Color-Secundary
+		padding-left 15px
+		font-size $Fz-20
+	
+#filter-product
+	@media (max-width 736px)
+		display none
+	.filter-item
+		span
+			color $Color-Secundary
+			width 60px
+			display inline-block
+			margin-right 15px
+		select
+			line-height 18px
+			width 60%
+			height 40px
+			border-color $Color-Secundary
+			background $Color-White
+			color $Color-Gray-Light
+			border-radius 0
+			-webkit-appearance: none;
+			-webkit-border-radius: 0px;
+			padding-left 12px
+			font-size $Fz-13
+			position relative
+			@media (max-width 1024px)
+				width 50%
+		&:before
+			content ""
+			width 12px
+			height 1px
+			position absolute
+			top 20px
+			right 33px
+			background-color: $Color-Secundary
+			transform rotate(45deg)
+			z-index 99
+		&:after
+			content ""
+			width 12px
+			height 1px
+			position absolute
+			top 20px
+			right 25px
+			background-color: $Color-Secundary
+			transform rotate(-45deg)
+			z-index 99
+
+#search-product
+	position relative
+	width 100%
+	margin-bottom 50px
+	@media (max-width 736px)
+		margin-bottom 20px
+		width 100%
+	.form-control
+		padding-right 50px
+		padding-top 0
+		padding-bottom 0
+		border-radius 0
+		border 1px solid $Color-Secundary
+		background-color: $Color-White
+		width 100%
+		line-height 40px
+		height 40px
+		font-size 13px
+	.btn-search
+		color $Color-Secundary
+		position absolute
+		top 0px
+		right 0px
+		height 40px
+		padding-top 0
+		padding-bottom 0
+		border none
+		background-color: transparent
+		&:hover
+			background-color: transparent
+			box-shadow none
+
+.content-catalogo
+	border 1px solid $Color-Secundary
+	margin-bottom 20px
+	.title-select
+		padding-left 20px
+		border-bottom 1px solid $Color-Secundary
+		color $Color-Secundary
+		line-height 40px
+		position relative
+		.btn-acordion
+			position absolute
+			right 10px
+			top 10px
+			width 20px
+			height 20px
+			display none
+			&:before
+				content ""
+				width 12px
+				height 1px
+				position absolute
+				top 10px
+				right 8px
+				background-color: $Color-Secundary
+				transform rotate(45deg)
+				z-index 99
+			&:after
+				content ""
+				width 12px
+				height 1px
+				position absolute
+				top 10px
+				right 0px
+				background-color: $Color-Secundary
+				transform rotate(-45deg)
+				z-index 99
+			&:hover
+				cursor pointer
+			@media(max-width 480px)
+				display block
+		@media(max-width 480px)
+			border-bottom none
+	.select-item
+		padding-left 40px
+		padding-top 15px
+		padding-bottom 15px
+		.item
+			margin-bottom 10px
+			label
+				margin-bottom 0
+				color $Color-Gray-Light
+				font-weight $Fw-Regular
+				margin-left 5px
+			&:last-child
+				margin-bottom 0
+		@media (max-width 768px)
+			padding-left 15px
+		@media (max-width 767px)
+			display none
+		&.active
+			display block
+				
+#list-equipos
+	margin-bottom 0
+	.producto
+		border 1px solid $Color-Gray-ULight
+		padding 30px 0
+		margin-bottom 30px
+		.image-product
+			img
+				transition 0.5s ease all
+			@media(max-width 480px)
+				@media(min-width 321px)
+					width 50%
+		.content-product
+			width 100%
+			bottom 20px
+			ul.icon-list
+				display flex
+				justify-content center
+				li
+					margin 0 6px
+					button
+						background-color $Color-White
+						border 1px solid $Color-Gray-ULight
+						border-radius 50%
+						height 40px
+						width 40px
+						transition .5s ease all
+						&:hover
+							background-color $Color-skyblue
+							border 1px solid transparent
+							span
+								color $Color-White
+						span
+							color $Color-Black
+							line-height 27px
+			.title-product
+				margin 20px 0
+				h3
+					font-weight $Fw-Regular
+					margin-bottom 0
+					font-size 20px
+			.price-product
+				font-weight $Fw-Light
+				font-size $Fz-30
+				font-family 'multicolore'
+				color $Color-Secundary
+				margin-bottom 10px
+			.plan-product
+				font-weight $Fw-Light
+				font-size 12px
+				margin-bottom 10px
+			.btn-product
+				text-align left
+				.btn-comprar
+					width 50%
+					padding-left 15px
+					@media (max-width 1024px)
+						width 100%
+						padding 0 15px
+					@media (max-width 736px)
+						width 50%
+						display inline-block
+						margin-bottom 0
+					@media (max-width 480px)
+						@media (min-width 321px)
+							width 100% 
+					.btn-default
+						background-color $Color-Primary
+						color $Color-Secundary
+						border none
+						text-transform uppercase
+						border-radius 0
+						width 100%
+						font-size $Fz-12
+						line-height 35px
+						padding-top 0
+						padding-bottom 0
+				.btn-comparar
+					text-transform uppercase
+					padding-left 10px
+					width 45%
+					font-size $Fz-12
+					color $Color-Secundary
+					text-align center
+					line-height 35px
+					margin-top 0
+					margin-bottom 0
+					@media (max-width 1024px)
+						width 100%
+						padding 0 15px
+						margin-top 0px
+					@media (max-width 736px)
+						width 45%
+						float right
+						display inline-block
+					@media (max-width 480px)
+						@media (min-width 321px)
+							width 100%
+							float none
+					.checkbox-compare
+						margin-right 10px
+						top 2px
+						@media (max-width 480px)
+							top 8px
+			@media(max-width 480px)
+				@media(min-width 321px)
+					width 50%
+					padding-right 30px
+		&:hover
+			border 1px solid $Color-Primary
+			&.catalogo
+				border none
+			.image-product
+				img
+					transform: scale(1.1, 1.1)
+					@media(max-width 736px)
+						transform none
+
+		&.active-comparar
+			border 1px solid $Color-Primary
+		@media(max-width 480px)
+			display flex
+		@media(max-width 321px)
+			display block
+		&.accesorio
+			.content-product
+				.title-product
+					margin-top 0
+					margin-bottom 15px
+				.btn-comprar
+					width 100%
+					padding 0 15%
+	#pagination-nav
+		text-align center
+		ul
+			li
+				&.active
+					a
+						color $Color-White
+						background-color: $Color-Secundary
+						border 1px solid $Color-Secundary
+				a
+					color $Color-Secundary
+					border 1px solid $Color-Gray-ULight
+					&:hover
+						background-color: $Color-Secundary
+						border 1px solid $Color-Secundary
+						color $Color-White
+						
+			
+	#list-equipos-comparar
+		color $Color-Secundary
+		font-size $Fz-14
+		position fixed
+		text-align center
+		transition 0.5s ease all
+		top 246px
+		right 50px
+		@media(max-width 1366px)
+			right 0
+			top 247px
+		@media(max-width 736px)
+			right 10%
+			left 10%
+			width 80%
+		@media(max-width 480px)
+			right 0
+			left 0
+			width 100%
+			background-color $Color-White
+		.equipos-comp
+			border 1px solid $Color-Secundary
+			background rgba(255, 255, 255,0.9)
+			padding 20px
+			padding-bottom 0
+			margin-bottom 10px
+			@media(max-width 1366px)
+				padding 10px
+				margin-bottom 5px
+			@media(max-width 480px)
+				background-color $Color-White
+				border none
+				margin-bottom 0
+				padding 0
+				width 60%
+			.title-equipos
+				span
+					font-size $Fz-18
+					@media(max-width 1366px)
+						font-size $Fz-16
+					@media(max-width 480px)
+						margin-right 5px
+						font-size $Fz-12
+						color $Color-Gray
+				p
+					font-size $Fz-11
+					margin-bottom 0
+					@media(max-width 1366px)
+						font-size $Fz-10
+					@media(max-width 480px)
+						font-size $Fz-12
+						color $Color-Gray
+				@media(max-width 480px)
+					display flex
+					padding 0 10px
+					line-height 35px
+					justify-content center
+			.list-equipos
+				ul
+					li
+						margin-bottom 10px
+						position relative
+						img
+							width 50px
+							@media(max-width 1366px)
+								width 35px
+						button
+							position absolute
+							background-color $Color-Secundary
+							border none
+							width 15px
+							height 15px
+							top 0px
+							left 13px
+							border-radius 10px
+							padding 0
+							@media(max-width 1366px)
+								left 15px
+							@media(max-width 736px)
+								left 40%
+							span
+								top 1px
+								left 2px
+								color $Color-White
+								font-size $Fz-13
+								position absolute
+				@media(max-width 480px)
+					display none
+		@media(max-width 480px)
+			border-top 2px solid $Color-Secundary
+			border-bottom 2px solid $Color-Secundary
+			display flex
+			z-index 999
+		.btn-comparar
+			text-transform uppercase
+			width 100%
+			font-size $Fz-12
+			color $Color-Secundary
+			background-color $Color-Primary
+			border none
+			border-radius 0
+			line-height 35px
+			padding-top 0
+			padding-bottom 0
+			a
+				color $Color-Secundary
+				&:hover
+					text-decoration none
+			@media(max-width 480px)
+				width 40%
+				background-color: transparent
+				position relative
+				&:before
+					content ""
+					width 12px
+					height 1px
+					position absolute
+					top 14px
+					right 10px
+					background-color: $Color-Secundary
+					transform rotate(45deg)
+					z-index 99
+				&:after
+					content ""
+					width 12px
+					height 1px
+					position absolute
+					top 22px
+					right 10px
+					background-color: $Color-Secundary
+					transform rotate(-45deg)
+					z-index 99
+							

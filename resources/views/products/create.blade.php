@@ -35,15 +35,15 @@
                 <!-- <p class="help-block">Help text here.</p> -->
               </div>
               <hr>
-              @if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-              @endif
+@if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+@foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+@endforeach
+                </ul>
+              </div>
+@endif
               <button type="submit" class="btn btn-success pull-right" name="button">Registrar</button>
               <a href="{{route('product.index')}}" class="btn btn-primary">Regresar</a>
           </form>

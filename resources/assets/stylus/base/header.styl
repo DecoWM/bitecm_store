@@ -1,0 +1,201 @@
+// HEADER STYLUS
+
+
+// $Color-Primary = #f4dd4a
+// $Color-Primary-Bold = #ffe741
+// $Color-Primary-UBold = #ffb212
+
+// $Color-Secundary-Light = #169599
+// $Color-Secundary = #008994
+// $Color-Secundary-Bold = #008b95
+// $Color-Secundary-UBold = #00838b
+
+
+// $Color-Gray-Thin = #e4e3e3
+// $Color-Gray-ULight = #cecece
+// $Color-Gray-Light = #797878
+// $Color-Gray = #4e4e4e
+
+header
+	color $Color-Gray-Light
+	#site-header
+		padding-top 30px
+		padding-bottom 20px
+		.container
+			.select-persona
+				ul
+					li
+						&:first-child
+							border-right 1px solid $Color-Gray-Light
+							margin-right 20px
+							padding-right 20px
+						a
+							padding-top 0
+							padding-bottom 0
+							color $Color-Gray-Light
+							line-height 25px
+							&:hover
+								background-color: transparent
+							&:first-child
+								padding 0
+				@media(max-width 992px)
+					@media(min-width 776px)
+						float right !important
+						margin-bottom 10px
+				@media(max-width 776px)
+					display none
+
+
+			.info-bitel
+				ul
+					display flex
+					margin-bottom 0
+					@media(max-width 776px)
+						display block
+						float right
+					li
+						line-height 25px
+						margin-left 20px
+						&:first-child
+							border-right 1px solid $Color-Gray-Light
+							padding-right 20px
+							@media(max-width 776px)
+								border-right none
+								padding-right 0
+						&.cart
+							position relative
+							padding-right 50px
+							@media(max-width 776px)
+								display none
+							a
+								padding-left 20px
+								position absolute
+								bottom 0px
+								right 0px
+								width 57px
+								height 40px
+								span
+									font-size 30px
+									line-height 13px
+									color $Color-Gray-Light
+									&.icon-cart
+										// background url(../images/header/svg/icon-cart.svg) no-repeat 0 0
+										background-size cover
+										height 30px
+										width 30px
+										display inline-block
+										position inherit
+										bottom 0px
+									&.icon-count
+										position inherit
+										top 0px
+										right -10px
+										font-size 10px
+										text-align center
+										line-height 20px
+										padding-top 2px
+										background-color $Color-Secundary
+										border-radius 50%
+										min-width 22px
+										min-height 20px
+										color $Color-White
+										transition 0.5s ease all
+							&:hover
+								span
+									&.icon-count
+										background-color $Color-Primary
+						&.search
+							#search
+								position relative
+								.form-control
+									padding-right 50px
+									height 25px
+									padding-top 0
+									padding-bottom 0
+									border-radius 10px 10px
+									border none
+									background-color: $Color-Gray-Thin
+									width 200px
+									line-height 25px
+									font-size 13px
+								.btn-search
+									color $Color-Secundary
+									position absolute
+									top 0px
+									right 0px
+									height 25px
+									padding-top 0
+									padding-bottom 0
+									border none
+									background-color: transparent
+									&:hover
+										background-color: transparent
+										box-shadow none
+							@media(max-width 776px)
+								display none
+
+nav#nav-bitel
+	background-color: $Color-Primary
+	border 0
+	border-radius 0
+	padding 0px
+	margin-bottom 0px
+	transition 0.6s ease all
+	.container
+		.navbar-header
+			.navbar-toggle
+				background-color transparent
+				border none
+				margin-top 14px
+				span
+					background-color $Color-Secundary
+			a.navbar-brand
+				padding 0
+				// background url(../images/header/svg/logo.svg) no-repeat 0 5px
+				width 220px
+				margin-top 10px
+				@media(max-width 736px)
+					margin-left 12px
+					margin-top 5px
+					width 190px
+				h1
+					margin 0
+					text-indent -555px
+					overflow hidden
+		#navbar
+			border-color transparent
+			@media(max-width 736px)
+				background-color $Color-Secundary
+			ul
+				@media(max-width 736px)
+					margin 0
+				li
+					a
+						color $Color-Secundary
+						line-height 40px
+						@media(max-width 736px)
+							line-height 20px
+					&.active
+						a
+							background-color: $Color-Secundary
+							color $Color-White
+							line-height 40px
+						@media(max-width 736px)
+							a
+								line-height 20px
+			&.in
+				ul
+					li
+						border-bottom 1px solid rgba(255, 255, 255, 0.36)
+						&:last-child
+							border-bottom none
+						a
+							color $Color-Primary
+							&:hover
+								color $Color-White
+	@media(max-width 480px)
+		&.nav-fixed
+			position: fixed
+			top 0px
+			width 100%;
+			z-index 9999

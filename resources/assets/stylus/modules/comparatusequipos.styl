@@ -1,0 +1,219 @@
+// HOME STYLUS
+
+// $Color-Primary = #f4dd4a
+// $Color-Primary-Bold = #ffe741
+// $Color-Primary-UBold = #ffb212
+
+// $Color-Secundary-Light = #169599
+// $Color-Secundary = #008994
+// $Color-Secundary-Bold = #008b95
+// $Color-Secundary-UBold = #00838b
+
+
+// $Color-Gray-Thin = #e4e3e3
+// $Color-Gray-ULight = #cecece
+// $Color-Gray-Light = #797878
+// $Color-Gray = #4e4e4e
+
+.title-page
+	border-bottom 1px solid $Color-Gray-Bold
+	padding-bottom 20px
+	margin 40px 0
+	h2
+		margin-bottom 0
+		text-transform uppercase
+		color $Color-Secundary
+		padding-left 15px
+		font-size $Fz-20
+	
+				
+#compara-tus-equipos
+	display flex
+	@media(max-width 736px)
+		display block
+	.info-lista
+		padding-top 346px
+		width 20%
+		font-size  $Fz-12
+		@media(max-width 736px)
+			display none
+		.especificaciones
+				border 1px solid $Color-Border
+				border-right none
+				div
+					box-sizing border-box
+					border-bottom 1px solid $Color-Border
+					span
+						color $Color-Secundary
+						margin-left 10px
+						font-size $Fz-11
+						@media(max-width 736px)
+							display block
+					&.bg-gray
+						line-height 39px
+						background-color $Color-Gray-Bg
+						@media(max-width 736px)
+							line-height 25px
+					&.bg-white
+						line-height 39px
+						box-sizing: border-box
+						@media(max-width 736px)
+							line-height 25px
+					&:last-child
+						border-bottom none
+	.lista-equipos
+		width 80%
+		@media(max-width 736px)
+			width 100%
+		.equipo-seleccionado
+			@media(max-width 736px)
+				margin 0 3px
+			.equipo
+				border 1px solid $Color-Gray-ULight
+				padding 30px 0
+				margin-bottom 10px
+				.image-product
+					img
+						transition 0.5s ease all
+						margin 0 auto
+						height 100px
+				.content-product
+					width 100%
+					bottom 20px
+					ul.icon-list
+						display flex
+						justify-content center
+						li
+							margin 0 6px
+							button
+								background-color $Color-White
+								border 1px solid $Color-Gray-ULight
+								border-radius 50%
+								height 40px
+								width 40px
+								transition .5s ease all
+								&:hover
+									background-color $Color-skyblue
+									border 1px solid transparent
+									span
+										color $Color-White
+								span
+									color $Color-Black
+									line-height 27px
+					.title-product
+						margin 20px 0
+						h3
+							font-weight $Fw-Regular
+							margin-bottom 0
+							font-size 20px
+					.price-product
+						font-weight $Fw-Light
+						font-size $Fz-30
+						font-family 'multicolore'
+						color $Color-Secundary
+						margin-bottom 10px
+					.plan-product
+						font-weight $Fw-Light
+						font-size $Fz-11
+						margin-bottom 10px
+					.btn-product
+						text-align center
+						.btn-vermas
+							width 70%
+							@media (max-width 1024px)
+								width 100%
+								padding 0 15px
+							@media (max-width 736px)
+								width 100%
+								display inline-block
+								margin-bottom 0
+							@media (max-width 480px)
+								@media (min-width 321px)
+									width 100% 
+							.btn-default
+								background-color $Color-Secundary
+								color $Color-White
+								border none
+								text-transform uppercase
+								border-radius 0
+								width 100%
+								font-size $Fz-12
+								line-height 35px
+								padding-top 0
+								padding-bottom 0
+						.btn-comparar
+							text-transform uppercase
+							padding-left 10px
+							width 45%
+							font-size $Fz-12
+							color $Color-Secundary
+							text-align center
+							line-height 35px
+							margin-top 0
+							margin-bottom 0
+							@media (max-width 1024px)
+								width 100%
+								padding 0 15px
+								margin-top 0px
+							@media (max-width 736px)
+								width 45%
+								float right
+								display inline-block
+							@media (max-width 480px)
+								@media (min-width 321px)
+									width 100%
+									float none
+							.checkbox-compare
+								margin-right 10px
+								top 2px
+								@media (max-width 480px)
+									top 8px
+				&.active-comparar
+					border 1px solid $Color-Primary
+			.especificaciones
+				border 1px solid $Color-Border
+				box-sizing border-box
+				font-size $Fz-12
+				div
+					border-bottom 1px solid $Color-Border
+					box-sizing border-box
+					&.bg-gray
+						line-height 40px
+						background-color $Color-Gray-Bg
+						@media(max-width 736px)
+							background-color $Color-White
+							line-height 25px
+						span
+							display none
+							color $Color-Secundary
+							margin-left 10px
+							@media(max-width 736px)
+								display block
+						p
+							margin-bottom 0
+							text-align center
+					&.bg-white
+						line-height 40px
+						box-sizing: border-box
+						@media(max-width 736px)
+							line-height 25px
+						span
+							display none
+							color $Color-Secundary
+							margin-left 10px
+							@media(max-width 736px)
+								display block
+						p
+							margin-bottom 0
+							text-align center
+					&:last-child
+						border-bottom none
+			&:nth-child(even)
+				div
+					border-left none
+				@media(max-width 736px)
+					.equipo
+						border-left 1px solid $Color-Border
+					.especificaciones
+						border-left 1px solid $Color-Border
+				

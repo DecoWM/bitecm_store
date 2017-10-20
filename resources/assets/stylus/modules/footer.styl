@@ -1,0 +1,76 @@
+// FOOTER STYLUS
+
+// $Color-Primary = #f4dd4a
+// $Color-Primary-Bold = #ffe741
+// $Color-Primary-UBold = #ffb212
+
+// $Color-Secundary-Light = #169599
+// $Color-Secundary = #008994
+// $Color-Secundary-Bold = #008b95
+// $Color-Secundary-UBold = #00838b
+
+
+// $Color-Gray-Thin = #e4e3e3
+// $Color-Gray-ULight = #cecece
+// $Color-Gray-Light = #797878
+// $Color-Gray = #4e4e4e
+
+footer
+	margin-top 60px
+	padding-top 40px
+	padding-bottom 30px
+	background-color: $Color-Primary
+	color $Color-Secundary
+	.container
+		width 1000px
+		@media (max-width: 1024px)
+			width 100%
+		#mapa-sitio
+			border-bottom 1px solid $Color-Secundary
+			padding-bottom 15px
+			margin-bottom 20px
+			.row
+				.mapa
+					line-height 36px
+					font-weight $Fw-Regular
+				.logo-footer
+					img
+						width 90px
+		#info-footer
+			.row
+				.nav-footer
+					display inline-block
+					vertical-align top
+					padding-right 30px
+					ul
+						li
+							display
+							a
+								font-size $Fz-12
+								color $Color-Secundary
+						
+						
+				.social-media
+						float right
+						@media(max-width 480px)
+							float none
+							width 100%
+							margin-bottom 15px
+						ul
+							display flex
+							@media (max-width 480px)
+								justify-content center
+							li
+								margin 0 10px
+								&:last-child
+									margin-right 0
+								a
+									font-size 22px
+									color $Color-Secundary
+								
+			
+			
+
+		.copyright
+			color $Color-Gray-Light
+			font-size $Fz-12

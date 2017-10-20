@@ -1,0 +1,407 @@
+// HOME STYLUS
+
+// $Color-Primary = #ffe60d
+// $Color-Primary-Bold = #ffe741
+// $Color-Primary-UBold = #ffb212
+
+// $Color-Secundary-Light = #169599
+// $Color-Secundary = #008994
+// $Color-Secundary-Bold = #008b95
+// $Color-Secundary-UBold = #00838b
+
+
+// $Color-Gray-Thin = #e4e3e3
+// $Color-Gray-ULight = #cecece
+// $Color-Gray-Light = #797878
+// $Color-Gray = #4e4e4e
+
+#banner-principal
+	height auto
+	background-color: $Color-Gray-ULight
+	margin-bottom 30px
+	overflow hidden
+	.slider
+		img
+			width 100%
+			object-fit cover
+			height 396px
+			overflow hidden
+	.slick-prev
+		left 10px
+		z-index 99
+	.slick-next
+		right 10px
+		z-index 99
+	.slick-dots
+		bottom 10px
+		li
+			button:before
+				font-size 8px
+				color $Color-White
+
+section#equipos-vendidos
+	.container
+		.row
+			.heading
+				h2
+					color $Color-Secundary
+					padding-bottom 20px
+					margin-bottom 25px
+					font-size $Fz-26
+					font-family $Fw_Regular
+					position relative
+					&::before
+						position absolute
+						content ""
+						bottom 0px
+						width 45px
+						height 2px
+						left 0px
+						right 0
+						margin 0 auto
+						background $Color-Gray-ULight
+			.sub-heading
+				display flex
+				justify-content center
+				h3
+					margin 0 10px
+					font-size $Fz-20
+					position relative
+					&.opt1
+						a
+							color $Color-Secundary-UBold
+					&.opt2
+						a
+							color $Color-Primary-UBold
+			.content-tab-pro
+				margin-top 50px
+				height 452px
+				.producto
+					border 1px solid $Color-Gray-ULight
+					position relative
+					padding-top 48px
+					padding-bottom 124px
+					margin 0 10px
+					.state-product
+						position absolute
+						right 10px
+						span
+							display inline-block
+							padding 4px 13px
+							position relative
+							background-color $Color-Primary-UBold
+							font-size $Fz-12
+							color $Color-White
+							z-index 99
+							&:before
+								left -24px
+								top 0
+								border solid transparent
+								content ""
+								height 25px
+								width 0
+								position absolute
+								pointer-events none
+								border-color rgba(231,83,83,0)
+								border-right-color $Color-Primary-UBold
+								border-width 12px
+							&:after
+								content ""
+								width 5px
+								height 5px
+								background-color: $Color-White
+								position absolute
+								left 0px
+								top 10px
+								border-radius 50%
+							&.promo
+								color $Color-skyblue
+								background-color $Color-Primary
+								&:before
+									border-right-color $Color-Primary
+								&:after
+									background-color: $Color-skyblue
+					.image-product
+						img
+							transition 0.5s ease all
+							margin 0 auto
+					.content-product
+						position absolute
+						width 100%
+						bottom 20px
+						ul.icon-list
+							display flex
+							justify-content center
+							li
+								margin 0 6px
+								button
+									background-color $Color-White
+									border 1px solid $Color-Gray-ULight
+									border-radius 50%
+									height 40px
+									width 40px
+									transition .5s ease all
+									&:hover
+										background-color $Color-skyblue
+										border 1px solid transparent
+										span
+											color $Color-White
+									span
+										color $Color-Black
+										line-height 27px
+						.title-product
+							margin 20px 0
+							h4
+								font-weight $Fw-Light
+						.price-product
+							font-weight $Fw-Light
+					&.catalogo
+						padding 0
+						border 0
+						position relative
+						height 452px
+						overflow hidden
+						max-width 259px
+						// width auto !important
+						@media(max-width 480px)
+							max-width 100%
+							height auto
+							max-height 452px
+						img
+							width 100%
+							height 100%
+							object-fit cover
+						.btn-catalogo
+							position absolute
+							bottom 30px
+							text-align center
+							width 100%
+							.border-btn
+								background-color: rgba(0, 0, 0, .3)
+								padding 5px
+								display inline-block
+							.btn.btn-default
+								color $Color-White
+								font-size: $Fz-14
+								text-transform uppercase
+								background-color: $Color-Secundary-Light
+								border-radius 0
+								position relative
+								width 140px
+								height 34px
+								padding-top 0
+								padding-bottom 0
+								line-height 34px
+								z-index 99
+								border none
+					&:hover
+						border 1px solid $Color-Primary
+						&.catalogo
+							border none
+						.image-product
+							img
+								transform: scale(1.1, 1.1)
+
+#promociones
+		margin-top 50px
+	.container
+		.row
+			.promociones
+				@media(max-width 736px)
+					margin-bottom 15px
+				img
+					width 100%
+				&.image-left
+					padding-left 15px
+					@media (max-width: 480px)
+						padding-left 0
+				&.image-right
+					padding-right 15px
+					@media (max-width: 480px)
+						padding-right 0
+					
+section#equipos-promocion
+	margin-top 50px
+	.container
+		.row
+			.heading
+				h2
+					color $Color-Secundary
+					padding-bottom 20px
+					margin-bottom 25px
+					font-size $Fz-26
+					font-family $Fw_Regular
+					position relative
+					&::before
+						position absolute
+						content ""
+						bottom 0px
+						width 45px
+						height 2px
+						left 0px
+						right 0
+						margin 0 auto
+						background $Color-Gray-ULight
+			.sub-heading
+				display flex
+				justify-content center
+				h3
+					margin 0 10px
+					font-size $Fz-20
+					position relative
+					&.opt1
+						a
+							color $Color-Secundary-UBold
+					&.opt2
+						a
+							color $Color-Primary-UBold
+			.content-tab-pro
+				margin-top 50px
+				.producto
+					border 1px solid $Color-Gray-ULight
+					position relative
+					padding-top 30px
+					padding-bottom 174px
+					margin 0 10px
+					.state-product
+						position absolute
+						right 10px
+						z-index: 99
+						span
+							display inline-block
+							padding 4px 5px
+							position relative
+							background-color $Color-Primary-UBold
+							font-size $Fz-12
+							color $Color-White
+							span
+							display inline-block
+							padding 4px 13px
+							position relative
+							background-color $Color-Primary-UBold
+							font-size $Fz-12
+							color $Color-White
+							&:before
+								left -24px
+								top 0
+								border solid transparent
+								content ""
+								height 25px
+								width 0
+								position absolute
+								pointer-events none
+								border-color rgba(231,83,83,0)
+								border-right-color $Color-Primary-UBold
+								border-width 12px
+							&:after
+								content ""
+								width 5px
+								height 5px
+								background-color: $Color-White
+								position absolute
+								left 0px
+								top 10px
+								border-radius 50%
+							&.trending
+								color $Color-White
+								background-color $Color-Secundary
+								&:before
+									border-right-color $Color-Secundary
+								&:after
+									background-color: $Color-White
+							&.promo
+								color $Color-skyblue
+								background-color $Color-Primary
+								&:before
+									border-right-color $Color-Primary
+								&:after
+									background-color: $Color-skyblue
+							
+					.image-product
+						img
+							transition 0.5s ease all
+							margin 0 auto
+					.content-product
+						position absolute
+						width  100%
+						bottom 20px
+						ul.icon-list
+							display flex
+							justify-content center
+							li
+								margin 0 6px
+								button
+									background-color $Color-White
+									border 1px solid $Color-Gray-ULight
+									border-radius 50%
+									height 40px
+									width 40px
+									transition .5s ease all
+									&:hover
+										background-color $Color-skyblue
+										border 1px solid transparent
+										span
+											color $Color-White
+									span
+										color $Color-Black
+										line-height 27px
+						.title-product
+							margin 20px 0
+							h4
+								font-weight $Fw-Light
+						.price-product
+							font-weight $Fw-Light
+						.btn-comprar
+							margin-top 20px	
+							text-align center
+							width 100%
+							.btn.btn-default
+								padding 6px 20px
+								color $Color-White
+								font-size: $Fz-12
+								text-transform uppercase
+								background-color: $Color-Secundary-Light
+								border-radius 0
+								border none
+					&:hover
+						border 1px solid $Color-Primary
+						.image-product
+							img
+								transform: scale(1.1, 1.1)
+
+section#garantia
+	margin-top 40px	
+	.container
+		.row
+			.col-xs-4
+				.text-center
+					.image
+						width 100%
+						height 140px
+						@media (max-width: 480px)
+							height auto
+						img
+							&.garantia
+								height 120px	
+							&.delivery
+								height 80px
+								margin-top 30px	
+							&.pago-seguro
+								height 80px
+								margin-top 30px	
+							@media(max-width: 480px)
+								height auto !important
+								margin-top 0 !important
+								max-height 55px
+					h2
+						font-weight $Fw-Regular
+						color $Color-Secundary
+						margin-top 0
+						font-size $Fz-23
+						@media (max-width: 480px)
+							font-size $Fz-14
+							margin-top 15px
+					p
+						font-weight $Fw-Light
+						@media(max-width:480px)
+							display none
