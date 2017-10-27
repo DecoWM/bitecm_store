@@ -27,7 +27,6 @@ const app = new Vue({
         toggleBestSeller: function (str) {
             self = this;
             self.bestSeller=str;
-            console.log(self.bestSeller);
             this.$nextTick(function(){
                 $('.list-productos').slick('setPosition');
               // $('#banner-principal').get(0).slick.setPosition();
@@ -36,7 +35,6 @@ const app = new Vue({
         togglePromo: function (str) {
             self = this;
             self.promo = str;
-            console.log(self.promo);
             this.$nextTick(function(){
                 $('.promociones-tab').slick('setPosition');
               // $('#banner-principal').get(0).slick.setPosition();

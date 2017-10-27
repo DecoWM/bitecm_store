@@ -55,7 +55,8 @@
                     </div>
                     <div class="col-xs-7 col-sm-6">
                       <div class="detalle-product">
-                        <div class="price-product"><span>s/</span>59</div>
+                        {{-- <div class="price-product"><span>s/</span>59</div> --}}
+                        <div class="price-product"><span>s/</span>{{$product->product_price_prepaid}}</div>
                         <div class="plan-product">
                           <p>con <span>Megaplus S/.149 mensual</span></p>
                         </div>
@@ -147,10 +148,10 @@
               <div class="descripcion-detalle">
                 <ul class="list-unstyled">
                   <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">Android 6</span><span class="description-dispositivo">Sistema Operativo</span></li>
-                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory+0}}GB / {{$product->product_ram_memory+0}}GB RAM</span><span class="description-dispositivo">Memoria</span></li>
-                  <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">6”</span><span class="description-dispositivo">Pantalla</span></li>
-                  <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">13MP / 8MP</span><span class="description-dispositivo">Cámara</span></li>
-                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">1.5 GHz Octa Core</span><span class="description-dispositivo">Procesador</span></li>
+                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory + 0}} GB / {{$product->product_ram_memory + 0}} GB RAM</span><span class="description-dispositivo">Memoria</span></li>
+                  <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
+                  <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
+                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
               <div class="pdf-tecnica"><a>Descargar ficha técnica<span class="fa fa-download"></span></a></div>

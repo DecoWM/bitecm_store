@@ -3,8 +3,8 @@
           <div class="container">
             <div class="select-persona navbar-left">
               <ul class="nav navbar-nav">
-                <li><a href="#">Personas</a></li>
-                <li><a href="#">Empresas</a></li>
+                <li><a href="http://bitel.com.pe/">Personas</a></li>
+                <li><a href="http://empresas.bitel.com.pe/">Empresas</a></li>
               </ul>
             </div>
             <div class="info-bitel navbar-right">
