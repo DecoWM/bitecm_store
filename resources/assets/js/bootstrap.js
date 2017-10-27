@@ -11,6 +11,10 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+
+    var slick = require('slick-carousel');
+
+    var elevateZoom = require('@zeitiger/elevatezoom');
 } catch (e) {}
 
 /**

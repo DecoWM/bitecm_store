@@ -30,6 +30,58 @@ a:hover {
 .form-control:focus {
   box-shadow: none;
 }
+.slick-slider .slick-prev {
+  z-index: 9999;
+}
+.slick-slider .slick-prev:before {
+  opacity: 1 !important;
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  background-color: #cecece;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+.slick-slider .slick-prev:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  background-color: #cecece;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+.slick-slider .slick-next {
+  z-index: 9999;
+}
+.slick-slider .slick-next:before {
+  opacity: 1 !important;
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 6px;
+  right: 0;
+  background-color: #cecece;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+.slick-slider .slick-next:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 15px;
+  right: 0;
+  background-color: #cecece;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
 .slick-slider ul.slick-dots {
   display: none !important;
   border-radius: 10px;
@@ -61,7 +113,6 @@ a:hover {
   border-radius: 10px;
   width: 40px;
   height: 14px;
-button
 }
 @media (max-width: 736px) {
   .slick-slider ul.slick-dots {
@@ -2737,12 +2788,18 @@ footer .container .copyright {
   font-size: 12px;
 }
 #banner-principal {
-  height: auto;
+  height: 396px;
   background-color: #cecece;
   margin-bottom: 30px;
   overflow: hidden;
 }
-#banner-principal .slider img {
+#banner-principal .slick-track {
+  overflow: hidden;
+}
+#banner-principal .slick-track .slider {
+  overflow: hidden;
+}
+#banner-principal .slick-track .slider img {
   width: 100%;
   object-fit: cover;
   height: 396px;
@@ -2800,6 +2857,7 @@ section#equipos-vendidos .container .row .sub-heading h3.opt2 a {
 section#equipos-vendidos .container .row .content-tab-pro {
   margin-top: 50px;
   height: 452px;
+  display: flex;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto {
   border: 1px solid #cecece;
@@ -2807,6 +2865,8 @@ section#equipos-vendidos .container .row .content-tab-pro .producto {
   padding-top: 48px;
   padding-bottom: 124px;
   margin: 0 10px;
+  height: 452px;
+  overflow: hidden;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto .state-product {
   position: absolute;
@@ -2857,6 +2917,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .state-produ
 section#equipos-vendidos .container .row .content-tab-pro .producto .image-product img {
   transition: 0.5s ease all;
   margin: 0 auto;
+  max-width: 100%;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product {
   position: absolute;
@@ -2890,7 +2951,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   line-height: 27px;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product h4 {
   font-weight: 300;
@@ -2898,13 +2959,27 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .price-product {
   font-weight: 300;
 }
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .btn-comprar {
+  margin-top: 10px;
+  text-align: center;
+  width: 100%;
+}
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default {
+  padding: 6px 20px;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  background-color: #169599;
+  border-radius: 0;
+  border: none;
+}
 section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo {
   padding: 0;
   border: 0;
   position: relative;
   height: 452px;
   overflow: hidden;
-  max-width: 259px;
+  width: 25%;
 }
 @media (max-width: 480px) {
   section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo {
@@ -2952,6 +3027,9 @@ section#equipos-vendidos .container .row .content-tab-pro .producto:hover.catalo
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto:hover .image-product img {
   transform: scale(1.1, 1.1);
+}
+section#equipos-vendidos .container .row .content-tab-pro .list-productos {
+  width: 75%;
 }
 #promociones {
   margin-top: 50px;
@@ -3026,6 +3104,8 @@ section#equipos-promocion .container .row .content-tab-pro .producto {
   padding-top: 30px;
   padding-bottom: 174px;
   margin: 0 10px;
+  height: 484px;
+  overflow: hidden;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .state-product {
   position: absolute;
@@ -3093,6 +3173,7 @@ section#equipos-promocion .container .row .content-tab-pro .producto .state-prod
 section#equipos-promocion .container .row .content-tab-pro .producto .image-product img {
   transition: 0.5s ease all;
   margin: 0 auto;
+  max-width: 100%;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product {
   position: absolute;
@@ -3126,7 +3207,7 @@ section#equipos-promocion .container .row .content-tab-pro .producto .content-pr
   line-height: 27px;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product h4 {
   font-weight: 300;
@@ -3135,7 +3216,7 @@ section#equipos-promocion .container .row .content-tab-pro .producto .content-pr
   font-weight: 300;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .btn-comprar {
-  margin-top: 20px;
+  margin-top: 10px;
   text-align: center;
   width: 100%;
 }
@@ -3216,7 +3297,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding-left: 15px;
   font-size: 20px;
 }
-@media (max-width: 736px) {
+@media (max-width: 768px) {
   #filter-product {
     display: none;
   }
@@ -3273,7 +3354,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   width: 100%;
   margin-bottom: 50px;
 }
-@media (max-width: 736px) {
+@media (max-width: 768px) {
   #search-product {
     margin-bottom: 20px;
     width: 100%;
@@ -3377,7 +3458,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 .content-catalogo .select-item .item:last-child {
   margin-bottom: 0;
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .content-catalogo .select-item {
     padding-left: 15px;
   }
@@ -3397,9 +3478,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border: 1px solid #cecece;
   padding: 30px 0;
   margin-bottom: 30px;
+  overflow: hidden;
 }
 #list-equipos .producto .image-product img {
   transition: 0.5s ease all;
+  max-width: 100%;
 }
 @media (max-width: 480px) and (min-width: 321px) {
   #list-equipos .producto .image-product {
@@ -3450,6 +3533,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 10px;
+}
+#list-equipos .producto .content-product .price-product span {
+  font-size: 23px;
 }
 #list-equipos .producto .content-product .plan-product {
   font-weight: 300;
@@ -3918,6 +4004,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   color: #008c95;
   margin-bottom: 10px;
 }
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product span {
+  font-size: 23px;
+}
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .plan-product {
   font-weight: 300;
   font-size: 11px;
@@ -4072,39 +4161,99 @@ section#garantia .container .row .col-xs-4 .text-center p {
     border-left: 1px solid #c4c4c4;
   }
 }
-#image-equipo {
+#content-page {
   margin-top: 30px;
+}
+#content-page .title {
+  text-align: center;
+  display: none;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+#content-page .title h2 {
+  color: #008c95;
+  font-size: 35px;
+  line-height: 35px;
+  margin: 0;
+}
+@media (max-width: 480px) {
+  #content-page .title h2 {
+    margin: 0 auto;
+    margin-bottom: 15px;
+  }
+}
+@media (max-width: 480px) {
+  #content-page .title {
+    display: block;
+  }
+}
+#content-page .state {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+  display: none;
+}
+#content-page .state span {
+  line-height: 35px;
+  border-radius: 15px;
+  background-color: #ffe60d;
+  font-weight: 600;
+  font-size: 20px;
+  display: inline-block;
+  padding: 0 20px;
+  color: #008c95;
+}
+@media (max-width: 480px) {
+  #content-page .state {
+    display: block;
+  }
+}
+#content-page #image-equipo {
+  margin-top: 30px;
+}
+#content-page #image-equipo .image-product {
+  border: 1px solid #cecece;
+  margin: auto;
+  max-width: 315px;
+  overflow: hidden;
+}
+#content-page #image-equipo .image-product img {
+  height: 350px;
+  margin: 45px 0;
+  object-fit: contain;
+  width: 100%;
 }
 #descripcion-equipo {
   margin-top: 30px;
 }
-#descripcion-equipo header {
+#descripcion-equipo .header-section {
   margin-bottom: 30px;
 }
-#descripcion-equipo header .title {
+#descripcion-equipo .header-section .title {
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
   height: 35px;
 }
 @media (max-width: 736px) {
-  #descripcion-equipo header .title {
+  #descripcion-equipo .header-section .title {
     display: block;
     height: auto;
   }
 }
-#descripcion-equipo header .title h1 {
+#descripcion-equipo .header-section .title h1 {
   color: #008c95;
   font-size: 35px;
   line-height: 35px;
   margin: 0;
 }
 @media (max-width: 736px) {
-  #descripcion-equipo header .title h1 {
+  #descripcion-equipo .header-section .title h1 {
     margin-bottom: 10px;
   }
 }
-#descripcion-equipo header .title .state {
+#descripcion-equipo .header-section .title .state {
   text-align: center;
   width: 150px;
   line-height: 35px;
@@ -4112,74 +4261,147 @@ section#garantia .container .row .col-xs-4 .text-center p {
   background-color: #ffe60d;
 }
 @media (max-width: 736px) {
-  #descripcion-equipo header .title .state {
+  #descripcion-equipo .header-section .title .state {
     margin-top: 10px;
   }
 }
-#descripcion-equipo header .title .state span {
+#descripcion-equipo .header-section .title .state span {
   font-weight: 600;
   font-size: 20px;
   color: #008c95;
 }
-#descripcion-equipo header .descripcion {
+#descripcion-equipo .header-section .descripcion {
   font-size: $fz-12;
   line-height: 20px;
 }
-#descripcion-equipo .content-section {
-  display: flex;
-  margin-bottom: 30px;
+@media (max-width: 480px) {
+  #descripcion-equipo .header-section {
+    display: none;
+  }
 }
 #descripcion-equipo .content-section form {
   width: 100%;
 }
-#descripcion-equipo .content-section form .content-product {
-  margin-bottom: 20px;
-  display: flex;
-}
-@media (max-width: 736px) {
+@media (max-width: 480px) {
   #descripcion-equipo .content-section form .content-product {
-    display: block;
+    margin-bottom: 10px;
+  }
+}
+#descripcion-equipo .content-section form .content-product .select-product {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+#descripcion-equipo .content-section form .content-product .select-product span.title-select {
+  Color: #008c95;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 5px;
+  display: block;
+}
+#descripcion-equipo .content-section form .content-product .select-product select {
+  line-height: 18px;
+  width: 100%;
+  height: 30px;
+  border-color: #008c95;
+  background: #fff;
+  color: #008c95;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding-left: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+#descripcion-equipo .content-section form .content-product .select-product:before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 40px;
+  right: 23px;
+  background-color: #008c95;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+#descripcion-equipo .content-section form .content-product .select-product:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 40px;
+  right: 15px;
+  background-color: #008c95;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+@media (max-width: 480px) {
+  #descripcion-equipo .content-section form .content-product .select-product {
+    display: none;
   }
 }
 #descripcion-equipo .content-section form .content-product .color-product {
-  width: 30%;
+  width: 100%;
+  margin-top: 10px;
 }
 @media (max-width: 736px) {
   #descripcion-equipo .content-section form .content-product .color-product {
-    width: 40%;
-    float: left;
+    padding-left: 20px;
+    margin-top: 0px;
+  }
+}
+@media (max-width: 320px) {
+  #descripcion-equipo .content-section form .content-product .color-product {
+    padding-left: 0;
+  }
+  #descripcion-equipo .content-section form .content-product .color-product .radio-inline {
+    margin-left: 5px;
   }
 }
 #descripcion-equipo .content-section form .content-product .color-product fieldset legend {
+  display: block;
   color: #008c95;
   font-weight: 500;
   font-size: 15px;
+  line-height: 27px;
   border-bottom: none;
-  margin-bottom: 10px;
+  margin-bottom: 0;
+  width: 70px;
+  float: left;
 }
-#descripcion-equipo .content-section form .content-product .color-product fieldset input[type='radio'] {
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .color-product fieldset legend {
+    font-size: 18px;
+  }
+}
+@media (max-width: 480px) {
+  #descripcion-equipo .content-section form .content-product .color-product fieldset legend {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline input[type='radio'] {
   border-radius: 0;
   width: 18px;
   height: 18px;
   -webkit-appearance: none;
-  background-color: #f00;
   border-radius: 3px;
-  margin-right: 14px;
+  margin-right: 8px;
   position: relative;
 }
-#descripcion-equipo .content-section form .content-product .color-product fieldset input[type='radio']#negro {
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline input[type='radio'].negro {
   background-color: #000;
   border: 1px solid transparent;
 }
-#descripcion-equipo .content-section form .content-product .color-product fieldset input[type='radio']#blanco {
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline input[type='radio'].blanco {
   background-color: #fff;
   border: 1px solid #000;
 }
-#descripcion-equipo .content-section form .content-product .color-product fieldset input[type='radio']#gris {
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline input[type='radio'].gris {
   background-color: #e4e3e3;
   border: 1px solid transparent;
 }
-#descripcion-equipo .content-section form .content-product .color-product fieldset input[type='radio']:checked:after {
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline input[type='radio']:checked:after {
   width: 28px;
   height: 28px;
   border-radius: 0px;
@@ -4194,22 +4416,21 @@ section#garantia .container .row .col-xs-4 .text-center p {
   visibility: visible;
 }
 #descripcion-equipo .content-section form .content-product .detalle-product {
-  width: 50%;
   border: 1px solid #008c95;
   padding: 10px 0;
-}
-@media (max-width: 736px) {
-  #descripcion-equipo .content-section form .content-product .detalle-product {
-    width: 60%;
-    float: left;
-  }
+  margin-bottom: 10px;
+  text-align: center;
 }
 #descripcion-equipo .content-section form .content-product .detalle-product .price-product {
+  text-align: center;
   font-weight: 300;
   font-size: 30px;
   font-family: 'multicolore';
   color: #008c95;
   line-height: 35px;
+}
+#descripcion-equipo .content-section form .content-product .detalle-product .price-product span {
+  font-size: 23px;
 }
 #descripcion-equipo .content-section form .content-product .detalle-product .plan-product {
   font-size: 11px;
@@ -4225,36 +4446,206 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #descripcion-equipo .content-section form .content-product .detalle-product .tiempo-plan p {
   margin-bottom: 0;
 }
-#descripcion-equipo .content-section form .content-product .btn-comprar {
-  width: 40%;
-  padding-left: 15px;
+#descripcion-equipo .content-section form .content-product .btn-option {
+  color: #008c95;
+  font-weight: 600;
+  font-size: 17px;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  border: 1px solid #008c95;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input a {
+  text-decoration: none;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  z-index: 99;
+  line-height: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 25px;
+  color: #cecece;
+  transition: 0.5s ease all;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input a.btn-minus {
+  left: 0;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input a.btn-plus {
+  right: 0;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input a:hover {
+  color: #008c95;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: none;
+  text-align: center;
+  position: relative;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input:before {
+  content: "";
+  background: transparent;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+#descripcion-equipo .content-section form .content-product .btn-option .count-input:focus {
+  outline: none;
 }
 @media (max-width: 736px) {
   #descripcion-equipo .content-section form .content-product .btn-comprar {
     width: 100%;
-    float: left;
-    padding-right: 15px;
-    margin: 20px 0;
+    margin: 10px 0;
   }
 }
-#descripcion-equipo .content-section form .content-product .btn-comprar a {
-  background-color: #e4e3e3;
+@media (max-width: 320px) {
+  #descripcion-equipo .content-section form .content-product .btn-comprar {
+    padding: 0;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-comprar button {
+  width: 100%;
+  padding: 0;
+  background-color: #cecece;
+  border: none;
   color: #fff;
-  line-height: 88px;
+  line-height: 50px;
   display: block;
   text-align: center;
   text-transform: uppercase;
   font-weight: 600;
+  transition: 0.5s ease all;
 }
 @media (max-width: 736px) {
-  #descripcion-equipo .content-section form .content-product .btn-comprar a {
+  #descripcion-equipo .content-section form .content-product .btn-comprar button {
     line-height: 50px;
   }
 }
+#descripcion-equipo .content-section form .content-product .btn-comprar button:hover {
+  background-color: #008c95;
+}
+#descripcion-equipo .content-section form .content-product .btn-carrito {
+  margin-bottom: 8px;
+}
 @media (max-width: 736px) {
-  #descripcion-equipo .content-section form .option-product {
-    clear: both;
+  #descripcion-equipo .content-section form .content-product .btn-carrito {
+    width: 100%;
+    margin: 10px 0;
   }
+}
+@media (max-width: 320px) {
+  #descripcion-equipo .content-section form .content-product .btn-carrito {
+    padding: 0;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-carrito button {
+  width: 100%;
+  padding: 0;
+  background-color: #ffe60d;
+  border: none;
+  color: #008c95;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.5s ease all;
+}
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .btn-carrito button {
+    line-height: 50px;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-carrito button:hover {
+  background-color: #ffe60d;
+}
+#descripcion-equipo .content-section form .content-product .btn-linea {
+  margin-bottom: 8px;
+}
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .btn-linea {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+@media (max-width: 320px) {
+  #descripcion-equipo .content-section form .content-product .btn-linea {
+    padding: 0;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-linea button {
+  width: 100%;
+  padding: 0;
+  background-color: #cecece;
+  border: none;
+  color: #008c95;
+  line-height: 18px;
+  padding: 10px 0;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.5s ease all;
+}
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .btn-linea button {
+    line-height: 50px;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-linea button:hover {
+  background-color: #cecece;
+}
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .btn-comprar-prepago {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+@media (max-width: 320px) {
+  #descripcion-equipo .content-section form .content-product .btn-comprar-prepago {
+    padding: 0;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-comprar-prepago button {
+  width: 100%;
+  padding: 0;
+  background-color: #008c95;
+  border: none;
+  color: #fff;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.5s ease all;
+}
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .content-product .btn-comprar-prepago button {
+    line-height: 50px;
+  }
+}
+#descripcion-equipo .content-section form .content-product .btn-comprar-prepago button:hover {
+  background-color: #008c95;
+}
+@media (min-width: 768px) {
+  #descripcion-equipo .content-section form .content-product.equipo-prepago .col-xs-pull-7 {
+    right: 0;
+  }
+}
+@media (min-width: 768px) {
+  #descripcion-equipo .content-section form .content-product.equipo-prepago .col-xs-push-5 {
+    left: 0px;
+  }
+}
+#descripcion-equipo .content-section form .option-product {
+  margin-bottom: 40px;
 }
 #descripcion-equipo .content-section form .option-product fieldset legend {
   Color: #008c95;
@@ -4262,61 +4653,140 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-size: 15px;
   border-bottom: none;
 }
-#descripcion-equipo .content-section form .option-product fieldset .checkbox {
-  display: inline-block;
-  margin-right: 10px;
+@media (max-width: 736px) {
+  #descripcion-equipo .content-section form .option-product {
+    clear: both;
+  }
 }
-#descripcion-equipo .content-section form .option-product fieldset .checkbox label {
-  padding-left: 0;
+@media (max-width: 480px) {
+  #descripcion-equipo .content-section form .option-product {
+    display: none;
+  }
 }
-#descripcion-equipo .content-section form .option-product fieldset .checkbox label input[type='radio'] {
-  color: #f00;
+#descripcion-equipo .content-section form .movil-select-product {
+  margin-bottom: 10px;
+  display: none;
+  width: 100%;
+  position: relative;
 }
-#descripcion-equipo .content-section form .planes .title-plan {
+#descripcion-equipo .content-section form .movil-select-product select {
+  line-height: 20px;
+  width: 100%;
+  height: 40px;
+  border-color: #008c95;
+  background: #fff;
+  color: #008c95;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding-left: 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+#descripcion-equipo .content-section form .movil-select-product:before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 20px;
+  right: 33px;
+  background-color: #008c95;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+#descripcion-equipo .content-section form .movil-select-product:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background-color: #008c95;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+@media (max-width: 480px) {
+  #descripcion-equipo .content-section form .movil-select-product {
+    display: block;
+  }
+}
+#planes .title-plan {
   Color: #008c95;
   font-weight: 600;
-  font-size: 15px;
+  font-size: 16px;
   border-bottom: none;
 }
-#descripcion-equipo .content-section form .planes .select-plan {
-  margin-top: 30px;
+@media (max-width: 735px) {
+  #planes .title-plan {
+    font-weight: 400;
+    font-size: 17px;
+    text-align: center;
+  }
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan {
+#planes .select-plan {
+  margin-top: 20px;
+}
+#planes .select-plan .slick-prev {
+  left: -10px;
+}
+@media (max-width: 320px) {
+  #planes .select-plan .slick-prev {
+    left: -10px;
+  }
+}
+#planes .select-plan .slick-next {
+  right: 0px;
+}
+@media (max-width: 320px) {
+  #planes .select-plan .slick-next {
+    right: 0px;
+  }
+}
+#planes .select-plan .slick-track {
+  padding-top: 10px;
+}
+#planes .select-plan .slick-track .plan {
   text-align: center;
-  padding: 20px 0;
-  border: 1px solid #cecece;
-  margin: 0 5px;
-  transition: 0.5s ease all;
+  padding: 10px;
+  border: 1px solid transparent;
+  transition: 0.1s ease-out all;
+  margin: 0 10px;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan .title-plan {
-  font-size: 13px;
+#planes .select-plan .slick-track .plan .content-plan {
+  border: 1px solid #cecece;
+  padding: 25px 10px;
+}
+#planes .select-plan .slick-track .plan .content-plan .title-plan {
+  font-size: 17px;
   margin-bottom: 15px;
   display: block;
+  color: #4e4e4e;
+  font-weight: 400;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan .precio-plan {
+#planes .select-plan .slick-track .plan .content-plan .precio-plan {
   font-family: 'multicolore';
   color: #008c95;
-  font-size: 22px;
+  font-size: 28px;
   margin-bottom: 15px;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan .precio-plan span {
+#planes .select-plan .slick-track .plan .content-plan .precio-plan span {
   font-size: 10px;
   font-family: 'Montserrat';
   margin-left: 4px;
   color: initial;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan ul {
+#planes .select-plan .slick-track .plan .content-plan ul {
   margin: 0 auto;
   display: inline-block;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan ul li {
+#planes .select-plan .slick-track .plan .content-plan ul li {
   text-align: left;
   font-size: 11px;
   position: relative;
   padding-left: 20px;
   margin-bottom: 15px;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan ul li:before {
+#planes .select-plan .slick-track .plan .content-plan ul li:before {
   content: "";
   width: 5px;
   height: 5px;
@@ -4327,299 +4797,1092 @@ section#garantia .container .row .col-xs-4 .text-center p {
   top: 5px;
   left: 6px;
 }
-#descripcion-equipo .content-section form .planes .select-plan .plan:hover {
+#planes .select-plan .slick-track .plan .content-plan:hover {
   border: 1px solid #ffe60d;
 }
-.title-page {
-  border-bottom: 1px solid #a8a8a8;
+#planes .select-plan .slick-track .plan.plan-active {
+  border: 1px solid #ffe60d;
+}
+#planes .select-plan .slick-track .plan.plan-active .content-plan {
+  border: 1px solid #fff;
+}
+#planes .select-plan .slick-track .plan.plan-active .content-plan:hover {
+  border: 1px solid #fff;
+}
+@media (max-width: 735px) {
+  #planes .select-plan {
+    margin-top: 5px;
+  }
+}
+#especificaciones-tecnicas .title-detalle {
+  border-bottom: 1px solid #cecece;
   padding-bottom: 20px;
   margin: 35px 0;
 }
-.title-page h2 {
+#especificaciones-tecnicas .title-detalle h4 {
   margin-bottom: 0;
   text-transform: uppercase;
   color: #008c95;
   padding-left: 15px;
   font-size: 20px;
+  font-weight: 500;
 }
-#compara-tus-equipos {
-  display: flex;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos {
-    display: block;
+@media (max-width: 480px) {
+  #especificaciones-tecnicas .title-detalle h4 {
+    font-size: 17px;
+    padding-left: 0;
+    text-align: center;
   }
 }
-#compara-tus-equipos .info-lista {
-  padding-top: 346px;
-  width: 20%;
-  font-size: 12px;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle {
+  margin-bottom: 30px;
 }
-@media (max-width: 736px) {
-  #compara-tus-equipos .info-lista {
-    display: none;
-  }
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul {
+  margin-bottom: 0;
 }
-#compara-tus-equipos .info-lista .especificaciones {
-  border: 1px solid #c4c4c4;
-  border-right: none;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul .slick-prev {
+  left: 0;
 }
-#compara-tus-equipos .info-lista .especificaciones div {
-  box-sizing: border-box;
-  border-bottom: 1px solid #c4c4c4;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul .slick-next {
+  right: 10px;
 }
-#compara-tus-equipos .info-lista .especificaciones div span {
-  color: #008c95;
-  margin-left: 10px;
-  font-size: 11px;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .info-lista .especificaciones div span {
-    display: block;
-  }
-}
-#compara-tus-equipos .info-lista .especificaciones div.bg-gray {
-  line-height: 39px;
-  background-color: #f4f4f4;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .info-lista .especificaciones div.bg-gray {
-    line-height: 25px;
-  }
-}
-#compara-tus-equipos .info-lista .especificaciones div.bg-white {
-  line-height: 39px;
-  box-sizing: border-box;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .info-lista .especificaciones div.bg-white {
-    line-height: 25px;
-  }
-}
-#compara-tus-equipos .info-lista .especificaciones div:last-child {
-  border-bottom: none;
-}
-#compara-tus-equipos .lista-equipos {
-  width: 80%;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos {
-    width: 100%;
-  }
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado {
-    margin: 0 3px;
-  }
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
-  border: 1px solid #cecece;
-  padding: 30px 0;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li {
+  padding: 0 10px;
+  text-align: center;
   margin-bottom: 10px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product img {
-  transition: 0.5s ease all;
-  margin: 0 auto;
-  height: 100px;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li img {
+  max-width: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product {
-  width: 100%;
-  bottom: 20px;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li span {
+  display: block;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list {
-  display: flex;
-  justify-content: center;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li span.title-dispositivo {
+  font-size: 15px;
+  margin-bottom: 5px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list li {
-  margin: 0 6px;
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li span.description-dispositivo {
+  font-size: 12px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list li button {
+@media (max-width: 480px) {
+  #especificaciones-tecnicas .content-detalle .descripcion-detalle {
+    border: 1px solid #a8a8a8;
+    padding: 20px 0;
+  }
+}
+#especificaciones-tecnicas .content-detalle .pdf-tecnica a {
+  display: inline-block;
+  float: right;
+  border: 1px solid #008c95;
+  color: #008c95;
+  line-height: 35px;
+  padding: 0 20px;
+  font-weight: 600;
   background-color: #fff;
-  border: 1px solid #cecece;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  transition: 0.5s ease all;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list li button:hover {
-  background-color: #00c3d3;
+#especificaciones-tecnicas .content-detalle .pdf-tecnica a span {
+  margin-left: 10px;
+}
+#especificaciones-tecnicas .content-detalle .pdf-tecnica a span:before {
+  color: #008c95;
+  font-size: 16px;
+}
+#especificaciones-tecnicas .content-detalle .pdf-tecnica a:hover {
+  text-decoration: none;
+}
+@media (max-width: 480px) {
+  #especificaciones-tecnicas .content-detalle .pdf-tecnica a {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  #especificaciones-tecnicas .content-detalle .pdf-tecnica {
+    padding: 0 20px;
+    display: block;
+    height: 37px;
+  }
+}
+.ver-mas-equipo {
+  margin: 35px 0;
+}
+.ver-mas-equipo .title-detalle {
+  border-bottom: 1px solid #cecece;
+  border-right: 1px solid #cecece;
+  padding-bottom: 20px;
+  position: relative;
+}
+.ver-mas-equipo .title-detalle .btn-vmas {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:before {
+  opacity: 1 !important;
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background-color: #008c95;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: #008c95;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:hover {
+  cursor: pointer;
+}
+@media (max-width: 480px) {
+  .ver-mas-equipo .title-detalle .btn-vmas {
+    right: 10px;
+    top: -3px;
+  }
+}
+.ver-mas-equipo .title-detalle h4 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #008c95;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media (max-width: 480px) {
+  .ver-mas-equipo .title-detalle h4 {
+    font-size: 15px;
+    padding-left: 0;
+  }
+}
+@media (max-width: 320px) {
+  .ver-mas-equipo .title-detalle h4 {
+    font-size: 12px;
+  }
+}
+.ver-mas-equipo .content-detalle {
+  margin-top: 15px;
+}
+#producto-disponibles .title-detalle {
+  border-bottom: 1px solid #008c95;
+  padding-bottom: 20px;
+  margin: 35px 0;
+  position: relative;
+}
+#producto-disponibles .title-detalle h5 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #008c95;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media (max-width: 480px) {
+  #producto-disponibles .title-detalle h5 {
+    font-size: 15px;
+    padding-left: 0;
+  }
+}
+@media (max-width: 320px) {
+  #producto-disponibles .title-detalle h5 {
+    font-size: 12px;
+  }
+}
+#producto-disponibles .list-producto {
+  margin: 0 20px;
   border: 1px solid transparent;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list li button:hover span {
-  color: #fff;
+#producto-disponibles .list-producto .slick-prev {
+  left: 20px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product ul.icon-list li button span {
-  color: #000;
-  line-height: 27px;
+@media (max-width: 320px) {
+  #producto-disponibles .list-producto .slick-prev {
+    left: 10px;
+  }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .title-product {
+#producto-disponibles .list-producto .slick-next {
+  right: 30px;
+}
+@media (max-width: 320px) {
+  #producto-disponibles .list-producto .slick-next {
+    right: 20px;
+  }
+}
+#producto-disponibles .list-producto .producto {
+  padding: 20px;
+  border: 1px solid #cecece;
+  margin: 0 10px;
+}
+#producto-disponibles .list-producto .producto .image-product img {
+  margin: 0 auto;
+}
+#producto-disponibles .list-producto .producto .content-product .title-product {
   margin: 20px 0;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .title-product h3 {
+#producto-disponibles .list-producto .producto .content-product .title-product h3 {
   font-weight: 400;
   margin-bottom: 0;
   font-size: 20px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product {
+#producto-disponibles .list-producto .producto .content-product .price-product {
   font-weight: 300;
   font-size: 30px;
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 10px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .plan-product {
-  font-weight: 300;
-  font-size: 11px;
-  margin-bottom: 10px;
+#producto-disponibles .list-producto .producto .content-product .price-product span {
+  font-size: 23px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product {
-  text-align: center;
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-vermas {
-  width: 70%;
-}
-@media (max-width: 1024px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-vermas {
-    width: 100%;
-    padding: 0 15px;
-  }
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-vermas {
-    width: 100%;
-    display: inline-block;
-    margin-bottom: 0;
-  }
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-vermas .btn-default {
-  background-color: #008c95;
+#producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default {
+  text-transform: uppercase;
+  padding: 0 20px;
+  font-size: 12px;
   color: #fff;
-  border: none;
-  text-transform: uppercase;
-  border-radius: 0;
-  width: 100%;
-  font-size: 12px;
-  line-height: 35px;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-@media (max-width: 480px) and (min-width: 321px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-vermas {
-    width: 100%;
-  }
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar {
-  text-transform: uppercase;
-  padding-left: 10px;
-  width: 45%;
-  font-size: 12px;
-  color: #008c95;
   text-align: center;
-  line-height: 35px;
+  line-height: 40px;
   margin-top: 0;
   margin-bottom: 0;
+  background-color: #008c95;
+  border-radius: 0;
 }
 @media (max-width: 1024px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar {
+  #producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default {
     width: 100%;
-    padding: 0 15px;
-    margin-top: 0px;
   }
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar {
-    width: 45%;
-    float: right;
-    display: inline-block;
-  }
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar .checkbox-compare {
-  margin-right: 10px;
-  top: 2px;
 }
 @media (max-width: 480px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar .checkbox-compare {
-    top: 8px;
+  #producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default {
+    width: 80%;
   }
 }
-@media (max-width: 480px) and (min-width: 321px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .btn-product .btn-comparar {
+@media (max-width: 768px) {
+  #producto-disponibles .list-producto .producto {
+    border: 1px solid transparent;
+  }
+}
+#producto-disponibles .list-producto ul.slick-dots {
+  bottom: 20px;
+  left: 15px;
+}
+@media (max-width: 480px) {
+  #producto-disponibles .list-producto {
+    border: 1px solid #cecece;
+  }
+}
+#nav-carrito {
+  position: relative;
+  margin: 40px 0;
+}
+#nav-carrito ul {
+  display: inline-flex;
+  width: 100%;
+}
+#nav-carrito ul li {
+  text-align: center;
+  color: #008c95;
+  position: relative;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+@media (max-width: 760px) {
+  #nav-carrito ul li span {
+    display: none;
+  }
+}
+#nav-carrito ul li:before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: #cecece;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -20px;
+  z-index: 999;
+}
+#nav-carrito ul li:after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid transparent;
+  border-radius: 100%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: -24px;
+  z-index: 999;
+}
+#nav-carrito ul li.active:before {
+  width: 12px;
+  height: 12px;
+  background-color: #008c95;
+}
+#nav-carrito ul li.active:after {
+  border: 1px solid #008c95;
+}
+#nav-carrito:before {
+  content: "";
+  position: absolute;
+  width: 67%;
+  height: 1px;
+  background-color: #cecece;
+  bottom: -5px;
+  left: 16%;
+  right: 15%;
+  z-index: 999;
+}
+#title-page {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cecece;
+  display: none;
+}
+#title-page h2 {
+  font-size: 16px;
+  color: #008c95;
+  text-transform: uppercase;
+}
+@media (max-width: 760px) {
+  #title-page {
+    display: block;
+  }
+}
+#section-pedido {
+  margin: 30px 0;
+}
+#section-pedido .row .title-section-pedido {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #cecece;
+  margin-bottom: 40px;
+}
+#section-pedido .row .title-section-pedido h3 {
+  font-size: 16px;
+  color: #008c95;
+  text-transform: uppercase;
+}
+@media (max-width: 736px) {
+  #section-pedido .row .title-section-pedido {
+    border-bottom: none;
+    margin-bottom: 0px;
+  }
+}
+#section-pedido .row span {
+  color: #008c95;
+}
+#section-pedido .row .detalle-pedido {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+#section-pedido .row .detalle-pedido .row {
+  display: flex;
+  align-items: center;
+}
+#section-pedido .row .detalle-pedido .row .solicitud {
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+#section-pedido .row .detalle-pedido .row .solicitud span {
+  font-size: 19px;
+  margin: 0 2px;
+}
+#section-pedido .row .detalle-pedido .row .solicitud p {
+  font-size: 14px;
+}
+#section-pedido .row .detalle-pedido .row .solicitud .btn-check {
+  margin-right: 40px;
+}
+#section-pedido .row .detalle-pedido .row .solicitud .btn-check .fa {
+  font-size: 40px;
+  color: #008c95;
+}
+@media (max-width: 990px) {
+  #section-pedido .row .detalle-pedido .row .solicitud .btn-check {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+}
+@media (max-width: 990px) {
+  #section-pedido .row .detalle-pedido .row .solicitud {
+    display: block;
+  }
+}
+@media (max-width: 736px) {
+  #section-pedido .row .detalle-pedido .row {
+    display: block;
+  }
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .image {
+  width: 40%;
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .image img {
+  max-width: 100%;
+}
+@media (max-width: 736px) {
+  #section-pedido .row .detalle-pedido .equipo-seleccionado .image {
+    width: 25%;
+  }
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .contenido {
+  width: 60%;
+  font-size: 13px;
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .contenido span {
+  margin-right: 5px;
+  color: #008c95;
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .contenido span.title-contenido {
+  font-weight: 500;
+}
+#section-pedido .row .detalle-pedido .equipo-seleccionado .contenido p {
+  margin-bottom: 8px;
+}
+@media (max-width: 736px) {
+  #section-pedido .row .detalle-pedido .equipo-seleccionado .contenido {
+    width: auto;
+  }
+}
+#section-pedido .row .rastreo-de-compra {
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+#section-pedido .row .rastreo-de-compra h4 {
+  font-size: 16px;
+  border-top: 1px solid #cecece;
+  border-bottom: 1px solid #cecece;
+  padding: 20px 0;
+  color: #008c95;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+@media (max-width: 736px) {
+  #section-pedido .row .rastreo-de-compra h4 {
+    padding: 30px 50px;
+    border-bottom: none;
+    margin-bottom: 0;
+    line-height: 22px;
+  }
+}
+@media (max-width: 320px) {
+  #section-pedido .row .rastreo-de-compra h4 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media (max-width: 736px) {
+  #section-pedido .row .rastreo-de-compra p {
+    padding: 0 25px;
+  }
+}
+@media (max-width: 736px) {
+  #section-pedido .row .rastreo-de-compra p {
+    padding: 0 18px;
+  }
+}
+#section-pedido .row .btn-detalle button {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  width: 50%;
+  border-radius: 0;
+  padding: 0;
+  line-height: 40px;
+  font-size: 12px;
+  height: 42px;
+}
+#section-pedido .row .btn-detalle button.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+  line-height: 16px;
+}
+@media (max-width: 760px) {
+  #section-pedido .row .btn-detalle button.regresar span {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  #section-pedido .row .btn-detalle button.regresar {
     width: 100%;
-    float: none;
+    margin-bottom: 10px;
   }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo.active-comparar {
-  border: 1px solid #ffe60d;
+#section-pedido .row .btn-detalle button.comprar {
+  color: #fff;
+  background-color: #008c95;
+  float: right;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones {
-  border: 1px solid #c4c4c4;
-  box-sizing: border-box;
+@media (max-width: 760px) {
+  #section-pedido .row .btn-detalle button {
+    width: 100%;
+  }
+}
+#form-cliente form .title-page {
+  border-bottom: 1px solid #a8a8a8;
+  padding-bottom: 20px;
+  margin: 40px 0;
+}
+#form-cliente form .title-page h3 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #008c95;
+  padding-left: 15px;
+  font-size: 20px;
+}
+@media (max-width: 736px) {
+  #form-cliente form .title-page h3 {
+    font-size: 16px;
+  }
+}
+#form-cliente form .section-form .form-group {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  position: relative;
+}
+#form-cliente form .section-form .form-group label {
+  display: block;
+  text-transform: uppercase;
+  color: #008c95;
+  font-size: 13px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+#form-cliente form .section-form .form-group input {
+  padding-left: 12px;
+  line-height: 18px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid #cecece;
+}
+#form-cliente form .section-form .form-group select {
+  text-transform: uppercase;
+  line-height: 18px;
+  width: 100%;
+  height: 40px;
+  border-color: #cecece;
+  background: #fff;
+  color: #797878;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+  padding-left: 12px;
+  font-size: 13px;
+  position: relative;
+}
+#form-cliente form .section-form .form-group i {
+  position: absolute;
+  color: #008c95;
+  top: 40px;
+  right: 20px;
+}
+#form-cliente form .section-form .form-group span.is-danger {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #008c95;
+}
+#form-cliente form .section-form .form-group.form-select:before {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  bottom: 20px;
+  right: 33px;
+  background-color: #008c95;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+#form-cliente form .section-form .form-group.form-select:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  background-color: #008c95;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+@media (max-width: 736px) {
+  #form-cliente form .section-form .form-group {
+    width: 100%;
+  }
+}
+#form-cliente form .section-form.mediosdepago {
+  padding: 20px 0;
+}
+#form-cliente form .section-form.mediosdepago .form-group {
+  width: 100%;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label {
+  text-transform: initial;
+  display: inline-block;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label img {
+  float: right;
+  max-width: 100%;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label input {
+  width: 15px;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo {
+  padding-left: 15px;
+  float: right;
+  line-height: 45px;
+  font-size: 14px;
+  position: relative;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop {
+  background-color: #008c95;
+  color: #fff;
+  width: 15px;
+  height: 15px;
+  display: block;
+  text-align: center;
+  line-height: 15px;
+  float: right;
+  margin-left: 5px;
+  margin-top: 14px;
+  border-radius: 100%;
   font-size: 12px;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div {
-  border-bottom: 1px solid #c4c4c4;
-  box-sizing: border-box;
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop .text-pop {
+  transition: opacity 0.5s linear;
+  opacity: 0;
+  visibility: hidden;
+  padding: 3px;
+  background: #ffe741;
+  font-size: 9px;
+  line-height: 14px;
+  color: #008c95;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray {
-  line-height: 40px;
-  background-color: #f4f4f4;
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop .text-pop p {
+  margin-bottom: 0;
 }
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray {
-    background-color: #fff;
-    line-height: 25px;
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop .text-pop:before {
+  content: "";
+  right: 0;
+  top: -10px;
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 10px solid #ffe741;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop:hover {
+  cursor: pointer;
+}
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop:hover .text-pop {
+  opacity: 1;
+  visibility: visible;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -45px;
+}
+@media (max-width: 320px) {
+  #form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo {
+    padding-left: 5px;
   }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray span {
-  display: none;
-  color: #008c95;
-  margin-left: 10px;
+#form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3:last-child {
+  padding: 0;
 }
 @media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray span {
+  #form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3:last-child {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width: 1000px) {
+  #form-cliente form .section-form.mediosdepago .form-group {
+    width: 80%;
+  }
+}
+@media (max-width: 736px) {
+  #form-cliente form .section-form.mediosdepago .form-group {
+    width: 100%;
+  }
+}
+#form-cliente form .btn-detalle {
+  margin-top: 20px;
+}
+#form-cliente form .btn-detalle button {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  width: 50%;
+  border-radius: 0;
+  padding: 0;
+  line-height: 40px;
+  font-size: 12px;
+}
+#form-cliente form .btn-detalle button.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+}
+@media (max-width: 760px) {
+  #form-cliente form .btn-detalle button.regresar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+#form-cliente form .btn-detalle button.comprar {
+  color: #fff;
+  background-color: #008c95;
+  float: right;
+}
+@media (max-width: 760px) {
+  #form-cliente form .btn-detalle button {
+    width: 100%;
+  }
+}
+#detalle-carrito {
+  margin-top: 30px;
+}
+#detalle-carrito .nav-detalle {
+  border: 1px solid #008c95;
+  text-transform: uppercase;
+  color: #008c95;
+  font-size: 12px;
+  line-height: 30px;
+  margin-bottom: 20px;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .nav-detalle {
+    display: none;
+  }
+}
+#detalle-carrito .nav-detalle div {
+  text-align: center;
+}
+#detalle-carrito .nav-detalle div p {
+  margin-bottom: 0;
+}
+#detalle-carrito .main-detalle {
+  padding: 25px 0;
+  border-bottom: 1px solid #cecece;
+  font-size: 14px;
+  position: relative;
+}
+#detalle-carrito .main-detalle .row div {
+  text-align: center;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado {
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado button.btn-eliminar-equipo {
+  position: absolute;
+  background-color: #008c95;
+  border: none;
+  width: 15px;
+  height: 15px;
+  top: 0px;
+  left: 13px;
+  border-radius: 10px;
+  padding: 0;
+}
+@media (max-width: 736px) {
+  #detalle-carrito .main-detalle .row div .equipo-seleccionado button.btn-eliminar-equipo {
+    left: 20%;
+  }
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado button.btn-eliminar-equipo span {
+  top: 1px;
+  left: 2px;
+  color: #fff;
+  font-size: 13px;
+  position: absolute;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .imagen-equipo {
+  width: 30%;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .imagen-equipo img {
+  max-width: 100%;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle .row div .equipo-seleccionado .imagen-equipo {
+    width: 25%;
+  }
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  #detalle-carrito .main-detalle .row div .equipo-seleccionado .imagen-equipo {
+    width: 35%;
+  }
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo {
+  width: 40%;
+  text-align: left;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo h2 {
+  margin-top: 0;
+  color: #008c95;
+  font-size: 15px;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo span {
+  font-size: 12px;
+  display: block;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option {
+  color: #008c95;
+  font-weight: 600;
+  font-size: 17px;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input {
+  position: relative;
+  width: 100%;
+  margin: 10px 0;
+  margin-bottom: 0;
+  border: 1px solid #008c95;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input a {
+  text-decoration: none;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  z-index: 99;
+  line-height: 30px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 25px;
+  color: #cecece;
+  transition: 0.5s ease all;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input a.btn-minus {
+  left: 0;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input a.btn-plus {
+  right: 0;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input a:hover {
+  color: #008c95;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: none;
+  text-align: center;
+  position: relative;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input:before {
+  content: "";
+  background: transparent;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo .cantidad .btn-option .count-input:focus {
+  outline: none;
+}
+@media (max-width: 1024px) and (min-width: 768px) {
+  #detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo {
+    width: 63%;
+  }
+}
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle .row div .equipo-seleccionado {
+    margin-bottom: 20px;
+  }
+}
+#detalle-carrito .main-detalle .row div span.title-detalle {
+  display: none;
+  color: #008c95;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle .row div span.title-detalle {
     display: block;
   }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray p {
+#detalle-carrito .main-detalle .row div span.plan {
+  font-size: 12px;
+}
+#detalle-carrito .main-detalle .row div p {
   margin-bottom: 0;
-  text-align: center;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white {
-  line-height: 40px;
-  box-sizing: border-box;
-}
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white {
-    line-height: 25px;
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle .row div p.version-mobil {
+    display: none;
   }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white span {
-  display: none;
-  color: #008c95;
-  margin-left: 10px;
+#detalle-carrito .main-detalle.equipos .row {
+  display: flex;
+  align-items: center;
 }
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white span {
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle.equipos .row {
     display: block;
   }
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white p {
-  margin-bottom: 0;
-  text-align: center;
-}
-#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div:last-child {
+#detalle-carrito .main-detalle.sinborder {
   border-bottom: none;
 }
-#compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) div {
-  border-left: none;
+#detalle-carrito .main-detalle.col-offset:before {
+  position: absolute;
+  content: "";
+  width: 14.33333333%;
+  height: 1px;
+  background-color: #fff;
+  bottom: -1px;
+  left: 0;
 }
-@media (max-width: 736px) {
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) .equipo {
-    border-left: 1px solid #c4c4c4;
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle.col-offset:before {
+    display: none;
   }
-  #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) .especificaciones {
-    border-left: 1px solid #c4c4c4;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .main-detalle {
+    padding: 20px 0;
   }
+}
+#detalle-carrito .btn-detalle {
+  margin-top: 35px;
+}
+#detalle-carrito .btn-detalle button {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  width: 50%;
+  border-radius: 0;
+  padding: 0;
+  line-height: 30px;
+  font-size: 12px;
+}
+#detalle-carrito .btn-detalle button.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .btn-detalle button.regresar {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+#detalle-carrito .btn-detalle button.comprar {
+  color: #fff;
+  background-color: #008c95;
+  float: right;
+}
+@media (max-width: 760px) {
+  #detalle-carrito .btn-detalle button {
+    width: 100%;
+  }
+}
+@media (max-width: 760px) {
+  #detalle-carrito .btn-detalle {
+    margin-top: 20px;
+  }
+}
+@media (max-width: 760px) {
+  #detalle-carrito {
+    margin-top: 20px;
+  }
+}
+.ver-mas-equipo {
+  margin: 50px 0;
+}
+.ver-mas-equipo .title-detalle {
+  border-bottom: 1px solid #cecece;
+  border-right: 1px solid #cecece;
+  padding-bottom: 20px;
+  position: relative;
+}
+.ver-mas-equipo .title-detalle .btn-vmas {
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  right: 20px;
+  top: 5px;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:before {
+  opacity: 1 !important;
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  background-color: #008c95;
+  transform: rotate(45deg);
+  z-index: 99;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: #008c95;
+  transform: rotate(-45deg);
+  z-index: 99;
+}
+.ver-mas-equipo .title-detalle .btn-vmas:hover {
+  cursor: pointer;
+}
+@media (max-width: 760px) {
+  .ver-mas-equipo .title-detalle .btn-vmas {
+    right: 10px;
+    top: -3px;
+  }
+}
+.ver-mas-equipo .title-detalle h4 {
+  margin-bottom: 0;
+  text-transform: uppercase;
+  color: #008c95;
+  padding-left: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media (max-width: 760px) {
+  .ver-mas-equipo .title-detalle h4 {
+    font-size: 15px;
+    padding-left: 0;
+  }
+}
+@media (max-width: 320px) {
+  .ver-mas-equipo .title-detalle h4 {
+    font-size: 12px;
+  }
+}
+.ver-mas-equipo .content-detalle {
+  margin-top: 15px;
 }
 /*
  * Bootstrap v3.3.4 (http://getbootstrap.com)
