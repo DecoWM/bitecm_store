@@ -52,13 +52,13 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    // public function show($categoria, Product $product)
+    // public function show(Product $product)
     public function show($product)
     {
         $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product]);
         // return $product;
         // dd($product[0]);
-        return view('postpago.detail', ['product' => $product[0]]);
+        return view('smartphones.postpago.detail', ['product' => $product[0]]);
     }
 
     /**

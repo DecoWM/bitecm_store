@@ -17,12 +17,14 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/productos/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('smartphone_detail');
 Route::get('/productos/tablets/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('tablet_detail');
 
+//RUTAS PREPAGO
+Route::get('/prepago', 'PrepaidController@index')->name('prepaid');
+Route::get('/prepago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('prepaid_detail');
 
-Route::get('/postpago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('postpago_detail');
-Route::get('/prepago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('prepago_detail');
+//RUTAS POSTPAGO
+Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
+Route::get('/postpago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('postpaid_detail');
 
-Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
-
-Route::get('/test', function () {
-  return round(3.5);
-});
+//RUTAS ACCESORIOS
+Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
+// Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);

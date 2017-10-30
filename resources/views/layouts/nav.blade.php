@@ -13,9 +13,9 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#">Postpago</a></li>
-              <li><a href="#">Prepago</a></li>
-              <li><a href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/accesorios.html">Accesorios</a></li>
+              <li class="{{Request::is('postpago') ? 'active' : ''}}"><a href="{{Route('postpaid')}}">Postpago</a></li>
+              <li class="{{Request::is('prepago') ? 'active' : ''}}"><a href="{{Route('prepaid')}}">Prepago</a></li>
+              <li class="{{Request::is('accesorios') ? 'active' : ''}}"><a href="{{Route('accessories')}}">Accesorios</a></li>
             </ul>
           </div>
         </div>

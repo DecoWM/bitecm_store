@@ -12,8 +12,8 @@
                 <h2 class="text-center">Equipos más vendidos</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" :class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="smartphones" class="text-uppercase" @click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
-                <h3 class="text-center" :class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="tablets" class="text-uppercase" @click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
               </div>
               {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
                 <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
@@ -156,8 +156,8 @@
                 <h2 class="text-center">Promociones</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" :class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="postpago" class="text-uppercase" @click.prevent="togglePromo('postpago')">Postpago</a></h3>
-                <h3 class="text-center" :class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="prepago" class="text-uppercase" @click.prevent="togglePromo('prepago')">Prepago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="postpago" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
               <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
 @foreach ($promo_pre as $smartphone)
@@ -180,7 +180,7 @@
                       <h4 class="text-center">{{$smartphone->product_name}}</h4>
                     </div>
                     <div class="price-product"><span>{{$smartphone->product_price_prepaid}}</span></div>
-                    <div class="btn-comprar"><a href="{{route('postpago_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
+                    <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
                   </div>
                 </div>
 @endforeach
@@ -294,7 +294,7 @@
                       <h4 class="text-center">{{$smartphone->product_name}}</h4>
                     </div>
                     <div class="price-product"><span>{{$smartphone->product_price_prepaid}}</span></div>
-                    <div class="btn-comprar"><a href="{{route('prepago_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
+                    <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
                   </div>
                 </div>
 @endforeach
