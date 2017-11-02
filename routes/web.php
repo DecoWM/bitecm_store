@@ -27,4 +27,7 @@ Route::get('/postpago/smartphones/{product}', 'ProductController@show')->where([
 
 //RUTAS ACCESORIOS
 Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
+
+//RUTAS BUSQUEDA
+Route::get('product/search', 'PostpaidController@search');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);

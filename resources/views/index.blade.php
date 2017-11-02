@@ -19,7 +19,7 @@
                 <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
                   <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
                     <div class="btn-catalogo">
-                      <div class="border-btn"><a href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/equipos.html" class="btn btn-default">ver catálogo</a></div>
+                      <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
                     </div>
                   </div>
                   <div class="list-productos">
@@ -42,7 +42,7 @@
                         <div class="title-product">
                           <h4 class="text-center">{{$smartphone->product_name}}</h4>
                         </div>
-                        <div class="price-product"><span>{{$smartphone->product_price_prepaid}}</span></div>
+                        <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
                         <div class="btn-comprar"><a href="{{route('smartphone_detail', ['product' => $smartphone->product_id])}}" class="btn btn-default">COMPRAR</a></div>
                       </div>
                     </div>
@@ -96,7 +96,7 @@
                 <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
                   <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
                     <div class="btn-catalogo">
-                      <div class="border-btn"><a href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/equipos.html" class="btn btn-default">ver catálogo</a></div>
+                      <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
                     </div>
                   </div>
                   <div class="list-productos">
@@ -119,7 +119,7 @@
                         <div class="title-product">
                           <h4 class="text-center">{{$tablet->product_name}}</h4>
                         </div>
-                        <div class="price-product"><span>{{$tablet->product_price_prepaid}}</span></div>
+                        <div class="price-product"><span>S/.</span><span>{{$tablet->product_price_prepaid}}</span></div>
                         <div class="btn-comprar"><a href="{{route('tablet_detail', ['product' => $tablet->product_id])}}" class="btn btn-default">COMPRAR</a></div>
                       </div>
                     </div>
@@ -140,10 +140,24 @@
             </div>
 @endforeach --}}
             <div class="col-xs-12 col-sm-6 no-padding">
-              <div class="promociones"><img src="./images/home/promo-s8.jpg" alt="promoción galaxy s8"></div>
+              <div class="promociones">
+                <img src="./images/home/promo-s8.jpg" alt="promoción galaxy s8">
+                <div class="content-product text-center">
+                  <div class="btn-comprar">
+                    <a href="{{route('prepaid_detail', ['product'=>1])}}" class="btn btn-default">COMPRAR</a>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-xs-12 col-sm-6 no-padding">
-              <div class="promociones"><img src="./images/home/promo-note.jpg" alt="promoción note4"></div>
+              <div class="promociones">
+                <img src="./images/home/promo-note.jpg" alt="promoción note4">
+              </div>
+              <div class="content-product text-center">
+                <div class="btn-comprar">
+                  <a href="{{route('prepaid_detail', ['product'=>2])}}" class="btn btn-default">COMPRAR</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -179,7 +193,10 @@
                     <div class="title-product">
                       <h4 class="text-center">{{$smartphone->product_name}}</h4>
                     </div>
-                    <div class="price-product"><span>{{$smartphone->product_price_prepaid}}</span></div>
+                    <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
+                    <div class="plan-product">
+                      <p>en plan <span>Megaplus 119</span></p>
+                    </div>
                     <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
                   </div>
                 </div>
@@ -293,7 +310,7 @@
                     <div class="title-product">
                       <h4 class="text-center">{{$smartphone->product_name}}</h4>
                     </div>
-                    <div class="price-product"><span>{{$smartphone->product_price_prepaid}}</span></div>
+                    <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
                     <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
                   </div>
                 </div>

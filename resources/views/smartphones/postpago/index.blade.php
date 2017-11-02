@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4">
-          <form id="search-product" class="form-inline">
+          <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct">
             <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
             <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
           </form>
@@ -40,10 +40,17 @@
 @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
           <div id="list-equipos">
-            <div class="row">
+            <div class="row" v-if="isSearching">
+              <loader></loader>
+            </div>
+            <div class="row" v-if="searchResult.length > 0">
+              <postpaid v-for="(product, index) in searchResult" :product="product" :key="index"></postpaid>
+            </div>
+            <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="1" class="producto active-comparar">
+                <div data-equipo="1" class="producto">
+                {{-- <div data-equipo="1" class="producto active-comparar"> --}}
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
@@ -224,7 +231,7 @@
                 </div>
               </div> --}}
             </div>
-            <div class="row">
+            <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
                   <ul class="pagination">

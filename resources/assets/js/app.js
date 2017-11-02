@@ -15,13 +15,19 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+// Vue.component('example', require('./components/Example.vue'));
+Vue.component('loader', require('./components/loader.vue'));
+Vue.component('postpaid', require('./components/postpaid.vue'));
 
 const app = new Vue({
     el: '#app',
     data: {
         bestSeller : "smartphone",
-        promo: "postpago"
+        promo: "postpago",
+        searchedString: "",
+        search: false,
+        isSearching: false,
+        searchResult: []
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -38,6 +44,20 @@ const app = new Vue({
             this.$nextTick(function(){
                 $('.promociones-tab').slick('setPosition');
               // $('#banner-principal').get(0).slick.setPosition();
+            });
+        },
+        searchProduct: function () {
+            self = this;
+            self.isSearching = true;
+            self.search = true;
+            self.searchResult = [];
+            let url = 'http://localhost:8000/product/search?searched_string='+self.searchedString;
+            axios.get(url).then((response) => {
+              self.searchResult = response.data.data;
+              self.isSearching = false;
+            }, (error) => {
+              console.log(error);
+              self.isSearching = false;
             });
         }
     },
