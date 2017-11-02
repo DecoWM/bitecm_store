@@ -43,6 +43,11 @@
                           <h4 class="text-center">{{$smartphone->product_name}}</h4>
                         </div>
                         <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
+@if ($smartphone->product_id == 3)
+                        <div class="plan-product">
+                          <p>en plan <span>Megaplus 119</span></p>
+                        </div>
+@endif
                         <div class="btn-comprar"><a href="{{route('smartphone_detail', ['product' => $smartphone->product_id])}}" class="btn btn-default">COMPRAR</a></div>
                       </div>
                     </div>
