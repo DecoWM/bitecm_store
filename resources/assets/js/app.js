@@ -22,6 +22,7 @@ Vue.component('postpaid', require('./components/postpaid.vue'));
 const app = new Vue({
     el: '#app',
     data: {
+        baseUrl: document.head.querySelector('meta[name="base-url"]').content,
         bestSeller : "smartphone",
         promo: "postpago",
         searchedString: "",
@@ -51,7 +52,8 @@ const app = new Vue({
             self.isSearching = true;
             self.search = true;
             self.searchResult = [];
-            let url = 'http://localhost:8000/product/search?searched_string='+self.searchedString;
+            console.log(self.baseUrl);
+            let url = self.baseUrl + '/product/search?searched_string=' + self.searchedString;
             axios.get(url).then((response) => {
               self.searchResult = response.data.data;
               self.isSearching = false;

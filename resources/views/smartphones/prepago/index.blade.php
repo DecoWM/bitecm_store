@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-4 col-md-4">
-          <form id="search-product" class="form-inline">
+          <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct">
             <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
             <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
           </form>
