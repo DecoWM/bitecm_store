@@ -224,7 +224,7 @@
                 </div>
               </div> --}}
             </div>
-            <div class="row">
+            {{-- <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
                   <ul class="pagination">
@@ -237,8 +237,8 @@
                   </ul>
                 </nav>
               </div>
-            </div>
-            <div id="list-equipos-comparar">
+            </div> --}}
+            <div id="list-equipos-comparar" >
               <div class="equipos-comp">
                 <div class="title-equipos"><span>4 Equipos</span>
                   <p>para comparar</p>

@@ -31,3 +31,6 @@ Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 //RUTAS BUSQUEDA
 Route::get('product/search', 'PostpaidController@search');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
+
+//RUTAS ARCHIVOS
+Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
