@@ -8,6 +8,7 @@
     {{-- <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700">
     <link type="text/css" rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css"> --}}
     <link type="text/css" rel="stylesheet" href="{{asset('css/main.min.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
   </head>
   <body>
     <div id="app">

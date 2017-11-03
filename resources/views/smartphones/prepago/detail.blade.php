@@ -5,11 +5,11 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>GOOGLE PIXEL</h2>
+              <h2>{{$product->product_name}}</h2>
             </div>
             <div class="state"><span>NUEVO</span></div>
             <div id="image-equipo">
-              <div class="image-product text-center"><img id="zoom_01" src="./images/home/celular-1.jpg" alt="equipos" data-zoom-image="./images/home/celular-12.jpg"></div>
+              <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos" data-zoom-image="{{asset('images/productos/'.$product->picture_url)}}"></div>
             </div>
           </div>
         </div>
@@ -17,14 +17,11 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>GOOGLE PIXEL</h1>
+                <h1>{{$product->product_name}}</h1>
                 <div class="state"><span>PREPAGO</span></div>
               </div>
               <div class="descripcion">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
-                  tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam
-                </p>
+                <p>{{$product->product_description}}</p>
               </div>
             </div>
             <div class="content-section">
@@ -35,7 +32,7 @@
                       <div class="row">
                         <div class="col-xs-7 col-xs-push-5 col-sm-12">
                           <div class="detalle-product">
-                            <div class="price-product"><span>s/</span>59</div>
+                            <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid}}</div>
                           </div>
                           <div class="btn-option">
                             <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
@@ -76,14 +73,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="movil-select-product">
+                {{-- <div class="movil-select-product">
                   <select>
                     <option name="" value="">Lo quieres en</option>
                     <option name="prepago" value="prepago">Portabilidad</option>
                     <option name="linea nueva" value="linea nueva">Linea nueva</option>
                     <option name="renovacion" value="renovacion">Renovación</option>
                   </select>
-                </div>
+                </div> --}}
               </form>
             </div>
           </section>
@@ -98,11 +95,11 @@
             <div class="content-detalle">
               <div class="descripcion-detalle">
                 <ul class="list-unstyled">
-                  <li> <img src="images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">Android 6</span><span class="description-dispositivo">Sistema Operativo</span></li>
-                  <li> <img src="images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">16GB / 2GB RAM</span><span class="description-dispositivo">Memoria</span></li>
-                  <li> <img src="images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">6”</span><span class="description-dispositivo">Pantalla</span></li>
-                  <li> <img src="images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">13MP / 8MP</span><span class="description-dispositivo">Cámara</span></li>
-                  <li> <img src="images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">1.5 GHz Octa Core</span><span class="description-dispositivo">Procesador</span></li>
+                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">Android 6</span><span class="description-dispositivo">Sistema Operativo</span></li>
+                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory + 0}} GB / {{$product->product_ram_memory + 0}} GB RAM</span><span class="description-dispositivo">Memoria</span></li>
+                  <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
+                  <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
+                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
               <div class="pdf-tecnica"><a>Descargar ficha técnica<span class="fa fa-download"></span></a></div>
@@ -145,8 +142,20 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
+@foreach ($available as $product)
               <div class="producto">
-                <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
+                <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                <div class="content-product text-center">
+                  <div class="title-product">
+                    <h3 class="text-center">{{$product->product_name}}</h3>
+                  </div>
+                  <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid + 0}}</div>
+                  <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">comprar</a></div>
+                </div>
+              </div>
+@endforeach
+              {{-- <div class="producto">
+                <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
                 <div class="content-product text-center">
                   <div class="title-product">
                     <h3 class="text-center">LG Stylus 3</h3>
@@ -164,17 +173,7 @@
                   <div class="price-product"><span>s/</span>59</div>
                   <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
                 </div>
-              </div>
-              <div class="producto">
-                <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>59</div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

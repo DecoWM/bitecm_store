@@ -56,7 +56,7 @@
                     <div class="col-xs-7 col-sm-6">
                       <div class="detalle-product">
                         {{-- <div class="price-product"><span>s/</span>59</div> --}}
-                        <div class="price-product"><span>s/</span>{{$product->product_price_prepaid}}</div>
+                        <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid}}</div>
                         <div class="plan-product">
                           <p>con <span>Megaplus S/.149 mensual</span></p>
                         </div>
@@ -194,7 +194,22 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
+@foreach ($available as $product)
               <div class="producto">
+                <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                <div class="content-product text-center">
+                  <div class="title-product">
+                    <h3 class="text-center">{{$product->product_name}}</h3>
+                  </div>
+                  <div class="price-product"><span>S/.</span><span>{{$product->product_price_prepaid + 0}}</span></div>
+                  <div class="plan-product">
+                    <p>en plan <span>119</span></p>
+                  </div>
+                  <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">comprar</a></div>
+                </div>
+              </div>
+@endforeach
+              {{-- <div class="producto">
                 <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
                 <div class="content-product text-center">
                   <div class="title-product">
@@ -224,15 +239,15 @@
                 <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
                 <div class="content-product text-center">
                   <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
+                    <h3 class="text-center">LG Stylus 4</h3>
                   </div>
-                  <div class="price-product"><span>s/</span>59</div>
+                  <div class="price-product"><span>s/</span>60</div>
                   <div class="plan-product">
                     <p>en plan <span>119</span></p>
                   </div>
                   <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

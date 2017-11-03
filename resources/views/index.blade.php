@@ -47,8 +47,10 @@
                         <div class="plan-product">
                           <p>en plan <span>Megaplus 119</span></p>
                         </div>
+                        <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product' => $smartphone->product_id])}}" class="btn btn-default">COMPRAR</a></div>
+@else
+                        <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product' => $smartphone->product_id])}}" class="btn btn-default">COMPRAR</a></div>
 @endif
-                        <div class="btn-comprar"><a href="{{route('smartphone_detail', ['product' => $smartphone->product_id])}}" class="btn btn-default">COMPRAR</a></div>
                       </div>
                     </div>
 @endforeach
@@ -149,7 +151,7 @@
                 <img src="./images/home/promo-s8.jpg" alt="promoción galaxy s8">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
-                    <a href="{{route('prepaid_detail', ['product'=>1])}}" class="btn btn-default">COMPRAR</a>
+                    <a href="{{route('prepaid_detail', ['product'=>6])}}" class="btn btn-default">COMPRAR</a>
                   </div>
                 </div>
               </div>
@@ -157,10 +159,10 @@
             <div class="col-xs-12 col-sm-6 no-padding">
               <div class="promociones">
                 <img src="./images/home/promo-note.jpg" alt="promoción note4">
-              </div>
-              <div class="content-product text-center">
-                <div class="btn-comprar">
-                  <a href="{{route('prepaid_detail', ['product'=>2])}}" class="btn btn-default">COMPRAR</a>
+                <div class="content-product text-center">
+                  <div class="btn-comprar">
+                    <a href="{{route('prepaid_detail', ['product'=>11])}}" class="btn btn-default">COMPRAR</a>
+                  </div>
                 </div>
               </div>
             </div>

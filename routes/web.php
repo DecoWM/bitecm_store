@@ -19,11 +19,11 @@ Route::get('/productos/tablets/{product}', 'ProductController@show')->where(['pr
 
 //RUTAS PREPAGO
 Route::get('/prepago', 'PrepaidController@index')->name('prepaid');
-Route::get('/prepago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('prepaid_detail');
+Route::get('/prepago/smartphones/{product}', 'PrepaidController@show')->where(['product'=>'[0-9]+'])->name('prepaid_detail');
 
 //RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::get('/postpago/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('postpaid_detail');
+Route::get('/postpago/smartphones/{product}', 'PostpaidController@show')->where(['product'=>'[0-9]+'])->name('postpaid_detail');
 
 //RUTAS ACCESORIOS
 Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');

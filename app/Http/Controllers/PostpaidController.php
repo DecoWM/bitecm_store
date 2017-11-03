@@ -19,6 +19,16 @@ class PostpaidController extends Controller
         return view('smartphones.postpago.index', ['products' => $search_result]);
     }
 
+    public function show($product_id) {
+        $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
+        $available_products = $this->shared->searchProduct(1, 4);
+        $response = [
+            'product' => $product[0],
+            'available' => $available_products
+        ];
+        return view('smartphones.postpago.detail', $response);
+    }
+
     public function search (Request $request) {
         $this->validate($request, [
           'searched_string' => 'required|max:30|regex:/(^[A-Za-z0-9 ]+$)+/'

@@ -1,9 +1,30 @@
 
 // Fonts
-@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+// @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
 // Variables
-@import "variables";
+// @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+//CUSTOM CSS
+#producto-disponibles .list-producto .producto .image-product img {
+    max-width: 100%;
+}
+
+.promociones .btn-comprar {
+    position: absolute;
+    bottom: 15%;
+    left: 48%;
+}
+
+.promociones .btn-default {
+    padding: 6px 20px;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    background-color: #169599;
+    border-radius: 0;
+    border: none;
+}
