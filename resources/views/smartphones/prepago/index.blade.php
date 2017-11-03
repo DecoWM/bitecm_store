@@ -40,7 +40,13 @@
 @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
           <div id="list-equipos">
-            <div class="row">
+            <div class="row" v-if="isSearching">
+              <loader></loader>
+            </div>
+            <div class="row" v-if="searchResult.length > 0">
+              <postpaid v-for="(product, index) in searchResult" :product="product" :key="index"></postpaid>
+            </div>
+            <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto active-comparar">
