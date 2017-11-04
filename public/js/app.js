@@ -11370,7 +11370,8 @@ var app = new Vue({
         searchedString: "",
         search: false,
         isSearching: false,
-        searchResult: []
+        searchResult: [],
+        noResults: false
     },
     methods: {
         toggleBestSeller: function toggleBestSeller(str) {
@@ -11392,15 +11393,21 @@ var app = new Vue({
         searchProduct: function searchProduct() {
             self = this;
             self.isSearching = true;
+            self.noResults = false;
             self.search = true;
             self.searchResult = [];
             console.log(self.baseUrl);
             var url = self.baseUrl + '/product/search?searched_string=' + self.searchedString;
             axios.get(url).then(function (response) {
                 self.searchResult = response.data.data;
+                console.log(self.searchResult.length);
+                if (self.searchResult.length == 0) {
+                    self.noResults = true;
+                }
                 self.isSearching = false;
             }, function (error) {
                 console.log(error);
+                self.noResults = true;
                 self.isSearching = false;
             });
         }

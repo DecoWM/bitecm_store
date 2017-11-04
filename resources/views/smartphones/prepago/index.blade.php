@@ -43,6 +43,9 @@
             <div class="row" v-if="isSearching">
               <loader></loader>
             </div>
+            <div class="row" v-if="noResults">
+              <p class="text-center">No se encontraron resultados</p>
+            </div>
             <div class="row" v-if="searchResult.length > 0">
               <postpaid v-for="(product, index) in searchResult" :product="product" :key="index"></postpaid>
             </div>
@@ -60,7 +63,7 @@
                       <p>Ver en plan postpago</p>
                     </div>
                     <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
+                      <div class="form-group btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <input type="checkbox" class="checkbox-compare">comparar
                       </div>

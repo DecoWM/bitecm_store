@@ -127,7 +127,7 @@
                           <h4 class="text-center">{{$tablet->product_name}}</h4>
                         </div>
                         <div class="price-product"><span>S/.</span><span>{{$tablet->product_price_prepaid}}</span></div>
-                        <div class="btn-comprar"><a href="{{route('tablet_detail', ['product' => $tablet->product_id])}}" class="btn btn-default">COMPRAR</a></div>
+                        <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product' => $tablet->product_id])}}" class="btn btn-default">COMPRAR</a></div>
                       </div>
                     </div>
 @endforeach
