@@ -66,6 +66,6 @@ class PostpaidController extends Controller
             }
         }
         // return $products;
-        return view('smartphones.compare', ['products' => $products]);
+        return view('smartphones.postpago.compare', ['products' => $products]);
     }
 }

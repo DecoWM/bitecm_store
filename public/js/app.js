@@ -11664,7 +11664,8 @@ window.Vue = __webpack_require__(40);
 Vue.component('loader', __webpack_require__(43));
 Vue.component('postpaid', __webpack_require__(49));
 Vue.component('prepaid', __webpack_require__(52));
-Vue.component('compare', __webpack_require__(55));
+Vue.component('comparePostpaid', __webpack_require__(74));
+Vue.component('comparePrepaid', __webpack_require__(69));
 
 var app = new Vue({
     el: '#app',
@@ -48512,7 +48513,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['product', 'baseUrl'],
+    props: ['product', 'baseUrl', 'compare'],
+    data: function data() {
+        return {
+            isSelected: false,
+            compareItem: {
+                product_id: this.product.product_id,
+                picture_url: this.product.picture_url
+            }
+        };
+    },
+
+    methods: {
+        emitCompare: function emitCompare() {
+            self = this;
+            self.isSelected ? this.$emit('additem', self.compareItem) : self.$emit('removeitem', self.compareItem.product_id);
+        }
+    },
+    beforeMount: function beforeMount() {
+        self = this;
+        self.compare.forEach(function (e) {
+            if (e.product_id == self.compareItem.product_id) {
+                self.isSelected = true;
+            }
+        });
+    },
     mounted: function mounted() {
         console.log('Component mounted bitel.');
     }
@@ -48562,7 +48587,52 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c("div", { staticClass: "checkbox btn-comparar" }, [
+            _c("label", [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.isSelected,
+                    expression: "isSelected"
+                  }
+                ],
+                staticClass: "checkbox-compare",
+                attrs: { type: "checkbox" },
+                domProps: {
+                  checked: Array.isArray(_vm.isSelected)
+                    ? _vm._i(_vm.isSelected, null) > -1
+                    : _vm.isSelected
+                },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$a = _vm.isSelected,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.isSelected = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.isSelected = $$c
+                      }
+                    },
+                    _vm.emitCompare
+                  ]
+                }
+              }),
+              _vm._v("comparar\n          ")
+            ])
+          ])
         ])
       ])
     ])
@@ -48576,20 +48646,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "plan-product" }, [
       _c("p", [_vm._v("Ver en plan postpago")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "checkbox btn-comparar" }, [
-      _c("label", [
-        _c("input", {
-          staticClass: "checkbox-compare",
-          attrs: { type: "checkbox" }
-        }),
-        _vm._v("comparar\n          ")
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -48602,165 +48658,10 @@ if (false) {
 }
 
 /***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(56)
-}
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(58)
-/* template */
-var __vue_template__ = __webpack_require__(64)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\compare.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6f7446b8", Component.options)
-  } else {
-    hotAPI.reload("data-v-6f7446b8", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 56 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(57);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(5)("2e8d110c", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f7446b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-6f7446b8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 58 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-// import compareItem from './compare-item.vue';
-Vue.component('compare-item', __webpack_require__(59));
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['products', 'baseUrl'],
-    // components: {
-    //     'compareItem': compareItem
-    // },
-    mounted: function mounted() {
-        console.log('Component mounted bitel.');
-    },
-
-    methods: {
-        removeItem: function removeItem(product) {
-            this.$emit('removeitem', product);
-        },
-        compareList: function compareList() {
-            self = this;
-            var subSet = [];
-            new Promise(function (resolve, reject) {
-                self.products.forEach(function (e) {
-                    subSet.push({ name: "product_id[]", value: e.product_id });
-                });
-                resolve();
-            }).then(function () {
-                var url = $.param(subSet);
-                window.location.href = self.baseUrl + '/product/compare?' + url;
-            });
-        }
-    }
-});
-
-/***/ }),
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
 /* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -48913,7 +48814,160 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 64 */,
+/* 65 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(70)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\compare-prepaid.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-50ce964c", Component.options)
+  } else {
+    hotAPI.reload("data-v-50ce964c", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(71);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("2058b10e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50ce964c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare-prepaid.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-50ce964c\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare-prepaid.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 71 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 72 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+Vue.component('compare-item', __webpack_require__(59));
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['products', 'baseUrl'],
+    mounted: function mounted() {
+        console.log('Component mounted bitel.');
+    },
+
+    methods: {
+        removeItem: function removeItem(product) {
+            this.$emit('removeitem', product);
+        },
+        compareList: function compareList() {
+            self = this;
+            var subSet = [];
+            new Promise(function (resolve, reject) {
+                self.products.forEach(function (e) {
+                    subSet.push({ name: "product_id[]", value: e.product_id });
+                });
+                resolve();
+            }).then(function () {
+                var url = $.param(subSet);
+                window.location.href = self.baseUrl + '/prepago/comparar?' + url;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -48973,15 +49027,233 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6f7446b8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-50ce964c", module.exports)
   }
 }
 
 /***/ }),
-/* 65 */
-/***/ (function(module, exports) {
+/* 74 */
+/***/ (function(module, exports, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(75)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(77)
+/* template */
+var __vue_template__ = __webpack_require__(78)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\compare-postpaid.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f77406de", Component.options)
+  } else {
+    hotAPI.reload("data-v-f77406de", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 75 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(76);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(5)("344c297f", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f77406de\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare-postpaid.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f77406de\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./compare-postpaid.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 76 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 77 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+// import compareItem from './compare-item.vue';
+Vue.component('compare-item', __webpack_require__(59));
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['products', 'baseUrl'],
+    // components: {
+    //     'compareItem': compareItem
+    // },
+    mounted: function mounted() {
+        console.log('Component mounted bitel.');
+    },
+
+    methods: {
+        removeItem: function removeItem(product) {
+            this.$emit('removeitem', product);
+        },
+        compareList: function compareList() {
+            self = this;
+            var subSet = [];
+            new Promise(function (resolve, reject) {
+                self.products.forEach(function (e) {
+                    subSet.push({ name: "product_id[]", value: e.product_id });
+                });
+                resolve();
+            }).then(function () {
+                var url = $.param(subSet);
+                window.location.href = self.baseUrl + '/postpago/comparar?' + url;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "list-equipos-comparar" } }, [
+    _c("div", { staticClass: "equipos-comp" }, [
+      _c("div", { staticClass: "title-equipos" }, [
+        _c("span", [
+          _vm._v(_vm._s(_vm.products.length) + " "),
+          _vm.products.length == 1
+            ? _c("span", [_vm._v("Equipo")])
+            : _c("span", [_vm._v("Equipos")])
+        ]),
+        _vm._v(" "),
+        _c("p", [_vm._v("para comparar")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "list-equipos" }, [
+        _c(
+          "ul",
+          { staticClass: "list-unstyled" },
+          _vm._l(_vm.products, function(product, index) {
+            return _c("compare-item", {
+              key: index,
+              attrs: { product: product },
+              on: { removeItem: _vm.removeItem }
+            })
+          })
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "btn-comparar",
+        on: {
+          click: function($event) {
+            $event.preventDefault()
+            _vm.compareList($event)
+          }
+        }
+      },
+      [
+        _c("a", { attrs: { href: _vm.baseUrl + "/product/compare" } }, [
+          _vm._v("COMPARAR")
+        ])
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f77406de", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

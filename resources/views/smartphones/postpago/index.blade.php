@@ -223,7 +223,7 @@
                 </nav>
               </div>
             </div> --}}
-            <compare v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare>
+            <compare-postpaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-postpaid>
             {{-- <div id="list-equipos-comparar">
               <div class="equipos-comp">
                 <div class="title-equipos"><span>4 Equipos</span>

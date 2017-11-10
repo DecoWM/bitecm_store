@@ -19,7 +19,8 @@ window.Vue = require('vue');
 Vue.component('loader', require('./components/loader.vue'));
 Vue.component('postpaid', require('./components/postpaid.vue'));
 Vue.component('prepaid', require('./components/prepaid.vue'));
-Vue.component('compare', require('./components/compare.vue'));
+Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
+Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
 
 const app = new Vue({
     el: '#app',

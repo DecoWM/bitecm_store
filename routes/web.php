@@ -33,6 +33,8 @@ Route::get('/product/search', 'PostpaidController@search');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
 
 //RUTAS COMPARAR
+Route::get('/prepago/comparar', 'PrepaidController@compare');
+Route::get('/postpago/comparar', 'PostpaidController@compare');
 Route::get('/product/compare', 'PostpaidController@compare');
 
 //RUTAS ARCHIVOS

@@ -28,4 +28,23 @@ class PrepaidController extends Controller
         ];
         return view('smartphones.prepago.detail', $response);
     }
+
+    public function compare (Request $request) {
+        $request->validate([
+          'product_id' => 'required|array',
+          'product_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
+        ]);
+        // return $request->all();
+        $products = [];
+        foreach ($request->product_id as $product_id) {
+            $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
+            if (isset($product[0])) {
+              array_push($products, $product[0]);
+            } else {
+              abort(404);
+            }
+        }
+        // return $products;
+        return view('smartphones.prepago.compare', ['products' => $products]);
+    }
 }

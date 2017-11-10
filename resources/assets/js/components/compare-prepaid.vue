@@ -7,18 +7,6 @@
       <div class="list-equipos">
         <ul class="list-unstyled">
           <compare-item v-for="(product, index) in products" :product="product" v-on:removeItem="removeItem" :key="index"></compare-item>
-          <!-- <li><img src="./images/home/celular.jpg" alt="equipos">
-            <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-          </li>
-          <li><img src="./images/home/celular.jpg" alt="equipos">
-            <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-          </li>
-          <li><img src="./images/home/celular.jpg" alt="equipos">
-            <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-          </li>
-          <li><img src="./images/home/celular.jpg" alt="equipos">
-            <button class="last-btn"><span class="fa fa-times"></span></button>
-          </li> -->
         </ul>
       </div>
     </div>
@@ -27,7 +15,6 @@
 </template>
 
 <script>
-    // import compareItem from './compare-item.vue';
     Vue.component('compare-item', require('./compare-item.vue'));
 
     export default {
@@ -35,9 +22,6 @@
             'products',
             'baseUrl'
         ],
-        // components: {
-        //     'compareItem': compareItem
-        // },
         mounted() {
             console.log('Component mounted bitel.')
         },
@@ -55,7 +39,7 @@
                     resolve()
                 }).then( () => {
                     let url = $.param(subSet)
-                    window.location.href = self.baseUrl + '/product/compare?' + url
+                    window.location.href = self.baseUrl + '/prepago/comparar?' + url
                 })
             }
         }

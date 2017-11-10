@@ -20,7 +20,7 @@
               <p class="text-center">No se encontraron resultados</p>
             </div>
             <div class="row" v-if="searchResult.length > 0">
-              <prepaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :key="index"></prepaid>
+              <prepaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></prepaid>
             </div>
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
@@ -39,7 +39,7 @@
                       <div class="form-group btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
-                          <input type="checkbox" class="checkbox-compare">comparar
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}">comparar
                         </label>
                       </div>
                     </div>
@@ -222,7 +222,8 @@
                 </nav>
               </div>
             </div> --}}
-            <div id="list-equipos-comparar" >
+            <compare-prepaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-prepaid>
+            {{-- <div id="list-equipos-comparar" >
               <div class="equipos-comp">
                 <div class="title-equipos"><span>4 Equipos</span>
                   <p>para comparar</p>
@@ -245,7 +246,7 @@
                 </div>
               </div>
               <div class="btn-comparar"><a href="#">COMPARAR</a></div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
