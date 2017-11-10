@@ -39,3 +39,8 @@ Route::get('/product/compare', 'PostpaidController@compare');
 
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
+
+//TEST
+Route::get('/carrito', 'CartController@index')->name('carrito');
+Route::get('/envio', 'CartController@index2')->name('envio');
+Route::get('/finalizado', 'CartController@index3')->name('finalizado');

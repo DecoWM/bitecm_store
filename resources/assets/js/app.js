@@ -22,6 +22,44 @@ Vue.component('prepaid', require('./components/prepaid.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
 
+
+
+
+var VeeValidate = require('vee-validate');
+
+Vue.use(VeeValidate);
+
+const form = new Vue({
+  el: '#form-vue-validator',
+  data: {
+    first_name:'',
+    last_name:'',
+    select_document:'',
+    number_document:'',
+    distrito:'',
+    number_phone:'',
+    delivery:'',
+    email:'',
+    number_contact:'',
+    mediopago:''
+  },
+  methods: {
+    validateInfoCliente(){
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          // eslint-disable-next-line
+           alert('Enviado a ' + this.first_name + '!')
+          return;
+        }
+
+        alert('Completar los campos');
+      });
+    }
+  }
+});
+
+
+
 const app = new Vue({
     el: '#app',
     data: {

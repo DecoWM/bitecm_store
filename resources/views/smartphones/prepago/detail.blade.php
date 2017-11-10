@@ -69,7 +69,8 @@
                         <a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
                       <div class="btn-comprar-prepago">
-                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                        {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
+                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a>
                       </div>
                     </div>
                   </div>

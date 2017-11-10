@@ -67,7 +67,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
                       <div class="btn-comprar">
-                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a>
+                        {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
                       </div>
                     </div>
                   </div>

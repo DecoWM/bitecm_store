@@ -72,3 +72,49 @@
   transition: 0.5s ease all;
 }
 
+#descripcion-equipo .content-section form .content-product .btn-comprar-prepago a {
+  width: 100%;
+  padding: 0;
+  background-color: #008c95;
+  border: none;
+  color: #fff;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+}
+
+#detalle-carrito .btn-detalle a.comprar {
+  color: #fff;
+  background-color: #008c95;
+  float: right;
+}
+
+#detalle-carrito .btn-detalle a {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  width: 50%;
+  border-radius: 0;
+  padding: 0;
+  line-height: 30px;
+  font-size: 12px;
+}
+
+#descripcion-equipo .content-section form .content-product .btn-comprar a {
+  width: 100%;
+  padding: 0;
+  background-color: #cecece;
+  border: none;
+  color: #fff;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  -webkit-transition: 0.5s ease all;
+  transition: 0.5s ease all;
+}
+

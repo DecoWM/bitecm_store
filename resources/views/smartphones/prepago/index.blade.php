@@ -20,7 +20,7 @@
               <p class="text-center">No se encontraron resultados</p>
             </div>
             <div class="row" v-if="searchResult.length > 0">
-              <prepaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></prepaid>
+              <prepaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></prepaid>
             </div>
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)

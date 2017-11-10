@@ -38,10 +38,10 @@ class PostpaidController extends Controller
 
         $filters = json_decode($request->filters);
 
-        $product_price_ini = (isset($filters->price)) ? $filters->price->x : 0;
+        $product_price_ini = (isset($filters->price->x)) ? $filters->price->x : 0;
         // $product_price_ini = 0;
 
-        $product_price_end = (isset($filters->price)) ? $filters->price->y : 0;
+        $product_price_end = (isset($filters->price->y)) ? $filters->price->y : 0;
         // $product_price_end = 0;
 
         $manufacturer_ids = implode(',',$filters->manufacturer);
