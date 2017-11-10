@@ -123,8 +123,8 @@ header {
   color: #797878;
 }
 header #site-header {
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 header #site-header .container .select-persona ul li:first-child {
   border-right: 1px solid #797878;
@@ -136,6 +136,7 @@ header #site-header .container .select-persona ul li a {
   padding-bottom: 0;
   color: #797878;
   line-height: 25px;
+  font-size: 13px;
 }
 header #site-header .container .select-persona ul li a:hover {
   background-color: transparent;
@@ -167,6 +168,7 @@ header #site-header .container .info-bitel ul {
 header #site-header .container .info-bitel ul li {
   line-height: 25px;
   margin-left: 20px;
+  font-size: 13px;
 }
 header #site-header .container .info-bitel ul li:first-child {
   border-right: 1px solid #797878;
@@ -203,16 +205,16 @@ header #site-header .container .info-bitel ul li.cart a span {
 header #site-header .container .info-bitel ul li.cart a span.icon-cart {
   background: url("../images/header/svg/icon-cart.svg") no-repeat 0 0;
   background-size: cover;
-  height: 30px;
-  width: 30px;
+  height: 27px;
+  width: 27px;
   display: inline-block;
   position: inherit;
   bottom: 0px;
 }
 header #site-header .container .info-bitel ul li.cart a span.icon-count {
   position: inherit;
-  top: 0px;
-  right: -10px;
+  top: 4px;
+  right: -3px;
   font-size: 10px;
   text-align: center;
   line-height: 20px;
@@ -280,7 +282,7 @@ nav#nav-bitel .container .navbar-header .navbar-toggle span {
 }
 nav#nav-bitel .container .navbar-header a.navbar-brand {
   padding: 0;
-  background: url("../images/header/svg/logo.svg") no-repeat 0 5px;
+  background: url("../images/header/svg/logo.svg") no-repeat 0;
   width: 220px;
   margin-top: 10px;
 }
@@ -2783,6 +2785,9 @@ footer .container #info-footer .row .social-media ul li a {
   font-size: 22px;
   color: #008c95;
 }
+footer .container #info-footer .row .social-media ul li a:hover {
+  text-decoration: none;
+}
 footer .container .copyright {
   color: #797878;
   font-size: 12px;
@@ -2972,6 +2977,14 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   background-color: #169599;
   border-radius: 0;
   border: none;
+  transition-property: all;
+  transition-duration: 0.2s;
+}
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:hover,
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:focus,
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:active {
+  background-color: #ffe60d;
+  color: #008c95;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo {
   padding: 0;
@@ -3035,6 +3048,14 @@ section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo .bt
   line-height: 34px;
   z-index: 99;
   border: none;
+  transition-property: all;
+  transition-duration: 0.2s;
+}
+section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo .btn-catalogo .btn.btn-default:hover,
+section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo .btn-catalogo .btn.btn-default:focus,
+section#equipos-vendidos .container .row .content-tab-pro .producto.catalogo .btn-catalogo .btn.btn-default:active {
+  background-color: #ffe60d;
+  color: #008c95;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto:hover {
   border: 1px solid #ffe60d;
@@ -3258,6 +3279,14 @@ section#equipos-promocion .container .row .content-tab-pro .producto .content-pr
   background-color: #169599;
   border-radius: 0;
   border: none;
+  transition-property: all;
+  transition-duration: 0.2s;
+}
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:hover,
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:focus,
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .btn-comprar .btn.btn-default:active {
+  background-color: #ffe60d;
+  color: #008c95;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto:hover {
   border: 1px solid #ffe60d;
@@ -3307,6 +3336,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   section#garantia .container .row .col-xs-4 .text-center p {
     display: none;
   }
+}
+.zoomContainer {
+  z-index: 99999;
 }
 .title-page {
   border-bottom: 1px solid #a8a8a8;
@@ -3596,6 +3628,14 @@ section#garantia .container .row .col-xs-4 .text-center p {
   line-height: 35px;
   padding-top: 0;
   padding-bottom: 0;
+  transition-property: all;
+  transition-duration: 0.2s;
+}
+#list-equipos .producto .content-product .btn-product .btn-comprar .btn-default:hover,
+#list-equipos .producto .content-product .btn-product .btn-comprar .btn-default:focus,
+#list-equipos .producto .content-product .btn-product .btn-comprar .btn-default:active {
+  background-color: #ffe60d;
+  color: #008c95;
 }
 @media (max-width: 480px) and (min-width: 321px) {
   #list-equipos .producto .content-product .btn-product .btn-comprar {
@@ -4240,12 +4280,17 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin: auto;
   max-width: 315px;
   overflow: hidden;
+  position: relative;
 }
 #content-page #image-equipo .image-product img {
   height: 350px;
   margin: 45px 0;
   object-fit: contain;
   width: 100%;
+}
+#content-page #image-equipo .image-product img.active {
+  visibility: visible;
+  z-index: 9999;
 }
 #descripcion-equipo {
   margin-top: 30px;
@@ -4270,6 +4315,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-size: 35px;
   line-height: 35px;
   margin: 0;
+  text-transform: uppercase;
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title h1 {
@@ -4430,6 +4476,20 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border-radius: 0px;
   top: -6px;
   left: -6px;
+  position: absolute;
+  border: 1px solid #008c95;
+  border-radius: 5px;
+  background-color: transparent;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+}
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline.option-active:after {
+  width: 28px;
+  height: 28px;
+  border-radius: 0px;
+  top: -1px;
+  left: -5px;
   position: absolute;
   border: 1px solid #008c95;
   border-radius: 5px;
@@ -4733,11 +4793,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
     display: block;
   }
 }
+#planes {
+  margin-top: -130px;
+}
 #planes .title-plan {
   Color: #008c95;
   font-weight: 600;
   font-size: 16px;
   border-bottom: none;
+  text-align: center;
 }
 @media (max-width: 735px) {
   #planes .title-plan {
@@ -4800,7 +4864,6 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #planes .select-plan .slick-track .plan .content-plan ul {
   margin: 0 auto;
-  display: inline-block;
 }
 #planes .select-plan .slick-track .plan .content-plan ul li {
   text-align: left;
@@ -4808,6 +4871,13 @@ section#garantia .container .row .col-xs-4 .text-center p {
   position: relative;
   padding-left: 20px;
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+#planes .select-plan .slick-track .plan .content-plan ul li img {
+  height: 28px;
+  max-height: 28px;
+  margin-right: 5px;
 }
 #planes .select-plan .slick-track .plan .content-plan ul li:before {
   content: "";
@@ -4817,7 +4887,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border-radius: 100%;
   position: absolute;
   background: #008c95;
-  top: 5px;
+  top: 12px;
   left: 6px;
 }
 #planes .select-plan .slick-track .plan .content-plan:hover {
@@ -4895,6 +4965,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
     border: 1px solid #a8a8a8;
     padding: 20px 0;
   }
+}
+#especificaciones-tecnicas .content-detalle .pdf-tecnica.not-active {
+  display: none;
 }
 #especificaciones-tecnicas .content-detalle .pdf-tecnica a {
   display: inline-block;
@@ -5082,6 +5155,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-bottom: 0;
   background-color: #008c95;
   border-radius: 0;
+  transition-property: all;
+  border: transparent;
+  transition-duration: 0.2s;
+}
+#producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default:hover,
+#producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default:focus,
+#producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default:active {
+  background-color: #ffe60d;
+  color: #008c95;
 }
 @media (max-width: 1024px) {
   #producto-disponibles .list-producto .producto .content-product .btn-comprar .btn-default {
@@ -5891,8 +5973,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding: 20px;
 }
 #page-rastreo #content-rastreo section#detalle-rastreo {
-  padding-bottom: 20px;
+  padding-bottom: 30px;
   border-bottom: 1px solid #cecece;
+  margin-bottom: 20px;
 }
 #page-rastreo #content-rastreo section#detalle-rastreo .title-section {
   display: flex;

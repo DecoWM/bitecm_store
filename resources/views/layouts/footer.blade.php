@@ -28,10 +28,10 @@
               <div class="col-xs-12 col-sm-6">
                 <div class="social-media">
                   <ul class="list-unstyled">
-                    <li><a href="#" class="fa fa-facebook"></a></li>
-                    <li><a href="#" class="fa fa-twitter"></a></li>
-                    <li><a href="#" class="fa fa-instagram"></a></li>
-                    <li><a href="#" class="fa fa-youtube-play"></a></li>
+                    <li><a href="https://web.facebook.com/bitelperu"  target="_blank" class="fa fa-facebook"></a></li>
+                    <li><a href="https://twitter.com/bitelperu"  target="_blank" class="fa fa-twitter"></a></li>
+                    <li><a href="https://www.instagram.com/bitel_peru"  target="_blank" class="fa fa-instagram"></a></li>
+                    <li><a href="https://www.youtube.com/BitelPeru"  target="_blank" class="fa fa-youtube-play"></a></li>
                   </ul>
                 </div>
               </div>

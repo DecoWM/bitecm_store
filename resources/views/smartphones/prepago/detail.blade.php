@@ -44,8 +44,8 @@
                           <div class="color-product">
                             <fieldset>
                               <legend>Color</legend>
-                              <div class="option-select">
-                                <div class="radio-inline">
+                              <div id="option-select" class="option-select">
+                                <div class="radio-inline option-active">
                                   <input type="radio" name="color" value="1" class="negro">
                                 </div>
                                 <div class="radio-inline">
