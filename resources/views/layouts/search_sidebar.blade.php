@@ -71,39 +71,39 @@
             <div class="select-item">
               <div class="item">
                 <input id="plan-opt-1" type="radio" name="plan" value="1">
-                <label for="plan-opt-1">S/. 15</label>
+                <label for="plan-opt-1">ichip 15</label>
               </div>
               <div class="item">
                 <input id="plan-opt-2" type="radio" name="plan" value="1">
-                <label for="plan-opt-2">S/. 29</label>
+                <label for="plan-opt-2">ichip 29</label>
               </div>
               <div class="item">
                 <input id="plan-opt-3" type="radio" name="plan" value="1">
-                <label for="plan-opt-3">S/. 49</label>
+                <label for="plan-opt-3">ichip 49</label>
               </div>
               <div class="item">
                 <input id="plan-opt-4" type="radio" name="plan" value="1">
-                <label for="plan-opt-4">S/. 69</label>
+                <label for="plan-opt-4">ichip 69</label>
               </div>
               <div class="item">
                 <input id="plan-opt-5" type="radio" name="plan" value="1">
-                <label for="plan-opt-5">S/. 89</label>
+                <label for="plan-opt-5">ichip 89</label>
               </div>
               <div class="item">
                 <input id="plan-opt-6" type="radio" name="plan" value="1">
-                <label for="plan-opt-6">S/. 99</label>
+                <label for="plan-opt-6">ichip 99</label>
               </div>
               <div class="item">
                 <input id="plan-opt-7" type="radio" name="plan" value="1">
-                <label for="plan-opt-7">S/. 129</label>
+                <label for="plan-opt-7">ichip 129</label>
               </div>
               <div class="item">
                 <input id="plan-opt-8" type="radio" name="plan" value="1">
-                <label for="plan-opt-8">S/. 149</label>
+                <label for="plan-opt-8">ichip 149</label>
               </div>
               <div class="item">
                 <input id="plan-opt-9" type="radio" name="plan" value="1">
-                <label for="plan-opt-9">S/. 169</label>
+                <label for="plan-opt-9">ichip 169</label>
               </div>
             </div>
           </div>

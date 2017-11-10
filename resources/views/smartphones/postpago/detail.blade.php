@@ -94,10 +94,12 @@
                 <div class="content-plan"><span class="title-plan">Megaplus 99</span>
                   <div class="precio-plan">S/.99<span>al mes</span></div>
                   <ul class="list-unstyled">
-                    <li>Llamadas ilimitadas</li>
-                    <li>10GB internet</li>
-                    <li>RPB ilimitado</li>
-                    <li>RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
                   </ul>
                 </div>
               </div>
@@ -105,10 +107,12 @@
                 <div class="content-plan"><span class="title-plan">Megaplus 119.90</span>
                   <div class="precio-plan">S/.119<span>al mes</span></div>
                   <ul class="list-unstyled">
-                    <li>Llamadas ilimitadas</li>
-                    <li>10GB internet</li>
-                    <li>RPB ilimitado</li>
-                    <li>RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
                   </ul>
                 </div>
               </div>
@@ -116,10 +120,12 @@
                 <div class="content-plan"><span class="title-plan">Megaplus 149.90</span>
                   <div class="precio-plan">S/.149<span>al mes</span></div>
                   <ul class="list-unstyled">
-                    <li>Llamadas ilimitadas</li>
-                    <li>10GB internet</li>
-                    <li>RPB ilimitado</li>
-                    <li>RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
                   </ul>
                 </div>
               </div>
@@ -127,10 +133,12 @@
                 <div class="content-plan"><span class="title-plan">Megaplus 189.90</span>
                   <div class="precio-plan">S/.189<span>al mes</span></div>
                   <ul class="list-unstyled">
-                    <li>Llamadas ilimitadas</li>
-                    <li>10GB internet</li>
-                    <li>RPB ilimitado</li>
-                    <li>RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
                   </ul>
                 </div>
               </div>
