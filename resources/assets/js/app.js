@@ -29,8 +29,11 @@ const app = new Vue({
         bestSeller : "smartphone",
         promo : "postpago",
         itemsPerPage : "12",
+        filters : {
+          price : "",
+          manufacturer : ["1","2","3","4","5","6","7"]
+        },
         compare: [],
-        manufacturer : ["1","2","3","4","5","6","7"],
         searchedString : "",
         search : false,
         isSearching : false,
@@ -79,7 +82,8 @@ const app = new Vue({
             let data = {
                 params: {
                     searched_string: self.searchedString,
-                    items_per_page: self.itemsPerPage
+                    items_per_page: self.itemsPerPage,
+                    filters : self.filters
                 }
             };
             axios.get(url, data).then((response) => {
@@ -434,6 +438,35 @@ const app = new Vue({
             zoomWindowFadeOut: 750
         });
 
+        $(".option-select input").change(function(e){
+           // var defColor = $(this).attr('id');
+           var currentValue = $(".option-select input:checked").val();
+           // console.log('Select val ' + currentValue + defColor);
+              if(currentValue == 1){
+              smallImage = '/images/home/celular-1.jpg';
+              largeImage = '/images/home/celular-12.jpg';
+              }
+              if(currentValue == 2){
+              smallImage = '/images/home/celular-2.jpg';
+              largeImage = '/images/home/celular-22.jpg';
+              }
+              if(currentValue == 3){
+              smallImage = '/images/home/celular-3.jpg';
+              largeImage = '/images/home/celular-33.jpg';
+              }
+           // if(currentValue == 4){
+           // smallImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/small/image4.png';
+           // largeImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/large/image4.jpg';
+           // }
+          // Example of using Active Gallery
+          $('#gallery_09 a').removeClass('active').eq(currentValue-1).addClass('active');
+
+
+           var ez =   $('#zoom_01').data('elevateZoom');
+
+          ez.swaptheimage(smallImage, largeImage);
+
+        });
         // $("#zoom_03").elevateZoom({
         //   gallery:'gallery_01',
         //  cursor: 'pointer',

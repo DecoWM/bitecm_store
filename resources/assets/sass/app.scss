@@ -61,6 +61,27 @@
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product {
     position: absolute;
 }
+
+//provisional
+#descripcion-equipo .content-section form .content-product .btn-linea a:hover {
+    background-color: #cecece;
+    text-decoration: none;
+}
+
+#descripcion-equipo .content-section form .content-product .btn-linea a {
+    width: 100%;
+    padding: 0;
+    background-color: #cecece;
+    border: none;
+    color: #008c95;
+    line-height: 18px;
+    padding: 10px 0;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: 0.5s ease all;
+}
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
 //     float: right;

@@ -65,7 +65,8 @@
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>
                       <div class="btn-linea">
-                        <button type="submit" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</button>
+                        {{-- <button type="submit" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</button> --}}
+                        <a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
                       <div class="btn-comprar-prepago">
                         <button type="submit" class="btn-default">Comprar Ahora</button>
@@ -102,7 +103,7 @@
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
-              <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_name)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div>
+              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_name)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
             </div>
           </div>
         </div>

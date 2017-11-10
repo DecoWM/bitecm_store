@@ -36,7 +36,19 @@ class PostpaidController extends Controller
           'items_per_page' => 'required|integer|min:0'
         ]);
 
-        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", 0, 0, 0, $request->searched_string);
+        $filters = json_decode($request->filters);
+
+        $product_price_ini = (isset($filters->price)) ? $filters->price->x : 0;
+        // $product_price_ini = 0;
+
+        $product_price_end = (isset($filters->price)) ? $filters->price->y : 0;
+        // $product_price_end = 0;
+
+        $manufacturer_ids = implode(',',$filters->manufacturer);
+
+        // return [$manufacturer_ids];
+
+        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
 
         $data = collect($search_result)->map(function ($item, $key) {
             $item->picture_url = asset('images/productos/'.$item->picture_url);

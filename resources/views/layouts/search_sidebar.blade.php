@@ -43,23 +43,23 @@
             </div>
             <div class="select-item">
               <div class="item">
-                <input id="price-opt-1" type="radio" name="price" value="1">
+                <input id="price-opt-1" type="radio" name="price" v-bind:value="{x : 1, y : 50}" v-model="filters.price" v-on:change="searchProduct">
                 <label for="price-opt-1">S/. 1 - 50</label>
               </div>
               <div class="item">
-                <input id="price-opt-2" type="radio" name="price" value="1">
+                <input id="price-opt-2" type="radio" name="price" v-bind:value="{x : 51, y : 150}" v-model="filters.price" v-on:change="searchProduct">
                 <label for="price-opt-2">S/. 51 - 150</label>
               </div>
               <div class="item">
-                <input id="price-opt-3" type="radio" name="price" value="1">
+                <input id="price-opt-3" type="radio" name="price" v-bind:value="{x : 151, y : 300}" v-model="filters.price" v-on:change="searchProduct">
                 <label for="price-opt-3">S/. 151 - 300</label>
               </div>
               <div class="item">
-                <input id="price-opt-4" type="radio" name="price" value="1">
+                <input id="price-opt-4" type="radio" name="price" v-bind:value="{x : 301, y : 1000}" v-model="filters.price" v-on:change="searchProduct">
                 <label for="price-opt-4">S/.301 - 1000</label>
               </div>
               <div class="item">
-                <input id="price-opt-5" type="radio" name="price" value="1">
+                <input id="price-opt-5" type="radio" name="price" v-bind:value="{x : 1001, y : 0}" v-model="filters.price" v-on:change="searchProduct">
                 <label for="price-opt-5">S/. 1001 +</label>
               </div>
             </div>
@@ -113,31 +113,31 @@
             </div>
             <div class="select-item">
               <div class="item">
-                <input id="brand-opt-1" type="checkbox" name="brand" v-model="manufacturer" value="1">
+                <input id="brand-opt-1" type="checkbox" name="brand" v-model="filters.manufacturer" value="1" v-on:change="searchProduct">
                 <label for="brand-opt-1">Samsung</label>
               </div>
               <div class="item">
-                <input id="brand-opt-2" type="checkbox" name="brand" v-model="manufacturer" value="2">
-                <label for="brand-opt-2">Huawei</label>
+                <input id="brand-opt-2" type="checkbox" name="brand" v-model="filters.manufacturer" value="2" v-on:change="searchProduct">
+                <label for="brand-opt-2">Sony</label>
               </div>
               <div class="item">
-                <input id="brand-opt-3" type="checkbox" name="brand" v-model="manufacturer" value="3">
+                <input id="brand-opt-3" type="checkbox" name="brand" v-model="filters.manufacturer" value="3" v-on:change="searchProduct">
                 <label for="brand-opt-3">LG</label>
               </div>
               <div class="item">
-                <input id="brand-opt-4" type="checkbox" name="brand" v-model="manufacturer" value="4">
+                <input id="brand-opt-4" type="checkbox" name="brand" v-model="filters.manufacturer" value="4" v-on:change="searchProduct">
                 <label for="brand-opt-4">Alcatel</label>
               </div>
               <div class="item">
-                <input id="brand-opt-5" type="checkbox" name="brand" v-model="manufacturer" value="5">
+                <input id="brand-opt-5" type="checkbox" name="brand" v-model="filters.manufacturer" value="5" v-on:change="searchProduct">
                 <label for="brand-opt-5">Sky</label>
               </div>
               <div class="item">
-                <input id="brand-opt-6" type="checkbox" name="brand" v-model="manufacturer" value="6">
+                <input id="brand-opt-6" type="checkbox" name="brand" v-model="filters.manufacturer" value="6" v-on:change="searchProduct">
                 <label for="brand-opt-6">Lenovo</label>
               </div>
               <div class="item">
-                <input id="brand-opt-7" type="checkbox" name="brand" v-model="manufacturer" value="7">
+                <input id="brand-opt-7" type="checkbox" name="brand" v-model="filters.manufacturer" value="7" v-on:change="searchProduct">
                 <label for="brand-opt-7">Bitel</label>
               </div>
             </div>
