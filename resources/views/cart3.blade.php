@@ -52,8 +52,10 @@
                 </div>
                 <div class="btn-detalle">
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    <button type="submit" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</button>
-                    <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/rastreo.html" class="redirect-href btn btn-default comprar">continuar</button>
+                    {{-- <button type="submit" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</button>
+                    <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/rastreo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
+                    <a href="{{route('home')}}" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</a>
+                    <a href="{{route('rastreo', ['product' => $product->product_id])}}" class="redirect-href btn btn-default comprar">continuar</a>
                   </div>
                 </div>
               </div>

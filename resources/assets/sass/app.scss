@@ -126,6 +126,32 @@
     font-weight: 600;
     transition: 0.5s ease all;
 }
+
+#section-pedido .row .btn-detalle a.regresar {
+    width: 46.4%;
+    margin-right: 10px;
+    background-color: #ffe60d;
+    color: #008c95;
+    line-height: 16px;
+}
+
+#section-pedido .row .btn-detalle a.comprar {
+    color: #fff;
+    background-color: #008c95;
+    float: right;
+}
+
+#section-pedido .row .btn-detalle a {
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    width: 50%;
+    border-radius: 0;
+    padding: 0;
+    line-height: 40px;
+    font-size: 12px;
+    height: 42px;
+}
+
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
 //     float: right;
