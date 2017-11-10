@@ -113,31 +113,31 @@
             </div>
             <div class="select-item">
               <div class="item">
-                <input id="brand-opt-1" type="radio" name="brand" value="1">
+                <input id="brand-opt-1" type="checkbox" name="brand" v-model="manufacturer" value="1">
                 <label for="brand-opt-1">Samsung</label>
               </div>
               <div class="item">
-                <input id="brand-opt-2" type="radio" name="brand" value="1">
+                <input id="brand-opt-2" type="checkbox" name="brand" v-model="manufacturer" value="2">
                 <label for="brand-opt-2">Huawei</label>
               </div>
               <div class="item">
-                <input id="brand-opt-3" type="radio" name="brand" value="1">
+                <input id="brand-opt-3" type="checkbox" name="brand" v-model="manufacturer" value="3">
                 <label for="brand-opt-3">LG</label>
               </div>
               <div class="item">
-                <input id="brand-opt-4" type="radio" name="brand" value="1">
+                <input id="brand-opt-4" type="checkbox" name="brand" v-model="manufacturer" value="4">
                 <label for="brand-opt-4">Alcatel</label>
               </div>
               <div class="item">
-                <input id="brand-opt-5" type="radio" name="brand" value="1">
+                <input id="brand-opt-5" type="checkbox" name="brand" v-model="manufacturer" value="5">
                 <label for="brand-opt-5">Sky</label>
               </div>
               <div class="item">
-                <input id="brand-opt-6" type="radio" name="brand" value="1">
+                <input id="brand-opt-6" type="checkbox" name="brand" v-model="manufacturer" value="6">
                 <label for="brand-opt-6">Lenovo</label>
               </div>
               <div class="item">
-                <input id="brand-opt-7" type="radio" name="brand" value="1">
+                <input id="brand-opt-7" type="checkbox" name="brand" v-model="manufacturer" value="7">
                 <label for="brand-opt-7">Bitel</label>
               </div>
             </div>

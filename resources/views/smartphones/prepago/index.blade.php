@@ -8,34 +8,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct">
-            <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
-            <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
-          </form>
-        </div>
-        <div class="col-xs-12 col-sm-8 col-md-8">
-          <div id="filter-product">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6 text-right">
-                <div class="filter-item"><span>Sort by:</span>
-                  <select>
-                    <option>Default</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 text-right">
-                <div class="filter-item"><span>Show:</span>
-                  <select>
-                    <option>16</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+@include('layouts.search_navbar')
       <div class="row">
 @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
@@ -47,7 +20,7 @@
               <p class="text-center">No se encontraron resultados</p>
             </div>
             <div class="row" v-if="searchResult.length > 0">
-              <postpaid v-for="(product, index) in searchResult" :product="product" :key="index"></postpaid>
+              <prepaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :key="index"></prepaid>
             </div>
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
@@ -65,7 +38,9 @@
                     <div class="btn-product form-inline">
                       <div class="form-group btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
+                        <label>
+                          <input type="checkbox" class="checkbox-compare">comparar
+                        </label>
                       </div>
                     </div>
                   </div>

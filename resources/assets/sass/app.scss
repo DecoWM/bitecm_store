@@ -29,10 +29,34 @@
     border: none;
 }
 
+.content-catalogo .select-item .item label{
+    cursor: pointer;
+}
+
 #especificaciones-tecnicas .content-detalle .pdf-tecnica a {
     cursor: pointer;
 }
 
+#list-equipos #list-equipos-comparar .btn-comparar {
+    cursor: pointer;
+}
+
+#compara-tus-equipos .info-lista {
+    padding-top: 345px;
+}
+
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
+    height: 335px;
+    position: relative;
+}
+
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product img {
+    height: 190px;
+}
+
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product {
+    position: absolute;
+}
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
 //     float: right;

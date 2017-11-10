@@ -18,18 +18,23 @@ window.Vue = require('vue');
 // Vue.component('example', require('./components/Example.vue'));
 Vue.component('loader', require('./components/loader.vue'));
 Vue.component('postpaid', require('./components/postpaid.vue'));
+Vue.component('prepaid', require('./components/prepaid.vue'));
+Vue.component('compare', require('./components/compare.vue'));
 
 const app = new Vue({
     el: '#app',
     data: {
         baseUrl: document.head.querySelector('meta[name="base-url"]').content,
         bestSeller : "smartphone",
-        promo: "postpago",
-        searchedString: "",
-        search: false,
-        isSearching: false,
-        searchResult: [],
-        noResults: false
+        promo : "postpago",
+        itemsPerPage : "12",
+        compare: [],
+        manufacturer : ["1","2","3","4","5","6","7"],
+        searchedString : "",
+        search : false,
+        isSearching : false,
+        searchResult : [],
+        noResults : false
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -48,6 +53,20 @@ const app = new Vue({
               // $('#banner-principal').get(0).slick.setPosition();
             });
         },
+        addItem : function (product) {
+            self = this;
+            self.compare.push(product);
+        },
+        removeItem: function (product_id) {
+            self = this
+            item = self.compare.find( function (e) {
+                return e.product_id == product_id
+            })
+            index = self.compare.indexOf(item)
+            if (index !== -1) {
+                self.compare.splice(index, 1)
+            }
+        },
         searchProduct: function () {
             self = this;
             self.isSearching = true;
@@ -55,8 +74,14 @@ const app = new Vue({
             self.search = true;
             self.searchResult = [];
             console.log(self.baseUrl);
-            let url = self.baseUrl + '/product/search?searched_string=' + self.searchedString;
-            axios.get(url).then((response) => {
+            let url = self.baseUrl + '/product/search';
+            let data = {
+                params: {
+                    searched_string: self.searchedString,
+                    items_per_page: self.itemsPerPage
+                }
+            };
+            axios.get(url, data).then((response) => {
               self.searchResult = response.data.data;
               console.log(self.searchResult.length);
               if (self.searchResult.length == 0) {
@@ -179,8 +204,8 @@ const app = new Vue({
         $('.lista-equipos').slick({
             arrows: true,
             dots: true,
-            infinite: true,
-            autoplay: true,
+            infinite: false,
+            autoplay: false,
             arrows: true,
             speed: 300,
             slidesToShow: 4,

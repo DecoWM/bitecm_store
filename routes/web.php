@@ -29,8 +29,11 @@ Route::get('/postpago/smartphones/{product}', 'PostpaidController@show')->where(
 Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 
 //RUTAS BUSQUEDA
-Route::get('product/search', 'PostpaidController@search');
+Route::get('/product/search', 'PostpaidController@search');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
+
+//RUTAS COMPARAR
+Route::get('/product/compare', 'PostpaidController@compare');
 
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');

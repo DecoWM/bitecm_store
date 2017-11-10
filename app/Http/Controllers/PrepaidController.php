@@ -15,7 +15,7 @@ class PrepaidController extends Controller
     }
 
     public function index () {
-        $search_result =  $this->shared->searchProduct(1, 9);
+        $search_result =  $this->shared->searchProduct(1, 12);
         return view('smartphones.prepago.index', ['products' => $search_result]);
     }
 

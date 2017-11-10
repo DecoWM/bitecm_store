@@ -12,9 +12,11 @@
           <p>en plan <span>Megaplus 119</span></p>
         </div>
         <div class="btn-product form-inline">
-          <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
+          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/postpago/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
           <div class="checkbox btn-comparar">
-            <input type="checkbox" class="checkbox-compare">comparar
+            <label>
+              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare">comparar
+            </label>
           </div>
         </div>
       </div>
@@ -25,8 +27,36 @@
 <script>
     export default {
         props: [
-            'product'
+            'product',
+            'baseUrl',
+            'compare'
         ],
+        data () {
+            return {
+                isSelected : false,
+                compareItem : {
+                  product_id: this.product.product_id,
+                  picture_url: this.product.picture_url
+                }
+            }
+        },
+        methods : {
+            emitCompare () {
+                self = this
+                self.isSelected ?
+                this.$emit('additem', self.compareItem)
+                :
+                self.$emit('removeitem', self.compareItem.product_id)
+            }
+        },
+        beforeMount() {
+            self = this
+            self.compare.forEach( function (e) {
+                if (e.product_id == self.compareItem.product_id) {
+                    self.isSelected = true
+                }
+            })
+        },
         mounted() {
             console.log('Component mounted bitel.')
         }

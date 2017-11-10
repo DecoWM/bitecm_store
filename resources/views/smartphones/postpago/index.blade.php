@@ -8,34 +8,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4">
-          <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct">
-            <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
-            <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
-          </form>
-        </div>
-        <div class="col-xs-12 col-sm-8 col-md-8">
-          <div id="filter-product">
-            <div class="row">
-              <div class="col-xs-12 col-sm-6 text-right">
-                <div class="filter-item"><span>Sort by:</span>
-                  <select>
-                    <option>Default</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 text-right">
-                <div class="filter-item"><span>Show:</span>
-                  <select>
-                    <option>16</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+@include('layouts.search_navbar')
       <div class="row">
 @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
@@ -47,7 +20,7 @@
               <p class="text-center">No se encontraron resultados</p>
             </div>
             <div class="row" v-if="searchResult.length > 0">
-              <postpaid v-for="(product, index) in searchResult" :product="product" :key="index"></postpaid>
+              <postpaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></postpaid>
             </div>
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
@@ -66,7 +39,9 @@
                     <div class="btn-product form-inline">
                       <div class="form-group btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
+                        <label>
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}">comparar
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -248,7 +223,8 @@
                 </nav>
               </div>
             </div> --}}
-            <div id="list-equipos-comparar">
+            <compare v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare>
+            {{-- <div id="list-equipos-comparar">
               <div class="equipos-comp">
                 <div class="title-equipos"><span>4 Equipos</span>
                   <p>para comparar</p>
@@ -271,7 +247,7 @@
                 </div>
               </div>
               <div class="btn-comparar"><a href="#">COMPARAR</a></div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>

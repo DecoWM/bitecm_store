@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Validator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class PostpaidController extends Controller
     }
 
     public function index () {
-        $search_result =  $this->shared->searchProduct(1, 9);
+        $search_result =  $this->shared->searchProduct(1, 12);
         return view('smartphones.postpago.index', ['products' => $search_result]);
     }
 
@@ -30,11 +31,12 @@ class PostpaidController extends Controller
     }
 
     public function search (Request $request) {
-        $this->validate($request, [
-          'searched_string' => 'required|max:30|regex:/(^[A-Za-z0-9 ]+$)+/'
+        $request->validate([
+          'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
+          'items_per_page' => 'required|integer|min:0'
         ]);
 
-        $search_result = $this->shared->searchProduct(1, 9, 1, "product_name", "desc", 0, 0, 0, $request->searched_string);
+        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", 0, 0, 0, $request->searched_string);
 
         $data = collect($search_result)->map(function ($item, $key) {
             $item->picture_url = asset('images/productos/'.$item->picture_url);
@@ -46,5 +48,24 @@ class PostpaidController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    public function compare (Request $request) {
+        $request->validate([
+          'product_id' => 'required|array',
+          'product_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
+        ]);
+        // return $request->all();
+        $products = [];
+        foreach ($request->product_id as $product_id) {
+            $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
+            if (isset($product[0])) {
+              array_push($products, $product[0]);
+            } else {
+              abort(404);
+            }
+        }
+        // return $products;
+        return view('smartphones.compare', ['products' => $products]);
     }
 }
