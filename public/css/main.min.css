@@ -4812,6 +4812,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #planes .select-plan {
   margin-top: 20px;
+  overflow-y: hidden;
+  height: 440px;
 }
 #planes .select-plan .slick-prev {
   left: -10px;
@@ -4832,40 +4834,42 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #planes .select-plan .slick-track {
   padding-top: 10px;
 }
-#planes .select-plan .slick-track .plan {
+#planes .select-plan .plan {
   text-align: center;
   padding: 10px;
   border: 1px solid transparent;
   transition: 0.1s ease-out all;
   margin: 0 10px;
+  float: left;
 }
-#planes .select-plan .slick-track .plan .content-plan {
+#planes .select-plan .plan .content-plan {
   border: 1px solid #cecece;
   padding: 25px 10px;
+  min-width: 208px;
 }
-#planes .select-plan .slick-track .plan .content-plan .title-plan {
+#planes .select-plan .plan .content-plan .title-plan {
   font-size: 17px;
   margin-bottom: 15px;
   display: block;
   color: #4e4e4e;
   font-weight: 400;
 }
-#planes .select-plan .slick-track .plan .content-plan .precio-plan {
+#planes .select-plan .plan .content-plan .precio-plan {
   font-family: 'multicolore';
   color: #008c95;
   font-size: 28px;
   margin-bottom: 15px;
 }
-#planes .select-plan .slick-track .plan .content-plan .precio-plan span {
+#planes .select-plan .plan .content-plan .precio-plan span {
   font-size: 10px;
   font-family: 'Montserrat';
   margin-left: 4px;
   color: initial;
 }
-#planes .select-plan .slick-track .plan .content-plan ul {
+#planes .select-plan .plan .content-plan ul {
   margin: 0 auto;
 }
-#planes .select-plan .slick-track .plan .content-plan ul li {
+#planes .select-plan .plan .content-plan ul li {
   text-align: left;
   font-size: 11px;
   position: relative;
@@ -4874,12 +4878,12 @@ section#garantia .container .row .col-xs-4 .text-center p {
   display: flex;
   align-items: center;
 }
-#planes .select-plan .slick-track .plan .content-plan ul li img {
+#planes .select-plan .plan .content-plan ul li img {
   height: 28px;
   max-height: 28px;
   margin-right: 5px;
 }
-#planes .select-plan .slick-track .plan .content-plan ul li:before {
+#planes .select-plan .plan .content-plan ul li:before {
   content: "";
   width: 5px;
   height: 5px;
@@ -4890,16 +4894,16 @@ section#garantia .container .row .col-xs-4 .text-center p {
   top: 12px;
   left: 6px;
 }
-#planes .select-plan .slick-track .plan .content-plan:hover {
+#planes .select-plan .plan .content-plan:hover {
   border: 1px solid #ffe60d;
 }
-#planes .select-plan .slick-track .plan.plan-active {
+#planes .select-plan .plan.plan-active {
   border: 1px solid #ffe60d;
 }
-#planes .select-plan .slick-track .plan.plan-active .content-plan {
+#planes .select-plan .plan.plan-active .content-plan {
   border: 1px solid #fff;
 }
-#planes .select-plan .slick-track .plan.plan-active .content-plan:hover {
+#planes .select-plan .plan.plan-active .content-plan:hover {
   border: 1px solid #fff;
 }
 @media (max-width: 735px) {
