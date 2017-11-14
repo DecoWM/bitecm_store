@@ -25,9 +25,9 @@ class HomeController extends Controller
     }
 
     private function searchProduct ($product_category_id=1, $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_manufacturer_id='', $product_price_ini=0, $product_price_end=0, $product_string_search="") {
-        $products = DB::select('call PA_productSearch(
+        $products = DB::select('call PA_productSearchPrepago(
             :product_category_id,
-            :product_manufacturer_id,
+            :product_manufacturers,
             :product_price_ini,
             :product_price_end,
             :product_string_search,
@@ -37,7 +37,7 @@ class HomeController extends Controller
             :sort_direction
           )', [
             'product_category_id' => $product_category_id,
-            'product_manufacturer_id' => $product_manufacturer_id,
+            'product_manufacturers' => $product_manufacturer_id,
             'product_price_ini' => $product_price_ini,
             'product_price_end' => $product_price_end,
             'product_string_search' => $product_string_search,

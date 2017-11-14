@@ -1,7 +1,7 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <div data-equipo="1" class="producto active-comparar"> -->
-    <div data-equipo="1" class="producto">
+    <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected}">
       <div class="image-product text-center"><img v-bind:src="product.picture_url" alt="equipos"></div>
       <div class="content-product text-center">
         <div class="title-product">

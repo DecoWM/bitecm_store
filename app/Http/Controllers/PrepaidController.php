@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class PrepaidController extends Controller
 {
@@ -14,9 +15,16 @@ class PrepaidController extends Controller
         $this->shared = $shared;
     }
 
-    public function index () {
-        $search_result =  $this->shared->searchProduct(1, 12);
-        return view('smartphones.prepago.index', ['products' => $search_result]);
+    public function index (Request $request) {
+        $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+        $items_per_page = 12;
+        $search_result =  $this->shared->searchProductPrepaid(1, $items_per_page, $current_page);
+        $pages = intval(ceil($search_result['total'] / $items_per_page));
+        $paginator = new Paginator($search_result['products'], $search_result['total'], $items_per_page, $current_page, [
+          'pageName' => 'pag'
+        ]);
+        $paginator->withPath('prepago');
+        return view('smartphones.prepago.index', ['products' => $paginator, 'pages' => $pages]);
     }
 
     public function show($product_id) {

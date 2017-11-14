@@ -8,11 +8,12 @@
           </div>
         </div>
       </div>
-@include('layouts.search_navbar')
+{{-- @include('layouts.search_navbar') --}}
+      @include('layouts.banner_smartphone')
       <div class="row">
-@include('layouts.search_sidebar')
+        @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
-          <div id="list-equipos">
+          <div id="list-equipos" v-cloak>
             <div class="row" v-if="isSearching">
               <loader></loader>
             </div>
@@ -40,7 +41,7 @@
                       <div class="form-group btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
-                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}">comparar
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4">comparar
                         </label>
                       </div>
                     </div>

@@ -18,4 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //RUTAS BUSQUEDA
-Route::get('product/search', 'PostpaidController@search');
+Route::get('search/products', 'Api\SearchController@search')->name('search');

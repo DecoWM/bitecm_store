@@ -136,6 +136,10 @@ const app = new Vue({
               self.noResults = true;
               self.isSearching = false;
             });
+        },
+        redirect: function (str) {
+            self = this
+            window.location.href = self.baseUrl + '/' + str
         }
     },
     mounted: function () {

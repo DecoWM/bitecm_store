@@ -152,6 +152,38 @@
     height: 42px;
 }
 
+#list-equipos #pagination-nav ul li.active span {
+    color: #fff;
+    background-color: #008c95;
+    border: 1px solid #008c95;
+}
+
+//CSS ADICIONAL
+.sidebar-box {
+    margin-bottom: 20px;
+    #search-product {
+        margin-bottom: 0
+    }
+}
+
+.top-banner {
+    height: 200px;
+    border: 1px solid #cecece;
+    margin-bottom: 20px;
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.title-page {
+    margin-bottom: 20px;
+}
+
+[v-cloak] {
+  display: none;
+}
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
 //     float: right;

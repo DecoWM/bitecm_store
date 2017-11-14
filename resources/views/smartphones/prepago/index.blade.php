@@ -8,11 +8,12 @@
           </div>
         </div>
       </div>
-@include('layouts.search_navbar')
+{{-- @include('layouts.search_navbar') --}}
+      @include('layouts.banner_smartphone')
       <div class="row">
-@include('layouts.search_sidebar')
+        @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
-          <div id="list-equipos">
+          <div id="list-equipos" v-cloak>
             <div class="row" v-if="isSearching">
               <loader></loader>
             </div>
@@ -25,7 +26,7 @@
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="1" class="producto active-comparar">
+                <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : compare}">
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
@@ -39,7 +40,7 @@
                       <div class="form-group btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
-                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}">comparar
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4">comparar
                         </label>
                       </div>
                     </div>
@@ -208,20 +209,22 @@
                 </div>
               </div> --}}
             </div>
-            {{-- <div class="row" v-if="!isSearching">
+            <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
+
                 <nav aria-label="Page navigation" id="pagination-nav">
-                  <ul class="pagination">
+                  {{ $products->links() }}
+                  {{-- <ul class="pagination">
                     <li><a href="#" aria-label="Atras"><span aria-hidden="true">&lt;</span></a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#"><span aria-hidden="true">&gt;</span></a></li>
-                  </ul>
+                  </ul> --}}
                 </nav>
               </div>
-            </div> --}}
+            </div>
             <compare-prepaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-prepaid>
             {{-- <div id="list-equipos-comparar" >
               <div class="equipos-comp">

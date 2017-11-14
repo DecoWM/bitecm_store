@@ -1,21 +1,27 @@
         <div class="col-xs-12 col-sm-3">
+          <div class="sidebar-box">
+            <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct">
+              <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
+              <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
+            </form>
+          </div>
           <div id="plan" class="content-catalogo">
             <div class="title-select">
               <div class="btn-acordion"></div><span>Plan</span>
             </div>
             <div class="select-item">
               <div class="item">
-                <input id="prepaid" type="radio" name="register_webinar_" value="1">
+                <input id="prepaid" type="radio" name="register_webinar_" value="1" {{Request::is('prepago') ? 'checked' : ''}} v-on:change="redirect('prepago')">
                 <label for="prepaid">Prepago</label>
               </div>
               <div class="item">
-                <input id="postpaid" type="radio" name="register_webinar_" value="1">
+                <input id="postpaid" type="radio" name="register_webinar_" value="1" {{Request::is('postpago') ? 'checked' : ''}} v-on:change="redirect('postpago')">
                 <label for="postpaid">Postpago</label>
               </div>
-              <div class="item">
+              {{-- <div class="item">
                 <input id="promotion" type="radio" name="register_webinar_" value="1">
                 <label for="promotion">Promociones</label>
-              </div>
+              </div> --}}
             </div>
           </div>
           <div id="lo-quieres" class="content-catalogo">

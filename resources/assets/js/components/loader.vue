@@ -1,7 +1,9 @@
 <template lang="pug">
   .col-xs-12
     .box
-      .loader
+      .wrapper
+        .loader
+        span Buscando...
 </template>
 
 <script>
@@ -14,7 +16,12 @@
 
 <style lang="stylus" scoped>
 .box
-  margin 50px 0
+  margin 50px auto
+  display flex
+  align-items center
+  justify-content center
+.wrapper
+  position fixed
 .loader
   border 7px solid #008c95
   border-radius 50%
