@@ -7,15 +7,15 @@
         <div class="title-product">
           <h3 class="text-center">{{product.product_name}}</h3>
         </div>
-        <div class="price-product"><span>s/{{product.product_price_prepaid}}</span></div>
+        <div class="price-product"><span>s/{{product.product_price}}</span></div>
         <div class="plan-product">
-          <p>en plan <span>Megaplus 119</span></p>
+          <p>en plan <span>{{product.plan_name}}</span></p>
         </div>
         <div class="btn-product form-inline">
-          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/postpago/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
+          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
           <div class="checkbox btn-comparar">
             <label>
-              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare">comparar
+              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare" v-bind:disabled="compare.length==4 && !isSelected">comparar
             </label>
           </div>
         </div>

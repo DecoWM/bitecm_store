@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+window.Velocity = require('velocity-animate');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -17,13 +18,11 @@ window.Vue = require('vue');
 
 // Vue.component('example', require('./components/Example.vue'));
 Vue.component('loader', require('./components/loader.vue'));
+Vue.component('paginatorLinks', require('./components/paginator.vue'));
 Vue.component('postpaid', require('./components/postpaid.vue'));
 Vue.component('prepaid', require('./components/prepaid.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
-
-
-
 
 var VeeValidate = require('vee-validate');
 
@@ -68,15 +67,43 @@ const app = new Vue({
         promo : "postpago",
         itemsPerPage : "12",
         filters : {
-          price : "",
-          manufacturer : ["1","2","3","4","5","6","7"]
+            type : {
+                value : '',
+                isOpen : true
+            },
+            affiliation : {
+                value : 2,
+                isOpen : true
+            },
+            plan : {
+                value : '',
+                isOpen : false
+            },
+            price : {
+                value : '',
+                isOpen : false
+            },
+            manufacturer : {
+                value : [],
+                all : true,
+                isOpen : false
+            }
         },
         compare: [],
         searchedString : "",
         search : false,
         isSearching : false,
         searchResult : [],
-        noResults : false
+        noResults : false,
+        pagination: {
+            total: 20,
+            per_page: 12,
+            from: 1,
+            to: 12,
+            current_page: 1,
+            last_page: 2
+        },
+        offset: 4
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -95,6 +122,15 @@ const app = new Vue({
               // $('#banner-principal').get(0).slick.setPosition();
             });
         },
+        toggleAccordion : function (item) {
+            item.isOpen = !item.isOpen
+        },
+        transitionEnter : function(el, done){
+            Velocity(el, 'slideDown', {duration: 300, easing: "easeInBack"},{complete: done})
+        },
+        transitionLeave : function(el, done){
+            Velocity(el, 'slideUp', {duration: 300, easing: "easeInBack"},{complete: done})
+        },
         addItem : function (product) {
             self = this;
             self.compare.push(product);
@@ -109,14 +145,23 @@ const app = new Vue({
                 self.compare.splice(index, 1)
             }
         },
+        selectAll : function () {
+            self = this
+            if (self.filters.manufacturer.all) {
+                self.filters.manufacturer.value = []
+                self.searchProduct()
+            }
+            self.filters.manufacturer.all = true
+        },
         searchProduct: function () {
             self = this;
             self.isSearching = true;
             self.noResults = false;
             self.search = true;
             self.searchResult = [];
+            (self.filters.manufacturer.value.length > 0) ? self.filters.manufacturer.all = false : self.filters.manufacturer.all = true
             console.log(self.baseUrl);
-            let url = self.baseUrl + '/product/search';
+            let url = self.baseUrl + '/buscar';
             let data = {
                 params: {
                     searched_string: self.searchedString,
@@ -126,7 +171,6 @@ const app = new Vue({
             };
             axios.get(url, data).then((response) => {
               self.searchResult = response.data.data;
-              console.log(self.searchResult.length);
               if (self.searchResult.length == 0) {
                   self.noResults = true;
               }
@@ -141,6 +185,9 @@ const app = new Vue({
             self = this
             window.location.href = self.baseUrl + '/' + str
         }
+    },
+    beforeMount : function () {
+
     },
     mounted: function () {
         $('#banner-principal').slick({

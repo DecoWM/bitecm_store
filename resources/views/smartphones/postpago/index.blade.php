@@ -33,9 +33,9 @@
                     <div class="title-product">
                       <h3 class="text-center">{{$smartphone->product_name}}</h3>
                     </div>
-                    <div class="price-product"><span>s/{{$smartphone->product_price_prepaid}}</span></div>
+                    <div class="price-product"><span>s/{{$smartphone->product_price}}</span></div>
                     <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
+                      <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                     </div>
                     <div class="btn-product form-inline">
                       <div class="form-group btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
@@ -210,20 +210,23 @@
                 </div>
               </div> --}}
             </div>
-            {{-- <div class="row" v-if="!isSearching">
+            <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
-                  <ul class="pagination">
+                  {{ $products->links() }}
+                  {{-- <ul class="pagination">
                     <li><a href="#" aria-label="Atras"><span aria-hidden="true">&lt;</span></a></li>
                     <li class="active"><a href="#">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#"><span aria-hidden="true">&gt;</span></a></li>
-                  </ul>
+                  </ul> --}}
+                  {{-- <paginator-links v-bind:pagination="pagination" v-on:click.native="getUsers(pagination.current_page)" :offset="4"></paginator-links>
+                  <paginator-links v-bind:pagination="pagination" :offset="4"></paginator-links> --}}
                 </nav>
               </div>
-            </div> --}}
+            </div>
             <compare-postpaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-postpaid>
             {{-- <div id="list-equipos-comparar">
               <div class="equipos-comp">

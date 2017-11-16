@@ -12,10 +12,10 @@
           <p>Ver en plan postpago</p>
         </div>
         <div class="btn-product form-inline">
-          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/prepago/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
+          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
           <div class="checkbox btn-comparar">
             <label>
-              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare">comparar
+              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare" v-bind:disabled="compare.length==4 && !isSelected">comparar
             </label>
           </div>
         </div>

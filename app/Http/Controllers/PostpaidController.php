@@ -6,6 +6,7 @@ use DB;
 use Validator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class PostpaidController extends Controller
 {
@@ -15,9 +16,21 @@ class PostpaidController extends Controller
         $this->shared = $shared;
     }
 
-    public function index () {
-        $search_result =  $this->shared->searchProduct(1, 12);
-        return view('smartphones.postpago.index', ['products' => $search_result]);
+    public function index (Request $request) {
+        $items_per_page = 12;
+        $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+        $search_result =  $this->shared->searchProductPostpaid(1, $items_per_page, $current_page);
+        $pages = intval(ceil($search_result['total'] / $items_per_page));
+        $paginator = new Paginator(
+            $search_result['products'],
+            $search_result['total'],
+            $items_per_page, $current_page,
+            [
+                'pageName' => 'pag'
+            ]
+        );
+        $paginator->withPath('postpago');
+        return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages]);
     }
 
     public function show($product_id) {
@@ -38,15 +51,11 @@ class PostpaidController extends Controller
 
         $filters = json_decode($request->filters);
 
-        $product_price_ini = (isset($filters->price->x)) ? $filters->price->x : 0;
-        // $product_price_ini = 0;
+        $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
 
-        $product_price_end = (isset($filters->price->y)) ? $filters->price->y : 0;
-        // $product_price_end = 0;
+        $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
 
-        $manufacturer_ids = implode(',',$filters->manufacturer);
-
-        // return [$manufacturer_ids];
+        $manufacturer_ids = implode(',',$filters->manufacturer->value);
 
         $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
 

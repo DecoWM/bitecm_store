@@ -30,6 +30,8 @@ Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 
 //RUTAS BUSQUEDA
 Route::get('/product/search', 'PostpaidController@search');
+Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
+Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
 
 //RUTAS COMPARAR

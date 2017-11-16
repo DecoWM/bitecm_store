@@ -181,8 +181,29 @@
     margin-bottom: 20px;
 }
 
+.title-select {
+    cursor: pointer;
+    .btl-caret {
+        margin-right: 15px;
+    }
+}
+
+#list-equipos .producto {
+    padding: 20px 0 10px;
+}
+
+#list-equipos .image-product {
+    height: 170px;
+}
+
+#list-equipos .image-product img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 [v-cloak] {
-  display: none;
+    display: none;
 }
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
