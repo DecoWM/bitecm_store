@@ -16,6 +16,7 @@
           <div class="checkbox btn-comparar">
             <label>
               <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare" v-bind:disabled="compare.length==4 && !isSelected">comparar
+              <span class="checkmark"></span>
             </label>
           </div>
         </div>

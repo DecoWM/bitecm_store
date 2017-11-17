@@ -153,12 +153,17 @@
   min-height: 290px;
 }
 
-#list-equipos .producto .content-product .btn-product .btn-comparar input.checkbox-compare {
-  opacity: 1;
-}
-
-#list-equipos .producto .content-product .btn-product .btn-comparar label:before {
-  display: none;
+input:checked ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 12px;
+  width: 4px;
+  height: 10px;
+  border: solid #008c95;
+  border-width: 0 1px 1px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .sidebar-box {

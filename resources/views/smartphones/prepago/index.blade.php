@@ -46,6 +46,7 @@
                       <div class="checkbox btn-comparar">
                         <label>
                           <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_id', {{$smartphone->product_id}}])">comparar
+                          <span class="checkmark"></span>
                         </label>
                       </div>
                     </div>
