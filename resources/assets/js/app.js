@@ -62,7 +62,8 @@ const form = new Vue({
 const app = new Vue({
     el: '#app',
     data: {
-        baseUrl: document.head.querySelector('meta[name="base-url"]').content,
+        baseUrl : document.head.querySelector('meta[name="base-url"]').content,
+        prefix : document.head.querySelector('meta[name="prefix"]').content,
         bestSeller : "smartphone",
         promo : "postpago",
         itemsPerPage : "12",
@@ -72,7 +73,7 @@ const app = new Vue({
                 isOpen : true
             },
             affiliation : {
-                value : 2,
+                value : '2',
                 isOpen : true
             },
             plan : {
@@ -103,7 +104,16 @@ const app = new Vue({
             current_page: 1,
             last_page: 2
         },
-        offset: 4
+        offset : 4,
+        //DETALLE DEL PRODUCTO
+        selectedPlan : {
+            plan_id : 8,
+            plan_name : 'iChip 129,90',
+            product_variation_price : {
+              portability : 59,
+              new : 299
+            }
+        }
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -153,27 +163,31 @@ const app = new Vue({
             }
             self.filters.manufacturer.all = true
         },
-        searchProduct: function () {
+        searchProduct: function (currentPage) {
             self = this;
+            self.pagination.current_page = currentPage
             self.isSearching = true;
             self.noResults = false;
             self.search = true;
             self.searchResult = [];
             (self.filters.manufacturer.value.length > 0) ? self.filters.manufacturer.all = false : self.filters.manufacturer.all = true
             console.log(self.baseUrl);
-            let url = self.baseUrl + '/buscar';
+            let url = self.baseUrl + self.prefix +'buscar';
             let data = {
                 params: {
                     searched_string: self.searchedString,
                     items_per_page: self.itemsPerPage,
-                    filters : self.filters
+                    filters : self.filters,
+                    pag : self.pagination.current_page
                 }
             };
             axios.get(url, data).then((response) => {
+              console.log(response.data);
               self.searchResult = response.data.data;
               if (self.searchResult.length == 0) {
                   self.noResults = true;
               }
+              self.pagination = response.data
               self.isSearching = false;
             }, (error) => {
               console.log(error);
@@ -184,6 +198,9 @@ const app = new Vue({
         redirect: function (str) {
             self = this
             window.location.href = self.baseUrl + '/' + str
+        },
+        selectPlan : function (plan) {
+            this.selectedPlan = plan
         }
     },
     beforeMount : function () {
@@ -524,7 +541,9 @@ const app = new Vue({
             zoomType: "inner",
             cursor: "crosshair",
             zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
+            zoomWindowFadeOut: 750,
+            gallery : "gallery_01",
+            galleryActiveClass: "active"
         });
 
         $(".option-select input").change(function(e){
@@ -548,7 +567,7 @@ const app = new Vue({
            // largeImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/large/image4.jpg';
            // }
           // Example of using Active Gallery
-          $('#gallery_09 a').removeClass('active').eq(currentValue-1).addClass('active');
+          $('#gallery_01 a').removeClass('active').eq(currentValue-1).addClass('active');
 
 
            var ez =   $('#zoom_01').data('elevateZoom');

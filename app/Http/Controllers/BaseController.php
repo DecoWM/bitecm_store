@@ -120,4 +120,29 @@ class BaseController extends Controller
 
         return ['products' => $products, 'total' => $total[0]->total_products];
     }
+
+    public function getFiltersPostpaid () {
+        $affiliation_list = DB::select('call PA_affiliationList()');
+        $plan_list = DB::select('call PA_planList()');
+        $brand_list = DB::select('call PA_brandList()');
+        return [
+            'affiliation_list' => $affiliation_list,
+            'plan_list' => $plan_list,
+            'brand_list' => $brand_list,
+        ];
+    }
+
+    public function getFiltersPrepaid () {
+        $brand_list = DB::select('call PA_brandList()');
+        return [
+            'brand_list' => $brand_list,
+        ];
+    }
+
+    public function getFiltersAccessories () {
+        $brand_list = DB::select('call PA_brandList()');
+        return [
+            'brand_list' => $brand_list,
+        ];
+    }
 }

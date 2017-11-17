@@ -5,7 +5,7 @@
       <div class="image-product text-center"><img v-bind:src="product.picture_url" alt="equipos"></div>
       <div class="content-product text-center">
         <div class="title-product">
-          <h3 class="text-center">{{product.product_name}}</h3>
+          <h3 class="text-center">{{product.product_model}}</h3>
         </div>
         <div class="price-product"><span>s/{{product.product_price_prepaid}}</span></div>
         <div class="plan-product">

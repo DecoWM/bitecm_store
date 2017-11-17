@@ -2,9 +2,13 @@
     <ul class="pagination">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled"><span>&lt;</span></li>
+            <li class="disabled">
+              <span>
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              </span>
+            </li>
         @else
-            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev">&lt;</a></li>
+            <li><a href="{{ $paginator->previousPageUrl() }}" rel="prev"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a></li>
         @endif
 
         {{-- Pagination Elements --}}
@@ -28,9 +32,13 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">&gt;</a></li>
+            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a></li>
         @else
-            <li class="disabled"><span>&gt;</span></li>
+            <li class="disabled">
+              <span>
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              </span>
+            </li>
         @endif
     </ul>
 @endif

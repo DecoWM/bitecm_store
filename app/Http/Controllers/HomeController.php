@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 use DB;
 
 use App\Product;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $shared;
+
+    public function __construct (BaseController $shared) {
+        $this->shared = $shared;
+    }
+
     public function index(Request $request) {
-        $best_seller_smartphone = $this->searchProduct(1, 3);
-        $best_seller_tablet = $this->searchProduct(2, 3);
-        $featured_products = $this->searchProduct(1, 2);
-        $promo_pre = $this->searchProduct(1, 4, 1, 'product_id', 'asc');
-        $promo_pos = $this->searchProduct(2 ,4, 1, 'product_id', 'desc');
+        $best_seller_smartphone = $this->shared->searchProduct(1, 3);
+        $best_seller_tablet = $this->shared->searchProduct(2, 3);
+        $featured_products = $this->shared->searchProduct(1, 2);
+        $promo_pre = $this->shared->searchProductPrepaid(1, 4, 1, 'product_id', 'asc');
+        $promo_pos = $this->shared->searchProductPostpaid(1 ,4, 1, 'product_id', 'desc');
         return view('index', [
             'best_seller_smartphone' => $best_seller_smartphone,
             'best_seller_tablet' => $best_seller_tablet,
             'featured_products' => $featured_products,
-            'promo_pre' => $promo_pre,
-            'promo_pos' => $promo_pos,
+            'promo_prepaid' => $promo_pre['products'],
+            'promo_postpaid' => $promo_pos['products'],
         ]);
     }
 

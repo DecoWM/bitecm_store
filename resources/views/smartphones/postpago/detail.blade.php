@@ -5,11 +5,26 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>{{$product->product_name}}</h2>
+              <h2>{{$product->product_model}}</h2>
             </div>
             <div class="state"><span>NUEVO</span></div>
             <div id="image-equipo">
               <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos" data-zoom-image="{{asset('images/productos/'.$product->picture_url)}}"></div>
+              <div id="gallery_01" class="galeria-min">
+                <a href="#" data-image="/images/home/celular-1.jpg" data-zoom-image="/images/home/celular-12.jpg">
+                  <img src="/images/home/celular-1.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-2.jpg" data-zoom-image="/images/home/celular-22.jpg">
+                  <img src="/images/home/celular-2.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
+                  <img src="/images/home/celular-3.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
+                  <img src="/images/home/celular-3.jpg" alt="">
+                </a>
+                <div class="clearfix"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -17,7 +32,7 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>{{$product->product_name}}</h1>
+                <h1>{{$product->product_model}}</h1>
                 <div class="state"><span>NUEVO</span></div>
               </div>
               <div class="descripcion">
@@ -30,10 +45,10 @@
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
                       <div class="select-product"><span class="title-select">Lo quieres en</span>
-                        <select>
-                          <option name="prepago" value="prepago">Portabilidad</option>
-                          <option name="linea nueva" value="linea nueva">Linea nueva</option>
-                          <option name="renovacion" value="renovacion">Renovación</option>
+                        <select v-model="filters.affiliation.value">
+                          <option name="prepago" value="1" >Portabilidad</option>
+                          <option name="linea nueva" value="2">Linea nueva</option>
+                          <option name="renovacion" value="3">Renovación</option>
                         </select>
                       </div>
                       <div class="color-product">
@@ -54,11 +69,12 @@
                       </div>
                     </div>
                     <div class="col-xs-7 col-sm-6">
-                      <div class="detalle-product">
+                      <div class="detalle-product" v-cloak>
                         {{-- <div class="price-product"><span>s/</span>59</div> --}}
-                        <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid}}</div>
+                        <div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
+                        <div class="price-product" v-if="filters.affiliation.value != 1"><span>S/.</span>@{{selectedPlan.product_variation_price.new}}</div>
                         <div class="plan-product">
-                          <p>con <span>Megaplus S/.149 mensual</span></p>
+                          <p>con <span>@{{selectedPlan.plan_name}}</span></p>
                         </div>
                         <div class="tiempo-plan">
                           <p>Contrato de 18 meses</p>
@@ -91,7 +107,44 @@
           <div id="planes" class="planes">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             <div class="select-plan">
-              <div class="plan">
+@foreach ($plans as $plan)
+@php
+    $price = [];
+    foreach ($plan as $item) {
+        $price[$item->affiliation_id == 1 ? 'portability' : 'new'] = $item->product_variation_price;
+    }
+    $selected = [
+        'plan_name' => $plan[0]->plan_name,
+        'product_variation_price' => $price
+    ];
+@endphp
+              {{-- <div class="plan" v-on:click="selectPlan({plan_id:{{$plan[0]->plan_id}}, product_variation_price: {{$plan[0]->product_variation_price}}, plan_name: '{{$plan[0]->plan_name}}'})"> --}}
+              <div class="plan" v-on:click="selectPlan({{str_replace('\"', '\'', json_encode($selected))}})">
+                <div class="content-plan"><span class="title-plan">{{$plan[0]->plan_name}}</span>
+                  <div class="precio-plan">S/. {{$plan[0]->plan_price}}<span>al mes</span></div>
+                  <ul class="list-unstyled">
+@if ($plan[0]->plan_unlimited_calls == 1)
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
+@endif
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">{{$plan[0]->plan_data_cap}} internet</li>
+@if ($plan[0]->plan_unlimited_rpb == 1)
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+@endif
+@if ($plan[0]->plan_unlimited_sms == 1)
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+@endif
+@if ($plan[0]->plan_free_facebook == 1)
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+@endif
+@if ($plan[0]->plan_unlimited_whatsapp == 1)
+                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
+@endif
+                  </ul>
+                </div>
+              </div>
+@endforeach
+
+              {{-- <div class="plan">
                 <div class="content-plan"><span class="title-plan">Megaplus 99</span>
                   <div class="precio-plan">S/.99<span>al mes</span></div>
                   <ul class="list-unstyled">
@@ -142,7 +195,7 @@
                     <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
                   </ul>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
@@ -163,7 +216,7 @@
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
-              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_name)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
+              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
             </div>
           </div>
         </div>
@@ -208,7 +261,7 @@
                 <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                 <div class="content-product text-center">
                   <div class="title-product">
-                    <h3 class="text-center">{{$product->product_name}}</h3>
+                    <h3 class="text-center">{{$product->product_model}}</h3>
                   </div>
                   <div class="price-product"><span>S/.</span><span>{{$product->product_price_prepaid + 0}}</span></div>
                   <div class="plan-product">

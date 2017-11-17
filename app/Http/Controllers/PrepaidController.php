@@ -24,7 +24,7 @@ class PrepaidController extends Controller
         $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
         $manufacturer_ids = ($request->has('filters')) ? implode(',',$filters->manufacturer->value) : '';
         // $search_result =  $this->shared->searchProductPrepaid(1, $items_per_page, $current_page);
-        $search_result =  $this->shared->searchProductPrepaid(1, $items_per_page, $current_page, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $searched_string);
+        $search_result =  $this->shared->searchProductPrepaid(1, $items_per_page, $current_page, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $searched_string);
         $pages = intval(ceil($search_result['total'] / $items_per_page));
         $paginator = new Paginator(
             $search_result['products'],
@@ -35,7 +35,10 @@ class PrepaidController extends Controller
             ]
         );
         $paginator->withPath('prepago');
-        return view('smartphones.prepago.index', ['products' => $paginator, 'pages' => $pages]);
+
+        $filterList = $this->shared->getFiltersPrepaid();
+
+        return view('smartphones.prepago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList]);
     }
 
     public function searchPrepaid (Request $request) {

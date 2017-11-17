@@ -11760,6 +11760,7 @@ var app = new Vue({
     el: '#app',
     data: {
         baseUrl: document.head.querySelector('meta[name="base-url"]').content,
+        prefix: document.head.querySelector('meta[name="prefix"]').content,
         bestSeller: "smartphone",
         promo: "postpago",
         itemsPerPage: "12",
@@ -11769,7 +11770,7 @@ var app = new Vue({
                 isOpen: true
             },
             affiliation: {
-                value: 2,
+                value: '2',
                 isOpen: true
             },
             plan: {
@@ -11800,7 +11801,16 @@ var app = new Vue({
             current_page: 1,
             last_page: 2
         },
-        offset: 4
+        offset: 4,
+        //DETALLE DEL PRODUCTO
+        selectedPlan: {
+            plan_id: 8,
+            plan_name: 'iChip 129,90',
+            product_variation_price: {
+                portability: 59,
+                new: 299
+            }
+        }
     },
     methods: {
         toggleBestSeller: function toggleBestSeller(str) {
@@ -11850,27 +11860,31 @@ var app = new Vue({
             }
             self.filters.manufacturer.all = true;
         },
-        searchProduct: function searchProduct() {
+        searchProduct: function searchProduct(currentPage) {
             self = this;
+            self.pagination.current_page = currentPage;
             self.isSearching = true;
             self.noResults = false;
             self.search = true;
             self.searchResult = [];
             self.filters.manufacturer.value.length > 0 ? self.filters.manufacturer.all = false : self.filters.manufacturer.all = true;
             console.log(self.baseUrl);
-            var url = self.baseUrl + '/buscar';
+            var url = self.baseUrl + self.prefix + 'buscar';
             var data = {
                 params: {
                     searched_string: self.searchedString,
                     items_per_page: self.itemsPerPage,
-                    filters: self.filters
+                    filters: self.filters,
+                    pag: self.pagination.current_page
                 }
             };
             axios.get(url, data).then(function (response) {
+                console.log(response.data);
                 self.searchResult = response.data.data;
                 if (self.searchResult.length == 0) {
                     self.noResults = true;
                 }
+                self.pagination = response.data;
                 self.isSearching = false;
             }, function (error) {
                 console.log(error);
@@ -11881,6 +11895,9 @@ var app = new Vue({
         redirect: function redirect(str) {
             self = this;
             window.location.href = self.baseUrl + '/' + str;
+        },
+        selectPlan: function selectPlan(plan) {
+            this.selectedPlan = plan;
         }
     },
     beforeMount: function beforeMount() {},
@@ -12169,7 +12186,9 @@ var app = new Vue({
             zoomType: "inner",
             cursor: "crosshair",
             zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750
+            zoomWindowFadeOut: 750,
+            gallery: "gallery_01",
+            galleryActiveClass: "active"
         });
 
         $(".option-select input").change(function (e) {
@@ -12193,7 +12212,7 @@ var app = new Vue({
             // largeImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/large/image4.jpg';
             // }
             // Example of using Active Gallery
-            $('#gallery_09 a').removeClass('active').eq(currentValue - 1).addClass('active');
+            $('#gallery_01 a').removeClass('active').eq(currentValue - 1).addClass('active');
 
             var ez = $('#zoom_01').data('elevateZoom');
 
@@ -48518,7 +48537,7 @@ var render = function() {
         _c("div", { staticClass: "content-product text-center" }, [
           _c("div", { staticClass: "title-product" }, [
             _c("h3", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(_vm.product.product_name))
+              _vm._v(_vm._s(_vm.product.product_model))
             ])
           ]),
           _vm._v(" "),
@@ -48748,7 +48767,7 @@ var render = function() {
         _c("div", { staticClass: "content-product text-center" }, [
           _c("div", { staticClass: "title-product" }, [
             _c("h3", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(_vm.product.product_name))
+              _vm._v(_vm._s(_vm.product.product_model))
             ])
           ]),
           _vm._v(" "),
@@ -60970,7 +60989,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         changePage: function changePage(page) {
-            this.pagination.current_page = page;
+            if (this.pagination.current_page != page) {
+                this.$emit('changepage', page);
+            }
+            // this.pagination.current_page = page;
         }
     }
 });

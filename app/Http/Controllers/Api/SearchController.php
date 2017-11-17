@@ -56,7 +56,7 @@ class SearchController extends Controller
 
         $manufacturer_ids = implode(',',$filters->manufacturer->value);
 
-        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
+        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
 
         $data = collect($search_result)->map(function ($item, $key) {
             $item->picture_url = asset('images/productos/'.$item->picture_url);
@@ -85,7 +85,7 @@ class SearchController extends Controller
         $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : 2;
         $plan_id = (isset($filters->plan->value)) ? ( $filters->plan->value!="" ? $filters->plan->value : 6) : 6;
 
-        $search_result = $this->shared->searchProductPostpaid(1, $items_per_page, $current_page, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string, $affiliation_id, $plan_id);
+        $search_result = $this->shared->searchProductPostpaid(1, $items_per_page, $current_page, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string, $affiliation_id, $plan_id);
         $pages = intval(ceil($search_result['total'] / $items_per_page));
 
         $data = collect($search_result['products'])->map(function ($item, $key) {
@@ -103,11 +103,7 @@ class SearchController extends Controller
         );
         $paginator->withPath('postpago');
 
-        $response = [
-            'data' => $paginator
-        ];
-
-        return response()->json($response);
+        return response()->json($paginator);
 
         // $items_per_page = 12;
         //

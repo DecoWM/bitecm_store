@@ -149,6 +149,10 @@
   border: 1px solid #008c95;
 }
 
+#planes .select-plan .plan .content-plan {
+  min-height: 290px;
+}
+
 .sidebar-box {
   margin-bottom: 20px;
 }

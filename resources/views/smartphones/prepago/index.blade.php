@@ -9,7 +9,7 @@
         </div>
       </div>
 {{-- @include('layouts.search_navbar') --}}
-      @include('layouts.banner_smartphone')
+      @include('layouts.banner_smartphone', ['filters' => $filters])
       <div class="row">
         @include('layouts.search_sidebar')
         <div class="col-xs-12 col-sm-9">
@@ -35,7 +35,7 @@
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
-                      <h3 class="text-center">{{$smartphone->product_name}}</h3>
+                      <h3 class="text-center">{{$smartphone->product_model}}</h3>
                     </div>
                     <div class="price-product"><span>s/{{$smartphone->product_price_prepaid}}</span></div>
                     <div class="plan-product">

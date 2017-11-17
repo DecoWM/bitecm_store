@@ -40,7 +40,7 @@
                           </li>
                         </ul> --}}
                         <div class="title-product">
-                          <h4 class="text-center">{{$smartphone->product_name}}</h4>
+                          <h4 class="text-center">{{$smartphone->product_model}}</h4>
                         </div>
                         <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
 @if ($smartphone->product_id == 3)
@@ -124,7 +124,7 @@
                           </li>
                         </ul> --}}
                         <div class="title-product">
-                          <h4 class="text-center">{{$tablet->product_name}}</h4>
+                          <h4 class="text-center">{{$tablet->product_model}}</h4>
                         </div>
                         <div class="price-product"><span>S/.</span><span>{{$tablet->product_price_prepaid}}</span></div>
                         <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product' => $tablet->product_id])}}" class="btn btn-default">COMPRAR</a></div>
@@ -181,7 +181,7 @@
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
               <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
-@foreach ($promo_pre as $smartphone)
+@foreach ($promo_postpaid as $smartphone)
                 <div class="producto">
                   <div class="state-product"><span class="trending">TRENDING</span></div>
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
@@ -198,11 +198,11 @@
                       </li>
                     </ul> --}}
                     <div class="title-product">
-                      <h4 class="text-center">{{$smartphone->product_name}}</h4>
+                      <h4 class="text-center">{{$smartphone->product_model}}</h4>
                     </div>
-                    <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
+                    <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price}}</span></div>
                     <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
+                      <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                     </div>
                     <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>
                   </div>
@@ -298,7 +298,7 @@
                 </div> --}}
               </div>
               <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
-@foreach ($promo_pos as $smartphone)
+@foreach ($promo_prepaid as $smartphone)
                 <div class="producto">
                   <div class="state-product"><span class="trending">TRENDING</span></div>
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
@@ -315,7 +315,7 @@
                       </li>
                     </ul> --}}
                     <div class="title-product">
-                      <h4 class="text-center">{{$smartphone->product_name}}</h4>
+                      <h4 class="text-center">{{$smartphone->product_model}}</h4>
                     </div>
                     <div class="price-product"><span>S/.</span><span>{{$smartphone->product_price_prepaid}}</span></div>
                     <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">VER MÁS</a></div>

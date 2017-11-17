@@ -38,7 +38,7 @@
                     <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
                     <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                     <div class="detalle-equipo">
-                      <h2>{{$product->product_name}}</h2><span class="modo">Portabilidad</span><span class="contrato">Contrato 18 meses</span>
+                      <h2>{{$product->product_model}}</h2><span class="modo">Portabilidad</span><span class="contrato">Contrato 18 meses</span>
                       <div class="cantidad">
                         <div class="btn-option">
                           <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>

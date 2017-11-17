@@ -5,11 +5,26 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>{{$product->product_name}}</h2>
+              <h2>{{$product->product_model}}</h2>
             </div>
             <div class="state"><span>NUEVO</span></div>
             <div id="image-equipo">
               <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos" data-zoom-image="{{asset('images/productos/'.$product->picture_url)}}"></div>
+              <div id="gallery_01" class="galeria-min">
+                <a href="#" data-image="/images/home/celular-1.jpg" data-zoom-image="/images/home/celular-12.jpg">
+                  <img src="/images/home/celular-1.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-2.jpg" data-zoom-image="/images/home/celular-22.jpg">
+                  <img src="/images/home/celular-2.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
+                  <img src="/images/home/celular-3.jpg" alt="">
+                </a>
+                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
+                  <img src="/images/home/celular-3.jpg" alt="">
+                </a>
+                <div class="clearfix"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -17,7 +32,7 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>{{$product->product_name}}</h1>
+                <h1>{{$product->product_model}}</h1>
                 <div class="state"><span>PREPAGO</span></div>
               </div>
               <div class="descripcion">
@@ -104,7 +119,7 @@
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
-              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_name)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
+              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
             </div>
           </div>
         </div>
@@ -149,7 +164,7 @@
                 <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                 <div class="content-product text-center">
                   <div class="title-product">
-                    <h3 class="text-center">{{$product->product_name}}</h3>
+                    <h3 class="text-center">{{$product->product_model}}</h3>
                   </div>
                   <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid + 0}}</div>
                   <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">comprar</a></div>

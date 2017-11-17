@@ -29,17 +29,31 @@ class PostpaidController extends Controller
                 'pageName' => 'pag'
             ]
         );
+
         $paginator->withPath('postpago');
-        return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages]);
+
+        $filterList = $this->shared->getFiltersPostpaid();
+
+        return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList]);
     }
 
     public function show($product_id) {
         $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
         $available_products = $this->shared->searchProduct(1, 4);
+
+        $plan = DB::table('tbl_product_variation')->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')->where('tbl_product_variation.product_id', $product_id)->get();
+
+        // $filterList = $this->shared->getFiltersPostpaid();
+
         $response = [
             'product' => $product[0],
-            'available' => $available_products
+            'available' => $available_products,
+            'plans' => $plan->groupBy('plan_id')
+            // 'plans' => $plan
         ];
+
+        // dd($plan->groupBy('plan_id'));
+
         return view('smartphones.postpago.detail', $response);
     }
 

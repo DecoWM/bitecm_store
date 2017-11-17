@@ -67,7 +67,10 @@
         },
         methods : {
             changePage: function (page) {
-                this.pagination.current_page = page;
+                if (this.pagination.current_page != page) {
+                    this.$emit('changepage', page)
+                }
+                // this.pagination.current_page = page;
             }
         }
     }
