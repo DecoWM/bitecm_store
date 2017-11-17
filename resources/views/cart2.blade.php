@@ -33,7 +33,9 @@
                     <div class="form-group form-select">
                       <label>Tipo de documento</label>
                       <select v-model="select_document" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('select_document') }">
-                        <option selected>DNI</option>
+                        <option value="1" selected>DNI</option>
+                        <option value="2">PASAPORTE</option>
+                        <option value="3">CARNÉ DE EXTRANJERÍA</option>
                       </select>
                     </div>
                     <div class="form-group">
@@ -50,8 +52,17 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">Portabilidad o linea nueva</label>
-                      <select>
+                      <select v-model="portabilidad">
                         <option>portabilidad</option>
+                        <option>Linea nueva</option>
+                      </select>
+                    </div>
+                    <div class="form-group form-select" v-if="portabilidad == 'portabilidad'">
+                      <label for="">Operador de procedencia</label>
+                      <select>
+                        <option value="">Movistar</option>
+                        <option value="">Claro</option>
+                        <option value="">Entel</option>
                       </select>
                     </div>
                   </div>

@@ -40,7 +40,8 @@ const form = new Vue({
     delivery:'',
     email:'',
     number_contact:'',
-    mediopago:''
+    mediopago:'',
+    portabilidad: '',
   },
   methods: {
     validateInfoCliente(){
