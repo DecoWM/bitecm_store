@@ -39,7 +39,7 @@
                     </div>
                     <div class="price-product"><span>s/{{$smartphone->product_price_prepaid}}</span></div>
                     <div class="plan-product">
-                      <p>Ver en plan postpago</p>
+                      <p><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}">Ver en plan postpago</a></p>
                     </div>
                     <div class="btn-product form-inline">
                       <div class="form-group btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>

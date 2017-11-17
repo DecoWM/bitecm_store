@@ -53819,7 +53819,22 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(0),
+          _c("div", { staticClass: "plan-product" }, [
+            _c("p", [
+              _c(
+                "a",
+                {
+                  attrs: {
+                    href:
+                      _vm.baseUrl +
+                      "/postpago/smartphones/" +
+                      _vm.product.product_id
+                  }
+                },
+                [_vm._v("Ver en plan postpago")]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "btn-product form-inline" }, [
             _c("div", { staticClass: "form-group btn-comprar" }, [
@@ -53893,16 +53908,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "plan-product" }, [
-      _c("p", [_vm._v("Ver en plan postpago")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

@@ -9,7 +9,7 @@
         </div>
         <div class="price-product"><span>s/{{product.product_price_prepaid}}</span></div>
         <div class="plan-product">
-          <p>Ver en plan postpago</p>
+          <p><a v-bind:href="baseUrl + '/postpago/smartphones/' +  product.product_id">Ver en plan postpago</a></p>
         </div>
         <div class="btn-product form-inline">
           <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/prepago/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
