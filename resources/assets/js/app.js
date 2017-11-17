@@ -41,7 +41,7 @@ const form = new Vue({
     email:'',
     number_contact:'',
     mediopago:'',
-    portabilidad: '',
+    portabilidad: '312',
   },
   methods: {
     validateInfoCliente(){
@@ -54,6 +54,9 @@ const form = new Vue({
 
         alert('Completar los campos');
       });
+    },
+    change () {
+        console.log(this.portabilidad);
     }
   }
 });

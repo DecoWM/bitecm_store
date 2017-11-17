@@ -26,7 +26,8 @@
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="1" class="producto">
+                {{-- <div data-equipo="1" class="producto"> --}}
+                <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
                 {{-- <div data-equipo="1" class="producto active-comparar"> --}}
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
@@ -41,7 +42,7 @@
                       <div class="form-group btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
-                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4">comparar
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_id', {{$smartphone->product_id}}])">comparar
                           <span class="checkmark"></span>
                         </label>
                       </div>
