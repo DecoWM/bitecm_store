@@ -35,7 +35,7 @@
                     <div class="col-xs-12 col-sm-5">
                       <div class="equipo-seleccionado">
                         <div class="image"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
-                        <div class="contenido"><span class="text-uppercase title-contenido">{{$product->product_name}}</span>
+                        <div class="contenido"><span class="text-uppercase title-contenido">{{$product->product_model}}</span>
                           {{-- <p>Portabilidad</p>
                           <p>Contrato 18 meses</p> --}}
                           <p> <span>Cantidad:</span>1</p>

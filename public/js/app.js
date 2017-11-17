@@ -11738,7 +11738,7 @@ var form = new Vue({
         email: '',
         number_contact: '',
         mediopago: '',
-        portabilidad: '312'
+        portabilidad: ''
     },
     methods: {
         validateInfoCliente: function validateInfoCliente() {
