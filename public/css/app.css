@@ -153,6 +153,14 @@
   min-height: 290px;
 }
 
+#list-equipos .producto .content-product .btn-product .btn-comparar input.checkbox-compare {
+  opacity: 1;
+}
+
+#list-equipos .producto .content-product .btn-product .btn-comparar label:before {
+  display: none;
+}
+
 .sidebar-box {
   margin-bottom: 20px;
 }
