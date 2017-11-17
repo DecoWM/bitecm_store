@@ -13,7 +13,11 @@
     <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
   </head>
   <body>
-    <div id="app">
+@if (Request::segment(1) == 'envio')
+  <div>
+@else
+  <div id="app">
+@endif
       @include('layouts.header')
       @include('layouts.nav')
 @yield('content')

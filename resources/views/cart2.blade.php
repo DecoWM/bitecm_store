@@ -57,7 +57,6 @@
                         <option>Linea nueva</option>
                       </select>
                     </div>
-                    @{{portabilidad}}
                     <div class="form-group form-select" v-if="portabilidad == 'portabilidad'">
                       <label for="">Operador de procedencia</label>
                       <select>
