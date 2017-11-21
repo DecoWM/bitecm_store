@@ -58,7 +58,7 @@ class SearchController extends Controller
 
         $search_result = $this->shared->searchProductPrepaid(1, $request->items_per_page, 1, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
 
-        $data = collect($search_result)->map(function ($item, $key) {
+        $data = collect($search_result['products'])->map(function ($item, $key) {
             $item->picture_url = asset('images/productos/'.$item->picture_url);
             return $item;
         });

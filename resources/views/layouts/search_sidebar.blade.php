@@ -78,6 +78,10 @@
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave" v-cloak>
               <div class="select-item" v-show="filters.price.isOpen">
                 <div class="item">
+                  <input id="price-opt-0" type="radio" name="price" v-bind:value="{x : 0, y : 0}" v-model="filters.price.value" v-on:change="searchProduct(1)">
+                  <label for="price-opt-0">Todos</label>
+                </div>
+                <div class="item">
                   <input id="price-opt-1" type="radio" name="price" v-bind:value="{x : 1, y : 50}" v-model="filters.price.value" v-on:change="searchProduct(1)">
                   <label for="price-opt-1">S/. 1 - 50</label>
                 </div>
