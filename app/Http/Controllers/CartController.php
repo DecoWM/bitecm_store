@@ -287,7 +287,7 @@ class CartController extends Controller
         $order = DB::table('tbl_order')->where('order_id', $order_id)->first();
         $items = DB::table('tbl_order_item')
         ->where('order_id', $order_id)->get();
-        // dd($items);
+
         foreach ($items as $item) {
           if ($item->product_variation_id != "") {
               $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $item->product_id]);
