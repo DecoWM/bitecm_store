@@ -81,7 +81,9 @@
                     <div class="form-group form-select">
                       <label for="">DISTRITO DE DELIVERY</label>
                       <select>
-                        <option>San Isidro</option>
+@foreach ($distritos as $distrito)
+                        <option value="{{$distrito}}">{{$distrito}}</option>
+@endforeach
                       </select>
                     </div>
                     <div class="form-group">

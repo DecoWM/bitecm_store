@@ -10,7 +10,7 @@
             <div class="info-bitel navbar-right">
               <ul class="list-unstyled">
                 <li class="telephone"><span>LLámanos al <strong> 0 700 00 555</strong></span></li>
-                <li class="cart"><strong>Mi Bitel</strong><a href="#"><span class="icon-cart"></span><span class="icon-count">12</span></a></li>
+                <li class="cart"><strong>Mi Bitel</strong><a href="{{route('show_cart')}}"><span class="icon-cart"></span><span class="icon-count">{{count(session('cart'))}}</span></a></li>
                 <li class="search">
                   <form id="search">
                     <input type="text" class="form-control">

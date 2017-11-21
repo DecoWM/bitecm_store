@@ -174,7 +174,7 @@ const app = new Vue({
             self.searchResult = [];
             (self.filters.manufacturer.value.length > 0) ? self.filters.manufacturer.all = false : self.filters.manufacturer.all = true
             console.log(self.baseUrl);
-            let url = self.baseUrl + self.prefix +'buscar';
+            let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {
                 params: {
                     searched_string: self.searchedString,

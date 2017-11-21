@@ -30,8 +30,8 @@ Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 
 //RUTAS BUSQUEDA
 Route::get('/product/search', 'PostpaidController@search');
-Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
-Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
+// Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
+// Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
 // Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
 
 //RUTAS COMPARAR
@@ -39,11 +39,16 @@ Route::get('/prepago/comparar', 'PrepaidController@compare');
 Route::get('/postpago/comparar', 'PostpaidController@compare');
 Route::get('/product/compare', 'PostpaidController@compare');
 
+//RUTAS CARRITO
+Route::get('/carrito', 'CartController@showCart')->name('show_cart');
+Route::post('/carrito', 'CartController@addToCart')->name('add_to_cart');
+Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
+
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
 //TEST
-Route::get('/carrito', 'CartController@index')->name('carrito');
+// Route::get('/carrito', 'CartController@index')->name('carrito');
 Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');

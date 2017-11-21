@@ -31,7 +31,68 @@
                 </div>
               </div>
             </div>
+@foreach ($products as $product)
             <div class="main-detalle equipos">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <div class="equipo-seleccionado">
+                    <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
+                    <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
+                    <div class="detalle-equipo">
+                      <h2>{{$product['product']->product_model}}</h2><span class="modo">{{$product['plan']->affiliation_name}}</span><span class="contrato">Contrato 18 meses</span>
+                      <div class="cantidad">
+                        <div class="btn-option">
+                          <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
+                            <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
+                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
+                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->plan_price : ''}}</p><span class="plan">{{array_has($product, 'plan') ? $product['plan']->plan_name : ''}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">PRECIO SIN IGV</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
+                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
+                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->plan_price : ''}} mensual</p>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">COSTO DE ENVÍO</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">COSTO DE ENVÍO</span>
+                  <p>GRATIS</p>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset sinborder">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">TOTAL + IGV</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">TOTAL + IGV</span>
+                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price + ($product['plan']->product_variation_price * 0.18) : $product['product']->product_price_prepaid + ($product['product']->product_price_prepaid * 0.18) }}</p>
+                </div>
+              </div>
+            </div>
+@endforeach
+            {{-- <div class="main-detalle equipos">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
                   <div class="equipo-seleccionado">
@@ -90,12 +151,73 @@
                 </div>
               </div>
             </div>
+            <div class="main-detalle equipos">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <div class="equipo-seleccionado">
+                    <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
+                    <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                    <div class="detalle-equipo">
+                      <h2>{{$product->product_model}}</h2><span class="modo">Portabilidad</span><span class="contrato">Contrato 18 meses</span>
+                      <div class="cantidad">
+                        <div class="btn-option">
+                          <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
+                            <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
+                  <p>S/. {{$product->product_price_prepaid}}</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
+                  <p>S/.219</p><span class="plan">Plan Megaplus 219</span>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">PRECIO SIN IGV</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
+                  <p>S/. {{$product->product_price_prepaid}}</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
+                  <p>S/.219 mensual</p>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">COSTO DE ENVÍO</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">COSTO DE ENVÍO</span>
+                  <p>GRATIS</p>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset sinborder">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">TOTAL + IGV</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">TOTAL + IGV</span>
+                  <p>S/.1770</p>
+                </div>
+              </div>
+            </div> --}}
             <div class="btn-detalle">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
-                  <button type="submit" class="btn btn-default regresar">REGRESAR</button>
+                  {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
+                  <a href="{{url()->previous()}}" class="btn btn-default regresar">REGRESAR</a>
+                  {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-                  <a href="{{route('envio', ['product'=>$product->product_id])}}" class="btn btn-default comprar">comprar</a>
+                  <a href="{{route('envio', ['product'=>$product['product']->product_id])}}" class="btn btn-default comprar">comprar</a>
                 </div>
               </div>
             </div>

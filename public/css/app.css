@@ -218,3 +218,24 @@ input:checked ~ .checkmark:after {
   display: none;
 }
 
+#planes {
+  margin-top: -330px;
+}
+
+#detalle-carrito .btn-detalle a.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+}
+
+#detalle-carrito .btn-detalle a {
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  width: 50%;
+  border-radius: 0;
+  padding: 0;
+  line-height: 30px;
+  font-size: 12px;
+}
+

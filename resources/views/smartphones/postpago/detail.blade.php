@@ -40,15 +40,18 @@
               </div>
             </div>
             <div class="content-section">
-              <form action="">
+              <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
+                {{ csrf_field() }}
+                <input type="hidden" name="product" value="{{$product->product_id}}">
+                <input type="hidden" name="type" value="2">
                 <div class="content-product">
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
                       <div class="select-product"><span class="title-select">Lo quieres en</span>
-                        <select v-model="filters.affiliation.value">
-                          <option name="prepago" value="1" >Portabilidad</option>
-                          <option name="linea nueva" value="2">Linea nueva</option>
-                          <option name="renovacion" value="3">Renovación</option>
+                        <select form="purchase-form" name="affiliation" v-model="filters.affiliation.value">
+                          <option value="1" >Portabilidad</option>
+                          <option value="2">Linea nueva</option>
+                          <option value="3">Renovación</option>
                         </select>
                       </div>
                       <div class="color-product">
@@ -82,10 +85,16 @@
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
-                      <div class="btn-comprar">
-                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a>
+                      {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
+                      {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
+                        <div class="btn-comprar">
+                          <button type="submit" class="btn-default">Comprar Ahora</button>
+                        </div>
+                      {{-- </form> --}}
+                      {{-- <div class="btn-comprar">
+                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
                         {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
-                      </div>
+                      {{-- </div> --}}
                     </div>
                   </div>
                 </div>
@@ -119,6 +128,8 @@
     ];
 @endphp
               {{-- <div class="plan" v-on:click="selectPlan({plan_id:{{$plan[0]->plan_id}}, product_variation_price: {{$plan[0]->product_variation_price}}, plan_name: '{{$plan[0]->plan_name}}'})"> --}}
+              <label>
+              <input type="radio" name="plan" form="purchase-form" value="{{$plan[0]->plan_id}}" style="display:none;" {{$plan[0]->plan_id == 8 ? 'checked' : ''}}>
               <div class="plan" v-on:click="selectPlan({{str_replace('\"', '\'', json_encode($selected))}})">
                 <div class="content-plan"><span class="title-plan">{{$plan[0]->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan[0]->plan_price}}<span>al mes</span></div>
@@ -142,6 +153,7 @@
                   </ul>
                 </div>
               </div>
+              </label>
 @endforeach
 
               {{-- <div class="plan">
