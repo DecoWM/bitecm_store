@@ -40,7 +40,10 @@
               </div>
             </div>
             <div class="content-section">
-              <form action="">
+              <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
+                {{ csrf_field() }}
+                <input type="hidden" name="product" value="{{$product->product_id}}">
+                <input type="hidden" name="type" value="1">
                 <div class="content-product equipo-prepago">
                   <div class="row">
                     <div class="col-xs-12 col-sm-6">
@@ -61,7 +64,7 @@
                               <legend>Color</legend>
                               <div id="option-select" class="option-select">
                                 <div class="radio-inline option-active">
-                                  <input type="radio" name="color" value="1" class="negro">
+                                  <input type="radio" name="color" value="1" class="negro" checked>
                                 </div>
                                 <div class="radio-inline">
                                   <input type="radio" name="color" value="2" class="blanco">
@@ -84,8 +87,8 @@
                         <a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
                       <div class="btn-comprar-prepago">
-                        {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
-                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a>
+                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                        {{-- <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
                       </div>
                     </div>
                   </div>

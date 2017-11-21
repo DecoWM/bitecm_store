@@ -42,13 +42,17 @@ Route::get('/product/compare', 'PostpaidController@compare');
 //RUTAS CARRITO
 Route::get('/carrito', 'CartController@showCart')->name('show_cart');
 Route::post('/carrito', 'CartController@addToCart')->name('add_to_cart');
-Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
+// Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
+Route::get('/envio', 'CartController@createOrder')->name('create_order');
+Route::post('/envio', 'CartController@storeOrder')->name('store_order');
+Route::get('/pedido', 'CartController@showOrder')->name('show_order');
+Route::get('/rastreo/{order_id}', 'CartController@trackOrder')->name('track_order');
 
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
 //TEST
 // Route::get('/carrito', 'CartController@index')->name('carrito');
-Route::get('/envio', 'CartController@index2')->name('envio');
+// Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');

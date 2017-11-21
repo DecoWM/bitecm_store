@@ -44,6 +44,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="product" value="{{$product->product_id}}">
                 <input type="hidden" name="type" value="2">
+                <input type="hidden" name="quantity" value="1">
                 <div class="content-product">
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
@@ -59,7 +60,7 @@
                           <legend>Color</legend>
                           <div id="option-select" class="option-select">
                             <div class="radio-inline option-active">
-                              <input type="radio" name="color" id="negro" value="1" class="negro">
+                              <input type="radio" name="color" id="negro" value="1" class="negro" checked>
                             </div>
                             <div class="radio-inline">
                               <input type="radio" name="color" id="blanco" value="2" class="blanco">

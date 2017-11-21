@@ -239,3 +239,7 @@ input:checked ~ .checkmark:after {
   font-size: 12px;
 }
 
+#section-pedido .row .detalle-pedido {
+  display: block;
+}
+

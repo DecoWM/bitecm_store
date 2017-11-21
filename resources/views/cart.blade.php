@@ -31,6 +31,7 @@
                 </div>
               </div>
             </div>
+@if (count($products) > 0)
 @foreach ($products as $product)
             <div class="main-detalle equipos">
               <div class="row">
@@ -39,11 +40,14 @@
                     <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
                     <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
                     <div class="detalle-equipo">
-                      <h2>{{$product['product']->product_model}}</h2><span class="modo">{{$product['plan']->affiliation_name}}</span><span class="contrato">Contrato 18 meses</span>
+                      <h2>{{$product['product']->product_model}}</h2>
+@if (array_has($product, 'plan'))
+                      <span class="modo">{{$product['plan']->affiliation_name}}</span><span class="contrato">Contrato 18 meses</span>
+@endif
                       <div class="cantidad">
                         <div class="btn-option">
                           <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
-                            <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                            <input type="text" value="{{$product['quantity']}}" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
                           </div>
                         </div>
                       </div>
@@ -54,7 +58,11 @@
                   <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
-                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->plan_price : ''}}</p><span class="plan">{{array_has($product, 'plan') ? $product['plan']->plan_name : ''}}</span>
+@if (array_has($product, 'plan'))
+                  <p>S/. {{$product['plan']->plan_price}}</p><span class="plan">{{$product['plan']->plan_name}}</span>
+@else
+                  <p> - </p>
+@endif
                 </div>
               </div>
             </div>
@@ -67,7 +75,11 @@
                   <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
-                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->plan_price : ''}} mensual</p>
+@if (array_has($product, 'plan'))
+                  <p>S/. {{$product['plan']->plan_price}} mensual</p>
+@else
+                  <p> - </p>
+@endif
                 </div>
               </div>
             </div>
@@ -92,6 +104,15 @@
               </div>
             </div>
 @endforeach
+@else
+            <div class="main-detalle equipos">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p>El carrito se encuentra vacío.</p>
+                </div>
+              </div>
+            </div>
+@endif
             {{-- <div class="main-detalle equipos">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -214,10 +235,13 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
+@if (count($products) > 0)
                   <a href="{{url()->previous()}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-                  <a href="{{route('envio', ['product'=>$product['product']->product_id])}}" class="btn btn-default comprar">comprar</a>
+
+                  <a href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
+@endif
                 </div>
               </div>
             </div>

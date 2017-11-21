@@ -48,11 +48,12 @@ const form = new Vue({
       this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line
-           alert('Enviado a ' + this.first_name + '!')
+           // alert('Enviado a ' + this.first_name + '!')
+          this.$refs.orderform.submit()
           return;
         }
 
-        alert('Completar los campos');
+        // alert('Completar los campos');
       });
     },
     change () {

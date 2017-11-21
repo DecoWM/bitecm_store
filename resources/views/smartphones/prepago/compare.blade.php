@@ -37,7 +37,7 @@
                   <div class="image-product text-center"><img class="image-prepago" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
-                      <h3 class="text-center">{{$product->product_name}}</h3>
+                      <h3 class="text-center">{{$product->product_model}}</h3>
                     </div>
                     <div class="price-product"><span>S/ </span>{{$product->product_price_prepaid + 0}}</div>
                     {{-- <div class="plan-product">
@@ -50,7 +50,7 @@
                 </div>
                 <div class="especificaciones">
                   <div class="bg-gray"><span>Marca</span>
-                    <p>{{$product->manufacturer_name}}</p>
+                    <p>{{$product->brand_name}}</p>
                   </div>
                   <div class="bg-white"><span>Color</span>
                     <p>Plateado</p>

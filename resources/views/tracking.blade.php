@@ -9,19 +9,24 @@
               <h3>Revisa el estado de tu pedido.</h3>
             </div>
             <div id="content-rastreo">
+@foreach ($products as $product)
               <section id="detalle-rastreo">
                 <div class="title-section">
-                  <h1>Producto comprado el:</h1><span>13 de Septiembre del 2017</span>
+                  <h1>Producto comprado el:</h1><span>{{$order->create_at}}</span>
                 </div>
                 <div class="content-section">
                   <div class="row">
                     <div class="col-xs-6 col-sm-12 col-md-12 col-lg-4">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                        <div class="image"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
                         <div class="contenido">
-                          <h2 class="text-uppercase title-contenido">{{$product->product_model}}</h2>
-                          <p> <span>Cantidad:</span>1</p>
-                          <p class="precio">S/. {{$product->product_price_prepaid + 0}}</p>
+                          <h2 class="text-uppercase title-contenido">{{$product['product']->product_model}}</h2>
+                          <p> <span>Cantidad:</span>{{$product['quantity']}}</p>
+@if (array_has($product, 'plan'))
+                          <p class="precio">S/. {{$product['plan']->product_variation_price + 0}}</p>
+@else
+                          <p class="precio">S/. {{$product['product']->product_price_prepaid + 0}}</p>
+@endif
                           <p class="status"><span>Status:</span>Enviado</p>
                         </div>
                       </div>
@@ -60,6 +65,7 @@
                   </div>
                 </div>
               </section>
+@endforeach
               {{-- <section id="detalle-rastreo">
                 <div class="title-section">
                   <h1>Producto comprado el</h1><span>13 de Septiembre del 2017</span>
