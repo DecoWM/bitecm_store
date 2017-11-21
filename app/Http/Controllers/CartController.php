@@ -279,7 +279,7 @@ class CartController extends Controller
 
         $request->session()->flush();
 
-        return view('order_detail', ['products' => $products, 'order_id']);
+        return view('order_detail', ['products' => $products, 'order_id' => $order_id]);
     }
 
     public function trackOrder (Request $request, $order_id) {
