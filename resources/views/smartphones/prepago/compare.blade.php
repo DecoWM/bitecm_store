@@ -11,6 +11,11 @@
 @if (!$errors->any())
       <div class="row">
         <div class="col-xs-12">
+          <div id="fixed-nav-comp">
+            <div class="container">
+              <div id="scroll-compara"></div>
+            </div>
+          </div>
           <div id="compara-tus-equipos">
             <div class="info-lista">
               <div class="especificaciones">

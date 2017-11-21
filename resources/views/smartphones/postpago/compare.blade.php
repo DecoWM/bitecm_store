@@ -11,6 +11,11 @@
 @if (!$errors->any())
       <div class="row">
         <div class="col-xs-12">
+          <div id="fixed-nav-comp">
+            <div class="container">
+              <div id="scroll-compara"></div>
+            </div>
+          </div>
           <div id="compara-tus-equipos">
             <div class="info-lista">
               <div class="especificaciones">
@@ -31,8 +36,8 @@
             </div>
             <div class="lista-equipos">
 @foreach ($products as $product)
-              <div class="equipo-seleccionado">
-                <div data-equipo="1" class="equipo">
+              <div class="equipo-seleccionado eselec-{{$loop->index + 1}}">
+                <div data-equipo="1" class="equipo equipo-comp-{{$loop->index	 + 1}}">
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
