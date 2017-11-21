@@ -198,8 +198,8 @@ class CartController extends Controller
         $cart = collect($request->session()->get('cart'));
         $idtype_id = $request->document_type;
         $payment_method_id = $request->payment_method;
-        $branch_id = 1;
-        $tracking_code = '';
+        $branch_id = null;
+        $tracking_code = null;
         $first_name = $request->first_name;
         $last_name = $request->last_name;
         $id_number = $request->document_number;
@@ -242,7 +242,6 @@ class CartController extends Controller
             $order_detail
         );
 
-        dump($order_id);
         foreach ($cart as $item) {
             switch ($item['type_id']) {
               case 1:
@@ -264,8 +263,8 @@ class CartController extends Controller
                 // 'order_item_id' => ,
                 'order_id' => $order_id,
                 'product_id' => $item['product_id'],
-                'product_variation_id' => $item['type_id'] == 2 ? $plan[0]->product_variation_id : '',
-                'promo_id' => 1,
+                'product_variation_id' => $item['type_id'] == 2 ? $plan[0]->product_variation_id : null,
+                'promo_id' => null,
                 'quantity' => $item['quantity'],
                 'subtotal' => $item['type_id'] == 2 ? $plan[0]->product_variation_price *  $item['quantity'] : $product[0]->product_price_prepaid * $item['quantity'],
             ]);
