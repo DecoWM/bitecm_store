@@ -631,10 +631,10 @@ const app = new Vue({
 
             if (scroll > 40) {
               $('#fixed-nav-comp').addClass('fixed-nav')
-              $('.equipo-comp-1').appendTo(contScroll);
-              $('.equipo-comp-2').appendTo(contScroll);
-              $('.equipo-comp-3').appendTo(contScroll);
-              $('.equipo-comp-4').appendTo(contScroll);
+              $('.slick-active .equipo-comp-1').appendTo(contScroll);
+              $('.slick-active .equipo-comp-2').appendTo(contScroll);
+              $('.slick-active .equipo-comp-3').appendTo(contScroll);
+              $('.slick-active .equipo-comp-4').appendTo(contScroll);
               $('.info-lista').addClass('fixed-lista')
                 // $("#header-information").hide();
                 // $('#nav-bitel').addClass('nav-fixed');
