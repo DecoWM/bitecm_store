@@ -56,3 +56,7 @@ Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename
 // Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
+
+Route::get('/test', function () {
+  return [phpinfo()];
+});
