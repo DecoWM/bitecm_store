@@ -287,6 +287,22 @@ section#equipos-vendidos .container .row .content-tab-pro .producto {
   padding-bottom: 174px;
 }
 
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .price-product,
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .price-product {
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product,
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product {
+  margin: 5px 0;
+}
+
+section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product h4,
+section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product h4 {
+  margin: 7px 0;
+}
+
 #planes {
   margin-top: -330px;
 }

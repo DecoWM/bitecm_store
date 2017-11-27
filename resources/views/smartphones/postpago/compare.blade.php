@@ -23,12 +23,8 @@
                             <div class="title-product">
                               <h3 class="text-center">{{$product->product_model}}</h3>
                             </div>
-                            {{-- <div class="price-product"><span>S/</span>{{$product->product_price_prepaid + 0}}</div>
-                            <div class="plan-product">
-                              <p>en plan <span>Megaplus 119</span></p>
-                            </div> --}}
                             <div class="btn-product form-inline">
-                              <div class="form-group btn-vermas"><a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">Ver más</a></div>
+                              <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>
                             </div>
                           </div>
                         </div>

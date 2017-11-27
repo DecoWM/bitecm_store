@@ -280,4 +280,13 @@ class BaseController extends Controller
       'brand_list' => $brand_list,
     ];
   }
+
+  public function orderItems($order_id) {
+    $items = DB::select('call PA_orderItems(
+      :order_id
+    )', [
+      'order_id' => $order_id
+    ]);
+    return $items;
+  }
 }
