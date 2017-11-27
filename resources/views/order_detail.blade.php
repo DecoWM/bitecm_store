@@ -31,16 +31,16 @@
                           <p>Tu solicitud ha sido enviada correctamente por:</p>
 @if (array_has($product, 'plan'))
                           <p>Plan <span> s/. {{$product['plan']->plan_price}} </span>mensual</p>
-                          <p>Precio del equipo: <span>s/. {{$product['plan']->product_variation_price + 0}}</span></p>
+                          <p>Precio del equipo: <span>s/. {{$product['plan']->product_price + 0}}</span></p>
 @else
-                          <p>Precio del equipo: <span>s/. {{$product['product']->product_price_prepaid + 0}}</span></p>
+                          <p>Precio del equipo: <span>s/. {{$product['product']->product_price + 0}}</span></p>
 @endif
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-5">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
+                        <div class="image"><img src="{{asset('images/productos/'.$product['product']->product_image_url)}}" alt="equipos"></div>
                         <div class="contenido"><span class="text-uppercase title-contenido">{{$product['product']->product_model}}</span>
 @if (array_has($product, 'plan'))
                           <p>{{$product['plan']->affiliation_name}}</p>

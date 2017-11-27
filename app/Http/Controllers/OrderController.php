@@ -104,7 +104,7 @@ class OrderController extends Controller
   protected function createConsultantRequest($order_detail) 
   // public function show() 
   {
-    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', [
+    $req = [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
       'shopCode' => 'VTP', // ***** Change it for dynamic Value !!!
       'dni' => $order_detail['id_number'],
@@ -116,7 +116,9 @@ class OrderController extends Controller
       'custName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
       'contactName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
       'reasonId' => '123' // ***** Change it for dynamic Value !!!
-    ]);
+    ];
+    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
+    dd($response);
 
     if($response->return->errorCodeMNP == '0'){
       // set the portingRequestId from response
@@ -189,8 +191,7 @@ class OrderController extends Controller
       'delivery_address' => $request->delivery_address,
       'delivery_district' => $request->delivery_distric,
       'contact_email' => $request->email,
-      'contact_phone' => $request->contact_phone,
-      'credit_status' => null,
+      'contact_phone' => $request->contact_phone
     ];
     
     $cart = collect($request->session()->get('cart'));
@@ -257,7 +258,7 @@ class OrderController extends Controller
           array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
           break;
       }
-      $subtotal = $product->product_variation_price * $item['quantity'];
+      $subtotal = $product->product_price * $item['quantity'];
       $total += $subtotal;
       array_push($order_items, [
         'stock_model_id' => $item['stock_model_id'],
@@ -271,7 +272,23 @@ class OrderController extends Controller
 
     $order_detail['total'] = $total;
     $order_detail['total_igv'] = $total*(1+$igv);
-    $order_id = DB::table('tbl_order')->insertGetId($order_detail);
+    $order_id = DB::table('tbl_order')->insertGetId([
+      'idtype_id' => $order_detail['idtype_id'],
+      'payment_method_id' => $order_detail['payment_method_id'],
+      'branch_id' => $order_detail['branch_id'],
+      'tracking_code' => $order_detail['tracking_code'],
+      'first_name' => $order_detail['first_name'],
+      'last_name' => $order_detail['last_name'],
+      'id_number' => $order_detail['id_number'],
+      'billing_district' => $order_detail['billing_district'],
+      'billing_phone' => $order_detail['billing_phone'],
+      'delivery_address' => $order_detail['delivery_address'],
+      'delivery_district' => $order_detail['delivery_district'],
+      'contact_email' => $order_detail['contact_email'],
+      'contact_phone' => $order_detail['contact_phone'],
+      'total' => $order_detail['total'],
+      'total_igv' => $order_detail['total_igv']
+    ]);
 
     foreach($order_items as $i => $item) {
       $order_items[$i]['order_id'] = $order_id;
@@ -279,7 +296,7 @@ class OrderController extends Controller
 
     DB::table('tbl_order_item')->insert($order_items);
 
-    Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
+    //Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
 
     $request->session()->flush();
 
