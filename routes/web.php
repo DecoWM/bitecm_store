@@ -40,10 +40,13 @@ Route::get('/producto/comparar', 'PostpaidController@compare');
 Route::get('/carrito', 'CartController@showCart')->name('show_cart');
 Route::post('/carrito', 'CartController@addToCart')->name('add_to_cart');
 // Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
-Route::get('/envio', 'CartController@createOrder')->name('create_order');
-Route::post('/envio', 'CartController@storeOrder')->name('store_order');
-Route::get('/pedido', 'CartController@showOrder')->name('show_order');
-Route::get('/rastreo/{order_id}', 'CartController@trackOrder')->name('track_order');
+
+//RUTAS ORDEN
+Route::get('/envio', 'OrderController@createOrder')->name('create_order');
+Route::get('/envio/currency', 'OrderController@show')->name('currency');
+Route::post('/envio', 'OrderController@storeOrder')->name('store_order');
+Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
+Route::get('/rastreo/{order_id}', 'OrderController@trackOrder')->name('track_order');
 
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');

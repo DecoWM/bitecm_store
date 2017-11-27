@@ -9,103 +9,139 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\SoapWrapper; // For use client SOAP service
 
-class CartController extends Controller
+class OrderController extends Controller
 {
   protected $shared;
 
-  public function __construct (BaseController $shared) {
+  /**
+  * @var SoapWrapper
+  * @var portingRequestId : ID when Consultant Request is created
+  */
+  protected $soapWrapper;
+  protected $portingRequestId;
+
+  /**
+  * SoapController constructor.
+  *
+  * @param SoapWrapper $soapWrapper
+  */
+
+  public function __construct (BaseController $shared, SoapWrapper $soapWrapper) {
     $this->shared = $shared;
+    $this->soapWrapper = $soapWrapper;
   }
 
-  public function showCart (Request $request) {
-    //VARIABLES
-    $products = []; //Lista de productos
-
-    //ASIGNACIÓN DE VALORES A VARIABLES
-    $cart = collect($request->session()->get('cart')); //Carrito de compras
-
-    foreach ($cart as $item) {
-      if (!isset($item['type_id']) || !isset($item['stock_model_id'])) {
-        continue;
-      }
-      switch ($item['type_id']) {
-        case 0:
-          $product = $this->shared->productByStock($item['stock_model_id']);
-          $product->quantity = $item['quantity'];
-          $product->type_id = $item['type_id'];
-          array_push($products, $product);
-          break;
-        case 1:
-          if(isset($item['product_variation_id'])) {
-            $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
-            $product->quantity = $item['quantity'];
-            $product->type_id = $item['type_id'];
-            array_push($products, $product);
-          }
-          break;
-        case 2:
-          if(isset($item['product_variation_id'])) {
-            $product = $this->shared->productPostpaidByStock($item['stock_model_id'],$item['product_variation_id']);
-            $product->quantity = $item['quantity'];
-            $product->type_id = $item['type_id'];
-            array_push($products, $product);
-          }
-          break;
-      }
-    }
-
-    if (count($products) == 0 && count($cart) > 0) {
-      $request->session()->forget('cart');
-    }
-
-    $igv = \Config::get('filter.igv');
-
-    return view('cart', ['products' => $products, 'igv' => $igv]);
+  private function initSoapWrapper(){
+    $this->soapWrapper->add('bitelSoap', function ($service) {
+      $service
+        ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')   // La ip se debe mover a una variable de configuración !!!
+        ->trace(true);
+    });        
   }
 
-  public function addToCart (Request $request) {
-    if(!isset($request->type) || !isset($request->stock_model)) {
-      return redirect()->route('show_cart');
-    }
+  /**
+  * ********** Temporary model from SOAP services here. Move to a model file !!!!
+  * Use the SoapWrapper
+  **/
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
-    $cart = collect($request->session()->get('cart',[])); //Carrito de compras
+  /**
+  * Function for verify if customer have many lines
+  * @var isOverQuota: 0 -> return false
+  *                  else -> return true
+  **/
+  protected function checkIsOverQouta($request) 
+  {
+    $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
+      'paymethodType' => $request->payment_method,
+      'busType' => 'INDI',
+      'idNo' => $request->document_number,
+      'productCode' => 'IchipVoz29_9',   // AQUI INDICAR EL CODIGO DEL PLAN QUE SE HA SELECCIONADO !!!
+    ]);
 
-    //CREACIÓN DEL ITEM PARA EL CARRITO
-    $cart_item = [
-      'type_id' => $request->type, //Prepago o postpago o sin variación
-      'stock_model_id' => $request->stock_model, //Id del producto en stock
-      'quantity' => 1 //Unidades
-    ];
-
-    switch ($cart_item['type_id']) {
-      case 0:
-        $has_item = $cart->search($cart_item);
-        if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
-          $request->session()->push('cart', $cart_item);
-        }
-        break;
-      case 1:
-        $cart_item['product_variation_id'] = $request->product_variation;
-        $has_item = $cart->search($cart_item);
-        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 2) {
-          $request->session()->push('cart', $cart_item);
-        }
-        break;
-      case 2:
-        $cart_item['product_variation_id'] = $request->product_variation;
-        $has_item = $cart->search($cart_item);
-        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
-          $request->session()->push('cart', $cart_item);
-        }
-        break;
-    }
-
-    return redirect()->route('show_cart');
+    return ($response->return->isOverQouta != 0);
   }
 
-  public function removeFromCart (Request $request) {
+  /**
+  * Verify if customer exists in bitel database
+  * @var result: if exists -> return object result
+  *              else -> return false: Not have debt
+  */
+  protected function getInfoCustomer($request) 
+  // public function show() 
+  {
+    $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
+      'idType' => '03', // persona natural !!!
+      'idNo' => $request->document_number
+    ]);
 
+    if(isset($response->return->result))
+      return $response->return->result;
+    else
+      return false;
+  }
+
+  /**
+  * Verify if customer have pending debt
+  * @var errorCode: -1 -> return true
+  *                 else -> return false: Not have debt
+  */
+  protected function checkHaveDebit($custId) 
+  // public function show() 
+  {
+    $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
+      'custId' => $custId
+    ]);
+
+    return ($response->return->errorCode == -1);
+  }
+
+  /**
+  * make a consultant request ONLY FOR PORTABILITY
+  * @var errorCodeMNP: 0 -> return true: Consultant created
+  *                 else -> return false: consultant not created
+  * @var portingRequestId: id for request created
+  */
+  protected function createConsultantRequest($request) 
+  // public function show() 
+  {
+    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', [
+      'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+      'shopCode' => 'VTP', // ***** Change it for dynamic Value !!!
+      'dni' => $request->document_number,
+      'isdn' => $request->phone_number,
+      'sourceOperator' => isset($request->operator) ? $request->operator : '',
+      'sourcePayment' => $request->payment_method,
+      'email' => $request->contact_email,
+      'phone' => $request->contact_phone,
+      'custName' => $request->first_name . ' ' . $request->last_name,
+      'contactName' => $request->first_name . ' ' . $request->last_name,
+      'reasonId' => '123' // ***** Change it for dynamic Value !!!
+    ]);
+
+    if($response->return->errorCodeMNP == '0'){
+      // set the portingRequestId from response
+      $this->portingRequestId = $response->return->portingRequestId;
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+  * get request response if is  created previously ONLY FOR PORTABILITY
+  * @var stateCode: 02 -> return true: Exito
+  *                 else -> return false: Rechazado
+  */
+  protected function checkSuccessPortingRequest($request) 
+  // public function show() 
+  {
+    $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
+      'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+      'dni' => $request->document_number,
+      'isdn' => $request->phone_number,
+    ]);
+
+    return ($response->return->errorCode == '02');
   }
 
   public function createOrder (Request $request) {
@@ -153,7 +189,7 @@ class CartController extends Controller
     $billing_district = $request->district;
     $billing_phone = $request->phone_number;
     if ($request->has('operator')) {
-        $previous_provider = $request->operator;
+      $previous_provider = $request->operator;
     }
     $delivery_address = $request->delivery_address;
     $delivery_district = $request->delivery_distric;
@@ -163,6 +199,36 @@ class CartController extends Controller
 
     if (count($cart) == 0) {
       return redirect()->route('show_cart');
+    }
+
+    // Apply validations with Bitel webservice before insert
+    $this->initSoapWrapper(); // Init the bitel soap webservice
+
+    // Check if have many lines
+    if($this->checkIsOverQouta($request)){
+      return 'No puede tener más números telefónicos';
+    }
+
+    // check if is client
+    if($data_customer = $this->getInfoCustomer($request)){
+      // check if have debt
+      if($this->checkHaveDebit($data_customer->custId)){
+        return 'Actualmente tiene deudas pendientes';
+      }
+    }
+
+    // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
+    if($affiliation_id == 'portabilidad'){
+      // process request portability
+      if($this->createConsultantRequest($request)){
+        // check if is possible migrate to bitel
+        if(!$this->checkSuccessPortingRequest($request)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+          return 'No es posible realizar la portabilidad con su número';
+        }
+      }
+      else{
+        return 'Error creando la solicitud de portabilidad';
+      }
     }
 
     $order_detail = [
