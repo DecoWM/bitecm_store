@@ -57,17 +57,22 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">Portabilidad o linea nueva</label>
-                      <select name="affiliation" v-model="portabilidad">
-                        <option value="portabilidad">Portabilidad</option>
-                        <option value="nueva">Linea nueva</option>
+                      <select name="affiliation" v-model="affiliation">
+                        <option value="1">Portabilidad</option>
+                        <option value="2">Linea nueva</option>
                       </select>
                     </div>
-                    <div class="form-group form-select" v-if="portabilidad == 'portabilidad'">
+                    <div class="form-group form-select" v-if="affiliation == 1">
                       <label for="">Operador de procedencia</label>
                       <select name="operator">
-                        <option value="Movistar">Movistar</option>
-                        <option value="Claro">Claro</option>
-                        <option value="Entel">Entel</option>
+                        <option value="30">Convergia Perú S.A.</option>
+                        <option value="37">Americatel Perú S.A.C</option>
+                        <option value="32">Fijo - Telefónica del Perú S.A.A.</option>
+                        <option value="20">Entel Perú S.A</option>
+                        <option value="21">Claro, América Móvil S.A.C</option>
+                        <option value="22">Movistar, Telefónica Móviles S.A</option>
+                        <option value="24">Viettel Peru S.A.C.</option>
+                        <option value="25">Virgin Mobile</option>
                       </select>
                     </div>
                   </div>

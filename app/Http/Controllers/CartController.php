@@ -105,7 +105,23 @@ class CartController extends Controller
   }
 
   public function removeFromCart (Request $request) {
-
+    $cart = collect($request->session()->get('cart',[])); //Carrito de compras
+    if(!isset($request->product_variation)) {
+      foreach ($cart as $i => $item) {
+        if($request->stock_model == $item['stock_model_id']) {
+          $request->session()->forget('cart.'.$i);
+          break;
+        }
+      }
+    } else {
+      foreach ($cart as $i => $item) {
+        if($request->stock_model == $item['stock_model_id'] && $request->product_variation == $item['product_variation_id']) {
+          $request->session()->forget('cart.'.$i);
+          break;
+        }
+      }
+    }
+    return redirect()->route('show_cart');
   }
 
   public function createOrder (Request $request) {

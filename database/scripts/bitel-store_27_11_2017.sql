@@ -1787,8 +1787,8 @@ BEGIN
   SET stock_model_id = IFNULL(stock_model_id, 0);
 
   SET select_query = 'SELECT
-    DISTINCT(PRD.product_id), PRM.*,
-    PRD.*, STM.`stock_model_code`,
+    DISTINCT(PRD.product_id), PRM.*, PRD.*,
+    STM.`stock_model_id`, STM.`stock_model_code`,
     BRN.`brand_name`, BRN.`brand_slug`,
     CLR.`color_name`, CLR.`color_slug`,';
 
@@ -2209,8 +2209,8 @@ BEGIN
   SET product_variation_id = IFNULL(product_variation_id, 0);
 
   SET select_query = 'SELECT
-    DISTINCT(PRD.product_id), PRM.*,
-    PRD.*, STM.`stock_model_code`,
+    DISTINCT(PRD.product_id), PRM.*, PRD.*,
+    STM.`stock_model_id`, STM.`stock_model_code`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_name`, BRN.`brand_slug`,
@@ -2700,8 +2700,8 @@ BEGIN
   SET product_variation_id = IFNULL(product_variation_id, 0);
 
   SET select_query = 'SELECT
-    DISTINCT(PRD.product_id), PRM.*,
-    PRD.*, STM.`stock_model_code`,
+    DISTINCT(PRD.product_id), PRM.*, PRD.*,
+    STM.`stock_model_id`, STM.`stock_model_code`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     PRD_VAR.`product_variation_price` as product_price,

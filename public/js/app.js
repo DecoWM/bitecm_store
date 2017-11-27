@@ -11739,7 +11739,7 @@ var form = new Vue({
         email: '',
         number_contact: '',
         mediopago: '',
-        portabilidad: ''
+        affiliation: ''
     },
     methods: {
         validateInfoCliente: function validateInfoCliente() {
@@ -11757,7 +11757,7 @@ var form = new Vue({
             });
         },
         change: function change() {
-            console.log(this.portabilidad);
+            console.log(this.affiliation);
         }
     }
 });
@@ -12073,7 +12073,7 @@ var app = new Vue({
                 slidesToShow: 2
             }
         }]), _$$slick4));
-        console.log($('#planes').data('selected'));
+
         $('.select-plan').slick({
             initialSlide: $('#planes').data('selected'),
             arrows: true,
@@ -12215,7 +12215,10 @@ var app = new Vue({
         $('button.btn-eliminar-equipo').on('click', function (event) {
             event.preventDefault();
             /* Act on the event */
-            $(this).closest('.main-detalle.equipos').hide(200);
+            var self = this;
+            $(this).closest('.main-detalle.equipos').hide(200, function () {
+                $(self).parent('form').submit();
+            });
         });
 
         $('button.last-btn').on('click', function (event) {

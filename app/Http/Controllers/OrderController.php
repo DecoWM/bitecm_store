@@ -195,6 +195,7 @@ class OrderController extends Controller
     $delivery_district = $request->delivery_distric;
     $contact_email = $request->email;
     $contact_phone = $request->contact_phone;
+    $affiliation_id = $request->affiliation;
     $credit_status = 1;
 
     if (count($cart) == 0) {
@@ -218,7 +219,7 @@ class OrderController extends Controller
     }
 
     // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-    if($affiliation_id == 'portabilidad'){
+    if($affiliation_id == 1){
       // process request portability
       if($this->createConsultantRequest($request)){
         // check if is possible migrate to bitel
