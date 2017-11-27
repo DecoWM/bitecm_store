@@ -11960,7 +11960,7 @@ var app = new Vue({
     },
     beforeMount: function beforeMount() {},
     mounted: function mounted() {
-        var _$$slick, _$$slick2, _$$slick3, _$$slick4;
+        var _$$slick, _$$slick2, _$$slick3, _$$slick4, _$$slick5;
 
         $('#banner-principal').slick((_$$slick = {
             arrows: true,
@@ -12039,15 +12039,51 @@ var app = new Vue({
             }
         }]), _$$slick3));
 
-        $('.lista-equipos').slick((_$$slick4 = {
+        $('.nav-compara').slick((_$$slick4 = {
             arrows: true,
-            dots: true,
+            dots: false,
             infinite: false,
             autoplay: false
-        }, _defineProperty(_$$slick4, 'arrows', true), _defineProperty(_$$slick4, 'speed', 300), _defineProperty(_$$slick4, 'slidesToShow', 4), _defineProperty(_$$slick4, 'slidesToScroll', 1), _defineProperty(_$$slick4, 'responsive', [{
+        }, _defineProperty(_$$slick4, 'arrows', true), _defineProperty(_$$slick4, 'speed', 300), _defineProperty(_$$slick4, 'slidesToShow', 4), _defineProperty(_$$slick4, 'slidesToScroll', 1), _defineProperty(_$$slick4, 'asNavFor', '.lista-equipos'), _defineProperty(_$$slick4, 'responsive', [{
+            breakpoint: 1040,
+            settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 3
+            }
+        }, {
+            breakpoint: 768,
+            settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 3
+            }
+        }, {
+            breakpoint: 667,
+            settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 2
+            }
+        }, {
+            breakpoint: 480,
+            settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 2
+            }
+        }]), _$$slick4));
+
+        $('.lista-equipos').slick((_$$slick5 = {
+            arrows: false,
+            dots: false,
+            infinite: false,
+            autoplay: false
+        }, _defineProperty(_$$slick5, 'arrows', true), _defineProperty(_$$slick5, 'speed', 300), _defineProperty(_$$slick5, 'slidesToShow', 4), _defineProperty(_$$slick5, 'slidesToScroll', 1), _defineProperty(_$$slick5, 'asNavFor', '.nav-compara'), _defineProperty(_$$slick5, 'responsive', [{
             breakpoint: 1040,
             settings: {
                 arrows: false,
+                dots: false,
                 centerMode: false,
                 slidesToShow: 3
             }
@@ -12055,13 +12091,13 @@ var app = new Vue({
             breakpoint: 768,
             settings: {
                 arrows: false,
+                dots: false,
                 centerMode: false,
                 slidesToShow: 3
             }
         }, {
             breakpoint: 667,
             settings: {
-                arrows: false,
                 centerMode: false,
                 slidesToShow: 2
             }
@@ -12069,10 +12105,11 @@ var app = new Vue({
             breakpoint: 480,
             settings: {
                 arrows: false,
+                dots: false,
                 centerMode: false,
                 slidesToShow: 2
             }
-        }]), _$$slick4));
+        }]), _$$slick5));
 
         $('.select-plan').slick({
             initialSlide: $('#planes').data('selected'),
@@ -12328,29 +12365,10 @@ var app = new Vue({
 
         $(window).scroll(function () {
             var scroll = $(window).scrollTop();
-            var contScroll = $('#scroll-compara');
-            var contScrollNone = $('#scroll-compara');
-
-            if (scroll > 40) {
+            if (scroll > 350) {
                 $('#fixed-nav-comp').addClass('fixed-nav');
-                $('.equipo-comp-1').appendTo(contScroll);
-                $('.equipo-comp-2').appendTo(contScroll);
-                $('.equipo-comp-3').appendTo(contScroll);
-                $('.equipo-comp-4').appendTo(contScroll);
-                $('.info-lista').addClass('fixed-lista');
-                // $("#header-information").hide();
-                // $('#nav-bitel').addClass('nav-fixed');
-            } else if (scroll < 40) {
-                $('.equipo-comp-1').prependTo('.eselec-1');
-                $('.equipo-comp-2').prependTo('.eselec-2');
-                $('.equipo-comp-3').prependTo('.eselec-3');
-                $('.equipo-comp-4').prependTo('.eselec-4');
-                $('.info-lista').removeClass('fixed-lista');
-
-                // $('#scroll-compara').remove();
-                // console.log('chau');
-
-                // $('#nav-bitel').removeClass('nav-fixed');
+            } else {
+                $('#fixed-nav-comp').removeClass('fixed-nav');
             }
         });
     }
