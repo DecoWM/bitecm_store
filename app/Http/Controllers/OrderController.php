@@ -49,12 +49,12 @@ class OrderController extends Controller
   * @var isOverQuota: 0 -> return false
   *                  else -> return true
   **/
-  protected function checkIsOverQouta($request) 
+  protected function checkIsOverQouta($order_detail) 
   {
     $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
-      'paymethodType' => $request->payment_method,
+      'paymethodType' => $order_detail['type_id'],
       'busType' => 'INDI',
-      'idNo' => $request->document_number,
+      'idNo' => $order_detail['id_number'],
       'productCode' => 'IchipVoz29_9',   // AQUI INDICAR EL CODIGO DEL PLAN QUE SE HA SELECCIONADO !!!
     ]);
 
@@ -66,12 +66,12 @@ class OrderController extends Controller
   * @var result: if exists -> return object result
   *              else -> return false: Not have debt
   */
-  protected function getInfoCustomer($request) 
+  protected function getInfoCustomer($order_detail)
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
       'idType' => '03', // persona natural !!!
-      'idNo' => $request->document_number
+      'idNo' => $order_detail['id_number']
     ]);
 
     if(isset($response->return->result))
@@ -85,7 +85,7 @@ class OrderController extends Controller
   * @var errorCode: -1 -> return true
   *                 else -> return false: Not have debt
   */
-  protected function checkHaveDebit($custId) 
+  protected function checkHaveDebit($custId)
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
@@ -101,20 +101,20 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
-  protected function createConsultantRequest($request) 
+  protected function createConsultantRequest($order_detail) 
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
       'shopCode' => 'VTP', // ***** Change it for dynamic Value !!!
-      'dni' => $request->document_number,
-      'isdn' => $request->phone_number,
-      'sourceOperator' => isset($request->operator) ? $request->operator : '',
-      'sourcePayment' => $request->payment_method,
-      'email' => $request->contact_email,
-      'phone' => $request->contact_phone,
-      'custName' => $request->first_name . ' ' . $request->last_name,
-      'contactName' => $request->first_name . ' ' . $request->last_name,
+      'dni' => $order_detail['id_number'],
+      'isdn' => $order_detail['porting_phone'],
+      'sourceOperator' => isset($order_detail['source_operator']) ? $order_detail['source_operator'] : '',
+      'sourcePayment' => $order_detail['type_id'],
+      'email' => $order_detail['contact_email'],
+      'phone' => $order_detail['contact_phone'],
+      'custName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
+      'contactName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
       'reasonId' => '123' // ***** Change it for dynamic Value !!!
     ]);
 
@@ -132,13 +132,13 @@ class OrderController extends Controller
   * @var stateCode: 02 -> return true: Exito
   *                 else -> return false: Rechazado
   */
-  protected function checkSuccessPortingRequest($request) 
+  protected function checkSuccessPortingRequest($order_detail) 
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-      'dni' => $request->document_number,
-      'isdn' => $request->phone_number,
+      'dni' => $order_detail['id_number'],
+      'isdn' => $order_detail['porting_phone'],
     ]);
 
     return ($response->return->errorCode == '02');
@@ -169,16 +169,12 @@ class OrderController extends Controller
   }
 
   public function storeOrder (Request $request) {
-    //VARIABLES
-    $products = []; //Lista de productos
+    $products = [];
 
     $order_id = "";
     $order_detail = [];
     $order_items = [];
     $total = 0;
-
-    //ASIGNACIÓN DE VALORES A VARIABLES
-    $cart = collect($request->session()->get('cart'));
 
     $order_detail = [
       'idtype_id' => $request->document_type,
@@ -187,18 +183,27 @@ class OrderController extends Controller
       'first_name' => $request->first_name,
       'last_name' => $request->last_name,
       'id_number' => $request->document_number,
-      'tracking_code' => $id_number,
+      'tracking_code' => $request->document_number,
       'billing_district' => $request->district,
       'billing_phone' => $request->phone_number,
       'delivery_address' => $request->delivery_address,
       'delivery_district' => $request->delivery_distric,
       'contact_email' => $request->email,
       'contact_phone' => $request->contact_phone,
-      'credit_status' => 1,
+      'credit_status' => null,
     ];
+    
+    $cart = collect($request->session()->get('cart'));
+
+    if ($cart->contains('type_id', 1)) {
+      $order_detail['type_id'] = '01';
+    } else if ($cart->contains('type_id', 2)) {
+      $order_detail['type_id'] = '02';
+    }
 
     if ($request->has('operator')) {
-      $order_detail'source_operator'] = $source_operator;
+      $order_detail['source_operator'] = $request->operator;
+      $order_detail['porting_phone'] = $request->porting_phone;
     }
 
     if (count($cart) == 0) {
@@ -222,7 +227,7 @@ class OrderController extends Controller
     }
 
     // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-    if($request->affiliation; == 1){
+    if($request->affiliation == 1){
       // process request portability
       if($this->createConsultantRequest($order_detail)){
         // check if is possible migrate to bitel

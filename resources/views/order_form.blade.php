@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">Portabilidad o linea nueva</label>
-                      <select name="affiliation" v-model="affiliation" disabled>
+                      <select name="affiliation" v-model="affiliation">
                         <option value="1">Portabilidad</option>
                         <option value="2">Linea nueva</option>
                       </select>
@@ -74,6 +74,11 @@
                         <option value="24">Viettel Peru S.A.C.</option>
                         <option value="25">Virgin Mobile</option>
                       </select>
+                    </div>
+                    <div class="form-group" v-if="affiliation == 1">
+                      <label for="">Número a portar</label>
+                      <input type="text" name="porting_phone" v-model="number_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
+                      {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
                   <div class="title-page">
