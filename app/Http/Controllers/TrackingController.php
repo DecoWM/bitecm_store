@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class TrackingController extends Controller
 {
-    public function index (Request $request) {
-        $product_id = $request->product;
-        $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
-        return view('tracking', ['product' => $product[0]]);
-    }
+  protected $shared;
+
+  public function __construct (BaseController $shared) {
+    $this->shared = $shared;
+  }
+
+  public function index (Request $request) {
+    //$order_id = $request->order;
+    //$product = $this->shared->orderItems();
+    //return view('tracking', ['product' => $product]);
+  }
 }

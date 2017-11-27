@@ -49,14 +49,14 @@ Route::post('/envio', 'OrderController@storeOrder')->name('store_order');
 Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
 Route::get('/rastreo/{order_id}', 'OrderController@trackOrder')->name('track_order');
 
-//RUTAS ARCHIVOS
-Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
-
 //ENLACES FOOTER
 
 Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');
-Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Consideraciones');
-Route::get('/files/fichatecnica', 'FileController@downloadFileFichaTecnica')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_FichaTecnica');
+Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->name('download_Consideraciones');
+Route::get('/files/fichatecnica', 'FileController@downloadFileFichaTecnica')->name('download_FichaTecnica');
+
+//RUTAS ARCHIVOS
+Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
 //TEST
 // Route::get('/carrito', 'CartController@index')->name('carrito');

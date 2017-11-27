@@ -33,6 +33,7 @@
                       </div>
                       <div class="content-product text-center">
                         <div class="title-product">
+                          <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
                           <h4 class="text-center">{{$smartphone->product_model}}</h4>
                         </div>
                         <div class="price-product">
@@ -73,6 +74,7 @@
                       </div>
                       <div class="content-product text-center">
                         <div class="title-product">
+                          <h4 class="text-center"><b>{{$tablet->brand_name}}</b></h4>
                           <h4 class="text-center">{{$tablet->product_model}}</h4>
                         </div>
                         <div class="price-product">
@@ -143,6 +145,7 @@
                   </div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
                       <h4 class="text-center">{{$smartphone->product_model}}</h4>
                     </div>
                     <div class="price-product">
@@ -174,6 +177,7 @@
                   </div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
                       <h4 class="text-center">{{$smartphone->product_model}}</h4>
                     </div>
                     <div class="price-product">

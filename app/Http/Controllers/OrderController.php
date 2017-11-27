@@ -305,13 +305,7 @@ class OrderController extends Controller
 
   public function trackOrder (Request $request, $order_id) {
     $order = DB::table('tbl_order')->where('order_id', $order_id)->first();
-
-    $products = DB::select('call PA_orderItems(
-      :order_id
-    )', [
-      'order_id' => $order_id
-    ]);
-
+    $products = $this->shared->orderItems($order_id);
     return view('tracking', ['order' => $order, 'products' => $products]);
   }
 }
