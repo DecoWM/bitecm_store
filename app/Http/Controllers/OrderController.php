@@ -179,23 +179,6 @@ class OrderController extends Controller
 
     //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart'));
-    $idtype_id = $request->document_type;
-    $payment_method_id = $request->payment_method;
-    $branch_id = null;
-    $first_name = $request->first_name;
-    $last_name = $request->last_name;
-    $id_number = $request->document_number;
-    $tracking_code = $id_number;
-    $billing_district = $request->district;
-    $billing_phone = $request->phone_number;
-    if ($request->has('operator')) {
-      $source_operator = $request->operator;
-    }
-    $delivery_address = $request->delivery_address;
-    $delivery_district = $request->delivery_distric;
-    $contact_email = $request->email;
-    $contact_phone = $request->contact_phone;
-    $credit_status = 1;
 
     $order_detail = [
       'idtype_id' => $request->document_type,
@@ -226,12 +209,12 @@ class OrderController extends Controller
     $this->initSoapWrapper(); // Init the bitel soap webservice
 
     // Check if have many lines
-    if($this->checkIsOverQouta($request)){
+    if($this->checkIsOverQouta($order_detail)){
       return 'No puede tener más números telefónicos';
     }
 
     // check if is client
-    if($data_customer = $this->getInfoCustomer($request)){
+    if($data_customer = $this->getInfoCustomer($order_detail)){
       // check if have debt
       if($this->checkHaveDebit($data_customer->custId)){
         return 'Actualmente tiene deudas pendientes';
@@ -241,9 +224,9 @@ class OrderController extends Controller
     // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
     if($request->affiliation; == 1){
       // process request portability
-      if($this->createConsultantRequest($request)){
+      if($this->createConsultantRequest($order_detail)){
         // check if is possible migrate to bitel
-        if(!$this->checkSuccessPortingRequest($request)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+        if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
           return 'No es posible realizar la portabilidad con su número';
         }
       }

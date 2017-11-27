@@ -64,7 +64,7 @@
                           </div>
                         </div>
                         <div class="col-xs-5 col-xs-pull-7 col-sm-12">
-                          @if($product->stock_model_id)  
+                          @if(isset($product->color_id))
                           <div class="color-product">
                             <fieldset>
                               <legend>Color</legend>

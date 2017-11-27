@@ -65,7 +65,7 @@
                           @endforeach
                         </select>
                       </div>
-                      @if($product->stock_model_id)
+                      @if(isset($product->color_id))
                       <div class="color-product">
                         <fieldset>
                           <legend>Color</legend>

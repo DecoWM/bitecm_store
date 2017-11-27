@@ -2121,6 +2121,7 @@ BEGIN
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
+    PRM.*, PRD.*, PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_id`, BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_slug`';
@@ -2160,8 +2161,6 @@ BEGIN
         ON PRD.`product_id` = STM.`product_id`');
   END IF;
 
-  SET select_query = CONCAT(select_query, ',
-    PRM.*, PRD.*, PRD_VAR.`product_variation_id`');
   SET from_query = CONCAT(from_query, '
     LEFT JOIN tbl_promo as PRM
       ON PRD.`product_id` = PRM.`product_id`');
@@ -2605,6 +2604,7 @@ BEGIN
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
+    PRM.*, PRD.*, PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_id`, BRN.`brand_name`, BRN.`brand_slug`,
     AFF.`affiliation_id`, AFF.`affiliation_name`, AFF.`affiliation_slug`,
@@ -2651,8 +2651,6 @@ BEGIN
         ON PRD.`product_id` = STM.`product_id`');
   END IF;
 
-  SET select_query = CONCAT(select_query, ',
-    PRM.*, PRD.*, PRD_VAR.`product_variation_id`');
   SET from_query = CONCAT(from_query, '
     LEFT JOIN tbl_promo as PRM
       ON PRD.`product_id` = PRM.`product_id`');
