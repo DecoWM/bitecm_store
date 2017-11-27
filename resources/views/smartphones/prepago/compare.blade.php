@@ -13,7 +13,29 @@
         <div class="col-xs-12">
           <div id="fixed-nav-comp">
             <div class="container">
-              <div id="scroll-compara"></div>
+              <div id="scroll-compara">
+                <div class="nav-compara">
+                    @foreach ($products as $product)
+                        <div class="equipo-seleccionado eselec-{{$loop->index + 1}}">
+                          <div data-equipo="1" class="equipo equipo-comp-{{$loop->index  + 1}}">
+                            <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                            <div class="content-product text-center">
+                              <div class="title-product">
+                                <h3 class="text-center">{{$product->product_model}}</h3>
+                              </div>
+                              {{-- <div class="price-product"><span>S/</span>{{$product->product_price_prepaid + 0}}</div>
+                              <div class="plan-product">
+                                <p>en plan <span>Megaplus 119</span></p>
+                              </div> --}}
+                              <div class="btn-product form-inline">
+                                <div class="form-group btn-vermas"><a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">Ver más</a></div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      @endforeach 
+                  </div>
+              </div>
             </div>
           </div>
           <div id="compara-tus-equipos">

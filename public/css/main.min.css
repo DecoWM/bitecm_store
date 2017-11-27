@@ -2871,6 +2871,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto {
   padding-bottom: 124px;
   margin: 0 10px;
   height: 452px;
+  width: 260px;
   overflow: hidden;
 }
 section#equipos-vendidos .container .row .content-tab-pro .producto .state-product {
@@ -3069,6 +3070,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto:hover .image
 }
 section#equipos-vendidos .container .row .content-tab-pro .list-productos {
   width: 75%;
+  display: flex;
 }
 @media (max-width: 736px) {
   section#equipos-vendidos .container .row .content-tab-pro .list-productos {
@@ -3149,6 +3151,7 @@ section#equipos-promocion .container .row .sub-heading h3.opt2 a {
 }
 section#equipos-promocion .container .row .content-tab-pro {
   margin-top: 50px;
+  display: flex;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto {
   border: 1px solid #cecece;
@@ -3157,6 +3160,7 @@ section#equipos-promocion .container .row .content-tab-pro .producto {
   padding-bottom: 174px;
   margin: 0 10px;
   height: 484px;
+  width: 265px;
   overflow: hidden;
 }
 section#equipos-promocion .container .row .content-tab-pro .producto .state-product {
