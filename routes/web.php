@@ -52,6 +52,12 @@ Route::get('/rastreo/{order_id}', 'OrderController@trackOrder')->name('track_ord
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
+//ENLACES FOOTER
+
+Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');
+Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Consideraciones');
+Route::get('/files/fichatecnica', 'FileController@downloadFileFichaTecnica')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_FichaTecnica');
+
 //TEST
 // Route::get('/carrito', 'CartController@index')->name('carrito');
 // Route::get('/envio', 'CartController@index2')->name('envio');

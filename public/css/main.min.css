@@ -3987,99 +3987,103 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-size: 20px;
 }
 #fixed-nav-comp {
-  margin-bottom: 10px;
+  height: 0;
+  opacity: 0;
   background-color: #fff;
-  transition: 0.5s ease all;
+  transition: 0.3s linear all;
+  overflow: hidden;
 }
 #fixed-nav-comp.fixed-nav {
   position: fixed;
+  margin-bottom: 10px;
+  opacity: 1;
+  height: 205px;
   width: 100%;
   top: 0;
   left: 0;
   z-index: 99;
   box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 }
+#fixed-nav-comp.fixed-nav .slick-prev {
+  left: 5px;
+}
+#fixed-nav-comp.fixed-nav .slick-next {
+  right: 15px;
+}
 #fixed-nav-comp #scroll-compara {
-  display: flex;
   padding-left: 20%;
 }
-#fixed-nav-comp #scroll-compara .equipo {
-  width: 25%;
+#fixed-nav-comp #scroll-compara .nav-compara {
+  margin-bottom: 0;
+}
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
+  width: 100%;
   border: 1px solid #cecece;
   border-bottom: none;
   padding: 15px 0;
 }
-@media (max-width: 1044px) {
-  #fixed-nav-comp #scroll-compara .equipo {
-    width: 33.3%;
-    padding-right: 1px;
-  }
-}
 @media (max-width: 736px) {
-  #fixed-nav-comp #scroll-compara .equipo {
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
     margin: 0 3px;
-    width: 33.3%;
   }
 }
 @media (max-width: 667px) {
-  #fixed-nav-comp #scroll-compara .equipo {
-    width: 50%;
-    padding-right: 1px;
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
     margin: 0 3px;
   }
 }
-#fixed-nav-comp #scroll-compara .equipo .image-product img {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .image-product img {
   transition: 0.5s ease all;
   margin: 0 auto;
   height: 65px;
 }
-#fixed-nav-comp #scroll-compara .equipo .title-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product {
   margin: 0;
 }
-#fixed-nav-comp #scroll-compara .equipo .title-product h3 {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product h3 {
   font-weight: 400;
   margin-bottom: 0;
   font-size: 16px;
   margin-top: 5px;
 }
-#fixed-nav-comp #scroll-compara .equipo .price-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product {
   font-weight: 300;
   font-size: 26px;
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 0px;
 }
-#fixed-nav-comp #scroll-compara .equipo .price-product span {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span {
   font-size: 23px;
 }
-#fixed-nav-comp #scroll-compara .equipo .plan-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product {
   font-weight: 300;
   font-size: 11px;
   margin-bottom: 5px;
 }
-#fixed-nav-comp #scroll-compara .equipo .plan-product p {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product p {
   margin: 0;
 }
-#fixed-nav-comp #scroll-compara .equipo .btn-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product {
   text-align: center;
 }
-#fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas {
   width: 70%;
 }
 @media (max-width: 1024px) {
-  #fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas {
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas {
     width: 100%;
     padding: 0 15px;
   }
 }
 @media (max-width: 736px) {
-  #fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas {
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas {
     width: 100%;
     display: inline-block;
     margin-bottom: 0;
   }
 }
-#fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas .btn-default {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas .btn-default {
   background-color: #008c95;
   color: #fff;
   border: none;
@@ -4093,14 +4097,17 @@ section#garantia .container .row .col-xs-4 .text-center p {
   transition-property: all;
   transition-duration: 0.2s;
 }
-#fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas .btn-default:hover {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas .btn-default:hover {
   background-color: #ffe60d;
   color: #008c95;
 }
 @media (max-width: 480px) and (min-width: 321px) {
-  #fixed-nav-comp #scroll-compara .equipo .btn-product .btn-vermas {
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product .btn-vermas {
     width: 100%;
   }
+}
+#fixed-nav-comp #scroll-compara .nav-compara .especificaciones {
+  display: none;
 }
 @media (max-width: 736px) {
   #fixed-nav-comp #scroll-compara {
