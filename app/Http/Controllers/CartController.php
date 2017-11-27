@@ -7,13 +7,141 @@ use App\Mail\OrderCompleted;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Artisaninweb\SoapWrapper\SoapWrapper; // For use client SOAP service
 
 class CartController extends Controller
 {
+
     protected $shared;
 
-    public function __construct (BaseController $shared) {
+    /**
+    * @var SoapWrapper
+    * @var portingRequestId : ID when Consultant Request is created
+    */
+    protected $soapWrapper;
+    protected $portingRequestId;
+
+    /**
+    * SoapController constructor.
+    *
+    * @param SoapWrapper $soapWrapper
+    */
+
+    public function __construct (BaseController $shared, SoapWrapper $soapWrapper) {
         $this->shared = $shared;
+        $this->soapWrapper = $soapWrapper;
+    }
+
+    private function initSoapWrapper(){
+        $this->soapWrapper->add('bitelSoap', function ($service) {
+            $service
+                ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')   // La ip se debe mover a una variable de configuración !!!
+                ->trace(true);
+        });        
+    }
+
+    /**
+    * ********** Temporary model from SOAP services here. Move to a model file !!!!
+    * Use the SoapWrapper
+    **/
+
+    /**
+    * Function for verify if customer have many lines
+    * @var isOverQuota: 0 -> return false
+    *                  else -> return true
+    **/
+    protected function checkIsOverQouta($request) 
+    {
+        $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
+          'paymethodType' => $request->payment_method,
+          'busType' => 'INDI',
+          'idNo' => $request->document_number,
+          'productCode' => 'IchipVoz29_9',   // AQUI INDICAR EL CODIGO DEL PLAN QUE SE HA SELECCIONADO !!!
+        ]);
+
+        return ($response->return->isOverQouta != 0);
+    }
+
+    /**
+    * Verify if customer exists in bitel database
+    * @var result: if exists -> return object result
+    *              else -> return false: Not have debt
+    */
+    protected function getInfoCustomer($request) 
+    // public function show() 
+    {
+        $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
+          'idType' => '03', // persona natural !!!
+          'idNo' => $request->document_number
+        ]);
+
+        if(isset($response->return->result))
+            return $response->return->result;
+        else
+            return false;
+    }
+
+    /**
+    * Verify if customer have pending debt
+    * @var errorCode: -1 -> return true
+    *                 else -> return false: Not have debt
+    */
+    protected function checkHaveDebit($custId) 
+    // public function show() 
+    {
+        $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
+          'custId' => $custId
+        ]);
+
+        return ($response->return->errorCode == -1);
+    }
+
+    /**
+    * make a consultant request ONLY FOR PORTABILITY
+    * @var errorCodeMNP: 0 -> return true: Consultant created
+    *                 else -> return false: consultant not created
+    * @var portingRequestId: id for request created
+    */
+    protected function createConsultantRequest($request) 
+    // public function show() 
+    {
+        $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', [
+          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+          'shopCode' => 'VTP', // ***** Change it for dynamic Value !!!
+          'dni' => $request->document_number,
+          'isdn' => $request->phone_number,
+          'sourceOperator' => isset($request->operator) ? $request->operator : '',
+          'sourcePayment' => $request->payment_method,
+          'email' => $request->contact_email,
+          'phone' => $request->contact_phone,
+          'custName' => $request->first_name . ' ' . $request->last_name,
+          'contactName' => $request->first_name . ' ' . $request->last_name,
+          'reasonId' => '123' // ***** Change it for dynamic Value !!!
+        ]);
+
+        if($response->return->errorCodeMNP == '0'){
+            // set the portingRequestId from response
+            $this->portingRequestId = $response->return->portingRequestId;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * get request response if is  created previously ONLY FOR PORTABILITY
+    * @var stateCode: 02 -> return true: Exito
+    *                 else -> return false: Rechazado
+    */
+    protected function checkSuccessPortingRequest($request) 
+    // public function show() 
+    {
+        $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
+            'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+            'dni' => $request->document_number,
+            'isdn' => $request->phone_number,
+        ]);
+
+        return ($response->return->errorCode == '02');
     }
 
     public function showCart (Request $request) {
@@ -212,11 +340,42 @@ class CartController extends Controller
         $delivery_district = $request->delivery_distric;
         $contact_email = $request->email;
         $contact_phone = $request->contact_phone;
+        $affiliation_id = $request->affiliation;
         $credit_status = 1;
         $total = 0;
 
         if (count($cart) == 0) {
             return redirect()->route('show_cart');
+        }
+
+        // Apply validations with Bitel webservice before insert
+        $this->initSoapWrapper(); // Init the bitel soap webservice
+
+        // Check if have many lines
+        if($this->checkIsOverQouta($request)){
+            return 'No puede tener más números telefónicos';
+        }
+
+        // check if is client
+        if($data_customer = $this->getInfoCustomer($request)){
+            // check if have debt
+            if($this->checkHaveDebit($data_customer->custId)){
+                return 'Actualmente tiene deudas pendientes';
+            }
+        }
+
+        // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
+        if($affiliation_id == 'portabilidad'){
+            // process request portability
+            if($this->createConsultantRequest($request)){
+                // check if is possible migrate to bitel
+                if(!$this->checkSuccessPortingRequest($request)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+                    return 'No es posible realizar la portabilidad con su número';
+                }
+            }
+            else{
+                return 'Error creando la solicitud de portabilidad';
+            }
         }
 
         $order_detail = [
