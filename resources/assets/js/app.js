@@ -367,53 +367,103 @@ const app = new Vue({
                 }
             ]
         });
+        
+        $('.nav-compara').slick({
+          arrows: true,
+          dots: false,
+          infinite: false,
+          autoplay: false,
+          arrows: true,
+          speed: 300,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          asNavFor: '.lista-equipos',
+          responsive: [
+          {
+              breakpoint: 1040,
+              settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 667,
+              settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 2
+              }
+            },
+          ]
+        });
 
         $('.lista-equipos').slick({
-            arrows: true,
-            dots: true,
-            infinite: false,
-            autoplay: false,
-            arrows: true,
-            speed: 300,
-            slidesToShow: 4,
-            slidesToScroll: 1,
-            // centerMode: true,
-            // variableWidth: true,
-            responsive: [
-                {
-                  breakpoint: 1040,
-                  settings: {
-                      arrows: false,
-                      centerMode: false,
-                      slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                      arrows: false,
-                      centerMode: false,
-                      slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 667,
-                  settings: {
-                      arrows: false,
-                      centerMode: false,
-                      slidesToShow: 2
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                      arrows: false,
-                      centerMode: false,
-                      slidesToShow: 2
-                  }
-                },
-            ]
+          arrows: false,
+          dots: false,
+          infinite: false,
+          autoplay: false,
+          arrows: true,
+          speed: 300,
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          asNavFor: '.nav-compara',
+          // centerMode: true,
+          // variableWidth: true,
+          responsive: [
+          {
+              breakpoint: 1040,
+              settings: {
+                arrows: false,
+                dots: false,
+                centerMode: false,
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 768,
+              settings: {
+                arrows: false,
+                dots: false,
+                centerMode: false,
+                slidesToShow: 3
+              }
+            },
+            {
+              breakpoint: 667,
+              settings: {
+                centerMode: false,
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 480,
+              settings: {
+                arrows: false,
+                dots: false,
+                centerMode: false,
+                slidesToShow: 2
+              }
+            },
+          ]
         });
+
 
         $('.select-plan').slick({
             initialSlide: $('#planes').data('selected'),
@@ -683,29 +733,11 @@ const app = new Vue({
 
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
-            var contScroll = $('#scroll-compara');
-            var contScrollNone = $('#scroll-compara');
-
-            if (scroll > 40) {
-              $('#fixed-nav-comp').addClass('fixed-nav');
-              $('.equipo-comp-1').appendTo(contScroll);
-              $('.equipo-comp-2').appendTo(contScroll);
-              $('.equipo-comp-3').appendTo(contScroll);
-              $('.equipo-comp-4').appendTo(contScroll);
-              $('.info-lista').addClass('fixed-lista');
-                // $("#header-information").hide();
-                // $('#nav-bitel').addClass('nav-fixed');
-            } else if(scroll < 40) {
-              $('.equipo-comp-1').prependTo('.eselec-1');
-              $('.equipo-comp-2').prependTo('.eselec-2');
-              $('.equipo-comp-3').prependTo('.eselec-3');
-              $('.equipo-comp-4').prependTo('.eselec-4');
-              $('.info-lista').removeClass('fixed-lista');
-
-              // $('#scroll-compara').remove();
-                // console.log('chau');
-
-                // $('#nav-bitel').removeClass('nav-fixed');
+            if (scroll > 350) {
+                $('#fixed-nav-comp').addClass('fixed-nav');
+         
+            }else {
+                $('#fixed-nav-comp').removeClass('fixed-nav');
             }
         });
     }
