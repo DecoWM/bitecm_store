@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">Portabilidad o linea nueva</label>
-                      <select name="affiliation" v-model="affiliation">
+                      <select name="affiliation" v-model="affiliation" disabled>
                         <option value="1">Portabilidad</option>
                         <option value="2">Linea nueva</option>
                       </select>

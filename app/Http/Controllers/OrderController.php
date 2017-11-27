@@ -189,14 +189,34 @@ class OrderController extends Controller
     $billing_district = $request->district;
     $billing_phone = $request->phone_number;
     if ($request->has('operator')) {
-      $previous_provider = $request->operator;
+      $source_operator = $request->operator;
     }
     $delivery_address = $request->delivery_address;
     $delivery_district = $request->delivery_distric;
     $contact_email = $request->email;
     $contact_phone = $request->contact_phone;
-    $affiliation_id = $request->affiliation;
     $credit_status = 1;
+
+    $order_detail = [
+      'idtype_id' => $request->document_type,
+      'payment_method_id' => $request->payment_method,
+      'branch_id' => null,
+      'first_name' => $request->first_name,
+      'last_name' => $request->last_name,
+      'id_number' => $request->document_number,
+      'tracking_code' => $id_number,
+      'billing_district' => $request->district,
+      'billing_phone' => $request->phone_number,
+      'delivery_address' => $request->delivery_address,
+      'delivery_district' => $request->delivery_distric,
+      'contact_email' => $request->email,
+      'contact_phone' => $request->contact_phone,
+      'credit_status' => 1,
+    ];
+
+    if ($request->has('operator')) {
+      $order_detail'source_operator'] = $source_operator;
+    }
 
     if (count($cart) == 0) {
       return redirect()->route('show_cart');
@@ -219,7 +239,7 @@ class OrderController extends Controller
     }
 
     // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-    if($affiliation_id == 1){
+    if($request->affiliation; == 1){
       // process request portability
       if($this->createConsultantRequest($request)){
         // check if is possible migrate to bitel
@@ -231,24 +251,6 @@ class OrderController extends Controller
         return 'Error creando la solicitud de portabilidad';
       }
     }
-
-    $order_detail = [
-      'idtype_id' => $idtype_id,
-      'payment_method_id' => $payment_method_id,
-      'branch_id' => $branch_id,
-      'tracking_code' => $tracking_code,
-      'first_name' => $first_name,
-      'last_name' => $last_name,
-      'id_number' => $id_number,
-      'billing_district' => $billing_district,
-      'billing_phone' => $billing_phone,
-      'previous_provider' => $previous_provider,
-      'delivery_address' => $delivery_address,
-      'delivery_district' => $delivery_district,
-      'contact_email' => $contact_email,
-      'contact_phone' => $contact_phone,
-      'credit_status' => $credit_status,
-    ];
 
     $igv = \Config::get('filter.igv');
 

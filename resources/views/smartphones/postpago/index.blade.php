@@ -8,7 +8,6 @@
           </div>
         </div>
       </div>
-{{-- @include('layouts.search_navbar') --}}
       @include('layouts.banner_smartphone', ['filters' => $filters])
       <div class="row">
         @include('layouts.sidebar.sidebar_postpago')
@@ -26,9 +25,7 @@
             <div class="row" v-if="!search">
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
-                {{-- <div data-equipo="1" class="producto"> --}}
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
-                {{-- <div data-equipo="1" class="producto active-comparar"> --}}
                   <div class="image-product text-center">
                     <a href="{{route('postpaid_detail', [
                       'brand'=>$smartphone->brand_slug,
@@ -72,18 +69,7 @@
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
-                  {{-- {{ $products->links() }} --}}
-                  {{-- <ul class="pagination">
-                    <li><a href="#" aria-label="Atras"><span aria-hidden="true">&lt;</span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#"><span aria-hidden="true">&gt;</span></a></li>
-                  </ul> --}}
-                  {{-- <paginator-links v-bind:pagination="pagination" v-on:click.native="searchProduct(pagination.current_page)" :offset="4"></paginator-links> --}}
                   <paginator-links v-bind:pagination="pagination" v-on:changepage="searchProduct" :offset="4"></paginator-links>
-                  {{-- <paginator-links v-bind:pagination="pagination" :offset="4"></paginator-links> --}}
                 </nav>
               </div>
             </div>

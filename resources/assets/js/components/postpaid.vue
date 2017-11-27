@@ -4,7 +4,7 @@
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected}">
       <div class="image-product text-center">
         <a v-bind:href="product.route">
-          <img v-bind:src="product.picture_url" ;alt="product.product_model">
+          <img v-bind:src="product.picture_url" :alt="product.product_model">
         </a>
       </div>
       <div class="content-product text-center">

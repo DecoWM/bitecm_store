@@ -53672,7 +53672,7 @@ var render = function() {
             _c("img", {
               attrs: {
                 src: _vm.product.picture_url,
-                ";alt": "product.product_model"
+                alt: _vm.product.product_model
               }
             })
           ])

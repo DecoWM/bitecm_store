@@ -8,7 +8,6 @@
           </div>
         </div>
       </div>
-{{-- @include('layouts.search_navbar') --}}
       @include('layouts.banner_smartphone', ['filters' => $filters])
       <div class="row">
         @include('layouts.sidebar.sidebar_prepago')
@@ -78,45 +77,12 @@
             </div>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
-
                 <nav aria-label="Page navigation" id="pagination-nav">
                   {{ $products->links() }}
-                  {{-- <ul class="pagination">
-                    <li><a href="#" aria-label="Atras"><span aria-hidden="true">&lt;</span></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#"><span aria-hidden="true">&gt;</span></a></li>
-                  </ul> --}}
                 </nav>
               </div>
             </div>
             <compare-prepaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-prepaid>
-            {{-- <div id="list-equipos-comparar" >
-              <div class="equipos-comp">
-                <div class="title-equipos"><span>4 Equipos</span>
-                  <p>para comparar</p>
-                </div>
-                <div class="list-equipos">
-                  <ul class="list-unstyled">
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="last-btn"><span class="fa fa-times"></span></button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="btn-comparar"><a href="#">COMPARAR</a></div>
-            </div> --}}
           </div>
         </div>
       </div>
