@@ -8,15 +8,15 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 -- -----------------------------------------------------
--- Schema bitel_store
+-- Schema bitel_ecommerce
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `bitel_store` DEFAULT CHARACTER SET utf8 ;
-USE `bitel_store` ;
+CREATE SCHEMA IF NOT EXISTS `bitel_ecommerce` DEFAULT CHARACTER SET utf8 ;
+USE `bitel_ecommerce` ;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_variation_type`
+-- Table `bitel_ecommerce`.`tbl_variation_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_variation_type` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_variation_type` (
   `variation_type_id` INT NOT NULL AUTO_INCREMENT,
   `variation_type_name` VARCHAR(20) NOT NULL,
   `variation_type_slug` VARCHAR(150) NULL DEFAULT NULL,
@@ -37,9 +37,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_variation_type` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_brand`
+-- Table `bitel_ecommerce`.`tbl_brand`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_brand` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_brand` (
   `brand_id` INT NOT NULL AUTO_INCREMENT,
   `brand_name` VARCHAR(20) NOT NULL,
   `brand_slug` VARCHAR(150) NULL DEFAULT NULL,
@@ -59,9 +59,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_category`
+-- Table `bitel_ecommerce`.`tbl_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_category` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_category` (
   `category_id` INT NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(25) NOT NULL,
   `category_slug` VARCHAR(150) NULL DEFAULT NULL,
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_category` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_product`
+-- Table `bitel_ecommerce`.`tbl_product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product` (
   `product_id` INT NOT NULL AUTO_INCREMENT,
   `category_id` INT NOT NULL,
   `brand_id` INT NOT NULL COMMENT 'Marca del dispositivo\n',
@@ -121,21 +121,21 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product` (
   FULLTEXT INDEX `indx_srch_product_slug` (`product_slug`),
   CONSTRAINT `fk_tbl_product_tbl_brand1`
     FOREIGN KEY (`brand_id`)
-    REFERENCES `bitel_store`.`tbl_brand` (`brand_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_brand` (`brand_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_product_tbl_category1`
     FOREIGN KEY (`category_id`)
-    REFERENCES `bitel_store`.`tbl_category` (`category_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_category` (`category_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_color`
+-- Table `bitel_ecommerce`.`tbl_color`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_color` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_color` (
   `color_id` INT NOT NULL AUTO_INCREMENT,
   `color_name` VARCHAR(50) NOT NULL,
   `color_hexcode` VARCHAR(8) NULL DEFAULT NULL,
@@ -153,9 +153,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_color` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_stock_model`
+-- Table `bitel_ecommerce`.`tbl_stock_model`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_stock_model` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_stock_model` (
   `stock_model_id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
   `color_id` INT NULL DEFAULT NULL,
@@ -172,12 +172,12 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_stock_model` (
   INDEX `fk_tbl_stock_model_tbl_color1_idx` (`color_id` ASC),
   CONSTRAINT `fk_tbl_stock_model_tbl_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `bitel_store`.`tbl_product` (`product_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_stock_model_tbl_color1`
     FOREIGN KEY (`color_id`)
-    REFERENCES `bitel_store`.`tbl_color` (`color_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_color` (`color_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
@@ -185,9 +185,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_product_image`
+-- Table `bitel_ecommerce`.`tbl_product_image`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product_image` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_image` (
   `product_image_id` INT NOT NULL AUTO_INCREMENT,
   `stock_model_id` INT NOT NULL,
   `product_image_url` VARCHAR(150) NOT NULL,
@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product_image` (
   INDEX `fk_tbl_product_image_tbl_stock_model1_idx` (`stock_model_id` ASC),
   CONSTRAINT `fk_tbl_product_image_tbl_stock_model1`
     FOREIGN KEY (`stock_model_id`)
-    REFERENCES `bitel_store`.`tbl_stock_model` (`stock_model_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_stock_model` (`stock_model_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
@@ -212,9 +212,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_plan`
+-- Table `bitel_ecommerce`.`tbl_plan`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_plan` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_plan` (
   `plan_id` INT NOT NULL AUTO_INCREMENT,
   `plan_type` ENUM('Prepago','Postpago') NOT NULL,
   `plan_name` VARCHAR(50) NOT NULL,
@@ -242,9 +242,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_contract`
+-- Table `bitel_ecommerce`.`tbl_contract`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_contract` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_contract` (
   `contract_id` INT NOT NULL AUTO_INCREMENT,
   `contract_name` VARCHAR(50) NOT NULL,
   `contract_months` INT NOT NULL,
@@ -264,9 +264,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_affiliation`
+-- Table `bitel_ecommerce`.`tbl_affiliation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_affiliation` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_affiliation` (
   `affiliation_id` INT NOT NULL AUTO_INCREMENT,
   `affiliation_name` VARCHAR(45) NOT NULL,
   `affiliation_slug` VARCHAR(150) NULL DEFAULT NULL,
@@ -285,9 +285,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_product_variation`
+-- Table `bitel_ecommerce`.`tbl_product_variation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product_variation` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_variation` (
   `product_variation_id` INT NOT NULL AUTO_INCREMENT,
   `variation_type_id` INT NOT NULL,
   `product_id` INT NOT NULL,
@@ -312,27 +312,27 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_product_variation` (
   INDEX `fk_tbl_product_variation_tbl_contract1_idx` (`contract_id` ASC),
   CONSTRAINT `fk_tbl_product_variation_tbl_variation_type1`
     FOREIGN KEY (`variation_type_id`)
-    REFERENCES `bitel_store`.`tbl_variation_type` (`variation_type_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_variation_type` (`variation_type_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_product_variation_tbl_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `bitel_store`.`tbl_product` (`product_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_product_variation_tbl_affiliation1`
     FOREIGN KEY (`affiliation_id`)
-    REFERENCES `bitel_store`.`tbl_affiliation` (`affiliation_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_affiliation` (`affiliation_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_product_variation_tbl_plan1`
     FOREIGN KEY (`plan_id`)
-    REFERENCES `bitel_store`.`tbl_plan` (`plan_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_plan` (`plan_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_product_variation_tbl_contract1`
     FOREIGN KEY (`contract_id`)
-    REFERENCES `bitel_store`.`tbl_contract` (`contract_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_contract` (`contract_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
@@ -340,9 +340,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_promo`
+-- Table `bitel_ecommerce`.`tbl_promo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_promo` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_promo` (
   `promo_id` INT NOT NULL AUTO_INCREMENT,
   `product_id` INT NOT NULL,
   `product_variation_id` INT NULL DEFAULT NULL,
@@ -373,31 +373,31 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_promo` (
   INDEX `fk_tbl_promo_tbl_variation_type1_idx` (`allowed_variation_type_id` ASC),
   CONSTRAINT `fk_tbl_promo_tbl_product1`
     FOREIGN KEY (`product_id`)
-    REFERENCES `bitel_store`.`tbl_product` (`product_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_promo_tbl_product_variation1`
     FOREIGN KEY (`product_variation_id`)
-    REFERENCES `bitel_store`.`tbl_product_variation` (`product_variation_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product_variation` (`product_variation_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_promo_tbl_product2`
     FOREIGN KEY (`add_product_id`)
-    REFERENCES `bitel_store`.`tbl_product` (`product_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product` (`product_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_promo_tbl_variation_type1`
     FOREIGN KEY (`allowed_variation_type_id`)
-    REFERENCES `bitel_store`.`tbl_variation_type` (`variation_type_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_variation_type` (`variation_type_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_branch`
+-- Table `bitel_ecommerce`.`tbl_branch`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_branch` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_branch` (
   `branch_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `zip_code` VARCHAR(50) NOT NULL,
@@ -414,9 +414,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_branch` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_order`
+-- Table `bitel_ecommerce`.`tbl_order`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order` (
   `order_id` INT NOT NULL AUTO_INCREMENT,
   `idtype_id` INT NOT NULL,
   `payment_method_id` INT NOT NULL,
@@ -458,26 +458,26 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order` (
   INDEX `fk_tbl_order_tbl_branch1_idx` (`branch_id` ASC),
   CONSTRAINT `fk_tbl_order_tbl_idtype1`
     FOREIGN KEY (`idtype_id`)
-    REFERENCES `bitel_store`.`tbl_idtype` (`idtype_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_idtype` (`idtype_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_tbl_payment_method1`
     FOREIGN KEY (`payment_method_id`)
-    REFERENCES `bitel_store`.`tbl_payment_method` (`payment_method_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_payment_method` (`payment_method_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_tbl_branch1`
     FOREIGN KEY (`branch_id`)
-    REFERENCES `bitel_store`.`tbl_branch` (`branch_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_branch` (`branch_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_order_item`
+-- Table `bitel_ecommerce`.`tbl_order_item`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_item` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_item` (
   `order_item_id` INT NOT NULL AUTO_INCREMENT,
   `order_id` INT NOT NULL,
   `stock_model_id` INT NOT NULL,
@@ -500,31 +500,31 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_item` (
   INDEX `fk_tbl_order_item_tbl_promo1_idx` (`promo_id` ASC),
   CONSTRAINT `fk_tbl_order_item_tbl_order1`
     FOREIGN KEY (`order_id`)
-    REFERENCES `bitel_store`.`tbl_order` (`order_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_order` (`order_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_item_tbl_stock_model1`
     FOREIGN KEY (`stock_model_id`)
-    REFERENCES `bitel_store`.`tbl_stock_model` (`stock_model_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_stock_model` (`stock_model_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_item_tbl_product_variation1`
     FOREIGN KEY (`product_variation_id`)
-    REFERENCES `bitel_store`.`tbl_product_variation` (`product_variation_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_product_variation` (`product_variation_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_item_tbl_promo1`
     FOREIGN KEY (`promo_id`)
-    REFERENCES `bitel_store`.`tbl_promo` (`promo_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_promo` (`promo_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_order_status`
+-- Table `bitel_ecommerce`.`tbl_order_status`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_status` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status` (
   `order_status_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -539,9 +539,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_status` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_order_status_history`
+-- Table `bitel_ecommerce`.`tbl_order_status_history`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_status_history` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status_history` (
   `order_status_history_id` INT NOT NULL AUTO_INCREMENT,
   `order_id` INT NOT NULL,
   `order_status_id` INT NOT NULL,
@@ -559,21 +559,21 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_order_status_history` (
   INDEX `fk_tbl_order_status_history_tbl_order_status1_idx` (`order_status_id` ASC),
   CONSTRAINT `fk_tbl_order_status_history_tbl_order1`
     FOREIGN KEY (`order_id`)
-    REFERENCES `bitel_store`.`tbl_order` (`order_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_order` (`order_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_tbl_order_status_history_tbl_order_status1`
     FOREIGN KEY (`order_status_id`)
-    REFERENCES `bitel_store`.`tbl_order_status` (`order_status_id`)
+    REFERENCES `bitel_ecommerce`.`tbl_order_status` (`order_status_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION
 )
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_payment_method`
+-- Table `bitel_ecommerce`.`tbl_payment_method`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_payment_method` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_payment_method` (
   `payment_method_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL,
   `icon_url` VARCHAR(100) NULL DEFAULT NULL,
@@ -590,9 +590,9 @@ CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_payment_method` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `bitel_store`.`tbl_id_type`
+-- Table `bitel_ecommerce`.`tbl_id_type`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `bitel_store`.`tbl_idtype` (
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_idtype` (
   `idtype_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
