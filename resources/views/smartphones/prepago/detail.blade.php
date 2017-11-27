@@ -47,6 +47,7 @@
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
+                <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                 <input type="hidden" name="type" value="1">
                 <div class="content-product equipo-prepago">
                   <div class="row">
