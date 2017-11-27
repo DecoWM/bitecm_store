@@ -21,6 +21,7 @@ Vue.component('loader', require('./components/loader.vue'));
 Vue.component('paginatorLinks', require('./components/paginator.vue'));
 Vue.component('postpaid', require('./components/postpaid.vue'));
 Vue.component('prepaid', require('./components/prepaid.vue'));
+Vue.component('products', require('./components/products.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
 
@@ -49,7 +50,7 @@ const form = new Vue({
         if (result) {
           // eslint-disable-next-line
            // alert('Enviado a ' + this.first_name + '!')
-          this.$refs.orderform.submit()
+          this.$refs.orderform.submit();
           return;
         }
 
@@ -67,31 +68,75 @@ const app = new Vue({
     data: {
         baseUrl : document.head.querySelector('meta[name="base-url"]').content,
         prefix : document.head.querySelector('meta[name="prefix"]').content,
+        type : document.head.querySelector('meta[name="type"]').content,
         bestSeller : "smartphone",
         promo : "postpago",
         itemsPerPage : "12",
-        filters : {
-            type : {
-                value : '',
-                isOpen : true
-            },
-            affiliation : {
-                value : '2',
-                isOpen : true
-            },
-            plan : {
-                value : '',
-                isOpen : false
-            },
+        filters: {
+          accesorios : {
             price : {
                 value : '',
-                isOpen : false
+                isOpen : true
             },
             manufacturer : {
                 value : [],
                 all : true,
-                isOpen : false
+                isOpen : true
             }
+          },
+          promociones : {
+            price : {
+                value : '',
+                isOpen : true
+            },
+            manufacturer : {
+                value : [],
+                all : true,
+                isOpen : true
+            }
+          },
+          prepago : {
+              type : {
+                  value : '',
+                  isOpen : true
+              },
+              plan : {
+                  value : '14',
+                  isOpen : false
+              },
+              price : {
+                  value : '',
+                  isOpen : true
+              },
+              manufacturer : {
+                  value : [],
+                  all : true,
+                  isOpen : false
+              }
+          },
+          postpago : {
+              type : {
+                  value : '',
+                  isOpen : true
+              },
+              affiliation : {
+                  value : '2',
+                  isOpen : true
+              },
+              plan : {
+                  value : '7',
+                  isOpen : false
+              },
+              price : {
+                  value : '',
+                  isOpen : false
+              },
+              manufacturer : {
+                  value : [],
+                  all : true,
+                  isOpen : false
+              }
+          },
         },
         compare: [],
         searchedString : "",
@@ -136,51 +181,51 @@ const app = new Vue({
             });
         },
         toggleAccordion : function (item) {
-            item.isOpen = !item.isOpen
+          item.isOpen = !item.isOpen;
         },
         transitionEnter : function(el, done){
-            Velocity(el, 'slideDown', {duration: 300, easing: "easeInBack"},{complete: done})
+          Velocity(el, 'slideDown', {duration: 300, easing: "easeInBack"},{complete: done});
         },
         transitionLeave : function(el, done){
-            Velocity(el, 'slideUp', {duration: 300, easing: "easeInBack"},{complete: done})
+          Velocity(el, 'slideUp', {duration: 300, easing: "easeInBack"},{complete: done});
         },
         addItem : function (product) {
             self = this;
             self.compare.push(product);
         },
         removeItem: function (product_id) {
-            self = this
+            self = this;
             item = self.compare.find( function (e) {
-                return e.product_id == product_id
-            })
-            index = self.compare.indexOf(item)
+                return e.product_id == product_id;
+            });
+            index = self.compare.indexOf(item);
             if (index !== -1) {
-                self.compare.splice(index, 1)
+                self.compare.splice(index, 1);
             }
         },
         selectAll : function () {
-            self = this
-            if (self.filters.manufacturer.all) {
-                self.filters.manufacturer.value = []
-                self.searchProduct()
+            self = this;
+            if (self.filters[self.type].manufacturer.all) {
+                self.filters[self.type].manufacturer.value = [];
+                self.searchProduct(1);
             }
-            self.filters.manufacturer.all = true
+            self.filters[self.type].manufacturer.all = true;
         },
         searchProduct: function (currentPage) {
             self = this;
-            self.pagination.current_page = currentPage
+            self.pagination.current_page = currentPage;
             self.isSearching = true;
             self.noResults = false;
             self.search = true;
             self.searchResult = [];
-            (self.filters.manufacturer.value.length > 0) ? self.filters.manufacturer.all = false : self.filters.manufacturer.all = true
+            (self.filters[self.type].manufacturer.value.length > 0) ? self.filters[self.type].manufacturer.all = false : self.filters[self.type].manufacturer.all = true;
             console.log(self.baseUrl);
             let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {
                 params: {
                     searched_string: self.searchedString,
                     items_per_page: self.itemsPerPage,
-                    filters : self.filters,
+                    filters : self.filters[self.type],
                     pag : self.pagination.current_page
                 }
             };
@@ -190,7 +235,7 @@ const app = new Vue({
               if (self.searchResult.length == 0) {
                   self.noResults = true;
               }
-              self.pagination = response.data
+              self.pagination = response.data;
               self.isSearching = false;
             }, (error) => {
               console.log(error);
@@ -199,11 +244,19 @@ const app = new Vue({
             });
         },
         redirect: function (str) {
-            self = this
-            window.location.href = self.baseUrl + '/' + str
+            self = this;
+            window.location.href = self.baseUrl + '/' + str;
+        },
+        redirectRel: function(loc) {
+          window.location.href = loc;
         },
         selectPlan : function (plan) {
-            this.selectedPlan = plan
+          this.selectedPlan = plan;
+        },
+        selectAffiliation: function(affiliation_routes,event) {
+          if(event.target.value.length > 0) {
+            document.location = affiliation_routes[event.target.value];
+          }
         }
     },
     beforeMount : function () {
@@ -361,15 +414,16 @@ const app = new Vue({
                 },
             ]
         });
-
+console.log($('#planes').data('selected'));
         $('.select-plan').slick({
+            initialSlide: $('#planes').data('selected'),
             arrows: true,
-            dots: true,
+            dots: false,
             infinite: false,
             autoplay: false,
             speed: 500,
             slidesToShow: 3,
-            slidesToScroll: 1,
+            slidesToScroll: 3,
         // centerMode: true,
         // variableWidth: true,
             responsive: [
@@ -630,21 +684,20 @@ const app = new Vue({
             var contScrollNone = $('#scroll-compara');
 
             if (scroll > 40) {
-              $('#fixed-nav-comp').addClass('fixed-nav')
-              $('.slick-active .equipo-comp-1').appendTo(contScroll);
-              $('.slick-active .equipo-comp-2').appendTo(contScroll);
-              $('.slick-active .equipo-comp-3').appendTo(contScroll);
-              $('.slick-active .equipo-comp-4').appendTo(contScroll);
-              $('.info-lista').addClass('fixed-lista')
+              $('#fixed-nav-comp').addClass('fixed-nav');
+              $('.equipo-comp-1').appendTo(contScroll);
+              $('.equipo-comp-2').appendTo(contScroll);
+              $('.equipo-comp-3').appendTo(contScroll);
+              $('.equipo-comp-4').appendTo(contScroll);
+              $('.info-lista').addClass('fixed-lista');
                 // $("#header-information").hide();
                 // $('#nav-bitel').addClass('nav-fixed');
-                console.log('hola');
             } else if(scroll < 40) {
               $('.equipo-comp-1').prependTo('.eselec-1');
               $('.equipo-comp-2').prependTo('.eselec-2');
               $('.equipo-comp-3').prependTo('.eselec-3');
               $('.equipo-comp-4').prependTo('.eselec-4');
-              $('.info-lista').removeClass('fixed-lista')
+              $('.info-lista').removeClass('fixed-lista');
 
               // $('#scroll-compara').remove();
                 // console.log('chau');

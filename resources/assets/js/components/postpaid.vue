@@ -2,7 +2,11 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <div data-equipo="1" class="producto active-comparar"> -->
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected}">
-      <div class="image-product text-center"><img v-bind:src="product.picture_url" alt="equipos"></div>
+      <div class="image-product text-center">
+        <a v-bind:href="product.route">
+          <img v-bind:src="product.picture_url" ;alt="product.product_model">
+        </a>
+      </div>
       <div class="content-product text-center">
         <div class="title-product">
           <h3 class="text-center">{{product.product_model}}</h3>
@@ -12,7 +16,9 @@
           <p>en plan <span>{{product.plan_name}}</span></p>
         </div>
         <div class="btn-product form-inline">
-          <div class="form-group btn-comprar"><a v-bind:href="baseUrl + '/postpago/smartphones/' +  product.product_id" class="btn btn-default">comprar</a></div>
+          <div class="form-group btn-comprar">
+            <a v-bind:href="product.route" class="btn btn-default">comprar</a>
+          </div>
           <div class="checkbox btn-comparar">
             <label>
               <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare" v-bind:disabled="compare.length==4 && !isSelected">comparar

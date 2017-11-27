@@ -13,31 +13,28 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-// Route::get('/productos/{category}/{product}', 'ProductController@show')->where(['category'=>'[A-Za-z]+', 'product'=>'[0-9]+'])->name('product_detail');
-Route::get('/productos/smartphones/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('smartphone_detail');
-Route::get('/productos/tablets/{product}', 'ProductController@show')->where(['product'=>'[0-9]+'])->name('tablet_detail');
+//RUTA PRODUCTO
+Route::get('/producto/{brand}/{product}/{color?}', 'ProductController@show')->name('product_detail');
 
 //RUTAS PREPAGO
 Route::get('/prepago', 'PrepaidController@index')->name('prepaid');
-Route::get('/prepago/smartphones/{product}', 'PrepaidController@show')->where(['product'=>'[0-9]+'])->name('prepaid_detail');
+Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show')->name('prepaid_detail');
 
 //RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::get('/postpago/smartphones/{product}', 'PostpaidController@show')->where(['product'=>'[0-9]+'])->name('postpaid_detail');
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')->name('postpaid_detail');
 
 //RUTAS ACCESORIOS
 Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
+Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show')->name('accessory_detail');
 
-//RUTAS BUSQUEDA
-Route::get('/product/search', 'PostpaidController@search');
-// Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
-// Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
-// Route::resource('/product', 'ProductController', ['only' => ['index', 'create', 'store']]);
+//RUTAS ACCESORIOS
+Route::get('/promociones', 'PromoController@index')->name('promociones');
 
 //RUTAS COMPARAR
 Route::get('/prepago/comparar', 'PrepaidController@compare');
 Route::get('/postpago/comparar', 'PostpaidController@compare');
-Route::get('/product/compare', 'PostpaidController@compare');
+Route::get('/producto/comparar', 'PostpaidController@compare');
 
 //RUTAS CARRITO
 Route::get('/carrito', 'CartController@showCart')->name('show_cart');
@@ -56,7 +53,3 @@ Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename
 // Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
-
-Route::get('/test', function () {
-  return [phpinfo()];
-});

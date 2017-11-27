@@ -11,113 +11,130 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 
 class SearchController extends Controller
 {
-    protected $shared;
+  protected $shared;
 
-    public function __construct (BaseController $shared) {
-        $this->shared = $shared;
-    }
+  public function __construct (BaseController $shared) {
+    $this->shared = $shared;
+  }
 
-    public function search (Request $request) {
-        $request->validate([
-          'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
-          'items_per_page' => 'required|integer|min:0',
-          'filters' => 'required'
-        ]);
+  public function searchPrepaid(Request $request) {
+    $request->validate([
+      'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
+      'items_per_page' => 'required|integer|min:0'
+    ]);
 
-        $filters = json_decode($request->filters);
-        $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
-        $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
-        $manufacturer_ids = implode(',',$filters->manufacturer->value);
-        $search_result = $this->shared->searchProduct(1, $request->items_per_page, 1, "product_name", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
+    $plan_pre_id = \Config::get('filter.plan_prepaid');
 
-        $data = collect($search_result)->map(function ($item, $key) {
-            $item->picture_url = asset('images/productos/'.$item->picture_url);
-            return $item;
-        });
+    $filters = json_decode($request->filters);
 
-        $response = [
-            'data' => $data
-        ];
+    $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
 
-        return response()->json($response);
-    }
+    $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
 
-    public function searchPrepaid (Request $request) {
-        $request->validate([
-          'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
-          'items_per_page' => 'required|integer|min:0'
-        ]);
+    $brand_ids = implode(',',$filters->manufacturer->value);
 
-        $filters = json_decode($request->filters);
+    $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_pre_id;
 
-        $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
+    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $request->items_per_page, 1, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
-        $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
+    $data = collect($search_result['products'])->map(function ($item, $key) {
+      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->route = route('prepaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'plan'=>$item->plan_slug
+      ]);
+      return $item;
+    });
 
-        $manufacturer_ids = implode(',',$filters->manufacturer->value);
+    $response = [
+      'data' => $data
+    ];
 
-        $search_result = $this->shared->searchProductPrepaid(1, $request->items_per_page, 1, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string);
+    return response()->json($response);
+  }
 
-        $data = collect($search_result['products'])->map(function ($item, $key) {
-            $item->picture_url = asset('images/productos/'.$item->picture_url);
-            return $item;
-        });
+  public function searchPostpaid (Request $request) {
+    $request->validate([
+      'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
+      'items_per_page' => 'required|integer|min:0'
+    ]);
 
-        $response = [
-            'data' => $data
-        ];
+    $affiliation_id = \Config::get('filter.affiliation');
+    $plan_post_id = \Config::get('filter.plan_postpaid');
+    $contract_id = \Config::get('filter.contract');
 
-        return response()->json($response);
-    }
+    $items_per_page = $request->items_per_page;
+    $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+    $filters = json_decode($request->filters);
+    $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
+    $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
+    $brand_ids = implode(',',$filters->manufacturer->value);
+    $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : $affiliation_id;
+    $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
+    $contract_id = \Config::get('filter.contract');
 
-    public function searchPostpaid (Request $request) {
-        $request->validate([
-          'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
-          'items_per_page' => 'required|integer|min:0'
-        ]);
+    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $pages = intval(ceil($search_result['total'] / $items_per_page));
 
-        $items_per_page = $request->items_per_page;
-        $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-        $filters = json_decode($request->filters);
-        $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
-        $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
-        $manufacturer_ids = implode(',',$filters->manufacturer->value);
-        $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : 2;
-        $plan_id = (isset($filters->plan->value)) ? ( $filters->plan->value!="" ? $filters->plan->value : 6) : 6;
+    $data = collect($search_result['products'])->map(function ($item, $key) {
+      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->route = route('postpaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug
+      ]);
+      return $item;
+    });
 
-        $search_result = $this->shared->searchProductPostpaid(1, $items_per_page, $current_page, "product_model", "desc", $manufacturer_ids, $product_price_ini, $product_price_end, $request->searched_string, $affiliation_id, $plan_id);
-        $pages = intval(ceil($search_result['total'] / $items_per_page));
+    $paginator = new Paginator(
+      $data,
+      $search_result['total'],
+      $items_per_page, $current_page,
+      [
+        'pageName' => 'pag'
+      ]
+    );
+    $paginator->withPath('postpago');
 
-        $data = collect($search_result['products'])->map(function ($item, $key) {
-            $item->picture_url = asset('images/productos/'.$item->picture_url);
-            return $item;
-        });
+    return response()->json($paginator);
+  }
 
-        $paginator = new Paginator(
-            $data,
-            $search_result['total'],
-            $items_per_page, $current_page,
-            [
-                'pageName' => 'pag'
-            ]
-        );
-        $paginator->withPath('postpago');
+  public function searchAccesorios (Request $request) {
+    $request->validate([
+      'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
+      'items_per_page' => 'required|integer|min:0'
+    ]);
 
-        return response()->json($paginator);
+    $filters = json_decode($request->filters);
 
-        // $items_per_page = 12;
-        //
-        // $search_result =  $this->shared->searchProductPostpaid(1, $items_per_page, $current_page);
-        // $pages = intval(ceil($search_result['total'] / $items_per_page));
-        // $paginator = new Paginator(
-        //     $search_result['products'],
-        //     $search_result['total'],
-        //     $items_per_page, $current_page,
-        //     [
-        //         'pageName' => 'pag'
-        //     ]
-        // );
-        // $paginator->withPath('postpago');
-        // return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages]);
-    }
+    $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
+
+    $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
+
+    $brand_ids = implode(',',$filters->manufacturer->value);
+
+    $search_result = $this->shared->productSearch(2, $brand_ids, $request->items_per_page, 1, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    
+    $data = collect($search_result['products'])->map(function ($item, $key) {
+      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->route = route('accessory_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+      ]);
+      return $item;
+    });
+
+    $response = [
+      'data' => $data
+    ];
+
+    return response()->json($response);
+  }
+
+  public function searchPromos (Request $request) {
+
+  }
 }

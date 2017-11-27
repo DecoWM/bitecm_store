@@ -104,7 +104,7 @@
               </div>
             </transition>
           </div>
-@if (Request::is('postpago'))
+@if (Request::is('postpago') || Request::is('prepago'))
           <div id="precio-plan" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters.plan)">
               <div class="btn-acordion"></div><span>Plan</span>
@@ -121,42 +121,6 @@
                   <label for="plan-opt-{{$plan->plan_id}}">{{$plan->plan_name}}</label>
                 </div>
 @endforeach
-                {{-- <div class="item">
-                  <input id="plan-opt-1" type="radio" name="plan" value="1" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-1">ichip 15</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-2" type="radio" name="plan" value="2" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-2">ichip 29</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-3" type="radio" name="plan" value="3" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-3">ichip 49</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-4" type="radio" name="plan" value="4" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-4">ichip 69</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-5" type="radio" name="plan" value="5" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-5">ichip 89</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-6" type="radio" name="plan" value="6" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-6">ichip 99</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-7" type="radio" name="plan" value="7" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-7">ichip 129</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-8" type="radio" name="plan" value="8" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-8">ichip 149</label>
-                </div>
-                <div class="item">
-                  <input id="plan-opt-9" type="radio" name="plan" value="9" v-model="filters.plan.value" v-on:change="searchProduct(1)">
-                  <label for="plan-opt-9">ichip 169</label>
-                </div> --}}
               </div>
             </transition>
           </div>
@@ -181,34 +145,6 @@
                   <label for="manufacturer-opt-{{$brand->brand_id}}">{{$brand->brand_name}}</label>
                 </div>
 @endforeach
-                {{-- <div class="item">
-                  <input id="manufacturer-opt-1" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="1" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-1">Samsung</label>
-                </div> --}}
-                {{-- <div class="item">
-                  <input id="manufacturer-opt-2" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="2" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-2">Sony</label>
-                </div>
-                <div class="item">
-                  <input id="manufacturer-opt-3" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="3" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-3">LG</label>
-                </div>
-                <div class="item">
-                  <input id="manufacturer-opt-4" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="4" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-4">Alcatel</label>
-                </div>
-                <div class="item">
-                  <input id="manufacturer-opt-5" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="5" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-5">Sky</label>
-                </div>
-                <div class="item">
-                  <input id="manufacturer-opt-6" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="6" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-6">Lenovo</label>
-                </div>
-                <div class="item">
-                  <input id="manufacturer-opt-7" type="checkbox" name="manufacturer" v-model="filters.manufacturer.value" value="7" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-7">Bitel</label>
-                </div> --}}
               </div>
             </transition>
           </div>

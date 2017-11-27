@@ -17,43 +17,92 @@ class HomeController extends Controller
     }
 
     public function index(Request $request) {
-        $best_seller_smartphone = $this->shared->searchProduct(1, 3);
-        $best_seller_tablet = $this->shared->searchProduct(2, 3);
-        $featured_products = $this->shared->searchProduct(1, 2);
-        $promo_pre = $this->shared->searchProductPrepaid(1, 4, 1, 'product_id', 'asc');
-        $promo_pos = $this->shared->searchProductPostpaid(1 ,4, 1, 'product_id', 'desc');
+        $affiliation_id = \Config::get('filter.affiliation');
+        $plan_pre_id = \Config::get('filter.plan_prepaid');
+        $plan_post_id = \Config::get('filter.plan_postpaid');
+        $contract_id = \Config::get('filter.contract');
+
+        $best_seller_smartphone = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4);
+        $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
+          $item->picture_url = asset('images/productos/'.$item->picture_url);
+          if (isset($item->affiliation_id)) {
+            $item->route = route('postpaid_detail', [
+              'brand'=>$item->brand_slug,
+              'product'=>$item->product_slug,
+              'affiliation'=>$item->affiliation_slug,
+              'plan'=>$item->plan_slug,
+              'contract'=>$item->contract_slug
+            ]);
+          } else {
+            $item->route = route('prepaid_detail', [
+              'brand'=>$item->brand_slug,
+              'product'=>$item->product_slug,
+              'plan'=>$item->plan_slug
+            ]);
+          }
+          return $item;
+        });
+        $best_seller_tablet = $best_seller_smartphone;
+        /*$best_seller_tablet = $this->shared->searchProductPrepaid(3, $plan_pre_id, null, 4);
+        $best_seller_tablet = collect($best_seller_tablet['products'])->map(function ($item, $key) {
+          $item->picture_url = asset('images/productos/'.$item->picture_url);
+          if (isset($item->affiliation_id)) {
+            $item->route = route('postpaid_detail', [
+              'brand'=>$item->brand_slug,
+              'product'=>$item->product_slug,
+              'affiliation'=>$item->affiliation_slug,
+              'plan'=>$item->plan_slug,
+              'contract'=>$item->contract_slug
+            ]);
+          } else {
+            $item->route = route('prepaid_detail', [
+              'brand'=>$item->brand_slug,
+              'product'=>$item->product_slug,
+              'plan'=>$item->plan_slug
+            ]);
+          }
+          return $item;
+        });*/
+        $featured_products = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, 2);
+        $featured_products = collect($featured_products['products'])->map(function ($item, $key) {
+          $item->picture_url = asset('images/productos/'.$item->picture_url);
+          $item->route = route('postpaid_detail', [
+            'brand'=>$item->brand_slug,
+            'product'=>$item->product_slug,
+            'affiliation'=>$item->affiliation_slug,
+            'plan'=>$item->plan_slug,
+            'contract'=>$item->contract_slug
+          ]);
+          return $item;
+        });
+        $promo_pre = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, 1, 'product_id', 'asc');
+        $promo_pre = collect($promo_pre['products'])->map(function ($item, $key) {
+          $item->picture_url = asset('images/productos/'.$item->picture_url);
+          $item->route = route('prepaid_detail', [
+            'brand'=>$item->brand_slug,
+            'product'=>$item->product_slug,
+            'plan'=>$item->plan_slug
+          ]);
+          return $item;
+        });
+        $promo_pos = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, 4, 1, 'product_id', 'desc');
+        $promo_pos = collect($promo_pos['products'])->map(function ($item, $key) {
+          $item->picture_url = asset('images/productos/'.$item->picture_url);
+          $item->route = route('postpaid_detail', [
+            'brand'=>$item->brand_slug,
+            'product'=>$item->product_slug,
+            'affiliation'=>$item->affiliation_slug,
+            'plan'=>$item->plan_slug,
+            'contract'=>$item->contract_slug
+          ]);
+          return $item;
+        });
         return view('index', [
             'best_seller_smartphone' => $best_seller_smartphone,
             'best_seller_tablet' => $best_seller_tablet,
             'featured_products' => $featured_products,
-            'promo_prepaid' => $promo_pre['products'],
-            'promo_postpaid' => $promo_pos['products'],
+            'promo_prepaid' => $promo_pre,
+            'promo_postpaid' => $promo_pos,
         ]);
-    }
-
-    private function searchProduct ($product_category_id=1, $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_manufacturer_id='', $product_price_ini=0, $product_price_end=0, $product_string_search="") {
-        $products = DB::select('call PA_productSearchPrepago(
-            :product_category_id,
-            :product_manufacturers,
-            :product_price_ini,
-            :product_price_end,
-            :product_string_search,
-            :pag_total_by_page,
-            :pag_actual,
-            :sort_by,
-            :sort_direction
-          )', [
-            'product_category_id' => $product_category_id,
-            'product_manufacturers' => $product_manufacturer_id,
-            'product_price_ini' => $product_price_ini,
-            'product_price_end' => $product_price_end,
-            'product_string_search' => $product_string_search,
-            'pag_total_by_page' => $pag_total_by_page,
-            'pag_actual' => $pag_actual,
-            'sort_by' => $sort_by,
-            'sort_direction' => $sort_direction,
-          ]);
-        // var_dump($products);
-        return $products;
     }
 }

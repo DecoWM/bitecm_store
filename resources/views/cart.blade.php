@@ -38,16 +38,16 @@
                 <div class="col-xs-12 col-sm-4">
                   <div class="equipo-seleccionado">
                     <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
-                    <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
+                    <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                     <div class="detalle-equipo">
-                      <h2>{{$product['product']->product_model}}</h2>
-@if (array_has($product, 'plan'))
-                      <span class="modo">{{$product['plan']->affiliation_name}}</span><span class="contrato">Contrato 18 meses</span>
+                      <h2>{{$product->product_model}}</h2>
+@if (!$product->type_id)
+                      <span class="modo">{{$product->affiliation_name}}</span><span class="contrato">Contrato {{$product->contract_name}}</span>
 @endif
                       <div class="cantidad">
                         <div class="btn-option">
                           <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
-                            <input type="text" value="{{$product['quantity']}}" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                            <input type="text" value="{{$product->quantity}}" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
                           </div>
                         </div>
                       </div>
@@ -55,11 +55,11 @@
                   </div>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
-                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
-@if (array_has($product, 'plan'))
-                  <p>S/. {{$product['plan']->plan_price}}</p><span class="plan">{{$product['plan']->plan_name}}</span>
+@if (!$product->type_id)
+                  <p>S/. {{$product->plan_price}}</p><span class="plan">{{$product->plan_name}}</span>
 @else
                   <p> - </p>
 @endif
@@ -72,11 +72,11 @@
                   <p class="version-mobil text-right">PRECIO SIN IGV</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
-                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price : $product['product']->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
-@if (array_has($product, 'plan'))
-                  <p>S/. {{$product['plan']->plan_price}} mensual</p>
+@if (!$product->type_id)
+                  <p>S/. {{$product->plan_price}} mensual</p>
 @else
                   <p> - </p>
 @endif
@@ -99,7 +99,7 @@
                   <p class="version-mobil text-right">TOTAL + IGV</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">TOTAL + IGV</span>
-                  <p>S/. {{array_has($product, 'plan') ? $product['plan']->product_variation_price + ($product['plan']->product_variation_price * 0.18) : $product['product']->product_price_prepaid + ($product['product']->product_price_prepaid * 0.18) }}</p>
+                  <p>S/. {{$product->product_price * (1 + $igv)}}</p>
                 </div>
               </div>
             </div>
@@ -132,7 +132,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
-                  <p>S/. {{$product->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_variation_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
                   <p>S/.219</p><span class="plan">Plan Megaplus 219</span>
@@ -145,7 +145,7 @@
                   <p class="version-mobil text-right">PRECIO SIN IGV</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
-                  <p>S/. {{$product->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_variation_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
                   <p>S/.219 mensual</p>
@@ -191,7 +191,7 @@
                   </div>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
-                  <p>S/. {{$product->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_variation_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
                   <p>S/.219</p><span class="plan">Plan Megaplus 219</span>
@@ -204,7 +204,7 @@
                   <p class="version-mobil text-right">PRECIO SIN IGV</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
-                  <p>S/. {{$product->product_price_prepaid}}</p>
+                  <p>S/. {{$product->product_variation_price}}</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
                   <p>S/.219 mensual</p>

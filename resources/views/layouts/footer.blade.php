@@ -20,8 +20,8 @@
                 </div>
                 <div class="nav-footer foo-sect-2">
                   <ul class="list-unstyled">
-                    <li><a href="{{asset('files/pdf/footer/Aviso-Legal.pdf')}}" target="_blank">Condiciones y Restricciones</a></li>
-                    <li><a href="{{asset('files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf')}}" target="_blank">Aviso Legal</a></li>
+                    <li><a href="#">Condiciones y Restricciones</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
                   </ul>
                 </div>
               </div>

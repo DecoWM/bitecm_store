@@ -237,6 +237,75 @@ input:checked ~ .checkmark:after {
 //     margin-left: 10px;
 // }
 
+.content-plan {
+    cursor: pointer;
+}
+
+#content-page #image-equipo .galeria-min {
+    min-height: 85px;
+}
+
+.color-product .radio-inline,
+.color-product .checkbox-inline {
+    position: relative;
+    display: inline-block;
+    padding: 4px;
+    margin-bottom: 0;
+    font-weight: normal;
+    vertical-align: middle;
+    cursor: auto;
+    color: #000000;
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+}
+
+#descripcion-equipo .content-section form .content-product .color-product fieldset .option-select .radio-inline.option-active:after {
+    content: none;
+}
+
+.color-product .radio-inline .color-box,
+.color-product .checkbox-inline .color-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 0px;
+    border-radius: 3px;
+    display: inline-block;
+    visibility: visible;
+}
+
+.stock-exhausted {
+    font-weight: 300;
+    font-size: 23px;
+    font-family: 'multicolore';
+    color: #929292;
+    line-height: 35px;
+}
+
+.content-tab-pro .producto .content-product .price-product {
+    font-weight: 300;
+    font-size: 30px;
+    font-family: 'multicolore';
+    color: #008c95;
+    margin-bottom: 10px;
+}
+
+.content-tab-pro .producto .content-product .price-product span {
+    font-size: 23px;
+}
+
+.producto .content-product .price-product span.normal-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #828282;
+    font-family: 'Montserrat', sans-serif;
+}
+
+section#equipos-vendidos .container .row .content-tab-pro .producto {
+    padding-top: 30px;
+    padding-bottom: 174px;
+}
+
 @import "home";
 @import "postpago";
 @import "carrito";

@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="title-page">
-            <h2>Equipos</h2>
+            <h2>Equipos Postpago</h2>
           </div>
         </div>
       </div>
 {{-- @include('layouts.search_navbar') --}}
       @include('layouts.banner_smartphone', ['filters' => $filters])
       <div class="row">
-        @include('layouts.search_sidebar')
+        @include('layouts.sidebar.sidebar_postpago')
         <div class="col-xs-12 col-sm-9">
           <div id="list-equipos" v-cloak>
             <div class="row" v-if="isSearching">
@@ -29,7 +29,17 @@
                 {{-- <div data-equipo="1" class="producto"> --}}
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
                 {{-- <div data-equipo="1" class="producto active-comparar"> --}}
-                  <div class="image-product text-center"><img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="equipos"></div>
+                  <div class="image-product text-center">
+                    <a href="{{route('postpaid_detail', [
+                      'brand'=>$smartphone->brand_slug,
+                      'product'=>$smartphone->product_slug,
+                      'affiliation'=>$smartphone->affiliation_slug,
+                      'plan'=>$smartphone->plan_slug,
+                      'contract'=>$smartphone->contract_slug
+                    ])}}">
+                      <img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="{{$smartphone->product_model}}">
+                    </a>
+                  </div>
                   <div class="content-product text-center">
                     <div class="title-product">
                       <h3 class="text-center">{{$smartphone->product_model}}</h3>
@@ -39,7 +49,14 @@
                       <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                     </div>
                     <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$smartphone->product_id])}}" class="btn btn-default">comprar</a></div>
+                      <div class="form-group btn-comprar">
+                        <a href="{{route('postpaid_detail', [
+                          'brand'=>$smartphone->brand_slug,
+                          'product'=>$smartphone->product_slug,
+                          'affiliation'=>$smartphone->affiliation_slug,
+                          'plan'=>$smartphone->plan_slug,
+                          'contract'=>$smartphone->contract_slug
+                        ])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
                           <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_id', {{$smartphone->product_id}}])">comparar
@@ -51,166 +68,6 @@
                 </div>
               </div>
 @endforeach
-              {{-- <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="2" class="producto active-comparar">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="3" class="producto active-comparar">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="4" class="producto active-comparar">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="5" class="producto">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="6" class="producto">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="7" class="producto">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="8" class="producto">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="9" class="producto">
-                  <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h3 class="text-center">LG Stylus 3</h3>
-                    </div>
-                    <div class="price-product"><span>s/59</span></div>
-                    <div class="plan-product">
-                      <p>en plan <span>Megaplus 119</span></p>
-                    </div>
-                    <div class="btn-product form-inline">
-                      <div class="form-group btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                      <div class="checkbox btn-comparar">
-                        <input type="checkbox" class="checkbox-compare">comparar
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
             </div>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
@@ -231,30 +88,6 @@
               </div>
             </div>
             <compare-postpaid v-if="compare.length > 0" v-bind:base-url="baseUrl" v-bind:products="compare" v-on:removeitem="removeItem"></compare-postpaid>
-            {{-- <div id="list-equipos-comparar">
-              <div class="equipos-comp">
-                <div class="title-equipos"><span>4 Equipos</span>
-                  <p>para comparar</p>
-                </div>
-                <div class="list-equipos">
-                  <ul class="list-unstyled">
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="btn-eliminar"><span class="fa fa-times"></span></button>
-                    </li>
-                    <li><img src="./images/home/celular.jpg" alt="equipos">
-                      <button class="last-btn"><span class="fa fa-times"></span></button>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="btn-comparar"><a href="#">COMPARAR</a></div>
-            </div> --}}
           </div>
         </div>
       </div>

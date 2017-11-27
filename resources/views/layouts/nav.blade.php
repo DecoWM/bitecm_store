@@ -16,6 +16,7 @@
               <li class="{{Request::is('postpago*') ? 'active' : ''}}"><a href="{{Route('postpaid')}}">Postpago</a></li>
               <li class="{{Request::is('prepago*') ? 'active' : ''}}"><a href="{{Route('prepaid')}}">Prepago</a></li>
               <li class="{{Request::is('accesorios*') ? 'active' : ''}}"><a href="{{Route('accessories')}}">Accesorios</a></li>
+              <li class="{{Request::is('promociones*') ? 'active' : ''}}"><a href="{{Route('promociones')}}">Promociones</a></li>
             </ul>
           </div>
         </div>

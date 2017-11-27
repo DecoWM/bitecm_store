@@ -9,22 +9,26 @@
             </div>
             <div class="state"><span>NUEVO</span></div>
             <div id="image-equipo">
-              <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos" data-zoom-image="{{asset('images/productos/'.$product->picture_url)}}"></div>
-              <div id="gallery_01" class="galeria-min">
-                <a href="#" data-image="/images/home/celular-1.jpg" data-zoom-image="/images/home/celular-12.jpg">
-                  <img src="/images/home/celular-1.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-2.jpg" data-zoom-image="/images/home/celular-22.jpg">
-                  <img src="/images/home/celular-2.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
-                  <img src="/images/home/celular-3.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
-                  <img src="/images/home/celular-3.jpg" alt="">
-                </a>
-                <div class="clearfix"></div>
+              @if(count($product_images)>0)
+                <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">
+                </div>
+                @if(count($product_images)>1)
+                <div id="gallery_01" class="galeria-min">
+                  @foreach($product_images as $image)
+                  <a href="#" data-image="{{asset('images/productos/'.$image->product_image_url)}}" data-zoom-image="{{asset('images/productos/'.$image->product_image_url)}}">
+                    <img src="{{asset('images/productos/'.$image->product_image_url)}}" alt="{{$product->product_model}}">
+                  </a>
+                  @endforeach
+                  <div class="clearfix"></div>
+                </div>
+                @else
+                {{--<div id="gallery_01" class="galeria-min"></div>--}}
+                @endif
+              @else
+              <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product->product_image_url)}}">
               </div>
+              {{--<div id="gallery_01" class="galeria-min"></div>--}}
+              @endif
             </div>
           </div>
         </div>
@@ -42,7 +46,7 @@
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
                 {{ csrf_field() }}
-                <input type="hidden" name="product" value="{{$product->product_id}}">
+                <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="type" value="1">
                 <div class="content-product equipo-prepago">
                   <div class="row">
@@ -50,7 +54,7 @@
                       <div class="row">
                         <div class="col-xs-7 col-xs-push-5 col-sm-12">
                           <div class="detalle-product">
-                            <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid}}</div>
+                            <div class="price-product"><span>S/.</span>{{$product->product_price}}</div>
                           </div>
                           <div class="btn-option">
                             <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
@@ -59,37 +63,58 @@
                           </div>
                         </div>
                         <div class="col-xs-5 col-xs-pull-7 col-sm-12">
+                          @if($product->stock_model_id)  
                           <div class="color-product">
                             <fieldset>
                               <legend>Color</legend>
                               <div id="option-select" class="option-select">
-                                <div class="radio-inline option-active">
-                                  <input type="radio" name="color" value="1" class="negro" checked>
-                                </div>
-                                <div class="radio-inline">
-                                  <input type="radio" name="color" value="2" class="blanco">
-                                </div>
-                                <div class="radio-inline">
-                                  <input type="radio" name="color" value="3" class="gris">
-                                </div>
+                                @foreach($stock_models as $stock_model)
+                                  @if($stock_model->stock_model_id == $product->stock_model_id)
+                                  <div class="radio-inline option-active" style="border: 1px solid #008c95;">
+                                    <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
+                                  </div>
+                                  @else
+                                  <a href="{{$stock_model->route}}">
+                                    <div class="radio-inline option-active" style="border: none;">
+                                      <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
+                                    </div>
+                                  </a>
+                                  @endif
+                                @endforeach
                               </div>
                             </fieldset>
                           </div>
+                          @endif
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
+                      @if($product->stock_model_id)
                       <div class="btn-carrito">
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>
+                      @endif
+                      @if($product->plan_id != 15)
                       <div class="btn-linea">
                         {{-- <button type="submit" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</button> --}}
-                        <a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
+                        <a href="{{route('postpaid_detail', [
+                          'brand'=>$product->brand_slug,
+                          'product'=>$product->product_slug,
+                          'affiliation'=>$affiliation_slug,
+                          'plan'=>$plan_post_slug,
+                          'contract'=>$contract_slug
+                        ])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
+                      @endif
+                      @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">
                         <button type="submit" class="btn-default">Comprar Ahora</button>
-                        {{-- <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
                       </div>
+                      @else
+                      <div class="stock-exhausted">
+                        Agotado
+                      </div>
+                      @endif
                     </div>
                   </div>
                 </div>
@@ -162,38 +187,22 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
-@foreach ($available as $product)
+@foreach ($available as $item)
               <div class="producto">
-                <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                <div class="image-product text-center">
+                  <a href="{{$item->route}}">
+                    <img src="{{asset('images/productos/'.$item->picture_url)}}" alt="equipos">
+                  </a>
+                </div>
                 <div class="content-product text-center">
                   <div class="title-product">
-                    <h3 class="text-center">{{$product->product_model}}</h3>
+                    <h3 class="text-center">{{$item->product_model}}</h3>
                   </div>
-                  <div class="price-product"><span>S/.</span>{{$product->product_price_prepaid + 0}}</div>
-                  <div class="btn-comprar"><a href="{{route('prepaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">comprar</a></div>
+                  <div class="price-product"><span>S/.</span><span>{{$item->product_price + 0}}</span></div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
                 </div>
               </div>
 @endforeach
-              {{-- <div class="producto">
-                <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>59</div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div>
-              <div class="producto">
-                <div class="image-product text-center"><img src="./images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>59</div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div> --}}
             </div>
           </div>
         </div>

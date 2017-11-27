@@ -9,22 +9,26 @@
             </div>
             <div class="state"><span>NUEVO</span></div>
             <div id="image-equipo">
-              <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos" data-zoom-image="{{asset('images/productos/'.$product->picture_url)}}"></div>
-              <div id="gallery_01" class="galeria-min">
-                <a href="#" data-image="/images/home/celular-1.jpg" data-zoom-image="/images/home/celular-12.jpg">
-                  <img src="/images/home/celular-1.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-2.jpg" data-zoom-image="/images/home/celular-22.jpg">
-                  <img src="/images/home/celular-2.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
-                  <img src="/images/home/celular-3.jpg" alt="">
-                </a>
-                <a href="#" data-image="/images/home/celular-3.jpg" data-zoom-image="/images/home/celular-33.jpg">
-                  <img src="/images/home/celular-3.jpg" alt="">
-                </a>
-                <div class="clearfix"></div>
+              @if(count($product_images)>0)
+                <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">
+                </div>
+                @if(count($product_images)>1)
+                <div id="gallery_01" class="galeria-min">
+                  @foreach($product_images as $image)
+                  <a href="#" data-image="{{asset('images/productos/'.$image->product_image_url)}}" data-zoom-image="{{asset('images/productos/'.$image->product_image_url)}}">
+                    <img src="{{asset('images/productos/'.$image->product_image_url)}}" alt="{{$product->product_model}}">
+                  </a>
+                  @endforeach
+                  <div class="clearfix"></div>
+                </div>
+                @else
+                <div id="gallery_01" class="galeria-min"></div>
+                @endif
+              @else
+              <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product->product_image_url)}}">
               </div>
+              <div id="gallery_01" class="galeria-min"></div>
+              @endif
             </div>
           </div>
         </div>
@@ -42,55 +46,75 @@
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
                 {{ csrf_field() }}
-                <input type="hidden" name="product" value="{{$product->product_id}}">
+                <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="type" value="2">
                 <input type="hidden" name="quantity" value="1">
                 <div class="content-product">
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
                       <div class="select-product"><span class="title-select">Lo quieres en</span>
-                        <select form="purchase-form" name="affiliation" v-model="filters.affiliation.value">
-                          <option value="1" >Portabilidad</option>
-                          <option value="2">Linea nueva</option>
-                          <option value="3">Renovación</option>
+                        {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
+                        <select form="purchase-form" name="affiliation" @change="selectAffiliation({
+                          @foreach ($affiliations as $affiliation)
+                          '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                          @endforeach
+                        },$event)">
+                          @foreach ($affiliations as $affiliation)
+                          <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                          @endforeach
                         </select>
                       </div>
+                      @if($product->stock_model_id)
                       <div class="color-product">
                         <fieldset>
                           <legend>Color</legend>
                           <div id="option-select" class="option-select">
-                            <div class="radio-inline option-active">
-                              <input type="radio" name="color" id="negro" value="1" class="negro" checked>
-                            </div>
-                            <div class="radio-inline">
-                              <input type="radio" name="color" id="blanco" value="2" class="blanco">
-                            </div>
-                            <div class="radio-inline">
-                              <input type="radio" name="color" id="gris" value="3" class="gris">
-                            </div>
+                            @foreach($stock_models as $stock_model)
+                              @if($stock_model->stock_model_id == $product->stock_model_id)
+                              <div class="radio-inline option-active" style="border: 1px solid #008c95;">
+                                <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
+                              </div>
+                              @else
+                              <a href="{{$stock_model->route}}">
+                                <div class="radio-inline option-active" style="border: none;">
+                                  <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
+                                </div>
+                              </a>
+                              @endif
+                            @endforeach
                           </div>
                         </fieldset>
                       </div>
+                      @endif
                     </div>
                     <div class="col-xs-7 col-sm-6">
-                      <div class="detalle-product" v-cloak>
-                        {{-- <div class="price-product"><span>s/</span>59</div> --}}
-                        <div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
-                        <div class="price-product" v-if="filters.affiliation.value != 1"><span>S/.</span>@{{selectedPlan.product_variation_price.new}}</div>
+                      {{--<div class="detalle-product" v-cloak>--}}
+                      <div class="detalle-product">
+                        {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
+                        <div class="price-product" v-if="filters.affiliation.value != 1"><span>S/.</span>@{{selectedPlan.product_variation_price.new}}</div>--}}
+                        <div class="price-product">
+                          <span>S/.</span>{{$product->product_price}}
+                        </div>
                         <div class="plan-product">
-                          <p>con <span>@{{selectedPlan.plan_name}}</span></p>
+                          <p>con <span>{{$product->plan_name}}</span></p>
                         </div>
                         <div class="tiempo-plan">
-                          <p>Contrato de 18 meses</p>
+                          <p>Contrato de {{$product->contract_name}}</p>
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
                       {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                       {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
-                        <div class="btn-comprar">
-                          <button type="submit" class="btn-default">Comprar Ahora</button>
-                        </div>
+                      @if($product->stock_model_id)  
+                      <div class="btn-comprar">
+                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                      </div>
+                      @else
+                      <div class="stock-exhausted">
+                        Agotado
+                      </div>
+                      @endif
                       {{-- </form> --}}
                       {{-- <div class="btn-comprar">
                         <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
@@ -100,11 +124,15 @@
                   </div>
                 </div>
                 <div class="movil-select-product">
-                  <select>
+                  <select @change="selectAffiliation({
+                    @foreach ($affiliations as $affiliation)
+                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                    @endforeach
+                  },$event)">
                     <option name="" value="">Lo quieres en</option>
-                    <option name="prepago" value="prepago">Portabilidad</option>
-                    <option name="linea nueva" value="linea nueva">Linea nueva</option>
-                    <option name="renovacion" value="renovacion">Renovación</option>
+                    @foreach ($affiliations as $affiliation)
+                    <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                    @endforeach
                   </select>
                 </div>
               </form>
@@ -114,41 +142,36 @@
       </div>
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-offset-4 col-lg-8">
-          <div id="planes" class="planes">
+          @foreach ($plans as $i => $plan)
+            @if($plan->plan_id == $product->plan_id)
+              @php $selected_plan = $i > 0 ? $i - 1 : $i; @endphp
+            @endif
+          @endforeach
+          <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             <div class="select-plan">
 @foreach ($plans as $plan)
-@php
-    $price = [];
-    foreach ($plan as $item) {
-        $price[$item->affiliation_id == 1 ? 'portability' : 'new'] = $item->product_variation_price;
-    }
-    $selected = [
-        'plan_name' => $plan[0]->plan_name,
-        'product_variation_price' => $price
-    ];
-@endphp
-              {{-- <div class="plan" v-on:click="selectPlan({plan_id:{{$plan[0]->plan_id}}, product_variation_price: {{$plan[0]->product_variation_price}}, plan_name: '{{$plan[0]->plan_name}}'})"> --}}
               <label>
-              <input type="radio" name="plan" form="purchase-form" value="{{$plan[0]->plan_id}}" style="display:none;" {{$plan[0]->plan_id == 8 ? 'checked' : ''}}>
-              <div class="plan" v-on:click="selectPlan({{str_replace('\"', '\'', json_encode($selected))}})">
-                <div class="content-plan"><span class="title-plan">{{$plan[0]->plan_name}}</span>
-                  <div class="precio-plan">S/. {{$plan[0]->plan_price}}<span>al mes</span></div>
+              <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
+              <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
+                <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')">
+                  <span class="title-plan">{{$plan->plan_name}}</span>
+                  <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
-@if ($plan[0]->plan_unlimited_calls == 1)
+@if ($plan->plan_unlimited_calls == 1)
                     <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
 @endif
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">{{$plan[0]->plan_data_cap}} internet</li>
-@if ($plan[0]->plan_unlimited_rpb == 1)
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">{{$plan->plan_data_cap}} internet</li>
+@if ($plan->plan_unlimited_rpb == 1)
                     <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
 @endif
-@if ($plan[0]->plan_unlimited_sms == 1)
+@if ($plan->plan_unlimited_sms == 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
 @endif
-@if ($plan[0]->plan_free_facebook == 1)
+@if ($plan->plan_free_facebook == 1)
                     <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
 @endif
-@if ($plan[0]->plan_unlimited_whatsapp == 1)
+@if ($plan->plan_unlimited_whatsapp == 1)
                     <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
 @endif
                   </ul>
@@ -156,59 +179,6 @@
               </div>
               </label>
 @endforeach
-
-              {{-- <div class="plan">
-                <div class="content-plan"><span class="title-plan">Megaplus 99</span>
-                  <div class="precio-plan">S/.99<span>al mes</span></div>
-                  <ul class="list-unstyled">
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
-                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="plan plan-active">
-                <div class="content-plan"><span class="title-plan">Megaplus 119.90</span>
-                  <div class="precio-plan">S/.119<span>al mes</span></div>
-                  <ul class="list-unstyled">
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
-                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="plan">
-                <div class="content-plan"><span class="title-plan">Megaplus 149.90</span>
-                  <div class="precio-plan">S/.149<span>al mes</span></div>
-                  <ul class="list-unstyled">
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
-                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="plan">
-                <div class="content-plan"><span class="title-plan">Megaplus 189.90</span>
-                  <div class="precio-plan">S/.189<span>al mes</span></div>
-                  <ul class="list-unstyled">
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">15GB internet</li>
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
-                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                  </ul>
-                </div>
-              </div> --}}
             </div>
           </div>
         </div>
@@ -229,8 +199,7 @@
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
-              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}" target="_blank">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
-              <div class="pdf-tecnica"><a href="{{asset('files/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf')}}" target="_blank">Descargar ficha técnica<span class="fa fa-download"></span></a></div>
+              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
             </div>
           </div>
         </div>
@@ -270,60 +239,25 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
-@foreach ($available as $product)
+@foreach ($available as $item)
               <div class="producto">
-                <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
+                <div class="image-product text-center">
+                  <a href="{{$item->route}}">
+                    <img src="{{asset('images/productos/'.$item->picture_url)}}" alt="equipos">
+                  </a>
+                </div>
                 <div class="content-product text-center">
                   <div class="title-product">
-                    <h3 class="text-center">{{$product->product_model}}</h3>
+                    <h3 class="text-center">{{$item->product_model}}</h3>
                   </div>
-                  <div class="price-product"><span>S/.</span><span>{{$product->product_price_prepaid + 0}}</span></div>
+                  <div class="price-product"><span>S/.</span><span>{{$item->product_price + 0}}</span></div>
                   <div class="plan-product">
-                    <p>en plan <span>119</span></p>
+                    <p>en plan <span>{{$item->plan_name}}</span></p>
                   </div>
-                  <div class="btn-comprar"><a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">comprar</a></div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
                 </div>
               </div>
 @endforeach
-              {{-- <div class="producto">
-                <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>59</div>
-                  <div class="plan-product">
-                    <p>en plan <span>119</span></p>
-                  </div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div>
-              <div class="producto">
-                <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 3</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>59</div>
-                  <div class="plan-product">
-                    <p>en plan <span>119</span></p>
-                  </div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div>
-              <div class="producto">
-                <div class="image-product text-center"><img src="/images/home/celular.jpg" alt="equipos"></div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center">LG Stylus 4</h3>
-                  </div>
-                  <div class="price-product"><span>s/</span>60</div>
-                  <div class="plan-product">
-                    <p>en plan <span>119</span></p>
-                  </div>
-                  <div class="btn-comprar"><a href="#" class="btn btn-default">comprar</a></div>
-                </div>
-              </div> --}}
             </div>
           </div>
         </div>
