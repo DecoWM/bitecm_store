@@ -10,6 +10,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema bitel_ecommerce
 -- -----------------------------------------------------
+DROP DATABASE IF EXISTS `bitel_ecommerce`;
+
 CREATE SCHEMA IF NOT EXISTS `bitel_ecommerce` DEFAULT CHARACTER SET utf8 ;
 USE `bitel_ecommerce` ;
 
