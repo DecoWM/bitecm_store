@@ -31,11 +31,11 @@
 }
 
 #compara-tus-equipos .info-lista {
-  padding-top: 345px;
+  padding-top: 410px;
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
-  height: 335px;
+  height: auto;
   position: relative;
 }
 
@@ -48,7 +48,7 @@
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product {
-  position: absolute;
+  position: initial;
 }
 
 #descripcion-equipo .content-section form .content-product .btn-linea a:hover {

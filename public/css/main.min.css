@@ -4250,10 +4250,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .title-product {
   margin: 20px 0;
+  margin-bottom: 5px;
 }
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .title-product h3 {
   font-weight: 400;
-  margin-bottom: 0;
+  margin: 5px 0;
   font-size: 20px;
 }
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product {
@@ -4262,6 +4263,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 10px;
+  line-height: 26px;
 }
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product span {
   font-size: 23px;
