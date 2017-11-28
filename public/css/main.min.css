@@ -4001,7 +4001,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   position: fixed;
   margin-bottom: 10px;
   opacity: 1;
-  height: 205px;
+  height: auto;
   width: 100%;
   top: 0;
   left: 0;
