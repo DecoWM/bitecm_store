@@ -28,7 +28,7 @@
                                 <p>en plan <span>Megaplus 119</span></p>
                               </div> --}}
                               <div class="btn-product form-inline">
-                                <div class="form-group btn-vermas"><a href="{{route('postpaid_detail', ['product'=>$product->product_id])}}" class="btn btn-default">Ver más</a></div>
+                                <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>
                               </div>
                             </div>
                           </div>
