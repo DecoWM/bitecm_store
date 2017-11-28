@@ -296,7 +296,7 @@ class OrderController extends Controller
 
     DB::table('tbl_order_item')->insert($order_items);
 
-    //Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
+    Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
 
     $request->session()->flush();
 
