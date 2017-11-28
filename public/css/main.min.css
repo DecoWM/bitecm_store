@@ -3071,6 +3071,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto:hover .image
 section#equipos-vendidos .container .row .content-tab-pro .list-productos {
   width: 75%;
   display: flex;
+  margin-bottom: 0;
 }
 @media (max-width: 736px) {
   section#equipos-vendidos .container .row .content-tab-pro .list-productos {
