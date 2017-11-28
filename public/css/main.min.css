@@ -3159,6 +3159,11 @@ section#equipos-promocion .container .row .content-tab-pro {
   margin-top: 50px;
   display: flex;
 }
+
+section#equipos-promocion .container .row .content-tab-pro .slick-track {
+    width: 2850px !important;
+}
+
 section#equipos-promocion .container .row .content-tab-pro .producto {
   border: 1px solid #cecece;
   position: relative;
