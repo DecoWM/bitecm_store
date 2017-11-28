@@ -247,6 +247,50 @@ class BaseController extends Controller
     return $stock_models;
   }
 
+  public function productSearchPromo($plan_pre_id=null, $plan_post_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
+    $products = DB::select('call PA_productSearchPromo(
+      :plan_pre_id,
+      :plan_post_id,
+      :product_brands,
+      :product_price_ini,
+      :product_price_end,
+      :product_string_search,
+      :pag_total_by_page,
+      :pag_actual,
+      :sort_by,
+      :sort_direction
+    )', [
+      'plan_pre_id' => $plan_pre_id,
+      'plan_post_id' => $plan_post_id,
+      'product_brands' => strval($product_brands),
+      'product_price_ini' => $product_price_ini,
+      'product_price_end' => $product_price_end,
+      'product_string_search' => $product_string_search,
+      'pag_total_by_page' => $pag_total_by_page,
+      'pag_actual' => $pag_actual,
+      'sort_by' => $sort_by,
+      'sort_direction' => $sort_direction,
+    ]);
+
+    $total = DB::select('call PA_productCountPromo(
+      :plan_pre_id,
+      :plan_post_id,
+      :product_brands,
+      :product_price_ini,
+      :product_price_end,
+      :product_string_search
+    )', [
+      'plan_pre_id' => $plan_pre_id,
+      'plan_post_id' => $plan_post_id,
+      'product_brands' => strval($product_brands),
+      'product_price_ini' => $product_price_ini,
+      'product_price_end' => $product_price_end,
+      'product_string_search' => $product_string_search
+    ]);
+
+    return ['products' => $products, 'total' => $total[0]->total_promos];
+  }
+
   public function getFiltersPostpaid() {
     $brand_list = DB::select('call PA_brandList()');
     $plan_list = DB::select('call PA_planList(2)');
@@ -288,5 +332,32 @@ class BaseController extends Controller
       'order_id' => $order_id
     ]);
     return $items;
+  }
+
+  public function planSlug($plan_id) {
+    $slug = DB::select('call PA_planSlug(
+      :plan_id
+    )', [
+      'plan_id' => $plan_id
+    ]);
+    return count($slug) > 0 ? $slug[0] : null;
+  }
+
+  public function affiliationSlug($affiliation_id) {
+    $slug = DB::select('call PA_affiliationSlug(
+      :affiliation_id
+    )', [
+      'affiliation_id' => $affiliation_id
+    ]);
+    return count($slug) > 0 ? $slug[0] : null;
+  }
+
+  public function contractSlug($contract_id) {
+    $slug = DB::select('call PA_contractSlug(
+      :contract_id
+    )', [
+      'contract_id' => $contract_id
+    ]);
+    return count($slug) > 0 ? $slug[0] : null;
   }
 }

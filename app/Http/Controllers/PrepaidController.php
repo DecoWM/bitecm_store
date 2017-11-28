@@ -16,12 +16,11 @@ class PrepaidController extends Controller
   }
 
   public function index(Request $request) {
-    $plan_pre_id = \Config::get('filter.plan_prepaid');
+    $plan_pre_id = \Config::get('filter.plan_pre_id');
 
-    //TODO: obtener slugs con la BD via IDs
-    $affiliation_slug = \Config::get('filter.affiliation_slug');
-    $plan_post_slug = \Config::get('filter.plan_postpaid_slug');
-    $contract_slug = \Config::get('filter.contract_slug');
+    $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
+    $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
+    $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
@@ -75,10 +74,9 @@ class PrepaidController extends Controller
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
 
-    //TODO: obtener slugs con la BD via IDs
-    $affiliation_slug = \Config::get('filter.affiliation_slug');
-    $plan_post_slug = \Config::get('filter.plan_postpaid_slug');
-    $contract_slug = \Config::get('filter.contract_slug');
+    $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
+    $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
+    $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
 
     $response = [
       'product' => $product,
@@ -102,8 +100,7 @@ class PrepaidController extends Controller
     foreach ($request->product_id as $product_id) {
       $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
       if (isset($product[0])) {
-        //TODO: obtener slugs con la BD via IDs
-        $plan_pre_slug = \Config::get('filter.plan_prepaid_slug');
+        $plan_pre_slug = $this->shared->planSlug(\Config::get('filter.plan_pre_id'));
 
         $product = $product[0];
         $product->route = route('prepaid_detail', [

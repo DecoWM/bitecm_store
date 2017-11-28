@@ -17,9 +17,9 @@ class PostpaidController extends Controller
   }
 
   public function index(Request $request) {
-    $affiliation_id = \Config::get('filter.affiliation');
-    $plan_post_id = \Config::get('filter.plan_postpaid');
-    $contract_id = \Config::get('filter.contract');
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $plan_post_id = \Config::get('filter.plan_post_id');
+    $contract_id = \Config::get('filter.contract_id');
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
@@ -128,10 +128,9 @@ class PostpaidController extends Controller
     foreach ($request->product_id as $product_id) {
       $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
       if (isset($product[0])) {
-        //TODO: obtener slugs via IDs
-        $affiliation_slug = \Config::get('filter.affiliation_slug');
-        $plan_post_slug = \Config::get('filter.plan_postpaid_slug');
-        $contract_slug = \Config::get('filter.contract_slug');
+        $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
+        $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
+        $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
 
         $product = $product[0];
         $product->route = route('postpaid_detail', [

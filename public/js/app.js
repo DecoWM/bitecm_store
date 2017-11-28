@@ -11784,6 +11784,10 @@ var app = new Vue({
                 }
             },
             promociones: {
+                type: {
+                    value: '',
+                    isOpen: true
+                },
                 price: {
                     value: '',
                     isOpen: true

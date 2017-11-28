@@ -23,7 +23,7 @@ class SearchController extends Controller
       'items_per_page' => 'required|integer|min:0'
     ]);
 
-    $plan_pre_id = \Config::get('filter.plan_prepaid');
+    $plan_pre_id = \Config::get('filter.plan_pre_id');
 
     $filters = json_decode($request->filters);
 
@@ -60,9 +60,9 @@ class SearchController extends Controller
       'items_per_page' => 'required|integer|min:0'
     ]);
 
-    $affiliation_id = \Config::get('filter.affiliation');
-    $plan_post_id = \Config::get('filter.plan_postpaid');
-    $contract_id = \Config::get('filter.contract');
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $plan_post_id = \Config::get('filter.plan_post_id');
+    $contract_id = \Config::get('filter.contract_id');
 
     $items_per_page = $request->items_per_page;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
@@ -72,7 +72,7 @@ class SearchController extends Controller
     $brand_ids = implode(',',$filters->manufacturer->value);
     $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : $affiliation_id;
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
-    $contract_id = \Config::get('filter.contract');
+    $contract_id = \Config::get('filter.contract_id');
 
     $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
     $pages = intval(ceil($search_result['total'] / $items_per_page));

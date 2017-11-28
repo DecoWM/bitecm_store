@@ -2,24 +2,16 @@
 
 return [
 
-  'affiliation' => 1,
+  'plan_pre_id' => env('PLAN_PRE_ID', 14),
 
-  'plan_prepaid' => 14,
+  'plan_post_id' => env('PLAN_POST_ID', 7),
 
-  'plan_postpaid' => 7,
+  'affiliation_id' => env('AFFILIATION_ID', 1),
 
-  'contract' => 1,
+  'contract_id' => env('CONTRACT_ID', 1),
 
-  //TODO: obtener slugs via IDs en PrepaidController
+  'accessory_cat_id' => env('ACCESSORY_CAT_ID', 2),
 
-  'affiliation_slug' => 'portabilidad',
-
-  'plan_prepaid_slug' => 'b-voz',
-
-  'plan_postpaid_slug' => 'ichip-99_90',
-
-  'contract_slug' => '18-meses',
-
-  'igv' => 0.18
+  'igv' => env('IGV', 0.18)
 
 ];

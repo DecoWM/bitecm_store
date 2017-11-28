@@ -57,7 +57,6 @@ class OrderController extends Controller
       'idNo' => $order_detail['id_number'],
       'productCode' => 'IchipVoz29_9',   // AQUI INDICAR EL CODIGO DEL PLAN QUE SE HA SELECCIONADO !!!
     ]);
-
     return ($response->return->isOverQouta != 0);
   }
 
@@ -70,10 +69,9 @@ class OrderController extends Controller
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
-      'idType' => '03', // persona natural !!!
+      'idType' => '01', // persona natural !!!
       'idNo' => $order_detail['id_number']
     ]);
-
     if(isset($response->return->result))
       return $response->return->result;
     else
@@ -91,7 +89,6 @@ class OrderController extends Controller
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
       'custId' => $custId
     ]);
-
     return ($response->return->errorCode == -1);
   }
 
@@ -118,7 +115,6 @@ class OrderController extends Controller
       'reasonId' => '123' // ***** Change it for dynamic Value !!!
     ];
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
-    dd($response);
 
     if($response->return->errorCodeMNP == '0'){
       // set the portingRequestId from response
@@ -142,7 +138,6 @@ class OrderController extends Controller
       'dni' => $order_detail['id_number'],
       'isdn' => $order_detail['porting_phone'],
     ]);
-
     return ($response->return->errorCode == '02');
   }
 

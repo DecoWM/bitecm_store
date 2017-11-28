@@ -41,7 +41,30 @@
                     <div class="title-product">
                       <h3 class="text-center">{{$product->product_model}}</h3>
                     </div>
-                    <div class="price-product"><span>s/{{$product->product_price}}</span></div>
+                    @if(isset($product->product_variation_id))
+                      @if($product->variation_type_id == 1)
+                      <div class="price-product">
+                        <span>S/.{{$product->promo_price}}</span>
+                        <span class="normal-price">S/.{{$product->product_price}}</span>
+                      </div>
+                      <div class="plan-product">
+                        <p><a href="{{$product->route_post}}">Ver en plan postpago</a></p>
+                      </div>
+                      @elseif($product->variation_type_id == 2)
+                      <div class="price-product">
+                        <span>S/.{{$product->promo_price}}</span>
+                        <span class="normal-price">S/.{{$product->product_price}}</span>
+                      </div>
+                      <div class="plan-product">
+                        <p>en plan <span>{{$product->plan_name}}</span></p>
+                      </div>
+                      @endif
+                    @else
+                    <div class="price-product">
+                      <span>S/.{{$product->promo_price}}</span>
+                      <span class="normal-price">S/.{{$product->product_price}}</span>
+                    </div>
+                    @endif
                     <div class="btn-product form-inline" style="text-align: center;">
                       <div class="form-group btn-comprar">
                         <a href="{{$product->route}}" class="btn btn-default">comprar</a></div>

@@ -1,7 +1,7 @@
         <div class="col-xs-12 col-sm-3">
           <div class="sidebar-box">
             <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct(1)">
-              <input type="text" placeholder="Busca por nombre" class="form-control" v-model="searchedString">
+              <input type="text" placeholder="Busca por modelo" class="form-control" v-model="searchedString">
               <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
             </form>
           </div>
