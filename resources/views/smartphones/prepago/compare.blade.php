@@ -41,7 +41,7 @@
           <div id="compara-tus-equipos">
             <div class="info-lista">
               <div class="especificaciones">
-                <div class="bg-gray"><span>Marca</span></div>
+                <!-- <div class="bg-gray"><span>Marca</span></div> -->
                 <div class="bg-white"><span>Color</span></div>
                 <div class="bg-gray"><span>Cámara Principal</span></div>
                 <div class="bg-white"><span>Cámara Posterior</span></div>
@@ -73,9 +73,9 @@
                   </div>
                 </div>
                 <div class="especificaciones">
-                  <div class="bg-gray"><span>Marca</span>
+                  <!-- <div class="bg-gray"><span>Marca</span>
                     <p>{{$product->brand_name}}</p>
-                  </div>
+                  </div> -->
                   <div class="bg-white"><span>Color</span>
                     <p>Plateado</p>
                   </div>

@@ -157,26 +157,15 @@
         <div class="col-xs-12">
           <div class="ver-mas-equipo">
             <div class="title-detalle">
-              <div class="btn-vmas"></div>
+              <!-- <a class="btn-vmas"></a> -->
+              <a href="{{route('download_FichaTecnica')}}" target="_blank" class="btn-vmas"></a>
               <h4>VER DETALLES TÉCNICOS</h4>
-            </div>
-            <div class="content-detalle">
-              <p>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam possimus magnam, eum nobis explicabo. Molestias
-                corporis, minima nam quas obcaecati?
-              </p>
             </div>
           </div>
           <div class="ver-mas-equipo">
             <div class="title-detalle">
-              <div class="btn-vmas"></div>
+              <a href="{{route('download_Consideraciones')}}" target="_blank" class="btn-vmas"></a>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>
-            </div>
-            <div class="content-detalle">
-              <p>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis minima ducimus, molestiae cumque a eos.
-                Consequuntur et, architecto ipsum molestias.
-              </p>
             </div>
           </div>
         </div>

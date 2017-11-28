@@ -12353,15 +12353,15 @@ var app = new Vue({
 
         $('.ver-mas-equipo .content-detalle').slideUp();
 
-        $('.ver-mas-equipo .btn-vmas').on('click', function (j) {
-            j.preventDefault();
+        // $('.ver-mas-equipo .btn-vmas').on('click', function (j) {
+        //     j.preventDefault();
 
-            $('.ver-mas-equipo .content-detalle').slideUp();
+        //     $('.ver-mas-equipo .content-detalle').slideUp();
 
-            $(this).closest('.title-detalle').next().slideDown();
+        //     $(this).closest('.title-detalle').next().slideDown();
 
-            /* Act on the event */
-        });
+        //     /* Act on the event */
+        // });
 
         $(window).scroll(function () {
             var scroll = $(window).scrollTop();
