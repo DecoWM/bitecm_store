@@ -2864,6 +2864,11 @@ section#equipos-vendidos .container .row .content-tab-pro {
   height: 452px;
   display: flex;
 }
+
+section#equipos-vendidos .container .row .content-tab-pro .slick-track {
+  width: 2850px !important;
+}
+
 section#equipos-vendidos .container .row .content-tab-pro .producto {
   border: 1px solid #cecece;
   position: relative;
