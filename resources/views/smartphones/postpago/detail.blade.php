@@ -200,7 +200,7 @@
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_value}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
-              {{-- <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div> --}}
+              <div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div>
             </div>
           </div>
         </div>
@@ -209,26 +209,15 @@
         <div class="col-xs-12">
           <div class="ver-mas-equipo">
             <div class="title-detalle">
-              <div class="btn-vmas"></div>
+              <a href="{{route('download_FichaTecnica')}}" target="_blank" class="btn-vmas"></a>
+              <!-- <a class="btn-vmas"></a> -->
               <h4>VER DETALLES TÉCNICOS</h4>
-            </div>
-            <div class="content-detalle">
-              <p>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis minima ducimus, molestiae cumque a eos.
-                Consequuntur et, architecto ipsum molestias.
-              </p>
             </div>
           </div>
           <div class="ver-mas-equipo">
             <div class="title-detalle">
-              <div class="btn-vmas"></div>
+              <a href="{{route('download_Consideraciones')}}" target="_blank" class="btn-vmas"></a>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>
-            </div>
-            <div class="content-detalle">
-              <p>
-                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis minima ducimus, molestiae cumque a eos.
-                Consequuntur et, architecto ipsum molestias.
-              </p>
             </div>
           </div>
         </div>
