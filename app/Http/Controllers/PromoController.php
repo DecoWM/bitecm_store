@@ -65,7 +65,7 @@ class PromoController extends Controller
     $filterList = $this->shared->getFiltersPromo();
 
     return view('promo.index', [
-      'title' => 'Accesorios',
+      'title' => 'Promociones',
       'products' => $paginator,
       'pages' => $pages,
       'filters' => $filterList

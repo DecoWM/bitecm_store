@@ -39,9 +39,17 @@
                   </div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h3 class="text-center"><b>{{$product->brand_name}}</b></h3>
                       <h3 class="text-center">{{$product->product_model}}</h3>
                     </div>
-                    <div class="price-product"><span>s/{{$product->product_price}}</span></div>
+                    <div class="price-product">
+                      @if($product->promo_id)
+                      <span>S/.{{$product->promo_price}}</span>
+                      <span class="normal-price">S/.{{$product->product_price}}</span>
+                      @else
+                      <span>S/.{{$product->product_price}}</span>
+                      @endif
+                    </div>
                     <div class="btn-product form-inline" style="text-align: center;">
                       <div class="form-group btn-comprar">
                         <a href="{{$product->route}}" class="btn btn-default">comprar</a></div>

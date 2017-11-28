@@ -295,10 +295,18 @@ input:checked ~ .checkmark:after {
 }
 
 .producto .content-product .price-product span.normal-price {
-    font-size: 14px;
+    font-size: 14px !important;
     text-decoration: line-through;
     color: #828282;
     font-family: 'Montserrat', sans-serif;
+}
+
+#descripcion-equipo .content-section form .content-product .detalle-product .price-product span.normal-price {
+    font-size: 14px !important;
+    text-decoration: line-through;
+    color: #828282;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 5px;
 }
 
 section#equipos-vendidos .container .row .content-tab-pro .producto {
@@ -320,6 +328,17 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product h4,
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product h4 {
     margin: 7px 0;
+}
+
+#list-equipos .producto .content-product .price-product {
+    line-height: 20px;
+    margin-bottom: 10px;
+}
+#list-equipos .producto .content-product .title-product {
+    margin: 7px 0;
+}
+#list-equipos .producto .content-product .title-product h3 {
+    margin: 9px 0;
 }
 
 @import "home";

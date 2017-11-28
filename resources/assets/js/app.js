@@ -22,6 +22,7 @@ Vue.component('paginatorLinks', require('./components/paginator.vue'));
 Vue.component('postpaid', require('./components/postpaid.vue'));
 Vue.component('prepaid', require('./components/prepaid.vue'));
 Vue.component('products', require('./components/products.vue'));
+Vue.component('promos', require('./components/promos.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
 

@@ -340,7 +340,7 @@ class BaseController extends Controller
     )', [
       'plan_id' => $plan_id
     ]);
-    return count($slug) > 0 ? $slug[0] : null;
+    return count($slug) > 0 ? $slug[0]->plan_slug : null;
   }
 
   public function affiliationSlug($affiliation_id) {
@@ -349,7 +349,7 @@ class BaseController extends Controller
     )', [
       'affiliation_id' => $affiliation_id
     ]);
-    return count($slug) > 0 ? $slug[0] : null;
+    return count($slug) > 0 ? $slug[0]->affiliation_slug : null;
   }
 
   public function contractSlug($contract_id) {
@@ -358,6 +358,6 @@ class BaseController extends Controller
     )', [
       'contract_id' => $contract_id
     ]);
-    return count($slug) > 0 ? $slug[0] : null;
+    return count($slug) > 0 ? $slug[0]->contract_slug : null;
   }
 }

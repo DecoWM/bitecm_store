@@ -11,7 +11,7 @@
 {{-- @include('layouts.search_navbar') --}}
       @include('layouts.banner_smartphone', ['filters' => $filters])
       <div class="row">
-        @include('layouts.sidebar.sidebar_products')
+        @include('layouts.sidebar.sidebar_promos')
         <div class="col-xs-12 col-sm-9">
           <div id="list-equipos" v-cloak>
             <div class="row" v-if="isSearching">
@@ -21,7 +21,7 @@
               <p class="text-center">No se encontraron resultados</p>
             </div>
             <div class="row" v-if="searchResult.length > 0">
-              <products v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></products>
+              <promos v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></promos>
             </div>
 @if (count($products) == 0)
             <div class="row">
@@ -39,6 +39,7 @@
                   </div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h3 class="text-center"><b>{{$product->brand_name}}</b></h3>
                       <h3 class="text-center">{{$product->product_model}}</h3>
                     </div>
                     @if(isset($product->product_variation_id))

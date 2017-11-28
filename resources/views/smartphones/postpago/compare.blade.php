@@ -21,7 +21,11 @@
                           <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                           <div class="content-product text-center">
                             <div class="title-product">
+                              <h3 class="text-center"><b>{{$product->brand_name}}</b></h3>
                               <h3 class="text-center">{{$product->product_model}}</h3>
+                            </div>
+                            <div class="price-product">
+                              <span>S/.{{$product->product_price}}</span>
                             </div>
                             <div class="btn-product form-inline">
                               <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>
@@ -59,7 +63,11 @@
                   <div class="image-product text-center"><img src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h3 class="text-center"><b>{{$product->brand_name}}</b></h3>
                       <h3 class="text-center">{{$product->product_model}}</h3>
+                    </div>
+                    <div class="price-product">
+                      <span>S/.{{$product->product_price}}</span>
                     </div>
                     <div class="btn-product form-inline">
                       <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>

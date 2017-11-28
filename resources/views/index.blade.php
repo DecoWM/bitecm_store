@@ -97,7 +97,7 @@
           </div>
         </div>
       </section>
-      {{--<div id="promociones">
+      <div id="promociones">
         <div class="container">
           <div class="row">
             <div class="col-xs-12 col-sm-6 no-padding">
@@ -122,7 +122,7 @@
             </div>
           </div>
         </div>
-      </div>--}}
+      </div>
       <section id="equipos-promocion">
         <div class="container">
           <div class="row">

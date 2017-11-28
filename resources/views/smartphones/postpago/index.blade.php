@@ -39,9 +39,17 @@
                   </div>
                   <div class="content-product text-center">
                     <div class="title-product">
+                      <h3 class="text-center"><b>{{$smartphone->brand_name}}</b></h3>
                       <h3 class="text-center">{{$smartphone->product_model}}</h3>
                     </div>
-                    <div class="price-product"><span>s/{{$smartphone->product_price}}</span></div>
+                    <div class="price-product">
+                      @if($smartphone->promo_id)
+                      <span>S/.{{$smartphone->promo_price}}</span>
+                      <span class="normal-price">S/.{{$smartphone->product_price}}</span>
+                      @else
+                      <span>S/.{{$smartphone->product_price}}</span>
+                      @endif
+                    </div>
                     <div class="plan-product">
                       <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                     </div>

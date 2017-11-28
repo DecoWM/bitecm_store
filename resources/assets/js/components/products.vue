@@ -9,9 +9,14 @@
       </div>
       <div class="content-product text-center">
         <div class="title-product">
+          <h3 class="text-center"><b>{{product.brand_name}}</b></h3>
           <h3 class="text-center">{{product.product_model}}</h3>
         </div>
-        <div class="price-product"><span>s/{{product.product_price}}</span></div>
+        <div class="price-product">
+          <span v-if="!product.promo_id">s/{{product.product_price}}</span>
+          <span v-if="product.promo_id">s/{{product.promo_price}}</span>
+          <span v-if="product.promo_id" class="normal-price">s/{{product.product_price}}</span>
+        </div>
         <div class="btn-product form-inline" style="text-align:center">
           <div class="form-group btn-comprar">
             <a v-bind:href="product.route" class="btn btn-default">comprar</a>

@@ -7,7 +7,11 @@
             <div class="title">
               <h2>{{$product->product_model}}</h2>
             </div>
+            @if(isset($product->promo_id))
+            <div class="state"><span>PROMOCIÓN</span></div>
+            @else
             <div class="state"><span>NUEVO</span></div>
+            @endif
             <div id="image-equipo">
               @if(count($product_images)>0)
                 <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">
@@ -37,7 +41,11 @@
             <div class="header-section">
               <div class="title">
                 <h1>{{$product->product_model}}</h1>
+                @if(isset($product->promo_id))
+                <div class="state"><span>PROMOCIÓN</span></div>
+                @else
                 <div class="state"><span>NUEVO</span></div>
+                @endif
               </div>
               <div class="descripcion">
                 <p>{{$product->product_description}}</p>
@@ -94,7 +102,11 @@
                         {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
                         <div class="price-product" v-if="filters.affiliation.value != 1"><span>S/.</span>@{{selectedPlan.product_variation_price.new}}</div>--}}
                         <div class="price-product">
-                          <span>S/.</span>{{$product->product_price}}
+                          @if(isset($product->promo_id))
+                          <span>S/.{{$product->promo_price}}</span><span class="normal-price">S/.{{$product->product_price}}</span>
+                          @else
+                          <span>S/.{{$product->product_price}}</span>
+                          @endif
                         </div>
                         <div class="plan-product">
                           <p>con <span>{{$product->plan_name}}</span></p>
@@ -238,9 +250,17 @@
                 </div>
                 <div class="content-product text-center">
                   <div class="title-product">
+                    <h3 class="text-center"><b>{{$item->brand_name}}</b></h3>
                     <h3 class="text-center">{{$item->product_model}}</h3>
                   </div>
-                  <div class="price-product"><span>S/.</span><span>{{$item->product_price + 0}}</span></div>
+                  <div class="price-product">
+                    @if($item->promo_id)
+                    <span>S/.{{$item->promo_price}}</span>
+                    <span class="normal-price">S/.{{$item->product_price}}</span>
+                    @else
+                    <span>S/.{{$item->product_price}}</span>
+                    @endif
+                  </div>
                   <div class="plan-product">
                     <p>en plan <span>{{$item->plan_name}}</span></p>
                   </div>

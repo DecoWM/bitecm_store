@@ -35,7 +35,7 @@ class SearchController extends Controller
 
     $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_pre_id;
 
-    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $request->items_per_page, 1, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
@@ -116,7 +116,7 @@ class SearchController extends Controller
 
     $brand_ids = implode(',',$filters->manufacturer->value);
 
-    $search_result = $this->shared->productSearch(2, $brand_ids, $request->items_per_page, 1, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->productSearch(2, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
     
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
@@ -135,6 +135,63 @@ class SearchController extends Controller
   }
 
   public function searchPromos (Request $request) {
+    $request->validate([
+      'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
+      'items_per_page' => 'required|integer|min:0'
+    ]);
 
+    $filters = json_decode($request->filters);
+
+    $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
+
+    $product_price_end = (isset($filters->price->value->y)) ? $filters->price->value->y : 0;
+
+    $brand_ids = implode(',',$filters->manufacturer->value);
+
+    $plan_pre_id = \Config::get('filter.plan_pre_id');
+    $plan_post_id = \Config::get('filter.plan_post_id');
+
+    $search_result = $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    
+    $data = collect($search_result['products'])->map(function ($item, $key) {
+      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      
+      if (isset($item->product_variation_id)) {
+        $item->product_price = $item->product_variation_price;
+        switch ($item->variation_type_id) {
+          case 1:
+            $item->route = route('prepaid_detail', [
+              'brand' => $item->brand_slug,
+              'product' => $item->product_slug,
+              'plan' => $item->plan_slug
+            ]);
+            break;
+          case 2:
+            $item->route = route('postpaid_detail', [
+              'brand' => $item->brand_slug,
+              'product' => $item->product_slug,
+              'plan' => $item->plan_slug,
+              'affiliation'=>$item->affiliation_slug,
+              'contract'=>$item->contract_slug
+            ]);
+            break;
+        }
+      } else {
+        if ($item->category_id == \Config::get('filter.accessory_cat_id')) {
+          $item->route = route('accessory_detail', [
+            'brand'=>$item->brand_slug,
+            'product'=>$item->product_slug
+          ]);
+        }
+      }
+      
+      return $item;
+    });
+
+    $response = [
+      'data' => $data
+    ];
+
+    return response()->json($response);
   }
 }
