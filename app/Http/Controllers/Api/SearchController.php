@@ -25,6 +25,10 @@ class SearchController extends Controller
 
     $plan_pre_id = \Config::get('filter.plan_pre_id');
 
+    $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
+    $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
+    $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
+
     $filters = json_decode($request->filters);
 
     $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
@@ -37,12 +41,19 @@ class SearchController extends Controller
 
     $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
-    $data = collect($search_result['products'])->map(function ($item, $key) {
+    $data = collect($search_result['products'])->map(function ($item, $key) use ($affiliation_slug,$plan_post_slug,$contract_slug) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
       $item->route = route('prepaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$item->plan_slug
+      ]);
+      $item->route_post = route('postpaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'affiliation'=>$affiliation_slug,
+        'plan'=>$plan_post_slug,
+        'contract'=>$contract_slug
       ]);
       return $item;
     });
@@ -74,7 +85,7 @@ class SearchController extends Controller
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "product_model", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
     $pages = intval(ceil($search_result['total'] / $items_per_page));
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
@@ -184,7 +195,7 @@ class SearchController extends Controller
           ]);
         }
       }
-      
+
       return $item;
     });
 

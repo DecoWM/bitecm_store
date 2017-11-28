@@ -102,8 +102,8 @@ class OrderController extends Controller
   // public function show() 
   {
     $req = [
-      'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-      'shopCode' => 'VTP', // ***** Change it for dynamic Value !!!
+      'staffCode' => 'CM_THUYNTT',
+      'shopCode' => 'VTP',
       'dni' => $order_detail['id_number'],
       'isdn' => $order_detail['porting_phone'],
       'sourceOperator' => isset($order_detail['source_operator']) ? $order_detail['source_operator'] : '',
@@ -242,17 +242,16 @@ class OrderController extends Controller
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
-          array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
+          
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
-          array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
           break;
         case 2:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
-          array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
           break;
       }
+      array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
       $subtotal = $product->product_price * $item['quantity'];
       $total += $subtotal;
       array_push($order_items, [

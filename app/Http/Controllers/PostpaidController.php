@@ -23,7 +23,7 @@ class PostpaidController extends Controller
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page);
+    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
     $pages = intval(ceil($search_result['total'] / $items_per_page));
     $paginator = new Paginator(
       $search_result['products'],

@@ -341,6 +341,16 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
     margin: 9px 0;
 }
 
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo {
+    margin-left: 10px;
+}
+
+#detalle-carrito .normal-price {
+    font-size: 12px;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
 @import "home";
 @import "postpago";
 @import "carrito";

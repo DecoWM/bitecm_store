@@ -24,6 +24,11 @@ class CartController extends Controller
     //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart')); //Carrito de compras
 
+    $total = 0;
+    $total_igv = 0;
+
+    $igv = \Config::get('filter.igv');
+
     foreach ($cart as $item) {
       if (!isset($item['type_id']) || !isset($item['stock_model_id'])) {
         continue;
@@ -31,36 +36,42 @@ class CartController extends Controller
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
-          $product->quantity = $item['quantity'];
-          $product->type_id = $item['type_id'];
-          array_push($products, $product);
           break;
         case 1:
           if(isset($item['product_variation_id'])) {
             $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
-            $product->quantity = $item['quantity'];
-            $product->type_id = $item['type_id'];
-            array_push($products, $product);
           }
           break;
         case 2:
           if(isset($item['product_variation_id'])) {
             $product = $this->shared->productPostpaidByStock($item['stock_model_id'],$item['product_variation_id']);
-            $product->quantity = $item['quantity'];
-            $product->type_id = $item['type_id'];
-            array_push($products, $product);
           }
           break;
       }
+      $product->quantity = $item['quantity'];
+      $product->type_id = $item['type_id'];
+
+      if(isset($product->promo_id)) {
+        $total += $product->promo_price;
+        $total_igv += $product->promo_price * (1 + $igv);
+      } else {
+        $total += $product->product_price;
+        $total_igv += $product->product_price * (1 + $igv);
+      }
+
+      array_push($products, $product);
     }
 
     if (count($products) == 0 && count($cart) > 0) {
       $request->session()->forget('cart');
     }
 
-    $igv = \Config::get('filter.igv');
-
-    return view('cart', ['products' => $products, 'igv' => $igv]);
+    return view('cart', [
+      'products' => $products, 
+      'total' => $total,
+      'total_igv' => $total_igv,
+      'igv' => $igv
+    ]);
   }
 
   public function addToCart (Request $request) {

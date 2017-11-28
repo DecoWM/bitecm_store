@@ -17,7 +17,7 @@ class PrepaidController extends Controller
 
   public function index(Request $request) {
     $plan_pre_id = \Config::get('filter.plan_pre_id');
-    
+
     $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
     $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
     $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
@@ -25,7 +25,7 @@ class PrepaidController extends Controller
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
     
-    $search_result =  $this->shared->searchProductPrepaid(1, $plan_pre_id, null, $items_per_page, $current_page, "product_model", "desc");
+    $search_result =  $this->shared->searchProductPrepaid(1, $plan_pre_id, null, $items_per_page, $current_page, "publish_at", "desc");
 
     $pages = intval(ceil($search_result['total'] / $items_per_page));
     $paginator = new Paginator(

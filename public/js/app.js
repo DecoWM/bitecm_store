@@ -54000,7 +54000,7 @@ var render = function() {
           _vm.product.plan_id != 15
             ? _c("div", { staticClass: "plan-product" }, [
                 _c("p", [
-                  _c("a", { attrs: { href: _vm.product.route } }, [
+                  _c("a", { attrs: { href: _vm.product.route_post } }, [
                     _vm._v("Ver en plan postpago")
                   ])
                 ])
@@ -61602,6 +61602,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -61662,107 +61674,101 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "content-product text-center" }, [
-          _c("div", { staticClass: "title-product" }, [
-            _c("h3", { staticClass: "text-center" }, [
-              _c("b", [_vm._v(_vm._s(_vm.product.brand_name))])
+        _c(
+          "div",
+          { staticClass: "content-product text-center" },
+          [
+            _c("div", { staticClass: "title-product" }, [
+              _c("h3", { staticClass: "text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.product.brand_name))])
+              ]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.product.product_model))
+              ])
             ]),
             _vm._v(" "),
-            _c("h3", { staticClass: "text-center" }, [
-              _vm._v(_vm._s(_vm.product.product_model))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "price-product" }, [
-            !_vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.product_price))])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.promo_price))])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.product.promo_id
-              ? _c("span", { staticClass: "normal-price" }, [
-                  _vm._v("s/" + _vm._s(_vm.product.product_price))
-                ])
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _vm.product.plan_id != 15
-            ? _c("div", { staticClass: "plan-product" }, [
-                _c("p", [
-                  _c("a", { attrs: { href: _vm.product.route } }, [
-                    _vm._v("Ver en plan postpago")
+            _vm.product.product_variation_id
+              ? [
+                  _vm.product.variation_type_id == 1
+                    ? [
+                        _c("div", { staticClass: "price-product" }, [
+                          _c("span", [
+                            _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "normal-price" }, [
+                            _vm._v("S/." + _vm._s(_vm.product.product_price))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "plan-product" }, [
+                          _c("p", [
+                            _c(
+                              "a",
+                              { attrs: { href: _vm.product.route_post } },
+                              [_vm._v("Ver en plan postpago")]
+                            )
+                          ])
+                        ])
+                      ]
+                    : _vm.product.variation_type_id == 2
+                      ? [
+                          _c("div", { staticClass: "price-product" }, [
+                            _c("span", [
+                              _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "normal-price" }, [
+                              _vm._v("S/." + _vm._s(_vm.product.product_price))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "plan-product" }, [
+                            _c("p", [
+                              _vm._v("en plan "),
+                              _c("span", [
+                                _vm._v(_vm._s(_vm.product.plan_name))
+                              ])
+                            ])
+                          ])
+                        ]
+                      : _vm._e()
+                ]
+              : [
+                  _c("div", { staticClass: "price-product" }, [
+                    _c("span", [
+                      _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "normal-price" }, [
+                      _vm._v("S/." + _vm._s(_vm.product.product_price))
+                    ])
                   ])
-                ])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "btn-product form-inline" }, [
-            _c("div", { staticClass: "form-group btn-comprar" }, [
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-default",
-                  attrs: { href: _vm.product.route }
-                },
-                [_vm._v("comprar")]
-              )
-            ]),
+                ],
             _vm._v(" "),
-            _c("div", { staticClass: "checkbox btn-comparar" }, [
-              _c("label", [
-                _c("input", {
-                  directives: [
+            _c(
+              "div",
+              {
+                staticClass: "btn-product form-inline",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c("div", { staticClass: "form-group btn-comprar" }, [
+                  _c(
+                    "a",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.isSelected,
-                      expression: "isSelected"
-                    }
-                  ],
-                  staticClass: "checkbox-compare",
-                  attrs: {
-                    type: "checkbox",
-                    disabled: _vm.compare.length == 4 && !_vm.isSelected
-                  },
-                  domProps: {
-                    checked: Array.isArray(_vm.isSelected)
-                      ? _vm._i(_vm.isSelected, null) > -1
-                      : _vm.isSelected
-                  },
-                  on: {
-                    change: [
-                      function($event) {
-                        var $$a = _vm.isSelected,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = null,
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
-                          } else {
-                            $$i > -1 &&
-                              (_vm.isSelected = $$a
-                                .slice(0, $$i)
-                                .concat($$a.slice($$i + 1)))
-                          }
-                        } else {
-                          _vm.isSelected = $$c
-                        }
-                      },
-                      _vm.emitCompare
-                    ]
-                  }
-                }),
-                _vm._v("comparar\n            "),
-                _c("span", { staticClass: "checkmark" })
-              ])
-            ])
-          ])
-        ])
+                      staticClass: "btn btn-default",
+                      attrs: { href: _vm.product.route }
+                    },
+                    [_vm._v("comprar")]
+                  )
+                ])
+              ]
+            )
+          ],
+          2
+        )
       ]
     )
   ])

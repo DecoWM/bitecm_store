@@ -31,8 +31,8 @@
                 </div>
               </div>
             </div>
-@if (count($products) > 0)
-@foreach ($products as $product)
+            @if (count($products) > 0)
+            @foreach ($products as $product)
             <div class="main-detalle equipos">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -49,9 +49,10 @@
                     <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                     <div class="detalle-equipo">
                       <h2>{{$product->product_model}}</h2>
-@if (intval($product->type_id) == 2)
-                      <span class="modo">{{$product->affiliation_name}}</span><span class="contrato">Contrato {{$product->contract_name}}</span>
-@endif
+                      @if (intval($product->type_id) == 2)
+                      <span class="modo">{{$product->affiliation_name}}</span>
+                      <span class="contrato">Contrato {{$product->contract_name}}</span>
+                      @endif
                       <div class="cantidad">
                         <div class="btn-option">
                           <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
@@ -63,14 +64,21 @@
                   </div>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">ÚLTIMO PAGO</span>
-                  <p>S/. {{$product->product_price}}</p>
+                  @if(isset($product->promo_id))
+                  <span>S/. {{$product->promo_price}}<span>
+                  <span class="normal-price">S/. {{$product->product_price}}<span>
+                  @else
+                  <span>S/. {{$product->product_price}}<span>
+                  @endif
                 </div>
-                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PAGO MENSUAL</span>
-@if (intval($product->type_id) == 2)
-                  <p>S/. {{$product->plan_price}}</p><span class="plan">{{$product->plan_name}}</span>
-@else
+                <div class="col-xs-6 col-sm-4">
+                  <span class="title-detalle">PAGO MENSUAL</span>
+                  @if (intval($product->type_id) == 2)
+                  <p>S/. {{$product->plan_price}}</p>
+                  <span class="plan">{{$product->plan_name}}</span>
+                  @else
                   <p> - </p>
-@endif
+                  @endif
                 </div>
               </div>
             </div>
@@ -80,14 +88,16 @@
                   <p class="version-mobil text-right">PRECIO SIN IGV</p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
-                  <p>S/. {{$product->product_price}}</p>
+                  <p>
+                    <span>S/. {{$total}}<span>
+                  </p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
-@if (intval($product->type_id) == 2)
+                  @if (intval($product->type_id) == 2)
                   <p>S/. {{$product->plan_price}} mensual</p>
-@else
+                  @else
                   <p> - </p>
-@endif
+                  @endif
                 </div>
               </div>
             </div>
@@ -101,18 +111,19 @@
                 </div>
               </div>
             </div>
+            @endforeach
             <div class="main-detalle col-offset sinborder">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
                   <p class="version-mobil text-right">TOTAL + IGV</p>
                 </div>
-                <div class="col-xs-6 col-sm-4"><span class="title-detalle">TOTAL + IGV</span>
-                  <p>S/. {{$product->product_price * (1 + $igv)}}</p>
+                <div class="col-xs-6 col-sm-4">
+                  <span class="title-detalle">TOTAL + IGV</span>
+                  <p>S/. {{$total_igv}}</p>
                 </div>
               </div>
             </div>
-@endforeach
-@else
+            @else
             <div class="main-detalle equipos">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -120,18 +131,18 @@
                 </div>
               </div>
             </div>
-@endif
+            @endif
             <div class="btn-detalle">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
-@if (count($products) > 0)
+                  @if (count($products) > 0)
                   <a href="{{url()->previous()}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
 
                   <a href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
-@endif
+                  @endif
                 </div>
               </div>
             </div>

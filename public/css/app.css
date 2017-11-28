@@ -31,11 +31,11 @@
 }
 
 #compara-tus-equipos .info-lista {
-  padding-top: 410px;
+  padding-top: 345px;
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
-  height: auto;
+  height: 335px;
   position: relative;
 }
 
@@ -48,7 +48,7 @@
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product {
-  position: initial;
+  position: absolute;
 }
 
 #descripcion-equipo .content-section form .content-product .btn-linea a:hover {
@@ -322,6 +322,16 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 
 #list-equipos .producto .content-product .title-product h3 {
   margin: 9px 0;
+}
+
+#detalle-carrito .main-detalle .row div .equipo-seleccionado .detalle-equipo {
+  margin-left: 10px;
+}
+
+#detalle-carrito .normal-price {
+  font-size: 12px;
+  text-decoration: line-through;
+  margin-left: 5px;
 }
 
 #planes {

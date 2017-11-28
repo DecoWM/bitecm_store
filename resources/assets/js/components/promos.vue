@@ -12,23 +12,35 @@
           <h3 class="text-center"><b>{{product.brand_name}}</b></h3>
           <h3 class="text-center">{{product.product_model}}</h3>
         </div>
+        <template v-if="product.product_variation_id">
+          <template v-if="product.variation_type_id == 1">
+          <div class="price-product">
+            <span>S/.{{product.promo_price}}</span>
+            <span class="normal-price">S/.{{product.product_price}}</span>
+          </div>
+          <div class="plan-product">
+            <p><a :href="product.route_post">Ver en plan postpago</a></p>
+          </div>
+          </template>
+          <template v-else-if="product.variation_type_id == 2">
+          <div class="price-product">
+            <span>S/.{{product.promo_price}}</span>
+            <span class="normal-price">S/.{{product.product_price}}</span>
+          </div>
+          <div class="plan-product">
+            <p>en plan <span>{{product.plan_name}}</span></p>
+          </div>
+          </template>
+        </template>
+        <template v-else>
         <div class="price-product">
-          <span v-if="!product.promo_id">s/{{product.product_price}}</span>
-          <span v-if="product.promo_id">s/{{product.promo_price}}</span>
-          <span v-if="product.promo_id" class="normal-price">s/{{product.product_price}}</span>
+          <span>S/.{{product.promo_price}}</span>
+          <span class="normal-price">S/.{{product.product_price}}</span>
         </div>
-        <div class="plan-product" v-if="product.plan_id != 15">
-          <p><a v-bind:href="product.route">Ver en plan postpago</a></p>
-        </div>
-        <div class="btn-product form-inline">
+        </template>
+        <div class="btn-product form-inline" style="text-align: center;">
           <div class="form-group btn-comprar">
             <a v-bind:href="product.route" class="btn btn-default">comprar</a>
-          </div>
-          <div class="checkbox btn-comparar">
-            <label>
-              <input type="checkbox" class="checkbox-compare" v-model="isSelected" v-on:change="emitCompare" v-bind:disabled="compare.length==4 && !isSelected">comparar
-              <span class="checkmark"></span>
-            </label>
           </div>
         </div>
       </div>
