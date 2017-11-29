@@ -437,6 +437,16 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
     font-size: 14px;
 }
 
+#page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .contenido p span.normal-price {
+    text-decoration: line-through;
+    color: #828282;
+    font-size: 12px;
+}
+
+#page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image {
+    margin-right: 7px;
+}
+
 @import "home";
 @import "postpago";
 @import "carrito";

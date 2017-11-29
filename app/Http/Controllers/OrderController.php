@@ -263,8 +263,8 @@ class OrderController extends Controller
       $total_igv += $subtotal_igv;
       array_push($order_items, [
         'stock_model_id' => $item['stock_model_id'],
-        'product_variation_id' => $item['product_variation_id'] ? $item['product_variation_id'] : null,
-        'promo_id' => null,//$product->promo_id,
+        'product_variation_id' => $item['product_variation_id'],
+        'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => $subtotal,
         'subtotal_igv' => $subtotal_igv

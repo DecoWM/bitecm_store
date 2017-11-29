@@ -2495,12 +2495,14 @@ BEGIN
   SET order_id = IFNULL(order_id, 0);
 
   SET select_query = 'SELECT
-    DISTINCT(PRD.product_id), PRM.*,
-    PRD.*, STM.`stock_model_code`,
+    OIT.*, PRM.*, PRD.*,
+    STM.`stock_model_id`, STM.`stock_model_code`,
+    PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price`,
     BRN.`brand_name`, BRN.`brand_slug`,
-    PLN.`plan_name`, PLN.`plan_slug`, PLN.`product_code`,
+    PLN.`plan_name`, PLN.`plan_slug`,
+    PLN.`plan_price`, PLN.`product_code`,
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
     CLR.`color_name`, CLR.`color_slug`';
@@ -2512,9 +2514,9 @@ BEGIN
     INNER JOIN tbl_product as PRD
       ON STM.`product_id` = PRD.`product_id`
     INNER JOIN tbl_brand as BRN
-      ON PRD.`brand_id` = BRN.`brand_id`
+      ON BRN.`brand_id` = PRD.`brand_id`
     LEFT JOIN tbl_product_variation as PRD_VAR
-      ON PRD.`product_id` = PRD_VAR.`product_id`
+      ON PRD_VAR.`product_id` = PRD.`product_id`
     LEFT JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     LEFT JOIN tbl_affiliation as AFF
@@ -2524,14 +2526,14 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`';
+      ON PRM.`promo_id` = OIT.`promo_id`';
 
   SET where_query = CONCAT('
     WHERE OIT.`order_id` = ', order_id, '
-      AND (PRD_VAR.`product_variation_id` = OIT.`product_variation_id`
-        OR PRD_VAR.`product_variation_id` IS NULL)
-      AND (PRM.`promo_id` = OIT.`promo_id`
-        OR PRM.`promo_id` IS NULL)'
+      AND (OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
+        OR OIT.`product_variation_id` IS NULL)
+      AND (OIT.`promo_id` = PRM.`promo_id`
+        OR OIT.`promo_id` IS NULL)'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);

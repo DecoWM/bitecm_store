@@ -18,16 +18,35 @@
                   <div class="row">
                     <div class="col-xs-6 col-sm-12 col-md-12 col-lg-4">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product['product']->picture_url)}}" alt="equipos"></div>
+                        <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                         <div class="contenido">
-                          <h2 class="text-uppercase title-contenido">{{$product['product']->product_model}}</h2>
-                          <p> <span>Cantidad:</span>{{$product['quantity']}}</p>
-@if (array_has($product, 'plan'))
-                          <p class="precio">S/. {{$product['plan']->product_variation_price + 0}}</p>
-@else
-                          <p class="precio">S/. {{$product['product']->product_price_prepaid + 0}}</p>
-@endif
-                          <p class="status"><span>Status:</span>Enviado</p>
+                          <h2 class="text-uppercase title-contenido">
+                            <b>{{$product->brand_name}}</b> {{$product->product_model}}
+                          </h2>
+                          <p> <span>Cantidad:</span>{{$product->quantity}}</p>
+                          @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
+                          <p>
+                            <span>Plan:</span>
+                            {{$product->plan_name}}
+                          </p>
+                          @endif
+                          @if(isset($product->product_variation_id))
+                            @php 
+                            $product->product_price = $product->product_variation_price;
+                            @endphp
+                          @endif
+                          @if(isset($product->promo_id))
+                          <p>
+                            <span>Precio del equipo:</span>
+                            <p>S/. {{$product->promo_price}} <span class="normal-price">S/. {{$product->product_price}}</span>
+                          </p>
+                          @else
+                          <p>
+                            <span>Precio del equipo:</span>
+                            <p>S/. {{$product->product_price}}</P>
+                          </p>
+                          @endif
+                          <p class="status"><span>Status:</span>Pendiente</p>
                         </div>
                       </div>
                     </div>
@@ -53,59 +72,19 @@
                           </ul>
                         </div>
                         <div class="resp-proceso-web text-center">
-                          <p>¡Tu pedido ya está en camino!</p>
+                          <p>¡Tu pedido está siendo evaluado!</p>
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12">
                       <div class="resp-proceso-movil text-center">
-                        <p>¡Tu pedido ya está en camino!</p>
+                        <p>¡Tu pedido está siendo evaluado!</p>
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
-@endforeach
-              {{-- <section id="detalle-rastreo">
-                <div class="title-section">
-                  <h1>Producto comprado el</h1><span>13 de Septiembre del 2017</span>
-                </div>
-                <div class="content-section">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-5">
-                      <div class="equipo-seleccionado">
-                        <div class="image"><img src="./images/home/celular-1.jpg" alt="equipos"></div>
-                        <div class="contenido">
-                          <h2 class="text-uppercase title-contenido">GOOGLE PIXEL</h2>
-                          <p> <span>Cantidad:</span>1</p>
-                          <p class="precio">S/.2,701,78</p>
-                          <p class="status"><span>Status:</span>Enviado</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-7 col-sp">
-                      <div class="proceso">
-                        <div id="nav-carrito">
-                          <ul class="list-unstyled">
-                            <li class="col-xs-4 col-sm-4 active">
-                              <div class="image-icon"><img src="./images/rastreo/svg/aceptado.svg" alt="" class="aceptado"></div><span>Aceptado</span>
-                            </li>
-                            <li class="col-xs-4 col-sm-4">
-                              <div class="image-icon"><img src="./images/rastreo/svg/enproceso.svg" alt="" class="enproceso"></div><span>En Proceso</span>
-                            </li>
-                            <li class="col-xs-4 col-sm-4">
-                              <div class="image-icon"><img src="./images/rastreo/svg/enviado.svg" alt="" class="enviado"></div><span>Enviado</span>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="resp-proceso text-center">
-                          <p>¡Tu pedido ya está en camino!</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section> --}}
+            @endforeach
             </div>
             <div class="ver-mas-ratreo">
               <p>¿Quieres comprar más?</p>
