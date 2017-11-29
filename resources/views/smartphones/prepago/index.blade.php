@@ -31,6 +31,9 @@
 @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
+                  @if(isset($smartphone->promo_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                  @endif
                   <div class="image-product text-center">
                     <a href="{{route('prepaid_detail',  [
                       'brand'=>$smartphone->brand_slug,

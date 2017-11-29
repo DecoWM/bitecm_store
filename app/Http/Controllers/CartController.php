@@ -44,7 +44,7 @@ class CartController extends Controller
           break;
         case 2:
           if(isset($item['product_variation_id'])) {
-            $product = $this->shared->productPostpaidByStock($item['stock_model_id'],$item['product_variation_id']);
+            $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           }
           break;
       }

@@ -166,12 +166,11 @@ class OrderController extends Controller
   }
 
   public function storeOrder (Request $request) {
-    $products = [];
+    $cart = collect($request->session()->get('cart'));
 
-    $order_id = "";
-    $order_detail = [];
-    $order_items = [];
-    $total = 0;
+    if (count($cart) == 0) {
+      return redirect()->route('show_cart');
+    }
 
     $order_detail = [
       'idtype_id' => $request->document_type,
@@ -188,8 +187,6 @@ class OrderController extends Controller
       'contact_email' => $request->email,
       'contact_phone' => $request->contact_phone
     ];
-    
-    $cart = collect($request->session()->get('cart'));
 
     if ($cart->contains('type_id', 1)) {
       $order_detail['type_id'] = '01';
@@ -200,10 +197,6 @@ class OrderController extends Controller
     if ($request->has('operator')) {
       $order_detail['source_operator'] = $request->operator;
       $order_detail['porting_phone'] = $request->porting_phone;
-    }
-
-    if (count($cart) == 0) {
-      return redirect()->route('show_cart');
     }
 
     // Apply validations with Bitel webservice before insert
@@ -238,34 +231,48 @@ class OrderController extends Controller
 
     $igv = \Config::get('filter.igv');
 
+    $products = [];
+    $order_items = [];
+    $total = 0;
+    $total_igv = 0;
+
     foreach ($cart as $item) {
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
-          
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
           break;
         case 2:
-          $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
+          $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           break;
       }
-      array_push($products, ['product' => $product, 'quantity' => $item['quantity']]);
-      $subtotal = $product->product_price * $item['quantity'];
+      $product->quantity = $item['quantity'];
+      array_push($products, $product);
+
+      if(isset($product->promo_id)) {
+        $final_price = $product->promo_price;
+      } else {
+        $final_price = $product->product_price;
+      }
+
+      $subtotal = $final_price * $item['quantity'];
+      $subtotal_igv = $subtotal * (1+$igv);
       $total += $subtotal;
+      $total_igv += $subtotal_igv;
       array_push($order_items, [
         'stock_model_id' => $item['stock_model_id'],
         'product_variation_id' => $item['product_variation_id'] ? $item['product_variation_id'] : null,
         'promo_id' => null,//$product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => $subtotal,
-        'subtotal_igv' => $subtotal*(1+$igv)
+        'subtotal_igv' => $subtotal_igv
       ]);
     }
 
     $order_detail['total'] = $total;
-    $order_detail['total_igv'] = $total*(1+$igv);
+    $order_detail['total_igv'] = $total_igv;
     $order_id = DB::table('tbl_order')->insertGetId([
       'idtype_id' => $order_detail['idtype_id'],
       'payment_method_id' => $order_detail['payment_method_id'],

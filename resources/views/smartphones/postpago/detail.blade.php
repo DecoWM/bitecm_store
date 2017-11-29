@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>{{$product->product_model}}</h2>
+              <h2>{{$product->brand_name}} {{$product->product_model}}</h2>
             </div>
             @if(isset($product->promo_id))
             <div class="state"><span>PROMOCIÓN</span></div>
@@ -40,7 +40,7 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>{{$product->product_model}}</h1>
+                <h1>{{$product->brand_name}} {{$product->product_model}}</h1>
                 @if(isset($product->promo_id))
                 <div class="state"><span>PROMOCIÓN</span></div>
                 @else

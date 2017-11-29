@@ -1543,6 +1543,7 @@ BEGIN
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
     STM.`stock_model_id`, STM.`stock_model_code`,
+    PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_name`, BRN.`brand_slug`,
@@ -1935,7 +1936,9 @@ BEGIN
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
-    PRM.*, PRD.*, PRD_VAR.`product_variation_id`,
+    PRM.*, PRD.*, 
+    PRD_VAR.`variation_type_id`,
+    PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_id`, BRN.`brand_name`, BRN.`brand_slug`,
     AFF.`affiliation_id`, AFF.`affiliation_name`, AFF.`affiliation_slug`,

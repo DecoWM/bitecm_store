@@ -32,6 +32,9 @@
 @foreach ($products as $product)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$product->product_id}}])}">
+                  @if(isset($product->promo_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                  @endif
                   <div class="image-product text-center">
                     <a href="{{$product->route}}">
                       <img src="{{$product->picture_url}}" alt="{{$product->product_model}}">

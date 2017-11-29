@@ -53646,6 +53646,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -53695,6 +53698,14 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
+        _vm.product.promo_id
+          ? _c("div", { staticClass: "ribbon-wrapper" }, [
+              _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                _vm._v("Promo")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
             _c("img", {
@@ -53910,6 +53921,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -53959,6 +53973,14 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
+        _vm.product.promo_id
+          ? _c("div", { staticClass: "ribbon-wrapper" }, [
+              _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                _vm._v("Promo")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
             _c("img", {
@@ -54168,6 +54190,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -54217,6 +54242,14 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
+        _vm.product.promo_id
+          ? _c("div", { staticClass: "ribbon-wrapper" }, [
+              _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                _vm._v("Promo")
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
             _c("img", {

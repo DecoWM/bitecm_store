@@ -2,6 +2,9 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <div data-equipo="1" class="producto active-comparar"> -->
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected}">
+      <div v-if="product.promo_id" class="ribbon-wrapper">
+        <div class="ribbon ribbon-promo">Promo</div>
+      </div>
       <div class="image-product text-center">
         <a v-bind:href="product.route">
           <img v-bind:src="product.picture_url" :alt="product.product_model">

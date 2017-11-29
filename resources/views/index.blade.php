@@ -25,7 +25,11 @@
                   <div class="list-productos">
 @foreach ($best_seller_smartphone as $smartphone)
                     <div class="producto">
-                      <div class="state-product"><span>NUEVO</span></div>
+                      @if(isset($smartphone->promo_id))
+                      <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                      @else
+                      <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
+                      @endif
                       <div class="image-product text-center">
                         <a href="{{$smartphone->route}}">
                           <img src="{{$smartphone->picture_url}}" alt="equipos">
@@ -66,7 +70,11 @@
                   <div class="list-productos">
 @foreach ($best_seller_tablet as $tablet)
                     <div class="producto">
-                      <div class="state-product"><span>NUEVO</span></div>
+                      @if(isset($tablet->promo_id))
+                      <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                      @else
+                      <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
+                      @endif
                       <div class="image-product text-center">
                         <a href="{{$tablet->route}}">
                           <img src="{{$tablet->picture_url}}" alt="equipos">
@@ -137,7 +145,12 @@
               <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
 @foreach ($promo_postpaid as $smartphone)
                 <div class="producto">
-                  <div class="state-product"><span class="trending">TRENDING</span></div>
+                  @if(isset($smartphone->promo_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                  @else
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
+                  @endif
+                  {{--<div class="state-product"><span class="trending">TRENDING</span></div>--}}
                   <div class="image-product text-center">
                     <a href="{{$smartphone->route}}">
                       <img src="{{$smartphone->picture_url}}" alt="equipos">
@@ -169,7 +182,11 @@
               <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
 @foreach ($promo_prepaid as $smartphone)
                 <div class="producto">
-                  <div class="state-product"><span class="trending">TRENDING</span></div>
+                  @if(isset($smartphone->promo_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                  @else
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
+                  @endif
                   <div class="image-product text-center">
                     <a href="{{$smartphone->route}}">
                       <img src="{{$smartphone->picture_url}}" alt="equipos">

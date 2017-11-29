@@ -151,7 +151,7 @@ class BaseController extends Controller
     return count($result) > 0 ? $result[0] : null;
   }
 
-  public function productPostpaidByStock($stock_model_id,$product_variation_id) {
+  public function productPostpagoByStock($stock_model_id,$product_variation_id) {
     $result = DB::select('call PA_productPostpagoByStock(
       :stock_model_id,
       :product_variation_id

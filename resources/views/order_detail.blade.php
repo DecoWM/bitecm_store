@@ -18,8 +18,7 @@
                 <div class="title-section-pedido text-center">
                   <h3>¡GRACIAS POR COMPRAR EN BITEL!</h3>
                 </div>
-{{-- {{dump($products)}} --}}
-@foreach ($products as $product)
+                @foreach ($products as $product)
                 <div class="detalle-pedido">
                   <div class="row">
                     <div class="col-xs-12 col-sm-7">
@@ -29,30 +28,40 @@
                         </div>
                         <div class="info">
                           <p>Tu solicitud ha sido enviada correctamente por:</p>
-@if (array_has($product, 'plan'))
-                          <p>Plan <span> s/. {{$product['plan']->plan_price}} </span>mensual</p>
-                          <p>Precio del equipo: <span>s/. {{$product['plan']->product_price + 0}}</span></p>
-@else
-                          <p>Precio del equipo: <span>s/. {{$product['product']->product_price + 0}}</span></p>
-@endif
+                          @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
+                          <p>
+                            Plan <span> s/. {{$product->plan_price}} </span>mensual
+                          </p>
+                          @endif
+                          @if(isset($product->promo_id))
+                          <p>
+                            Precio del equipo: <span>s/. {{$product->promo_price}}</span> <span class="normal-price">{{$product->product_price}}</span>
+                          </p>
+                          @else
+                          <p>
+                            Precio del equipo: <span>s/. {{$product->product_price}}</span>
+                          </p>
+                          @endif
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-5">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product['product']->product_image_url)}}" alt="equipos"></div>
-                        <div class="contenido"><span class="text-uppercase title-contenido">{{$product['product']->product_model}}</span>
-@if (array_has($product, 'plan'))
-                          <p>{{$product['plan']->affiliation_name}}</p>
+                        <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
+                        <div class="contenido">
+                          <span class="text-uppercase title-contenido">{{$product->brand_name}} {{$product->product_model}}
+                          </span>
+                          @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
+                          <p>{{$product->affiliation_name}}</p>
                           <p>Contrato 18 meses</p>
-@endif
-                          <p> <span>Cantidad:</span> {{$product['quantity']}}</p>
+                          @endif
+                          <p> <span>Cantidad:</span> {{$product->quantity}}</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-@endforeach
+                @endforeach
                 <div class="rastreo-de-compra">
                   <div class="text-center">
                     <h4>HEMOS ENVIADO UN MENSAJE A SU CORREO PARA EL RASTREO DE SU COMPRA</h4>
@@ -61,8 +70,6 @@
                 </div>
                 <div class="btn-detalle">
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    {{-- <button type="submit" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</button>
-                    <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/rastreo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
                     <a href="{{route('home')}}" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</a>
                     <a href="{{route('track_order', ['order_id' => $order_id])}}" class="redirect-href btn btn-default comprar">continuar</a>
                   </div>

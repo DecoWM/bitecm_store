@@ -124,6 +124,7 @@
   background-color: #ffe60d;
   color: #008c95;
   line-height: 16px;
+  padding: 5px;
 }
 
 #section-pedido .row .btn-detalle a.comprar {
@@ -290,8 +291,9 @@ input:checked ~ .checkmark:after {
   margin-left: 5px;
 }
 
+section#equipos-promocion .container .row .content-tab-pro .producto,
 section#equipos-vendidos .container .row .content-tab-pro .producto {
-  padding-top: 30px;
+  padding-top: 22px;
   padding-bottom: 174px;
 }
 
@@ -309,6 +311,10 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .title-product h4,
 section#equipos-vendidos .container .row .content-tab-pro .producto .content-product .title-product h4 {
   margin: 7px 0;
+}
+
+#list-equipos .producto {
+  padding-top: 15px;
 }
 
 #list-equipos .producto .content-product .price-product {
@@ -332,6 +338,93 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   font-size: 12px;
   text-decoration: line-through;
   margin-left: 5px;
+}
+
+#producto-disponibles .list-producto .producto .content-product .price-product {
+  margin-bottom: 5px;
+}
+
+#producto-disponibles .list-producto .producto .content-product .title-product {
+  margin: 10px 0;
+  margin-bottom: 0px;
+}
+
+#producto-disponibles .list-producto .producto .content-product .title-product h3 {
+  margin-top: 13px;
+}
+
+.ribbon-wrapper {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  z-index: 999;
+}
+
+.ribbon {
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  position: relative;
+  padding: 2px 0;
+  left: -30px;
+  top: 25px;
+  width: 140px;
+  background-color: #cc3333;
+  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+.ribbon:before,
+.ribbon:after {
+  content: "";
+  border-top: 3px solid #900;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  bottom: -3px;
+}
+
+.ribbon:before {
+  left: 0;
+}
+
+.ribbon:after {
+  right: 0;
+}
+
+.ribbon-promo {
+  background-color: #cc3333;
+}
+
+.ribbon-new {
+  background-color: #ffb212;
+}
+
+.ribbon-trend {
+  background-color: #008c95;
+}
+
+#list-equipos .producto {
+  position: relative;
+}
+
+#list-equipos .producto .ribbon {
+  left: -26px;
+  top: 26px;
+  width: 130px;
+}
+
+#section-pedido .row .detalle-pedido .row .solicitud span.normal-price {
+  text-decoration: line-through;
+  color: #828282;
+  font-size: 14px;
 }
 
 #planes {

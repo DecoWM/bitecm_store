@@ -35,7 +35,8 @@
                     <div class="form-group form-select">
                       <label>Tipo de documento</label>
                       <select name="document_type" v-model="select_document" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }"><i v-show="errors.has('document_type')" class="fa fa-warning"></i>
-                        <option value="1" selected>DNI</option>
+                        <option value="" selected>Seleccione tipo de documento</option>
+                        <option value="1">DNI</option>
                         <option value="2">CARNÉ DE EXTRANJERÍA</option>
                         <option value="3">PASAPORTE</option>
                       </select>
@@ -45,9 +46,14 @@
                       <input type="text" name="document_number" v-model="number_document" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-show="errors.has('document_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_document')" class="help is-danger">@{{ errors.first('number_document') }}</span> --}}
                     </div>
-                    <div class="form-group">
-                      <label for="">distrito de domicilio</label>
-                      <input type="text" name="district" v-model="distrito" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('district')}"><i v-show="errors.has('district')" class="fa fa-warning"></i>
+                    <div class="form-group form-select">
+                      <label for="">Distrito de domicilio</label>
+                      <select name="district" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('district')}">
+                        <option value="" selected="">Seleccione Distrito</option>
+                        @foreach ($distritos as $distrito)
+                        <option value="{{$distrito}}">{{$distrito}}</option>
+                        @endforeach
+                      </select>
                       {{-- <span v-show="errors.has('distrito')" class="help is-danger">@{{ errors.first('distrito') }}</span> --}}
                     </div>
                     <div class="form-group">
@@ -57,14 +63,16 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">Portabilidad o linea nueva</label>
-                      <select name="affiliation" v-model="affiliation">
+                      <select name="affiliation" v-model="affiliation" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('affiliation') }">
+                        <option value="" selected>Seleccione tipo de afiliación</option>
                         <option value="1">Portabilidad</option>
                         <option value="2">Linea nueva</option>
                       </select>
                     </div>
                     <div class="form-group form-select" v-if="affiliation == 1">
                       <label for="">Operador de procedencia</label>
-                      <select name="operator">
+                      <select name="operator" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('operator') }">
+                        <option value="" selected>Seleccione un operador de procedencia</option>
                         <option value="30">Convergia Perú S.A.</option>
                         <option value="37">Americatel Perú S.A.C</option>
                         <option value="32">Fijo - Telefónica del Perú S.A.A.</option>
@@ -77,7 +85,7 @@
                     </div>
                     <div class="form-group" v-if="affiliation == 1">
                       <label for="">Número a portar</label>
-                      <input type="text" name="porting_phone" v-model="number_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
+                      <input type="text" name="porting_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
@@ -97,10 +105,11 @@
                     </div>
                     <div class="form-group form-select">
                       <label for="">DISTRITO DE DELIVERY</label>
-                      <select name="delivery_distric">
-@foreach ($distritos as $distrito)
+                      <select name="delivery_distric" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
+                        <option value="" selected>Seleccione Distrito</option>
+                        @foreach ($distritos as $distrito)
                         <option value="{{$distrito}}">{{$distrito}}</option>
-@endforeach
+                        @endforeach
                       </select>
                     </div>
                     <div class="form-group">
