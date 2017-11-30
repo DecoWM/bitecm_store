@@ -20,7 +20,7 @@
                 </div>
                 <div class="nav-footer foo-sect-2">
                   <ul class="list-unstyled">
-                    <li><a href="{{route('download_Consideraciones')}}" target="_blank">Condiciones y Restricciones</a></li>
+                    <li><a href="{{route('download_Terminos')}}" target="_blank">Condiciones y Restricciones</a></li>
                     <li><a href="{{route('download_Aviso')}}" target="_blank">Aviso Legal</a></li>
                   </ul>
                 </div>
