@@ -60,6 +60,13 @@ Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
+//MAIL
+Route::get('/email/orden', function () {
+    //$invoice = App\Invoice::find(1);
+
+    return new App\Mail\OrderCompleted();
+});
+
 //TEST
 // Route::get('/carrito', 'CartController@index')->name('carrito');
 // Route::get('/envio', 'CartController@index2')->name('envio');
