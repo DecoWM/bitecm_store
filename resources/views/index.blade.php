@@ -23,7 +23,7 @@
                     </div>
                   </div>
                   <div class="list-productos">
-@foreach ($best_seller_smartphone as $smartphone)
+                    @foreach ($best_seller_smartphone as $smartphone)
                     <div class="producto">
                       @if(isset($smartphone->promo_id))
                       <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
@@ -48,17 +48,17 @@
                           <span>S/.{{$smartphone->product_price}}</span>
                           @endif
                         </div>
-@if (isset($smartphone->affiliation_id))
+                        @if (isset($smartphone->affiliation_id))
                         <div class="plan-product">
                           <p>en plan <span>{{$smarthphone->plan_name}}</span></p>
                         </div>
-@endif
+                        @endif
                         <div class="btn-comprar">
                           <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
                         </div>
                       </div>
                     </div>
-@endforeach
+                  @endforeach
                   </div>
                 </div>
                 <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
@@ -68,7 +68,7 @@
                     </div>
                   </div>
                   <div class="list-productos">
-@foreach ($best_seller_tablet as $tablet)
+                    @foreach ($best_seller_tablet as $tablet)
                     <div class="producto">
                       @if(isset($tablet->promo_id))
                       <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
@@ -98,7 +98,7 @@
                         </div>
                       </div>
                     </div>
-@endforeach
+                    @endforeach
                   </div>
                 </div>
             </div>

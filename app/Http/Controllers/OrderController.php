@@ -36,7 +36,7 @@ class OrderController extends Controller
       $service
         ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')   // La ip se debe mover a una variable de configuración !!!
         ->trace(true);
-    });        
+    });
   }
 
   /**
@@ -114,8 +114,9 @@ class OrderController extends Controller
       'contactName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
       'reasonId' => '123' // ***** Change it for dynamic Value !!!
     ];
-    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
 
+    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
+    
     if($response->return->errorCodeMNP == '0'){
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
@@ -216,7 +217,7 @@ class OrderController extends Controller
     }
 
     // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-    if($request->affiliation == 1){
+    /*if($request->affiliation == 1){
       // process request portability
       if($this->createConsultantRequest($order_detail)){
         // check if is possible migrate to bitel
@@ -227,7 +228,7 @@ class OrderController extends Controller
       else{
         return 'Error creando la solicitud de portabilidad';
       }
-    }
+    }*/
 
     $igv = \Config::get('filter.igv');
 

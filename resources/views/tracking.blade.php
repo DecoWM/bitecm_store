@@ -9,7 +9,7 @@
               <h3>Revisa el estado de tu pedido.</h3>
             </div>
             <div id="content-rastreo">
-@foreach ($products as $product)
+              @foreach ($products as $product)
               <section id="detalle-rastreo">
                 <div class="title-section">
                   <h1>Producto comprado el:</h1><span>{{$order->create_at}}</span>
