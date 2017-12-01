@@ -5078,6 +5078,23 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding: 12px 10px;
   min-width: 208px;
 }
+
+#planes .select-plan .slick-slide.slick-active{
+ transform: scale(1);
+ transition: 0.5s ease all;
+}
+
+#planes .select-plan .slick-slide.slick-active.slick-current:hover{
+  transform: scale(1);
+}
+
+#planes .select-plan .slick-slide.slick-active:hover{
+  transform: scale(1.05);
+}
+
+
+
+
 #planes .select-plan .plan .content-plan .title-plan {
   margin-bottom: 0px;
   font-size: 17px;
@@ -5129,6 +5146,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #planes .select-plan .plan.plan-active {
   border: 1px solid #ffe60d;
+  box-shadow: 0 0px 4px rgba(0,0,0,0.3)
 }
 #planes .select-plan .plan.plan-active .content-plan {
   border: 1px solid #fff;
@@ -5367,6 +5385,10 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border: 1px solid #cecece;
   margin: 0 10px;
 }
+#producto-disponibles .list-producto .producto:hover {
+    border: 1px solid #ffe60d;
+}
+
 #producto-disponibles .list-producto .producto .image-product img {
   margin: 0 auto;
 }
