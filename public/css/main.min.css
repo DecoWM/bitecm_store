@@ -4525,7 +4525,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #descripcion-equipo .header-section .title {
   display: flex;
   margin-bottom: 10px;
-  height: 35px;
+  /*height: 35px;*/
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title {
@@ -4554,6 +4554,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border-radius: 15px;
   background-color: #ffe60d;
   font-weight: 600;
+  height: 35px;
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title .state {
@@ -5020,7 +5021,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes {
-  margin-top: -330px;
+  margin-top: -310px;
 }
 #planes .title-plan {
   Color: #008c95;
@@ -5054,7 +5055,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes .select-plan .slick-next {
-  right: 0px;
+  right: -1px;
 }
 @media (max-width: 320px) {
   #planes .select-plan .slick-next {
