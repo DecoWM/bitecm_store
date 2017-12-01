@@ -5071,6 +5071,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   transition: 0.1s ease-out all;
   margin: 0 10px;
   float: left;
+  width: 95%;
 }
 #planes .select-plan .plan .content-plan {
   border: 1px solid #cecece;

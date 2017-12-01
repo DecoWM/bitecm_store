@@ -12128,7 +12128,7 @@ var app = new Vue({
             // centerMode: true,
             // variableWidth: true,
             responsive: [{
-                breakpoint: 1040,
+                breakpoint: 1200,
                 settings: {
                     arrows: true,
                     dots: false,
