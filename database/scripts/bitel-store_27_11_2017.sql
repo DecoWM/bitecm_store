@@ -22,6 +22,26 @@ CREATE SCHEMA IF NOT EXISTS `bitel_ecommerce` DEFAULT CHARACTER SET utf8 ;
 USE `bitel_ecommerce` ;
 
 -- -----------------------------------------------------
+-- Table `bitel_ecommerce`.`tbl_user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_user` (
+  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `user_name` VARCHAR(100) NULL DEFAULT NULL,
+  `user_email` VARCHAR(100) NOT NULL,
+  `user_password` VARCHAR(255) NOT NULL,
+  `remember_token` VARCHAR(100) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
+  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  PRIMARY KEY (`user_id`)
+)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
 -- Table `bitel_ecommerce`.`tbl_variation_type`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_variation_type` (
@@ -32,12 +52,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_variation_type` (
   `allow_affiliation` BOOLEAN NOT NULL DEFAULT TRUE,
   `allow_contract` BOOLEAN NOT NULL DEFAULT TRUE,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`variation_type_id`),
   FULLTEXT INDEX `indx_srch_variation_type_slug` (`variation_type_slug`)
@@ -52,12 +72,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_brand` (
   `brand_name` VARCHAR(20) NOT NULL,
   `brand_slug` VARCHAR(150) NULL DEFAULT NULL,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`brand_id`),
   FULLTEXT INDEX `indx_srchbrand` (`brand_name` ASC),
@@ -75,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_category` (
   `category_slug` VARCHAR(150) NULL DEFAULT NULL,
   `allow_variation` BOOLEAN NOT NULL DEFAULT TRUE,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`category_id`),
   FULLTEXT INDEX `indx_srch_category_slug` (`category_slug`)
@@ -113,13 +133,13 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product` (
   `product_processor_cores` VARCHAR(20) NULL DEFAULT NULL,
   `product_band` VARCHAR(3) NULL DEFAULT NULL COMMENT '2G / 3G / 4G',
   `product_slug` VARCHAR(150) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
   `publish_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `publish_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`product_id`),
@@ -148,12 +168,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_color` (
   `color_name` VARCHAR(50) NOT NULL,
   `color_hexcode` VARCHAR(8) NULL DEFAULT NULL,
   `color_slug` VARCHAR(150) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`color_id`),
   FULLTEXT INDEX `indx_srch_color_slug` (`color_slug`)
@@ -168,12 +188,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_stock_model` (
   `product_id` INT NOT NULL,
   `color_id` INT NULL DEFAULT NULL,
   `stock_model_code` VARCHAR(8) NOT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`stock_model_id`),
   INDEX `fk_tbl_stock_model_tbl_product1_idx` (`product_id` ASC),
@@ -200,13 +220,13 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_image` (
   `stock_model_id` INT NOT NULL,
   `product_image_url` VARCHAR(150) NOT NULL,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
 
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`product_image_id`),
   INDEX `fk_tbl_product_image_tbl_stock_model1_idx` (`stock_model_id` ASC),
@@ -236,12 +256,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_plan` (
   `product_code` VARCHAR(20) NULL DEFAULT NULL,
   `plan_slug` VARCHAR(150) NULL DEFAULT NULL,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`plan_id`),
   FULLTEXT INDEX `indx_srch_plan_slug` (`plan_slug`)
@@ -258,12 +278,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_contract` (
   `contract_months` INT NOT NULL,
   `contract_slug` VARCHAR(150) NULL DEFAULT NULL,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`contract_id`),
   FULLTEXT INDEX `indx_srch_contract_slug` (`contract_slug`)
@@ -279,12 +299,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_affiliation` (
   `affiliation_name` VARCHAR(45) NOT NULL,
   `affiliation_slug` VARCHAR(150) NULL DEFAULT NULL,
   `weight` INT NOT NULL DEFAULT 1,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`affiliation_id`),
   FULLTEXT INDEX `indx_srch_affiliation_slug` (`affiliation_slug`)
@@ -305,12 +325,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_variation` (
   `product_variation_price` DECIMAL(6,2) NOT NULL,
   `reason_code` VARCHAR(8) NULL DEFAULT NULL,
   `product_package` VARCHAR(20) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`product_variation_id`),
   INDEX `fk_tbl_product_variation_tbl_variation_type1_idx` (`variation_type_id` ASC),
@@ -365,13 +385,13 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_promo` (
   `promo_expiration_date` DATETIME NOT NULL,
   `allow_all_variations` BOOLEAN NOT NULL DEFAULT FALSE,
   `allowed_variation_type_id` INT NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
   `publish_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `publish_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`promo_id`),
@@ -407,15 +427,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_branch` (
   `branch_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
+  `branch_name` VARCHAR(50) NOT NULL,
   `zip_code` VARCHAR(50) NOT NULL,
-  `address` VARCHAR(100) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `branch_address` VARCHAR(100) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`branch_id`)
 )
@@ -453,12 +473,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order` (
   `porting_status_desc` VARCHAR(20) NULL DEFAULT NULL,
   `total` DECIMAL(6,2) NOT NULL,
   `total_igv` DECIMAL(6,2) NOT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`order_id`),
   INDEX `fk_tbl_order_tbl_idtype1_idx` (`idtype_id` ASC),
@@ -494,12 +514,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_item` (
   `quantity` INT NOT NULL DEFAULT 1,
   `subtotal` DECIMAL(6,2) NOT NULL,
   `subtotal_igv` DECIMAL(6,2) NOT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`order_item_id`),
   INDEX `fk_tbl_order_item_tbl_order1_idx` (`order_id` ASC),
@@ -534,13 +554,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status` (
   `order_status_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `order_status_name` VARCHAR(50) NOT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`order_status_id`)
 )
@@ -555,12 +575,12 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status_history` (
   `order_status_id` INT NOT NULL,
   `notify_customer` BOOLEAN NULL DEFAULT FALSE,
   `comment` VARCHAR(200) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`order_status_history_id`),
   INDEX `fk_tbl_order_status_history_tbl_order1_idx` (`order_id` ASC),
@@ -583,15 +603,15 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_payment_method` (
   `payment_method_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `icon_url` VARCHAR(100) NULL DEFAULT NULL,
-  `tip` VARCHAR(100) NULL DEFAULT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `method_name` VARCHAR(50) NOT NULL,
+  `method_icon_url` VARCHAR(100) NULL DEFAULT NULL,
+  `method_tip` VARCHAR(100) NULL DEFAULT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`payment_method_id`)
 )
@@ -602,13 +622,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_idtype` (
   `idtype_id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `create_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-  `change_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
-  `delete_at` DATETIME NULL DEFAULT NULL,
-  `create_by` INT NULL DEFAULT 1,
-  `change_by` INT NULL DEFAULT NULL,
-  `delete_by` INT NULL DEFAULT NULL,
+  `idtype_name` VARCHAR(100) NOT NULL,
+  `created_at` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` DATETIME NULL ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
+  `created_by` INT NULL DEFAULT 1,
+  `updated_by` INT NULL DEFAULT NULL,
+  `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY (`idtype_id`)
 )
@@ -2549,16 +2569,107 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
--- Order Status
+-- Order Search
 -- ------------------------------------------
 
-DROP PROCEDURE IF EXISTS PA_orderStatus;
+DROP PROCEDURE IF EXISTS PA_orderSearch;
 
 DELIMITER $$
 --
--- Procedimiento para obtener un equipo prepago por su stock model code
+-- Procedimiento para obtener el detalle de una orden
 --
-CREATE PROCEDURE PA_orderStatus(
+CREATE PROCEDURE PA_orderSearch(
+  IN pag_total_by_page INT, -- Items per page
+  IN pag_actual INT, -- Actual page
+  IN sort_by VARCHAR(50),
+  IN sort_direction VARCHAR(5)  
+)
+BEGIN
+  DECLARE stored_query TEXT;
+  DECLARE select_query TEXT;
+  DECLARE from_query TEXT;
+  DECLARE where_query TEXT;
+
+  DECLARE pag_ini INT;
+  DECLARE pag_end INT;
+
+  SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
+  SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
+  -- SET product_string_search = IFNULL(product_string_search, '');
+  SET sort_by = IFNULL(sort_by, '');
+  SET sort_direction = IFNULL(sort_direction, '');
+
+  SET select_query = 'SELECT
+    ORD.*, OIT.*,
+    OST.`order_status_name`,
+    ORD.`created_at`,
+    IDT.`idtype_name`';
+
+  SET from_query = '
+    FROM tbl_order as ORD
+    INNER JOIN tbl_order_item as OIT
+      ON ORD.`order_id` = OIT.`order_id`
+    LEFT JOIN tbl_order_status_history as OSH
+      ON ORD.`order_id` = OSH.`order_id`
+    LEFT JOIN tbl_order_status as OST
+      ON OSH.`order_status_id` = OST.`order_status_id`
+    LEFT JOIN tbl_idtype as IDT
+      ON ORD.`idtype_id` = IDT.`idtype_id`';
+
+  SET where_query = '
+    ORDER BY OSH.`created_at` DESC';
+  
+  -- ORDER BY
+  IF (sort_by <> '') THEN
+    SET where_query = CONCAT(where_query, ', ORD.', sort_by);
+    IF(sort_direction IN ('ASC','DESC')) THEN
+      SET where_query = CONCAT(where_query, " ", sort_direction);
+    END IF;
+  END IF;
+
+  SET where_query = CONCAT(where_query, ' GROUP BY ORD.`order_id`');
+
+  -- setting actual page if wrong value
+  IF (pag_actual < 1) THEN
+    SET pag_actual = 1;
+  END IF;
+  -- Define the inital row
+  SET pag_ini = (pag_actual - 1) * pag_total_by_page;
+  -- Define the final row
+  SET pag_end = pag_actual * pag_total_by_page;
+
+  -- filter to pagination
+  IF (pag_ini > 0 AND pag_total_by_page > 0) THEN
+    SET where_query = CONCAT(where_query, ' LIMIT ',pag_ini,',', pag_total_by_page);
+  ELSE
+    IF (pag_total_by_page > 0) THEN
+      SET where_query = CONCAT(where_query, ' LIMIT ',pag_total_by_page);
+    END IF;
+  END IF;
+
+  SET stored_query = CONCAT(select_query, from_query, where_query);
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
+END $$
+
+DELIMITER ;
+
+-- ------------------------------------------
+-- Order Detail
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_orderDetail;
+
+DELIMITER $$
+--
+-- Procedimiento para obtener el detalle de una orden
+--
+CREATE PROCEDURE PA_orderDetail(
   IN order_id INT
 )
 BEGIN
@@ -2570,23 +2681,28 @@ BEGIN
   SET order_id = IFNULL(order_id, 0);
 
   SET select_query = 'SELECT
-    ORD.*,
-    STM.`stock_model_code`,
-    BRN.`brand_name`, BRN.`brand_slug`,
-    CLR.`color_name`, CLR.`color_slug`';
+    ORD.*, OST.*, IDT.`idtype_name`,
+    PMT.`method_name`, BCH.`branch_name`,
+    ORD.`created_at` as order_date,
+    OSH.`created_at` as status_date';
 
   SET from_query = '
-    FROM tbl_stock_model as STM
-    INNER JOIN tbl_product as PRD
-      ON STM.`product_id` = PRD.`product_id`
-    INNER JOIN tbl_brand as BRN
-      ON PRD.`brand_id` = BRN.`brand_id`
-    LEFT JOIN tbl_color as CLR
-      ON STM.`color_id` = CLR.`color_id`';
+    FROM tbl_order as ORD
+    LEFT JOIN tbl_order_status_history as OSH
+      ON ORD.`order_id` = OSH.`order_id`
+    LEFT JOIN tbl_order_status as OST
+      ON OSH.`order_status_id` = OST.`order_status_id`
+    LEFT JOIN tbl_idtype as IDT
+      ON ORD.`idtype_id` = IDT.`idtype_id`
+    LEFT JOIN tbl_payment_method as PMT
+      ON ORD.`payment_method_id` = PMT.`payment_method_id`
+    LEFT JOIN tbl_branch as BCH
+      ON ORD.`branch_id` = BCH.`branch_id`';
 
   SET where_query = CONCAT('
-    WHERE PRD.`active` = 1
-      AND STM.`stock_model_id` = ', stock_model_id
+    WHERE ORD.`order_id` = ', order_id, '
+    ORDER BY OSH.`created_at` DESC
+    LIMIT 1'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
@@ -2675,6 +2791,14 @@ DELIMITER ;
 -- INSERT RECORDS
 -- ------------------------------------------
 -- ------------------------------------------
+
+-- insert users
+INSERT INTO `tbl_user` VALUES (1, 'Agente Prueba', 'agente.prueba@bitel.pe', '$2y$10$dzOUK/H0LREcx/qhYwCluuIWDWn69hpAab3V3Bxpn//Y2x1e
+  0I4cq', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+
+-- order statuses
+INSERT INTO `tbl_order_status` VALUES (1, 'Pendiente', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO `tbl_order_status` VALUES (2, 'Aprobado', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 
 -- insert variation types
 INSERT INTO `tbl_variation_type` VALUES (1, 'Prepago', 'prepago', DEFAULT, FALSE, FALSE, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
@@ -2810,6 +2934,7 @@ INSERT INTO `tbl_idtype` VALUES (2, 'Carnet de extranjería', DEFAULT, DEFAULT, 
 INSERT INTO `tbl_idtype` VALUES (3, 'Pasaporte', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 
 -- insert postpaid product variations
+-- linea nueva
 INSERT INTO `tbl_product_variation` VALUES (1, 2, 1, 1, 2, 1, 359.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (2, 2, 1, 2, 2, 1, 359.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (3, 2, 1, 3, 2, 1, 359.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
@@ -3070,6 +3195,7 @@ INSERT INTO `tbl_product_variation` VALUES (257, 2, 20, 10, 2, 1, 9.00, DEFAULT,
 INSERT INTO `tbl_product_variation` VALUES (258, 2, 20, 11, 2, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (259, 2, 20, 12, 2, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (260, 2, 20, 13, 2, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+-- portabilidad
 INSERT INTO `tbl_product_variation` VALUES (261, 2, 1, 1, 1, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (262, 2, 1, 2, 1, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (263, 2, 1, 3, 1, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
@@ -3330,30 +3456,291 @@ INSERT INTO `tbl_product_variation` VALUES (517, 2, 20, 10, 1, 1, 9.00, DEFAULT,
 INSERT INTO `tbl_product_variation` VALUES (518, 2, 20, 11, 1, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (519, 2, 20, 12, 1, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 INSERT INTO `tbl_product_variation` VALUES (520, 2, 20, 13, 1, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+-- renovacion
+INSERT INTO `tbl_product_variation` VALUES (521, 2, 1, 1, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (522, 2, 1, 2, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (523, 2, 1, 3, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (524, 2, 1, 4, 3, 1, 229.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (525, 2, 1, 5, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (526, 2, 1, 6, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (527, 2, 1, 7, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (528, 2, 1, 8, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (529, 2, 1, 9, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (530, 2, 1, 10, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (531, 2, 1, 11, 3, 1, 409.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (532, 2, 1, 12, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (533, 2, 1, 13, 3, 1, 229.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (534, 2, 2, 1, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (535, 2, 2, 2, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (536, 2, 2, 3, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (537, 2, 2, 4, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (538, 2, 2, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (539, 2, 2, 6, 3, 1, 19.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (540, 2, 2, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (541, 2, 2, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (542, 2, 2, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (543, 2, 2, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (544, 2, 2, 11, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (545, 2, 2, 12, 3, 1, 170.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (546, 2, 2, 13, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (547, 2, 3, 1, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (548, 2, 3, 2, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (549, 2, 3, 3, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (550, 2, 3, 4, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (551, 2, 3, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (552, 2, 3, 6, 3, 1, 19.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (553, 2, 3, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (554, 2, 3, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (555, 2, 3, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (556, 2, 3, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (557, 2, 3, 11, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (558, 2, 3, 12, 3, 1, 170.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (559, 2, 3, 13, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (560, 2, 4, 1, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (561, 2, 4, 2, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (562, 2, 4, 3, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (563, 2, 4, 4, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (564, 2, 4, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (565, 2, 4, 6, 3, 1, 19.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (566, 2, 4, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (567, 2, 4, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (568, 2, 4, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (569, 2, 4, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (570, 2, 4, 11, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (571, 2, 4, 12, 3, 1, 170.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (572, 2, 4, 13, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (573, 2, 5, 1, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (574, 2, 5, 2, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (575, 2, 5, 3, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (576, 2, 5, 4, 3, 1, 229.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (577, 2, 5, 5, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (578, 2, 5, 6, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (579, 2, 5, 7, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (580, 2, 5, 8, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (581, 2, 5, 9, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (582, 2, 5, 10, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (583, 2, 5, 11, 3, 1, 359.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (584, 2, 5, 12, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (585, 2, 5, 13, 3, 1, 229.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (586, 2, 6, 1, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (587, 2, 6, 2, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (588, 2, 6, 3, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (589, 2, 6, 4, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (590, 2, 6, 5, 3, 1, 629.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (591, 2, 6, 6, 3, 1, 629.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (592, 2, 6, 7, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (593, 2, 6, 8, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (594, 2, 6, 9, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (595, 2, 6, 10, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (596, 2, 6, 11, 3, 1, 709.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (597, 2, 6, 12, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (598, 2, 6, 13, 3, 1, 669.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (599, 2, 7, 1, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (600, 2, 7, 2, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (601, 2, 7, 3, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (602, 2, 7, 4, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (603, 2, 7, 5, 3, 1, 1299.00, '90584', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (604, 2, 7, 6, 3, 1, 1199.00, '90585', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (605, 2, 7, 7, 3, 1, 1199.00, '90586', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (606, 2, 7, 8, 3, 1, 999.00, '90587', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (607, 2, 7, 9, 3, 1, 999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (608, 2, 7, 10, 3, 1, 999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (609, 2, 7, 11, 3, 1, 1549.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (610, 2, 7, 12, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (611, 2, 7, 13, 3, 1, 1399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (612, 2, 8, 1, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (613, 2, 8, 2, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (614, 2, 8, 3, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (615, 2, 8, 4, 3, 1, 129.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (616, 2, 8, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (617, 2, 8, 6, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (618, 2, 8, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (619, 2, 8, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (620, 2, 8, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (621, 2, 8, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (622, 2, 8, 11, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (623, 2, 8, 12, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (624, 2, 8, 13, 3, 1, 129.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (625, 2, 9, 1, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (626, 2, 9, 2, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (627, 2, 9, 3, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (628, 2, 9, 4, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (629, 2, 9, 5, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (630, 2, 9, 6, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (631, 2, 9, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (632, 2, 9, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (633, 2, 9, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (634, 2, 9, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (635, 2, 9, 11, 3, 1, 539.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (636, 2, 9, 12, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (637, 2, 9, 13, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (638, 2, 10, 1, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (639, 2, 10, 2, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (640, 2, 10, 3, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (641, 2, 10, 4, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (642, 2, 10, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (643, 2, 10, 6, 3, 1, 19.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (644, 2, 10, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (645, 2, 10, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (646, 2, 10, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (647, 2, 10, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (648, 2, 10, 11, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (649, 2, 10, 12, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (650, 2, 10, 13, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (651, 2, 11, 1, 3, 1, 559.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (652, 2, 11, 2, 3, 1, 559.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (653, 2, 11, 3, 3, 1, 559.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (654, 2, 11, 4, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (655, 2, 11, 5, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (656, 2, 11, 6, 3, 1, 459.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (657, 2, 11, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (658, 2, 11, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (659, 2, 11, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (660, 2, 11, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (661, 2, 11, 11, 3, 1, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (662, 2, 11, 12, 3, 1, 559.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (663, 2, 11, 13, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (664, 2, 12, 1, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (665, 2, 12, 2, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (666, 2, 12, 3, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (667, 2, 12, 4, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (668, 2, 12, 5, 3, 1, 2299.00, '90584', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (669, 2, 12, 6, 3, 1, 2099.00, '90585', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (670, 2, 12, 7, 3, 1, 1999.00, '90586', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (671, 2, 12, 8, 3, 1, 1599.00, '90587', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (672, 2, 12, 9, 3, 1, 799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (673, 2, 12, 10, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (674, 2, 12, 11, 3, 1, 2639.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (675, 2, 12, 12, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (676, 2, 12, 13, 3, 1, 2399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (677, 2, 13, 1, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (678, 2, 13, 2, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (679, 2, 13, 3, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (680, 2, 13, 4, 3, 1, 1.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (681, 2, 13, 5, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (682, 2, 13, 6, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (683, 2, 13, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (684, 2, 13, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (685, 2, 13, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (686, 2, 13, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (687, 2, 13, 11, 3, 1, 339.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (688, 2, 13, 12, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (689, 2, 13, 13, 3, 1, 1.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (690, 2, 14, 1, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (691, 2, 14, 2, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (692, 2, 14, 3, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (693, 2, 14, 4, 3, 1, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (694, 2, 14, 5, 3, 1, 599.00, '90584', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (695, 2, 14, 6, 3, 1, 329.00, '90585', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (696, 2, 14, 7, 3, 1, 199.00, '90586', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (697, 2, 14, 8, 3, 1, 9.00, '90587', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (698, 2, 14, 9, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (699, 2, 14, 10, 3, 1, 499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (700, 2, 14, 11, 3, 1, 739.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (701, 2, 14, 12, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (702, 2, 14, 13, 3, 1, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (703, 2, 15, 1, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (704, 2, 15, 2, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (705, 2, 15, 3, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (706, 2, 15, 4, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (707, 2, 15, 5, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (708, 2, 15, 6, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (709, 2, 15, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (710, 2, 15, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (711, 2, 15, 9, 3, 1, 159.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (712, 2, 15, 10, 3, 1, 159.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (713, 2, 15, 11, 3, 1, 539.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (714, 2, 15, 12, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (715, 2, 15, 13, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (716, 2, 16, 1, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (717, 2, 16, 2, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (718, 2, 16, 3, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (719, 2, 16, 4, 3, 1, 129.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (720, 2, 16, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (721, 2, 16, 6, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (722, 2, 16, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (723, 2, 16, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (724, 2, 16, 9, 3, 1, 159.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (725, 2, 16, 10, 3, 1, 159.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (726, 2, 16, 11, 3, 1, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (727, 2, 16, 12, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (728, 2, 16, 13, 3, 1, 129.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (729, 2, 17, 1, 3, 1, 799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (730, 2, 17, 2, 3, 1, 799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (731, 2, 17, 3, 3, 1, 799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (732, 2, 17, 4, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (733, 2, 17, 5, 3, 1, 679.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (734, 2, 17, 6, 3, 1, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (735, 2, 17, 7, 3, 1, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (736, 2, 17, 8, 3, 1, 99.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (737, 2, 17, 9, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (738, 2, 17, 10, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (739, 2, 17, 11, 3, 1, 939.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (740, 2, 17, 12, 3, 1, 799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (741, 2, 17, 13, 3, 1, 659.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (742, 2, 18, 1, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (743, 2, 18, 2, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (744, 2, 18, 3, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (745, 2, 18, 4, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (746, 2, 18, 5, 3, 1, 2199.00, '90584', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (747, 2, 18, 6, 3, 1, 2199.00, '90585', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (748, 2, 18, 7, 3, 1, 1999.00, '90586', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (749, 2, 18, 8, 3, 1, 1699.00, '90587', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (750, 2, 18, 9, 3, 1, 1999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (751, 2, 18, 10, 3, 1, 1999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (752, 2, 18, 11, 3, 1, 2439.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (753, 2, 18, 12, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (754, 2, 18, 13, 3, 1, 2299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (755, 2, 19, 1, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (756, 2, 19, 2, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (757, 2, 19, 3, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (758, 2, 19, 4, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (759, 2, 19, 5, 3, 1, 2599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (760, 2, 19, 6, 3, 1, 2599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (761, 2, 19, 7, 3, 1, 2499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (762, 2, 19, 8, 3, 1, 2099.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (763, 2, 19, 9, 3, 1, 2199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (764, 2, 19, 10, 3, 1, 2199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (765, 2, 19, 11, 3, 1, 2939.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (766, 2, 19, 12, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (767, 2, 19, 13, 3, 1, 2799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (768, 2, 20, 1, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (769, 2, 20, 2, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (770, 2, 20, 3, 3, 1, 199.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (771, 2, 20, 4, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (772, 2, 20, 5, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (773, 2, 20, 6, 3, 1, 19.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (774, 2, 20, 7, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (775, 2, 20, 8, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (776, 2, 20, 9, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (777, 2, 20, 10, 3, 1, 9.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (778, 2, 20, 11, 3, 1, 219.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (779, 2, 20, 12, 3, 1, 179.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (780, 2, 20, 13, 3, 1, 59.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 
 -- insert prepaid product variations
-INSERT INTO `tbl_product_variation` VALUES (521, 1, 1, 14, DEFAULT, DEFAULT, 449.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (522, 1, 2, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (523, 1, 3, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (524, 1, 4, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (525, 1, 5, 14, DEFAULT, DEFAULT, 439.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (526, 1, 6, 14, DEFAULT, DEFAULT, 779.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (527, 1, 7, 14, DEFAULT, DEFAULT, 1679.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (528, 1, 8, 14, DEFAULT, DEFAULT, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (529, 1, 9, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (530, 1, 10, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (531, 1, 11, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (532, 1, 12, 14, DEFAULT, DEFAULT, 2699.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (533, 1, 13, 14, DEFAULT, DEFAULT, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (534, 1, 14, 14, DEFAULT, DEFAULT, 1799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (535, 1, 15, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (536, 1, 16, 14, DEFAULT, DEFAULT, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (537, 1, 17, 14, DEFAULT, DEFAULT, 999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (538, 1, 18, 14, DEFAULT, DEFAULT, 2499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (539, 1, 19, 14, DEFAULT, DEFAULT, 2999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
-INSERT INTO `tbl_product_variation` VALUES (540, 1, 20, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (791, 1, 1, 14, DEFAULT, DEFAULT, 449.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (792, 1, 2, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (793, 1, 3, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (794, 1, 4, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (795, 1, 5, 14, DEFAULT, DEFAULT, 439.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (796, 1, 6, 14, DEFAULT, DEFAULT, 779.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (797, 1, 7, 14, DEFAULT, DEFAULT, 1679.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (798, 1, 8, 14, DEFAULT, DEFAULT, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (799, 1, 9, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (800, 1, 10, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (801, 1, 11, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (802, 1, 12, 14, DEFAULT, DEFAULT, 2699.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (803, 1, 13, 14, DEFAULT, DEFAULT, 399.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (804, 1, 14, 14, DEFAULT, DEFAULT, 1799.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (805, 1, 15, 14, DEFAULT, DEFAULT, 599.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (806, 1, 16, 14, DEFAULT, DEFAULT, 299.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (807, 1, 17, 14, DEFAULT, DEFAULT, 999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (808, 1, 18, 14, DEFAULT, DEFAULT, 2499.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (809, 1, 19, 14, DEFAULT, DEFAULT, 2999.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (810, 1, 20, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 -- chip
-INSERT INTO `tbl_product_variation` VALUES (541, 1, 21, 15, DEFAULT, DEFAULT, 5.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+INSERT INTO `tbl_product_variation` VALUES (811, 1, 21, 15, DEFAULT, DEFAULT, 5.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
