@@ -25,7 +25,7 @@ USE `bitel_ecommerce` ;
 -- Table `bitel_ecommerce`.`tbl_user`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_user` (
-  `user_id` INT NOT NULL AUTO_INCREMENT,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user_name` VARCHAR(100) NULL DEFAULT NULL,
   `user_email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
