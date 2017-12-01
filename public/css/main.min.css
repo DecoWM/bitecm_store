@@ -5084,7 +5084,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
  transition: 0.5s ease all;
 }
 
-#planes .select-plan .slick-slide.slick-active.slick-current:hover{
+#planes .select-plan .slick-slide.slick-active.label-active:hover{
   transform: scale(1);
 }
 
