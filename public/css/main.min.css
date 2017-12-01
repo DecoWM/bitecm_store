@@ -5265,8 +5265,14 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 .ver-mas-equipo {
+  display: block;
   margin: 35px 0;
 }
+
+.ver-mas-equipo a:hover{
+  text-decoration: none;
+}
+
 .ver-mas-equipo .title-detalle {
   border-bottom: 1px solid #cecece;
   border-right: 1px solid #cecece;

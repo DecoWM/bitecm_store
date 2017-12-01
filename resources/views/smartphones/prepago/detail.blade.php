@@ -169,19 +169,19 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <div class="ver-mas-equipo">
+          <a href="{{route('download_FichaTecnica')}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
+              <span  class="btn-vmas"></span>
               <!-- <a class="btn-vmas"></a> -->
-              <a href="{{route('download_FichaTecnica')}}" target="_blank" class="btn-vmas"></a>
               <h4>VER DETALLES TÉCNICOS</h4>
             </div>
-          </div>
-          <div class="ver-mas-equipo">
+          </a>
+          <a href="{{route('download_FichaTecnica')}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
-              <a href="{{route('download_Consideraciones')}}" target="_blank" class="btn-vmas"></a>
+              <span href="{{route('download_Consideraciones')}}" target="_blank" class="btn-vmas"></span>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>
             </div>
-          </div>
+          </a>
         </div>
       </div>
       <div class="row">
