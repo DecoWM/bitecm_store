@@ -5243,6 +5243,12 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-bottom: 10px;
   width: 100%;
 }
+
+
+#especificaciones-tecnicas .slick-track{
+  width: 1140px !important;
+}
+
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul li img {
   max-width: 100px;
   margin-left: auto;
