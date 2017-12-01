@@ -96,7 +96,7 @@
                       </div>
                       @endif
                     </div>
-                    <div class="col-xs-7 col-sm-6">
+                    <div class="col-xs-7 col-sm-6 col-12-mob">
                       {{--<div class="detalle-product" v-cloak>--}}
                       <div class="detalle-product">
                         {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
@@ -154,7 +154,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-offset-4 col-lg-8">
+        <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           @foreach ($plans as $i => $plan)
             @if($plan->plan_id == $product->plan_id)
               @php $selected_plan = $i > 0 ? $i - 1 : $i; @endphp
