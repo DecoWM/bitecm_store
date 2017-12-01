@@ -2793,8 +2793,7 @@ DELIMITER ;
 -- ------------------------------------------
 
 -- insert users
-INSERT INTO `tbl_user` VALUES (1, 'Agente Prueba', 'agente.prueba@bitel.pe', '$2y$10$dzOUK/H0LREcx/qhYwCluuIWDWn69hpAab3V3Bxpn//Y2x1e
-  0I4cq', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO `tbl_user` VALUES (1, 'Agente Prueba', 'agente.prueba@bitel.pe', '$2y$10$uxajRLmSd08NUSzIqJslw.17vHKahezEKRshOefldRoqnJEmS34sO', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 
 -- order statuses
 INSERT INTO `tbl_order_status` VALUES (1, 'Pendiente', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
