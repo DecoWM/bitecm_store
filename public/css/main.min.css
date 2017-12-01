@@ -2852,7 +2852,7 @@ section#equipos-vendidos .container .row .heading h2::before {
 section#equipos-vendidos .container .row .sub-heading {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin-bottom: 50px;
 
 }
 
@@ -3169,6 +3169,7 @@ section#equipos-promocion .container .row .heading h2::before {
 section#equipos-promocion .container .row .sub-heading {
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
 }
 section#equipos-promocion .container .row .sub-heading h3 {
   margin: 0 10px;
@@ -3182,7 +3183,6 @@ section#equipos-promocion .container .row .sub-heading h3.opt2 a {
   color: #ffb212;
 }
 section#equipos-promocion .container .row .content-tab-pro {
-  margin-top: 50px;
   display: flex;
 }
 
@@ -4546,7 +4546,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-top: 30px;
 }
 #descripcion-equipo .header-section {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 #descripcion-equipo .header-section .title {
   display: flex;
@@ -4555,8 +4555,12 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title {
-    display: block;
+    display: flex;
     height: auto;
+  }
+
+  #content-page #image-equipo .galeria-min{
+    display: none;
   }
 }
 #descripcion-equipo .header-section .title h1 {
@@ -4570,7 +4574,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title h1 {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
 }
 #descripcion-equipo .header-section .title .state {
@@ -4584,7 +4588,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title .state {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
   }
 }
 #descripcion-equipo .header-section .title .state span {
@@ -5081,7 +5085,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes .select-plan .slick-next {
-  right: -1px;
+  right: 0px;
 }
 @media (max-width: 320px) {
   #planes .select-plan .slick-next {
@@ -5221,6 +5225,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul {
   margin-bottom: 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
 }
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul .slick-prev {
   left: 0;
@@ -5232,6 +5241,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding: 0 10px;
   text-align: center;
   margin-bottom: 10px;
+  width: 100%;
 }
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul li img {
   max-width: 100px;
