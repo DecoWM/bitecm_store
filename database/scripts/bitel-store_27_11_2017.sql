@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_user` (
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
   `active` BOOLEAN NOT NULL DEFAULT FALSE,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB;
 
