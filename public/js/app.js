@@ -12133,7 +12133,7 @@ var app = new Vue({
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 3
+                    slidesToShow: 2
                 }
             }, {
                 breakpoint: 768,
@@ -12141,7 +12141,7 @@ var app = new Vue({
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 3
+                    slidesToShow: 2
                 }
             }, {
                 breakpoint: 667,
@@ -12153,6 +12153,13 @@ var app = new Vue({
                 }
             }, {
                 breakpoint: 480,
+                settings: {
+                    arrows: true,
+                    dots: false,
+                    centerMode: false,
+                    slidesToShow: 2
+            }, {
+                breakpoint: 320,
                 settings: {
                     arrows: true,
                     dots: false,
