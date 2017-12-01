@@ -96,7 +96,7 @@
                       </div>
                       @endif
                     </div>
-                    <div class="col-xs-7 col-sm-6">
+                    <div class="col-xs-7 col-sm-6 col-12-mob">
                       {{--<div class="detalle-product" v-cloak>--}}
                       <div class="detalle-product">
                         {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>

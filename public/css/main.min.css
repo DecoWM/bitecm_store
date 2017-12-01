@@ -4549,7 +4549,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #descripcion-equipo .header-section .title .state {
   text-align: center;
-  width: 150px;
+  width: 180px;
   line-height: 35px;
   border-radius: 15px;
   background-color: #ffe60d;
@@ -5031,6 +5031,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-top: 0;
   margin-bottom: 5px;
 }
+
+
 @media (max-width: 735px) {
   #planes .title-plan {
     font-weight: 400;
@@ -5138,11 +5140,16 @@ section#garantia .container .row .col-xs-4 .text-center p {
     margin-top: 5px;
   }
 }
-@media (max-width: 1199px) {
+@media (max-width: 768px) {
   #planes {
     margin-top: 20px;
   }
 }
+
+/*@media (max-width: 768px) {
+  #planes
+}*/
+
 #especificaciones-tecnicas .title-detalle {
   border-bottom: 1px solid #cecece;
   padding-bottom: 20px;

@@ -12157,9 +12157,10 @@ var app = new Vue({
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 2
-            }, {
-                breakpoint: 320,
+                    slidesToShow: 1
+                }
+            },{
+                breakpoint: 480,
                 settings: {
                     arrows: true,
                     dots: false,
