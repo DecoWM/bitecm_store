@@ -40,7 +40,7 @@
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product img {
-  height: 190px;
+  height: 130px;
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product .image-prepago {
@@ -198,6 +198,16 @@ input:checked ~ .checkmark:after {
 
 .title-select .btl-caret {
   margin-right: 15px;
+}
+
+@media (max-width: 480px){
+  .title-select .btl-caret{
+    display: none;
+  }
+}
+
+#compara-tus-equipos .slick-arrow{
+  display: none !important;
 }
 
 #list-equipos .producto {
