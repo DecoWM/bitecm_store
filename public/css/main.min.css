@@ -2798,13 +2798,18 @@ footer .container .copyright {
   margin-bottom: 30px;
   overflow: hidden;
 }
+
+#banner-principal .slider{
+
+}
+
 #banner-principal .slick-track {
   overflow: hidden;
 }
 #banner-principal .slick-track .slider {
   overflow: hidden;
 }
-#banner-principal .slick-track .slider img {
+#banner-principal img {
   width: 100%;
   object-fit: cover;
   height: 396px;
@@ -2847,7 +2852,11 @@ section#equipos-vendidos .container .row .heading h2::before {
 section#equipos-vendidos .container .row .sub-heading {
   display: flex;
   justify-content: center;
+  margin-top: 50px;
+
 }
+
+
 section#equipos-vendidos .container .row .sub-heading h3 {
   margin: 0 10px;
   font-size: 20px;
@@ -2859,10 +2868,27 @@ section#equipos-vendidos .container .row .sub-heading h3.opt1 a {
 section#equipos-vendidos .container .row .sub-heading h3.opt2 a {
   color: #ffb212;
 }
+
+.content-tab-promociones{
+  overflow: hidden;
+  height: 484px;
+}
+
+.content-tab-vendidos{
+  overflow: hidden;
+  height: 452px;
+
+}
+
+
+
+
+
 section#equipos-vendidos .container .row .content-tab-pro {
-  margin-top: 50px;
+  /*margin-top: 50px;*/
   height: 452px;
   display: flex;
+  overflow: hidden;
 }
 
 section#equipos-vendidos .container .row .content-tab-pro .slick-track {
