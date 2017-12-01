@@ -164,7 +164,7 @@
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             <div class="select-plan">
 @foreach ($plans as $plan)
-              <label>
+              <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')">
