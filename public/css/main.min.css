@@ -2798,13 +2798,18 @@ footer .container .copyright {
   margin-bottom: 30px;
   overflow: hidden;
 }
+
+#banner-principal .slider{
+
+}
+
 #banner-principal .slick-track {
   overflow: hidden;
 }
 #banner-principal .slick-track .slider {
   overflow: hidden;
 }
-#banner-principal .slick-track .slider img {
+#banner-principal img {
   width: 100%;
   object-fit: cover;
   height: 396px;
@@ -2847,7 +2852,11 @@ section#equipos-vendidos .container .row .heading h2::before {
 section#equipos-vendidos .container .row .sub-heading {
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
+
 }
+
+
 section#equipos-vendidos .container .row .sub-heading h3 {
   margin: 0 10px;
   font-size: 20px;
@@ -2859,10 +2868,27 @@ section#equipos-vendidos .container .row .sub-heading h3.opt1 a {
 section#equipos-vendidos .container .row .sub-heading h3.opt2 a {
   color: #ffb212;
 }
+
+.content-tab-promociones{
+  overflow: hidden;
+  height: 484px;
+}
+
+.content-tab-vendidos{
+  overflow: hidden;
+  height: 452px;
+
+}
+
+
+
+
+
 section#equipos-vendidos .container .row .content-tab-pro {
-  margin-top: 50px;
+  /*margin-top: 50px;*/
   height: 452px;
   display: flex;
+  overflow: hidden;
 }
 
 section#equipos-vendidos .container .row .content-tab-pro .slick-track {
@@ -3143,6 +3169,7 @@ section#equipos-promocion .container .row .heading h2::before {
 section#equipos-promocion .container .row .sub-heading {
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
 }
 section#equipos-promocion .container .row .sub-heading h3 {
   margin: 0 10px;
@@ -3156,7 +3183,6 @@ section#equipos-promocion .container .row .sub-heading h3.opt2 a {
   color: #ffb212;
 }
 section#equipos-promocion .container .row .content-tab-pro {
-  margin-top: 50px;
   display: flex;
 }
 
@@ -4520,17 +4546,21 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-top: 30px;
 }
 #descripcion-equipo .header-section {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 #descripcion-equipo .header-section .title {
   display: flex;
   margin-bottom: 10px;
-  height: 35px;
+  /*height: 35px;*/
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title {
-    display: block;
+    display: flex;
     height: auto;
+  }
+
+  #content-page #image-equipo .galeria-min{
+    display: none;
   }
 }
 #descripcion-equipo .header-section .title h1 {
@@ -4544,7 +4574,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title h1 {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
 }
 #descripcion-equipo .header-section .title .state {
@@ -4554,10 +4584,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border-radius: 15px;
   background-color: #ffe60d;
   font-weight: 600;
+  height: 35px;
 }
 @media (max-width: 736px) {
   #descripcion-equipo .header-section .title .state {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
   }
 }
 #descripcion-equipo .header-section .title .state span {
@@ -5020,7 +5051,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes {
-  margin-top: -330px;
+  margin-top: -310px;
 }
 #planes .title-plan {
   Color: #008c95;
@@ -5084,7 +5115,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
  transition: 0.5s ease all;
 }
 
-#planes .select-plan .slick-slide.slick-active.slick-current:hover{
+#planes .select-plan .slick-slide.slick-active.label-active:hover{
   transform: scale(1);
 }
 
@@ -5194,6 +5225,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul {
   margin-bottom: 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
 }
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul .slick-prev {
   left: 0;
@@ -5205,7 +5241,14 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding: 0 10px;
   text-align: center;
   margin-bottom: 10px;
+  width: 100%;
 }
+
+
+#especificaciones-tecnicas .slick-track{
+  width: 1140px !important;
+}
+
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul li img {
   max-width: 100px;
   margin-left: auto;
@@ -5265,8 +5308,14 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 .ver-mas-equipo {
+  display: block;
   margin: 35px 0;
 }
+
+.ver-mas-equipo:hover{
+  text-decoration: none;
+}
+
 .ver-mas-equipo .title-detalle {
   border-bottom: 1px solid #cecece;
   border-right: 1px solid #cecece;

@@ -15,92 +15,94 @@
                 <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
                 <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
               </div>
-              {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
-                <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
-                  <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
-                    <div class="btn-catalogo">
-                      <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
-                    </div>
-                  </div>
-                  <div class="list-productos">
-                    @foreach ($best_seller_smartphone as $smartphone)
-                    <div class="producto">
-                      @if(isset($smartphone->promo_id))
-                      <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
-                      @else
-                      <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
-                      @endif
-                      <div class="image-product text-center">
-                        <a href="{{$smartphone->route}}">
-                          <img src="{{$smartphone->picture_url}}" alt="equipos">
-                        </a>
+              <div class="content-tab-vendidos">
+                {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
+                  <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
+                    <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
+                      <div class="btn-catalogo">
+                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
                       </div>
-                      <div class="content-product text-center">
-                        <div class="title-product">
-                          <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
-                          <h4 class="text-center">{{$smartphone->product_model}}</h4>
-                        </div>
-                        <div class="price-product">
-                          @if($smartphone->promo_id)
-                          <span>S/.{{$smartphone->promo_price}}</span>
-                          <span class="normal-price">S/.{{$smartphone->product_price}}</span>
-                          @else
-                          <span>S/.{{$smartphone->product_price}}</span>
-                          @endif
-                        </div>
-                        @if (isset($smartphone->affiliation_id))
-                        <div class="plan-product">
-                          <p>en plan <span>{{$smarthphone->plan_name}}</span></p>
-                        </div>
+                    </div>
+                    <div class="list-productos">
+                      @foreach ($best_seller_smartphone as $smartphone)
+                      <div class="producto">
+                        @if(isset($smartphone->promo_id))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                        @else
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
                         @endif
-                        <div class="btn-comprar">
-                          <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
+                        <div class="image-product text-center">
+                          <a href="{{$smartphone->route}}">
+                            <img src="{{$smartphone->picture_url}}" alt="equipos">
+                          </a>
                         </div>
-                      </div>
-                    </div>
-                  @endforeach
-                  </div>
-                </div>
-                <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
-                  <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
-                    <div class="btn-catalogo">
-                      <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
-                    </div>
-                  </div>
-                  <div class="list-productos">
-                    @foreach ($best_seller_tablet as $tablet)
-                    <div class="producto">
-                      @if(isset($tablet->promo_id))
-                      <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
-                      @else
-                      <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
-                      @endif
-                      <div class="image-product text-center">
-                        <a href="{{$tablet->route}}">
-                          <img src="{{$tablet->picture_url}}" alt="equipos">
-                        </a>
-                      </div>
-                      <div class="content-product text-center">
-                        <div class="title-product">
-                          <h4 class="text-center"><b>{{$tablet->brand_name}}</b></h4>
-                          <h4 class="text-center">{{$tablet->product_model}}</h4>
-                        </div>
-                        <div class="price-product">
-                          @if($tablet->promo_id)
-                          <span>S/.{{$tablet->promo_price}}</span>
-                          <span class="normal-price">S/.{{$tablet->product_price}}</span>
-                          @else
-                          <span>S/.{{$tablet->product_price}}</span>
+                        <div class="content-product text-center">
+                          <div class="title-product">
+                            <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
+                            <h4 class="text-center">{{$smartphone->product_model}}</h4>
+                          </div>
+                          <div class="price-product">
+                            @if($smartphone->promo_id)
+                            <span>S/.{{$smartphone->promo_price}}</span>
+                            <span class="normal-price">S/.{{$smartphone->product_price}}</span>
+                            @else
+                            <span>S/.{{$smartphone->product_price}}</span>
+                            @endif
+                          </div>
+                          @if (isset($smartphone->affiliation_id))
+                          <div class="plan-product">
+                            <p>en plan <span>{{$smarthphone->plan_name}}</span></p>
+                          </div>
                           @endif
-                        </div>
-                        <div class="btn-comprar">
-                          <a href="{{$tablet->route}}" class="btn btn-default">COMPRAR</a>
+                          <div class="btn-comprar">
+                            <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
+                          </div>
                         </div>
                       </div>
-                    </div>
                     @endforeach
+                    </div>
                   </div>
-                </div>
+                  <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
+                    <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
+                      <div class="btn-catalogo">
+                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
+                      </div>
+                    </div>
+                    <div class="list-productos">
+                      @foreach ($best_seller_tablet as $tablet)
+                      <div class="producto">
+                        @if(isset($tablet->promo_id))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                        @else
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
+                        @endif
+                        <div class="image-product text-center">
+                          <a href="{{$tablet->route}}">
+                            <img src="{{$tablet->picture_url}}" alt="equipos">
+                          </a>
+                        </div>
+                        <div class="content-product text-center">
+                          <div class="title-product">
+                            <h4 class="text-center"><b>{{$tablet->brand_name}}</b></h4>
+                            <h4 class="text-center">{{$tablet->product_model}}</h4>
+                          </div>
+                          <div class="price-product">
+                            @if($tablet->promo_id)
+                            <span>S/.{{$tablet->promo_price}}</span>
+                            <span class="normal-price">S/.{{$tablet->product_price}}</span>
+                            @else
+                            <span>S/.{{$tablet->product_price}}</span>
+                            @endif
+                          </div>
+                          <div class="btn-comprar">
+                            <a href="{{$tablet->route}}" class="btn btn-default">COMPRAR</a>
+                          </div>
+                        </div>
+                      </div>
+                      @endforeach
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
@@ -142,76 +144,81 @@
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="postpago" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
-              <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
-@foreach ($promo_postpaid as $smartphone)
-                <div class="producto">
-                  @if(isset($smartphone->promo_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
-                  @else
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
-                  @endif
-                  {{--<div class="state-product"><span class="trending">TRENDING</span></div>--}}
-                  <div class="image-product text-center">
-                    <a href="{{$smartphone->route}}">
-                      <img src="{{$smartphone->picture_url}}" alt="equipos">
-                    </a>
+
+              <div class="content-tab-promociones">
+                
+                <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
+    @foreach ($promo_postpaid as $smartphone)
+                  <div class="producto">
+                    @if(isset($smartphone->promo_id))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                    @else
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
+                    @endif
+                    {{--<div class="state-product"><span class="trending">TRENDING</span></div>--}}
+                    <div class="image-product text-center">
+                      <a href="{{$smartphone->route}}">
+                        <img src="{{$smartphone->picture_url}}" alt="equipos">
+                      </a>
+                    </div>
+                    <div class="content-product text-center">
+                      <div class="title-product">
+                        <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
+                        <h4 class="text-center">{{$smartphone->product_model}}</h4>
+                      </div>
+                      <div class="price-product">
+                        @if($smartphone->promo_id)
+                        <span>S/.{{$smartphone->promo_price}}</span>
+                        <span class="normal-price">S/.{{$smartphone->product_price}}</span>
+                        @else
+                        <span>S/.{{$smartphone->product_price}}</span>
+                        @endif
+                      </div>
+                      <div class="plan-product">
+                        <p>en plan <span>{{$smartphone->plan_name}}</span></p>
+                      </div>
+                      <div class="btn-comprar">
+                        <a href="{{$smartphone->route}}" class="btn btn-default">VER MÁS</a>
+                      </div>
+                    </div>
                   </div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
-                      <h4 class="text-center">{{$smartphone->product_model}}</h4>
-                    </div>
-                    <div class="price-product">
-                      @if($smartphone->promo_id)
-                      <span>S/.{{$smartphone->promo_price}}</span>
-                      <span class="normal-price">S/.{{$smartphone->product_price}}</span>
-                      @else
-                      <span>S/.{{$smartphone->product_price}}</span>
-                      @endif
-                    </div>
-                    <div class="plan-product">
-                      <p>en plan <span>{{$smartphone->plan_name}}</span></p>
-                    </div>
-                    <div class="btn-comprar">
-                      <a href="{{$smartphone->route}}" class="btn btn-default">VER MÁS</a>
-                    </div>
-                  </div>
+    @endforeach
                 </div>
-@endforeach
-              </div>
-              <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
-@foreach ($promo_prepaid as $smartphone)
-                <div class="producto">
-                  @if(isset($smartphone->promo_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
-                  @else
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
-                  @endif
-                  <div class="image-product text-center">
-                    <a href="{{$smartphone->route}}">
-                      <img src="{{$smartphone->picture_url}}" alt="equipos">
-                    </a>
+                <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
+    @foreach ($promo_prepaid as $smartphone)
+                  <div class="producto">
+                    @if(isset($smartphone->promo_id))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                    @else
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
+                    @endif
+                    <div class="image-product text-center">
+                      <a href="{{$smartphone->route}}">
+                        <img src="{{$smartphone->picture_url}}" alt="equipos">
+                      </a>
+                    </div>
+                    <div class="content-product text-center">
+                      <div class="title-product">
+                        <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
+                        <h4 class="text-center">{{$smartphone->product_model}}</h4>
+                      </div>
+                      <div class="price-product">
+                        @if($smartphone->promo_id)
+                        <span>S/.{{$smartphone->promo_price}}</span>
+                        <span class="normal-price">S/.{{$smartphone->product_price}}</span>
+                        @else
+                        <span>S/.{{$smartphone->product_price}}</span>
+                        @endif
+                      </div>
+                      <div class="btn-comprar">
+                        <a href="{{$smartphone->route}}" class="btn btn-default">VER MÁS</a>
+                      </div>
+                    </div>
                   </div>
-                  <div class="content-product text-center">
-                    <div class="title-product">
-                      <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
-                      <h4 class="text-center">{{$smartphone->product_model}}</h4>
-                    </div>
-                    <div class="price-product">
-                      @if($smartphone->promo_id)
-                      <span>S/.{{$smartphone->promo_price}}</span>
-                      <span class="normal-price">S/.{{$smartphone->product_price}}</span>
-                      @else
-                      <span>S/.{{$smartphone->product_price}}</span>
-                      @endif
-                    </div>
-                    <div class="btn-comprar">
-                      <a href="{{$smartphone->route}}" class="btn btn-default">VER MÁS</a>
-                    </div>
-                  </div>
+    @endforeach
                 </div>
-@endforeach
               </div>
+              
             </div>
           </div>
         </div>
