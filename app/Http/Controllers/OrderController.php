@@ -271,7 +271,7 @@ class OrderController extends Controller
         'subtotal_igv' => $subtotal_igv
       ]);
     }
-
+    
     $order_detail['total'] = $total;
     $order_detail['total_igv'] = $total_igv;
     $order_id = DB::table('tbl_order')->insertGetId([

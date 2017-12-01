@@ -12,7 +12,7 @@
               @foreach ($products as $product)
               <section id="detalle-rastreo">
                 <div class="title-section">
-                  <h1>Producto comprado el:</h1><span>{{$order->create_at}}</span>
+                  <h1>Producto comprado el:</h1><span>{{$order->created_at}}</span>
                 </div>
                 <div class="content-section">
                   <div class="row">
