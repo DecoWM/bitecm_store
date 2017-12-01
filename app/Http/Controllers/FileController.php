@@ -33,6 +33,15 @@ class FileController extends Controller
         return response()->download($path, $name);
     }
 
+    public function downloadFileTerminos (Request $request) {
+        $name = $slug = str_slug('Terminos');
+        // $path = storage_path('/app/public/'.$filename);
+        $ext = ".pdf";
+        $name = $name.$ext;
+        $path = public_path('/files/pdf/footer/Terminos-Condiciones.pdf');
+        return response()->download($path, $name);
+    }
+
     public function downloadFileFichaTecnica (Request $request) {
         $name = $slug = str_slug('Ficha-Técnica');
         // $path = storage_path('/app/public/'.$filename);

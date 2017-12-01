@@ -5442,7 +5442,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 768px) {
   #nav-carrito ul li span {
-    display: none;
+    display: block;
+  }
+
+  .navbar-brand{
+    height: 45px;
   }
 }
 #nav-carrito ul li:before {
@@ -5528,7 +5532,10 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 768px) {
   #nav-carrito {
-    margin: 0;
+    margin: 30px auto;
+    display: block;
+    height: 90px;
+    width: 200px;
   }
 }
 #title-page {
@@ -5544,6 +5551,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 768px) {
   #title-page {
     display: block;
+    margin: 0;
   }
 }
 #section-pedido {
