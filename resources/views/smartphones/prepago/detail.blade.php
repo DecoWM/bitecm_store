@@ -14,7 +14,7 @@
             @endif
             <div id="image-equipo">
               @if(count($product_images)>0)
-                <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}" data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">
+                <div class="image-product text-center"><img id="zoom_01" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">--}}
                 </div>
                 @if(count($product_images)>1)
                 <div id="gallery_01" class="galeria-min">

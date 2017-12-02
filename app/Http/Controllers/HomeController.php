@@ -42,8 +42,7 @@ class HomeController extends Controller
       }
       return $item;
     });
-    $best_seller_tablet = $best_seller_smartphone;
-    /*$best_seller_tablet = $this->shared->searchProductPrepaid(3, $plan_pre_id, null, 4);
+    $best_seller_tablet = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, 2);
     $best_seller_tablet = collect($best_seller_tablet['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
       if (isset($item->affiliation_id)) {
@@ -62,7 +61,7 @@ class HomeController extends Controller
         ]);
       }
       return $item;
-    });*/
+    });
     $featured_products = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, 2);
     $featured_products = collect($featured_products['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);

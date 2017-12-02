@@ -2732,6 +2732,49 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
+-- Order Detail
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_orderStatusHistory;
+
+DELIMITER $$
+--
+-- Procedimiento para obtener el detalle de una orden
+--
+CREATE PROCEDURE PA_orderStatusHistory(
+  IN order_id INT
+)
+BEGIN
+  DECLARE stored_query TEXT;
+  DECLARE select_query TEXT;
+  DECLARE from_query TEXT;
+  DECLARE where_query TEXT;
+  
+  SET order_id = IFNULL(order_id, 0);
+
+  SET select_query = 'SELECT OSH.*';
+
+  SET from_query = '
+    FROM tbl_order_status_history as OSH';
+
+  SET where_query = CONCAT('
+    WHERE OSH.`order_id` = ', order_id, '
+    ORDER BY OSH.`created_at` DESC'
+  );
+
+  SET stored_query = CONCAT(select_query, from_query, where_query);
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
+END $$
+
+DELIMITER ;
+
+-- ------------------------------------------
 -- Plan Slug by ID
 -- ------------------------------------------
 
