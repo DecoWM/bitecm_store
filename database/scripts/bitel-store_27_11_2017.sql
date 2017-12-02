@@ -2603,7 +2603,11 @@ BEGIN
     ORD.*, OIT.*,
     OST.`order_status_name`,
     ORD.`created_at`,
-    IDT.`idtype_name`';
+    IDT.`idtype_name`,
+    BCH.`branch_name`,
+    VAR.`variation_type_name`,
+    PLN.`plan_name`,
+    AFF.`affiliation_name`';
 
   SET from_query = '
     FROM tbl_order as ORD
@@ -2614,7 +2618,17 @@ BEGIN
     LEFT JOIN tbl_order_status as OST
       ON OSH.`order_status_id` = OST.`order_status_id`
     LEFT JOIN tbl_idtype as IDT
-      ON ORD.`idtype_id` = IDT.`idtype_id`';
+      ON ORD.`idtype_id` = IDT.`idtype_id`
+    LEFT JOIN tbl_branch as BCH
+      ON ORD.`branch_id` = BCH.`branch_id`
+    LEFT JOIN tbl_product_variation as PRD_VAR
+      ON OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
+    LEFT JOIN tbl_variation_type as VAR
+      ON PRD_VAR.`variation_type_id` = VAR.`variation_type_id`
+    LEFT JOIN tbl_plan as PLN
+      ON PRD_VAR.`plan_id` = PLN.`plan_id`
+    LEFT JOIN tbl_affiliation as AFF
+      ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
 
   SET where_query = '
     ORDER BY OSH.`created_at` DESC';
