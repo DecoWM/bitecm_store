@@ -297,6 +297,7 @@ nav#nav-bitel .container .navbar-header a.navbar-brand h1 {
   margin: 0;
   text-indent: -555px;
   overflow: hidden;
+  height: 50px;
 }
 nav#nav-bitel .container #navbar {
   border-color: transparent;
@@ -5312,6 +5313,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin: 35px 0;
 }
 
+.ver-mas-equipo:focus,
 .ver-mas-equipo:hover{
   text-decoration: none;
 }
@@ -5330,7 +5332,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   right: 20px;
   top: 5px;
 }
-.ver-mas-equipo .title-detalle .btn-vmas:before {
+/*.ver-mas-equipo .title-detalle .btn-vmas:before {
   opacity: 1 !important;
   content: "";
   width: 12px;
@@ -5352,7 +5354,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   background-color: #008c95;
   transform: rotate(-45deg);
   z-index: 99;
-}
+}*/
 .ver-mas-equipo .title-detalle .btn-vmas:hover {
   cursor: pointer;
 }
@@ -5439,8 +5441,16 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 
 #producto-disponibles .list-producto .producto .image-product img {
+  max-width: 100%;
   margin: 0 auto;
+  transition: 0.5s ease all;
+
 }
+
+#producto-disponibles .list-producto .producto:hover .image-product img{
+  transform: scale(1.1, 1.1);
+}
+
 #producto-disponibles .list-producto .producto .content-product .title-product {
   margin: 20px 0;
 }
@@ -5938,6 +5948,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-top: 14px;
   border-radius: 100%;
   font-size: 12px;
+  display: none;
 }
 #form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop .text-pop {
   transition: opacity 0.5s linear;
@@ -6477,14 +6488,17 @@ section#garantia .container .row .col-xs-4 .text-center p {
   position: relative;
 }
 .ver-mas-equipo .title-detalle .btn-vmas {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   display: block;
   position: absolute;
   right: 20px;
   top: 5px;
+  background: url(../../images/productos/icon-descarga.svg) 0 0 no-repeat ;
+  -webkit-background-size: contain;
+  background-size: contain;
 }
-.ver-mas-equipo .title-detalle .btn-vmas:before {
+/*.ver-mas-equipo .title-detalle .btn-vmas:before {
   opacity: 1 !important;
   content: "";
   width: 12px;
@@ -6506,7 +6520,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   background-color: #008c95;
   transform: rotate(-45deg);
   z-index: 99;
-}
+}*/
 .ver-mas-equipo .title-detalle .btn-vmas:hover {
   cursor: pointer;
 }
