@@ -5313,6 +5313,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin: 35px 0;
 }
 
+.ver-mas-equipo:focus,
 .ver-mas-equipo:hover{
   text-decoration: none;
 }

@@ -226,7 +226,7 @@
               <h4>VER DETALLES TÉCNICOS</h4>
             </div>
           </a>
-          <a href="{{route('download_FichaTecnica')}}" target="_blank" class="ver-mas-equipo">
+          <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>
