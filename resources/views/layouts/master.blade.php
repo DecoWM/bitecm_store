@@ -9,6 +9,17 @@
     <meta name="type" content="{{ Request::segment(1) ? Request::segment(1) : '' }}">
     <meta name="robots" content="noindex">
     <title>Bitel</title>
+
+    <meta property="og:description" content='Bitel'>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://bitel.com.pe">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700,800,900">
     {{-- <link type="text/css" rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css"> --}}
     <link type="text/css" rel="stylesheet" href="{{asset('css/main.min.css')}}">
