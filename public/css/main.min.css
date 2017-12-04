@@ -5861,6 +5861,13 @@ section#garantia .container .row .col-xs-4 .text-center p {
   height: 40px;
   border: 1px solid #cecece;
 }
+
+#form-cliente form .section-form .form-group input.is-danger{
+  border: 1px solid #e30020;
+}
+
+
+
 #form-cliente form .section-form .form-group select {
   text-transform: uppercase;
   line-height: 18px;
@@ -5952,7 +5959,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-top: 14px;
   border-radius: 100%;
   font-size: 12px;
-  display: none;
+/*  display: none;*/
 }
 #form-cliente form .section-form.mediosdepago .form-group .col-xs-6.col-sm-3 label .efectivo span.pop .text-pop {
   transition: opacity 0.5s linear;
