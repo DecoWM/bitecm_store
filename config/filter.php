@@ -12,6 +12,10 @@ return [
 
   'accessory_cat_id' => env('ACCESSORY_CAT_ID', 2),
 
-  'igv' => env('IGV', 0.18)
+  'igv' => env('IGV', 0.18),
+
+  'order_status_id' => env('ORDER_STATUS_ID', 1),
+
+  'use_bcss' => env('USE_BCSS', 1)
 
 ];

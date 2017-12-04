@@ -67,6 +67,7 @@
                         <option value="" selected>Seleccione tipo de afiliación</option>
                         <option value="1">Portabilidad</option>
                         <option value="2">Linea nueva</option>
+                        <option value="3">Renovación</option>
                       </select>
                     </div>
                     <div class="form-group form-select" v-if="affiliation == 1">

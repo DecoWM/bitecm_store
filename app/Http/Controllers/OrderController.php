@@ -200,35 +200,37 @@ class OrderController extends Controller
       $order_detail['porting_phone'] = $request->porting_phone;
     }
 
-    // Apply validations with Bitel webservice before insert
-    $this->initSoapWrapper(); // Init the bitel soap webservice
+    if(\Config::get('filter.use_bcss')) {
+      // Apply validations with Bitel webservice before insert
+      $this->initSoapWrapper(); // Init the bitel soap webservice
 
-    // Check if have many lines
-    if($this->checkIsOverQouta($order_detail)){
-      return 'No puede tener más números telefónicos';
-    }
-
-    // check if is client
-    if($data_customer = $this->getInfoCustomer($order_detail)){
-      // check if have debt
-      if($this->checkHaveDebit($data_customer->custId)){
-        return 'Actualmente tiene deudas pendientes';
+      // Check if have many lines
+      if($this->checkIsOverQouta($order_detail)){
+        return 'No puede tener más números telefónicos';
       }
-    }
 
-    // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-    /*if($request->affiliation == 1){
-      // process request portability
-      if($this->createConsultantRequest($order_detail)){
-        // check if is possible migrate to bitel
-        if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
-          return 'No es posible realizar la portabilidad con su número';
+      // check if is client
+      if($data_customer = $this->getInfoCustomer($order_detail)){
+        // check if have debt
+        if($this->checkHaveDebit($data_customer->custId)){
+          return 'Actualmente tiene deudas pendientes';
         }
       }
-      else{
-        return 'Error creando la solicitud de portabilidad';
-      }
-    }*/
+
+      // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
+      /*if($request->affiliation == 1){
+        // process request portability
+        if($this->createConsultantRequest($order_detail)){
+          // check if is possible migrate to bitel
+          if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+            return 'No es posible realizar la portabilidad con su número';
+          }
+        }
+        else{
+          return 'Error creando la solicitud de portabilidad';
+        }
+      }*/
+    }
 
     $igv = \Config::get('filter.igv');
 
@@ -271,7 +273,7 @@ class OrderController extends Controller
         'subtotal_igv' => $subtotal_igv
       ]);
     }
-    
+
     $order_detail['total'] = $total;
     $order_detail['total_igv'] = $total_igv;
     $order_id = DB::table('tbl_order')->insertGetId([
@@ -297,6 +299,11 @@ class OrderController extends Controller
     }
 
     DB::table('tbl_order_item')->insert($order_items);
+
+    DB::table('tbl_order_status_history')->insert([
+      'order_id' => $order_id,
+      'order_status_id' => \Config::get('filter.order_status_id')
+    ]);
 
     Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
 

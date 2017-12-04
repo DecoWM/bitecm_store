@@ -2695,6 +2695,7 @@ BEGIN
   SET select_query = 'SELECT
     ORD.*, OST.*, IDT.`idtype_name`,
     PMT.`method_name`, BCH.`branch_name`,
+    PMT.`method_name`,
     ORD.`created_at` as order_date,
     OSH.`created_at` as status_date';
 
@@ -2730,7 +2731,7 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
--- Order Detail
+-- Order Status History
 -- ------------------------------------------
 
 DROP PROCEDURE IF EXISTS PA_orderStatusHistory;
