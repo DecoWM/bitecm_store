@@ -29,7 +29,7 @@ class BaseController extends Controller
       'pag_total_by_page' => $pag_total_by_page,
       'pag_actual' => $pag_actual,
       'sort_by' => $sort_by,
-      'sort_direction' => $sort_direction,
+      'sort_direction' => $sort_direction
     ]);
 
     $total = DB::select('call PA_productCountPrepago(

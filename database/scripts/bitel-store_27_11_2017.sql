@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_user` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB;
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_variation_type` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`variation_type_id`),
   FULLTEXT INDEX `indx_srch_variation_type_slug` (`variation_type_slug`)
 )
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_brand` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`brand_id`),
   FULLTEXT INDEX `indx_srchbrand` (`brand_name` ASC),
   FULLTEXT INDEX `indx_srch_brand_slug` (`brand_slug`)
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_category` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`category_id`),
   FULLTEXT INDEX `indx_srch_category_slug` (`category_slug`)
 )
@@ -174,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_color` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`color_id`),
   FULLTEXT INDEX `indx_srch_color_slug` (`color_slug`)
 )
@@ -194,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_stock_model` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`stock_model_id`),
   INDEX `fk_tbl_stock_model_tbl_product1_idx` (`product_id` ASC),
   INDEX `fk_tbl_stock_model_tbl_color1_idx` (`color_id` ASC),
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_image` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`product_image_id`),
   INDEX `fk_tbl_product_image_tbl_stock_model1_idx` (`stock_model_id` ASC),
   CONSTRAINT `fk_tbl_product_image_tbl_stock_model1`
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_plan` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`plan_id`),
   FULLTEXT INDEX `indx_srch_plan_slug` (`plan_slug`)
 )
@@ -284,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_contract` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`contract_id`),
   FULLTEXT INDEX `indx_srch_contract_slug` (`contract_slug`)
 )
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_affiliation` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`affiliation_id`),
   FULLTEXT INDEX `indx_srch_affiliation_slug` (`affiliation_slug`)
 )
@@ -331,7 +331,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product_variation` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`product_variation_id`),
   INDEX `fk_tbl_product_variation_tbl_variation_type1_idx` (`variation_type_id` ASC),
   INDEX `fk_tbl_product_variation_tbl_product1_idx` (`product_id` ASC),
@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_branch` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`branch_id`)
 )
 ENGINE = InnoDB;
@@ -461,11 +461,9 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order` (
   `delivery_district` VARCHAR(50) NOT NULL,
   `contact_email` VARCHAR(100) NOT NULL,
   `contact_phone` VARCHAR(20) NOT NULL,
-  `credit_status` ENUM('Aprobado','Rechazado','Observado') NULL DEFAULT NULL,
+  `credit_status` ENUM('Pendiente','Aprobada','Rechazada','Observada') NULL DEFAULT 'Pendiente',
   `has_debt` BOOLEAN NOT NULL DEFAULT FALSE,
   `isdn_status` ENUM('0','5','4','6') NOT NULL DEFAULT '0',
-  `staff_code` VARCHAR(20) NULL DEFAULT NULL,
-  `shop_code` VARCHAR(20) NULL DEFAULT NULL,
   `porting_request_id` VARCHAR(20) NULL DEFAULT NULL,
   `mnp_request_id` VARCHAR(20) NULL DEFAULT NULL,
   `porting_state_code` VARCHAR(20) NULL DEFAULT NULL,
@@ -561,7 +559,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`order_status_id`)
 )
 ENGINE = InnoDB;
@@ -581,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_order_status_history` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`order_status_history_id`),
   INDEX `fk_tbl_order_status_history_tbl_order1_idx` (`order_id` ASC),
   INDEX `fk_tbl_order_status_history_tbl_order_status1_idx` (`order_status_id` ASC),
@@ -612,7 +610,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_payment_method` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`payment_method_id`)
 )
 ENGINE = InnoDB;
@@ -629,7 +627,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_idtype` (
   `created_by` INT NULL DEFAULT 1,
   `updated_by` INT NULL DEFAULT NULL,
   `deleted_by` INT NULL DEFAULT NULL,
-  `active` BOOLEAN NOT NULL DEFAULT FALSE,
+  `active` BOOLEAN NOT NULL DEFAULT TRUE,
   PRIMARY KEY (`idtype_id`)
 )
 ENGINE = InnoDB;
@@ -2593,8 +2591,8 @@ BEGIN
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
 
-  SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
+  SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   -- SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
   SET sort_direction = IFNULL(sort_direction, '');
@@ -2630,8 +2628,10 @@ BEGIN
     LEFT JOIN tbl_affiliation as AFF
       ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
 
-  SET where_query = '
-    ORDER BY OSH.`created_at` DESC';
+  SET where_query = 'GROUP BY ORD.`order_id`';
+
+  SET where_query = CONCAT(where_query, '
+    ORDER BY OSH.`created_at` DESC');
   
   -- ORDER BY
   IF (sort_by <> '') THEN
@@ -2640,8 +2640,6 @@ BEGIN
       SET where_query = CONCAT(where_query, " ", sort_direction);
     END IF;
   END IF;
-
-  SET where_query = CONCAT(where_query, ' GROUP BY ORD.`order_id`');
 
   -- setting actual page if wrong value
   IF (pag_actual < 1) THEN
@@ -3797,6 +3795,11 @@ INSERT INTO `tbl_product_variation` VALUES (809, 1, 19, 14, DEFAULT, DEFAULT, 29
 INSERT INTO `tbl_product_variation` VALUES (810, 1, 20, 14, DEFAULT, DEFAULT, 259.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
 -- chip
 INSERT INTO `tbl_product_variation` VALUES (811, 1, 21, 15, DEFAULT, DEFAULT, 5.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, TRUE);
+
+-- insert test orders
+INSERT INTO `tbl_order` VALUES (1, 1, 4, DEFAULT, DEFAULT, 'Cliente', 'Prueba 1', '45678910', 'Surco', '987654321', DEFAULT, DEFAULT, 'Av. Javier Prado 123', 'Surco', 'cliente.prueba@gmail.com', '987654321', DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 1500.00, 1770.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO `tbl_order_item` VALUES(1, 1, 6, 228, 3, 1, 1500.00, 1770.00, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
+INSERT INTO `tbl_order_status_history` VALUES(1, 1, 1, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
