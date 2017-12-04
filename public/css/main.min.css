@@ -4,6 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
+html{
+  zoom: 90%;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -5874,7 +5878,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #form-cliente form .section-form .form-group i {
   position: absolute;
-  color: #008c95;
+  color: #e30020;
   top: 40px;
   right: 20px;
 }
