@@ -2751,10 +2751,13 @@ BEGIN
   
   SET order_id = IFNULL(order_id, 0);
 
-  SET select_query = 'SELECT OSH.*';
+  SET select_query = 'SELECT 
+    OSH.*, OST.`order_status_name`';
 
   SET from_query = '
-    FROM tbl_order_status_history as OSH';
+    FROM tbl_order_status_history as OSH
+    LEFT JOIN tbl_order_status as OST
+      ON OSH.`order_status_id` = OST.`order_status_id`';
 
   SET where_query = CONCAT('
     WHERE OSH.`order_id` = ', order_id, '
