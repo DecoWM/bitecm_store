@@ -23,8 +23,8 @@ class OrderCompleted extends Mailable
         $this->order = $order;
     }*/
 
-    public function __construct()
-    {
+    public function __construct($order) {
+        $this->order = $order;
     }
 
     /**
@@ -34,6 +34,6 @@ class OrderCompleted extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.order');
+        return $this->view('emails.order', $this->order);
     }
 }

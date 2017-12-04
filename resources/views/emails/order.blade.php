@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Email Bitel</title>
+	<title>Confirmación de Pedido | Bitel</title>
 </head>
 <style>
 	@import url('http://fonts.googleapis.com/css?family=Open+Sans');
@@ -19,8 +19,8 @@
 	<table style="width:100%;max-width:600px;margin:0px auto;border-collapse:collapse">
 		<thead style="background: #ffe60d; ">
 			<tr>
-				<th width="8%"><img src="https://bitel-store.clientes-forceclose.com/images/email/bg-header.png" alt="lo  gotipo"></th>
-				<th style="height: 40px;color: #008c95; font-size: 19px;padding-top: 20px; padding-bottom: 15px; text-align: right; padding-right: 30px;"><strong>Tu pedido ha sido aprobado</strong></th>
+				<th width="8%"><img src="{{env('APP_URL')}}/images/email/bg-header.png" alt="lo  gotipo"></th>
+				<th style="height: 40px;color: #008c95; font-size: 19px;padding-top: 20px; padding-bottom: 15px; text-align: right; padding-right: 30px;"><strong>Tu pedido esta siendo evaluado</strong></th>
 			</tr>
 		</thead>
 		<tbody style="background-color: #f1f8f8; width: 100%;text-align: center;border-top: 10px solid #ffffff;border-bottom: 10px solid #ffffff;">
@@ -28,13 +28,13 @@
 				<td colspan="2" style="padding-top: 15px">Estimado(a):</td>
 			</tr>
 			<tr style="height: 30px">
-				<td colspan="2"><strong>Enrique Eduardo Santillana Sánchez</strong></td>
+				<td colspan="2"><strong>{{$order_detail['first_name']}} {{$order_detail['last_name']}}</strong></td>
 			</tr>
 			<tr style="height: 30px">
 				<td colspan="2" style="color: #008c95; font-size: 20px;"><strong>¡ Gracias por comprar en Bitel!</strong></td>
 			</tr>
 			<tr style="height: 30px">
-				<td colspan="2" style=" font-size: 14px;padding-bottom: 15px">Hemos recibido tu pedido satisfactoriamente con el Nº de orden: <b>00001</b></td>
+				<td colspan="2" style=" font-size: 14px;padding-bottom: 15px">Hemos recibido tu pedido satisfactoriamente con el Nº de orden: <b>{{$order_id}}</b></td>
 			</tr>
 		</tbody>
 		<tfoot>
@@ -57,23 +57,30 @@
 			</tr>
 		</thead>
 		<tbody style="text-align: center;font-size: 13px;">
+			@foreach($order_items as $i => $item)
 			<tr style="height: 45px;">
-				<td style="border: 1px solid #008c95">Huawei P9</td>
+				<td style="border: 1px solid #008c95">{{$products[$i]->brand_name}} {{$products[$i]->product_model}}</td>
 				<td style="border: 1px solid #008c95">24 horas después de la coordinación con el asesor telfónico</td>
-				<td style="border: 1px solid #008c95">1</td>
-				<td style="border: 1px solid #008c95">S/. 1,199.00</td>
+				<td style="border: 1px solid #008c95">{{$item['quantity']}}</td>
+				@if(isset($item['promo_id']))
+				<td style="border: 1px solid #008c95">
+					<span>S/{{$item['subtotal']}}</span>
+					<span style="text-decoration: line-through; font-size: 12px; color: #a2a2a2; margin-left: 5px;">S/{{$products[$i]->product_price * $item['quantity']}}</span>
+				</td>
+				@else
+				<td style="border: 1px solid #008c95">S/{{$item['subtotal']}}</td>
+				@endif
 			</tr>
-			<tr style="height: 45px;">
-				<td style="border: 1px solid #008c95">Ichip Voz 89.9</td>
-				<td style="border: 1px solid #008c95">24 horas después de la coordinación con el asesor telfónico</td>
-				<td style="border: 1px solid #008c95">1</td>
-				<td style="border: 1px solid #008c95">S/. 89.90</td>
-			</tr>
+			@endforeach
 		</tbody>
 		<tfoot>
 			<tr style="height: 45px;">
+				<td colspan="3" style=" border: 1px solid #008c95;text-align: center">Total</td>
+				<td style=" border: 1px solid #008c95;text-align: center">S/{{$order_detail['total']}}</td>
+			</tr>
+			<tr style="height: 45px;">
 				<td colspan="3" style=" border: 1px solid #008c95;text-align: center">Total (IGV incluido)</td>
-				<td style=" border: 1px solid #008c95;text-align: center">S/. 1,378.80</td>
+				<td style=" border: 1px solid #008c95;text-align: center">S/{{$order_detail['total_igv']}}</td>
 			</tr>
 			<tr style="height: 45px;">
 				<td colspan="3" style=" border: 1px solid #008c95;text-align: center">Costo de envío</td>
@@ -81,52 +88,52 @@
 			</tr>
 			<tr style="height: 45px;">
 				<td colspan="3" style="height: 35px;text-align: right"><strong>Total compra:</strong></td>
-				<th style="height: 35px;text-align: center"><strong>S/. 1,378.80</strong></th>
+				<th style="height: 35px;text-align: center"><strong>S/{{$order_detail['total_igv']}}</strong></th>
 			</tr>
 		</tfoot>
 	</table>
 	<table style="width:100%;max-width:550px;margin:0px auto;border-collapse:collapse;">
 		<thead>
 			<tr><td><strong>Fecha y Hora:</strong></td></tr>
-			<tr><td>17/11/2017 14:54:02</td></tr>
+			<tr><td>{{$order_detail['fecha']}}</td></tr>
 			<tr><td><br></td></tr>
 		</thead>
 		<tbody>
 			<tr><td>Podrás dar seguimiento a tu pedido ingresando al siguiente link:</td></tr>
-			<tr><td><strong>https://tienda.bitel.com.pe/norden00001</strong></td></tr>
+			<tr><td><strong>{{env('APP_URL')}}/rastreo/{{$order_id}}</strong></td></tr>
 		</tbody>
 	</table>
 	<table style="width:100%;max-width:550px;margin:20px auto;border-collapse:collapse;">
 		<tbody>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>El pago del plan son de 2 rentas adelantadas.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>La coordinación con el asesor telefónico se realizará dentro de</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>24 horas después de haber realizado la solicitud en la plataforma web.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>El costo de envío es gratis.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
 				<td>Para poder ver los términos y condiciones de uso de la tienda virtual Bitel</td>
 			</tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>ingresa al siguiente link: https://tienda.bitel.com.pe/terminosycondiciones</td>
 			</tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="https://bitel-store.clientes-forceclose.com/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>Para cualquier consulta llamar al 123/930123123/080079123 o enviar un correo servicioalcliente@viettelperu.com.pe</td>
 			</tr>
 		</tbody>

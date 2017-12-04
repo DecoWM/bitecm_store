@@ -294,6 +294,9 @@ class OrderController extends Controller
       'total_igv' => $order_detail['total_igv']
     ]);
 
+    $now = new \DateTime('America/Lima');
+    $order_detail['fecha'] = $now->format('d/m/Y H:i:s');
+
     foreach($order_items as $i => $item) {
       $order_items[$i]['order_id'] = $order_id;
     }
@@ -305,7 +308,12 @@ class OrderController extends Controller
       'order_status_id' => \Config::get('filter.order_status_id')
     ]);
 
-    Mail::to($request->email)->send(new OrderCompleted(['order_id' => $order_id, 'order_detail' => $order_detail, 'order_items' => $order_items]));
+    Mail::to($request->email)->send(new OrderCompleted([
+      'order_id' => $order_id,
+      'order_detail' => $order_detail,
+      'order_items' => $order_items,
+      'products' => $products
+    ]));
 
     $request->session()->flush();
 
