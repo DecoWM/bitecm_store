@@ -54,19 +54,19 @@
                       <div class="proceso">
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">
-                            <li class="col-xs-4 col-sm-4 active">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 1 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_pendiente.svg" alt=""></div><span>Pendiente</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 2 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_procesado.svg" alt=""></div><span>Procesado</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 3 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_cancelado.svg" alt=""></div><span>Cancelado</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 4 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_entregado.svg" alt=""></div><span>Entregado</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 5 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_completado.svg" alt=""></div><span>Completado</span>
                             </li>
                           </ul>

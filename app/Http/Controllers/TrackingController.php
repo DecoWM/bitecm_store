@@ -13,9 +13,8 @@ class TrackingController extends Controller
     $this->shared = $shared;
   }
 
-  public function index (Request $request) {
-    //$order_id = $request->order;
-    //$product = $this->shared->orderItems();
-    //return view('tracking', ['product' => $product]);
+  public function index (Request $request, $order_id = null) {
+    $status_history = $this->shared->statusHistory($order_id);dd($status_history);
+    return view('tracking', ['status_id' => $status_history[0]->order_status_id]);
   }
 }

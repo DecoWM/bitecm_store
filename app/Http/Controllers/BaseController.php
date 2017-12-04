@@ -291,6 +291,15 @@ class BaseController extends Controller
     return ['products' => $products, 'total' => $total[0]->total_promos];
   }
 
+  public function statusHistory($order_id = null) {
+    $result = DB::select('call PA_orderStatusHistory(
+      :order_id
+    )', [
+      'order_id' => $order_id
+    ]);
+    return $result;
+  }
+
   public function getFiltersPostpaid() {
     $brand_list = DB::select('call PA_brandList()');
     $plan_list = DB::select('call PA_planList(2)');
