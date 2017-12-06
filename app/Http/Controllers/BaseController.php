@@ -247,10 +247,12 @@ class BaseController extends Controller
     return $stock_models;
   }
 
-  public function productSearchPromo($plan_pre_id=null, $plan_post_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
+  public function productSearchPromo($plan_pre_id=null, $plan_post_id=null, $affiliation_id=null, $contract_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
     $products = DB::select('call PA_productSearchPromo(
       :plan_pre_id,
       :plan_post_id,
+      :affiliation_id,
+      :contract_id,
       :product_brands,
       :product_price_ini,
       :product_price_end,
@@ -262,6 +264,8 @@ class BaseController extends Controller
     )', [
       'plan_pre_id' => $plan_pre_id,
       'plan_post_id' => $plan_post_id,
+      'affiliation_id' => $affiliation_id,
+      'contract_id' => $contract_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,

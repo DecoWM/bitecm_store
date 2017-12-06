@@ -824,8 +824,8 @@ BEGIN
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
   DECLARE stored_query TEXT;
-  DECLARE cad_condition VARCHAR(255);
-  DECLARE cad_order VARCHAR(70);
+  DECLARE cad_condition TEXT;
+  DECLARE cad_order TEXT;
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
   DECLARE join_segment TEXT;
@@ -871,7 +871,7 @@ BEGIN
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`),
-    PRM.*, PRD.*,
+    PRM.*, PRD.*, STM.`stock_model_id`,
     PRD.`product_image_url` AS picture_url,
     BRN.`brand_name`, BRN.`brand_slug`,';
 
@@ -880,6 +880,10 @@ BEGIN
     -- Filter by brand
     INNER JOIN tbl_brand as BRN
       ON PRD.`brand_id` = BRN.`brand_id`
+    -- Check stock models
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
+    -- Check promos
     LEFT JOIN tbl_promo as PRM
       ON PRD.`product_id` = PRM.`product_id`';
 
@@ -910,13 +914,26 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
-  SET cad_condition = CONCAT(cad_condition, ' 
-    AND (PRM.`product_variation_id` IS NULL
-      OR PRM.`promo_id` IS NULL)');
+  SET cad_order = CONCAT(cad_order, cad_order_comma, '
+    ISNULL(STM.`stock_model_id`),
+    ISNULL(PRM.`publish_at`),
+    PRM.`publish_at` DESC');
+
+  SET cad_condition = CONCAT(cad_condition, '
+    AND (
+      (
+        PRM.`promo_id` IS NOT NULL
+        AND PRM.`active` = 1
+        AND PRM.`product_variation_id` IS NULL
+        AND PRM.`allow_all_variations` = 0
+        AND PRM.`publish_at` IS NOT NULL
+      )
+      OR PRM.`promo_id` IS NULL
+    )');
 
   -- ORDER BY
   IF (sort_by <> '') THEN
-    SET cad_order = CONCAT(cad_order, cad_order_comma, 'PRD.', sort_by);
+    SET cad_order = CONCAT(cad_order, ', PRD.', sort_by);
     IF(sort_direction IN ('ASC','DESC')) THEN
       SET cad_order = CONCAT(cad_order, " ", sort_direction);
     END IF;
@@ -1204,7 +1221,7 @@ BEGIN
   DECLARE pag_end INT;
   DECLARE stored_query TEXT;
   DECLARE cad_condition TEXT;
-  DECLARE cad_order VARCHAR(70);
+  DECLARE cad_order TEXT;
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
   DECLARE join_segment TEXT;
@@ -1256,8 +1273,9 @@ BEGIN
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`),
-    PRM.*, PRD.*, PRD_VAR.`product_variation_id`,
+    PRM.*, PRD.*, STM.`stock_model_id`,
     PRD.`product_image_url` AS picture_url,
+    PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_price`, PLN.`plan_slug`,
     BRN.`brand_name`, BRN.`brand_slug`,';
@@ -1273,6 +1291,9 @@ BEGIN
     -- Filter by plan
     INNER JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
+    -- Check stock models
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
       ON PRD.`product_id` = PRM.`product_id`';
@@ -1304,17 +1325,36 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
+  SET cad_order = CONCAT(cad_order, cad_order_comma, '
+    ISNULL(STM.`stock_model_id`),
+    ISNULL(PRM.`publish_at`),
+    PRM.`publish_at` DESC');
+
   SET cad_condition = CONCAT(cad_condition, ' 
     AND PRD_VAR.`variation_type_id` = 1
-    AND ((PRM.`allow_all_variations` = TRUE
-        AND (PRM.`allowed_variation_type_id` = 1
-          OR PRM.`allowed_variation_type_id` IS NULL))
-      OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
-      OR PRM.`promo_id` IS NULL)');
+    AND (
+      (
+        PRM.`promo_id` IS NOT NULL
+        AND PRM.`active` = 1
+        AND PRM.`publish_at` IS NOT NULL
+        AND
+        (
+          (
+            PRM.`allow_all_variations` = TRUE
+            AND (
+              PRM.`allowed_variation_type_id` = 1
+              OR PRM.`allowed_variation_type_id` IS NULL
+            )
+          )
+          OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
+      OR PRM.`promo_id` IS NULL
+    )');
 
   -- ORDER BY
   IF (sort_by <> '') THEN
-    SET cad_order = CONCAT(cad_order, cad_order_comma, 'PRD.', sort_by);
+    SET cad_order = CONCAT(cad_order, ', PRD.', sort_by);
     IF(sort_direction IN ('ASC','DESC')) THEN
       SET cad_order = CONCAT(cad_order, " ", sort_direction);
     END IF;
@@ -1772,8 +1812,9 @@ BEGIN
   END IF;
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
-    PRM.`publish_at` DESC,
-    STM.`stock_model_id` ASC');
+    ISNULL(STM.`stock_model_id`),
+    ISNULL(PRM.`publish_at`),
+    PRM.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, ' 
     AND PRD_VAR.`variation_type_id` = 2
@@ -2153,6 +2194,8 @@ DELIMITER $$
 CREATE PROCEDURE PA_productSearchPromo(
   IN plan_pre_id INT,
   IN plan_post_id INT,
+  IN affiliation_id INT,
+  IN contract_id INT,
   IN product_brands VARCHAR(200),
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
@@ -2179,6 +2222,8 @@ BEGIN
   -- checking null values
   SET plan_pre_id = IFNULL(plan_pre_id, -1); -- set value if null
   SET plan_post_id = IFNULL(plan_post_id, -1); -- set value if null
+  SET affiliation_id = IFNULL(affiliation_id, -1); -- set value if null
+  SET contract_id = IFNULL(contract_id, -1); -- set value if null
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
@@ -2211,7 +2256,9 @@ BEGIN
   SET select_segment = 'SELECT
     PRM.*, PRD.*, PRD_VAR.*,
     PRD.`product_image_url` AS picture_url,
-    PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_price`, PLN.`plan_slug`,
+    STM.`stock_model_id`,
+    PLN.`plan_id`, PLN.`plan_name`,
+    PLN.`plan_price`, PLN.`plan_slug`,
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
     BRN.`brand_name`, BRN.`brand_slug`,';
@@ -2230,6 +2277,9 @@ BEGIN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     INNER JOIN tbl_contract as CTR
       ON CTR.`contract_id` = PRD_VAR.`contract_id`
+    -- Check stock models
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
       ON PRD.`product_id` = PRM.`product_id`';
@@ -2261,24 +2311,105 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
-  IF (plan_pre_id > 0 AND plan_post_id > 0) THEN
+  IF (plan_pre_id > 0 AND plan_post_id > 0 AND affiliation_id > 0 AND contract_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, '
+      AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
-      AND ((PRM.`allow_all_variations` = TRUE
+      AND PRM.`publish_at` IS NOT NULL
+      AND (
+        PRD_VAR.`product_variation_id` IS NULL
+        OR
+        (
+          PRM.`allow_all_variations` = FALSE
+          AND PRM.`product_variation_id` IS NOT NULL
           AND PRD_VAR.`product_variation_id` IS NOT NULL
-          AND ((PRD_VAR.`variation_type_id` = 1
-              AND PRD_VAR.`plan_id` = ', plan_pre_id, ')
-            OR (PRD_VAR.`variation_type_id` = 2
-              AND PRD_VAR.`plan_id` = ', plan_post_id, ')))
-        OR PRM.`product_variation_id` IS NULL
-        OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`)
+          AND PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+        OR
+        (
+          PRM.`allow_all_variations` = TRUE
+          AND PRM.`product_variation_id` IS NULL
+          AND PRD_VAR.`product_variation_id` IS NOT NULL
+          AND
+          (
+            (
+              PRM.`allowed_variation_type_id` IS NOT NULL
+              AND PRM.`allowed_variation_type_id` = 1
+              AND PRD_VAR.`variation_type_id` = 1
+              AND PRD_VAR.`plan_id` = ', plan_pre_id, '
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NOT NULL
+              AND PRM.`allowed_variation_type_id` = 2
+              AND PRD_VAR.`variation_type_id` = 2
+              AND PRD_VAR.`plan_id` = ', plan_post_id, '
+              AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+              AND PRD_VAR.`contract_id` = ', contract_id, '
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NULL
+              AND PRD_VAR.`variation_type_id` = 1
+              AND PRD_VAR.`plan_id` = ', plan_pre_id, '
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NULL
+              AND PRD_VAR.`variation_type_id` = 2
+              AND PRD_VAR.`plan_id` = ', plan_post_id, '
+              AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+              AND PRD_VAR.`contract_id` = ', contract_id, '
+            )
+          )
+        )
+      )
       GROUP BY PRM.`promo_id`');
   ELSE
     SET cad_condition = CONCAT(cad_condition, '
+      AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
-      AND (PRM.`allow_all_variations` = TRUE
-        OR PRM.`product_variation_id` IS NULL
-        OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`)
+      AND PRM.`publish_at` IS NOT NULL
+      AND (
+        PRD_VAR.`product_variation_id` IS NULL
+        OR
+        (
+          PRM.`allow_all_variations` = FALSE
+          AND PRM.`product_variation_id` IS NOT NULL
+          AND PRD_VAR.`product_variation_id` IS NOT NULL
+          AND PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+        OR
+        (
+          PRM.`allow_all_variations` = TRUE
+          AND PRM.`product_variation_id` IS NULL
+          AND PRD_VAR.`product_variation_id` IS NOT NULL
+          AND
+          (
+            (
+              PRM.`allowed_variation_type_id` IS NOT NULL
+              AND PRM.`allowed_variation_type_id` = 1
+              AND PRD_VAR.`variation_type_id` = 1
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NOT NULL
+              AND PRM.`allowed_variation_type_id` = 2
+              AND PRD_VAR.`variation_type_id` = 2
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NULL
+              AND PRD_VAR.`variation_type_id` = 1
+            )
+            OR
+            (
+              PRM.`allowed_variation_type_id` IS NULL
+              AND PRD_VAR.`variation_type_id` = 2
+            )
+          )
+        )
+      )
       GROUP BY PRM.`promo_id`');
   END IF;
 

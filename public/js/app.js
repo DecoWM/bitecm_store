@@ -53695,6 +53695,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -53744,13 +53747,19 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
-        _vm.product.promo_id
+        !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-promo" }, [
-                _vm._v("Promo")
+              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+                _vm._v("Agotado")
               ])
             ])
-          : _vm._e(),
+          : _vm.product.promo_id
+            ? _c("div", { staticClass: "ribbon-wrapper" }, [
+                _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                  _vm._v("Promo")
+                ])
+              ])
+            : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
@@ -53776,16 +53785,16 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "price-product" }, [
             !_vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.product_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.product_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.promo_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.promo_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
               ? _c("span", { staticClass: "normal-price" }, [
-                  _vm._v("s/" + _vm._s(_vm.product.product_price))
+                  _vm._v("s/." + _vm._s(_vm.product.product_price))
                 ])
               : _vm._e()
           ]),
@@ -53970,6 +53979,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -54019,13 +54031,19 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
-        _vm.product.promo_id
+        !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-promo" }, [
-                _vm._v("Promo")
+              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+                _vm._v("Agotado")
               ])
             ])
-          : _vm._e(),
+          : _vm.product.promo_id
+            ? _c("div", { staticClass: "ribbon-wrapper" }, [
+                _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                  _vm._v("Promo")
+                ])
+              ])
+            : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
@@ -54051,16 +54069,16 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "price-product" }, [
             !_vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.product_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.product_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.promo_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.promo_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
               ? _c("span", { staticClass: "normal-price" }, [
-                  _vm._v("s/" + _vm._s(_vm.product.product_price))
+                  _vm._v("s/." + _vm._s(_vm.product.product_price))
                 ])
               : _vm._e()
           ]),
@@ -54239,6 +54257,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['product', 'baseUrl', 'compare'],
@@ -54288,13 +54309,19 @@ var render = function() {
         attrs: { "data-equipo": "1" }
       },
       [
-        _vm.product.promo_id
+        !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-promo" }, [
-                _vm._v("Promo")
+              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+                _vm._v("Agotado")
               ])
             ])
-          : _vm._e(),
+          : _vm.product.promo_id
+            ? _c("div", { staticClass: "ribbon-wrapper" }, [
+                _c("div", { staticClass: "ribbon ribbon-promo" }, [
+                  _vm._v("Promo")
+                ])
+              ])
+            : _vm._e(),
         _vm._v(" "),
         _c("div", { staticClass: "image-product text-center" }, [
           _c("a", { attrs: { href: _vm.product.route } }, [
@@ -54320,16 +54347,16 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "price-product" }, [
             !_vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.product_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.product_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
-              ? _c("span", [_vm._v("s/" + _vm._s(_vm.product.promo_price))])
+              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.promo_price))])
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
               ? _c("span", { staticClass: "normal-price" }, [
-                  _vm._v("s/" + _vm._s(_vm.product.product_price))
+                  _vm._v("s/." + _vm._s(_vm.product.product_price))
                 ])
               : _vm._e()
           ]),

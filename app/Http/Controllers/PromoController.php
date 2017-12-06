@@ -19,7 +19,12 @@ class PromoController extends Controller
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1;
 
-    $search_result =  $this->shared->productSearchPromo(7, 14, null, $items_per_page, $current_page, "publish_at", "desc");
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $plan_pre_id = \Config::get('filter.plan_pre_id');
+    $plan_post_id = \Config::get('filter.plan_post_id');
+    $contract_id = \Config::get('filter.contract_id');
+
+    $search_result =  $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
     collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
 

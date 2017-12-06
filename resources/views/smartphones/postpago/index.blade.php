@@ -23,10 +23,12 @@
               <postpaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></postpaid>
             </div>
             <div class="row" v-if="!search">
-@foreach ($products as $smartphone)
+              @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
-                  @if(isset($smartphone->promo_id))
+                  @if(!isset($smartphone->stock_model_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-not-stock">Agotado</div></div>
+                  @elseif(isset($smartphone->promo_id))
                   <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
                   @endif
                   <div class="image-product text-center">
@@ -75,7 +77,7 @@
                   </div>
                 </div>
               </div>
-@endforeach
+              @endforeach
             </div>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
@@ -89,4 +91,4 @@
         </div>
       </div>
     </div>
-@endsection
+    @endsection

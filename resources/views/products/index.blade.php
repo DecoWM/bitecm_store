@@ -23,16 +23,18 @@
             <div class="row" v-if="searchResult.length > 0">
               <products v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="index"></products>
             </div>
-@if (count($products) == 0)
+            @if (count($products) == 0)
             <div class="row">
               <p class="text-center">No se encontraron resultados</p>
             </div>
-@endif
+            @endif
             <div class="row" v-if="!search">
-@foreach ($products as $product)
+              @foreach ($products as $product)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$product->product_id}}])}">
-                  @if(isset($product->promo_id))
+                  @if(!isset($smartphone->stock_model_id))
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-not-stock">Agotado</div></div>
+                  @elseif(isset($product->promo_id))
                   <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
                   @endif
                   <div class="image-product text-center">
@@ -60,7 +62,7 @@
                   </div>
                 </div>
               </div>
-@endforeach
+              @endforeach
             </div>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">

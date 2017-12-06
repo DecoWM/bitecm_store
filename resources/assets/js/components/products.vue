@@ -2,7 +2,10 @@
   <div class="col-xs-12 col-sm-6 col-md-4">
     <!-- <div data-equipo="1" class="producto active-comparar"> -->
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected}">
-      <div v-if="product.promo_id" class="ribbon-wrapper">
+      <div v-if="!product.stock_model_id" class="ribbon-wrapper">
+        <div class="ribbon ribbon-not-stock">Agotado</div>
+      </div>
+      <div v-else-if="product.promo_id" class="ribbon-wrapper">
         <div class="ribbon ribbon-promo">Promo</div>
       </div>
       <div class="image-product text-center">
@@ -16,9 +19,9 @@
           <h3 class="text-center">{{product.product_model}}</h3>
         </div>
         <div class="price-product">
-          <span v-if="!product.promo_id">s/{{product.product_price}}</span>
-          <span v-if="product.promo_id">s/{{product.promo_price}}</span>
-          <span v-if="product.promo_id" class="normal-price">s/{{product.product_price}}</span>
+          <span v-if="!product.promo_id">s/.{{product.product_price}}</span>
+          <span v-if="product.promo_id">s/.{{product.promo_price}}</span>
+          <span v-if="product.promo_id" class="normal-price">s/.{{product.product_price}}</span>
         </div>
         <div class="btn-product form-inline" style="text-align:center">
           <div class="form-group btn-comprar">
