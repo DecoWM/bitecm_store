@@ -21,7 +21,7 @@
                         <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                         <div class="contenido">
                           <h2 class="text-uppercase title-contenido">
-                            <b>{{$product->brand_name}}</b> {{$product->product_model}}
+                            <b>{{$product->brand_name}}</b> {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}
                           </h2>
                           <p> <span>Cantidad:</span>{{$product->quantity}}</p>
                           @if(isset($product->variation_type_id) && $product->variation_type_id == 2)

@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>{{$product->brand_name}} {{$product->product_model}}</h2>
+              <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
             @if(isset($product->promo_id))
             <div class="state"><span>PROMOCIÓN</span></div>
@@ -40,7 +40,7 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>{{$product->brand_name}} {{$product->product_model}}</h1>
+                <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @if(isset($product->promo_id))
                 <div class="state"><span>PROMOCIÓN</span></div>
                 @else
@@ -71,8 +71,9 @@
                             </div>
                           </div>
                           <div class="btn-option">
-                            <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
-                              <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                            <div class="count-input space-bottom">
+                              <a href="#" data-action="decrease" data-limit="1" class="incr-btn btn-minus">-</a>
+                              <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" data-limit="10" class="incr-btn btn-plus">+</a>
                             </div>
                           </div>
                         </div>

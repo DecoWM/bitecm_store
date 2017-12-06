@@ -61,35 +61,53 @@
                       <input type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
+                    @if(isset($item))
                     <div class="form-group form-select">
-                      <label for="">Portabilidad o linea nueva</label>
-                      <select name="affiliation" v-model="affiliation" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('affiliation') }">
+                      <label for="">Tipo de afiliación</label>
+                      @if(isset($item['affiliation_id']))
+                      <input type="hidden" name="affiliation" value="{{$item['affiliation_id']}}">
+                      <select disabled="" style="background-color:#e2e2e2">
+                        <option value="">Seleccione tipo de afiliación</option>
+                        @foreach($affiliation_list as $affiliation)
+                        <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $item['affiliation_id'] ? 'selected' : ''}}>
+                          {{$affiliation->affiliation_name}}
+                        </option>
+                        @endforeach
+                      @else
+                      <select name="affiliation" v-model="affiliation" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('affiliation')}">
                         <option value="" selected>Seleccione tipo de afiliación</option>
-                        <option value="1">Portabilidad</option>
-                        <option value="2">Linea nueva</option>
-                        <option value="3">Renovación</option>
+                        @foreach($affiliation_list as $affiliation)
+                        <option value="{{$affiliation->affiliation_id}}">
+                          {{$affiliation->affiliation_name}}
+                        </option>
+                        @endforeach
+                      @endif
                       </select>
                     </div>
+                    @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 1)
+                    <div class="form-group form-select">
+                    @else
                     <div class="form-group form-select" v-if="affiliation == 1">
+                    @endif
                       <label for="">Operador de procedencia</label>
                       <select name="operator" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('operator') }">
                         <option value="" selected>Seleccione un operador de procedencia</option>
-                        <option value="30">Convergia Perú S.A.</option>
-                        <option value="37">Americatel Perú S.A.C</option>
-                        <option value="32">Fijo - Telefónica del Perú S.A.A.</option>
-                        <option value="20">Entel Perú S.A</option>
-                        <option value="21">Claro, América Móvil S.A.C</option>
-                        <option value="22">Movistar, Telefónica Móviles S.A</option>
-                        <option value="24">Viettel Peru S.A.C.</option>
-                        <option value="25">Virgin Mobile</option>
+                        @foreach($source_operators as $id => $operator)
+                        <option value="{{$id}}">{{$operator}}</option>
+                        @endforeach
                       </select>
                     </div>
+                    @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 1)
+                    <div class="form-group">
+                    @else
                     <div class="form-group" v-if="affiliation == 1">
+                    @endif
                       <label for="">Número a portar</label>
                       <input type="text" name="porting_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
+                  @endif
                   <div class="title-page">
                     <h3>INFORMACIÓN DE DELIVERY</h3>
                   </div>

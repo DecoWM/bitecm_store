@@ -64,10 +64,12 @@ class PostpaidController extends Controller
     if($product->stock_model_id) {
       $stock_models = $this->shared->productStockModels($product->product_id);
       foreach($stock_models as $i => $item) {
-        $stock_models[$i]->route = route('prepaid_detail', [
+        $stock_models[$i]->route = route('postpaid_detail', [
           'brand'=>$brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
+          'affiliation'=>$affiliation_slug,
+          'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
       }

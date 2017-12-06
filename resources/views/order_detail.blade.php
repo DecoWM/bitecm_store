@@ -49,7 +49,8 @@
                       <div class="equipo-seleccionado">
                         <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                         <div class="contenido">
-                          <span class="text-uppercase title-contenido">{{$product->brand_name}} {{$product->product_model}}
+                          <span class="text-uppercase title-contenido">
+                            {{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}
                           </span>
                           @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
                           <p>{{$product->affiliation_name}}</p>

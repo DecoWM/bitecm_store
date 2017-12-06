@@ -369,4 +369,17 @@ class BaseController extends Controller
     ]);
     return count($slug) > 0 ? $slug[0]->contract_slug : null;
   }
+
+  public function operatorList() {
+    return [
+      '30' => 'Convergia Perú S.A.',
+      '37' => 'Americatel Perú S.A.C',
+      '32' => 'Fijo - Telefónica del Perú S.A.A.',
+      '20' => 'Entel Perú S.A',
+      '21' => 'Claro, América Móvil S.A.C',
+      '22' => 'Movistar, Telefónica Móviles S.A',
+      '24' => 'Viettel Peru S.A.C.',
+      '25' => 'Virgin Mobile'
+    ];
+  }
 }

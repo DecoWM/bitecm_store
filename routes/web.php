@@ -40,6 +40,7 @@ Route::get('/producto/comparar', 'PostpaidController@compare');
 Route::get('/carrito', 'CartController@showCart')->name('show_cart');
 Route::post('/carrito', 'CartController@addToCart')->name('add_to_cart');
 Route::post('/carrito/borrar', 'CartController@removeFromCart')->name('remove_from_cart');
+Route::post('/carrito/actualizar', 'CartController@updateCart')->name('update_cart');
 // Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
 
 //RUTAS ORDEN

@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-4">
           <div id="content-page">
             <div class="title">
-              <h2>{{$product->brand_name}} {{$product->product_model}}</h2>
+              <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
             @if(isset($product->promo_id))
             <div class="state"><span>PROMOCIÓN</span></div>
@@ -40,7 +40,7 @@
           <section id="descripcion-equipo">
             <div class="header-section">
               <div class="title">
-                <h1>{{$product->brand_name}} {{$product->product_model}}</h1>
+                <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @if(isset($product->promo_id))
                 <div class="state"><span>PROMOCIÓN</span></div>
                 @else
@@ -56,6 +56,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
+                <input type="hidden" name="affiliation" value="{{$product->affiliation_id}}">
                 <input type="hidden" name="type" value="2">
                 <input type="hidden" name="quantity" value="1">
                 <div class="content-product">

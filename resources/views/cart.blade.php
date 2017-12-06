@@ -40,7 +40,7 @@
                     <form action="{{route('remove_from_cart')}}" method="POST">
                       {{ csrf_field() }}
                       <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
-                      @if($product->product_variation_id)
+                      @if(isset($product->product_variation_id))
                       <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                       @endif
                       <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
@@ -48,18 +48,36 @@
                     </form>
                     <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                     <div class="detalle-equipo">
-                      <h2>{{$product->product_model}}</h2>
+                      <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}</h2>
                       @if (intval($product->type_id) == 2)
                       <span class="modo">{{$product->affiliation_name}}</span>
                       <span class="contrato">Contrato {{$product->contract_name}}</span>
+                      @elseif (intval($product->type_id) == 1)
+                      <span class="modo">Prepago {{$product->plan_name}}</span>
                       @endif
+                      @if (!isset($product->variation_type_id) || $product->variation_type_id == 1)
                       <div class="cantidad">
                         <div class="btn-option">
-                          <div class="count-input space-bottom"><a href="#" data-action="decrease" class="incr-btn btn-minus">-</a>
-                            <input type="text" value="{{$product->quantity}}" name="quantity" class="quantity"><a href="#" data-action="increase" class="incr-btn btn-plus">+</a>
+                          <div class="count-input space-bottom">
+                            <form action="{{route('update_cart')}}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
+                              @if(isset($product->product_variation_id))
+                              <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
+                              @endif
+                              <a href="#" data-action="decrease" data-limit="1" class="incr-btn btn-minus">-</a>
+                              @if (isset($product->variation_type_id))
+                              <a href="#" data-action="increase" data-limit="2" class="incr-btn btn-plus">+</a>
+                              @else
+                              <a href="#" data-action="increase" data-limit="10" class="incr-btn btn-plus">+</a>
+                              @endif
+                              <input type="text" value="{{$product->quantity}}" name="quantity" class="quantity">
+                              <input type="submit" style="display: none">
+                            </form>
                           </div>
                         </div>
                       </div>
+                      @endif
                     </div>
                   </div>
                 </div>

@@ -40,7 +40,7 @@
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product img {
-  height: 130px;
+  height: 190px;
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product .image-prepago {
@@ -198,16 +198,6 @@ input:checked ~ .checkmark:after {
 
 .title-select .btl-caret {
   margin-right: 15px;
-}
-
-@media (max-width: 480px){
-  .title-select .btl-caret{
-    display: none;
-  }
-}
-
-#compara-tus-equipos .slick-arrow{
-  display: none !important;
 }
 
 #list-equipos .producto {
@@ -421,14 +411,6 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   background-color: #008c95;
 }
 
-.ribbon-trend {
-  background-color: #008c95;
-}
-
-.ribbon-not-stock {
-  background-color: #cdcdcd;
-}
-
 #list-equipos .producto {
   position: relative;
 }
@@ -456,16 +438,8 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 }
 
 #planes {
-  /*margin-top: -330px;*/
+  margin-top: -330px;
 }
-
-@media (max-width: 480px) {
-  .col-12-mob{
-    width: 100% ; 
-  }
-}
-
-
 
 #detalle-carrito .btn-detalle a.regresar {
   width: 46.4%;

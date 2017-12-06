@@ -55,7 +55,7 @@ class OrderController extends Controller
       'paymethodType' => $order_detail['type_id'],
       'busType' => 'INDI',
       'idNo' => $order_detail['id_number'],
-      'productCode' => 'IchipVoz29_9',   // AQUI INDICAR EL CODIGO DEL PLAN QUE SE HA SELECCIONADO !!!
+      'productCode' => $order_detail['product_code']
     ]);
     return ($response->return->isOverQouta != 0);
   }
@@ -112,7 +112,7 @@ class OrderController extends Controller
       'phone' => $order_detail['contact_phone'],
       'custName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
       'contactName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
-      'reasonId' => '123' // ***** Change it for dynamic Value !!!
+      'reasonId' => $order_detail['reason_code']
     ];
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
@@ -143,6 +143,12 @@ class OrderController extends Controller
   }
 
   public function createOrder (Request $request) {
+    $cart = collect($request->session()->get('cart')); //Carrito de compras
+
+    if (!count($cart)) {
+      return redirect()->route('home');
+    }
+
     $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO', 
       'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO', 
       'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE', 
@@ -156,14 +162,30 @@ class OrderController extends Controller
       'BELLAVISTA', 'CARMEN DE LA LEGUA REYNOSO', 'LA PERLA', 'LA PUNTA', 'VENTANILLA'
     ];
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
-    $cart = collect($request->session()->get('cart')); //Carrito de compras
+    $source_operators = $this->shared->operatorList();
 
-    if (count($cart) > 0) {
-      return view('order_form', ['distritos' => $distritos]);
-    } else {
-      return redirect()->route('home');
+    $affiliation_list = DB::select('call PA_affiliationList()');
+    
+    $equipo = null;
+    foreach ($cart as $item) {
+      switch ($item['type_id']) {
+        case 0:
+          break;
+        case 1:
+          $equipo = $item;
+          break;
+        case 2:
+          $equipo = $item;
+          break;
+      }
     }
+    
+    return view('order_form', [
+      'item' => $equipo,
+      'distritos' => $distritos,
+      'source_operators' => $source_operators,
+      'affiliation_list' => $affiliation_list
+    ]);
   }
 
   public function storeOrder (Request $request) {
@@ -173,71 +195,13 @@ class OrderController extends Controller
       return redirect()->route('show_cart');
     }
 
-    $order_detail = [
-      'idtype_id' => $request->document_type,
-      'payment_method_id' => $request->payment_method,
-      'branch_id' => null,
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
-      'id_number' => $request->document_number,
-      'tracking_code' => $request->document_number,
-      'billing_district' => $request->district,
-      'billing_phone' => $request->phone_number,
-      'delivery_address' => $request->delivery_address,
-      'delivery_district' => $request->delivery_distric,
-      'contact_email' => $request->email,
-      'contact_phone' => $request->contact_phone
-    ];
-
-    if ($cart->contains('type_id', 1)) {
-      $order_detail['type_id'] = '01';
-    } else if ($cart->contains('type_id', 2)) {
-      $order_detail['type_id'] = '02';
-    }
-
-    if ($request->has('operator')) {
-      $order_detail['source_operator'] = $request->operator;
-      $order_detail['porting_phone'] = $request->porting_phone;
-    }
-
-    if(\Config::get('filter.use_bcss')) {
-      // Apply validations with Bitel webservice before insert
-      $this->initSoapWrapper(); // Init the bitel soap webservice
-
-      // Check if have many lines
-      if($this->checkIsOverQouta($order_detail)){
-        return 'No puede tener más números telefónicos';
-      }
-
-      // check if is client
-      if($data_customer = $this->getInfoCustomer($order_detail)){
-        // check if have debt
-        if($this->checkHaveDebit($data_customer->custId)){
-          return 'Actualmente tiene deudas pendientes';
-        }
-      }
-
-      // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-      /*if($request->affiliation == 1){
-        // process request portability
-        if($this->createConsultantRequest($order_detail)){
-          // check if is possible migrate to bitel
-          if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
-            return 'No es posible realizar la portabilidad con su número';
-          }
-        }
-        else{
-          return 'Error creando la solicitud de portabilidad';
-        }
-      }*/
-    }
-
     $igv = \Config::get('filter.igv');
 
     $products = [];
     $order_items = [];
     $total = 0;
     $total_igv = 0;
+    $equipo = null;
 
     foreach ($cart as $item) {
       switch ($item['type_id']) {
@@ -246,9 +210,11 @@ class OrderController extends Controller
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
+          $equipo = $product;
           break;
         case 2:
           $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
+          $equipo = $product;
           break;
       }
       $product->quantity = $item['quantity'];
@@ -274,6 +240,79 @@ class OrderController extends Controller
       ]);
     }
 
+    $order_detail = [
+      'idtype_id' => $request->document_type,
+      'payment_method_id' => $request->payment_method,
+      'branch_id' => null,
+      'first_name' => $request->first_name,
+      'last_name' => $request->last_name,
+      'id_number' => $request->document_number,
+      'tracking_code' => $request->document_number,
+      'billing_district' => $request->district,
+      'billing_phone' => $request->phone_number,
+      'delivery_address' => $request->delivery_address,
+      'delivery_district' => $request->delivery_distric,
+      'contact_email' => $request->email,
+      'contact_phone' => $request->contact_phone
+    ];
+
+    if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
+      $source_operators = $this->shared->operatorList();
+      $order_detail['source_operator'] = $source_operators[$request->operator];
+      $order_detail['porting_phone'] = $request->porting_phone;
+    } else {
+      $order_detail['source_operator'] = null;
+      $order_detail['porting_phone'] = null;
+    }
+
+    if(isset($equipo) && isset($equipo->variation_type_id)) {
+      $order_detail['type_id'] = '0'.$equipo->variation_type_id;
+    }
+
+    if(isset($equipo) && isset($equipo->reason_code)) {
+      $order_detail['reason_code'] = $equipo->reason_code;
+    }
+
+    if(isset($equipo) && isset($equipo->product_package)) {
+      $order_detail['product_package'] = $equipo->product_package;
+    }
+
+    if(isset($equipo) && isset($equipo->product_code)) {
+      $order_detail['product_code'] = $equipo->product_code;
+    }
+
+    if(isset($equipo) && \Config::get('filter.use_bcss')) {
+      // Apply validations with Bitel webservice before insert
+      $this->initSoapWrapper(); // Init the bitel soap webservice
+
+      // Check if have many lines
+      if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)){
+        return 'No puede tener más números telefónicos';
+      }
+
+      // check if is client
+      if($data_customer = $this->getInfoCustomer($order_detail)){
+        // check if have debt
+        if($this->checkHaveDebit($data_customer->custId)){
+          return 'Actualmente tiene deudas pendientes';
+        }
+      }
+
+      // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
+      /*if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
+        // process request portability
+        if($this->createConsultantRequest($order_detail)){
+          // check if is possible migrate to bitel
+          if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+            return 'No es posible realizar la portabilidad con su número';
+          }
+        }
+        else{
+          return 'Error creando la solicitud de portabilidad';
+        }
+      }*/
+    }
+
     $order_detail['total'] = $total;
     $order_detail['total_igv'] = $total_igv;
     $order_id = DB::table('tbl_order')->insertGetId([
@@ -286,6 +325,8 @@ class OrderController extends Controller
       'id_number' => $order_detail['id_number'],
       'billing_district' => $order_detail['billing_district'],
       'billing_phone' => $order_detail['billing_phone'],
+      'source_operator' => $order_detail['source_operator'],
+      'porting_phone' => $order_detail['porting_phone'],
       'delivery_address' => $order_detail['delivery_address'],
       'delivery_district' => $order_detail['delivery_district'],
       'contact_email' => $order_detail['contact_email'],

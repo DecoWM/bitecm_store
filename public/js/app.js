@@ -11637,13 +11637,13 @@ module.exports = Cancel;
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(67)
+  __webpack_require__(70)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(69)
+var __vue_script__ = __webpack_require__(72)
 /* template */
-var __vue_template__ = __webpack_require__(70)
+var __vue_template__ = __webpack_require__(73)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -11687,7 +11687,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(78);
+module.exports = __webpack_require__(81);
 
 
 /***/ }),
@@ -11719,11 +11719,11 @@ Vue.component('paginatorLinks', __webpack_require__(51));
 Vue.component('postpaid', __webpack_require__(54));
 Vue.component('prepaid', __webpack_require__(57));
 Vue.component('products', __webpack_require__(60));
-Vue.component('promos', __webpack_require__(82));
-Vue.component('comparePostpaid', __webpack_require__(63));
-Vue.component('comparePrepaid', __webpack_require__(72));
+Vue.component('promos', __webpack_require__(63));
+Vue.component('comparePostpaid', __webpack_require__(66));
+Vue.component('comparePrepaid', __webpack_require__(75));
 
-var VeeValidate = __webpack_require__(77);
+var VeeValidate = __webpack_require__(80);
 
 Vue.use(VeeValidate);
 
@@ -11753,14 +11753,13 @@ var form = new Vue({
                     _this.$refs.orderform.submit();
                     return;
                 }
-
-                // alert('Completar los campos');
             });
         },
         change: function change() {
             console.log(this.affiliation);
         }
-    }
+    },
+    mounted: function mounted() {}
 });
 
 var app = new Vue({
@@ -12128,12 +12127,12 @@ var app = new Vue({
             // centerMode: true,
             // variableWidth: true,
             responsive: [{
-                breakpoint: 1200,
+                breakpoint: 1040,
                 settings: {
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 2
+                    slidesToShow: 3
                 }
             }, {
                 breakpoint: 768,
@@ -12141,7 +12140,7 @@ var app = new Vue({
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 2
+                    slidesToShow: 3
                 }
             }, {
                 breakpoint: 667,
@@ -12152,14 +12151,6 @@ var app = new Vue({
                     slidesToShow: 2
                 }
             }, {
-                breakpoint: 480,
-                settings: {
-                    arrows: true,
-                    dots: false,
-                    centerMode: false,
-                    slidesToShow: 1
-                }
-            },{
                 breakpoint: 480,
                 settings: {
                     arrows: true,
@@ -12345,23 +12336,70 @@ var app = new Vue({
         //   return false;
         // });
 
-        $(".incr-btn").on("click", function (e) {
+        $(".incr-btn").each(function (elem) {
             var $button = $(this);
-            var oldValue = $button.parent().find('.quantity').val();
-            $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
-            if ($button.data('action') == "increase") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-                // Don't allow decrementing below 1
-                if (oldValue > 1) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                    $button.addClass('inactive');
-                }
+            var $action = $button.data('action');
+            var $limit = parseInt($button.data('limit'));
+            var value = parseInt($button.parent().find('.quantity').val());
+            switch ($action) {
+                case 'increase':
+                    if (value >= $limit) {
+                        $button.addClass('inactive');
+                    }
+                    break;
+                case 'decrease':
+                    if (value <= $limit) {
+                        $button.addClass('inactive');
+                    }
+                    break;
             }
-            $button.parent().find('.quantity').val(newVal);
+        });
+
+        $(".incr-btn").on("click", function (e) {
             e.preventDefault();
+            var $button = $(this);
+            var $action = $button.data('action');
+            var $limit = parseInt($button.data('limit'));
+            var oldValue = parseInt($button.parent().find('.quantity').val());
+            var newVal;
+            switch ($action) {
+                case 'increase':
+                    var $decButton = $button.parent().find('.incr-btn[data-action="decrease"]');
+                    var $decAction = $decButton.data('action');
+                    var $decLimit = parseInt($decButton.data('limit'));
+                    if (oldValue < $limit) {
+                        newVal = oldValue + 1;
+                        $button.parent().find('.quantity').val(newVal);
+                        if (newVal >= $limit) {
+                            $button.addClass('inactive');
+                        }
+                        if (newVal > $decLimit) {
+                            $decButton.removeClass('inactive');
+                        }
+                        $button.parent('form').submit();
+                    } else {
+                        $button.addClass('inactive');
+                    }
+                    break;
+                case 'decrease':
+                    var $incButton = $button.parent().find('.incr-btn[data-action="increase"]');
+                    var $incAction = $incButton.data('action');
+                    var $incLimit = parseInt($incButton.data('limit'));
+                    if (oldValue > $limit) {
+                        newVal = oldValue - 1;
+                        $button.parent().find('.quantity').val(newVal);
+                        if (newVal <= $limit) {
+                            $button.addClass('inactive');
+                        }
+                        if (newVal < $incLimit) {
+                            $incButton.removeClass('inactive');
+                        }
+                        $button.parent('form').submit();
+                    } else {
+                        $button.addClass('inactive');
+                    }
+                    break;
+            }
         });
 
         $('.ver-mas-equipo .content-detalle').slideUp();
@@ -54335,15 +54373,288 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(64)
+/* template */
+var __vue_template__ = __webpack_require__(65)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/promos.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-789b1aa4", Component.options)
+  } else {
+    hotAPI.reload("data-v-789b1aa4", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 64 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['product', 'baseUrl', 'compare'],
+    data: function data() {
+        return {
+            isSelected: false,
+            compareItem: {
+                product_id: this.product.product_id,
+                picture_url: this.product.picture_url
+            }
+        };
+    },
+
+    methods: {
+        emitCompare: function emitCompare() {
+            self = this;
+            self.isSelected ? this.$emit('additem', self.compareItem) : self.$emit('removeitem', self.compareItem.product_id);
+        }
+    },
+    beforeMount: function beforeMount() {
+        self = this;
+        self.compare.forEach(function (e) {
+            if (e.product_id == self.compareItem.product_id) {
+                self.isSelected = true;
+            }
+        });
+    },
+    mounted: function mounted() {
+        console.log('Component mounted bitel.');
+    }
+});
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-xs-12 col-sm-6 col-md-4" }, [
+    _c(
+      "div",
+      {
+        staticClass: "producto",
+        class: { "active-comparar": _vm.isSelected },
+        attrs: { "data-equipo": "1" }
+      },
+      [
+        _c("div", { staticClass: "image-product text-center" }, [
+          _c("a", { attrs: { href: _vm.product.route } }, [
+            _c("img", {
+              attrs: {
+                src: _vm.product.picture_url,
+                alt: _vm.product.product_model
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "content-product text-center" },
+          [
+            _c("div", { staticClass: "title-product" }, [
+              _c("h3", { staticClass: "text-center" }, [
+                _c("b", [_vm._v(_vm._s(_vm.product.brand_name))])
+              ]),
+              _vm._v(" "),
+              _c("h3", { staticClass: "text-center" }, [
+                _vm._v(_vm._s(_vm.product.product_model))
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.product.product_variation_id
+              ? [
+                  _vm.product.variation_type_id == 1
+                    ? [
+                        _c("div", { staticClass: "price-product" }, [
+                          _c("span", [
+                            _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "normal-price" }, [
+                            _vm._v("S/." + _vm._s(_vm.product.product_price))
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "plan-product" }, [
+                          _c("p", [
+                            _c(
+                              "a",
+                              { attrs: { href: _vm.product.route_post } },
+                              [_vm._v("Ver en plan postpago")]
+                            )
+                          ])
+                        ])
+                      ]
+                    : _vm.product.variation_type_id == 2
+                      ? [
+                          _c("div", { staticClass: "price-product" }, [
+                            _c("span", [
+                              _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                            ]),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "normal-price" }, [
+                              _vm._v("S/." + _vm._s(_vm.product.product_price))
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "plan-product" }, [
+                            _c("p", [
+                              _vm._v("en plan "),
+                              _c("span", [
+                                _vm._v(_vm._s(_vm.product.plan_name))
+                              ])
+                            ])
+                          ])
+                        ]
+                      : _vm._e()
+                ]
+              : [
+                  _c("div", { staticClass: "price-product" }, [
+                    _c("span", [
+                      _vm._v("S/." + _vm._s(_vm.product.promo_price))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "normal-price" }, [
+                      _vm._v("S/." + _vm._s(_vm.product.product_price))
+                    ])
+                  ])
+                ],
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "btn-product form-inline",
+                staticStyle: { "text-align": "center" }
+              },
+              [
+                _c("div", { staticClass: "form-group btn-comprar" }, [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-default",
+                      attrs: { href: _vm.product.route }
+                    },
+                    [_vm._v("comprar")]
+                  )
+                ])
+              ]
+            )
+          ],
+          2
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-789b1aa4", module.exports)
+  }
+}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(64)
+  __webpack_require__(67)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(66)
+var __vue_script__ = __webpack_require__(69)
 /* template */
-var __vue_template__ = __webpack_require__(71)
+var __vue_template__ = __webpack_require__(74)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54383,13 +54694,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(65);
+var content = __webpack_require__(68);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54409,7 +54720,7 @@ if(false) {
 }
 
 /***/ }),
-/* 65 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -54423,7 +54734,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 66 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54490,13 +54801,13 @@ Vue.component('compare-item', __webpack_require__(13));
 });
 
 /***/ }),
-/* 67 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(68);
+var content = __webpack_require__(71);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54516,7 +54827,7 @@ if(false) {
 }
 
 /***/ }),
-/* 68 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -54530,7 +54841,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 69 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54562,7 +54873,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 70 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54590,7 +54901,7 @@ if (false) {
 }
 
 /***/ }),
-/* 71 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54655,19 +54966,19 @@ if (false) {
 }
 
 /***/ }),
-/* 72 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(73)
+  __webpack_require__(76)
 }
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(75)
+var __vue_script__ = __webpack_require__(78)
 /* template */
-var __vue_template__ = __webpack_require__(76)
+var __vue_template__ = __webpack_require__(79)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -54707,13 +55018,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 73 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(74);
+var content = __webpack_require__(77);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -54733,7 +55044,7 @@ if(false) {
 }
 
 /***/ }),
-/* 74 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(2)(undefined);
@@ -54747,7 +55058,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 75 */
+/* 78 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54798,7 +55109,7 @@ Vue.component('compare-item', __webpack_require__(13));
 });
 
 /***/ }),
-/* 76 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -54863,7 +55174,7 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 80 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -61543,286 +61854,10 @@ var index_esm = {
 
 
 /***/ }),
-/* 78 */
+/* 81 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(1)
-/* script */
-var __vue_script__ = __webpack_require__(83)
-/* template */
-var __vue_template__ = __webpack_require__(84)
-/* template functional */
-  var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/promos.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-789b1aa4", Component.options)
-  } else {
-    hotAPI.reload("data-v-789b1aa4", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 83 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['product', 'baseUrl', 'compare'],
-    data: function data() {
-        return {
-            isSelected: false,
-            compareItem: {
-                product_id: this.product.product_id,
-                picture_url: this.product.picture_url
-            }
-        };
-    },
-
-    methods: {
-        emitCompare: function emitCompare() {
-            self = this;
-            self.isSelected ? this.$emit('additem', self.compareItem) : self.$emit('removeitem', self.compareItem.product_id);
-        }
-    },
-    beforeMount: function beforeMount() {
-        self = this;
-        self.compare.forEach(function (e) {
-            if (e.product_id == self.compareItem.product_id) {
-                self.isSelected = true;
-            }
-        });
-    },
-    mounted: function mounted() {
-        console.log('Component mounted bitel.');
-    }
-});
-
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-12 col-sm-6 col-md-4" }, [
-    _c(
-      "div",
-      {
-        staticClass: "producto",
-        class: { "active-comparar": _vm.isSelected },
-        attrs: { "data-equipo": "1" }
-      },
-      [
-        _c("div", { staticClass: "image-product text-center" }, [
-          _c("a", { attrs: { href: _vm.product.route } }, [
-            _c("img", {
-              attrs: {
-                src: _vm.product.picture_url,
-                alt: _vm.product.product_model
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "content-product text-center" },
-          [
-            _c("div", { staticClass: "title-product" }, [
-              _c("h3", { staticClass: "text-center" }, [
-                _c("b", [_vm._v(_vm._s(_vm.product.brand_name))])
-              ]),
-              _vm._v(" "),
-              _c("h3", { staticClass: "text-center" }, [
-                _vm._v(_vm._s(_vm.product.product_model))
-              ])
-            ]),
-            _vm._v(" "),
-            _vm.product.product_variation_id
-              ? [
-                  _vm.product.variation_type_id == 1
-                    ? [
-                        _c("div", { staticClass: "price-product" }, [
-                          _c("span", [
-                            _vm._v("S/." + _vm._s(_vm.product.promo_price))
-                          ]),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "normal-price" }, [
-                            _vm._v("S/." + _vm._s(_vm.product.product_price))
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "plan-product" }, [
-                          _c("p", [
-                            _c(
-                              "a",
-                              { attrs: { href: _vm.product.route_post } },
-                              [_vm._v("Ver en plan postpago")]
-                            )
-                          ])
-                        ])
-                      ]
-                    : _vm.product.variation_type_id == 2
-                      ? [
-                          _c("div", { staticClass: "price-product" }, [
-                            _c("span", [
-                              _vm._v("S/." + _vm._s(_vm.product.promo_price))
-                            ]),
-                            _vm._v(" "),
-                            _c("span", { staticClass: "normal-price" }, [
-                              _vm._v("S/." + _vm._s(_vm.product.product_price))
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "plan-product" }, [
-                            _c("p", [
-                              _vm._v("en plan "),
-                              _c("span", [
-                                _vm._v(_vm._s(_vm.product.plan_name))
-                              ])
-                            ])
-                          ])
-                        ]
-                      : _vm._e()
-                ]
-              : [
-                  _c("div", { staticClass: "price-product" }, [
-                    _c("span", [
-                      _vm._v("S/." + _vm._s(_vm.product.promo_price))
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "normal-price" }, [
-                      _vm._v("S/." + _vm._s(_vm.product.product_price))
-                    ])
-                  ])
-                ],
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "btn-product form-inline",
-                staticStyle: { "text-align": "center" }
-              },
-              [
-                _c("div", { staticClass: "form-group btn-comprar" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-default",
-                      attrs: { href: _vm.product.route }
-                    },
-                    [_vm._v("comprar")]
-                  )
-                ])
-              ]
-            )
-          ],
-          2
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-789b1aa4", module.exports)
-  }
-}
 
 /***/ })
 /******/ ]);

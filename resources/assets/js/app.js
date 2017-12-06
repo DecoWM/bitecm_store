@@ -43,24 +43,24 @@ const form = new Vue({
     email:'',
     number_contact:'',
     mediopago:'',
-    affiliation: '',
+    affiliation: ''
   },
   methods: {
     validateInfoCliente(){
       this.$validator.validateAll().then((result) => {
         if (result) {
           // eslint-disable-next-line
-           // alert('Enviado a ' + this.first_name + '!')
+          // alert('Enviado a ' + this.first_name + '!')
           this.$refs.orderform.submit();
           return;
         }
-
-        // alert('Completar los campos');
       });
     },
     change () {
-        console.log(this.affiliation);
+      console.log(this.affiliation);
     }
+  },
+  mounted: function() {
   }
 });
 
@@ -705,23 +705,70 @@ const app = new Vue({
         //   return false;
         // });
 
+        $(".incr-btn").each(function(elem){
+          var $button = $(this);
+          var $action = $button.data('action');
+          var $limit = parseInt($button.data('limit'));
+          var value = parseInt($button.parent().find('.quantity').val());
+          switch($action) {
+            case 'increase':
+              if (value >= $limit) {
+                $button.addClass('inactive');
+              }
+              break;
+            case 'decrease':
+              if (value <= $limit) {
+                $button.addClass('inactive');
+              }
+              break;
+          }
+        });
+
         $(".incr-btn").on("click", function (e) {
-            var $button = $(this);
-            var oldValue = $button.parent().find('.quantity').val();
-            $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
-            if ($button.data('action') == "increase") {
-                var newVal = parseFloat(oldValue) + 1;
-            } else {
-            // Don't allow decrementing below 1
-                if (oldValue > 1) {
-                    var newVal = parseFloat(oldValue) - 1;
-                } else {
-                    newVal = 1;
-                    $button.addClass('inactive');
+          e.preventDefault();
+          var $button = $(this);
+          var $action = $button.data('action');
+          var $limit = parseInt($button.data('limit'));
+          var oldValue = parseInt($button.parent().find('.quantity').val());
+          var newVal;
+          switch($action) {
+            case 'increase':
+              var $decButton = $button.parent().find('.incr-btn[data-action="decrease"]');
+              var $decAction = $decButton.data('action');
+              var $decLimit = parseInt($decButton.data('limit'));
+              if (oldValue < $limit) {
+                newVal = oldValue + 1;
+                $button.parent().find('.quantity').val(newVal);
+                if (newVal >= $limit) {
+                  $button.addClass('inactive');
                 }
-            }
-            $button.parent().find('.quantity').val(newVal);
-            e.preventDefault();
+                if (newVal > $decLimit) {
+                  $decButton.removeClass('inactive');
+                }
+                $button.parent('form').submit();
+              } else {
+                $button.addClass('inactive');
+              }
+              break;
+            case 'decrease':
+              var $incButton = $button.parent().find('.incr-btn[data-action="increase"]');
+              var $incAction = $incButton.data('action');
+              var $incLimit = parseInt($incButton.data('limit'));
+              if (oldValue > $limit) {
+                newVal = oldValue - 1;
+                $button.parent().find('.quantity').val(newVal);
+                if (newVal <= $limit) {
+                  $button.addClass('inactive');
+                }
+                if (newVal < $incLimit) {
+                  $incButton.removeClass('inactive');
+                }
+                $button.parent('form').submit();
+              } else {
+                $button.addClass('inactive');
+              }
+              break;
+          }
         });
 
         $('.ver-mas-equipo .content-detalle').slideUp();

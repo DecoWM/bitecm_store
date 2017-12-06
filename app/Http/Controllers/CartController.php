@@ -52,9 +52,12 @@ class CartController extends Controller
       $product->type_id = $item['type_id'];
 
       if(isset($product->promo_id)) {
+        $product->promo_price = $product->promo_price * $product->quantity;
+        $product->product_price = $product->product_price * $product->quantity;
         $total += $product->promo_price;
         $total_igv += $product->promo_price * (1 + $igv);
       } else {
+        $product->product_price = $product->product_price * $product->quantity;
         $total += $product->product_price;
         $total_igv += $product->product_price * (1 + $igv);
       }
@@ -86,7 +89,7 @@ class CartController extends Controller
     $cart_item = [
       'type_id' => $request->type, //Prepago o postpago o sin variación
       'stock_model_id' => $request->stock_model, //Id del producto en stock
-      'quantity' => 1 //Unidades
+      'quantity' => $request->quantity //Unidades
     ];
 
     switch ($cart_item['type_id']) {
@@ -99,12 +102,13 @@ class CartController extends Controller
       case 1:
         $cart_item['product_variation_id'] = $request->product_variation;
         $has_item = $cart->search($cart_item);
-        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 2) {
+        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
         }
         break;
       case 2:
         $cart_item['product_variation_id'] = $request->product_variation;
+        $cart_item['affiliation_id'] = $request->affiliation;
         $has_item = $cart->search($cart_item);
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
@@ -128,6 +132,28 @@ class CartController extends Controller
       foreach ($cart as $i => $item) {
         if($request->stock_model == $item['stock_model_id'] && $request->product_variation == $item['product_variation_id']) {
           $request->session()->forget('cart.'.$i);
+          break;
+        }
+      }
+    }
+    return redirect()->route('show_cart');
+  }
+
+  public function updateCart(Request $request) {
+    $cart = collect($request->session()->get('cart',[])); //Carrito de compras
+    if(!isset($request->product_variation)) {
+      foreach ($cart as $i => $item) {
+        if($request->stock_model == $item['stock_model_id']) {
+          $item['quantity'] = $request->quantity;
+          $request->session()->put('cart.'.$i, $item);
+          break;
+        }
+      }
+    } else {
+      foreach ($cart as $i => $item) {
+        if($request->stock_model == $item['stock_model_id'] && $request->product_variation == $item['product_variation_id']) {
+          $item['quantity'] = $request->quantity;
+          $request->session()->put('cart.'.$i, $item);
           break;
         }
       }

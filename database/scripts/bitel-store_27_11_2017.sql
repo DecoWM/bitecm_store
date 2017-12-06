@@ -1087,10 +1087,13 @@ BEGIN
       AND CLR.color_slug = "', color_slug, '"');
   ELSE
     SET select_query = CONCAT(select_query, ',
-      STM.`stock_model_id`, STM.`stock_model_code`');
+      STM.`stock_model_id`, STM.`stock_model_code`,
+      CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`');
+        ON PRD.`product_id` = STM.`product_id`
+      LEFT JOIN tbl_color as CLR
+        ON STM.`color_id` = CLR.`color_id`');
   END IF;
 
   SET select_query = CONCAT(select_query, ',
@@ -1504,10 +1507,13 @@ BEGIN
       AND CLR.color_slug = "', color_slug, '"');
   ELSE
     SET select_query = CONCAT(select_query, ',
-      STM.`stock_model_id`, STM.`stock_model_code`');
+      STM.`stock_model_id`, STM.`stock_model_code`,
+      CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`');
+        ON PRD.`product_id` = STM.`product_id`
+      LEFT JOIN tbl_color as CLR
+        ON STM.`color_id` = CLR.`color_id`');
   END IF;
 
   SET from_query = CONCAT(from_query, '
@@ -1564,6 +1570,7 @@ BEGIN
     PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
+    PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`,
     PLN.`plan_price`, PLN.`product_code`,
@@ -1997,10 +2004,13 @@ BEGIN
       AND CLR.color_slug = "', color_slug, '"');
   ELSE
     SET select_query = CONCAT(select_query, ',
-      STM.`stock_model_id`, STM.`stock_model_code`');
+      STM.`stock_model_id`, STM.`stock_model_code`,
+      CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`');
+        ON PRD.`product_id` = STM.`product_id`
+      LEFT JOIN tbl_color as CLR
+        ON STM.`color_id` = CLR.`color_id`');
   END IF;
 
   SET from_query = CONCAT(from_query, '
@@ -2054,9 +2064,10 @@ BEGIN
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
     STM.`stock_model_id`, STM.`stock_model_code`,
+    PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
-    PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     PRD_VAR.`product_variation_price` as product_price,
+    PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`, 
     PLN.`plan_price`, PLN.`product_code`,

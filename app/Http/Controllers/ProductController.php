@@ -76,6 +76,19 @@ class ProductController extends Controller
       ]);
       return $item;
     });
+    $stock_models = [];
+    $product_images = [];
+    if($product->stock_model_id) {
+      $stock_models = $this->shared->productStockModels($product->product_id);
+      foreach($stock_models as $i => $item) {
+        $stock_models[$i]->route = route('accessory_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'color'=>$item->color_slug
+        ]);
+      }
+      $product_images = $this->shared->productImagesByStock($product->stock_model_id);
+    }
     $response = [
       'product' => $product,
       'available' => $available
