@@ -1,5 +1,19 @@
 @extends('layouts.master')
 @section('content')
+@if (session('msg'))
+    <div class="alert alert-warning alert-dismissible" role="alert">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="text-center">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Lo sentimos. :(</strong> <br> {{session('msg')}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+@endif
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">

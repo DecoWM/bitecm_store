@@ -70,7 +70,7 @@ class CartController extends Controller
     }
 
     return view('cart', [
-      'products' => $products, 
+      'products' => $products,
       'total' => $total,
       'total_igv' => $total_igv,
       'igv' => $igv
@@ -97,6 +97,8 @@ class CartController extends Controller
         $has_item = $cart->search($cart_item);
         if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
           $request->session()->push('cart', $cart_item);
+        } else {
+          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
         }
         break;
       case 1:
@@ -104,6 +106,8 @@ class CartController extends Controller
         $has_item = $cart->search($cart_item);
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
+        }else {
+          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
         }
         break;
       case 2:
@@ -112,6 +116,8 @@ class CartController extends Controller
         $has_item = $cart->search($cart_item);
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
+        }else {
+          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
         }
         break;
     }
