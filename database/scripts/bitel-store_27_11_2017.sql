@@ -2683,6 +2683,7 @@ BEGIN
     PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price`,
+    PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`,
     PLN.`plan_price`, PLN.`product_code`,
