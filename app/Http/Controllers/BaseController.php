@@ -374,6 +374,16 @@ class BaseController extends Controller
     return count($slug) > 0 ? $slug[0]->contract_slug : null;
   }
 
+  public function districtsList() {
+    $district_list = DB::select('call PA_districtList()');
+    return count($district_list) > 0 ? $district_list : null;
+  }
+
+  public function branchByDistrict($district_id) {
+    $branch = DB::select('call PA_branchByDistrict(:district_id)', ['district_id' => $district_id]);
+    return count($branch) > 0 ? $branch[0]->branch_id : null;
+  }
+
   public function operatorList() {
     return [
       '30' => 'Convergia Perú S.A.',

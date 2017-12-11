@@ -51,7 +51,7 @@
                       <select name="district" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('district')}">
                         <option value="" selected="">Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
-                        <option value="{{$distrito}}">{{$distrito}}</option>
+                        <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>
                         @endforeach
                       </select>
                       {{-- <span v-show="errors.has('distrito')" class="help is-danger">@{{ errors.first('distrito') }}</span> --}}
@@ -127,7 +127,7 @@
                       <select name="delivery_distric" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
                         <option value="" selected>Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
-                        <option value="{{$distrito}}">{{$distrito}}</option>
+                        <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>
                         @endforeach
                       </select>
                     </div>

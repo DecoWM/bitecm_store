@@ -3037,6 +3037,57 @@ END $$
 
 DELIMITER ;
 
+
+-- ------------------------------------------
+-- Disctricts List with Branch asiggned
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_districtList;
+
+DELIMITER $$
+--
+-- Procedimiento para listar distritos pertenecientes a un branch
+--
+CREATE PROCEDURE PA_districtList(
+)
+BEGIN
+
+  SELECT DS.`district_id`, DS.`province_id`, DS.`branch_id`, DS.`district_name`
+  FROM tbl_branch as BR 
+  INNER JOIN tbl_district as DS ON BR.`branch_id`=DS.`branch_id`
+  WHERE DS.`active`=1 AND BR.`active`=1
+  ORDER BY DS.`district_name` ASC;
+
+END $$
+
+DELIMITER ;
+
+
+-- ------------------------------------------
+-- Get the branch ID for and District ID
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_branchByDistrict;
+
+DELIMITER $$
+--
+-- Procedimiento para obtener el branch_id de un distrito
+--
+CREATE PROCEDURE PA_branchByDistrict(
+  IN _district_id INT
+)
+BEGIN
+
+  SELECT BR.`branch_id`
+  FROM tbl_branch as BR 
+  INNER JOIN tbl_district as DS ON BR.`branch_id`=DS.`branch_id`
+  WHERE DS.`district_id` = _district_id;
+
+END $$
+
+DELIMITER ;
+
+
 -- ------------------------------------------
 -- ------------------------------------------
 -- INSERT RECORDS
@@ -4009,3 +4060,4 @@ INSERT INTO `tbl_order_status_history` VALUES(1, 1, 1, DEFAULT, DEFAULT, DEFAULT
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
