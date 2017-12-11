@@ -420,6 +420,10 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   opacity: 0.3;
 }
 
+#list-equipos .not-stock:hover .image-product img{
+  transform: none !important; 
+}
+
 #list-equipos .producto {
   position: relative;
 }
