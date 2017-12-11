@@ -415,6 +415,11 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   background-color: #cdcdcd;
 }
 
+
+.not-stock .image-product img{
+  opacity: 0.3;
+}
+
 #list-equipos .producto {
   position: relative;
 }
