@@ -48,6 +48,9 @@ class CartController extends Controller
           }
           break;
       }
+      if(!isset($product)) {
+        continue;
+      }
       $product->quantity = $item['quantity'];
       $product->type_id = $item['type_id'];
 

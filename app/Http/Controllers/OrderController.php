@@ -219,6 +219,11 @@ class OrderController extends Controller
           $equipo = $product;
           break;
       }
+
+      if(!isset($product)) {
+        continue;
+      }
+
       $product->quantity = $item['quantity'];
       array_push($products, $product);
 
@@ -240,6 +245,11 @@ class OrderController extends Controller
         'subtotal' => $subtotal,
         'subtotal_igv' => $subtotal_igv
       ]);
+    }
+
+    if (count($order_items) == 0 && count($cart) > 0) {
+      $request->session()->forget('cart');
+      return redirect()->route('show_cart')->with('msg', 'Ha ocurrido un error con el carrito de compras');
     }
 
     $order_detail = [
