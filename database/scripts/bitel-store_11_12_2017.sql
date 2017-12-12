@@ -6283,6 +6283,7 @@ BEGIN
 
   SET select_query = 'SELECT
     ORD.*, OIT.*,
+    OSH.`order_status_history_id`,
     OST.`order_status_name`,
     ORD.`created_at`,
     IDT.`idtype_name`,
@@ -6295,9 +6296,9 @@ BEGIN
     FROM tbl_order as ORD
     INNER JOIN tbl_order_item as OIT
       ON ORD.`order_id` = OIT.`order_id`
-    LEFT JOIN tbl_order_status_history as OSH
+    INNER JOIN tbl_order_status_history as OSH
       ON ORD.`order_id` = OSH.`order_id`
-    LEFT JOIN tbl_order_status as OST
+    INNER JOIN tbl_order_status as OST
       ON OSH.`order_status_id` = OST.`order_status_id`
     LEFT JOIN tbl_idtype as IDT
       ON ORD.`idtype_id` = IDT.`idtype_id`
@@ -6312,10 +6313,19 @@ BEGIN
     LEFT JOIN tbl_affiliation as AFF
       ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
 
-  SET where_query = 'GROUP BY ORD.`order_id`';
+  SET where_query = '
+  
+  WHERE OSH.order_status_history_id IN (
+         (select max(sOSH.`order_status_history_id`) as order_status_history_id
+            FROM tbl_order_status_history as sOSH
+            GROUP BY sOSH.`order_id`
+            ORDER BY sOSH.`order_status_history_id` DESC)
+  )
+
+  GROUP BY ORD.`order_id`';
 
   SET where_query = CONCAT(where_query, '
-    ORDER BY OSH.`created_at` DESC');
+    ORDER BY OSH.`order_status_history_id` DESC');
   
   -- ORDER BY
   IF (sort_by <> '') THEN
