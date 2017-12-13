@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
-{{-- @if (session('msg')) --}}
+@if (session('ws_result'))
+  {{-- @if (session('ws_result') == 2) --}}
     <div class="alert alert-warning alert-ws alert-dismissible" role="alert">
       <div class="alert-header">
         <div class="row">
@@ -25,7 +26,8 @@
         </div>
       </div>
     </div>
-{{-- @endif --}}
+  {{-- @endif --}}
+@endif
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">
