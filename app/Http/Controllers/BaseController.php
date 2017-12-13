@@ -283,6 +283,8 @@ class BaseController extends Controller
     $total = DB::select('call PA_productCountPromo(
       :plan_pre_id,
       :plan_post_id,
+      :affiliation_id,
+      :contract_id,
       :product_brands,
       :product_price_ini,
       :product_price_end,
@@ -290,6 +292,8 @@ class BaseController extends Controller
     )', [
       'plan_pre_id' => $plan_pre_id,
       'plan_post_id' => $plan_post_id,
+      'affiliation_id' => $affiliation_id,
+      'contract_id' => $contract_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
