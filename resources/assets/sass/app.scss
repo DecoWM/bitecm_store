@@ -371,8 +371,8 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 }
 
 .ribbon-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 115px;
+    height: 115px;
     overflow: hidden;
     position: absolute;
     top: -6px;
@@ -380,22 +380,24 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
     z-index: 999;
 }
 .ribbon {
-    font-size: 15px;
-    color: white;
-    text-align: center;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    position: relative;
-    padding: 2px 0;
-    left: -30px;
-    top: 25px;
-    width: 140px;
-    background-color: #cc3333;
-    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  position: relative;
+  padding: 4px 0;
+  left: -35px;
+  top: 35px;
+  width: 170px;
+  background-color: #cc3333;
+  -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
 }
 .ribbon:before, .ribbon:after {
     content: "";
@@ -411,28 +413,38 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 .ribbon:after {
     right: 0;
 }
+
 .ribbon-promo {
+  background-color: #ffe000;
+  color: #008994;
+}
+
+.ribbon-new {
   background-color: #cc3333;
 }
-.ribbon-new {
+
+.ribbon-outstanding {
   background-color: #ffb212;
 }
+
+.ribbon-sold-out {
+  background-color: #e0e0e0;
+  color: #727272;
+}
+
 .ribbon-trend {
   background-color: #008c95;
-}
-.ribbon-not-stock {
-  background-color: #cdcdcd;
 }
 
 #list-equipos .producto {
   position: relative;
 }
 
-#list-equipos .producto .ribbon {
-  left: -26px;
-  top: 26px;
-  width: 130px;
-}
+// #list-equipos .producto .ribbon {
+//   left: -26px;
+//   top: 26px;
+//   width: 130px;
+// }
 
 #section-pedido .row .detalle-pedido .row .solicitud span.normal-price {
     text-decoration: line-through;
@@ -450,6 +462,11 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
     margin-right: 7px;
 }
 
+@import "bitel_variables";
+@import "base";
+@import "common";
+@import "alerts";
 @import "home";
 @import "postpago";
 @import "carrito";
+@import "404";
