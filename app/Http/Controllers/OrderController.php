@@ -306,7 +306,7 @@ class OrderController extends Controller
       if($data_customer = $this->getInfoCustomer($order_detail)){
         // check if have debt
         if($this->checkHaveDebit($data_customer->custId)){
-          return 'Actualmente tiene deudas pendientes';
+          return redirect()->route('envio')->with('ws_result', 2);
         }
       }
 
