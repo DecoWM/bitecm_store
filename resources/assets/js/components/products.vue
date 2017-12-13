@@ -6,7 +6,13 @@
         <div class="ribbon ribbon-sold-out">Agotado</div>
       </div>
       <div v-else-if="product.promo_id" class="ribbon-wrapper">
-        <div class="ribbon ribbon-promo">Promo</div>
+        <div class="ribbon ribbon-promo">Promoción</div>
+      </div>
+      <div v-else-if="product.product_tag == 'Destacado'" class="ribbon-wrapper">
+        <div class="ribbon ribbon-outstanding">Destacado</div>
+      </div>
+      <div v-else-if="product.product_tag == 'Nuevo'" class="ribbon-wrapper">
+        <div class="ribbon ribbon-new">Nuevo</div>
       </div>
       <div class="image-product text-center">
         <a v-bind:href="product.route">

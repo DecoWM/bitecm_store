@@ -7,6 +7,7 @@
           <img v-bind:src="product.picture_url" :alt="product.product_model">
         </a>
       </div>
+      <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
       <div class="content-product text-center">
         <div class="title-product">
           <h3 class="text-center"><b>{{product.brand_name}}</b></h3>
