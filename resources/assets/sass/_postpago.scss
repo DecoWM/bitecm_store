@@ -1,3 +1,8 @@
-#planes {
-    margin-top: -330px; 
+// #planes {
+//     margin-top: -330px;
+// }
+@media (max-width: 480px) {
+  .col-12-mob {
+    width: 100%;
+  }
 }

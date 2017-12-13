@@ -32,9 +32,9 @@
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto {{!isset($smartphone->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
                   @if(!isset($smartphone->stock_model_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-not-stock">Agotado</div></div>
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
                   @elseif(isset($smartphone->promo_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
                   @endif
                   <div class="image-product text-center">
                     <a href="{{route('prepaid_detail',  [

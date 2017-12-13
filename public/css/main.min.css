@@ -4874,7 +4874,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     line-height: 50px;
   }
 }
-#descripcion-equipo .content-section form .content-product .btn-comprar button:hover {
+#descripcion-equipo .content-section form .content-product .btn-comprar button:hover :not(:disabled) {
   background-color: #008c95;
 }
 #descripcion-equipo .content-section form .content-product .btn-carrito {
@@ -4977,7 +4977,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     line-height: 50px;
   }
 }
-#descripcion-equipo .content-section form .content-product .btn-comprar-prepago button:hover {
+#descripcion-equipo .content-section form .content-product .btn-comprar-prepago button:hover :not(:disabled) :not([disabled]){
   background-color: #008c95;
 }
 @media (min-width: 768px) {
@@ -5057,7 +5057,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes {
-  margin-top: -310px;
+  margin-top: -330px;
 }
 #planes .title-plan {
   Color: #008c95;
@@ -5565,21 +5565,21 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #nav-carrito ul li:after {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border: 1px solid transparent;
   border-radius: 100%;
   left: 0;
   right: 0;
   margin: 0 auto;
-  bottom: -24px;
+  bottom: -26px;
   z-index: 999;
 }
 @media (max-width: 768px) {
   #nav-carrito ul li:after {
     right: initial;
-    bottom: 6px;
-    left: -4px;
+    bottom: 4px;
+    left: -6px;
   }
 }
 #nav-carrito ul li.active:before {
@@ -5619,7 +5619,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 768px) {
   #nav-carrito:before {
     width: 1px;
-    height: 80px;
+    height: 90px;
+    top: 10px;
     left: 5px;
     bottom: initial;
   }

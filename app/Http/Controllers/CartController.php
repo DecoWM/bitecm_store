@@ -18,10 +18,8 @@ class CartController extends Controller
   }
 
   public function showCart (Request $request) {
-    //VARIABLES
     $products = []; //Lista de productos
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart')); //Carrito de compras
 
     $total = 0;
@@ -85,10 +83,8 @@ class CartController extends Controller
       return redirect()->route('show_cart');
     }
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart',[])); //Carrito de compras
 
-    //CREACIÓN DEL ITEM PARA EL CARRITO
     $cart_item = [
       'type_id' => $request->type, //Prepago o postpago o sin variación
       'stock_model_id' => $request->stock_model, //Id del producto en stock
@@ -101,7 +97,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
           $request->session()->push('cart', $cart_item);
         } else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
       case 1:
@@ -110,7 +106,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
         }else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
       case 2:
@@ -120,7 +116,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
         }else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
     }

@@ -2,12 +2,23 @@
 @section('content')
 @if (session('msg'))
     <div class="alert alert-warning alert-dismissible" role="alert">
-      <div class="container">
+      <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="alert-body">
         <div class="row">
-          <div class="col-xs-12">
-            <div class="text-center">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>Lo sentimos. :(</strong> <br> {{session('msg')}}
+          <div class="center-flex">
+            <div class="col-xs-12 col-sm-4">
+              <img class="img-responsive" src="{{asset('images/alerts/img-left.png')}}" alt="">
+            </div>
+            <div class="col-xs-12 col-sm-8">
+              <div class="text-center">
+                {{-- {{session('msg')}} --}}
+                Al momento solo está disponible
+                hacer la compra de <b>un solo producto</b>
+                por pedido, si deseas comprar
+                un producto adicional, termina el
+                pedido seleccionado o borra el
+                producto elegido.
+              </div>
             </div>
           </div>
         </div>
