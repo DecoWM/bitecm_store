@@ -20,7 +20,6 @@
             <div class="col-xs-12 col-sm-8">
               <p>Tienes una deuda pendiente con BITEL, acércate a cancelar a la agencia más cercana.</p>
                 {{-- {{session('msg')}} --}}
-
             </div>
           </div>
         </div>
