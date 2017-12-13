@@ -661,6 +661,16 @@ button[disabled] {
   }
 }
 
+@media (min-width: 768px) {
+  .alert-warning.alert-ws .alert-header > div > div > span {
+    margin-left: -25px;
+  }
+
+  .alert-warning.alert-ws .alert-body p {
+    margin-left: -25px;
+  }
+}
+
 @media (max-width: 600px) {
   .alert-warning {
     width: 300px;
