@@ -199,7 +199,7 @@
                   </div>
                   <div class="btn-detalle">
                     <div class="row">
-                      <div class="col-xs-12 col-sm-6 col-sm-offset-6">
+                      <div class="col-xs-12 col-sm-8 col-sm-push-2">
                         <button type="button" class="btn btn-default regresar">REGRESAR</button>
                         {{-- <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/pedido_completo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
                         <button type="submit" class="btn btn-default comprar">continuar</button>

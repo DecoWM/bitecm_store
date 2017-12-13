@@ -423,6 +423,10 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
   background-color: #008c95;
 }
 
+.not-stock .image-product img {
+  opacity: 0.3;
+}
+
 #list-equipos .producto {
   position: relative;
 }
@@ -544,15 +548,15 @@ button[disabled] {
   width: 650px;
   height: auto;
   z-index: 99999;
-  left: calc(50% - 325px);
-  top: 150px;
+  right: 170px;
+  bottom: 215px;
   font-size: 20px;
   font-weight: 300;
   padding: 20px 35px;
 }
 
 .alert-body {
-  margin: 50px 0;
+  margin: 30px 0;
 }
 
 .alert .btn-close {
@@ -574,6 +578,7 @@ button[disabled] {
   background: #efefef;
   color: #169599;
   padding: 5px;
+  width: 525px;
 }
 
 .alert-warning.alert-ws .alert-header {
@@ -597,11 +602,18 @@ button[disabled] {
 }
 
 .alert-warning.alert-ws img {
+  max-height: 140px;
   margin-top: -30px;
 }
 
 .alert-warning.alert-ws span {
   color: #fff;
+}
+
+.alert-warning.alert-ws p {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 10px;
 }
 
 .alert-warning.alert-ws::before {
@@ -613,6 +625,18 @@ button[disabled] {
   position: absolute;
   left: 0;
   top: 0;
+}
+
+@media (max-width: 991px) {
+  .alert-warning {
+    left: calc(50% - 325px);
+    right: inherit;
+  }
+
+  .alert-warning {
+    left: calc(50% - 262.5px);
+    right: inherit;
+  }
 }
 
 @media (max-width: 767px) {
@@ -632,6 +656,7 @@ button[disabled] {
     width: 300px;
     left: calc(50% - 150px);
     top: 120px;
+    bottom: inherit;
   }
 
   .alert-warning .center-flex {
@@ -645,6 +670,11 @@ button[disabled] {
 
   .alert-warning .alert-body {
     margin: 10px 0;
+  }
+
+  .alert-warning.alert-ws {
+    width: 300px;
+    right: inherit;
   }
 }
 

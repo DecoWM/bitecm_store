@@ -53743,13 +53743,16 @@ var render = function() {
       "div",
       {
         staticClass: "producto",
-        class: { "active-comparar": _vm.isSelected },
+        class: {
+          "active-comparar": _vm.isSelected,
+          "not-stock": !_vm.product.stock_model_id
+        },
         attrs: { "data-equipo": "1" }
       },
       [
         !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+              _c("div", { staticClass: "ribbon ribbon-sold-out" }, [
                 _vm._v("Agotado")
               ])
             ])
@@ -54027,13 +54030,16 @@ var render = function() {
       "div",
       {
         staticClass: "producto",
-        class: { "active-comparar": _vm.isSelected },
+        class: {
+          "active-comparar": _vm.isSelected,
+          "not-stock": !_vm.product.stock_model_id
+        },
         attrs: { "data-equipo": "1" }
       },
       [
         !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+              _c("div", { staticClass: "ribbon ribbon-sold-out" }, [
                 _vm._v("Agotado")
               ])
             ])
@@ -54305,13 +54311,16 @@ var render = function() {
       "div",
       {
         staticClass: "producto",
-        class: { "active-comparar": _vm.isSelected },
+        class: {
+          "active-comparar": _vm.isSelected,
+          "not-stock": !_vm.product.stock_model_id
+        },
         attrs: { "data-equipo": "1" }
       },
       [
         !_vm.product.stock_model_id
           ? _c("div", { staticClass: "ribbon-wrapper" }, [
-              _c("div", { staticClass: "ribbon ribbon-not-stock" }, [
+              _c("div", { staticClass: "ribbon ribbon-sold-out" }, [
                 _vm._v("Agotado")
               ])
             ])

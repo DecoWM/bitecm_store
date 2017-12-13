@@ -33,7 +33,7 @@
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto {{!isset($product->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$product->product_id}}])}">
                   @if(!isset($product->stock_model_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-not-stock">Agotado</div></div>
+                  <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
                   @elseif(isset($product->promo_id))
                   <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
                   @endif
