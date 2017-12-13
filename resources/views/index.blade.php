@@ -30,9 +30,9 @@
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
                         @elseif(isset($smartphone->promo_id))
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                        @elseif(($smartphone->product_tag == 'destacado'))
+                        @elseif(($smartphone->product_tag == 'Destacado'))
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
-                        @elseif(($smartphone->product_tag == 'nuevo'))
+                        @elseif(($smartphone->product_tag == 'Nuevo'))
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
                         @endif
                         <div class="image-product text-center">
