@@ -22,7 +22,7 @@ class HomeController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $best_seller_smartphone = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4);
+    $best_seller_smartphone = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, null, null, null, null, null, null, 'destacado');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
       if (isset($item->affiliation_id)) {

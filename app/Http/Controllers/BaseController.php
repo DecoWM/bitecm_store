@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-  public function searchProductPrepaid ($category_id=1, $plan_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
+  public function searchProductPrepaid ($category_id=1, $plan_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="") {
     $products = DB::select('call PA_productSearchPrepago(
       :category_id,
       :product_brands,
@@ -18,7 +18,8 @@ class BaseController extends Controller
       :pag_total_by_page,
       :pag_actual,
       :sort_by,
-      :sort_direction
+      :sort_direction,
+      :product_tag
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -29,7 +30,8 @@ class BaseController extends Controller
       'pag_total_by_page' => $pag_total_by_page,
       'pag_actual' => $pag_actual,
       'sort_by' => $sort_by,
-      'sort_direction' => $sort_direction
+      'sort_direction' => $sort_direction,
+      'product_tag' => $product_tag
     ]);
 
     $total = DB::select('call PA_productCountPrepago(
@@ -38,14 +40,16 @@ class BaseController extends Controller
       :plan_id,
       :product_price_ini,
       :product_price_end,
-      :product_string_search
+      :product_string_search,
+      :product_tag
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
       'plan_id' => $plan_id,
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
-      'product_string_search' => $product_string_search
+      'product_string_search' => $product_string_search,
+      'product_tag' => $product_tag
     ]);
 
     return ['products' => $products, 'total' => $total[0]->total_products];
