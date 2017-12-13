@@ -18,10 +18,8 @@ class CartController extends Controller
   }
 
   public function showCart (Request $request) {
-    //VARIABLES
     $products = []; //Lista de productos
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart')); //Carrito de compras
 
     $total = 0;
@@ -85,10 +83,8 @@ class CartController extends Controller
       return redirect()->route('show_cart');
     }
 
-    //ASIGNACIÓN DE VALORES A VARIABLES
     $cart = collect($request->session()->get('cart',[])); //Carrito de compras
 
-    //CREACIÓN DEL ITEM PARA EL CARRITO
     $cart_item = [
       'type_id' => $request->type, //Prepago o postpago o sin variación
       'stock_model_id' => $request->stock_model, //Id del producto en stock

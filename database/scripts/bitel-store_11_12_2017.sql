@@ -6149,6 +6149,7 @@ BEGIN
     STM.`stock_model_id`,
     STM.`stock_model_code`,
     CLR.`color_id`,
+    CLR.`color_name`,
     CLR.`color_hexcode`,
     CLR.`color_slug` ';
 
@@ -6207,7 +6208,7 @@ BEGIN
     PLN.`plan_price`, PLN.`product_code`,
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
-    CLR.`color_name`, CLR.`color_slug`';
+    CLR.`color_id`, CLR.`color_name`, CLR.`color_slug`';
 
   SET from_query = '
     FROM tbl_order_item as OIT
