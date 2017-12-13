@@ -2521,7 +2521,7 @@ CREATE TABLE `tbl_product_variation` (
   `contract_id` int(11) DEFAULT NULL,
   `product_variation_price` decimal(6,2) NOT NULL,
   `reason_code` varchar(8) DEFAULT NULL,
-  `product_package` varchar(20) DEFAULT NULL,
+  `product_package` varchar(50) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
