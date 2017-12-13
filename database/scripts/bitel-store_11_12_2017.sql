@@ -2412,6 +2412,7 @@ CREATE TABLE `tbl_product` (
   `product_processor_cores` varchar(20) DEFAULT NULL,
   `product_band` varchar(3) DEFAULT NULL COMMENT '2G / 3G / 4G',
   `product_slug` varchar(150) DEFAULT NULL,
+  `product_tag` enum('nuevo','destacado') DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -2470,6 +2471,7 @@ INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_mod
 (40, 2, 6, 'Headset 19', 'accesorios.jpg', NULL, '1049.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-19', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
 (41, 2, 6, 'Headset 20', 'accesorios.jpg', NULL, '1449.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-20', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1);
 
+update `tbl_product` set `product_tag`='destacado' where `product_id` in (4,9,12,18);
 -- --------------------------------------------------------
 
 --
@@ -4120,18 +4122,9 @@ DELIMITER $$
 CREATE PROCEDURE PA_affiliationList()
 BEGIN
     --
-    DECLARE stored_query TEXT;
-    
-    SET stored_query = '
-        SELECT affiliation_id,affiliation_name,affiliation_slug
+    SELECT affiliation_id,affiliation_name,affiliation_slug
         FROM tbl_affiliation
-        ORDER BY weight ASC';
-
-    -- Executing query
-    SET @consulta = stored_query;
-    -- select @consulta;
-    PREPARE exec_strquery FROM @consulta;
-    EXECUTE exec_strquery;
+        ORDER BY weight ASC;
 
 END $$
 
@@ -4150,18 +4143,9 @@ DELIMITER $$
 CREATE PROCEDURE PA_brandList()
 BEGIN
     --
-    DECLARE stored_query TEXT;
-    
-    SET stored_query = '
-        SELECT brand_id,brand_name
+    SELECT brand_id,brand_name
         FROM tbl_brand
-        ORDER BY weight ASC';
-
-    -- Executing query
-    SET @consulta = stored_query;
-    -- select @consulta;
-    PREPARE exec_strquery FROM @consulta;
-    EXECUTE exec_strquery;
+        ORDER BY weight ASC;
 
 END $$
 
@@ -4178,29 +4162,16 @@ DELIMITER $$
 -- Procedimiento para listar los planes
 --
 CREATE PROCEDURE PA_planList(
-  plan_type INT
+  _plan_type INT
 )
 BEGIN
-  --
-  DECLARE stored_query TEXT;
 
-  SET plan_type = IFNULL(plan_type, -1); -- set value if null  
-  
-  SET stored_query = '
-    SELECT *
-    FROM tbl_plan';
+  SET _plan_type = IFNULL(_plan_type, -1); -- set value if null  
 
-  IF (plan_type > 0) THEN
-    SET stored_query = CONCAT(stored_query, ' WHERE plan_type = ', plan_type);
-  END IF;
-
-  SET stored_query = CONCAT(stored_query, ' ORDER BY weight ASC');
-
-  -- Executing query
-  SET @consulta = stored_query;
-  -- select @consulta;
-  PREPARE exec_strquery FROM @consulta;
-  EXECUTE exec_strquery;
+  SELECT *
+    FROM tbl_plan
+  WHERE IF(_plan_type > 0, plan_type = _plan_type, 1)
+  ORDER BY  weight ASC;
 
 END $$
 
@@ -4219,18 +4190,9 @@ DELIMITER $$
 CREATE PROCEDURE PA_variationTypeList()
 BEGIN
     --
-    DECLARE stored_query TEXT;
-    
-    SET stored_query = '
-        SELECT *
+    SELECT *
         FROM tbl_variation_type
-        ORDER BY weight ASC';
-
-    -- Executing query
-    SET @consulta = stored_query;
-    -- select @consulta;
-    PREPARE exec_strquery FROM @consulta;
-    EXECUTE exec_strquery;
+        ORDER BY weight ASC;
 
 END $$
 
@@ -4297,6 +4259,7 @@ BEGIN
   DECLARE cad_order TEXT;
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
+  DECLARE select_idpromo_segment TEXT; -- subquery for promotional id
   DECLARE join_segment TEXT;
   -- conditional string query
   SET cad_condition = "";
@@ -4327,10 +4290,16 @@ BEGIN
   END IF;
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND (PRD.product_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    SET cad_condition = CONCAT(cad_condition, ' AND (IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
   END IF;
   IF (product_price_ini > 0 AND product_price_end < 1) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_price >= ',product_price_ini);
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) >= ',product_price_ini);
+  END IF;
+  IF (product_price_ini < 1 AND product_price_end > 0) THEN
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) <= ',product_price_end);
   END IF;
 
   -- Define the inital row
@@ -4338,13 +4307,25 @@ BEGIN
   -- Define the final row
   SET pag_end = pag_actual * pag_total_by_page;
 
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
+
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`),
     PRM.*, PRD.*, STM.`stock_model_id`,
     PRD.`product_image_url` AS picture_url,
-    BRN.`brand_name`, BRN.`brand_slug`,';
+    BRN.`brand_name`, BRN.`brand_slug`,
+    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price,';
 
-  SET join_segment = '
+  SET join_segment = CONCAT('
     FROM tbl_product as PRD
     -- Filter by brand
     INNER JOIN tbl_brand as BRN
@@ -4354,7 +4335,9 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`';
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
@@ -4388,17 +4371,8 @@ BEGIN
     ISNULL(PRM.`publish_at`),
     PRM.`publish_at` DESC');
 
-  SET cad_condition = CONCAT(cad_condition, '
-    AND (
-      (
-        PRM.`promo_id` IS NOT NULL
-        AND PRM.`active` = 1
-        AND PRM.`product_variation_id` IS NULL
-        AND PRM.`allow_all_variations` = 0
-        AND PRM.`publish_at` IS NOT NULL
-      )
-      OR PRM.`promo_id` IS NULL
-    )');
+  -- SET cad_condition = CONCAT(cad_condition, '
+  --   ');
 
   -- ORDER BY
   IF (sort_by <> '') THEN
@@ -4453,6 +4427,7 @@ BEGIN
   DECLARE stored_query TEXT;
   DECLARE cad_condition VARCHAR(255);
   DECLARE select_segment TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE join_segment TEXT;
 
   -- conditional string query
@@ -4475,19 +4450,42 @@ BEGIN
   END IF;
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND (PRD.product_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    SET cad_condition = CONCAT(cad_condition, ' AND (IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
   END IF;
   IF (product_price_ini > 0 AND product_price_end < 1) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_price >= ',product_price_ini);
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) >= ',product_price_ini);
   END IF;
+  IF (product_price_ini < 1 AND product_price_end > 0) THEN
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD.product_price), IFNULL(PRM.promo_price,PRD.product_price)) <= ',product_price_end);
+  END IF;
+
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
 
   SET select_segment = 'SELECT COUNT(PRD.product_id) as total_products';
 
-  SET join_segment = '
+  SET join_segment = CONCAT('
     FROM tbl_product as PRD
     -- Filter by brand
     INNER JOIN tbl_brand as BRN
-      ON PRD.`brand_id` = BRN.`brand_id`';
+      ON PRD.`brand_id` = BRN.`brand_id`
+    -- Check promos
+    LEFT JOIN tbl_promo as PRM
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
@@ -4538,6 +4536,7 @@ CREATE PROCEDURE PA_productBySlug(
 BEGIN
   DECLARE stored_query TEXT;
   DECLARE select_query TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
   
@@ -4545,9 +4544,20 @@ BEGIN
   SET product_slug = IFNULL(product_slug, '');
   SET color_slug = IFNULL(color_slug, '');
 
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
+
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
-    BRN.`brand_id`, BRN.`brand_name`';
+    BRN.`brand_id`, BRN.`brand_name`,BRN.`brand_slug`';
 
   SET from_query = '
     FROM tbl_product as PRD
@@ -4583,13 +4593,14 @@ BEGIN
   END IF;
 
   SET select_query = CONCAT(select_query, ',
-    PRM.*, PRD.*');
+    PRM.*, PRD.*,
+    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price');
   SET from_query = CONCAT(from_query, '
+    -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`');
-  SET where_query = CONCAT(where_query, ' 
-    AND (PRM.`product_variation_id` IS NULL
-      OR PRM.`promo_id` IS NULL)');
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   SET where_query = CONCAT(where_query, ' LIMIT 1');
 
@@ -4621,18 +4632,31 @@ CREATE PROCEDURE PA_productByStock(
 BEGIN
   DECLARE stored_query TEXT;
   DECLARE select_query TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
   
   SET stock_model_id = IFNULL(stock_model_id, 0);
 
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
+
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
     STM.`stock_model_id`, STM.`stock_model_code`,
     BRN.`brand_name`, BRN.`brand_slug`,
-    CLR.`color_name`, CLR.`color_slug`,';
+    CLR.`color_name`, CLR.`color_slug`,
+    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price';
 
-  SET from_query = '
+  SET from_query = CONCAT('
     FROM tbl_stock_model as STM
     INNER JOIN tbl_product as PRD
       ON STM.`product_id` = PRD.`product_id`
@@ -4641,13 +4665,13 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`';
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   SET where_query = CONCAT('
     WHERE PRD.`active` = 1
-      AND STM.`stock_model_id` = ', stock_model_id, '
-      AND (PRM.`product_variation_id` IS NULL
-        OR PRM.`promo_id` IS NULL)'
+      AND STM.`stock_model_id` = ', stock_model_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
@@ -4682,7 +4706,8 @@ CREATE PROCEDURE PA_productSearchPrepago(
   IN pag_total_by_page INT, -- Items per page
   IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),
-  IN sort_direction VARCHAR(5)
+  IN sort_direction VARCHAR(5),
+  IN product_tag VARCHAR(15)
 )
 BEGIN
   --
@@ -4712,6 +4737,7 @@ BEGIN
   SET product_string_search = IFNULL(product_string_search,'');
   SET sort_by = IFNULL(sort_by,'');
   SET sort_direction = IFNULL(sort_direction,'');
+  SET product_tag = IFNULL(product_tag,'');
   -- setting actual page if wrong value
   IF (pag_actual < 1) THEN
     SET pag_actual = 1;
@@ -4740,6 +4766,10 @@ BEGIN
   -- conditional filter for plan
   IF (plan_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PLN.plan_id = ', plan_id);
+  END IF;
+  -- conditional filter for tag product (nuevo / destacado)
+  IF (product_tag <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag = ''', product_tag,' '' ');
   END IF;
 
   -- Define the inital row
@@ -4882,32 +4912,45 @@ CREATE PROCEDURE PA_productCountPrepago(
   IN plan_id INT,
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
-  IN product_string_search VARCHAR(255)
+  IN product_string_search VARCHAR(255),
+  IN product_tag VARCHAR(255)
 )
 BEGIN
+
   --
+  DECLARE variation_type_id INT;
   DECLARE stored_query TEXT;
-  DECLARE cad_condition VARCHAR(255);
+  DECLARE cad_condition TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE select_segment TEXT;
   DECLARE join_segment TEXT;
   -- conditional string query
+  SET variation_type_id = 1; -- Prepaid
   SET cad_condition = "";
+
   -- checking null values
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
+  SET plan_id = IFNULL(plan_id, 14); -- set value 14 (Prepago B-Voz) if null
   SET category_id = IFNULL(category_id, -1); -- set value if null
-  SET plan_id = IFNULL(plan_id, -1); -- set value if null
   SET product_string_search = IFNULL(product_string_search,'');
-
+  SET product_tag = IFNULL(product_tag,'');
+  
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ', (product_price_ini - 0.5), ' AND ', (product_price_end + 0.5) , ') ');
+    -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    SET cad_condition = CONCAT(cad_condition, ' AND (IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
   END IF;
   IF (product_price_ini > 0 AND product_price_end < 1) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ', product_price_ini);
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) >= ',product_price_ini);
   END IF;
-  -- conditional filter for brand
+  IF (product_price_ini < 1 AND product_price_end > 0) THEN
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) <= ',product_price_end);
+  END IF;
+  -- conditional filter for manufacturer
   IF (product_brands <> '') THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
@@ -4918,13 +4961,38 @@ BEGIN
   -- conditional filter for plan
   IF (plan_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PLN.plan_id = ', plan_id);
-  ELSE
-    SET cad_condition = CONCAT(cad_condition, ' AND PLN.plan_id = 14');
   END IF;
+  -- conditional filter for tag product (nuevo / destacado)
+  IF (product_tag <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag = ''', product_tag,' '' ');
+  END IF;
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    AND
+        (
+            PRMsub.allow_all_variations = 1
+            OR
+            (
+                PRMsub.allow_all_variations = 0
+                AND PRMsub.`product_variation_id` IS NOT NULL
+                AND PRD_VAR.`product_variation_id` IS NOT NULL
+                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+            )
+        )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+
+    ';
 
   SET select_segment = 'SELECT COUNT(PRD.product_id) as total_products';
 
-  SET join_segment = '
+  SET join_segment = CONCAT('
     FROM tbl_product as PRD
     -- Filter by brand
     INNER JOIN tbl_brand as BRN
@@ -4934,12 +5002,20 @@ BEGIN
       ON PRD.`product_id` = PRD_VAR.`product_id`
     -- Filter by plan
     INNER JOIN tbl_plan as PLN
-      ON PLN.`plan_id` = PRD_VAR.`plan_id`';
+      ON PLN.`plan_id` = PRD_VAR.`plan_id`
+    -- Check stock models
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
+    -- Check promos
+    LEFT JOIN tbl_promo as PRM
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
     -- is a search and require MATCH
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,  
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
@@ -4948,11 +5024,14 @@ BEGIN
     ');
   ELSE
     -- If this is not a search
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
   END IF;
+
+  SET cad_condition = CONCAT(cad_condition, ' 
+    AND PRD_VAR.`variation_type_id` = ',variation_type_id);
 
   -- CONCAT query, condition AND order
   SET stored_query = CONCAT(stored_query, cad_condition);
@@ -4986,6 +5065,7 @@ CREATE PROCEDURE PA_productPrepagoBySlug(
 BEGIN
   DECLARE stored_query TEXT;
   DECLARE select_query TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
   
@@ -4994,12 +5074,35 @@ BEGIN
   SET plan_slug = IFNULL(plan_slug, '');
   SET color_slug = IFNULL(color_slug, '');
 
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    AND
+        (
+            PRMsub.allow_all_variations = 1
+            OR
+            (
+                PRMsub.allow_all_variations = 0
+                AND PRMsub.`product_variation_id` IS NOT NULL
+                AND PRD_VAR.`product_variation_id` IS NOT NULL
+                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+            )
+        )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
+
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
     PRM.*, PRD.*, PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_id`, BRN.`brand_name`, BRN.`brand_slug`,
-    PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_slug`';
+    PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_slug`,
+    FORMAT(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
 
   SET from_query = '
     FROM tbl_product as PRD
@@ -5041,14 +5144,11 @@ BEGIN
 
   SET from_query = CONCAT(from_query, '
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`');
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
   SET where_query = CONCAT(where_query, ' 
-    AND PRD_VAR.`variation_type_id` = 1
-    AND ((PRM.`allow_all_variations` = TRUE
-      AND (PRM.`allowed_variation_type_id` = 1
-        OR PRM.`allowed_variation_type_id` IS NULL))
-      OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
-      OR PRM.`promo_id` IS NULL)');
+    AND PRD_VAR.`variation_type_id` = 1');
 
   SET where_query = CONCAT(where_query, ' LIMIT 1');
 

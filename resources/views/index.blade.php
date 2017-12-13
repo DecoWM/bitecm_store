@@ -26,10 +26,14 @@
                     <div class="list-productos">
                       @foreach ($best_seller_smartphone as $smartphone)
                       <div class="producto">
-                        @if(isset($smartphone->promo_id))
+                        @if(!isset($smartphone->stock_model_id))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-not-stock">Agotado</div></div>
+                        @elseif(isset($smartphone->promo_id))
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promo</div></div>
-                        @else
-                        <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
+                        @elseif(($smartphone->product_tag == 'destacado'))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Destacado</div></div>
+                        @elseif(($smartphone->product_tag == 'nuevo'))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
                         @endif
                         <div class="image-product text-center">
                           <a href="{{$smartphone->route}}">
