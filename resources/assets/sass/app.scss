@@ -300,6 +300,7 @@ input:checked ~ .checkmark:after {
     text-decoration: line-through;
     color: #828282;
     font-family: 'Montserrat', sans-serif;
+    line-height: 0;
 }
 
 #descripcion-equipo .content-section form .content-product .detalle-product .price-product span.normal-price {
@@ -438,6 +439,14 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 
 .not-stock .image-product img {
   opacity: 0.3;
+}
+
+#list-equipos .producto.not-stock:hover {
+  border: 1px solid #cecece;
+}
+
+#list-equipos .producto.not-stock:hover .image-product img {
+  transform: scale(1);
 }
 
 #list-equipos .producto {
