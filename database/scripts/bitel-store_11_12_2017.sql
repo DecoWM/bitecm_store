@@ -2408,11 +2408,11 @@ CREATE TABLE `tbl_product` (
   `product_camera_3` varchar(6) DEFAULT NULL,
   `product_camera_4` varchar(6) DEFAULT NULL,
   `product_processor_name` varchar(25) DEFAULT NULL,
-  `product_processor_value` varchar(12) DEFAULT NULL,
+  `product_processor_power` varchar(12) DEFAULT NULL,
   `product_processor_cores` varchar(20) DEFAULT NULL,
   `product_band` varchar(3) DEFAULT NULL COMMENT '2G / 3G / 4G',
   `product_slug` varchar(150) DEFAULT NULL,
-  `product_tag` enum('nuevo','destacado') DEFAULT NULL,
+  `product_tag` enum('Nuevo','Destacado') DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -2428,7 +2428,7 @@ CREATE TABLE `tbl_product` (
 -- Volcado de datos para la tabla `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_ram_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_value`, `product_processor_cores`, `product_band`, `product_slug`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
+INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_ram_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_power`, `product_processor_cores`, `product_band`, `product_slug`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
 (1, 1, 1, 'A3 XL', 'ALCATEL/ALCATEL-A3-XL.jpg', NULL, '449.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'a3-xl', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
 (2, 1, 2, 'L640', 'BITEL/BITEL-L640.jpg', NULL, '259.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'l640', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
 (3, 1, 2, 'B9501', 'BITEL/Bitel-B9501.jpg', NULL, '259.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'b9501', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
@@ -2471,7 +2471,8 @@ INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_mod
 (40, 2, 6, 'Headset 19', 'accesorios.jpg', NULL, '1049.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-19', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
 (41, 2, 6, 'Headset 20', 'accesorios.jpg', NULL, '1449.00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-20', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1);
 
-update `tbl_product` set `product_tag`='destacado' where `product_id` in (4,9,12,18);
+UPDATE `tbl_product` SET `product_tag`='Destacado' WHERE `product_id` IN (4,9,12,18);
+UPDATE `tbl_product` SET `product_tag`='Nuevo' WHERE `product_id` IN (14,16,32,36);
 -- --------------------------------------------------------
 
 --
@@ -2520,7 +2521,7 @@ CREATE TABLE `tbl_product_variation` (
   `contract_id` int(11) DEFAULT NULL,
   `product_variation_price` decimal(6,2) NOT NULL,
   `reason_code` varchar(8) DEFAULT NULL,
-  `product_package` varchar(20) DEFAULT NULL,
+  `product_package` varchar(50) DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
