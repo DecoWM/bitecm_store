@@ -3375,10 +3375,10 @@ CREATE TABLE `tbl_promo` (
 --
 
 INSERT INTO `tbl_promo` (`promo_id`, `product_id`, `product_variation_id`, `add_product_id`, `promo_price`, `promo_discount`, `promo_add_product_price`, `promo_add_product_discount`, `promo_title`, `promo_description`, `promo_start_date`, `promo_expiration_date`, `allow_all_variations`, `allowed_variation_type_id`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
-(1, 10, NULL, NULL, 99, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(1, 10, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (2, 12, NULL, NULL, 89, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(3, 19, NULL, NULL, '9.00', NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(4, 18, 488, NULL, 199, NULL, NULL, NULL, 'promocion navideña', 'esta es una promoción de navidad!', '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, NULL, 1);
+(3, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(4, 18, 488, NULL, 999, NULL, NULL, NULL, 'promocion navideña', 'esta es una promoción de navidad!', '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -4323,7 +4323,7 @@ BEGIN
     PRM.*, PRD.*, STM.`stock_model_id`,
     PRD.`product_image_url` AS picture_url,
     BRN.`brand_name`, BRN.`brand_slug`,
-    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price,';
+    ROUND(IFNULL(PRM.promo_price,0),2) as promo_price,';
 
   SET join_segment = CONCAT('
     FROM tbl_product as PRD
@@ -4594,7 +4594,7 @@ BEGIN
 
   SET select_query = CONCAT(select_query, ',
     PRM.*, PRD.*,
-    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price');
+    ROUND(IFNULL(PRM.promo_price,0),2) as promo_price');
   SET from_query = CONCAT(from_query, '
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -4654,7 +4654,7 @@ BEGIN
     STM.`stock_model_id`, STM.`stock_model_code`,
     BRN.`brand_name`, BRN.`brand_slug`,
     CLR.`color_name`, CLR.`color_slug`,
-    FORMAT(IFNULL(PRM.promo_price,0),2) as promo_price';
+    ROUND(IFNULL(PRM.promo_price,0),2) as promo_price';
 
   SET from_query = CONCAT('
     FROM tbl_stock_model as STM
@@ -4808,7 +4808,7 @@ BEGIN
     PRD_VAR.`product_variation_price` as product_price,
     PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_price`, PLN.`plan_slug`,
     BRN.`brand_name`, BRN.`brand_slug`,
-    FORMAT(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price,';
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price,';
 
   SET join_segment = CONCAT('
     FROM tbl_product as PRD
@@ -5102,7 +5102,7 @@ BEGIN
     PRD_VAR.`product_variation_price` as product_price,
     BRN.`brand_id`, BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_slug`,
-    FORMAT(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
 
   SET from_query = '
     FROM tbl_product as PRD
@@ -5181,11 +5181,34 @@ CREATE PROCEDURE PA_productPrepagoByStock(
 BEGIN
   DECLARE stored_query TEXT;
   DECLARE select_query TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
   
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    AND
+        (
+            PRMsub.allow_all_variations = 1
+            OR
+            (
+                PRMsub.allow_all_variations = 0
+                AND PRMsub.`product_variation_id` IS NOT NULL
+                AND PRD_VAR.`product_variation_id` IS NOT NULL
+                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+            )
+        )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
@@ -5197,9 +5220,10 @@ BEGIN
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`,
     PLN.`plan_price`, PLN.`product_code`,
-    CLR.`color_name`, CLR.`color_slug`';
+    CLR.`color_name`, CLR.`color_slug`,
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
 
-  SET from_query = '
+  SET from_query = CONCAT('
     FROM tbl_stock_model as STM
     INNER JOIN tbl_product as PRD
       ON STM.`product_id` = PRD.`product_id`
@@ -5212,17 +5236,14 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`';
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   SET where_query = CONCAT('
     WHERE PRD.`active` = 1
       AND STM.`stock_model_id` = ', stock_model_id, '
-      AND PRD_VAR.`product_variation_id` = ', product_variation_id,' 
-      AND ((PRM.`allow_all_variations` = TRUE
-          AND (PRM.`allowed_variation_type_id` = 1
-            OR PRM.`allowed_variation_type_id` IS NULL))
-        OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
-        OR PRM.`promo_id` IS NULL)'
+      AND PRD_VAR.`product_variation_id` = ', product_variation_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
@@ -5369,7 +5390,7 @@ BEGIN
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
     BRN.`brand_name`, BRN.`brand_slug`,
-    FORMAT(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price,';
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price,';
 
   SET join_segment = CONCAT('
     FROM tbl_product as PRD
@@ -5486,31 +5507,41 @@ CREATE PROCEDURE PA_productCountPostpago(
   IN product_string_search VARCHAR(255)
 )
 BEGIN
+
   --
+  DECLARE variation_type_id INT;
   DECLARE stored_query TEXT;
-  DECLARE cad_condition VARCHAR(255);
+  DECLARE cad_condition TEXT;
   DECLARE select_segment TEXT;
+  DECLARE select_idpromo_segment TEXT; -- subquery for promotional id
   DECLARE join_segment TEXT;
   -- conditional string query
+  SET variation_type_id = 2; -- Postpaid
   SET cad_condition = "";
   -- checking null values
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET category_id = IFNULL(category_id, -1); -- set value if null
-  SET plan_id = IFNULL(plan_id, -1); -- set value if null
-  SET affiliation_id = IFNULL(affiliation_id, -1); -- set value if null
-  SET contract_id = IFNULL(contract_id, -1); -- set value if null
-  SET product_string_search = IFNULL(product_string_search,'');
-
+  SET plan_id = IFNULL(plan_id, 7); -- set value 7 (Postpago iChip 99.9) if null
+  SET affiliation_id = IFNULL(affiliation_id, 1); -- set value 1 (Portabilidad) if null
+  SET contract_id = IFNULL(contract_id, 1); -- set value 1 (18 meses) if null
+  SET product_string_search = IFNULL(product_string_search, '');
+ 
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
+    SET cad_condition = CONCAT(cad_condition, ' AND (IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
   END IF;
   IF (product_price_ini > 0 AND product_price_end < 1) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) >= ',product_price_ini);
   END IF;
-  -- conditional filter for brand
+  IF (product_price_ini < 1 AND product_price_end > 0) THEN
+    -- SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.product_variation_price >= ',product_price_ini);
+    SET cad_condition = CONCAT(cad_condition, ' AND IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) <= ',product_price_end);
+  END IF;
+  -- conditional filter for manufacturer
   IF (product_brands <> '') THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
@@ -5520,26 +5551,42 @@ BEGIN
   END IF;
   -- conditional filter for plan
   IF (plan_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PLN.plan_id = ', plan_id);
-  ELSE
-    SET cad_condition = CONCAT(cad_condition, ' AND PLN.plan_id = 1');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.plan_id = ', plan_id);
   END IF;
   -- conditional filter for affiliation
   IF (affiliation_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND AFF.affiliation_id = ', affiliation_id);
-  ELSE
-    SET cad_condition = CONCAT(cad_condition, ' AND AFF.affiliation_id = 7');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.affiliation_id = ', affiliation_id);
   END IF;
   -- conditional filter for contract
   IF (contract_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND CTR.contract_id = ', contract_id);
-  ELSE
-    SET cad_condition = CONCAT(cad_condition, ' AND CTR.contract_id = 1');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.contract_id = ', contract_id);
   END IF;
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    AND
+        (
+            PRMsub.allow_all_variations = 1
+            OR
+            (
+                PRMsub.allow_all_variations = 0
+                AND PRMsub.`product_variation_id` IS NOT NULL
+                AND PRD_VAR.`product_variation_id` IS NOT NULL
+                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+            )
+        )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
 
   SET select_segment = 'SELECT COUNT(PRD.product_id) as total_products';
 
-  SET join_segment = '
+  SET join_segment = CONCAT('
     FROM tbl_product as PRD
     -- Filter by brand
     INNER JOIN tbl_brand as BRN
@@ -5548,19 +5595,27 @@ BEGIN
     LEFT JOIN tbl_product_variation as PRD_VAR
       ON PRD.`product_id` = PRD_VAR.`product_id`
     -- Filter by affiliation
-    LEFT JOIN tbl_affiliation as AFF
+    INNER JOIN tbl_affiliation as AFF
       ON AFF.`affiliation_id` = PRD_VAR.`affiliation_id`
     -- Filter by plan
-    LEFT JOIN tbl_plan as PLN
+    INNER JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     -- Filter by contract
     INNER JOIN tbl_contract as CTR
-      ON CTR.`contract_id` = PRD_VAR.`contract_id`';
+      ON CTR.`contract_id` = PRD_VAR.`contract_id`
+    -- Check stock models
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
+    -- Check promos
+    LEFT JOIN tbl_promo as PRM
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
     -- is a search and require MATCH
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
@@ -5569,11 +5624,16 @@ BEGIN
     ');
   ELSE
     -- If this is not a search
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
   END IF;
+
+  -- validation for PLAN and promo price
+  SET cad_condition = CONCAT(cad_condition, ' 
+    AND PRD_VAR.`variation_type_id` = ',variation_type_id,'
+    ');
 
   -- CONCAT query, condition AND order
   SET stored_query = CONCAT(stored_query, cad_condition);
@@ -5653,7 +5713,7 @@ BEGIN
     AFF.`affiliation_id`, AFF.`affiliation_name`, AFF.`affiliation_slug`,
     PLN.`plan_id`, PLN.`plan_name`, PLN.`plan_slug`,
     CTR.`contract_id`, CTR.`contract_name`, CTR.`contract_slug`,
-    FORMAT(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
 
   SET from_query = '
     FROM tbl_product as PRD
@@ -5737,11 +5797,34 @@ CREATE PROCEDURE PA_productPostpagoByStock(
 BEGIN
   DECLARE stored_query TEXT;
   DECLARE select_query TEXT;
+  DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
   
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = 'SELECT
+        PRMsub.promo_id
+    FROM
+    tbl_promo as PRMsub
+    WHERE
+        PRMsub.product_id = PRD.product_id
+    AND
+        (
+            PRMsub.allow_all_variations = 1
+            OR
+            (
+                PRMsub.allow_all_variations = 0
+                AND PRMsub.`product_variation_id` IS NOT NULL
+                AND PRD_VAR.`product_variation_id` IS NOT NULL
+                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+            )
+        )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+    ';
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
@@ -5755,9 +5838,10 @@ BEGIN
     PLN.`plan_price`, PLN.`product_code`,
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
-    CLR.`color_name`, CLR.`color_slug`';
+    CLR.`color_name`, CLR.`color_slug`,
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
 
-  SET from_query = '
+  SET from_query = CONCAT('
     FROM tbl_stock_model as STM
     INNER JOIN tbl_product as PRD
       ON STM.`product_id` = PRD.`product_id`
@@ -5774,17 +5858,14 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON PRD.`product_id` = PRM.`product_id`';
+      ON (PRD.`product_id` = PRM.`product_id` 
+          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )');
 
   SET where_query = CONCAT('
     WHERE PRD.`active` = 1
       AND STM.`stock_model_id` = ', stock_model_id, '
-      AND PRD_VAR.`product_variation_id` = ', product_variation_id,' 
-      AND ((PRM.`allow_all_variations` = TRUE
-          AND (PRM.`allowed_variation_type_id` = 2
-            OR PRM.`allowed_variation_type_id` IS NULL))
-        OR PRM.`product_variation_id` = PRD_VAR.`product_variation_id`
-        OR PRM.`promo_id` IS NULL)'
+      AND PRD_VAR.`product_variation_id` = ', product_variation_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
