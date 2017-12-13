@@ -12,7 +12,11 @@
               @foreach ($products as $product)
               <section id="detalle-rastreo">
                 <div class="title-section">
-                  <h1>Producto comprado el:</h1><span>{{$order->created_at}}</span>
+                  @php
+                    // \Carbon\Carbon::setLocale('es');
+                    $date = new \Carbon\Carbon($order->created_at);
+                  @endphp
+                  <h1>Producto comprado el:</h1><span>{{$date->format('d - m - Y')}}</span>
                 </div>
                 <div class="content-section">
                   <div class="row">
@@ -31,7 +35,7 @@
                           </p>
                           @endif
                           @if(isset($product->product_variation_id))
-                            @php 
+                            @php
                             $product->product_price = $product->product_variation_price;
                             @endphp
                           @endif
@@ -46,7 +50,25 @@
                             <p>S/. {{$product->product_price}}</P>
                           </p>
                           @endif
-                          <p class="status"><span>Status:</span>Pendiente</p>
+                          <p class="status"><span>Status:</span>
+                            @switch($status_id)
+                                @case(1)
+                                    Pendiente
+                                    @break
+                                @case(2)
+                                    Procesado
+                                    @break
+                                @case(3)
+                                    Cancelado
+                                    @break
+                                @case(4)
+                                    Entregado
+                                    @break
+                                @case(5)
+                                  Completado
+                                    @break
+                            @endswitch
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -54,31 +76,47 @@
                       <div class="proceso">
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 1 ? 'active' : ''}}">
-                              <div class="image-icon"><img src="./images/rastreo/svg/estado_pendiente.svg" alt=""></div><span>Pendiente</span>
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 1 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 ? 'is-completed' : ''}}">
+                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_pendiente.svg" alt=""></div> --}}
+                              <span>Pendiente</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 2 ? 'active' : ''}}">
-                              <div class="image-icon"><img src="./images/rastreo/svg/estado_procesado.svg" alt=""></div><span>Procesado</span>
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 2 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 && $status_id != 1? 'is-completed' : ''}}">
+                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_procesado.svg" alt=""></div> --}}
+                              <span>Procesado</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 3 ? 'active' : ''}}">
+                            {{-- <li class="col-xs-4 col-sm-4 {{$status_id == 3 ? 'active' : ''}}">
                               <div class="image-icon"><img src="./images/rastreo/svg/estado_cancelado.svg" alt=""></div><span>Cancelado</span>
+                            </li> --}}
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 4 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 && $status_id != 2 && $status_id != 1? 'is-completed' : ''}}">
+                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_entregado.svg" alt=""></div> --}}
+                              <span>Entregado</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 4 ? 'active' : ''}}">
-                              <div class="image-icon"><img src="./images/rastreo/svg/estado_entregado.svg" alt=""></div><span>Entregado</span>
-                            </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 5 ? 'active' : ''}}">
-                              <div class="image-icon"><img src="./images/rastreo/svg/estado_completado.svg" alt=""></div><span>Completado</span>
+                            <li class="col-xs-4 col-sm-4 {{$status_id == 5 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}}">
+                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_completado.svg" alt=""></div> --}}
+                              <span>Completado</span>
                             </li>
                           </ul>
                         </div>
                         <div class="resp-proceso-web text-center">
-                          <p>¡Tu pedido está siendo evaluado!</p>
+                          @if ($status_id == 1 || $status_id == 2)
+                            <p>¡Tu pedido está siendo evaluado!</p>
+                          @elseif ($status_id == 3)
+                            <p>Tu pedido ha sido cancelado</p>
+                          @elseif ($status_id == 4 || $status_id == 5)
+                            <p>¡Tu pedido ha sido entregado!</p>
+                          @endif
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12">
                       <div class="resp-proceso-movil text-center">
-                        <p>¡Tu pedido está siendo evaluado!</p>
+                        @if ($status_id == 1 || $status_id == 2)
+                          <p>¡Tu pedido está siendo evaluado!</p>
+                        @elseif ($status_id == 3)
+                          <p>Tu pedido ha sido cancelado</p>
+                        @elseif ($status_id == 4 || $status_id == 5)
+                          <p>¡Tu pedido ha sido entregado!</p>
+                        @endif
                       </div>
                     </div>
                   </div>

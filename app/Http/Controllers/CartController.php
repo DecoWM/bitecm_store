@@ -97,7 +97,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
           $request->session()->push('cart', $cart_item);
         } else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
       case 1:
@@ -106,7 +106,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
         }else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
       case 2:
@@ -116,7 +116,7 @@ class CartController extends Controller
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
         }else {
-          return redirect()->route('show_cart')->with('msg', 'Alcanzaste el número máximo de productos permitidos.');
+          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
         }
         break;
     }

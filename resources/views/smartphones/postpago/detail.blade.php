@@ -7,10 +7,19 @@
             <div class="title">
               <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
-            @if(isset($product->promo_id))
-            <div class="state"><span>PROMOCIÓN</span></div>
+
+            @if (!$product->stock_model_id)
+              <div class="state">
+                <span>
+                  <i class="fa fa-exclamation" aria-hidden="true"></i> Agotado
+                </span>
+              </div>
             @else
-            <div class="state"><span>NUEVO</span></div>
+              @if(isset($product->promo_id))
+              <div class="state"><span>PROMOCIÓN</span></div>
+              @else
+              <div class="state"><span>NUEVO</span></div>
+              @endif
             @endif
             <div id="image-equipo">
               @if(count($product_images)>0)
@@ -41,10 +50,24 @@
             <div class="header-section">
               <div class="title">
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
-                @if(isset($product->promo_id))
-                <div class="state"><span>PROMOCIÓN</span></div>
+                @if (!$product->stock_model_id)
+                  <div class="tag tag-sold-out">
+                    <div class="tag-icon">
+                      <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-exclamation fa-stack-1x"></i>
+                      </span>
+                    </div>
+                    <div class="tag-text">
+                      Agotado
+                    </div>
+                  </div>
                 @else
-                <div class="state"><span>NUEVO</span></div>
+                  @if(isset($product->promo_id))
+                  <div class="state"><span>PROMOCIÓN</span></div>
+                  @else
+                  <div class="state"><span>NUEVO</span></div>
+                  @endif
                 @endif
               </div>
               <div class="descripcion">
@@ -120,14 +143,17 @@
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
                       {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                       {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
-                      @if($product->stock_model_id)  
+                      @if($product->stock_model_id)
                       <div class="btn-comprar">
-                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                        <button type="submit" class="btn-default btn-buy">Comprar Ahora</button>
                       </div>
                       @else
-                      <div class="stock-exhausted">
-                        Agotado
+                      <div class="btn-comprar">
+                        <button class="btn-default" disabled>Comprar Ahora</button>
                       </div>
+                      {{-- <div class="stock-exhausted">
+                        Agotado
+                      </div> --}}
                       @endif
                       {{-- </form> --}}
                       {{-- <div class="btn-comprar">
