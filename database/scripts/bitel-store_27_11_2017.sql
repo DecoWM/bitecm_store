@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `bitel_ecommerce`.`tbl_product` (
   `product_camera_3` VARCHAR(6) NULL DEFAULT NULL,
   `product_camera_4` VARCHAR(6) NULL DEFAULT NULL,
   `product_processor_name` VARCHAR(25) NULL DEFAULT NULL,
-  `product_processor_value` VARCHAR(12) NULL DEFAULT NULL,
+  `product_processor_power` VARCHAR(12) NULL DEFAULT NULL,
   `product_processor_cores` VARCHAR(20) NULL DEFAULT NULL,
   `product_band` VARCHAR(3) NULL DEFAULT NULL COMMENT '2G / 3G / 4G',
   `product_slug` VARCHAR(150) NULL DEFAULT NULL,

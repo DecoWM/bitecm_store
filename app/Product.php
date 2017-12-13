@@ -28,7 +28,7 @@ class Product extends Model
         'product_camera_3',
         'product_camera_4',
         'product_processor_name',
-        'product_processor_value',
+        'product_processor_power',
         'product_processor_cores',
         'product_band',
     ];
