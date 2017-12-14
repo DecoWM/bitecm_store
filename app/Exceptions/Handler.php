@@ -36,10 +36,6 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if ($e instanceof \Illuminate\Session\TokenMismatchException) {
-            return redirect()->back();
-        }
-
         parent::report($exception);
     }
 
@@ -52,6 +48,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return redirect()->back();
+        }
         return parent::render($request, $exception);
     }
 }
