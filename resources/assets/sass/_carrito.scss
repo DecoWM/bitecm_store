@@ -19,3 +19,17 @@
 #section-pedido .row .detalle-pedido {
     display: block;
 }
+
+
+#form-cliente form .btn-detalle a.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  border-radius: 0;
+  padding: 0;
+  line-height: 40px;
+  font-size: 12px;
+}
