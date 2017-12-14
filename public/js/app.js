@@ -11774,7 +11774,7 @@ var app = new Vue({
         filters: {
             accesorios: {
                 price: {
-                    value: '',
+                    value: { x: 0, y: 0 },
                     isOpen: true
                 },
                 manufacturer: {
@@ -11789,7 +11789,7 @@ var app = new Vue({
                     isOpen: true
                 },
                 price: {
-                    value: '',
+                    value: { x: 0, y: 0 },
                     isOpen: true
                 },
                 manufacturer: {
@@ -11808,7 +11808,7 @@ var app = new Vue({
                     isOpen: false
                 },
                 price: {
-                    value: '',
+                    value: { x: 0, y: 0 },
                     isOpen: true
                 },
                 manufacturer: {
@@ -11831,7 +11831,7 @@ var app = new Vue({
                     isOpen: false
                 },
                 price: {
-                    value: '',
+                    value: { x: 0, y: 0 },
                     isOpen: false
                 },
                 manufacturer: {
@@ -12280,10 +12280,10 @@ var app = new Vue({
             $(this).closest('.radio-inline').addClass('option-active');
         });
 
-        $('.select-plan .plan').on('click', function () {
-            $('.plan').removeClass('plan-active');
-            $(this).addClass('plan-active');
-        });
+        // $('.select-plan .plan').on('click', function() {
+        //     $('.plan').removeClass('plan-active');
+        //     $(this).addClass('plan-active');
+        // });
 
         $('#zoom_01').elevateZoom({
             zoomType: "inner",

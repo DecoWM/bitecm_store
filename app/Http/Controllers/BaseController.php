@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {
-  public function searchProductPrepaid ($category_id=1, $plan_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="") {
+  public function searchProductPrepaid ($category_id=1, $plan_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="", $product_ignore_ids="") {
     $products = DB::select('call PA_productSearchPrepago(
       :category_id,
       :product_brands,
@@ -19,7 +19,8 @@ class BaseController extends Controller
       :pag_actual,
       :sort_by,
       :sort_direction,
-      :product_tag
+      :product_tag,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -31,7 +32,8 @@ class BaseController extends Controller
       'pag_actual' => $pag_actual,
       'sort_by' => $sort_by,
       'sort_direction' => $sort_direction,
-      'product_tag' => $product_tag
+      'product_tag' => $product_tag,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     $total = DB::select('call PA_productCountPrepago(
@@ -41,7 +43,8 @@ class BaseController extends Controller
       :product_price_ini,
       :product_price_end,
       :product_string_search,
-      :product_tag
+      :product_tag,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -49,7 +52,8 @@ class BaseController extends Controller
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
       'product_string_search' => $product_string_search,
-      'product_tag' => $product_tag
+      'product_tag' => $product_tag,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     return ['products' => $products, 'total' => $total[0]->total_products];
@@ -83,7 +87,7 @@ class BaseController extends Controller
     return count($result) > 0 ? $result[0] : null;
   }
 
-  public function searchProductPostpaid ($category_id=1, $affiliation_id=1, $plan_id=7, $contract_id=1, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
+  public function searchProductPostpaid ($category_id=1, $affiliation_id=1, $plan_id=7, $contract_id=1, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_ignore_ids = "") {
     $products = DB::select('call PA_productSearchPostpago(
       :category_id,
       :product_brands,
@@ -96,7 +100,8 @@ class BaseController extends Controller
       :pag_total_by_page,
       :pag_actual,
       :sort_by,
-      :sort_direction
+      :sort_direction,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -110,6 +115,7 @@ class BaseController extends Controller
       'pag_actual' => $pag_actual,
       'sort_by' => $sort_by,
       'sort_direction' => $sort_direction,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     $total = DB::select('call PA_productCountPostpago(
@@ -120,7 +126,8 @@ class BaseController extends Controller
       :contract_id,
       :product_price_ini,
       :product_price_end,
-      :product_string_search
+      :product_string_search,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -129,7 +136,8 @@ class BaseController extends Controller
       'contract_id' => $contract_id,
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
-      'product_string_search' => $product_string_search
+      'product_string_search' => $product_string_search,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     return ['products' => $products, 'total' => $total[0]->total_products];
@@ -167,7 +175,7 @@ class BaseController extends Controller
     return count($result) > 0 ? $result[0] : null;
   }
 
-  public function productSearch($category_id=2, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="") {
+  public function productSearch($category_id=2, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_ignore_ids="") {
     $products = DB::select('call PA_productSearch(
       :category_id,
       :product_brands,
@@ -177,7 +185,8 @@ class BaseController extends Controller
       :pag_total_by_page,
       :pag_actual,
       :sort_by,
-      :sort_direction
+      :sort_direction,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
@@ -188,6 +197,7 @@ class BaseController extends Controller
       'pag_actual' => $pag_actual,
       'sort_by' => $sort_by,
       'sort_direction' => $sort_direction,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     $total = DB::select('call PA_productCount(
@@ -195,13 +205,15 @@ class BaseController extends Controller
       :product_brands,
       :product_price_ini,
       :product_price_end,
-      :product_string_search
+      :product_string_search,
+      :product_ignore_ids
     )', [
       'category_id' => $category_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
-      'product_string_search' => $product_string_search
+      'product_string_search' => $product_string_search,
+      'product_ignore_ids' => $product_ignore_ids
     ]);
 
     return ['products' => $products, 'total' => $total[0]->total_products];
@@ -283,6 +295,8 @@ class BaseController extends Controller
     $total = DB::select('call PA_productCountPromo(
       :plan_pre_id,
       :plan_post_id,
+      :affiliation_id,
+      :contract_id,
       :product_brands,
       :product_price_ini,
       :product_price_end,
@@ -290,6 +304,8 @@ class BaseController extends Controller
     )', [
       'plan_pre_id' => $plan_pre_id,
       'plan_post_id' => $plan_post_id,
+      'affiliation_id' => $affiliation_id,
+      'contract_id' => $contract_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
