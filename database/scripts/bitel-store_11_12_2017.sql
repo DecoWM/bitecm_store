@@ -2238,7 +2238,7 @@ CREATE TABLE `tbl_order_item` (
 --
 
 INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `product_variation_id`, `promo_id`, `quantity`, `subtotal`, `subtotal_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 6, 228, 3, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(1, 1, 6, 228, 4, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
 (2, 2, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
 (3, 3, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
 (4, 4, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);

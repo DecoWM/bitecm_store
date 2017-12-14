@@ -2311,28 +2311,6 @@ BEGIN
   
   SET order_id = IFNULL(order_id, 0);
 
-  -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
-    FROM
-    tbl_promo as PRMsub
-    WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
-        (
-            PRMsub.allow_all_variations = 1
-            OR
-            (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
-            )
-        )
-    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
-    LIMIT 0,1
-    ';
-
   SET select_query = 'SELECT
     OIT.*, PRM.*, PRD.*,
     STM.`stock_model_id`, STM.`stock_model_code`,
@@ -2368,7 +2346,7 @@ BEGIN
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
       ON (PRD.`product_id` = PRM.`product_id` 
-          AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+          AND PRM.promo_id = OIT.promo_id
       )');
 
   SET where_query = CONCAT('
