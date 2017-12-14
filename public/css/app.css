@@ -559,7 +559,7 @@ button[disabled] {
   height: auto;
   z-index: 99999;
   right: 170px;
-  bottom: 215px;
+  bottom: -10px;
   font-size: 20px;
   font-weight: 300;
   padding: 20px 35px;
