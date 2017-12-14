@@ -32,15 +32,7 @@
               @foreach ($products as $product)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto {{!isset($product->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$product->product_id}}])}">
-                  @if(!isset($product->stock_model_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
-                @elseif(isset($product->promo_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                @elseif(($product->product_tag == 'Destacado'))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
-                @elseif(($product->product_tag == 'Nuevo'))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
-                  @endif
+                  @include('products.ribbon',['product' => $product])
                   <div class="image-product text-center">
                     <a href="{{$product->route}}">
                       <img src="{{$product->picture_url}}" alt="{{$product->product_model}}">
