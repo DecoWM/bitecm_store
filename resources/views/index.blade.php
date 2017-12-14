@@ -12,8 +12,8 @@
                 <h2 class="text-center">Equipos</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="#smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="#tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
               </div>
               <div class="content-tab-vendidos">
                 {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
@@ -133,8 +133,8 @@
                 <h2 class="text-center">Promociones</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="postpago" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
-                <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="#postpago" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="#prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
 
               <div class="content-tab-promociones">
