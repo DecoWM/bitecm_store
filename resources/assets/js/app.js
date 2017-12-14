@@ -236,7 +236,7 @@ const app = new Vue({
             };
             axios.get(url, data).then((response) => {
               console.log(response.data);
-              self.searchResult = response.data.data;
+              self.searchResult = response.data.data
               if (self.searchResult.length == 0) {
                   self.noResults = true;
               }
