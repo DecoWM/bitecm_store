@@ -83,6 +83,19 @@
         },
         mounted() {
             console.log('Component mounted bitel.')
+        },
+        watch: {
+          compare: function() {
+            self = this
+            var item = self.compare.find( function (e) {
+                return e.product_id == self.compareItem.product_id;
+            });
+            if (item) {
+                self.isSelected = true
+            } else {
+                self.isSelected = false
+            }
+          }
         }
     }
 </script>

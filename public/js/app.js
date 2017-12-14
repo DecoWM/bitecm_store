@@ -53733,6 +53733,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('Component mounted bitel.');
+    },
+
+    watch: {
+        compare: function compare() {
+            self = this;
+            var item = self.compare.find(function (e) {
+                return e.product_id == self.compareItem.product_id;
+            });
+            if (item) {
+                self.isSelected = true;
+            } else {
+                self.isSelected = false;
+            }
+        }
     }
 });
 
@@ -54038,6 +54052,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('Component mounted bitel.');
+    },
+
+    watch: {
+        compare: function compare() {
+            self = this;
+            var item = self.compare.find(function (e) {
+                return e.product_id == self.compareItem.product_id;
+            });
+            if (item) {
+                self.isSelected = true;
+            } else {
+                self.isSelected = false;
+            }
+        }
     }
 });
 
@@ -54830,7 +54858,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#list-equipos-comparar {\n  width: 110px;\n}\n", ""]);
 
 // exports
 
@@ -54841,6 +54869,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -55012,16 +55043,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "list-equipos-comparar" } }, [
     _c("div", { staticClass: "equipos-comp" }, [
-      _c("div", { staticClass: "title-equipos" }, [
-        _c("span", [
-          _vm._v(_vm._s(_vm.products.length) + " "),
-          _vm.products.length == 1
-            ? _c("span", [_vm._v("Equipo")])
-            : _c("span", [_vm._v("Equipos")])
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("para comparar")])
-      ]),
+      _vm.products.length == 1
+        ? _c("div", { staticClass: "title-equipos" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", [_vm._v("para comparar")])
+          ])
+        : _c("div", { staticClass: "title-equipos" }, [
+            _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("para comparar")])
+          ]),
       _vm._v(" "),
       _c("div", { staticClass: "list-equipos" }, [
         _c(
@@ -55038,26 +55070,41 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "btn-comparar",
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            _vm.compareList($event)
-          }
-        }
-      },
-      [
-        _c("a", { attrs: { href: _vm.baseUrl + "/product/compare" } }, [
-          _vm._v("COMPARAR")
-        ])
-      ]
-    )
+    _vm.products.length != 1
+      ? _c(
+          "div",
+          {
+            staticClass: "btn-comparar",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.compareList($event)
+              }
+            }
+          },
+          [
+            _c("a", { attrs: { href: _vm.baseUrl + "/product/compare" } }, [
+              _vm._v("COMPARAR")
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _vm._v("Añade "),
+      _c("br"),
+      _vm._v("otro "),
+      _c("br"),
+      _vm._v("equipo")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -55154,7 +55201,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -55165,6 +55212,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -55220,16 +55270,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "list-equipos-comparar" } }, [
     _c("div", { staticClass: "equipos-comp" }, [
-      _c("div", { staticClass: "title-equipos" }, [
-        _c("span", [
-          _vm._v(_vm._s(_vm.products.length) + " "),
-          _vm.products.length == 1
-            ? _c("span", [_vm._v("Equipo")])
-            : _c("span", [_vm._v("Equipos")])
-        ]),
-        _vm._v(" "),
-        _c("p", [_vm._v("para comparar")])
-      ]),
+      _vm.products.length == 1
+        ? _c("div", { staticClass: "title-equipos" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("p", [_vm._v("para comparar")])
+          ])
+        : _c("div", { staticClass: "title-equipos" }, [
+            _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
+            _vm._v(" "),
+            _c("p", [_vm._v("para comparar")])
+          ]),
       _vm._v(" "),
       _c("div", { staticClass: "list-equipos" }, [
         _c(
@@ -55246,26 +55297,41 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "btn-comparar",
-        on: {
-          click: function($event) {
-            $event.preventDefault()
-            _vm.compareList($event)
-          }
-        }
-      },
-      [
-        _c("a", { attrs: { href: _vm.baseUrl + "/product/compare" } }, [
-          _vm._v("COMPARAR")
-        ])
-      ]
-    )
+    _vm.products.length != 1
+      ? _c(
+          "div",
+          {
+            staticClass: "btn-comparar",
+            on: {
+              click: function($event) {
+                $event.preventDefault()
+                _vm.compareList($event)
+              }
+            }
+          },
+          [
+            _c("a", { attrs: { href: _vm.baseUrl + "/product/compare" } }, [
+              _vm._v("COMPARAR")
+            ])
+          ]
+        )
+      : _vm._e()
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _vm._v("Añade "),
+      _c("br"),
+      _vm._v("otro "),
+      _c("br"),
+      _vm._v("equipo")
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
