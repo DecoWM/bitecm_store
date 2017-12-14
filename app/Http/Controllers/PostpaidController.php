@@ -45,7 +45,7 @@ class PostpaidController extends Controller
     if(empty($product)) {
       abort(404);
     }
-    
+
     $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, $product->brand_id, 4, 1, null, null,null, null, null, $product->product_id);
 
     $available = $available_products['products'];

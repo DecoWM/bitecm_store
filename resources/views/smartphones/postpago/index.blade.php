@@ -75,6 +75,7 @@
               </div>
               @endforeach
             </div>
+            <input id="pagination-init" type="hidden" value='@json($products)'>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">

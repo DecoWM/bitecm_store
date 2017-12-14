@@ -265,7 +265,11 @@ const app = new Vue({
         }
     },
     beforeMount : function () {
-
+        self = this
+        if($('#pagination-init')) {
+          paginationData = $('#pagination-init').val()
+          self.pagination = JSON.parse(paginationData)
+        }
     },
     mounted: function () {
         $('#banner-principal').slick({
