@@ -559,7 +559,7 @@ button[disabled] {
   height: auto;
   z-index: 99999;
   right: 170px;
-  bottom: 215px;
+  bottom: -10px;
   font-size: 20px;
   font-weight: 300;
   padding: 20px 35px;
@@ -723,6 +723,19 @@ button[disabled] {
 
 #section-pedido .row .detalle-pedido {
   display: block;
+}
+
+#form-cliente form .btn-detalle a.regresar {
+  width: 46.4%;
+  margin-right: 10px;
+  background-color: #ffe60d;
+  color: #008c95;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  border-radius: 0;
+  padding: 0;
+  line-height: 40px;
+  font-size: 12px;
 }
 
 #search-404 {

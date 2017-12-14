@@ -75,10 +75,14 @@
                     <div class="list-productos">
                       @foreach ($best_seller_tablet as $tablet)
                       <div class="producto">
-                        @if(isset($tablet->promo_id))
+                        @if(!isset($smartphone->stock_model_id))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
+                        @elseif(isset($smartphone->promo_id))
                         <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                        @else
-                        <div class="ribbon-wrapper"><div class="ribbon ribbon-trend">Trending</div></div>
+                        @elseif(($smartphone->product_tag == 'Destacado'))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
+                        @elseif(($smartphone->product_tag == 'Nuevo'))
+                        <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
                         @endif
                         <div class="image-product text-center">
                           <a href="{{$tablet->route}}">
@@ -154,9 +158,13 @@
                 <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
     @foreach ($promo_postpaid as $smartphone)
                   <div class="producto">
-                    @if(isset($smartphone->promo_id))
+                    @if(!isset($smartphone->stock_model_id))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
+                    @elseif(isset($smartphone->promo_id))
                     <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                    @else
+                    @elseif(($smartphone->product_tag == 'Destacado'))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
+                    @elseif(($smartphone->product_tag == 'Nuevo'))
                     <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
                     @endif
                     {{--<div class="state-product"><span class="trending">TRENDING</span></div>--}}
@@ -191,9 +199,13 @@
                 <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
     @foreach ($promo_prepaid as $smartphone)
                   <div class="producto">
-                    @if(isset($smartphone->promo_id))
+                    @if(!isset($smartphone->stock_model_id))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
+                    @elseif(isset($smartphone->promo_id))
                     <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                    @else
+                    @elseif(($smartphone->product_tag == 'Destacado'))
+                    <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
+                    @elseif(($smartphone->product_tag == 'Nuevo'))
                     <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
                     @endif
                     <div class="image-product text-center">

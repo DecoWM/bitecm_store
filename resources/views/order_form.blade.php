@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-@if (session('ws_result'))
+{{-- @if (session('ws_result')) --}}
   {{-- @if (session('ws_result') == 2) --}}
     <div class="alert alert-warning alert-ws alert-dismissible" role="alert">
       <div class="alert-header">
@@ -26,7 +26,7 @@
       </div>
     </div>
   {{-- @endif --}}
-@endif
+{{-- @endif --}}
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">
@@ -201,7 +201,8 @@
                   <div class="btn-detalle">
                     <div class="row">
                       <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                        <button type="button" class="btn btn-default regresar">REGRESAR</button>
+                        <a href="{{URL::previous()}}" class="btn btn-default regresar">REGRESAR</a>
+                        {{-- <button type="button" class="btn btn-default regresar"></button> --}}
                         {{-- <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/pedido_completo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
                         <button type="submit" class="btn btn-default comprar">continuar</button>
                       </div>
