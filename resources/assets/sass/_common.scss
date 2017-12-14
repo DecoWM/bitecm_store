@@ -15,6 +15,10 @@
   color: #b9b9b9 !important;
 }
 
+.text-danger {
+  color: #e30020 !important;
+}
+
 .is-completed {
   color: $bitel-secondary !important;
 }
@@ -52,4 +56,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+//ERRORS
+.input.is-danger {
+  border: 1px solid #e30020 !important;
 }
