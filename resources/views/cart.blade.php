@@ -195,16 +195,18 @@
       <div class="row">
         <div class="col-xs-12">
           <div class="ver-mas-equipo">
-            <div class="title-detalle">
-              <div class="btn-vmas"></div>
-              <h4>VER CONSIDERACIONES COMERCIALES</h4>
-            </div>
-            <div class="content-detalle">
+            <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
+              <div class="title-detalle">
+                <span class="btn-vmas"></span>
+                <h4>VER CONSIDERACIONES COMERCIALES</h4>
+              </div>
+            </a>
+            {{-- <div class="content-detalle">
               <p>
                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam possimus magnam, eum nobis explicabo. Molestias
                 corporis, minima nam quas obcaecati?
               </p>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
