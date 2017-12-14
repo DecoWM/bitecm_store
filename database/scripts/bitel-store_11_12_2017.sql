@@ -2238,7 +2238,7 @@ CREATE TABLE `tbl_order_item` (
 --
 
 INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `product_variation_id`, `promo_id`, `quantity`, `subtotal`, `subtotal_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 6, 228, 3, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(1, 1, 6, 228, 4, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
 (2, 2, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
 (3, 3, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
 (4, 4, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
@@ -3379,7 +3379,7 @@ INSERT INTO `tbl_promo` (`promo_id`, `product_id`, `product_variation_id`, `add_
 (1, 10, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (2, 12, NULL, NULL, 89, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (3, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(4, 18, 488, NULL, 999, NULL, NULL, NULL, 'promocion navideña', 'esta es una promoción de navidad!', '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, NULL, 1);
+(4, 18, 488, NULL, 1500, NULL, NULL, NULL, 'promocion navideña', 'esta es una promoción de navidad!', '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
