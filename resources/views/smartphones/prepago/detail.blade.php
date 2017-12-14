@@ -15,9 +15,11 @@
               </div>
             @else
               @if(isset($product->promo_id))
-                <div class="state"><span>PROMOCIÓN</span></div>
-              @else
-                <div class="state"><span>NUEVO</span></div>
+              <div class="state"><span>PROMOCIÓN</span></div>
+              @elseif(($product->product_tag == 'Nuevo'))
+              <div class="state"><span>NUEVO</span></div>
+              @elseif(($product->product_tag == 'Destacado'))
+              <div class="state"><span>DESTACADO</span></div>
               @endif
             @endif
             <div id="image-equipo">

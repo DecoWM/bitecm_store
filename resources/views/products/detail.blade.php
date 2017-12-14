@@ -7,10 +7,20 @@
             <div class="title">
               <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
-            @if(isset($product->promo_id))
-            <div class="state"><span>PROMOCIÓN</span></div>
+            @if (!isset($product->stock_model_id))
+              <div class="state">
+                <span>
+                  <i class="fa fa-exclamation" aria-hidden="true"></i> Agotado
+                </span>
+              </div>
             @else
-            <div class="state"><span>NUEVO</span></div>
+              @if(isset($product->promo_id))
+              <div class="state"><span>PROMOCIÓN</span></div>
+              @elseif(($product->product_tag == 'Nuevo'))
+              <div class="state"><span>NUEVO</span></div>
+              @elseif(($product->product_tag == 'Destacado'))
+              <div class="state"><span>DESTACADO</span></div>
+              @endif
             @endif
             <div id="image-equipo">
               @if(count($product_images)>0)

@@ -7,7 +7,6 @@
             <div class="title">
               <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
-
             @if (!$product->stock_model_id)
               <div class="state">
                 <span>
@@ -17,8 +16,10 @@
             @else
               @if(isset($product->promo_id))
               <div class="state"><span>PROMOCIÓN</span></div>
-              @else
+              @elseif(($product->product_tag == 'Nuevo'))
               <div class="state"><span>NUEVO</span></div>
+              @elseif(($product->product_tag == 'Destacado'))
+              <div class="state"><span>DESTACADO</span></div>
               @endif
             @endif
             <div id="image-equipo">

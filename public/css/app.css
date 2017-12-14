@@ -238,7 +238,7 @@ input:checked ~ .checkmark:after {
   cursor: auto;
   color: #000000;
   width: 28px;
-  height: 28px;
+  height: 29px;
   border-radius: 3px;
 }
 
