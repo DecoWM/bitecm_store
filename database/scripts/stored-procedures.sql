@@ -2373,9 +2373,7 @@ BEGIN
   SET where_query = CONCAT('
     WHERE OIT.`order_id` = ', order_id, '
       AND (OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
-        OR OIT.`product_variation_id` IS NULL)
-      AND (OIT.`promo_id` = PRM.`promo_id`
-        OR OIT.`promo_id` IS NULL)'
+        OR OIT.`product_variation_id` IS NULL)'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
