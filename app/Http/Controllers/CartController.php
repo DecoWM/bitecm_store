@@ -93,6 +93,7 @@ class CartController extends Controller
 
     switch ($cart_item['type_id']) {
       case 0:
+        $cart_item['product_variation_id'] = null;
         $has_item = $cart->search($cart_item);
         if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
           $request->session()->push('cart', $cart_item);
