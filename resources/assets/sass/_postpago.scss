@@ -1,8 +1,16 @@
 // #planes {
 //     margin-top: -330px;
 // }
+#content-page .tag {
+  display: none;
+}
+
 @media (max-width: 480px) {
   .col-12-mob {
     width: 100%;
+  }
+
+  #content-page .tag {
+    display: flex;
   }
 }

@@ -31,15 +31,7 @@
               @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <div data-equipo="1" class="producto {{!isset($smartphone->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
-                  @if(!isset($smartphone->stock_model_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-sold-out">Agotado</div></div>
-                  @elseif(isset($smartphone->promo_id))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-promo">Promoción</div></div>
-                @elseif(($smartphone->product_tag == 'Destacado'))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-outstanding">Destacado</div></div>
-                @elseif(($smartphone->product_tag == 'Nuevo'))
-                  <div class="ribbon-wrapper"><div class="ribbon ribbon-new">Nuevo</div></div>
-                  @endif
+                  @include('products.ribbon',['product' => $smartphone])
                   <div class="image-product text-center">
                     <a href="{{route('prepaid_detail',  [
                       'brand'=>$smartphone->brand_slug,

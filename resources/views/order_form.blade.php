@@ -51,17 +51,17 @@
                   <div class="section-form">
                     <div class="form-group">
                       <label>Nombres</label>
-                      <input type="text" name="first_name" v-model="first_name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('first_name')}"><i v-show="errors.has('first_name')" class="fa fa-warning"></i>
+                      <input type="text" name="first_name" v-model="first_name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('first_name')}"><i v-cloak v-show="errors.has('first_name')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('first_name')" class="help is-danger">@{{ errors.first('first_name') }}</span> --}}
                     </div>
                     <div class="form-group">
                       <label>Apellidos</label>
-                      <input type="text" name="last_name" v-model="last_name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('last_name')}"><i v-show="errors.has('last_name')" class="fa fa-warning"></i>
+                      <input type="text" name="last_name" v-model="last_name" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('last_name')}"><i v-cloak v-show="errors.has('last_name')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('last_name')" class="help is-danger">@{{ errors.first('last_name') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
                       <label>Tipo de documento</label>
-                      <select name="document_type" v-model="select_document" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }"><i v-show="errors.has('document_type')" class="fa fa-warning"></i>
+                      <select name="document_type" v-model="select_document" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }"><i v-cloak v-show="errors.has('document_type')" class="fa fa-warning"></i>
                         <option value="" selected>Seleccione tipo de documento</option>
                         <option value="1">DNI</option>
                         <option value="2">CARNÉ DE EXTRANJERÍA</option>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">Número de documento</label>
-                      <input type="text" name="document_number" v-model="number_document" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-show="errors.has('document_number')" class="fa fa-warning"></i>
+                      <input type="text" name="document_number" v-model="number_document" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_document')" class="help is-danger">@{{ errors.first('number_document') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">Número de telefono</label>
-                      <input type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                      <input type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                     @if(isset($item))
@@ -130,7 +130,7 @@
                     <div class="form-group" v-if="affiliation == 1">
                     @endif
                       <label for="">Número a portar</label>
-                      <input type="text" name="porting_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
+                      <input type="text" name="porting_phone" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
@@ -141,17 +141,17 @@
                   <div class="section-form">
                     <div class="form-group">
                       <label for="">DIRECCIÓN DE DELIVERY</label>
-                      <input type="text" name="delivery_address" v-model="delivery" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
+                      <input type="text" name="delivery_address" v-model="delivery" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('delivery')" class="help is-danger">@{{ errors.first('delivery') }}</span> --}}
                     </div>
                     <div class="form-group">
                       <label for="">CORREO ELECTRÓNICO</label>
-                      <input type="text" name="email" v-model="email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email')}"><i v-show="errors.has('email')" class="fa fa-warning"></i>
+                      <input type="text" name="email" v-model="email" v-validate="'required|email'" :class="{'input': true, 'is-danger': errors.has('email')}"><i v-cloak v-show="errors.has('email')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('email')" class="help is-danger">@{{ errors.first('email') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
+                      <select name="delivery_distric" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
                       <label for="">DISTRITO DE DELIVERY</label>
-                      <select name="delivery_distric" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
                         <option value="" selected>Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
                         <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="form-group">
                       <label for="">TELÉFONO DE CONTACTO</label>
-                      <input type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
+                      <input type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric'" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-cloak v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_contact')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
@@ -195,6 +195,13 @@
                           </label>
                         </div>
                         {{-- <div class="col-xs-12"><span v-show="errors.has('mediopago')" class="help is-danger">@{{ errors.first('mediopago') }}</span></div> --}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <p v-cloak v-show="errors.has('payment_method')"  class="text-danger">
+                          Selecciona un método de pago.
+                        </p>
                       </div>
                     </div>
                   </div>

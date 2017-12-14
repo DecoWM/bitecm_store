@@ -7,20 +7,7 @@
             <div class="title">
               <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
             </div>
-
-            @if (!$product->stock_model_id)
-              <div class="state">
-                <span>
-                  <i class="fa fa-exclamation" aria-hidden="true"></i> Agotado
-                </span>
-              </div>
-            @else
-              @if(isset($product->promo_id))
-              <div class="state"><span>PROMOCIÓN</span></div>
-              @else
-              <div class="state"><span>NUEVO</span></div>
-              @endif
-            @endif
+            @include('products.tag',['product' => $product])
             <div id="image-equipo">
               @if(count($product_images)>0)
                 <div class="image-product text-center"><img id="zoom_02" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">--}}
@@ -50,25 +37,7 @@
             <div class="header-section">
               <div class="title">
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
-                @if (!$product->stock_model_id)
-                  <div class="tag tag-sold-out">
-                    <div class="tag-icon">
-                      <span class="fa-stack">
-                        <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-exclamation fa-stack-1x"></i>
-                      </span>
-                    </div>
-                    <div class="tag-text">
-                      Agotado
-                    </div>
-                  </div>
-                @else
-                  @if(isset($product->promo_id))
-                  <div class="state"><span>PROMOCIÓN</span></div>
-                  @else
-                  <div class="state"><span>NUEVO</span></div>
-                  @endif
-                @endif
+                @include('products.tag',['product' => $product])
               </div>
               <div class="descripcion">
                 <p>{{$product->product_description}}</p>
@@ -97,28 +66,7 @@
                           @endforeach
                         </select>
                       </div>
-                      @if(isset($product->color_id))
-                      <div class="color-product">
-                        <fieldset>
-                          <legend>Color</legend>
-                          <div id="option-select" class="option-select">
-                            @foreach($stock_models as $stock_model)
-                              @if($stock_model->stock_model_id == $product->stock_model_id)
-                              <div class="radio-inline option-active" style="border: 1px solid #008c95;">
-                                <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
-                              </div>
-                              @else
-                              <a href="{{$stock_model->route}}">
-                                <div class="radio-inline option-active" style="border: none;">
-                                  <div class="color-box" style="background-color: #{{$stock_model->color_hexcode}};"></div>
-                                </div>
-                              </a>
-                              @endif
-                            @endforeach
-                          </div>
-                        </fieldset>
-                      </div>
-                      @endif
+                      @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                     </div>
                     <div class="col-xs-7 col-sm-6 col-12-mob">
                       {{--<div class="detalle-product" v-cloak>--}}
@@ -190,7 +138,7 @@
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             <div class="select-plan">
-@foreach ($plans as $plan)
+              @foreach ($plans as $plan)
               <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
@@ -198,27 +146,27 @@
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
-@if ($plan->plan_unlimited_calls == 1)
+                    @if ($plan->plan_unlimited_calls == 1)
                     <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-@endif
+                    @endif
                     <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">{{$plan->plan_data_cap}} internet</li>
-@if ($plan->plan_unlimited_rpb == 1)
+                    @if ($plan->plan_unlimited_rpb == 1)
                     <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
-@endif
-@if ($plan->plan_unlimited_sms == 1)
+                    @endif
+                    @if ($plan->plan_unlimited_sms == 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
-@endif
-@if ($plan->plan_free_facebook == 1)
+                    @endif
+                    @if ($plan->plan_free_facebook == 1)
                     <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
-@endif
-@if ($plan->plan_unlimited_whatsapp == 1)
+                    @endif
+                    @if ($plan->plan_unlimited_whatsapp == 1)
                     <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-@endif
+                    @endif
                   </ul>
                 </div>
               </div>
               </label>
-@endforeach
+              @endforeach
             </div>
           </div>
         </div>
@@ -261,6 +209,7 @@
           </a>
         </div>
       </div>
+      @if (count($available) > 0)
       <div class="row">
         <div class="col-xs-12">
           <div id="producto-disponibles">
@@ -299,5 +248,6 @@
           </div>
         </div>
       </div>
+      @endif
     </div>
 @endsection
