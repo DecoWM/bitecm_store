@@ -209,6 +209,7 @@
           </a>
         </div>
       </div>
+      @if (count($available) > 0)
       <div class="row">
         <div class="col-xs-12">
           <div id="producto-disponibles">
@@ -247,5 +248,6 @@
           </div>
         </div>
       </div>
+      @endif
     </div>
 @endsection
