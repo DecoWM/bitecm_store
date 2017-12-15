@@ -1524,7 +1524,7 @@ BEGIN
   -- Define the price promo select segment (subQuery)
   SET select_idpromo_segment = 'SELECT
         PRMsub.promo_id
-
+    FROM
     tbl_promo as PRMsub
     WHERE
         PRMsub.product_id = PRD.product_id
