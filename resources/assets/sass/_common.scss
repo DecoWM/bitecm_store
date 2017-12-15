@@ -10,6 +10,22 @@
   background: $bitel-primary !important;
 }
 
+.btn-cart-delete {
+  left: 0 !important;
+  top: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  z-index: 9999;
+  i {
+    -webkit-text-stroke: 2px #008c95;
+    height: 22px;
+    width: 22px;
+    line-height: 22px;
+    color: #fff;
+    font-size: 18px;
+  }
+}
+
 //Text
 .text-muted {
   color: #b9b9b9 !important;

@@ -7,6 +7,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <a href="{{route('show_cart')}}" class="cart-link visible-xs-inline-block"><span class="cart-icon"></span><span class="count-icon">{{count(session('cart'))}}</span></a>
             <a href="{{route('home')}}" class="navbar-brand">
               <h1>TIENDA BITEL</h1>
             </a>

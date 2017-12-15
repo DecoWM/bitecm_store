@@ -266,11 +266,11 @@ const app = new Vue({
     },
     beforeMount : function () {
         self = this
-        if($('#pagination-init')) {
+        if($('#pagination-init').length) {
           paginationData = $('#pagination-init').val()
           self.pagination = JSON.parse(paginationData)
         }
-        if($('#search-init')) {
+        if($('#search-init').length) {
           searchedString = $('#search-init').val()
           self.searchedString  = searchedString
         }
