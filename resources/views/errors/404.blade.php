@@ -17,8 +17,8 @@
       <div class="wrapper-404-img">
         <img class="img-404" src="{{asset('/images/404/404.png')}}" alt="404">
       </div>
-      <form id="search-404">
-        <input type="text" class="form-control" placeholder="Buscar">
+      <form id="search-404" action="{{route('postpaid')}}" method="get">
+        <input type="text" class="form-control" name="buscar" placeholder="Buscar">
         <button type="submit"> <span class="fa fa-search"></span></button>
       </form>
     </div>

@@ -768,7 +768,8 @@ BEGIN
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
     -- order
     SET cad_order = ' ORDER BY (mscore + pscore) DESC';
@@ -958,7 +959,8 @@ BEGIN
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
     -- If this is not a search
@@ -1376,7 +1378,8 @@ BEGIN
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
     -- order
     SET cad_order = ' ORDER BY (mscore + pscore) DESC';
@@ -1576,7 +1579,8 @@ BEGIN
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
     -- If this is not a search
@@ -1981,7 +1985,8 @@ BEGIN
       -- Filter by search words
       WHERE PRM.`active` = 1 AND PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
     -- order
     SET cad_order = ' ORDER BY (mscore + pscore) DESC';
@@ -2156,7 +2161,8 @@ BEGIN
       -- Filter by search words
       WHERE PRM.`active` = 1 AND PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
     -- If this is not a search
