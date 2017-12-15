@@ -21,9 +21,11 @@ class PostpaidController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
+    $searched_string = $request->has('buscar') ? $request->buscar : '';
+
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
+    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
     $pages = intval(ceil($search_result['total'] / $items_per_page));
     $paginator = new Paginator(
       $search_result['products'],
@@ -36,7 +38,7 @@ class PostpaidController extends Controller
 
     $filterList = $this->shared->getFiltersPostpaid();
 
-    return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList]);
+    return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string]);
   }
 
   public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
@@ -45,7 +47,7 @@ class PostpaidController extends Controller
     if(empty($product)) {
       abort(404);
     }
-    
+
     $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, $product->brand_id, 4, 1, null, null,null, null, null, $product->product_id);
 
     $available = $available_products['products'];

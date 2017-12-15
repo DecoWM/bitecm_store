@@ -12,8 +12,8 @@
                 <li class="telephone"><span>LLámanos al <strong> 0 700 00 555</strong></span></li>
                 <li class="cart"><strong>Mi Bitel</strong><a href="{{route('show_cart')}}"><span class="icon-cart"></span><span class="icon-count">{{count(session('cart'))}}</span></a></li>
                 <li class="search">
-                  <form id="search">
-                    <input type="text" class="form-control">
+                  <form id="search" action="{{route('postpaid')}}" method="get">
+                    <input type="text" class="form-control" name="buscar">
                     <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
                   </form>
                 </li>

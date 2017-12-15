@@ -29,6 +29,9 @@ class SearchController extends Controller
     $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
     $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
 
+    $items_per_page = $request->items_per_page;
+    $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+
     $filters = json_decode($request->filters);
 
     $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
@@ -39,7 +42,7 @@ class SearchController extends Controller
 
     $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_pre_id;
 
-    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) use ($affiliation_slug,$plan_post_slug,$contract_slug) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
@@ -58,11 +61,23 @@ class SearchController extends Controller
       return $item;
     });
 
-    $response = [
-      'data' => $data
-    ];
+    // $response = [
+    //   'data' => $data
+    // ];
+    //
+    // return response()->json($response);
 
-    return response()->json($response);
+    $paginator = new Paginator(
+      $data,
+      $search_result['total'],
+      $items_per_page, $current_page,
+      [
+        'pageName' => 'pag'
+      ]
+    );
+    $paginator->withPath('prepago');
+
+    return response()->json($paginator);
   }
 
   public function searchPostpaid (Request $request) {
@@ -119,6 +134,9 @@ class SearchController extends Controller
       'items_per_page' => 'required|integer|min:0'
     ]);
 
+    $items_per_page = $request->items_per_page;
+    $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+
     $filters = json_decode($request->filters);
 
     $product_price_ini = (isset($filters->price->value->x)) ? $filters->price->value->x : 0;
@@ -127,8 +145,8 @@ class SearchController extends Controller
 
     $brand_ids = implode(',',$filters->manufacturer->value);
 
-    $search_result = $this->shared->productSearch(2, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
-    
+    $search_result = $this->shared->productSearch(2, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
       $item->route = route('accessory_detail', [
@@ -138,11 +156,23 @@ class SearchController extends Controller
       return $item;
     });
 
-    $response = [
-      'data' => $data
-    ];
+    // $response = [
+    //   'data' => $data
+    // ];
+    //
+    // return response()->json($response);
 
-    return response()->json($response);
+    $paginator = new Paginator(
+      $data,
+      $search_result['total'],
+      $items_per_page, $current_page,
+      [
+        'pageName' => 'pag'
+      ]
+    );
+    $paginator->withPath('accesorios');
+
+    return response()->json($paginator);
   }
 
   public function searchPromos (Request $request) {
@@ -150,6 +180,9 @@ class SearchController extends Controller
       'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9 ]+$)+/',
       'items_per_page' => 'required|integer|min:0'
     ]);
+
+    $items_per_page = $request->items_per_page;
+    $current_page = ($request->has('pag')) ? $request->pag : 1 ;
 
     $filters = json_decode($request->filters);
 
@@ -165,10 +198,10 @@ class SearchController extends Controller
     $contract_id = \Config::get('filter.contract_id');
 
     $search_result = $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
-    
+
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset('images/productos/'.$item->picture_url);
-      
+
       if (isset($item->product_variation_id)) {
         $item->product_price = $item->product_variation_price;
         switch ($item->variation_type_id) {
@@ -201,10 +234,22 @@ class SearchController extends Controller
       return $item;
     });
 
-    $response = [
-      'data' => $data
-    ];
+    // $response = [
+    //   'data' => $data
+    // ];
+    //
+    // return response()->json($response);
 
-    return response()->json($response);
+    $paginator = new Paginator(
+      $data,
+      $search_result['total'],
+      $items_per_page, $current_page,
+      [
+        'pageName' => 'pag'
+      ]
+    );
+    $paginator->withPath('promociones');
+
+    return response()->json($paginator);
   }
 }

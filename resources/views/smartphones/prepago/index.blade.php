@@ -84,10 +84,14 @@
               </div>
               @endforeach
             </div>
+            @php
+              $paginationData = array_except(json_decode($products->toJson(), true), ['data']);
+            @endphp
+            <input id="pagination-init" type="hidden" value='@json($paginationData)'>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
-                  {{ $products->links() }}
+                  <paginator-links v-bind:pagination="pagination" v-on:changepage="searchProduct" :offset="4"></paginator-links>
                 </nav>
               </div>
             </div>
