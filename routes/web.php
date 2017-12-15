@@ -22,7 +22,6 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show
 
 //RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::post('/postpago', 'PostpaidController@index')->name('postpaid_search');
 Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')->name('postpaid_detail');
 
 //RUTAS ACCESORIOS

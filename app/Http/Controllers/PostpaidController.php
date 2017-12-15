@@ -21,8 +21,8 @@ class PostpaidController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $searched_string = $request->has('searched_string') ? $request->searched_string : '';
-    
+    $searched_string = $request->has('buscar') ? $request->buscar : '';
+
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
     $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
