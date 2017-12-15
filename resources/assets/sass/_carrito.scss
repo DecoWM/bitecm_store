@@ -1,3 +1,41 @@
+.cart-link {
+  display: inline-block;
+  position: relative;
+  padding: 5px;
+  .cart-icon {
+    background: url(/images/header/svg/icon-cart.svg) no-repeat 0 0;
+    background-size: cover;
+    height: 27px;
+    width: 27px;
+    display: block;
+  }
+  .count-icon {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    font-size: 10px;
+    text-align: center;
+    line-height: 20px;
+    padding-top: 2px;
+    background-color: #008c95;
+    border-radius: 50%;
+    min-width: 22px;
+    height: 22px;
+    color: #fff;
+    transition: 0.5s ease all;
+  }
+}
+
+.navbar-header .cart-link {
+  margin-top: 11px;
+  margin-right: 10px;
+  float: right;
+}
+
+#detalle-carrito .imagen-equipo {
+  position: relative;
+}
+
 #detalle-carrito .btn-detalle a.regresar {
     width: 46.4%;
     margin-right: 10px;

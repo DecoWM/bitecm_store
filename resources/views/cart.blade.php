@@ -62,16 +62,18 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
                   <div class="equipo-seleccionado">
-                    <form action="{{route('remove_from_cart')}}" method="POST">
-                      {{ csrf_field() }}
-                      <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
-                      @if(isset($product->product_variation_id))
-                      <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
-                      @endif
-                      <button class="btn-eliminar-equipo"><span class="fa fa-times"></span></button>
-                      <input type="submit" style="display: none">
-                    </form>
-                    <div class="imagen-equipo"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
+                    <div class="imagen-equipo">
+                      <form action="{{route('remove_from_cart')}}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
+                        @if(isset($product->product_variation_id))
+                        <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
+                        @endif
+                        <button class="btn-eliminar-equipo btn-cart-delete"><i class="fa fa-times"></i></button>
+                        <input type="submit" style="display: none">
+                      </form>
+                      <img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos">
+                    </div>
                     <div class="detalle-equipo">
                       <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}</h2>
                       @if (intval($product->type_id) == 2)
