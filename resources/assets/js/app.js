@@ -270,6 +270,11 @@ const app = new Vue({
           paginationData = $('#pagination-init').val()
           self.pagination = JSON.parse(paginationData)
         }
+        if($('#search-init')) {
+          searchedString = $('#search-init').val()
+          self.searchedString  = searchedString
+        }
+
     },
     mounted: function () {
         $('#banner-principal').slick({

@@ -19,6 +19,11 @@
             <div class="row" v-if="noResults">
               <p class="text-center">No se encontraron resultados</p>
             </div>
+            @if (count($products) == 0)
+              <div class="row" v-if="!search">
+                <p class="text-center">No se encontraron resultados</p>
+              </div>
+            @endif
             <div class="row" v-if="searchResult.length > 0">
               <postpaid v-for="(product, index) in searchResult" :product="product" :base-url="baseUrl" :compare="compare" v-on:additem="addItem" v-on:removeitem="removeItem" :key="product.product_id"></postpaid>
             </div>
@@ -78,6 +83,7 @@
             @php
               $paginationData = array_except(json_decode($products->toJson(), true), ['data']);
             @endphp
+            <input id="search-init" type="hidden" value={{$searched_string}}>
             <input id="pagination-init" type="hidden" value='@json($paginationData)'>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
