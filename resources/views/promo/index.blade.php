@@ -76,7 +76,10 @@
               </div>
 @endforeach
             </div>
-            <input id="pagination-init" type="hidden" value='@json($products)'>
+            @php
+              $paginationData = array_except(json_decode($products->toJson(), true), ['data']);
+            @endphp
+            <input id="pagination-init" type="hidden" value='@json($paginationData)'>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
                 <nav aria-label="Page navigation" id="pagination-nav">
