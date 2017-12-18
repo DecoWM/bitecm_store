@@ -51,12 +51,12 @@
                   <div class="section-form">
                     <div class="form-group">
                       <label for="first_name">Nombres</label>
-                      <input id="first_name" type="text" name="first_name" v-model="first_name" v-validate="'required|alpha_spaces|max:100'" :class="{'input': true, 'is-danger': errors.has('first_name')}"><i v-cloak v-show="errors.has('first_name')" class="fa fa-warning"></i>
+                      <input id="first_name" type="text" name="first_name" v-model="first_name" v-validate="'required|alpha_spaces|max:100'" maxlength="100" :class="{'input': true, 'is-danger': errors.has('first_name')}"><i v-cloak v-show="errors.has('first_name')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('first_name')" class="help is-danger">@{{ errors.first('first_name') }}</span> --}}
                     </div>
                     <div class="form-group">
                       <label for="last_name">Apellidos</label>
-                      <input id="last_name" type="text" name="last_name" v-model="last_name" v-validate="'required|alpha_spaces|max:100'" :class="{'input': true, 'is-danger': errors.has('last_name')}"><i v-cloak v-show="errors.has('last_name')" class="fa fa-warning"></i>
+                      <input id="last_name" type="text" name="last_name" v-model="last_name" v-validate="'required|alpha_spaces|max:100'" maxlength="100" :class="{'input': true, 'is-danger': errors.has('last_name')}"><i v-cloak v-show="errors.has('last_name')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('last_name')" class="help is-danger">@{{ errors.first('last_name') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
