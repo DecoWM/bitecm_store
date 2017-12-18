@@ -352,7 +352,7 @@ nav#nav-bitel .container #navbar.in ul li a:hover {
     position: fixed;
     top: 0px;
     width: 100%;
-    z-index: 9999;
+    z-index: 99999;
   }
 }
 /*
