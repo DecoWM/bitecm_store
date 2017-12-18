@@ -5,8 +5,8 @@
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             <div id="nav-carrito">
               <ul class="list-unstyled">
-                <li class="col-xs-4 col-sm-4"><span>Carrito de compras </span></li>
-                <li class="col-xs-4 col-sm-4"><span>Informacion de envío</span></li>
+                <li class="col-xs-4 col-sm-4 is-completed"><span>Carrito de compras </span></li>
+                <li class="col-xs-4 col-sm-4 is-completed"><span>Informacion de envío</span></li>
                 <li class="col-xs-4 col-sm-4 active"><span>Pedido completo</span></li>
               </ul>
             </div>
