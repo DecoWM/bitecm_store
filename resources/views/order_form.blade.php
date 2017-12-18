@@ -70,7 +70,7 @@
                     </div>
                     <div class="form-group">
                       <label for="document_number">Número de documento</label>
-                      <input id="document_number" type="text" name="document_number" v-model="number_document" v-validate="select_document == 1 ? 'required|numeric|min:8|max:8' : 'required|alpha_num|max:12'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
+                      <input id="document_number" type="text" name="document_number" v-model="number_document" maxlength="12" v-validate="select_document == 1 ? 'required|numeric|min:8|max:8' : 'required|alpha_num|max:12'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_document')" class="help is-danger">@{{ errors.first('number_document') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
@@ -130,7 +130,7 @@
                     <div class="form-group" v-if="affiliation == 1">
                     @endif
                       <label for="porting_phone">Número a portar</label>
-                      <input id="porting_phone" type="text" name="porting_phone" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
+                      <input id="porting_phone" type="text" name="porting_phone" maxlength="11" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
@@ -141,7 +141,8 @@
                   <div class="section-form">
                     <div class="form-group">
                       <label for="delivery_address">DIRECCIÓN DE DELIVERY</label>
-                      <input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9#.\s-]+)$/}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
+
+                      <input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required|max:150}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('delivery')" class="help is-danger">@{{ errors.first('delivery') }}</span> --}}
                     </div>
                     <div class="form-group">
