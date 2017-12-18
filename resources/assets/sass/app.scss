@@ -475,6 +475,59 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
     margin-right: 7px;
 }
 
+
+// HOME MOBILE RESPONSIVE
+
+li.nav-mobile.item-nav-mobile{
+    display: none
+}
+
+li.nav-mobile.item-nav-mobile a{
+    color: white;
+}
+
+@media (max-width: 767px){
+
+    li.nav-mobile.item-nav-mobile{
+        display: block
+    }
+
+    #equipos-vendidos .content-tab-vendidos{
+        height: 520px;
+    }
+
+    section#equipos-vendidos .container .row .content-tab-pro{
+        margin-top: 0;
+    }
+
+    nav#nav-bitel .container #navbar{
+        padding: 0;
+    }
+
+    li.nav-mobile.item-nav-mobile {
+        background-color : #107379;
+    }
+
+    li.nav-mobile.item-nav-mobile:first-child{
+        padding-top: 30px;
+    }
+
+
+}
+
+section#equipos-promocion .container .row .sub-heading h3,
+section#equipos-vendidos .container .row .sub-heading h3{
+    font-size: 18px;
+    margin: 0 20px;
+}
+
+section#equipos-promocion .container .row .heading h2,
+section#equipos-vendidos .container .row .heading h2{
+    font-size: 23px;
+}
+
+
+
 @import "bitel_variables";
 @import "base";
 @import "common";

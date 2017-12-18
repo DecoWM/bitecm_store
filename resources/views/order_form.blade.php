@@ -85,7 +85,7 @@
                     </div>
                     <div class="form-group">
                       <label for="phone_number">Número de telefono</label>
-                      <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                      <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'"  maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                     @if(isset($item))
@@ -141,12 +141,12 @@
                   <div class="section-form">
                     <div class="form-group">
                       <label for="delivery_address">DIRECCIÓN DE DELIVERY</label>
-                      <input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9#.\s-]+)$/}" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
+                      <input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9#.\s-]+)$/}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('delivery')" class="help is-danger">@{{ errors.first('delivery') }}</span> --}}
                     </div>
                     <div class="form-group">
                       <label for="email">CORREO ELECTRÓNICO</label>
-                      <input id="email" type="text" name="email" v-model="email" v-validate="'required|email|max:150'" :class="{'input': true, 'is-danger': errors.has('email')}"><i v-cloak v-show="errors.has('email')" class="fa fa-warning"></i>
+                      <input id="email" type="text" name="email" v-model="email" v-validate="'required|email|max:150'" maxlength="150" :class="{'input': true, 'is-danger': errors.has('email')}"><i v-cloak v-show="errors.has('email')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('email')" class="help is-danger">@{{ errors.first('email') }}</span> --}}
                     </div>
                     <div class="form-group form-select">
@@ -160,7 +160,7 @@
                     </div>
                     <div class="form-group">
                       <label for="contact_phone">TELÉFONO DE CONTACTO</label>
-                      <input id="contact_phone" type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-cloak v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
+                      <input id="contact_phone" type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-cloak v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
                       {{-- <span v-show="errors.has('number_contact')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                     </div>
                   </div>
