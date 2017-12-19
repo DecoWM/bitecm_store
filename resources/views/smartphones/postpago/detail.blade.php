@@ -194,14 +194,14 @@
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <a href="{{route('download_FichaTecnica')}}" target="_blank" class="ver-mas-equipo">
+          <a href="{{route('download_FichaTecnica',[$product->product_id])}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
               <!-- <a class="btn-vmas"></a> -->
               <h4>VER DETALLES TÉCNICOS</h4>
             </div>
           </a>
-          <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
+          <a href="{{route('download_Consideraciones',[$product->product_id])}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>

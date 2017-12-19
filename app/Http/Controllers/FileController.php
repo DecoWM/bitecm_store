@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -27,16 +28,23 @@ class FileController extends Controller
         return redirect($url);
     }
 
-    public function downloadFileConsideraciones (Request $request) {
-        $name = $slug = str_slug('Consideraciones-Comerciales');
-        // $path = storage_path('/app/public/'.$filename);
+    public function downloadFileConsideraciones (Request $request, $product_id) {
+        /*$name = $slug = str_slug('Consideraciones-Comerciales');
         $ext = ".pdf";
         $name = $name.$ext;
         $path = public_path('/files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf');
-        // return response()->download($path, $name);
+        return response()->download($path, $name);*/
 
-        $url = asset('/files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf');
-        return redirect($url);
+        $filename = DB::table('tbl_product')
+            ->where('product_id', $product_id)
+            ->select('product_commercial_considerations')
+            ->get();
+
+        if (count($filename)) {
+            return redirect(asset($filename[0]->product_commercial_considerations));
+        } else {
+            return abort(404);
+        }
     }
 
     public function downloadFileTerminos (Request $request) {
@@ -51,15 +59,22 @@ class FileController extends Controller
         return redirect($url);
     }
 
-    public function downloadFileFichaTecnica (Request $request) {
-        $name = $slug = str_slug('Ficha-Técnica');
-        // $path = storage_path('/app/public/'.$filename);
+    public function downloadFileFichaTecnica (Request $request, $product_id) {
+        /*$name = $slug = str_slug('Ficha-Técnica');
         $ext = ".pdf";
         $name = $name.$ext;
         $path = public_path('/files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf');
-        // return response()->download($path, $name);
+        return response()->download($path, $name);*/
+        
+        $filename = DB::table('tbl_product')
+            ->where('product_id', $product_id)
+            ->select('product_data_sheet')
+            ->get();
 
-        $url = asset('/files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf');
-        return redirect($url);
+        if (count($filename)) {
+            return redirect(asset($filename[0]->product_data_sheet));
+        } else {
+            return abort(404);
+        }
     }
 }
