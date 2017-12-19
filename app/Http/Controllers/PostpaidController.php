@@ -21,6 +21,10 @@ class PostpaidController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
+    $request->validate([
+      'buscar' => 'nullable|max:30|regex:/(^[A-Za-z0-9. ]+$)+/'
+    ]);
+
     $searched_string = $request->has('buscar') ? $request->buscar : '';
 
     $items_per_page = 12;
