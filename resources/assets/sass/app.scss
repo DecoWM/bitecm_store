@@ -526,6 +526,91 @@ section#equipos-vendidos .container .row .heading h2{
     font-size: 23px;
 }
 
+.form-group span.help.is-danger{
+    position: absolute;
+    top: 0px;
+    right: 0;
+    width: auto;
+    background: #e30020;
+    padding: 3px 5px;
+    color: #ffffff !important;
+    margin-top: 0 !important;
+
+}
+.form-group span.help.is-danger::after{
+    content: "";
+    right: 20px;
+    bottom: -10px;
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid #e30020;
+}
+
+.form-group span.help.is-danger::before{
+    content: "";
+    right: 14px;
+    bottom: -17px;
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 13px solid transparent;
+    border-right: 13px solid transparent;
+    border-top: 16px solid white;
+ 
+}
+
+li.item-nav-mobile.first-item-nav{
+    padding-top: 20px;
+}
+
+li.item-nav-mobile a{
+    color: #ffffff !important;
+}
+
+li.item-nav-mobile a:hover{
+    color: #ffe60d !important;
+}
+
+
+
+li.item-nav-mobile.search{
+    padding: 10px;
+}
+
+li.item-nav-mobile.search #search {
+    position: relative;
+}
+
+li.item-nav-mobile.search #search .form-control {
+    padding-right: 50px;
+    height: 28px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-radius: 5px 5px;
+    border: none;
+    background-color: white;
+    width: 100%;
+    line-height: 25px;
+    font-size: 13px;
+}
+
+li.item-nav-mobile.search #search .btn-search {
+    color: #008c95;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 28px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: none;
+    background-color: transparent;
+}
+
 
 
 @import "bitel_variables";

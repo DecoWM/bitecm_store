@@ -125,7 +125,7 @@ const app = new Vue({
                   isOpen : true
               },
               affiliation : {
-                  value : '1',
+                  value : '2',
                   isOpen : true
               },
               plan : {
