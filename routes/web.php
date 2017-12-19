@@ -52,7 +52,7 @@ Route::get('/rastreo/{order_id}', 'OrderController@trackOrder')->name('track_ord
 
 //ENLACES FOOTER
 Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');
-Route::get('/files/consideraciones/{product_id}', 'FileController@downloadFileConsideraciones')->name('download_Consideraciones');
+Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->name('download_Consideraciones');
 Route::get('/files/terminos', 'FileController@downloadFileTerminos')->name('download_Terminos');
 Route::get('/files/fichatecnica/{product_id}', 'FileController@downloadFileFichaTecnica')->name('download_FichaTecnica');
 
