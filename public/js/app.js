@@ -11823,7 +11823,7 @@ var app = new Vue({
                     isOpen: true
                 },
                 affiliation: {
-                    value: '2',
+                    value: '1',
                     isOpen: true
                 },
                 plan: {
