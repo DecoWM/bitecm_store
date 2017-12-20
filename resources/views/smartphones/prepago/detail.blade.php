@@ -49,6 +49,7 @@
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                 <input type="hidden" name="type" value="1">
+                <input type="hidden" name="quantity" value="1">
                 <div class="content-product equipo-prepago">
                   <div class="row">
                     <div class="col-xs-12 col-sm-6">
@@ -61,12 +62,6 @@
                               @else
                               <span>S/.{{$product->product_price}}</span>
                               @endif
-                            </div>
-                          </div>
-                          <div class="btn-option">
-                            <div class="count-input space-bottom">
-                              <a href="#" data-action="decrease" data-limit="1" class="incr-btn btn-minus">-</a>
-                              <input type="text" value="1" name="quantity" class="quantity"><a href="#" data-action="increase" data-limit="2" class="incr-btn btn-plus">+</a>
                             </div>
                           </div>
                         </div>
@@ -164,7 +159,7 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
-@foreach ($available as $item)
+              @foreach ($available as $item)
               <div class="producto">
                 <div class="image-product text-center">
                   <a href="{{$item->route}}">
@@ -187,7 +182,7 @@
                   <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
                 </div>
               </div>
-@endforeach
+              @endforeach
             </div>
           </div>
         </div>

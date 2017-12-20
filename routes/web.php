@@ -48,7 +48,7 @@ Route::get('/envio', 'OrderController@createOrder')->name('create_order');
 Route::get('/envio/currency', 'OrderController@show')->name('currency');
 Route::post('/envio', 'OrderController@storeOrder')->name('store_order');
 Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
-Route::get('/rastreo/{order_id}', 'OrderController@trackOrder')->name('track_order');
+Route::get('/trackeo/{order_id}', 'OrderController@trackOrder')->name('track_order');
 
 //ENLACES FOOTER
 Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');

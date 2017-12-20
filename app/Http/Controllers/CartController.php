@@ -19,7 +19,7 @@ class CartController extends Controller
 
   public function showCart (Request $request) {
     $products = []; //Lista de productos
-
+    $equipo = null;
     $cart = collect($request->session()->get('cart')); //Carrito de compras
 
     $total = 0;
@@ -38,11 +38,13 @@ class CartController extends Controller
         case 1:
           if(isset($item['product_variation_id'])) {
             $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
+            $equipo = $product;
           }
           break;
         case 2:
           if(isset($item['product_variation_id'])) {
             $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
+            $equipo = $product;
           }
           break;
       }
@@ -71,6 +73,7 @@ class CartController extends Controller
     }
 
     return view('cart', [
+      'equipo' => $equipo,
       'products' => $products,
       'total' => $total,
       'total_igv' => $total_igv,
@@ -91,33 +94,41 @@ class CartController extends Controller
       'quantity' => $request->quantity //Unidades
     ];
 
+    $limit_message = 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.';
+
     switch ($cart_item['type_id']) {
       case 0:
         $cart_item['product_variation_id'] = null;
-        $has_item = $cart->search($cart_item);
-        if ($has_item === false && !$cart->contains('type_id', 1) && !$cart->contains('type_id', 2)) {
+        $has_item = $cart->search(function($item, $key) use ($cart_item) {
+          return !isset($item['product_variation_id']) && $item['stock_model_id'] == $cart_item['stock_model_id'];
+        });
+        if ($has_item === false) {
           $request->session()->push('cart', $cart_item);
         } else {
-          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
+          return redirect()->route('show_cart')->with('msg', $limit_message);
         }
         break;
       case 1:
         $cart_item['product_variation_id'] = $request->product_variation;
-        $has_item = $cart->search($cart_item);
+        $has_item = $cart->search(function($item, $key) use ($cart_item) {
+          return $item['product_variation_id'] == $cart_item['product_variation_id'] && $item['stock_model_id'] == $cart_item['stock_model_id'];
+        });
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
-        }else {
-          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
+        } else {
+          return redirect()->route('show_cart')->with('msg', $limit_message);
         }
         break;
       case 2:
         $cart_item['product_variation_id'] = $request->product_variation;
         $cart_item['affiliation_id'] = $request->affiliation;
-        $has_item = $cart->search($cart_item);
+        $has_item = $cart->search(function($item, $key) use ($cart_item) {
+          return $item['product_variation_id'] == $cart_item['product_variation_id'] && $item['stock_model_id'] == $cart_item['stock_model_id'];
+        });
         if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
           $request->session()->push('cart', $cart_item);
-        }else {
-          return redirect()->route('show_cart')->with('msg', 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.');
+        } else {
+          return redirect()->route('show_cart')->with('msg', $limit_message);
         }
         break;
     }

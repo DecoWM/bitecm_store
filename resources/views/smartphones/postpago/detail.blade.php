@@ -217,7 +217,7 @@
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
             <div class="list-producto">
-@foreach ($available as $item)
+              @foreach ($available as $item)
               <div class="producto">
                 <div class="image-product text-center">
                   <a href="{{$item->route}}">
@@ -243,7 +243,7 @@
                   <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
                 </div>
               </div>
-@endforeach
+              @endforeach
             </div>
           </div>
         </div>

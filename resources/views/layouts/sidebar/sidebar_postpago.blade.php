@@ -42,24 +42,12 @@
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave">
               <div class="select-item" v-show="filters[type].affiliation.isOpen">
-@foreach ($filters['affiliation_list'] as $affiliation)
+                @foreach ($filters['affiliation_list'] as $affiliation)
                 <div class="item">
                   <input id="type-opt-{{$affiliation->affiliation_id}}" type="radio" name="affiliation" value="{{$affiliation->affiliation_id}}" v-model="filters[type].affiliation.value" v-on:change="searchProduct(1)">
                   <label for="type-opt-{{$affiliation->affiliation_id}}">{{$affiliation->affiliation_name}}</label>
                 </div>
-@endforeach
-                {{-- <div class="item">
-                  <input id="type-opt-1" type="radio" name="affiliation" value="1" v-model="filters[type].affiliation.value" v-on:change="searchProduct(1)">
-                  <label for="type-opt-1">Portabilidad</label>
-                </div>
-                <div class="item">
-                  <input id="type-opt-2" type="radio" name="affiliation" value="2" v-model="filters[type].affiliation.value" v-on:change="searchProduct(1)">
-                  <label for="type-opt-2">Linea nueva</label>
-                </div>
-                <div class="item">
-                  <input id="type-opt-3" type="radio" name="affiliation" value="3" v-model="filters[type].affiliation.value" v-on:change="searchProduct(1)">
-                  <label for="type-opt-3">Renovación</label>
-                </div> --}}
+                @endforeach
               </div>
             </transition>
           </div>
@@ -110,12 +98,12 @@
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave" v-cloak>
               <div class="select-item" v-show="filters[type].plan.isOpen">
-@foreach ($filters['plan_list'] as $plan)
+                @foreach ($filters['plan_list'] as $plan)
                 <div class="item">
                   <input id="plan-opt-{{$plan->plan_id}}" type="radio" name="plan" value="{{$plan->plan_id}}" v-model="filters[type].plan.value" v-on:change="searchProduct(1)">
                   <label for="plan-opt-{{$plan->plan_id}}">{{$plan->plan_name}}</label>
                 </div>
-@endforeach
+                @endforeach
               </div>
             </transition>
           </div>
@@ -133,12 +121,12 @@
                   <input id="manufacturer-opt-0" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.all" v-on:change="selectAll()">
                   <label for="manufacturer-opt-0">Todos</label>
                 </div>
-@foreach ($filters['brand_list'] as $brand)
+                @foreach ($filters['brand_list'] as $brand)
                 <div class="item">
                   <input id="manufacturer-opt-{{$brand->brand_id}}" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.value" value="{{$brand->brand_id}}" v-on:change="searchProduct(1)">
                   <label for="manufacturer-opt-{{$brand->brand_id}}">{{$brand->brand_name}}</label>
                 </div>
-@endforeach
+                @endforeach
               </div>
             </transition>
           </div>
