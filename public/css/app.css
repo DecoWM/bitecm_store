@@ -135,6 +135,8 @@
   color: #fff;
   background-color: #008c95;
   float: right;
+  line-height: 16px;
+  padding: 5px;
 }
 
 #section-pedido .row .btn-detalle a {
