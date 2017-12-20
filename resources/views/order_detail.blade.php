@@ -72,7 +72,7 @@
                 <div class="btn-detalle">
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <a href="{{route('home')}}" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</a>
-                    <a href="{{route('track_order', ['order_id' => $order_id])}}" class="redirect-href btn btn-default comprar">Visualizar el estado de tu pedido</a>
+                    <a href="{{route('track_order', ['order_id' => $order_id])}}" class="redirect-href btn btn-default comprar">Visualizar el estado<span><br></span>de tu pedido</a>
                   </div>
                 </div>
               </div>
