@@ -70,11 +70,15 @@ class CartController extends Controller
       $request->session()->forget('cart');
     }
 
+    if (url()->previous() != route('create_order')) {
+      $this->shared->setPreviousUrl(url()->previous());
+    }
+    
     return view('cart', [
       'products' => $products,
       'total' => $total,
       'total_igv' => $total_igv,
-      'igv' => $igv
+      'igv' => $igv,
     ]);
   }
 

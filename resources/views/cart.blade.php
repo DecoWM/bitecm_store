@@ -180,9 +180,8 @@
             <div class="btn-detalle">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
-                  {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   @if (count($products) > 0)
-                  <a href="{{url()->previous()}}" class="btn btn-default regresar">REGRESAR</a>
+                  <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
 

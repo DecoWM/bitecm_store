@@ -9,6 +9,11 @@
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
 //CUSTOM CSS
+[v-cloak] {
+    display: none !important;
+}
+
+
 #producto-disponibles .list-producto .producto .image-product img {
     max-width: 100%;
 }
@@ -220,9 +225,6 @@ input:checked ~ .checkmark:after {
     object-fit: contain;
 }
 
-[v-cloak] {
-    display: none;
-}
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
 //     display: inline-block;
 //     float: right;
@@ -561,7 +563,7 @@ section#equipos-vendidos .container .row .heading h2{
     border-left: 13px solid transparent;
     border-right: 13px solid transparent;
     border-top: 16px solid white;
- 
+
 }
 
 li.item-nav-mobile.first-item-nav{
