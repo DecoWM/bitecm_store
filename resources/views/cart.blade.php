@@ -82,22 +82,18 @@
                       @elseif (intval($product->type_id) == 1)
                       <span class="modo">Prepago {{$product->plan_name}}</span>
                       @endif
-                      @if (!isset($product->variation_type_id) || $product->variation_type_id == 1)
+                      @if (!isset($product->variation_type_id))
                       <div class="cantidad">
                         <div class="btn-option">
                           <div class="count-input space-bottom">
                             <form action="{{route('update_cart')}}" method="POST">
                               {{ csrf_field() }}
                               <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
-                              @if(isset($product->product_variation_id))
+                              {{--@if(isset($product->product_variation_id))
                               <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
-                              @endif
+                              @endif--}}
                               <a href="#" data-action="decrease" data-limit="1" class="incr-btn btn-minus">-</a>
-                              @if (isset($product->variation_type_id))
-                              <a href="#" data-action="increase" data-limit="2" class="incr-btn btn-plus">+</a>
-                              @else
                               <a href="#" data-action="increase" data-limit="10" class="incr-btn btn-plus">+</a>
-                              @endif
                               <input type="text" value="{{$product->quantity}}" name="quantity" class="quantity">
                               <input type="submit" style="display: none">
                             </form>
@@ -127,6 +123,7 @@
                 </div>
               </div>
             </div>
+            @endforeach
             <div class="main-detalle col-offset">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -138,8 +135,8 @@
                   </p>
                 </div>
                 <div class="col-xs-6 col-sm-4"><span class="title-detalle"> </span>
-                  @if (intval($product->type_id) == 2)
-                  <p>S/. {{$product->plan_price}} mensual</p>
+                  @if (isset($equipo) && intval($equipo->type_id) == 2)
+                  <p>S/. {{$equipo->plan_price}} mensual</p>
                   @else
                   <p> - </p>
                   @endif
@@ -156,7 +153,6 @@
                 </div>
               </div>
             </div>
-            @endforeach
             <div class="main-detalle col-offset sinborder">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
@@ -180,9 +176,8 @@
             <div class="btn-detalle">
               <div class="row">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
-                  {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   @if (count($products) > 0)
-                  <a href="{{url()->previous()}}" class="btn btn-default regresar">REGRESAR</a>
+                  <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
 

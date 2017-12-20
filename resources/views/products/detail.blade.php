@@ -76,11 +76,11 @@
                     </div>
                     <div class="col-xs-12 col-sm-6">
                       @if($product->stock_model_id)
-                      <div class="btn-carrito">
+                      {{--<div class="btn-carrito">
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
-                      </div>
+                      </div>--}}
                       <div class="btn-comprar-prepago">
-                        <button type="submit" class="btn-default">Comprar Ahora</button>
+                        <button type="submit" class="btn-default btn-buy">Comprar Ahora</button>
                       </div>
                       @else
                       <div class="stock-exhausted">

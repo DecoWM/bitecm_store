@@ -16,7 +16,7 @@
             <div id="section-pedido">
               <div class="row">
                 <div class="title-section-pedido text-center">
-                  <h3>¡GRACIAS POR COMPRAR EN BITEL!</h3>
+                  <h3>¡GRACIAS POR COMPRAR EN BITEL! TU NÚMERO DE PEDIDO ES # {{$order_id}}</h3>
                 </div>
                 @foreach ($products as $product)
                 <div class="detalle-pedido">
@@ -65,14 +65,14 @@
                 @endforeach
                 <div class="rastreo-de-compra">
                   <div class="text-center">
-                    <h4>HEMOS ENVIADO UN MENSAJE A SU CORREO PARA EL RASTREO DE SU COMPRA</h4>
+                    <h4>HEMOS ENVIADO UN MENSAJE A SU CORREO PARA EL TRACKEO DE SU COMPRA</h4>
                     <p>Un representante se comunicará contigo dentro de las 6 horas posteriores, previa evaluación crediticia y disponibilidad de stock.</p>
                   </div>
                 </div>
                 <div class="btn-detalle">
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <a href="{{route('home')}}" class="btn btn-default regresar">REGRESAR<span><br></span>A LA PÁGINA DE INICIO</a>
-                    <a href="{{route('track_order', ['order_id' => $order_id])}}" class="redirect-href btn btn-default comprar">continuar</a>
+                    <a href="{{route('track_order', ['order_id' => $order_id])}}" class="redirect-href btn btn-default comprar">Visualizar el estado<span><br></span>de tu pedido</a>
                   </div>
                 </div>
               </div>

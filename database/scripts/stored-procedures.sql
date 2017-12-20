@@ -2512,7 +2512,8 @@ BEGIN
   SET select_query = 'SELECT
     ORD.*, OST.*, IDT.`idtype_name`,
     PMT.`method_name`, BCH.`branch_name`,
-    PMT.`method_name`,
+    BD.`district_name` as billing_district,
+    DD.`district_name` as delivery_district,
     ORD.`created_at` as order_date,
     OSH.`created_at` as status_date';
 
@@ -2527,7 +2528,11 @@ BEGIN
     LEFT JOIN tbl_payment_method as PMT
       ON ORD.`payment_method_id` = PMT.`payment_method_id`
     LEFT JOIN tbl_branch as BCH
-      ON ORD.`branch_id` = BCH.`branch_id`';
+      ON ORD.`branch_id` = BCH.`branch_id`
+    LEFT JOIN tbl_district as BD
+      ON ORD.`billing_district` = BD.`district_id`
+    LEFT JOIN tbl_district as DD
+      ON ORD.`delivery_district` = DD.`district_id`';
 
   SET where_query = CONCAT('
     WHERE ORD.`order_id` = ', order_id, '

@@ -2,10 +2,10 @@
         <div class="container">
           <div id="mapa-sitio">
             <div class="row">
-              <div class="col-xs-6"><span class="mapa">MAPA DE SITIO</span></div>
-              <div class="col-xs-6">
+              <div class="col-xs-12 col-sm-6 col-sm-push-6">
                 <div class="logo-footer text-right"><img src="/images/footer/svg/logo.svg" alt="logotipo-footer"></div>
               </div>
+              <div class="col-xs-12 col-sm-6 col-sm-pull-6"><span class="mapa">MAPA DE SITIO</span></div>
             </div>
           </div>
           <div id="info-footer">

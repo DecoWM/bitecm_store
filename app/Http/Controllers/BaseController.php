@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -415,5 +417,13 @@ class BaseController extends Controller
       '24' => 'Viettel Peru S.A.C.',
       '25' => 'Virgin Mobile'
     ];
+  }
+
+  public static function setPreviousUrl($url) {
+      Session::put('back_button', $url);
+  }
+
+  public static function getPreviousUrl() {
+      return Session::get('back_button', null);
   }
 }
