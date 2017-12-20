@@ -2255,7 +2255,8 @@ DELIMITER $$
 -- Procedimiento para obtener las colores de un equipo
 --
 CREATE PROCEDURE PA_productStockModels(
-    IN product_id INT
+    IN product_id INT,
+    IN color_required BOOLEAN
 )
 BEGIN
   DECLARE stored_query TEXT;
@@ -2264,6 +2265,7 @@ BEGIN
   DECLARE where_query TEXT;
 
   SET product_id = IFNULL(product_id, 0);
+  SET color_required = IFNULL(color_required, 0);
 
   SET select_query = 'SELECT
     STM.`stock_model_id`,
@@ -2279,9 +2281,13 @@ BEGIN
       ON STM.`color_id` = CLR.`color_id`';
 
   SET where_query = CONCAT('
-    WHERE STM.`product_id` = ', product_id, '
+    WHERE STM.`product_id` = ', product_id);
+
+  IF (color_required > 0) THEN
+    SET where_query = CONCAT(where_query, '
       AND CLR.`color_id` IS NOT NULL'
-  );
+    );
+  END IF;
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
 
