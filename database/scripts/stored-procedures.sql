@@ -652,7 +652,7 @@ BEGIN
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
-  SET plan_id = IFNULL(plan_id, 14); -- set value 14 (Prepago B-Voz) if null
+  SET plan_id = IFNULL(plan_id, 0); -- set value 14 (Prepago B-Voz) if null
   SET category_id = IFNULL(category_id, -1); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
