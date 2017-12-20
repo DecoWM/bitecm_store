@@ -76,11 +76,11 @@
                       </div>
                     </div>
                     <div class="col-xs-12 col-sm-6">
-                      @if($product->stock_model_id)
+                      {{--@if($product->stock_model_id)
                       <div class="btn-carrito">
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>
-                      @endif
+                      @endif--}}
                       @if($product->plan_id != 15)
                       <div class="btn-linea">
                         {{-- <button type="submit" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</button> --}}
