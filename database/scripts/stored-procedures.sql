@@ -118,12 +118,18 @@ BEGIN
     PRD.*,
     PRD.`product_image_url` as picture_url,
     BRN.`brand_name`, BRN.`brand_slug`,
-    CAT.`category_name`, CAT.`category_id`
+    CAT.`category_name`, CAT.`category_id`,
+    STM.`stock_model_id`, STM.`stock_model_code`,
+    CLR.`color_id`, CLR.`color_name`
   FROM tbl_product as PRD
   INNER JOIN tbl_brand as BRN
     ON PRD.`brand_id` = BRN.`brand_id`
   INNER JOIN tbl_category as CAT
     ON PRD.`category_id` = CAT.`category_id`
+  LEFT JOIN tbl_stock_model as STM
+    ON PRD.`product_id` = STM.`product_id`
+  LEFT JOIN tbl_color as CLR
+    ON STM.`color_id` = CLR.`color_id`
   WHERE PRD.`product_id` = product_id;
 END $$
 

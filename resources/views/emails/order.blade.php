@@ -100,7 +100,7 @@
 		</thead>
 		<tbody>
 			<tr><td>Podrás dar seguimiento a tu pedido ingresando al siguiente link:</td></tr>
-			<tr><td><strong>{{env('APP_URL')}}/rastreo/{{$order_id}}</strong></td></tr>
+			<tr><td><strong>{{env('APP_URL')}}/trackeo/{{$order_id}}</strong></td></tr>
 		</tbody>
 	</table>
 	<table style="width:100%;max-width:550px;margin:20px auto;border-collapse:collapse;">
