@@ -5618,10 +5618,10 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 768px) {
   #nav-carrito:before {
-    width: 1px;
-    height: 90px;
+    width: 2px;
+    height: 70px;
     top: 10px;
-    left: 5px;
+    left: 4px;
     bottom: initial;
   }
 }
