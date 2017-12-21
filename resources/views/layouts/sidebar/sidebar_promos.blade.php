@@ -78,14 +78,14 @@
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave" v-cloak>
               <div class="select-item" v-show="filters[type].manufacturer.isOpen">
-                <div class="item">
+                <div class="item checkbox-wrapper">
                   <input id="manufacturer-opt-0" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.all" v-on:change="selectAll()">
-                  <label for="manufacturer-opt-0">Todos</label>
+                  <label for="manufacturer-opt-0" class="checkmark-wrapper">Todos</label>
                 </div>
                 @foreach ($filters['brand_list'] as $brand)
-                <div class="item">
+                <div class="item checkbox-wrapper">
                   <input id="manufacturer-opt-{{$brand->brand_id}}" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.value" value="{{$brand->brand_id}}" v-on:change="searchProduct(1)">
-                  <label for="manufacturer-opt-{{$brand->brand_id}}">{{$brand->brand_name}}</label>
+                  <label for="manufacturer-opt-{{$brand->brand_id}}" class="checkmark-wrapper">{{$brand->brand_name}}</label>
                 </div>
                 @endforeach
               </div>
