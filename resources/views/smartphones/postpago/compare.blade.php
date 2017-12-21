@@ -106,7 +106,7 @@
                     <p>{{$product->product_bluetooth}}</p>
                   </div>
                   <div class="bg-gray"><span>Sistema Operativo</span>
-                    <p>{{$product->product_so}}</p>
+                    <p>{{$product->product_os}}</p>
                   </div>
                   <div class="bg-white"><span>GPS</span>
                     <p>{{$product->product_gps}}</p>

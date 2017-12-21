@@ -2414,7 +2414,7 @@ CREATE TABLE `tbl_product` (
   `product_radio` varchar(50) DEFAULT NULL,
   `product_wlan` varchar(50) DEFAULT NULL,
   `product_bluetooth` varchar(50) DEFAULT NULL,
-  `product_so` varchar(50) DEFAULT NULL,
+  `product_os` varchar(50) DEFAULT NULL,
   `product_gps` varchar(50) DEFAULT NULL,
   `product_battery` varchar(50) DEFAULT NULL,
   `product_slug` varchar(150) DEFAULT NULL,
@@ -2434,7 +2434,7 @@ CREATE TABLE `tbl_product` (
 -- Volcado de datos para la tabla `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_external_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_power`, `product_processor_cores`, `product_band`, `product_radio`, `product_wlan`, `product_bluetooth`, `product_so`, `product_gps`, `product_battery`, `product_slug`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
+INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_external_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_power`, `product_processor_cores`, `product_band`, `product_radio`, `product_wlan`, `product_bluetooth`, `product_os`, `product_gps`, `product_battery`, `product_slug`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
 (1, 1, 1, 'A3 XL', 'ALCATEL/ALCATEL-A3-XL.jpg', NULL, '449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '2000mAh', 'a3-xl', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
 (2, 1, 2, 'L640', 'BITEL/BITEL-L640.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', '64', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '3000mAh', 'l640', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
 (3, 1, 2, 'B9501', 'BITEL/Bitel-B9501.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', '32', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '4000mAh', 'b9501', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
