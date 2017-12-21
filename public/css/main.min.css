@@ -4524,8 +4524,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #content-page #image-equipo .image-product img {
   height: 350px;
   margin: 45px 0;
-  object-fit: contain;
-  width: 100%;
+  /*object-fit: contain;*/
+  /*width: 100%;*/
 }
 #content-page #image-equipo .image-product img.active {
   visibility: visible;
