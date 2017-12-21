@@ -854,6 +854,37 @@ select {
   border: 1px solid #cecece;
 }
 
+.checkbox-wrapper .checkmark-wrapper::before {
+  content: "";
+  background: #fff;
+  border: 0.2rem solid #008c95 !important;
+  display: inline-block;
+  width: 1.7rem !important;
+  height: 1.7rem !important;
+  padding: 2px;
+  text-align: center;
+  border-radius: 0 !important;
+  left: -23px;
+  position: absolute;
+}
+
+.checkbox-wrapper input:checked + label::before {
+  background: none !important;
+}
+
+.checkbox-wrapper input:checked + label::after {
+  content: "";
+  position: absolute;
+  left: -1.6rem;
+  top: 0.3rem;
+  width: 0.4rem;
+  height: 0.9rem;
+  border: solid #008c95;
+  border-width: 0 0.1rem 0.1rem 0;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
 .btn-buy {
   -webkit-transition: .2s ease all !important;
   transition: .2s ease all !important;
