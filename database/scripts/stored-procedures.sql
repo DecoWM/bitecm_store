@@ -652,7 +652,7 @@ BEGIN
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
-  SET plan_id = IFNULL(plan_id, 14); -- set value 14 (Prepago B-Voz) if null
+  SET plan_id = IFNULL(plan_id, 0); -- set value 14 (Prepago B-Voz) if null
   SET category_id = IFNULL(category_id, -1); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
@@ -2255,7 +2255,8 @@ DELIMITER $$
 -- Procedimiento para obtener las colores de un equipo
 --
 CREATE PROCEDURE PA_productStockModels(
-    IN product_id INT
+    IN product_id INT,
+    IN color_required BOOLEAN
 )
 BEGIN
   DECLARE stored_query TEXT;
@@ -2264,6 +2265,7 @@ BEGIN
   DECLARE where_query TEXT;
 
   SET product_id = IFNULL(product_id, 0);
+  SET color_required = IFNULL(color_required, 0);
 
   SET select_query = 'SELECT
     STM.`stock_model_id`,
@@ -2279,9 +2281,13 @@ BEGIN
       ON STM.`color_id` = CLR.`color_id`';
 
   SET where_query = CONCAT('
-    WHERE STM.`product_id` = ', product_id, '
+    WHERE STM.`product_id` = ', product_id);
+
+  IF (color_required > 0) THEN
+    SET where_query = CONCAT(where_query, '
       AND CLR.`color_id` IS NOT NULL'
-  );
+    );
+  END IF;
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
 

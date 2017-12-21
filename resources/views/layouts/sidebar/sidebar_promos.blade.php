@@ -82,12 +82,12 @@
                   <input id="manufacturer-opt-0" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.all" v-on:change="selectAll()">
                   <label for="manufacturer-opt-0">Todos</label>
                 </div>
-@foreach ($filters['brand_list'] as $brand)
+                @foreach ($filters['brand_list'] as $brand)
                 <div class="item">
                   <input id="manufacturer-opt-{{$brand->brand_id}}" type="checkbox" name="manufacturer" v-model="filters[type].manufacturer.value" value="{{$brand->brand_id}}" v-on:change="searchProduct(1)">
                   <label for="manufacturer-opt-{{$brand->brand_id}}">{{$brand->brand_name}}</label>
                 </div>
-@endforeach
+                @endforeach
               </div>
             </transition>
           </div>

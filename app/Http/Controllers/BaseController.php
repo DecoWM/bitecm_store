@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Route;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -253,11 +255,13 @@ class BaseController extends Controller
     return $stock_models;
   }
 
-  public function productStockModels($product_id) {
+  public function productStockModels($product_id, $color_required = 1) {
     $stock_models = DB::select('call PA_productStockModels(
-      :product_id
+      :product_id,
+      :color_required
     )', [
-      'product_id' => $product_id
+      'product_id' => $product_id,
+      'color_required' => $color_required
     ]);
 
     return $stock_models;
@@ -415,5 +419,13 @@ class BaseController extends Controller
       '24' => 'Viettel Peru S.A.C.',
       '25' => 'Virgin Mobile'
     ];
+  }
+
+  public static function setPreviousUrl($url) {
+      Session::put('back_button', $url);
+  }
+
+  public static function getPreviousUrl() {
+      return Session::get('back_button', null);
   }
 }

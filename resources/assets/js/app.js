@@ -106,7 +106,8 @@ const app = new Vue({
                   isOpen : true
               },
               plan : {
-                  value : '14',
+                  value : '',
+                  all: true,
                   isOpen : false
               },
               price : {
@@ -208,6 +209,14 @@ const app = new Vue({
                 self.compare.splice(index, 1);
             }
         },
+        selectAllFilter: function (filter) {
+            self = this
+            if (!self.filters[self.type][filter].all) {
+                self.filters[self.type][filter].value = '';
+                self.searchProduct(1);
+            }
+            self.filters[self.type][filter].all = true;
+        },
         selectAll : function () {
             self = this;
             if (self.filters[self.type].manufacturer.all) {
@@ -224,6 +233,7 @@ const app = new Vue({
             self.search = true;
             self.searchResult = [];
             (self.filters[self.type].manufacturer.value.length > 0) ? self.filters[self.type].manufacturer.all = false : self.filters[self.type].manufacturer.all = true;
+            (self.filters[self.type].plan.value != '') ? self.filters[self.type].plan.all = false : self.filters[self.type].plan.all = true;
             console.log(self.baseUrl);
             let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {

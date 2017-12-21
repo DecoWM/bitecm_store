@@ -16,7 +16,7 @@ class PrepaidController extends Controller
   }
 
   public function index(Request $request) {
-    $plan_pre_id = \Config::get('filter.plan_pre_id');
+    $plan_pre_id = null;//\Config::get('filter.plan_pre_id');
 
     $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
     $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
@@ -49,8 +49,6 @@ class PrepaidController extends Controller
     }
     
     $available_products = $this->shared->searchProductPrepaid(1, $product->plan_id, $product->brand_id, 4, 1, null, null, null, null, null, null, $product->product_id);
-
-
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {

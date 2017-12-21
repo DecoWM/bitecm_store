@@ -5,7 +5,7 @@
         <div class="col-xs-12 col-sm-10 col-sm-offset-1">
           <div id="page-rastreo">
             <div class="title-page-rastreo">
-              <h2>RASTREO</h2>
+              <h2>TRACKEO</h2>
               <h3>Revisa el estado de tu pedido # {{$order->order_id}}</h3>
             </div>
             <div id="content-rastreo">

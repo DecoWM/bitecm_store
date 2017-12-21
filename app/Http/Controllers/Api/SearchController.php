@@ -23,8 +23,6 @@ class SearchController extends Controller
       'items_per_page' => 'required|integer|min:0'
     ]);
 
-    $plan_pre_id = \Config::get('filter.plan_pre_id');
-
     $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
     $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
     $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
@@ -40,7 +38,7 @@ class SearchController extends Controller
 
     $brand_ids = implode(',',$filters->manufacturer->value);
 
-    $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_pre_id;
+    $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : null;
 
     $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
