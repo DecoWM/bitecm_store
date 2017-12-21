@@ -264,7 +264,8 @@ BEGIN
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR PRD.product_model like ''%',product_string_search,'%''
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') 
+        OR BRN.`brand_name` like ''%',product_string_search,'%'' )
     ');
     -- order
     SET cad_order = ' ORDER BY (mscore + pscore) DESC';
