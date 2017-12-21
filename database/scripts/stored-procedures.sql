@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 USE `bitel_ecommerce` ;
 
 -- ------------------------------------------
--- Affiliation List 
+-- Affiliation List
 -- ------------------------------------------
 
 DROP PROCEDURE IF EXISTS PA_affiliationList;
@@ -32,7 +32,7 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
--- Brand List 
+-- Brand List
 -- ------------------------------------------
 
 DROP PROCEDURE IF EXISTS PA_brandList;
@@ -53,7 +53,7 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
--- Plan List 
+-- Plan List
 -- ------------------------------------------
 
 DROP PROCEDURE IF EXISTS PA_planList;
@@ -67,7 +67,7 @@ CREATE PROCEDURE PA_planList(
 )
 BEGIN
 
-  SET _plan_type = IFNULL(_plan_type, -1); -- set value if null  
+  SET _plan_type = IFNULL(_plan_type, -1); -- set value if null
 
   SELECT *
     FROM tbl_plan
@@ -79,7 +79,7 @@ END $$
 DELIMITER ;
 
 -- ------------------------------------------
--- Varation Type List 
+-- Varation Type List
 -- ------------------------------------------
 
 DROP PROCEDURE IF EXISTS PA_variationTypeList;
@@ -118,12 +118,18 @@ BEGIN
     PRD.*,
     PRD.`product_image_url` as picture_url,
     BRN.`brand_name`, BRN.`brand_slug`,
-    CAT.`category_name`, CAT.`category_id`
+    CAT.`category_name`, CAT.`category_id`,
+    STM.`stock_model_id`, STM.`stock_model_code`,
+    CLR.`color_id`, CLR.`color_name`
   FROM tbl_product as PRD
   INNER JOIN tbl_brand as BRN
     ON PRD.`brand_id` = BRN.`brand_id`
   INNER JOIN tbl_category as CAT
     ON PRD.`category_id` = CAT.`category_id`
+  LEFT JOIN tbl_stock_model as STM
+    ON PRD.`product_id` = STM.`product_id`
+  LEFT JOIN tbl_color as CLR
+    ON STM.`color_id` = CLR.`color_id`
   WHERE PRD.`product_id` = product_id;
 END $$
 
@@ -178,7 +184,7 @@ BEGIN
   SET sort_by = IFNULL(sort_by,'');
   SET sort_direction = IFNULL(sort_direction,'');
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
-  
+
   -- conditional filter for category (smartphone, tablet, basic, etc)
   IF (category_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
@@ -243,7 +249,7 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -252,12 +258,14 @@ BEGIN
     -- is a search and require MATCH
     SET stored_query = CONCAT(select_segment, '
       MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''') as pscore,
-      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore', 
+      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  )
+        OR PRD.product_model like ''%',product_string_search,'%''
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') 
+        OR BRN.`brand_name` like ''%',product_string_search,'%'' )
     ');
     -- order
     SET cad_order = ' ORDER BY (mscore + pscore) DESC';
@@ -265,7 +273,7 @@ BEGIN
   ELSE
     -- If this is not a search
     SET stored_query = CONCAT(select_segment, '
-      1 as pscore, 1 as mscore', 
+      1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
@@ -348,7 +356,7 @@ BEGIN
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET product_string_search = IFNULL(product_string_search,'');
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
-  
+
   -- conditional filter for category (smartphone, tablet, basic, etc)
   IF (category_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
@@ -357,7 +365,7 @@ BEGIN
   IF (product_brands <> '') THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
-  
+
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
     -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
@@ -400,14 +408,14 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
     -- is a search and require MATCH
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
@@ -416,7 +424,7 @@ BEGIN
     ');
   ELSE
     -- If this is not a search
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
@@ -428,7 +436,7 @@ BEGIN
   -- CONCAT query, condition AND order
   SET stored_query = CONCAT('SELECT COUNT(*) as total_products FROM (', stored_query, cad_condition,') as t');
 
-  
+
   -- Executing query
   SET @consulta = stored_query;
   -- select @consulta;
@@ -460,7 +468,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET brand_slug = IFNULL(brand_slug, '');
   SET product_slug = IFNULL(product_slug, '');
   SET color_slug = IFNULL(color_slug, '');
@@ -500,7 +508,7 @@ BEGIN
         ON PRD.`product_id` = STM.`product_id`
       INNER JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
-    SET where_query = CONCAT(where_query, ' 
+    SET where_query = CONCAT(where_query, '
       AND CLR.color_slug = "', color_slug, '"');
   ELSE
     SET select_query = CONCAT(select_query, ',
@@ -519,7 +527,7 @@ BEGIN
   SET from_query = CONCAT(from_query, '
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -556,7 +564,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET stock_model_id = IFNULL(stock_model_id, 0);
 
   -- Define the price promo select segment (subQuery)
@@ -586,7 +594,7 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -754,7 +762,7 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -763,12 +771,13 @@ BEGIN
     -- is a search and require MATCH
     SET stored_query = CONCAT(select_segment, '
       MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''') as pscore,
-      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore', 
+      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR PRD.product_model like ''%',product_string_search,'%''
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
     -- order
@@ -777,7 +786,7 @@ BEGIN
   ELSE
     -- If this is not a search
     SET stored_query = CONCAT(select_segment, '
-      1 as pscore, 1 as mscore', 
+      1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
@@ -791,7 +800,7 @@ BEGIN
     ISNULL(PRM.`publish_at`),
     PRM.`publish_at` DESC');
 
-  SET cad_condition = CONCAT(cad_condition, ' 
+  SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ',variation_type_id);
 
   -- ORDER BY
@@ -870,7 +879,7 @@ BEGIN
   SET product_string_search = IFNULL(product_string_search,'');
   SET product_tag = IFNULL(product_tag,'');
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
-  
+
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
     -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
@@ -947,19 +956,19 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
     -- is a search and require MATCH
-    SET stored_query = CONCAT(select_segment,  
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
@@ -970,7 +979,7 @@ BEGIN
       WHERE PRD.`active` = 1');
   END IF;
 
-  SET cad_condition = CONCAT(cad_condition, ' 
+  SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ',variation_type_id);
 
   SET cad_condition = CONCAT(cad_condition, '
@@ -1011,7 +1020,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET brand_slug = IFNULL(brand_slug, '');
   SET product_slug = IFNULL(product_slug, '');
   SET plan_slug = IFNULL(plan_slug, '');
@@ -1072,7 +1081,7 @@ BEGIN
         ON PRD.`product_id` = STM.`product_id`
       INNER JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
-    SET where_query = CONCAT(where_query, ' 
+    SET where_query = CONCAT(where_query, '
       AND CLR.color_slug = "', color_slug, '"');
   ELSE
     SET select_query = CONCAT(select_query, ',
@@ -1087,10 +1096,10 @@ BEGIN
 
   SET from_query = CONCAT(from_query, '
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
-  SET where_query = CONCAT(where_query, ' 
+  SET where_query = CONCAT(where_query, '
     AND PRD_VAR.`variation_type_id` = 1');
 
   SET where_query = CONCAT(where_query, ' LIMIT 1');
@@ -1127,7 +1136,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
 
@@ -1179,7 +1188,7 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -1333,7 +1342,7 @@ BEGIN
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`), PRD.*, PRD.`product_image_url` AS picture_url, PRD_VAR.`product_variation_id`, PRD_VAR.`product_variation_price` as product_price,
-    
+
     PRM.promo_id, PRM.promo_price, PRM.promo_discount, PRM.promo_add_product_price, PRM.promo_add_product_discount, PRM.promo_title, PRM.promo_description, PRM.`publish_at`, STM.`stock_model_id`,
     PLN.`plan_id`, PLN.`plan_name`,
     PLN.`plan_price`, PLN.`plan_slug`,
@@ -1364,7 +1373,7 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -1373,11 +1382,12 @@ BEGIN
     -- is a search and require MATCH
     SET stored_query = CONCAT(select_segment, '
       MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''') as pscore,
-      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore', 
+      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
+        OR PRD.product_model like ''%',product_string_search,'%''
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
@@ -1387,7 +1397,7 @@ BEGIN
   ELSE
     -- If this is not a search
     SET stored_query = CONCAT(select_segment, '
-      1 as pscore, 1 as mscore', 
+      1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1');
@@ -1402,7 +1412,7 @@ BEGIN
     PRM.`publish_at` DESC');
 
   -- validation for PLAN and promo price
-  SET cad_condition = CONCAT(cad_condition, ' 
+  SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ',variation_type_id,'
     GROUP BY PRD.product_id
     ');
@@ -1481,7 +1491,7 @@ BEGIN
   SET contract_id = IFNULL(contract_id, 1); -- set value 1 (18 meses) if null
   SET product_string_search = IFNULL(product_string_search, '');
   SET product_ignore_ids = IFNULL(product_ignore_ids, '');
- 
+
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
     -- SET cad_condition = CONCAT(cad_condition, ' AND (PRD_VAR.product_variation_price BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');
@@ -1567,7 +1577,7 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -1579,7 +1589,7 @@ BEGIN
       -- Filter by search words
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
@@ -1591,7 +1601,7 @@ BEGIN
   END IF;
 
   -- validation for PLAN and promo price
-  SET cad_condition = CONCAT(cad_condition, ' 
+  SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ',variation_type_id,'
     ');
 
@@ -1668,7 +1678,7 @@ BEGIN
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
-    PRM.*, PRD.*, 
+    PRM.*, PRD.*,
     PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
     PRD_VAR.`product_variation_price` as product_price,
@@ -1723,10 +1733,10 @@ BEGIN
 
   SET from_query = CONCAT(from_query, '
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
-  SET where_query = CONCAT(where_query, ' 
+  SET where_query = CONCAT(where_query, '
     AND PRD_VAR.`variation_type_id` = 2');
 
   SET where_query = CONCAT(where_query, ' LIMIT 1');
@@ -1763,7 +1773,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
 
@@ -1821,7 +1831,7 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -1971,7 +1981,7 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
@@ -1980,12 +1990,13 @@ BEGIN
     -- is a search and require MATCH
     SET stored_query = CONCAT(select_segment, '
       MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''') as pscore,
-      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore', 
+      MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRM.`active` = 1 AND PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR PRD.product_model like ''%',product_string_search,'%''
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
     -- order
@@ -1994,7 +2005,7 @@ BEGIN
   ELSE
     -- If this is not a search
     SET stored_query = CONCAT(select_segment, '
-      1 as pscore, 1 as mscore', 
+      1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
       WHERE PRM.`active` = 1 AND PRD.`active` = 1');
@@ -2008,14 +2019,14 @@ BEGIN
       AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
       AND PRM.`publish_at` IS NOT NULL
-      
+
       GROUP BY PRM.`promo_id`');
   ELSE
     SET cad_condition = CONCAT(cad_condition, '
       AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
       AND PRM.`publish_at` IS NOT NULL
-      
+
       GROUP BY PRM.`promo_id`');
   END IF;
 
@@ -2149,19 +2160,19 @@ BEGIN
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
       )');
 
   -- checking if is search query
   IF product_string_search <> ''  THEN
     -- is a search and require MATCH
-    SET stored_query = CONCAT(select_segment, 
+    SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
       WHERE PRM.`active` = 1 AND PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')  
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
     ');
   ELSE
@@ -2177,14 +2188,14 @@ BEGIN
       AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
       AND PRM.`publish_at` IS NOT NULL
-      
+
       GROUP BY PRM.`promo_id`');
   ELSE
     SET cad_condition = CONCAT(cad_condition, '
       AND STM.`stock_model_id` IS NOT NULL
       AND PRM.`promo_id` IS NOT NULL
       AND PRM.`publish_at` IS NOT NULL
-      
+
       GROUP BY PRM.`promo_id`');
   END IF;
 
@@ -2320,7 +2331,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET order_id = IFNULL(order_id, 0);
 
   SET select_query = 'SELECT
@@ -2357,7 +2368,7 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id` 
+      ON (PRD.`product_id` = PRM.`product_id`
           AND PRM.promo_id = OIT.promo_id
       )');
 
@@ -2393,7 +2404,7 @@ CREATE PROCEDURE PA_orderSearch(
   IN pag_total_by_page INT, -- Items per page
   IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),
-  IN sort_direction VARCHAR(5)  
+  IN sort_direction VARCHAR(5)
 )
 BEGIN
   DECLARE stored_query TEXT;
@@ -2443,7 +2454,7 @@ BEGIN
       ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
 
   SET where_query = '
-  
+
   WHERE OSH.order_status_history_id IN (
          (select max(sOSH.`order_status_history_id`) as order_status_history_id
             FROM tbl_order_status_history as sOSH
@@ -2455,7 +2466,7 @@ BEGIN
 
   SET where_query = CONCAT(where_query, '
     ORDER BY OSH.`order_status_history_id` DESC');
-  
+
   -- ORDER BY
   IF (sort_by <> '') THEN
     SET where_query = CONCAT(where_query, ', ORD.', sort_by);
@@ -2512,7 +2523,7 @@ BEGIN
   DECLARE select_query TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET order_id = IFNULL(order_id, 0);
 
   SET select_query = 'SELECT
@@ -2576,10 +2587,10 @@ BEGIN
   DECLARE select_query TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
-  
+
   SET order_id = IFNULL(order_id, 0);
 
-  SET select_query = 'SELECT 
+  SET select_query = 'SELECT
     OSH.*, OST.`order_status_name`';
 
   SET from_query = '
@@ -2618,7 +2629,7 @@ CREATE PROCEDURE PA_planSlug(
   IN plan_id INT
 )
 BEGIN
-  
+
   SELECT PLN.`plan_slug`
   FROM tbl_plan as PLN
   WHERE PLN.`active` = 1 AND PLN.`plan_id` = plan_id;
@@ -2641,7 +2652,7 @@ CREATE PROCEDURE PA_affiliationSlug(
   IN affiliation_id INT
 )
 BEGIN
-  
+
   SELECT AFF.`affiliation_slug`
   FROM tbl_affiliation as AFF
   WHERE AFF.`active` = 1 AND AFF.`affiliation_id` = affiliation_id;
@@ -2689,7 +2700,7 @@ CREATE PROCEDURE PA_districtList(
 BEGIN
 
   SELECT DS.`district_id`, DS.`province_id`, DS.`branch_id`, DS.`district_name`
-  FROM tbl_branch as BR 
+  FROM tbl_branch as BR
   INNER JOIN tbl_district as DS ON BR.`branch_id`=DS.`branch_id`
   WHERE DS.`active`=1 AND BR.`active`=1
   ORDER BY DS.`district_name` ASC;
@@ -2715,7 +2726,7 @@ CREATE PROCEDURE PA_branchByDistrict(
 BEGIN
 
   SELECT BR.`branch_id`
-  FROM tbl_branch as BR 
+  FROM tbl_branch as BR
   INNER JOIN tbl_district as DS ON BR.`branch_id`=DS.`branch_id`
   WHERE DS.`district_id` = _district_id;
 
