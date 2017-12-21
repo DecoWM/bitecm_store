@@ -233,7 +233,9 @@ const app = new Vue({
             self.search = true;
             self.searchResult = [];
             (self.filters[self.type].manufacturer.value.length > 0) ? self.filters[self.type].manufacturer.all = false : self.filters[self.type].manufacturer.all = true;
-            (self.filters[self.type].plan.value != '') ? self.filters[self.type].plan.all = false : self.filters[self.type].plan.all = true;
+            if (self.type != 'accesorios' && self.type != 'promociones') {
+              (self.filters[self.type].plan.value != '') ? self.filters[self.type].plan.all = false : self.filters[self.type].plan.all = true;
+            }
             console.log(self.baseUrl);
             let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {
