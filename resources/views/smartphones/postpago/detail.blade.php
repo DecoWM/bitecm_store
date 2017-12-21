@@ -183,7 +183,7 @@
             <div class="content-detalle">
               <div class="descripcion-detalle">
                 <ul class="list-unstyled">
-                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">{{$product->product_so}}</span><span class="description-dispositivo">Sistema Operativo</span></li>
+                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">{{$product->product_os}}</span><span class="description-dispositivo">Sistema Operativo</span></li>
                   <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory}} GB / {{$product->product_internal_memory}} GB</span><span class="description-dispositivo">Memoria</span></li>
                   <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
                   <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
