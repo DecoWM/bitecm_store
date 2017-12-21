@@ -490,34 +490,16 @@ li.nav-mobile.item-nav-mobile a{
     color: white;
 }
 
-@media (max-width: 767px){
-
-    li.nav-mobile.item-nav-mobile{
-        display: block
-    }
-
-    #equipos-vendidos .content-tab-vendidos{
-        height: 520px;
-    }
-
-    section#equipos-vendidos .container .row .content-tab-pro{
-        margin-top: 0;
-    }
-
-    nav#nav-bitel .container #navbar{
-        padding: 0;
-    }
-
-    li.nav-mobile.item-nav-mobile {
-        background-color : #107379;
-    }
-
-    li.nav-mobile.item-nav-mobile:first-child{
-        padding-top: 30px;
-    }
-
-
+section#equipos-promocion .container .row .sub-heading h3.opt2 a,
+section#equipos-vendidos .container .row .sub-heading h3.opt2 a{
+    font-weight: 700;
+    text-decoration: none !important;
 }
+
+
+
+
+
 
 section#equipos-promocion .container .row .sub-heading h3,
 section#equipos-vendidos .container .row .sub-heading h3{
@@ -614,6 +596,228 @@ li.item-nav-mobile.search #search .btn-search {
     border: none;
     background-color: transparent;
 }
+
+#list-equipos .producto{
+    min-height: initial;
+}
+
+.content-catalogo .title-select .btn-acordion{
+    display: none !important;
+}
+
+.responsive-sidebar{
+    display: none;
+}
+
+#planes{
+    margin-top: 20px;
+}
+
+#especificaciones-tecnicas .slick-track{
+    // width: 100% !important; 
+}
+
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul{
+    display: block;
+}
+
+#especificaciones-tecnicas .content-detalle .descripcion-detalle ul li{
+    // min-width: auto;
+    width: auto;
+}
+
+
+
+@media (max-width: 767px){
+
+    #form-cliente form .btn-detalle a.regresar{
+        width: 100% !important;
+        margin-bottom: 10px;
+    }
+
+    li.nav-mobile.item-nav-mobile{
+        display: block
+    }
+
+    #equipos-vendidos .content-tab-vendidos{
+        height: 520px;
+    }
+
+    section#equipos-vendidos .container .row .content-tab-pro{
+        margin-top: 0;
+    }
+
+    nav#nav-bitel .container #navbar{
+        padding: 0;
+    }
+
+    li.nav-mobile.item-nav-mobile {
+        background-color : #107379;
+    }
+
+    li.nav-mobile.item-nav-mobile:first-child{
+        padding-top: 30px;
+    }
+
+    li.telephone{
+        font-size: 15px !important;
+        strong{
+            color: #169599;
+        }
+
+    }
+
+    #plan{
+        border-top: 1px solid #008c95;
+    }
+
+    .content-catalogo{
+        margin-bottom: 0;
+        border-top: none;
+        .title-select{
+            border-bottom: none;
+        }
+    }
+
+    #list-equipos{
+        margin-top: 20px;
+    }
+
+    .content-catalogo .select-item{
+         border-top: 1px solid #008c95;
+    }
+
+    .responsive-sidebar{
+        display: block;
+        // height: 40px;
+        &.is-open-sidebar{
+            .responsive-sidebar-item{
+                // height: auto;
+                // transform:scaleY(1);
+                 // transform-origin: top;
+            }
+                
+        }
+        .responsive-sidebar-title{
+            padding-left: 20px;
+            background-color: #008c95;
+            color: #ffffff;
+            line-height: 40px;
+            .btl-caret{
+                margin-right: 15px;
+            }
+        }
+        .responsive-sidebar-item{
+            // max-height: 0;
+            display: none;
+            // transition: 0.5s ease all ;
+            // transition: transform 0.3s linear;
+            // overflow: hidden;
+            // transform:scaleY(0)
+        }
+    }
+
+    #compara-tus-equipos .slick-prev{
+        top: 160px;
+        left: 30px;
+    }
+
+    #compara-tus-equipos  .slick-next{
+        top: 160px;
+        right: 30px;
+    }    
+
+}
+
+@media (max-width: 480px) {
+
+    .content-tab-pro .slick-prev{
+        left: 50px;
+    }
+
+    .content-tab-pro  .slick-next{
+
+        right: 70px;
+    }
+
+    footer{
+       padding-bottom: 15px;
+        .container{
+            padding-right: 0;
+            padding-left: 0;
+            .row{
+                margin-right: 0;
+                margin-left: 0;
+            }
+            #mapa-sitio{
+                text-align: center;
+                margin-bottom: 0px;
+                .col-xs-12{
+                    padding-left: 0;
+                    padding-right: 0;
+                    .logo-footer{
+                        &.text-right{
+                            text-align: center;
+                            margin-bottom: 10px;
+                        }
+                    }
+                }
+            }
+            #info-footer{
+                .row{
+                    .col-xs-12{
+                        padding-left: 0;
+                        padding-right: 0;
+                        .nav-footer{
+                            display: block;
+                            text-align: center;
+                            padding-right: 0;
+                            ul{
+                                margin-bottom: 0;
+                                li{
+                                    border-bottom: 1px solid  #107379;
+                                    padding: 15px 0;
+                                    a{
+                                        font-size: 14px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .social-media{
+                margin: 20px 0;
+                ul{
+                    li{
+                        a{
+                            margin: 0 5px;
+                            font-size: 30px !important;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #planes .select-plan .plan{
+        width: 75%;
+        margin: auto;
+        float: initial;
+    }
+
+
+}
+
+.slick-prev:hover:after,
+.slick-prev:hover:before,
+.slick-next:hover:after,
+.slick-next:hover:before{
+    background-color: #169599;
+}
+
+
 
 
 
