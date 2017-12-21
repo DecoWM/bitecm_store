@@ -16,7 +16,7 @@ class PrepaidController extends Controller
   }
 
   public function index(Request $request) {
-    $plan_pre_id = null;//\Config::get('filter.plan_pre_id');
+    $plan_pre_id = \Config::get('filter.plan_pre_id');
 
     $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
     $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));

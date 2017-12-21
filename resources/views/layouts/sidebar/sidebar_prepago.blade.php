@@ -68,7 +68,7 @@
               </div>
             </transition>
           </div>
-          <div id="precio-plan" class="content-catalogo">
+          {{--<div id="precio-plan" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters[type].plan)">
               <div class="btn-acordion"></div><span>Plan</span>
               <div class="pull-right btl-caret" v-cloak>
@@ -90,7 +90,7 @@
                 @endforeach
               </div>
             </transition>
-          </div>
+          </div>--}}
           <div id="marca" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters[type].manufacturer)">
               <div class="btn-acordion"></div><span>Filtrar por marca:</span>

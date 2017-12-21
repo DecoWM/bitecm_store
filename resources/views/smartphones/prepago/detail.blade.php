@@ -76,9 +76,7 @@
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>
                       @endif--}}
-                      @if($product->plan_id != 15)
                       <div class="btn-linea">
-                        {{-- <button type="submit" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</button> --}}
                         <a href="{{route('postpaid_detail', [
                           'brand'=>$product->brand_slug,
                           'product'=>$product->product_slug,
@@ -87,7 +85,6 @@
                           'contract'=>$contract_slug
                         ])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
-                      @endif
                       @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">
                         <button type="submit" class="btn-default btn-buy">Comprar Ahora</button>

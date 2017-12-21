@@ -651,6 +651,7 @@ BEGIN
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
   DECLARE join_segment TEXT;
+
   -- conditional string query
   SET variation_type_id = 1; -- Prepaid
   SET cad_condition = "";
@@ -714,27 +715,41 @@ BEGIN
   SET pag_end = pag_actual * pag_total_by_page;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-
-    ';
+  ');
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`),
@@ -801,7 +816,7 @@ BEGIN
     PRM.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, '
-    AND PRD_VAR.`variation_type_id` = ',variation_type_id);
+    AND PRD_VAR.`variation_type_id` = ', variation_type_id);
 
   -- ORDER BY
   IF (sort_by <> '') THEN
@@ -866,6 +881,7 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE select_segment TEXT;
   DECLARE join_segment TEXT;
+
   -- conditional string query
   SET variation_type_id = 1; -- Prepaid
   SET cad_condition = "";
@@ -916,27 +932,41 @@ BEGIN
   END IF;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-
-    ';
+  ');
 
   SET select_segment = 'SELECT COUNT(PRD.product_id) as total_products';
 
@@ -1020,33 +1050,50 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
+  DECLARE variation_type_id INT;
 
   SET brand_slug = IFNULL(brand_slug, '');
   SET product_slug = IFNULL(product_slug, '');
   SET plan_slug = IFNULL(plan_slug, '');
   SET color_slug = IFNULL(color_slug, '');
+  SET variation_type_id = 1; -- Prepago
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
@@ -1136,31 +1183,48 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
+  DECLARE variation_type_id INT;
 
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
+  SET variation_type_id = 1; -- Prepago
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
@@ -1250,6 +1314,7 @@ BEGIN
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT; -- subquery for promotional id
   DECLARE join_segment TEXT;
+
   -- conditional string query
   SET variation_type_id = 2; -- Postpaid
   SET cad_condition = "";
@@ -1318,31 +1383,44 @@ BEGIN
   SET pag_end = pag_actual * pag_total_by_page;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-
-    ';
+  ');
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`), PRD.*, PRD.`product_image_url` AS picture_url, PRD_VAR.`product_variation_id`, PRD_VAR.`product_variation_price` as product_price,
-
     PRM.promo_id, PRM.promo_price, PRM.promo_discount, PRM.promo_add_product_price, PRM.promo_add_product_discount, PRM.promo_title, PRM.promo_description, PRM.`publish_at`, STM.`stock_model_id`,
     PLN.`plan_id`, PLN.`plan_name`,
     PLN.`plan_price`, PLN.`plan_slug`,
@@ -1470,7 +1548,6 @@ CREATE PROCEDURE PA_productCountPostpago(
   IN product_ignore_ids VARCHAR(50)
 )
 BEGIN
-
   --
   DECLARE variation_type_id INT;
   DECLARE stored_query TEXT;
@@ -1478,6 +1555,7 @@ BEGIN
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT; -- subquery for promotional id
   DECLARE join_segment TEXT;
+  
   -- conditional string query
   SET variation_type_id = 2; -- Postpaid
   SET cad_condition = "";
@@ -1532,26 +1610,42 @@ BEGIN
   END IF;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
+      PRMsub.product_id = PRD.product_id
     AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRD_VAR.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_segment = 'SELECT COUNT(PRD.product_id) as total_products';
 
@@ -1645,6 +1739,7 @@ BEGIN
   DECLARE select_query TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
+  DECLARE variation_type_id INT;
 
   SET brand_slug = IFNULL(brand_slug, '');
   SET product_slug = IFNULL(product_slug, '');
@@ -1652,29 +1747,44 @@ BEGIN
   SET plan_slug = IFNULL(plan_slug, '');
   SET contract_slug = IFNULL(contract_slug, '');
   SET color_slug = IFNULL(color_slug, '');
+  SET variation_type_id = 2; -- Postpaid
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-
-    ';
+  ');
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
@@ -1773,31 +1883,48 @@ BEGIN
   DECLARE select_idpromo_segment TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
+  DECLARE variation_type_id INT;
 
   SET stock_model_id = IFNULL(stock_model_id, 0);
   SET product_variation_id = IFNULL(product_variation_id, 0);
+  SET variation_type_id = 2; -- Postpaid
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = ', 
+              variation_type_id, '
+            )
             OR
             (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+              PRMsub.`allowed_variation_type_id` IS NULL
             )
+          )
         )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
@@ -1888,6 +2015,7 @@ BEGIN
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT;
   DECLARE join_segment TEXT;
+  DECLARE cond_variations TEXT;
   -- conditional string query
   SET cad_condition = "";
   SET cad_order = " ";
@@ -1901,7 +2029,7 @@ BEGIN
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
-  SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
+  SET pag_total_by_page = IFNULL(pag_total_by_page, 12); -- set value if null
   SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
   SET sort_direction = IFNULL(sort_direction, '');
@@ -1929,27 +2057,96 @@ BEGIN
   -- Define the final row
   SET pag_end = pag_actual * pag_total_by_page;
 
-  -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
-    FROM
-    tbl_promo as PRMsub
-    WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+  IF (plan_pre_id > 0 AND plan_post_id > 0 AND affiliation_id > 0 AND contract_id > 0) THEN
+    SET cond_variations = CONCAT('
+      AND PRMsub.`product_variation_id` IS NULL
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
-            OR
-            (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
-            )
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 1
+          AND PRD_VAR.`variation_type_id` = 1
+          AND PRD_VAR.`plan_id` = ', plan_pre_id, '
         )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 2
+          AND PRD_VAR.`variation_type_id` = 2
+          AND PRD_VAR.`plan_id` = ', plan_post_id, '
+          AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+          AND PRD_VAR.`contract_id` = ', contract_id, '
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 1
+          AND PRD_VAR.`plan_id` = ', plan_pre_id, '
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 2
+          AND PRD_VAR.`plan_id` = ', plan_post_id, '
+          AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+          AND PRD_VAR.`contract_id` = ', contract_id, '
+        )
+      )
+    ');
+  ELSE
+    SET cond_variations = '
+      AND PRMsub.`product_variation_id` IS NULL
+      AND
+      (
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 1
+          AND PRD_VAR.`variation_type_id` = 1
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 2
+          AND PRD_VAR.`variation_type_id` = 2
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 1
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 2
+        )
+      )
+    ';
+  END IF;
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
+    FROM
+      tbl_promo as PRMsub
+    WHERE
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
+        (
+          PRMsub.allow_all_variations = 1
+          ', cond_variations, '
+        )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_segment = 'SELECT
     PRM.*, PRD.*, PRD_VAR.*,
@@ -1970,11 +2167,11 @@ BEGIN
     -- Get product variations
     LEFT JOIN tbl_product_variation as PRD_VAR
       ON PRD.`product_id` = PRD_VAR.`product_id`
-    INNER JOIN tbl_affiliation as AFF
-      ON AFF.`affiliation_id` = PRD_VAR.`affiliation_id`
     INNER JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
-    INNER JOIN tbl_contract as CTR
+    LEFT JOIN tbl_affiliation as AFF
+      ON AFF.`affiliation_id` = PRD_VAR.`affiliation_id`
+    LEFT JOIN tbl_contract as CTR
       ON CTR.`contract_id` = PRD_VAR.`contract_id`
     -- Check stock models
     LEFT JOIN tbl_stock_model as STM
@@ -2014,21 +2211,11 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
-  IF (plan_pre_id > 0 AND plan_post_id > 0 AND affiliation_id > 0 AND contract_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, '
-      AND STM.`stock_model_id` IS NOT NULL
-      AND PRM.`promo_id` IS NOT NULL
-      AND PRM.`publish_at` IS NOT NULL
-
-      GROUP BY PRM.`promo_id`');
-  ELSE
-    SET cad_condition = CONCAT(cad_condition, '
-      AND STM.`stock_model_id` IS NOT NULL
-      AND PRM.`promo_id` IS NOT NULL
-      AND PRM.`publish_at` IS NOT NULL
-
-      GROUP BY PRM.`promo_id`');
-  END IF;
+  SET cad_condition = CONCAT(cad_condition, '
+    AND STM.`stock_model_id` IS NOT NULL
+    AND PRM.`promo_id` IS NOT NULL
+    AND PRM.`publish_at` IS NOT NULL
+    GROUP BY PRM.`promo_id`');
 
   -- ORDER BY
   IF (sort_by <> '') THEN
@@ -2082,14 +2269,13 @@ CREATE PROCEDURE PA_productCountPromo(
   IN product_string_search VARCHAR(255)
 )
 BEGIN
-
-
   --
   DECLARE stored_query TEXT;
   DECLARE cad_condition TEXT;
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT;
   DECLARE join_segment TEXT;
+  DECLARE cond_variations TEXT;
   -- conditional string query
   SET cad_condition = "";
   -- checking null values
@@ -2117,27 +2303,96 @@ BEGIN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
 
-  -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
-    FROM
-    tbl_promo as PRMsub
-    WHERE
-        PRMsub.product_id = PRD.product_id
-    AND
+  IF (plan_pre_id > 0 AND plan_post_id > 0 AND affiliation_id > 0 AND contract_id > 0) THEN
+    SET cond_variations = CONCAT('
+      AND PRMsub.`product_variation_id` IS NULL
+      AND
+      (
         (
-            PRMsub.allow_all_variations = 1
-            OR
-            (
-                PRMsub.allow_all_variations = 0
-                AND PRMsub.`product_variation_id` IS NOT NULL
-                AND PRD_VAR.`product_variation_id` IS NOT NULL
-                AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
-            )
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 1
+          AND PRD_VAR.`variation_type_id` = 1
+          AND PRD_VAR.`plan_id` = ', plan_pre_id, '
         )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 2
+          AND PRD_VAR.`variation_type_id` = 2
+          AND PRD_VAR.`plan_id` = ', plan_post_id, '
+          AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+          AND PRD_VAR.`contract_id` = ', contract_id, '
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 1
+          AND PRD_VAR.`plan_id` = ', plan_pre_id, '
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 2
+          AND PRD_VAR.`plan_id` = ', plan_post_id, '
+          AND PRD_VAR.`affiliation_id` = ', affiliation_id, '
+          AND PRD_VAR.`contract_id` = ', contract_id, '
+        )
+      )
+    ');
+  ELSE
+    SET cond_variations = '
+      AND PRMsub.`product_variation_id` IS NULL
+      AND
+      (
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 1
+          AND PRD_VAR.`variation_type_id` = 1
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NOT NULL
+          AND PRMsub.`allowed_variation_type_id` = 2
+          AND PRD_VAR.`variation_type_id` = 2
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 1
+        )
+        OR
+        (
+          PRMsub.`allowed_variation_type_id` IS NULL
+          AND PRD_VAR.`variation_type_id` = 2
+        )
+      )
+    ';
+  END IF;
+
+  -- Define the price promo select segment (subQuery)
+  SET select_idpromo_segment = CONCAT('
+    SELECT
+      PRMsub.promo_id
+    FROM
+      tbl_promo as PRMsub
+    WHERE
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
+        (
+          PRMsub.allow_all_variations = 1
+          ', cond_variations, '
+        )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ');
 
   SET select_segment = 'SELECT COUNT(PRM.promo_id) as total_promos';
 
