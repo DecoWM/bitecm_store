@@ -321,9 +321,17 @@ const app = new Vue({
                   }
                 },
                 {
-                  breakpoint: 768,
+                  breakpoint: 995,
                   settings: {
                       arrows: false,
+                      centerMode: false,
+                      slidesToShow: 2
+                  }
+                },
+                {
+                  breakpoint: 768,
+                  settings: {
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 2
                   }
@@ -339,7 +347,7 @@ const app = new Vue({
                 {
                   breakpoint: 480,
                   settings: {
-                      arrows: false,
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 1
                   }
@@ -386,7 +394,7 @@ const app = new Vue({
                 {
                   breakpoint: 480,
                   settings: {
-                      arrows: false,
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 1
                   }
@@ -437,6 +445,14 @@ const app = new Vue({
                 slidesToShow: 2
               }
             },
+            {
+              breakpoint: 375,
+              settings: {
+                arrows: true,
+                centerMode: false,
+                slidesToShow: 1
+              }
+            }
           ]
         });
 
@@ -481,12 +497,21 @@ const app = new Vue({
             {
               breakpoint: 480,
               settings: {
-                arrows: false,
+                arrows: true,
                 dots: false,
                 centerMode: false,
                 slidesToShow: 2
               }
             },
+            {
+              breakpoint: 375,
+              settings: {
+                arrows: true,
+                dots: false,
+                centerMode: false,
+                slidesToShow: 1
+              }
+            }
           ]
         });
 
@@ -504,12 +529,12 @@ const app = new Vue({
         // variableWidth: true,
             responsive: [
                 {
-                  breakpoint: 1040,
+                  breakpoint: 1200,
                   settings: {
                       arrows: true,
                       dots: false,
                       centerMode: false,
-                      slidesToShow: 3
+                      slidesToShow: 2
                   }
                 },
                 {
@@ -544,10 +569,9 @@ const app = new Vue({
 
         $('.descripcion-detalle ul').slick({
             arrows: true,
-            dots: true,
-            infinite: false,
+            dots: false,
+            infinite: true,
             autoplay: false,
-            speed: 500,
             slidesToShow: 5,
             slidesToScroll: 1,
         // centerMode: true,
@@ -580,6 +604,7 @@ const app = new Vue({
                   slidesToShow: 2
               }
             },
+
             ]
         });
 
@@ -813,5 +838,34 @@ const app = new Vue({
                 $('#fixed-nav-comp').removeClass('fixed-nav');
             }
         });
+
+      $(window).on('resize', function(){
+
+            var contentCatalogo = $('.content-catalogo');
+            var win = $(this); 
+
+            if (win.width() < 767) {
+              /* ... */ 
+              $('.responsive-sidebar-item').append(contentCatalogo);
+
+            } else{
+              $('.sidebarbox').append(contentCatalogo).next();
+
+            }
+      });
+
+        $('.responsive-sidebar-title').on('click', function(event) {
+          event.preventDefault();
+          /* Act on the event */
+          // $('.responsive-sidebar').toggleClass('is-open-sidebar');
+          $('.responsive-sidebar-item').slideToggle(400);
+        });
+
+        $(window).on('resize', function() {
+          /* Act on the event */
+
+        });
+
+
     }
 });

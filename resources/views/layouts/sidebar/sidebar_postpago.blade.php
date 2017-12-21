@@ -1,9 +1,20 @@
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-3 sidebarbox">
           <div class="sidebar-box">
             <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct(1)">
               <input type="text" placeholder="Busca por modelo" class="form-control" v-model="searchedString">
               <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
             </form>
+          </div>
+          <div class="responsive-sidebar">
+              <!-- <a href="#">Filtrar equipos por <i class="fa-"></i></a> -->
+              <div class="responsive-sidebar-title">
+                <span>Filtrar equipos por</span> 
+                <div class="pull-right btl-caret">
+                    <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span> 
+                    <span aria-hidden="true" class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
+                </div>
+              </div>
+              <div class="responsive-sidebar-item"></div>
           </div>
           <div id="plan" class="content-catalogo">
             {{-- <div class="title-select" v-on:click="toggleAccordion(filters[type].type)"> --}}

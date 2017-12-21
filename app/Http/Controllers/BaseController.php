@@ -255,11 +255,13 @@ class BaseController extends Controller
     return $stock_models;
   }
 
-  public function productStockModels($product_id) {
+  public function productStockModels($product_id, $color_required = 1) {
     $stock_models = DB::select('call PA_productStockModels(
-      :product_id
+      :product_id,
+      :color_required
     )', [
-      'product_id' => $product_id
+      'product_id' => $product_id,
+      'color_required' => $color_required
     ]);
 
     return $stock_models;
