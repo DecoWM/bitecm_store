@@ -126,10 +126,6 @@
               </form>
             </div>
           </section>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           @foreach ($plans as $i => $plan)
             @if($plan->plan_id == $product->plan_id)
               @php $selected_plan = $i > 0 ? $i - 1 : $i; @endphp
@@ -169,6 +165,13 @@
               @endforeach
             </div>
           </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-offset-4 col-sm-8">
+          <div class="add-select-plan"></div>
+          
         </div>
       </div>
       <div class="row">
@@ -180,8 +183,8 @@
             <div class="content-detalle">
               <div class="descripcion-detalle">
                 <ul class="list-unstyled">
-                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">Android 6</span><span class="description-dispositivo">Sistema Operativo</span></li>
-                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory + 0}} GB / {{$product->product_ram_memory + 0}} GB RAM</span><span class="description-dispositivo">Memoria</span></li>
+                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">{{$product->product_so}}</span><span class="description-dispositivo">Sistema Operativo</span></li>
+                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory}} GB / {{$product->product_internal_memory}} GB</span><span class="description-dispositivo">Memoria</span></li>
                   <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
                   <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_power}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>

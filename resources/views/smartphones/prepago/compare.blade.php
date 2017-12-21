@@ -8,7 +8,7 @@
           </div>
         </div>
       </div>
-@if (!$errors->any())
+      @if (!$errors->any())
       <div class="row">
         <div class="col-xs-12">
           <div id="fixed-nav-comp">
@@ -57,8 +57,7 @@
               </div>
             </div>
             <div class="lista-equipos">
-
-@foreach ($products as $product)
+              @foreach ($products as $product)
               <div class="equipo-seleccionado">
                 <div data-equipo="1" class="equipo">
                   <div class="image-product text-center"><img class="image-prepago" src="{{asset('images/productos/'.$product->picture_url)}}" alt="equipos"></div>
@@ -80,7 +79,7 @@
                     <p>{{$product->brand_name}}</p>
                   </div> -->
                   <div class="bg-white"><span>Color</span>
-                    <p>Plateado</p>
+                    <p>{{isset($product->color_id) ? $product->color_name : 'Ninguno'}}</p>
                   </div>
                   <div class="bg-gray"><span>Cámara Principal</span>
                     <p>{{$product->product_camera_1}} MP</p>
@@ -89,54 +88,54 @@
                     <p>{{$product->product_camera_2}} MP</p>
                   </div>
                   <div class="bg-gray"><span>Radio</span>
-                    <p>Sí</p>
+                    <p>{{$product->product_radio}}</p>
                   </div>
                   <div class="bg-white"><span>Pantalla</span>
                     <p>{{$product->product_screen_size}}"</p>
                   </div>
                   <div class="bg-gray"><span>Memoria Externa</span>
-                    <p>128GB</p>
+                    <p>{{$product->product_external_memory}}</p>
                   </div>
                   <div class="bg-white"><span>Memoria Interna</span>
                     <p>{{$product->product_internal_memory}}GB</p>
                   </div>
                   <div class="bg-gray"><span>WLAN</span>
-                    <p>Sí</p>
+                    <p>{{$product->product_wlan}}</p>
                   </div>
                   <div class="bg-white"><span>Bluetooth</span>
-                    <p>Sí</p>
+                    <p>{{$product->product_bluetooth}}</p>
                   </div>
                   <div class="bg-gray"><span>Sistema Operativo</span>
-                    <p>Android 6,0</p>
+                    <p>{{$product->product_os}}</p>
                   </div>
                   <div class="bg-white"><span>GPS</span>
-                    <p>Sí</p>
+                    <p>{{$product->product_gps}}</p>
                   </div>
                   <div class="bg-gray"><span>Batería</span>
-                    <p>2000mAh</p>
+                    <p>{{$product->product_battery}}</p>
                   </div>
                 </div>
               </div>
-@endforeach
+              @endforeach
             </div>
           </div>
         </div>
       </div>
-@else
+      @else
       <div class="row">
         <div class="col-xs-12">
           No se encontraron resultados
-{{-- @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-@foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-@endforeach
-                </ul>
-            </div>
-@endif --}}
+          {{-- @if ($errors->any())
+          <div class="alert alert-danger">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+          </div>
+          @endif --}}
         </div>
       </div>
-@endif
+      @endif
     </div>
 @endsection

@@ -180,7 +180,6 @@
                   <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-
                   <a href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
                   @endif
                 </div>

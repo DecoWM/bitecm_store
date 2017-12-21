@@ -4243,7 +4243,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
   border: 1px solid #cecece;
   padding: 30px 0;
-  margin-bottom: 10px;
+  margin-bottom: 9px;
 }
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .image-product img {
   transition: 0.5s ease all;
@@ -4498,11 +4498,11 @@ section#garantia .container .row .col-xs-4 .text-center p {
   display: none;
 }
 #content-page .state span {
-  line-height: 35px;
+  line-height: 25px;
   border-radius: 15px;
   background-color: #ffe60d;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 14px;
   display: inline-block;
   padding: 0 20px;
   color: #008c95;
@@ -5078,7 +5078,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes .select-plan {
-  overflow-y: hidden;
+  /*overflow-x: hidden;*/
   height: 323px;
   margin-bottom: 0;
 }
@@ -5252,7 +5252,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 
 
 #especificaciones-tecnicas .slick-track{
-  width: 1140px !important;
+  /*width: 1140px !important;*/
 }
 
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul li img {
