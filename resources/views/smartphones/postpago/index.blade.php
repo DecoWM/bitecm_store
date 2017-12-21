@@ -83,7 +83,7 @@
             @php
               $paginationData = array_except(json_decode($products->toJson(), true), ['data']);
             @endphp
-            <input id="search-init" type="hidden" value={{$searched_string}}>
+            <input id="search-init" type="hidden" value="{{$searched_string}}">
             <input id="pagination-init" type="hidden" value='@json($paginationData)'>
             <div class="row" v-if="!isSearching">
               <div class="col-xs-12">
