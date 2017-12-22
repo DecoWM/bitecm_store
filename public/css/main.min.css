@@ -4048,23 +4048,37 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding-left: 15px;
   font-size: 20px;
 }
+
+.list-compare{
+  position: relative;
+}
+
 #fixed-nav-comp {
-  height: 0;
-  opacity: 0;
-  background-color: #fff;
-  transition: 0.3s linear all;
-  overflow: hidden;
+    height: 0;
+    z-index: 99;
+    position: absolute;
+    opacity: 1;
+    left: 0;
+    background: #fff;
+    transition: 0.1s linear all;
+    overflow: hidden;
+    /* top: -100%; */
+    right: 0;
+    left: 0;
+    visibility: hidden;
 }
 #fixed-nav-comp.fixed-nav {
-  position: fixed;
-  margin-bottom: 10px;
-  opacity: 1;
-  height: auto;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+     visibility: visible;
+    position: fixed;
+    margin-bottom: 10px;
+    opacity: 1;
+    height: 205px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    transition: 0.5s linear all;
 }
 #fixed-nav-comp.fixed-nav .slick-prev {
   left: 5px;

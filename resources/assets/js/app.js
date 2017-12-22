@@ -538,6 +538,15 @@ const app = new Vue({
                   }
                 },
                 {
+                  breakpoint: 996,
+                  settings: {
+                      arrows: true,
+                      dots: false,
+                      centerMode: false,
+                      slidesToShow: 1
+                  }
+                },
+                {
                   breakpoint: 768,
                   settings: {
                       arrows: true,
