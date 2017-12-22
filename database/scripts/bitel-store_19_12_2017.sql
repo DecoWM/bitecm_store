@@ -2269,7 +2269,7 @@ INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `created
 (1, 'Pendiente', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
 (2, 'Procesado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
 (3, 'Cancelado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(4, 'Entregado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'En Envío', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
 (5, 'Completado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
