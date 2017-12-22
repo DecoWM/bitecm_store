@@ -5100,7 +5100,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes .select-plan {
-  /*overflow-x: hidden;*/
+  overflow: hidden;
   height: 323px;
   margin-bottom: 0;
 }
