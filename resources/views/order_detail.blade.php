@@ -16,7 +16,8 @@
             <div id="section-pedido">
               <div class="row">
                 <div class="title-section-pedido text-center">
-                  <h3>¡GRACIAS POR COMPRAR EN BITEL! TU NÚMERO DE PEDIDO ES # {{$order_id}}</h3>
+                  <h3>¡GRACIAS POR COMPRAR EN BITEL!</h3>
+                  <h4>TU NÚMERO DE PEDIDO ES # {{$order_id}}</h4>
                 </div>
                 @foreach ($products as $product)
                 <div class="detalle-pedido">

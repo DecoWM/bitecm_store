@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="list-equipos-comparar">
     <div class="equipos-comp">
-      <div class="title-equipos" v-if="products.length==1"><span>Añade <br>otro <br>equipo</span>
+      <div class="title-equipos" v-if="products.length==1"><span>Añade <span class="br"><br></span>otro <span class="br"><br></span>equipo</span>
         <p>para comparar</p>
       </div>
       <div class="title-equipos" v-else><span>{{products.length}} Equipos</span>

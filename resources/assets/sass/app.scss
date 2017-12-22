@@ -13,6 +13,11 @@
     display: none !important;
 }
 
+#planes .select-plan{
+    padding-right: 25px ;
+    padding-left: 15px;  
+}
+
 
 #producto-disponibles .list-producto .producto .image-product img {
     max-width: 100%;
@@ -510,6 +515,7 @@ section#equipos-vendidos .container .row .sub-heading h3{
 section#equipos-promocion .container .row .heading h2,
 section#equipos-vendidos .container .row .heading h2{
     font-size: 23px;
+    font-weight: 600;
 }
 
 .form-group span.help.is-danger{
@@ -638,6 +644,10 @@ li.item-nav-mobile.search #search .btn-search {
     color: #ffffff !important;
 }
 
+#list-equipos #list-equipos-comparar .equipos-comp .title-equipos span span.br{
+    display: none;
+}
+
 
 @media (max-width: 767px){
 
@@ -660,6 +670,10 @@ li.item-nav-mobile.search #search .btn-search {
 
     nav#nav-bitel .container #navbar{
         padding: 0;
+        position: absolute;
+        right: 15px;
+        width: auto;
+        z-index: 99;
     }
 
     li.nav-mobile.item-nav-mobile {
@@ -714,6 +728,7 @@ li.item-nav-mobile.search #search .btn-search {
             background-color: #008c95;
             color: #ffffff;
             line-height: 40px;
+            text-align: center;
             .btl-caret{
                 margin-right: 15px;
             }
@@ -744,6 +759,40 @@ li.item-nav-mobile.search #search .btn-search {
     }
 
 }
+
+#nav-carrito ul{
+    position: relative;
+}
+
+#nav-carrito ul li{
+    // padding-left: 0;
+    // padding-right: 0;
+}
+
+#nav-carrito ul:before {
+  content: "";
+  position: absolute;
+  width: 77%;
+  height: 1px;
+  background-color: #cecece;
+  bottom: -16px;
+  left: 11%;
+  right: 15%;
+  z-index: 999;
+}
+
+
+@media (max-width: 768px) {
+  #nav-carrito ul:before {
+    width: 2px;
+    height: 100px;
+    top: 10px;
+    left: 4px;
+    bottom: initial;
+  }
+}
+
+
 
 @media (max-width: 480px) {
 
@@ -868,6 +917,12 @@ li.item-nav-mobile.search #search .btn-search {
     }
 
 
+}
+
+@media (max-width: 374px){
+    .col-12-mob {
+        width: 100%; 
+    }
 }
 
 @media (max-width: 320px) {
