@@ -194,12 +194,15 @@
                         <span>S/.{{$smartphone->product_price}}</span>
                         @endif
                       </div>
+                      <div class="plan-product">
+                        <p>en plan <span>{{$smartphone->plan_name}}</span></p>
+                      </div>
                       <div class="btn-comprar">
                         <a href="{{$smartphone->route}}" class="btn btn-default">VER MÁS</a>
                       </div>
                     </div>
                   </div>
-    @endforeach
+                  @endforeach
                 </div>
               </div>
 

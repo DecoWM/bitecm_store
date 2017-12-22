@@ -377,9 +377,11 @@ class OrderController extends Controller
     $order = DB::table('tbl_order')->where('order_id', $order_id)->first();
     $products = $this->shared->orderItems($order_id);
     $status_history = $this->shared->statusHistory($order_id);
+    $status_list = $this->shared->statusList();
     return view('tracking', [
       'order' => $order,
       'products' => $products,
+      'status_list' => $status_list,
       'status_id' => $status_history[0]->order_status_id
     ]);
   }

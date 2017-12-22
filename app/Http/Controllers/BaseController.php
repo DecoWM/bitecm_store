@@ -328,6 +328,11 @@ class BaseController extends Controller
     return $result;
   }
 
+  public function statusList() {
+    $result = DB::table('tbl_order_status')->get();
+    return $result;
+  }
+
   public function getFiltersPostpaid() {
     $brand_list = DB::select('call PA_brandList()');
     $plan_list = DB::select('call PA_planList(2)');

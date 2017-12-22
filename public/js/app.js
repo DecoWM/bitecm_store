@@ -54426,15 +54426,12 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _vm.product.plan_id != 15
-            ? _c("div", { staticClass: "plan-product" }, [
-                _c("p", [
-                  _c("a", { attrs: { href: _vm.product.route_post } }, [
-                    _vm._v("Ver en plan postpago")
-                  ])
-                ])
-              ])
-            : _vm._e(),
+          _c("div", { staticClass: "plan-product" }, [
+            _c("p", [
+              _vm._v("en plan "),
+              _c("span", [_vm._v(_vm._s(_vm.product.plan_name))])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "btn-product form-inline" }, [
             _c("div", { staticClass: "form-group btn-comprar" }, [

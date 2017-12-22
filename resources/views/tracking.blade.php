@@ -51,23 +51,11 @@
                           </p>
                           @endif
                           <p class="status"><span>Status:</span>
-                            @switch($status_id)
-                                @case(1)
-                                    Pendiente
-                                    @break
-                                @case(2)
-                                    Procesado
-                                    @break
-                                @case(3)
-                                    Cancelado
-                                    @break
-                                @case(4)
-                                    Entregado
-                                    @break
-                                @case(5)
-                                  Completado
-                                    @break
-                            @endswitch
+                            @foreach($status_list as $status)
+                              @if($status->order_status_id == $status_id)
+                              {{$status->order_status_name}}
+                              @endif
+                            @endforeach
                           </p>
                         </div>
                       </div>
@@ -76,25 +64,11 @@
                       <div class="proceso">
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 1 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 ? 'is-completed' : ''}}">
-                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_pendiente.svg" alt=""></div> --}}
-                              <span>Pendiente</span>
+                            @foreach($status_list as $status)
+                            <li class="col-xs-4 col-sm-4 {{$status_id == $status->order_status_id ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id > $status->order_status_id ? 'is-completed' : ''}}">
+                              <span>{{$status->order_status_name}}</span>
                             </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 2 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 && $status_id != 1? 'is-completed' : ''}}">
-                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_procesado.svg" alt=""></div> --}}
-                              <span>Procesado</span>
-                            </li>
-                            {{-- <li class="col-xs-4 col-sm-4 {{$status_id == 3 ? 'active' : ''}}">
-                              <div class="image-icon"><img src="./images/rastreo/svg/estado_cancelado.svg" alt=""></div><span>Cancelado</span>
-                            </li> --}}
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 4 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id != 3 && $status_id != 2 && $status_id != 1? 'is-completed' : ''}}">
-                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_entregado.svg" alt=""></div> --}}
-                              <span>Entregado</span>
-                            </li>
-                            <li class="col-xs-4 col-sm-4 {{$status_id == 5 ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}}">
-                              {{-- <div class="image-icon"><img src="/images/rastreo/svg/estado_completado.svg" alt=""></div> --}}
-                              <span>Completado</span>
-                            </li>
+                            @endforeach
                           </ul>
                         </div>
                         <div class="resp-proceso-web text-center">
