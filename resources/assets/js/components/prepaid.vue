@@ -29,8 +29,8 @@
           <span v-if="product.promo_id">s/.{{product.promo_price}}</span>
           <span v-if="product.promo_id" class="normal-price">s/.{{product.product_price}}</span>
         </div>
-        <div class="plan-product" v-if="product.plan_id != 15">
-          <p><a v-bind:href="product.route_post">Ver en plan postpago</a></p>
+        <div class="plan-product">
+          <p>en plan <span>{{product.plan_name}}</span></p>
         </div>
         <div class="btn-product form-inline">
           <div class="form-group btn-comprar">
