@@ -3871,16 +3871,19 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 1366px) {
   #list-equipos #list-equipos-comparar .equipos-comp {
     padding: 10px;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
   }
 }
 @media (max-width: 480px) {
   #list-equipos #list-equipos-comparar .equipos-comp {
     background-color: #fff;
     border: none;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
     padding: 0;
     width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 #list-equipos #list-equipos-comparar .equipos-comp .title-equipos span {
@@ -4529,8 +4532,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #content-page #image-equipo .image-product img {
   height: 350px;
   margin: 45px 0;
-  object-fit: contain;
-  width: 100%;
+  /*object-fit: contain;*/
+  /*width: 100%;*/
 }
 #content-page #image-equipo .image-product img.active {
   visibility: visible;
@@ -5538,6 +5541,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
   position: relative;
   font-weight: 600;
   padding-bottom: 5px;
+  padding-left: 0;
+  padding-right: 0;
 }
 @media (max-width: 768px) {
   #nav-carrito ul li span {
@@ -5610,26 +5615,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     display: block;
   }
 }
-#nav-carrito:before {
-  content: "";
-  position: absolute;
-  width: 85%;
-  height: 1px;
-  background-color: #cecece;
-  bottom: -5px;
-  left: 10%;
-  right: 15%;
-  z-index: 999;
-}
-@media (max-width: 768px) {
-  #nav-carrito:before {
-    width: 2px;
-    height: 70px;
-    top: 10px;
-    left: 4px;
-    bottom: initial;
-  }
-}
+
 @media (max-width: 768px) {
   #nav-carrito {
     margin: 30px auto;
@@ -5666,7 +5652,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-size: 16px;
   color: #008c95;
   text-transform: uppercase;
+  font-weight: 600;
 }
+
+#section-pedido .row .title-section-pedido h4 {
+  font-size: 14px;
+  color: #008c95;
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   #section-pedido .row .title-section-pedido {
     border-bottom: none;
@@ -5727,6 +5721,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #section-pedido .row .detalle-pedido .equipo-seleccionado .image {
   width: 40%;
+  margin-right: 15px;
 }
 #section-pedido .row .detalle-pedido .equipo-seleccionado .image img {
   max-width: 100%;

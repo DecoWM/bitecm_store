@@ -38,7 +38,7 @@ class SearchController extends Controller
 
     $brand_ids = implode(',',$filters->manufacturer->value);
 
-    $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : null;
+    $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : \Config::get('filter.plan_pre_id');
 
     $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 

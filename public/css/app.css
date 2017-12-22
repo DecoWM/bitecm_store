@@ -2,6 +2,11 @@
   display: none !important;
 }
 
+#planes .select-plan {
+  padding-right: 25px;
+  padding-left: 15px;
+}
+
 #producto-disponibles .list-producto .producto .image-product img {
   max-width: 100%;
 }
@@ -216,9 +221,6 @@ input:checked ~ .checkmark:after {
 
 #list-equipos .image-product img {
   height: 100%;
-  width: 100%;
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
 .content-plan {
@@ -482,6 +484,7 @@ section#equipos-vendidos .container .row .sub-heading h3 {
 section#equipos-promocion .container .row .heading h2,
 section#equipos-vendidos .container .row .heading h2 {
   font-size: 23px;
+  font-weight: 600;
 }
 
 .form-group span.help.is-danger {
@@ -595,6 +598,10 @@ li.item-nav-mobile.search #search .btn-search {
   color: #ffffff !important;
 }
 
+#list-equipos #list-equipos-comparar .equipos-comp .title-equipos span span.br {
+  display: none;
+}
+
 @media (max-width: 767px) {
   #form-cliente form .btn-detalle a.regresar {
     width: 100% !important;
@@ -615,6 +622,10 @@ li.item-nav-mobile.search #search .btn-search {
 
   nav#nav-bitel .container #navbar {
     padding: 0;
+    position: absolute;
+    right: 15px;
+    width: auto;
+    z-index: 99;
   }
 
   li.nav-mobile.item-nav-mobile {
@@ -663,6 +674,7 @@ li.item-nav-mobile.search #search .btn-search {
     background-color: #008c95;
     color: #ffffff;
     line-height: 40px;
+    text-align: center;
   }
 
   .responsive-sidebar .responsive-sidebar-title .btl-caret {
@@ -686,6 +698,32 @@ li.item-nav-mobile.search #search .btn-search {
   #descripcion-equipo .content-section form .content-product .color-product {
     margin-top: 10px;
     padding-left: 0;
+  }
+}
+
+#nav-carrito ul {
+  position: relative;
+}
+
+#nav-carrito ul:before {
+  content: "";
+  position: absolute;
+  width: 77%;
+  height: 1px;
+  background-color: #cecece;
+  bottom: -16px;
+  left: 11%;
+  right: 15%;
+  z-index: 999;
+}
+
+@media (max-width: 768px) {
+  #nav-carrito ul:before {
+    width: 2px;
+    height: 100px;
+    top: 10px;
+    left: 4px;
+    bottom: initial;
   }
 }
 
@@ -807,6 +845,12 @@ li.item-nav-mobile.search #search .btn-search {
     width: 75%;
     margin: auto;
     float: initial;
+  }
+}
+
+@media (max-width: 374px) {
+  .col-12-mob {
+    width: 100%;
   }
 }
 
@@ -1133,10 +1177,6 @@ select {
 }
 
 @media (max-width: 480px) {
-  .col-12-mob {
-    width: 100%;
-  }
-
   #content-page .tag {
     display: -webkit-box;
     display: -ms-flexbox;

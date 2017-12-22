@@ -12167,7 +12167,7 @@ var app = new Vue({
       autoplay: false,
       speed: 500,
       slidesToShow: 3,
-      slidesToScroll: 3,
+      slidesToScroll: 1,
       // centerMode: true,
       // variableWidth: true,
       responsive: [{
@@ -12201,6 +12201,7 @@ var app = new Vue({
           dots: false,
           centerMode: false,
           slidesToShow: 1
+
         }
       }]
     });
@@ -12246,6 +12247,7 @@ var app = new Vue({
       dots: true,
       infinite: false,
       autoplay: false,
+      draggable: false,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 1,
@@ -12265,7 +12267,8 @@ var app = new Vue({
           arrows: true,
           dots: false,
           centerMode: false,
-          slidesToShow: 1
+          slidesToShow: 1,
+          draggable: false
         }
       }]
     });
@@ -54221,15 +54224,12 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _vm.product.plan_id != 15
-            ? _c("div", { staticClass: "plan-product" }, [
-                _c("p", [
-                  _c("a", { attrs: { href: _vm.product.route_post } }, [
-                    _vm._v("Ver en plan postpago")
-                  ])
-                ])
-              ])
-            : _vm._e(),
+          _c("div", { staticClass: "plan-product" }, [
+            _c("p", [
+              _vm._v("en plan "),
+              _c("span", [_vm._v(_vm._s(_vm.product.plan_name))])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "btn-product form-inline" }, [
             _c("div", { staticClass: "form-group btn-comprar" }, [
