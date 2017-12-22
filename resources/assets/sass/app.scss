@@ -223,8 +223,8 @@ input:checked ~ .checkmark:after {
 
 #list-equipos .image-product img {
     height: 100%;
-    width: 100%;
-    object-fit: contain;
+    // width: 100%;
+    // object-fit: contain;
 }
 
 // #especificaciones-tecnicas .content-detalle .pdf-tecnica button {
@@ -627,6 +627,17 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 
+#navbar{}
+#navbar ul{}
+#navbar ul li{}
+#navbar ul li a{
+
+}
+#navbar ul li a:hover{
+    background-color: #8e8e8e;
+    color: #ffffff !important;
+}
+
 
 @media (max-width: 767px){
 
@@ -725,11 +736,60 @@ li.item-nav-mobile.search #search .btn-search {
     #compara-tus-equipos  .slick-next{
         top: 160px;
         right: 30px;
-    }    
+    }   
+
+    #descripcion-equipo .content-section form .content-product .color-product{
+        margin-top: 10px;
+        padding-left: 0;
+    }
 
 }
 
 @media (max-width: 480px) {
+
+    #section-pedido .row .btn-detalle a.regresar{
+        width: 100%;
+        line-height: 42px;
+        margin-bottom: 0;
+        padding: 0;
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    #section-pedido .row .btn-detalle a.comprar{
+        width: 100%;
+        float: none;
+        line-height: 42px;
+        padding: 0;
+    }
+
+    #section-pedido .row .btn-detalle span{
+        display: none
+    }
+
+    .ver-mas-equipo .title-detalle h4{
+        font-size: 14px;
+
+    }
+
+    #detalle-carrito .btn-detalle a.regresar{
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 10px;
+        line-height: 35px;
+    }
+
+    #detalle-carrito .btn-detalle a.comprar{
+        width: 100%;
+        float: none;
+        line-height: 35px;
+    }
+
+
+    #descripcion-equipo .content-section form .content-product .color-product{
+        margin-bottom: 10px;
+        padding-left: 0;
+    }
 
     .content-tab-pro .slick-prev{
         left: 50px;
@@ -810,13 +870,20 @@ li.item-nav-mobile.search #search .btn-search {
 
 }
 
+@media (max-width: 320px) {
+
+    .ver-mas-equipo .title-detalle h4{
+        font-size: 12px;
+
+    }
+}
+
 .slick-prev:hover:after,
 .slick-prev:hover:before,
 .slick-next:hover:after,
 .slick-next:hover:before{
     background-color: #169599;
 }
-
 
 
 

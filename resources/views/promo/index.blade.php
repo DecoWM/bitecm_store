@@ -50,7 +50,7 @@
                         <span class="normal-price">S/.{{$product->product_price}}</span>
                       </div>
                       <div class="plan-product">
-                        <p><a href="{{$product->route_post}}">Ver en plan postpago</a></p>
+                        <p>en plan <span>{{$product->plan_name}}</span></p>
                       </div>
                       @elseif($product->variation_type_id == 2)
                       <div class="price-product">

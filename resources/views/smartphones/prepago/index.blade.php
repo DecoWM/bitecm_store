@@ -54,8 +54,10 @@
                       <span>S/.{{$smartphone->product_price}}</span>
                       @endif
                     </div>
-                    @if($smartphone->plan_id != 15)
                     <div class="plan-product">
+                      <p>en plan <span>{{$smartphone->plan_name}}</span></p>
+                    </div>
+                    {{--<div class="plan-product">
                       <p><a href="{{route('postpaid_detail', [
                         'brand'=>$smartphone->brand_slug,
                         'product'=>$smartphone->product_slug,
@@ -63,8 +65,7 @@
                         'plan'=>$plan_post_slug,
                         'contract'=>$contract_slug
                       ])}}">Ver en plan postpago</a></p>
-                    </div>
-                    @endif
+                    </div>--}}
                     <div class="btn-product form-inline">
                       <div class="form-group btn-comprar">
                         <a href="{{route('prepaid_detail',  [
