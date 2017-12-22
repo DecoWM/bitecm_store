@@ -222,12 +222,13 @@ BEGIN
   SET pag_end = pag_actual * pag_total_by_page;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = '
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
+      PRMsub.product_id = PRD.product_id
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
     ';
@@ -386,15 +387,16 @@ BEGIN
   END IF;
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = '
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
+      PRMsub.product_id = PRD.product_id
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ';
 
   SET select_segment = 'SELECT COUNT(PRD.`product_id`)';
 
@@ -474,15 +476,16 @@ BEGIN
   SET color_slug = IFNULL(color_slug, '');
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = '
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
+      PRMsub.product_id = PRD.product_id
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ';
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id),
@@ -568,15 +571,16 @@ BEGIN
   SET stock_model_id = IFNULL(stock_model_id, 0);
 
   -- Define the price promo select segment (subQuery)
-  SET select_idpromo_segment = 'SELECT
-        PRMsub.promo_id
+  SET select_idpromo_segment = '
+    SELECT
+      PRMsub.promo_id
     FROM
-    tbl_promo as PRMsub
+      tbl_promo as PRMsub
     WHERE
-        PRMsub.product_id = PRD.product_id
+      PRMsub.product_id = PRD.product_id
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
-    ';
+  ';
 
   SET select_query = 'SELECT
     DISTINCT(PRD.product_id), PRM.*, PRD.*,
