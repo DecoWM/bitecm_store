@@ -3995,10 +3995,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 480px) {
   #list-equipos #list-equipos-comparar .btn-comparar {
     width: 40%;
-    background-color: transparent;
-    position: relative;
+    /* background-color: transparent;
+    position: relative; */
   }
-  #list-equipos #list-equipos-comparar .btn-comparar:before {
+
+  #list-equipos-comparar .equipos-comp, #list-equipos-comparar .btn-comparar{
+    margin: 10px;
+  }
+
+  /* #list-equipos #list-equipos-comparar .btn-comparar:before {
     content: "";
     width: 12px;
     height: 1px;
@@ -4019,7 +4024,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     background-color: #008c95;
     transform: rotate(-45deg);
     z-index: 99;
-  }
+  } */
 }
 .title-page {
   border-bottom: 1px solid #a8a8a8;

@@ -54926,7 +54926,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n#list-equipos-comparar {\n  width: 110px;\n}\n", ""]);
+exports.push([module.i, "\n#list-equipos-comparar {\n  width: 110px;\n}\n.is-mobile {\n  width: 100% !important;\n  margin-bottom: 10px !important;\n}\n", ""]);
 
 // exports
 
@@ -55110,33 +55110,40 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "list-equipos-comparar" } }, [
-    _c("div", { staticClass: "equipos-comp" }, [
-      _vm.products.length == 1
-        ? _c("div", { staticClass: "title-equipos" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("p", [_vm._v("para comparar")])
-          ])
-        : _c("div", { staticClass: "title-equipos" }, [
-            _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("para comparar")])
-          ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "list-equipos" }, [
-        _c(
-          "ul",
-          { staticClass: "list-unstyled" },
-          _vm._l(_vm.products, function(product, index) {
-            return _c("compare-item", {
-              key: index,
-              attrs: { product: product },
-              on: { removeItem: _vm.removeItem }
+    _c(
+      "div",
+      {
+        staticClass: "equipos-comp",
+        class: { "is-mobile": _vm.products.length == 1 }
+      },
+      [
+        _vm.products.length == 1
+          ? _c("div", { staticClass: "title-equipos" }, [
+              _c("span", [_vm._v("Añade otro equipo")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("para comparar")])
+            ])
+          : _c("div", { staticClass: "title-equipos" }, [
+              _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("para comparar")])
+            ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "list-equipos" }, [
+          _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            _vm._l(_vm.products, function(product, index) {
+              return _c("compare-item", {
+                key: index,
+                attrs: { product: product },
+                on: { removeItem: _vm.removeItem }
+              })
             })
-          })
-        )
-      ])
-    ]),
+          )
+        ])
+      ]
+    ),
     _vm._v(" "),
     _vm.products.length != 1
       ? _c(
@@ -55159,20 +55166,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _vm._v("Añade "),
-      _c("br"),
-      _vm._v("otro "),
-      _c("br"),
-      _vm._v("equipo")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -55269,7 +55263,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n#list-equipos-comparar {\n  width: 110px;\n}\n.is-mobile {\n  width: 100% !important;\n  margin-bottom: 10px !important;\n}\n", ""]);
 
 // exports
 
@@ -55337,33 +55331,40 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "list-equipos-comparar" } }, [
-    _c("div", { staticClass: "equipos-comp" }, [
-      _vm.products.length == 1
-        ? _c("div", { staticClass: "title-equipos" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("p", [_vm._v("para comparar")])
-          ])
-        : _c("div", { staticClass: "title-equipos" }, [
-            _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
-            _vm._v(" "),
-            _c("p", [_vm._v("para comparar")])
-          ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "list-equipos" }, [
-        _c(
-          "ul",
-          { staticClass: "list-unstyled" },
-          _vm._l(_vm.products, function(product, index) {
-            return _c("compare-item", {
-              key: index,
-              attrs: { product: product },
-              on: { removeItem: _vm.removeItem }
+    _c(
+      "div",
+      {
+        staticClass: "equipos-comp",
+        class: { "is-mobile": _vm.products.length == 1 }
+      },
+      [
+        _vm.products.length == 1
+          ? _c("div", { staticClass: "title-equipos" }, [
+              _c("span", [_vm._v("Añade otro equipo")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("para comparar")])
+            ])
+          : _c("div", { staticClass: "title-equipos" }, [
+              _c("span", [_vm._v(_vm._s(_vm.products.length) + " Equipos")]),
+              _vm._v(" "),
+              _c("p", [_vm._v("para comparar")])
+            ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "list-equipos" }, [
+          _c(
+            "ul",
+            { staticClass: "list-unstyled" },
+            _vm._l(_vm.products, function(product, index) {
+              return _c("compare-item", {
+                key: index,
+                attrs: { product: product },
+                on: { removeItem: _vm.removeItem }
+              })
             })
-          })
-        )
-      ])
-    ]),
+          )
+        ])
+      ]
+    ),
     _vm._v(" "),
     _vm.products.length != 1
       ? _c(
@@ -55386,20 +55387,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _vm._v("Añade "),
-      _c("br"),
-      _vm._v("otro "),
-      _c("br"),
-      _vm._v("equipo")
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
