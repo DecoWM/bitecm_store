@@ -10,7 +10,7 @@
       </div>
       @if (!$errors->any())
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 list-compare">
           <div id="fixed-nav-comp">
             <div class="container">
               <div id="scroll-compara">

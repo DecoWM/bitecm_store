@@ -20,7 +20,7 @@
                 </div>
                 <div class="content-section">
                   <div class="row">
-                    <div class="col-xs-6 col-sm-12 col-md-12 col-lg-4">
+                    <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4">
                       <div class="equipo-seleccionado">
                         <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
                         <div class="contenido">
@@ -60,7 +60,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-xs-6 col-sm-12 col-md-12 col-lg-8">
+                    <div class="col-xs-6 col-sm-12 col-md-8 col-lg-8">
                       <div class="proceso">
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">

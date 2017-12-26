@@ -52,12 +52,12 @@ class PostpaidController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, null, 4, 1, null, null,null, null, null, $product->product_id);
+    $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       $available[$i]->route = route('postpaid_detail', [
-        'brand'=>$brand_slug,
+        'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,

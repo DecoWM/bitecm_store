@@ -524,7 +524,7 @@ const app = new Vue({
             autoplay: false,
             speed: 500,
             slidesToShow: 3,
-            slidesToScroll: 3,
+            slidesToScroll: 1,
         // centerMode: true,
         // variableWidth: true,
             responsive: [
@@ -535,6 +535,15 @@ const app = new Vue({
                       dots: false,
                       centerMode: false,
                       slidesToShow: 2
+                  }
+                },
+                {
+                  breakpoint: 996,
+                  settings: {
+                      arrows: true,
+                      dots: false,
+                      centerMode: false,
+                      slidesToShow: 1
                   }
                 },
                 {
@@ -562,6 +571,7 @@ const app = new Vue({
                       dots: false,
                       centerMode: false,
                       slidesToShow: 1
+
                   }
                 },
             ]
@@ -613,6 +623,7 @@ const app = new Vue({
             dots: true,
             infinite: false,
             autoplay: false,
+            draggable: false,
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1,
@@ -634,7 +645,8 @@ const app = new Vue({
                     arrows: true,
                     dots: false,
                     centerMode: false,
-                    slidesToShow: 1
+                    slidesToShow: 1,
+                    draggable: false
                 }
               },
             ]

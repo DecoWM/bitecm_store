@@ -1,6 +1,5 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <!-- <div data-equipo="1" class="producto active-comparar"> -->
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected, 'not-stock': !product.stock_model_id}">
       <div v-if="!product.stock_model_id" class="ribbon-wrapper">
         <div class="ribbon ribbon-sold-out">Agotado</div>
