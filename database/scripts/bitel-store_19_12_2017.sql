@@ -2252,6 +2252,7 @@ INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `pr
 CREATE TABLE `tbl_order_status` (
   `order_status_id` int(11) NOT NULL,
   `order_status_name` varchar(50) NOT NULL,
+  `order_status_pos` int(2) NULL DEFAULT 1,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -2265,12 +2266,12 @@ CREATE TABLE `tbl_order_status` (
 -- Volcado de datos para la tabla `tbl_order_status`
 --
 
-INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 'Pendiente', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(2, 'Procesado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(3, 'Cancelado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(4, 'En Envío', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(5, 'Completado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
+INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `order_status_pos`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 'Pendiente', 1, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(2, 'Procesado', 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(3, 'Cancelado', 0, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'En Envío', 3, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(5, 'Completado', 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3383,9 +3384,11 @@ CREATE TABLE `tbl_promo` (
 
 INSERT INTO `tbl_promo` (`promo_id`, `product_id`, `product_variation_id`, `add_product_id`, `promo_price`, `promo_discount`, `promo_add_product_price`, `promo_add_product_discount`, `promo_title`, `promo_description`, `promo_start_date`, `promo_expiration_date`, `allow_all_variations`, `allowed_variation_type_id`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
 (1, 7, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(2, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(3, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(4, 18, 488, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, 1, 1);
+(2, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(3, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(4, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(5, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(6, 18, 488, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
