@@ -53,14 +53,14 @@ class AccessoriesController extends Controller
     if(empty($product)) {
       abort(404);
     }
-    
+
     $available_products = $this->shared->productSearch(2, $product->brand_id, 4, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       $available[$i]->picture_url = asset('images/productos/'.$item->picture_url);
       $available[$i]->route = route('accessory_detail', [
-        'brand'=>$brand_slug,
+        'brand'=>$item->brand_slug,
         'product'=>$item->product_slug
       ]);
     }
