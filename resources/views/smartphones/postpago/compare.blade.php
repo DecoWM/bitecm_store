@@ -25,7 +25,15 @@
                           <h3 class="text-center">{{$product->product_model}}</h3>
                         </div>
                         <div class="price-product">
+                          @if(isset($product->promo_id))
+                          <span>S/.{{$product->promo_price}}</span>
+                          <span class="normal-price">S/.{{$product->product_price}}</span>
+                          @else
                           <span>S/.{{$product->product_price}}</span>
+                          @endif
+                        </div>
+                        <div class="plan-product">
+                          <p>en plan <span>{{$product->plan_name}}</span></p>
                         </div>
                         <div class="btn-product form-inline">
                           <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>
@@ -67,7 +75,15 @@
                       <h3 class="text-center">{{$product->product_model}}</h3>
                     </div>
                     <div class="price-product">
+                      @if(isset($product->promo_id))
+                      <span>S/.{{$product->promo_price}}</span>
+                      <span class="normal-price">S/.{{$product->product_price}}</span>
+                      @else
                       <span>S/.{{$product->product_price}}</span>
+                      @endif
+                    </div>
+                    <div class="plan-product">
+                      <p>en plan <span>{{$product->plan_name}}</span></p>
                     </div>
                     <div class="btn-product form-inline">
                       <div class="form-group btn-vermas"><a href="{{$product->route}}" class="btn btn-default">Ver más</a></div>

@@ -4102,7 +4102,14 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-bottom: 0px;
 }
 #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span {
-  font-size: 23px;
+  font-size: 21px;
+}
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span.normal-price {
+  font-size: 12px !important;
+  text-decoration: line-through;
+  color: #828282;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 0;
 }
 #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product {
   font-weight: 300;

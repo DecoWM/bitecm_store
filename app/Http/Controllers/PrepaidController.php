@@ -92,21 +92,18 @@ class PrepaidController extends Controller
 
   public function compare (Request $request) {
     $request->validate([
-      'product_id' => 'required|array',
-      'product_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
+      'product_variation_id' => 'required|array',
+      'product_variation_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
     ]);
 
     $products = [];
-    foreach ($request->product_id as $product_id) {
-      $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
-      if (isset($product[0])) {
-        $plan_pre_slug = $this->shared->planSlug(\Config::get('filter.plan_pre_id'));
-
-        $product = $product[0];
+    foreach ($request->product_variation_id as $product_variation_id) {
+      $product = $this->shared->productVariationDetail($product_variation_id);
+      if (isset($product)) {
         $product->route = route('prepaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
-          'plan'=>$plan_pre_slug,
+          'plan'=>$product->plan_slug,
         ]);
         array_push($products, $product);
       } else {

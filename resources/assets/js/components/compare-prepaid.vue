@@ -37,7 +37,7 @@
                 let subSet = []
                 new Promise((resolve, reject) => {
                     self.products.forEach( e => {
-                        subSet.push({name: "product_id[]", value: e.product_id})
+                        subSet.push({name: "product_variation_id[]", value: e.product_variation_id})
                     })
                     resolve()
                 }).then( () => {

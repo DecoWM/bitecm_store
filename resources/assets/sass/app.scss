@@ -67,6 +67,14 @@
     position: absolute;
 }
 
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product span.normal-price {
+    font-size: 14px !important;
+    text-decoration: line-through;
+    color: #828282;
+    font-family: 'Montserrat', sans-serif;
+    line-height: 0;
+}
+
 //provisional
 #descripcion-equipo .content-section form .content-product .btn-linea a:hover {
     background-color: #cecece;
