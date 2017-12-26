@@ -4089,7 +4089,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   width: 100%;
   border: 1px solid #cecece;
   border-bottom: none;
-  padding: 15px 0;
+  padding: 12px 0;
 }
 @media (max-width: 767px) {
   #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
@@ -4106,39 +4106,44 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin: 0 auto;
   height: 65px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .title-product {
   margin: 0;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product h3 {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .title-product h3 {
   font-weight: 400;
   margin-bottom: 0;
   font-size: 16px;
   margin-top: 5px;
   margin-bottom: 0px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product {
+
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product {
+  line-height: 18px;
+}
+
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product {
   font-weight: 300;
   font-size: 26px;
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 0px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span {
-  font-size: 21px;
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product span {
+  font-size: 19px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span.normal-price {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product span.normal-price {
   font-size: 12px !important;
   text-decoration: line-through;
   color: #828282;
   font-family: 'Montserrat', sans-serif;
   line-height: 0;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .plan-product {
   font-weight: 300;
   font-size: 11px;
   margin-bottom: 5px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product p {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .plan-product p {
   margin: 0;
 }
 #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product {
