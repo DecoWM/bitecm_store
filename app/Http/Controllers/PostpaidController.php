@@ -52,12 +52,12 @@ class PostpaidController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, null, 4, 1, null, null,null, null, null, $product->product_id);
+    $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       $available[$i]->route = route('postpaid_detail', [
-        'brand'=>$brand_slug,
+        'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
@@ -122,31 +122,25 @@ class PostpaidController extends Controller
       'affiliations' => $product_affiliations,
     ];
 
-
     return view('smartphones.postpago.detail', $response);
   }
 
   public function compare (Request $request) {
     $request->validate([
-      'product_id' => 'required|array',
-      'product_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
+      'product_variation_id' => 'required|array',
+      'product_variation_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
     ]);
     // return $request->all();
     $products = [];
-    foreach ($request->product_id as $product_id) {
-      $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
-      if (isset($product[0])) {
-        $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
-        $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
-        $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
-
-        $product = $product[0];
+    foreach ($request->product_variation_id as $product_variation_id) {
+      $product = $this->shared->productVariationDetail($product_variation_id);
+      if (isset($product)) {
         $product->route = route('postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
-          'affiliation'=>$affiliation_slug,
-          'plan'=>$plan_post_slug,
-          'contract'=>$contract_slug
+          'affiliation'=>$product->affiliation_slug,
+          'plan'=>$product->plan_slug,
+          'contract'=>$product->contract_slug
         ]);
         array_push($products, $product);
       } else {

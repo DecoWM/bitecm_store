@@ -245,6 +245,24 @@ class BaseController extends Controller
     return count($result) > 0 ? $result[0] : null;
   }
 
+  public function productDetail($product_id = null) {
+    $result = DB::select('call PA_productDetail(
+      :product_id
+    )', [
+      'product_id' => $product_id
+    ]);
+    return count($result) > 0 ? $result[0] : null;
+  }
+
+  public function productVariationDetail($product_variation_id = null) {
+    $result = DB::select('call PA_productVariationDetail(
+      :product_variation_id
+    )', [
+      'product_variation_id' => $product_variation_id
+    ]);
+    return count($result) > 0 ? $result[0] : null;
+  }
+
   public function productImagesByStock($stock_model_id) {
     $stock_models = DB::select('call PA_productImagesByStock(
       :stock_model_id
@@ -325,6 +343,11 @@ class BaseController extends Controller
     )', [
       'order_id' => $order_id
     ]);
+    return $result;
+  }
+
+  public function statusList() {
+    $result = DB::table('tbl_order_status')->get();
     return $result;
   }
 

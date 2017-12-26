@@ -30,7 +30,7 @@
             <div class="row" v-if="!search">
               @foreach ($products as $smartphone)
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <div data-equipo="1" class="producto {{!isset($smartphone->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_id', {{$smartphone->product_id}}])}">
+                <div data-equipo="1" class="producto {{!isset($smartphone->stock_model_id)?'not-stock':''}}" v-bind:class="{'active-comparar' : _.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])}">
                   @include('products.ribbon',['product' => $smartphone])
                   <div class="image-product text-center">
                     <a href="{{route('prepaid_detail',  [
@@ -47,7 +47,7 @@
                       <h3 class="text-center">{{$smartphone->product_model}}</h3>
                     </div>
                     <div class="price-product">
-                      @if($smartphone->promo_id)
+                      @if(isset($smartphone->promo_id))
                       <span>S/.{{$smartphone->promo_price}}</span>
                       <span class="normal-price">S/.{{$smartphone->product_price}}</span>
                       @else
@@ -75,7 +75,7 @@
                         ])}}" class="btn btn-default">comprar</a></div>
                       <div class="checkbox btn-comparar">
                         <label>
-                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{product_id: {{$smartphone->product_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_id', {{$smartphone->product_id}}])">comparar
+                          <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{product_variation_id: {{$smartphone->product_variation_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])">comparar
                           <span class="checkmark"></span>
                         </label>
                       </div>

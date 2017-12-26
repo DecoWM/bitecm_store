@@ -1,6 +1,5 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <!-- <div data-equipo="1" class="producto active-comparar"> -->
     <div data-equipo="1" class="producto" v-bind:class="{'active-comparar': isSelected, 'not-stock': !product.stock_model_id}">
       <div v-if="!product.stock_model_id" class="ribbon-wrapper">
         <div class="ribbon ribbon-sold-out">Agotado</div>
@@ -29,8 +28,8 @@
           <span v-if="product.promo_id">s/.{{product.promo_price}}</span>
           <span v-if="product.promo_id" class="normal-price">s/.{{product.product_price}}</span>
         </div>
-        <div class="plan-product" v-if="product.plan_id != 15">
-          <p><a v-bind:href="product.route_post">Ver en plan postpago</a></p>
+        <div class="plan-product">
+          <p>en plan <span>{{product.plan_name}}</span></p>
         </div>
         <div class="btn-product form-inline">
           <div class="form-group btn-comprar">
@@ -59,7 +58,7 @@
             return {
                 isSelected : false,
                 compareItem : {
-                  product_id: this.product.product_id,
+                  product_variation_id: this.product.product_variation_id,
                   picture_url: this.product.picture_url
                 }
             }
@@ -70,13 +69,13 @@
                 self.isSelected ?
                 this.$emit('additem', self.compareItem)
                 :
-                self.$emit('removeitem', self.compareItem.product_id)
+                self.$emit('removeitem', self.compareItem.product_variation_id)
             }
         },
         beforeMount() {
             self = this
             self.compare.forEach( function (e) {
-                if (e.product_id == self.compareItem.product_id) {
+                if (e.product_variation_id == self.compareItem.product_variation_id) {
                     self.isSelected = true
                 }
             })
@@ -88,7 +87,7 @@
           compare: function() {
             self = this
             var item = self.compare.find( function (e) {
-                return e.product_id == self.compareItem.product_id;
+                return e.product_variation_id == self.compareItem.product_variation_id;
             });
             if (item) {
                 self.isSelected = true

@@ -3871,16 +3871,19 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 1366px) {
   #list-equipos #list-equipos-comparar .equipos-comp {
     padding: 10px;
-    margin-bottom: 5px;
+    /*margin-bottom: 5px;*/
   }
 }
 @media (max-width: 480px) {
   #list-equipos #list-equipos-comparar .equipos-comp {
     background-color: #fff;
     border: none;
-    margin-bottom: 0;
+    /* margin-bottom: 0; */
     padding: 0;
     width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 #list-equipos #list-equipos-comparar .equipos-comp .title-equipos span {
@@ -3995,10 +3998,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 480px) {
   #list-equipos #list-equipos-comparar .btn-comparar {
     width: 40%;
-    background-color: transparent;
-    position: relative;
+    /* background-color: transparent;
+    position: relative; */
   }
-  #list-equipos #list-equipos-comparar .btn-comparar:before {
+
+  #list-equipos-comparar .equipos-comp, #list-equipos-comparar .btn-comparar{
+    margin: 10px;
+  }
+
+  /* #list-equipos #list-equipos-comparar .btn-comparar:before {
     content: "";
     width: 12px;
     height: 1px;
@@ -4019,7 +4027,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     background-color: #008c95;
     transform: rotate(-45deg);
     z-index: 99;
-  }
+  } */
 }
 .title-page {
   border-bottom: 1px solid #a8a8a8;
@@ -4033,23 +4041,37 @@ section#garantia .container .row .col-xs-4 .text-center p {
   padding-left: 15px;
   font-size: 20px;
 }
+
+.list-compare{
+  position: relative;
+}
+
 #fixed-nav-comp {
-  height: 0;
-  opacity: 0;
-  background-color: #fff;
-  transition: 0.3s linear all;
-  overflow: hidden;
+    height: 0;
+    z-index: 99;
+    position: absolute;
+    opacity: 1;
+    left: 0;
+    background: #fff;
+    transition: 0.1s linear all;
+    overflow: hidden;
+    /* top: -100%; */
+    right: 0;
+    left: 0;
+    visibility: hidden;
 }
 #fixed-nav-comp.fixed-nav {
-  position: fixed;
-  margin-bottom: 10px;
-  opacity: 1;
-  height: auto;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 99;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+     visibility: visible;
+    position: fixed;
+    margin-bottom: 10px;
+    opacity: 1;
+    height: 205px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+    transition: 0.5s linear all;
 }
 #fixed-nav-comp.fixed-nav .slick-prev {
   left: 5px;
@@ -4067,7 +4089,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   width: 100%;
   border: 1px solid #cecece;
   border-bottom: none;
-  padding: 15px 0;
+  padding: 12px 0;
 }
 @media (max-width: 767px) {
   #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
@@ -4084,32 +4106,44 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin: 0 auto;
   height: 65px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .title-product {
   margin: 0;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .title-product h3 {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .title-product h3 {
   font-weight: 400;
   margin-bottom: 0;
   font-size: 16px;
   margin-top: 5px;
   margin-bottom: 0px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product {
+
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product {
+  line-height: 18px;
+}
+
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product {
   font-weight: 300;
   font-size: 26px;
   font-family: 'multicolore';
   color: #008c95;
   margin-bottom: 0px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .price-product span {
-  font-size: 23px;
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product span {
+  font-size: 19px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .price-product span.normal-price {
+  font-size: 12px !important;
+  text-decoration: line-through;
+  color: #828282;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 0;
+}
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .plan-product {
   font-weight: 300;
   font-size: 11px;
   margin-bottom: 5px;
 }
-#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .plan-product p {
+#fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .content-product .plan-product p {
   margin: 0;
 }
 #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado .btn-product {
@@ -5078,7 +5112,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 #planes .select-plan {
-  /*overflow-x: hidden;*/
+  overflow: hidden;
   height: 323px;
   margin-bottom: 0;
 }
@@ -5533,6 +5567,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
   position: relative;
   font-weight: 600;
   padding-bottom: 5px;
+  padding-left: 0;
+  padding-right: 0;
 }
 @media (max-width: 768px) {
   #nav-carrito ul li span {
@@ -5605,26 +5641,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     display: block;
   }
 }
-#nav-carrito:before {
-  content: "";
-  position: absolute;
-  width: 85%;
-  height: 1px;
-  background-color: #cecece;
-  bottom: -5px;
-  left: 10%;
-  right: 15%;
-  z-index: 999;
-}
-@media (max-width: 768px) {
-  #nav-carrito:before {
-    width: 2px;
-    height: 70px;
-    top: 10px;
-    left: 4px;
-    bottom: initial;
-  }
-}
+
 @media (max-width: 768px) {
   #nav-carrito {
     margin: 30px auto;
@@ -5661,7 +5678,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
   font-size: 16px;
   color: #008c95;
   text-transform: uppercase;
+  font-weight: 600;
 }
+
+#section-pedido .row .title-section-pedido h4 {
+  font-size: 14px;
+  color: #008c95;
+  text-transform: uppercase;
+}
+
 @media (max-width: 768px) {
   #section-pedido .row .title-section-pedido {
     border-bottom: none;
@@ -5722,6 +5747,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #section-pedido .row .detalle-pedido .equipo-seleccionado .image {
   width: 40%;
+  margin-right: 15px;
 }
 #section-pedido .row .detalle-pedido .equipo-seleccionado .image img {
   max-width: 100%;

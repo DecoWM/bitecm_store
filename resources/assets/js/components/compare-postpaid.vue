@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="list-equipos-comparar">
-    <div class="equipos-comp">
-      <div class="title-equipos" v-if="products.length==1"><span>Añade <br>otro <br>equipo</span>
+    <div class="equipos-comp" :class="{'is-mobile': products.length==1}">
+      <div class="title-equipos" v-if="products.length==1"><span>Añade otro equipo</span>
         <p>para comparar</p>
       </div>
       <div class="title-equipos" v-else><span>{{products.length}} Equipos</span>
@@ -53,7 +53,7 @@
                 let subSet = []
                 new Promise((resolve, reject) => {
                     self.products.forEach( e => {
-                        subSet.push({name: "product_id[]", value: e.product_id})
+                        subSet.push({name: "product_variation_id[]", value: e.product_variation_id})
                     })
                     resolve()
                 }).then( () => {
@@ -68,5 +68,9 @@
 <style lang="css">
   #list-equipos-comparar {
     width: 110px;
+  }
+  .is-mobile {
+    width: 100% !important;
+    margin-bottom: 10px !important;
   }
 </style>
