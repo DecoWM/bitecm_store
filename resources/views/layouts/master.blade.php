@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="{{ app()->getLocale() }}">
   <head>
     <meta charset="utf-8">
@@ -24,6 +25,15 @@
     {{-- <link type="text/css" rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css"> --}}
     <link type="text/css" rel="stylesheet" href="{{asset('css/main.min.css')}}">
     <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-9.css')}}"/>
+
+    <!--[if lte IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 9]>
+      <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-8.css')}}" />
+     <![endif]-->
   </head>
   <body>
 @if (Request::segment(1) == 'envio')
