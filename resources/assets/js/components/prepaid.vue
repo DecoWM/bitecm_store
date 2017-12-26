@@ -58,7 +58,7 @@
             return {
                 isSelected : false,
                 compareItem : {
-                  product_id: this.product.product_id,
+                  product_variation_id: this.product.product_variation_id,
                   picture_url: this.product.picture_url
                 }
             }
@@ -69,13 +69,13 @@
                 self.isSelected ?
                 this.$emit('additem', self.compareItem)
                 :
-                self.$emit('removeitem', self.compareItem.product_id)
+                self.$emit('removeitem', self.compareItem.product_variation_id)
             }
         },
         beforeMount() {
             self = this
             self.compare.forEach( function (e) {
-                if (e.product_id == self.compareItem.product_id) {
+                if (e.product_variation_id == self.compareItem.product_variation_id) {
                     self.isSelected = true
                 }
             })
@@ -87,7 +87,7 @@
           compare: function() {
             self = this
             var item = self.compare.find( function (e) {
-                return e.product_id == self.compareItem.product_id;
+                return e.product_variation_id == self.compareItem.product_variation_id;
             });
             if (item) {
                 self.isSelected = true

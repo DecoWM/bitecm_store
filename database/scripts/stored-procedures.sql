@@ -107,34 +107,162 @@ DROP PROCEDURE IF EXISTS PA_productDetail;
 
 DELIMITER $$
 --
--- Procedimiento para listar productos con filtrado / paginado
+-- Procedimiento para obtener del detalle de un producto sin variación
 --
 CREATE PROCEDURE PA_productDetail(
   IN product_id INT
 )
 BEGIN
-  --
-  SELECT
+  DECLARE select_segment TEXT;
+  DECLARE join_segment TEXT;
+  DECLARE where_segment TEXT;
+  DECLARE stored_query TEXT;
+  
+  SET select_segment = 'SELECT
     PRD.*,
     PRD.`product_image_url` as picture_url,
     BRN.`brand_name`, BRN.`brand_slug`,
     CAT.`category_name`, CAT.`category_id`,
     STM.`stock_model_id`, STM.`stock_model_code`,
-    CLR.`color_id`, CLR.`color_name`
-  FROM tbl_product as PRD
-  INNER JOIN tbl_brand as BRN
-    ON PRD.`brand_id` = BRN.`brand_id`
-  INNER JOIN tbl_category as CAT
-    ON PRD.`category_id` = CAT.`category_id`
-  LEFT JOIN tbl_stock_model as STM
-    ON PRD.`product_id` = STM.`product_id`
-  LEFT JOIN tbl_color as CLR
-    ON STM.`color_id` = CLR.`color_id`
-  WHERE PRD.`product_id` = product_id;
+    CLR.`color_id`, CLR.`color_name`';
+
+  SET join_segment = '
+    FROM tbl_product as PRD
+    INNER JOIN tbl_brand as BRN
+      ON PRD.`brand_id` = BRN.`brand_id`
+    INNER JOIN tbl_category as CAT
+      ON PRD.`category_id` = CAT.`category_id`
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
+    LEFT JOIN tbl_color as CLR
+      ON STM.`color_id` = CLR.`color_id`';
+
+  SET where_segment = CONCAT('
+    WHERE PRD.`product_id` = ',
+    product_id, '
+  ');
+
+  SET stored_query = CONCAT(select_segment, join_segment, where_segment);
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
 END $$
 
 DELIMITER ;
 
+-- ------------------------------------------
+-- Product Detail
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_productVariationDetail;
+
+DELIMITER $$
+--
+-- Procedimiento para obtener del detalle de un producto con variación
+--
+CREATE PROCEDURE PA_productVariationDetail(
+  IN product_variation_id INT
+)
+BEGIN
+  DECLARE select_segment TEXT;
+  DECLARE join_segment TEXT;
+  DECLARE where_segment TEXT;
+  DECLARE select_idpromo_segment TEXT;
+  DECLARE stored_query TEXT;
+  
+  SET select_segment = 'SELECT
+    PRD.*, PRM.`promo_id`,
+    PRD.`product_image_url` as picture_url,
+    BRN.`brand_name`, BRN.`brand_slug`,
+    CAT.`category_name`, CAT.`category_id`,
+    STM.`stock_model_id`, STM.`stock_model_code`,
+    CLR.`color_id`, CLR.`color_name`,
+    PRD_VAR.`product_variation_price` as product_price,
+    PLN.`plan_id`, PLN.`plan_name`,
+    PLN.`plan_price`, PLN.`plan_slug`,
+    AFF.`affiliation_name`, AFF.`affiliation_slug`,
+    CTR.`contract_name`, CTR.`contract_slug`,
+    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
+
+  SET select_idpromo_segment = '
+    SELECT
+      PRMsub.promo_id
+    FROM
+      tbl_promo as PRMsub
+    WHERE
+      PRMsub.product_id = PRD.product_id
+      AND
+      (
+        (
+          PRMsub.allow_all_variations = 1
+          AND PRMsub.`product_variation_id` IS NULL
+          AND
+          (
+            (
+              PRMsub.`allowed_variation_type_id` IS NOT NULL
+              AND PRMsub.`allowed_variation_type_id` = PRD_VAR.`variation_type_id`
+            )
+            OR
+            (
+              PRMsub.`allowed_variation_type_id` IS NULL
+            )
+          )
+        )
+        OR
+        (
+          PRMsub.allow_all_variations = 0
+          AND PRMsub.`product_variation_id` IS NOT NULL
+          AND PRMsub.`product_variation_id` = PRD_VAR.`product_variation_id`
+        )
+      )
+    ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
+    LIMIT 0,1
+  ';
+
+  SET join_segment = CONCAT('
+    FROM tbl_product as PRD
+    INNER JOIN tbl_brand as BRN
+      ON PRD.`brand_id` = BRN.`brand_id`
+    INNER JOIN tbl_category as CAT
+      ON PRD.`category_id` = CAT.`category_id`
+    LEFT JOIN tbl_stock_model as STM
+      ON PRD.`product_id` = STM.`product_id`
+    LEFT JOIN tbl_color as CLR
+      ON STM.`color_id` = CLR.`color_id`
+    LEFT JOIN tbl_product_variation as PRD_VAR
+      ON PRD.`product_id` = PRD_VAR.`product_id`
+    LEFT JOIN tbl_plan as PLN
+      ON PLN.`plan_id` = PRD_VAR.`plan_id`
+    LEFT JOIN tbl_affiliation as AFF
+      ON AFF.`affiliation_id` = PRD_VAR.`affiliation_id`
+    LEFT JOIN tbl_contract as CTR
+      ON CTR.`contract_id` = PRD_VAR.`contract_id`
+    LEFT JOIN tbl_promo as PRM
+      ON (PRD.`product_id` = PRM.`product_id`
+        AND IF((', select_idpromo_segment, ') IS NOT NULL, PRM.promo_id = (', select_idpromo_segment, '), PRM.promo_id = 0)
+      )
+  ');
+
+  SET where_segment = CONCAT('
+    WHERE PRD_VAR.`product_variation_id` = ', 
+    product_variation_id, '
+  ');
+
+  SET stored_query = CONCAT(select_segment, join_segment, where_segment);
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
+END $$
+
+DELIMITER ;
 
 -- ------------------------------------------
 -- Product Search
@@ -265,7 +393,7 @@ BEGIN
       WHERE PRD.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR PRD.product_model like ''%',product_string_search,'%''
-        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') 
+        OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%'' )
     ');
     -- order

@@ -24,7 +24,7 @@ class PrepaidController extends Controller
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-    
+
     $search_result =  $this->shared->searchProductPrepaid(1, $plan_pre_id, null, $items_per_page, $current_page, "publish_at", "desc");
 
     $pages = intval(ceil($search_result['total'] / $items_per_page));
@@ -47,13 +47,13 @@ class PrepaidController extends Controller
     if(empty($product)) {
       abort(404);
     }
-    
+
     $available_products = $this->shared->searchProductPrepaid(1, $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       $available[$i]->route = route('prepaid_detail', [
-        'brand'=>$brand_slug,
+        'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
       ]);
@@ -92,21 +92,18 @@ class PrepaidController extends Controller
 
   public function compare (Request $request) {
     $request->validate([
-      'product_id' => 'required|array',
-      'product_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
+      'product_variation_id' => 'required|array',
+      'product_variation_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
     ]);
 
     $products = [];
-    foreach ($request->product_id as $product_id) {
-      $product = DB::select('call PA_productDetail(:product_id)', ['product_id' => $product_id]);
-      if (isset($product[0])) {
-        $plan_pre_slug = $this->shared->planSlug(\Config::get('filter.plan_pre_id'));
-
-        $product = $product[0];
+    foreach ($request->product_variation_id as $product_variation_id) {
+      $product = $this->shared->productVariationDetail($product_variation_id);
+      if (isset($product)) {
         $product->route = route('prepaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
-          'plan'=>$plan_pre_slug,
+          'plan'=>$product->plan_slug,
         ]);
         array_push($products, $product);
       } else {
