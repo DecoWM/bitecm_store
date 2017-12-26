@@ -24,7 +24,7 @@ class PrepaidController extends Controller
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-    
+
     $search_result =  $this->shared->searchProductPrepaid(1, $plan_pre_id, null, $items_per_page, $current_page, "publish_at", "desc");
 
     $pages = intval(ceil($search_result['total'] / $items_per_page));
@@ -47,13 +47,13 @@ class PrepaidController extends Controller
     if(empty($product)) {
       abort(404);
     }
-    
+
     $available_products = $this->shared->searchProductPrepaid(1, $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       $available[$i]->route = route('prepaid_detail', [
-        'brand'=>$brand_slug,
+        'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
       ]);
