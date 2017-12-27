@@ -2726,7 +2726,7 @@ BEGIN
     STM.`stock_model_id`, STM.`stock_model_code`,
     PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
-    PRD_VAR.`product_variation_price`,
+    IFNULL(PRD_VAR.`product_variation_price`, PRD.`product_price`) as product_price,
     PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`,
@@ -2734,7 +2734,21 @@ BEGIN
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
     CLR.`color_id`, CLR.`color_name`, CLR.`color_slug`,
-    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
+    ROUND(
+      IF(
+        PRD_VAR.`product_variation_id` IS NOT NULL,
+        IF(
+          PRM.promo_discount IS NOT NULL,
+          ((1-PRM.promo_discount) * PRD_VAR.`product_variation_price`), 
+          IFNULL(PRM.promo_price, PRD_VAR.`product_variation_price`)
+        ),
+        IF(
+          PRM.promo_discount IS NOT NULL,
+          ((1-PRM.promo_discount) * PRD.`product_price`), 
+          IFNULL(PRM.promo_price, PRD.`product_price`)
+        )
+      )
+    ,2) as promo_price';
 
   SET from_query = CONCAT('
     FROM tbl_order_item as OIT
@@ -2745,7 +2759,7 @@ BEGIN
     INNER JOIN tbl_brand as BRN
       ON BRN.`brand_id` = PRD.`brand_id`
     LEFT JOIN tbl_product_variation as PRD_VAR
-      ON PRD_VAR.`product_id` = PRD.`product_id`
+      ON PRD_VAR.`product_variation_id` = OIT.`product_variation_id`
     LEFT JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     LEFT JOIN tbl_affiliation as AFF
@@ -2755,14 +2769,12 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id`
-          AND PRM.promo_id = OIT.promo_id
-      )');
+      ON PRM.promo_id = OIT.promo_id
+  ');
 
   SET where_query = CONCAT('
-    WHERE OIT.`order_id` = ', order_id, '
-      AND (OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
-        OR OIT.`product_variation_id` IS NULL)'
+    WHERE OIT.`order_id` = ',
+    order_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
