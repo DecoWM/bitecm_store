@@ -413,9 +413,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC
-    ');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, '
     GROUP BY PRD.product_id ');
@@ -944,8 +946,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ', variation_type_id);
@@ -1618,8 +1623,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   -- validation for PLAN and promo price
   SET cad_condition = CONCAT(cad_condition, '
@@ -2142,7 +2150,7 @@ BEGIN
   DECLARE pag_end INT;
   DECLARE stored_query TEXT;
   DECLARE cad_condition TEXT;
-  DECLARE cad_order VARCHAR(70);
+  DECLARE cad_order TEXT;
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT;
@@ -2343,6 +2351,12 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
+  SET cad_order = CONCAT(cad_order, cad_order_comma, '
+    PRD.`product_priority` DESC,
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
+
   SET cad_condition = CONCAT(cad_condition, '
     AND STM.`stock_model_id` IS NOT NULL
     AND PRM.`promo_id` IS NOT NULL
@@ -2351,12 +2365,10 @@ BEGIN
 
   -- ORDER BY
   IF (sort_by <> '') THEN
-    SET cad_order = CONCAT(cad_order, cad_order_comma, 'PRM.', sort_by);
+    SET cad_order = CONCAT(cad_order, ',', 'PRM.', sort_by);
     IF(sort_direction IN ('ASC','DESC')) THEN
       SET cad_order = CONCAT(cad_order, " ", sort_direction);
     END IF;
-  ELSE
-    SET cad_order = '';
   END IF;
 
   -- CONCAT query, condition AND order
