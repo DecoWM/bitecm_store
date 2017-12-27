@@ -2826,7 +2826,7 @@ BEGIN
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
 
-  SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
+  SET pag_total_by_page = IFNULL(pag_total_by_page, 0); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   -- SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
@@ -2836,47 +2836,49 @@ BEGIN
     ORD.*, OIT.*,
     OSH.`order_status_history_id`,
     OST.`order_status_name`,
-    ORD.`created_at`,
     IDT.`idtype_name`,
     BCH.`branch_name`,
-    VAR.`variation_type_name`,
-    PLN.`plan_name`,
-    AFF.`affiliation_name`';
+    ORD.`created_at`';
 
   SET from_query = '
     FROM tbl_order as ORD
-    INNER JOIN tbl_order_item as OIT
-      ON ORD.`order_id` = OIT.`order_id`
-    INNER JOIN tbl_order_status_history as OSH
-      ON ORD.`order_id` = OSH.`order_id`
+    INNER JOIN (
+      SELECT OSH.*
+      FROM tbl_order_status_history as OSH
+      INNER JOIN (
+        SELECT MAX(OSH.`order_status_history_id`) as `order_status_history_id`
+        FROM tbl_order_status_history as OSH
+        GROUP BY OSH.`order_id`
+      ) sOSH ON OSH.`order_status_history_id` = sOSH.`order_status_history_id`
+    ) OSH ON ORD.`order_id` = OSH.`order_id`
     INNER JOIN tbl_order_status as OST
       ON OSH.`order_status_id` = OST.`order_status_id`
+    INNER JOIN (
+      SELECT
+        OIT.*,
+        VAR.`variation_type_name`,
+        PLN.`plan_name`,
+        AFF.`affiliation_name`
+      FROM tbl_order_item as OIT
+      LEFT JOIN tbl_product_variation as PRD_VAR
+        ON OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
+      LEFT JOIN tbl_variation_type as VAR
+        ON PRD_VAR.`variation_type_id` = VAR.`variation_type_id`
+      LEFT JOIN tbl_plan as PLN
+        ON PRD_VAR.`plan_id` = PLN.`plan_id`
+      LEFT JOIN tbl_affiliation as AFF
+        ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`
+      ORDER BY ISNULL(PRD_VAR.`product_variation_id`)
+    ) OIT ON ORD.`order_id` = OIT.`order_id`
     LEFT JOIN tbl_idtype as IDT
       ON ORD.`idtype_id` = IDT.`idtype_id`
     LEFT JOIN tbl_branch as BCH
-      ON ORD.`branch_id` = BCH.`branch_id`
-    LEFT JOIN tbl_product_variation as PRD_VAR
-      ON OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
-    LEFT JOIN tbl_variation_type as VAR
-      ON PRD_VAR.`variation_type_id` = VAR.`variation_type_id`
-    LEFT JOIN tbl_plan as PLN
-      ON PRD_VAR.`plan_id` = PLN.`plan_id`
-    LEFT JOIN tbl_affiliation as AFF
-      ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
+      ON ORD.`branch_id` = BCH.`branch_id`';
 
   SET where_query = '
-
-  WHERE OSH.order_status_history_id IN (
-         (select max(sOSH.`order_status_history_id`) as order_status_history_id
-            FROM tbl_order_status_history as sOSH
-            GROUP BY sOSH.`order_id`
-            ORDER BY sOSH.`order_status_history_id` DESC)
-  )
-
-  GROUP BY ORD.`order_id`';
-
-  SET where_query = CONCAT(where_query, '
-    ORDER BY OSH.`order_status_history_id` DESC');
+    GROUP BY ORD.`order_id`
+    ORDER BY ORD.`created_at` DESC
+  ';
 
   -- ORDER BY
   IF (sort_by <> '') THEN
