@@ -34,11 +34,6 @@
                             {{$product->plan_name}}
                           </p>
                           @endif
-                          @if(isset($product->product_variation_id))
-                            @php
-                            $product->product_price = $product->product_variation_price;
-                            @endphp
-                          @endif
                           @if(isset($product->promo_id))
                           <p>
                             <span>Precio del equipo:</span>
