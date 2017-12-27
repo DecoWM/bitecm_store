@@ -1,0 +1,68 @@
+/* HEADER */
+
+.navbar-header{
+	float: left;
+}
+
+.navbar-collapse.collapse{
+	display: block;
+}
+
+
+.col-sm-6{
+	width: 50%;
+}
+
+.nav > li{
+  display: inline;
+  float: left;
+}
+
+.info-bitel ul li{
+	float: left;
+}
+
+
+#site-header .navbar-left{
+  float: left;
+}
+
+#site-header .navbar-right{
+	margin-top: 10px;
+	float: right;
+}
+
+.container{
+  max-width: 1170px;
+}
+
+header #site-header .container .info-bitel ul li{
+  float: left;
+}
+
+header #site-header .container .info-bitel UL LI.cart A SPAN.icon-cart{
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/header/icon-cart.png', sizingMethod='scale')
+	background-image: url(../images/header/icon-cart.png);
+	background-repeat: no-repeat;
+	background-position: 0 0;
+}
+
+nav#nav-bitel .container .navbar-header A.navbar-brand{
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/header/logo.png', sizingMethod='scale')
+}
+
+/* SECTION PROMOCIONES*/
+
+section#equipos-promocion .container .row .sub-heading{
+	display: block;
+}
+
+section#equipos-promocion .container .row .sub-heading H3{
+	float: left;;
+}
+
+/* HOME EQUIPOS */
+
+section#equipos-promocion .container .row .content-tab-pro .producto{
+	float: left;
+}
