@@ -8,6 +8,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Facades\Storage;
 
 class SearchController extends Controller
 {
@@ -43,7 +44,7 @@ class SearchController extends Controller
     $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) use ($affiliation_slug,$plan_post_slug,$contract_slug) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('prepaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
@@ -102,7 +103,7 @@ class SearchController extends Controller
     $pages = intval(ceil($search_result['total'] / $items_per_page));
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
@@ -146,7 +147,7 @@ class SearchController extends Controller
     $search_result = $this->shared->productSearch(2, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
@@ -198,7 +199,7 @@ class SearchController extends Controller
     $search_result = $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
 
       if (isset($item->product_variation_id)) {
         $item->product_price = $item->product_variation_price;

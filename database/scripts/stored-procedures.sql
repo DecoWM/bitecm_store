@@ -413,9 +413,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC
-    ');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, '
     GROUP BY PRD.product_id ');
@@ -944,8 +946,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ', variation_type_id);
@@ -1618,8 +1623,11 @@ BEGIN
 
   SET cad_order = CONCAT(cad_order, cad_order_comma, '
     ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
-    PRM.`publish_at` DESC');
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
 
   -- validation for PLAN and promo price
   SET cad_condition = CONCAT(cad_condition, '
@@ -2142,7 +2150,7 @@ BEGIN
   DECLARE pag_end INT;
   DECLARE stored_query TEXT;
   DECLARE cad_condition TEXT;
-  DECLARE cad_order VARCHAR(70);
+  DECLARE cad_order TEXT;
   DECLARE cad_order_comma VARCHAR(2);
   DECLARE select_segment TEXT;
   DECLARE select_idpromo_segment TEXT;
@@ -2343,6 +2351,12 @@ BEGIN
     SET cad_order_comma = '';
   END IF;
 
+  SET cad_order = CONCAT(cad_order, cad_order_comma, '
+    PRD.`product_priority` DESC,
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
+
   SET cad_condition = CONCAT(cad_condition, '
     AND STM.`stock_model_id` IS NOT NULL
     AND PRM.`promo_id` IS NOT NULL
@@ -2351,12 +2365,10 @@ BEGIN
 
   -- ORDER BY
   IF (sort_by <> '') THEN
-    SET cad_order = CONCAT(cad_order, cad_order_comma, 'PRM.', sort_by);
+    SET cad_order = CONCAT(cad_order, ',', 'PRM.', sort_by);
     IF(sort_direction IN ('ASC','DESC')) THEN
       SET cad_order = CONCAT(cad_order, " ", sort_direction);
     END IF;
-  ELSE
-    SET cad_order = '';
   END IF;
 
   -- CONCAT query, condition AND order
@@ -2726,7 +2738,7 @@ BEGIN
     STM.`stock_model_id`, STM.`stock_model_code`,
     PRD_VAR.`variation_type_id`,
     PRD_VAR.`product_variation_id`,
-    PRD_VAR.`product_variation_price`,
+    IFNULL(PRD_VAR.`product_variation_price`, PRD.`product_price`) as product_price,
     PRD_VAR.`reason_code`, PRD_VAR.`product_package`,
     BRN.`brand_name`, BRN.`brand_slug`,
     PLN.`plan_name`, PLN.`plan_slug`,
@@ -2734,7 +2746,21 @@ BEGIN
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
     CTR.`contract_name`, CTR.`contract_slug`,
     CLR.`color_id`, CLR.`color_name`, CLR.`color_slug`,
-    ROUND(IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)),2) as promo_price';
+    ROUND(
+      IF(
+        PRD_VAR.`product_variation_id` IS NOT NULL,
+        IF(
+          PRM.promo_discount IS NOT NULL,
+          ((1-PRM.promo_discount) * PRD_VAR.`product_variation_price`), 
+          IFNULL(PRM.promo_price, PRD_VAR.`product_variation_price`)
+        ),
+        IF(
+          PRM.promo_discount IS NOT NULL,
+          ((1-PRM.promo_discount) * PRD.`product_price`), 
+          IFNULL(PRM.promo_price, PRD.`product_price`)
+        )
+      )
+    ,2) as promo_price';
 
   SET from_query = CONCAT('
     FROM tbl_order_item as OIT
@@ -2745,7 +2771,7 @@ BEGIN
     INNER JOIN tbl_brand as BRN
       ON BRN.`brand_id` = PRD.`brand_id`
     LEFT JOIN tbl_product_variation as PRD_VAR
-      ON PRD_VAR.`product_id` = PRD.`product_id`
+      ON PRD_VAR.`product_variation_id` = OIT.`product_variation_id`
     LEFT JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     LEFT JOIN tbl_affiliation as AFF
@@ -2755,14 +2781,12 @@ BEGIN
     LEFT JOIN tbl_color as CLR
       ON STM.`color_id` = CLR.`color_id`
     LEFT JOIN tbl_promo as PRM
-      ON (PRD.`product_id` = PRM.`product_id`
-          AND PRM.promo_id = OIT.promo_id
-      )');
+      ON PRM.promo_id = OIT.promo_id
+  ');
 
   SET where_query = CONCAT('
-    WHERE OIT.`order_id` = ', order_id, '
-      AND (OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
-        OR OIT.`product_variation_id` IS NULL)'
+    WHERE OIT.`order_id` = ',
+    order_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
@@ -2802,7 +2826,7 @@ BEGIN
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
 
-  SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
+  SET pag_total_by_page = IFNULL(pag_total_by_page, 0); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   -- SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
@@ -2812,47 +2836,49 @@ BEGIN
     ORD.*, OIT.*,
     OSH.`order_status_history_id`,
     OST.`order_status_name`,
-    ORD.`created_at`,
     IDT.`idtype_name`,
     BCH.`branch_name`,
-    VAR.`variation_type_name`,
-    PLN.`plan_name`,
-    AFF.`affiliation_name`';
+    ORD.`created_at`';
 
   SET from_query = '
     FROM tbl_order as ORD
-    INNER JOIN tbl_order_item as OIT
-      ON ORD.`order_id` = OIT.`order_id`
-    INNER JOIN tbl_order_status_history as OSH
-      ON ORD.`order_id` = OSH.`order_id`
+    INNER JOIN (
+      SELECT OSH.*
+      FROM tbl_order_status_history as OSH
+      INNER JOIN (
+        SELECT MAX(OSH.`order_status_history_id`) as `order_status_history_id`
+        FROM tbl_order_status_history as OSH
+        GROUP BY OSH.`order_id`
+      ) sOSH ON OSH.`order_status_history_id` = sOSH.`order_status_history_id`
+    ) OSH ON ORD.`order_id` = OSH.`order_id`
     INNER JOIN tbl_order_status as OST
       ON OSH.`order_status_id` = OST.`order_status_id`
+    INNER JOIN (
+      SELECT
+        OIT.*,
+        VAR.`variation_type_name`,
+        PLN.`plan_name`,
+        AFF.`affiliation_name`
+      FROM tbl_order_item as OIT
+      LEFT JOIN tbl_product_variation as PRD_VAR
+        ON OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
+      LEFT JOIN tbl_variation_type as VAR
+        ON PRD_VAR.`variation_type_id` = VAR.`variation_type_id`
+      LEFT JOIN tbl_plan as PLN
+        ON PRD_VAR.`plan_id` = PLN.`plan_id`
+      LEFT JOIN tbl_affiliation as AFF
+        ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`
+      ORDER BY ISNULL(PRD_VAR.`product_variation_id`)
+    ) OIT ON ORD.`order_id` = OIT.`order_id`
     LEFT JOIN tbl_idtype as IDT
       ON ORD.`idtype_id` = IDT.`idtype_id`
     LEFT JOIN tbl_branch as BCH
-      ON ORD.`branch_id` = BCH.`branch_id`
-    LEFT JOIN tbl_product_variation as PRD_VAR
-      ON OIT.`product_variation_id` = PRD_VAR.`product_variation_id`
-    LEFT JOIN tbl_variation_type as VAR
-      ON PRD_VAR.`variation_type_id` = VAR.`variation_type_id`
-    LEFT JOIN tbl_plan as PLN
-      ON PRD_VAR.`plan_id` = PLN.`plan_id`
-    LEFT JOIN tbl_affiliation as AFF
-      ON PRD_VAR.`affiliation_id` = AFF.`affiliation_id`';
+      ON ORD.`branch_id` = BCH.`branch_id`';
 
   SET where_query = '
-
-  WHERE OSH.order_status_history_id IN (
-         (select max(sOSH.`order_status_history_id`) as order_status_history_id
-            FROM tbl_order_status_history as sOSH
-            GROUP BY sOSH.`order_id`
-            ORDER BY sOSH.`order_status_history_id` DESC)
-  )
-
-  GROUP BY ORD.`order_id`';
-
-  SET where_query = CONCAT(where_query, '
-    ORDER BY OSH.`order_status_history_id` DESC');
+    GROUP BY ORD.`order_id`
+    ORDER BY ORD.`created_at` DESC
+  ';
 
   -- ORDER BY
   IF (sort_by <> '') THEN
