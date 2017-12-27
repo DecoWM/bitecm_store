@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-5">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
+                        <div class="image"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="equipos"></div>
                         <div class="contenido">
                           <span class="text-uppercase title-contenido">
                             {{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}

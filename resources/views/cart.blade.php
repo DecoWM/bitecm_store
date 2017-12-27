@@ -72,7 +72,7 @@
                         <button class="btn-eliminar-equipo btn-cart-delete"><i class="fa fa-times"></i></button>
                         <input type="submit" style="display: none">
                       </form>
-                      <img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos">
+                      <img src="{{asset(Storage::url($product->product_image_url))}}" alt="equipos">
                     </div>
                     <div class="detalle-equipo">
                       <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}</h2>

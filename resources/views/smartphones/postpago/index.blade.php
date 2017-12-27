@@ -40,7 +40,7 @@
                   'plan'=>$smartphone->plan_slug,
                   'contract'=>$smartphone->contract_slug
                 ])}}">
-                  <img src="{{asset('images/productos/'.$smartphone->picture_url)}}" alt="{{$smartphone->product_model}}">
+                  <img src="{{asset(Storage::url($smartphone->picture_url))}}" alt="{{$smartphone->product_model}}">
                 </a>
               </div>
               <div class="content-product text-center">
@@ -70,7 +70,7 @@
                     ])}}" class="btn btn-default">comprar</a></div>
                   <div class="checkbox btn-comparar">
                     <label>
-                      <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_variation_id: {{$smartphone->product_variation_id}}, picture_url: '{{asset('images/productos/'.$smartphone->picture_url)}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])">comparar
+                      <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_variation_id: {{$smartphone->product_variation_id}}, picture_url: '{{asset(Storage::url($smartphone->picture_url))}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])">comparar
                       <span class="checkmark"></span>
                     </label>
                   </div>

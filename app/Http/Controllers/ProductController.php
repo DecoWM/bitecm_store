@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductPostRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -69,7 +70,6 @@ class ProductController extends Controller
 
     $available_products = $this->shared->productSearch(2, $product->brand_id, 4);
     $available = collect($available_products['products'])->map(function ($item, $key) use ($product) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
       $item->route = route('accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug
