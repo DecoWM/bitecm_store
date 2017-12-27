@@ -35,7 +35,7 @@
                   @include('products.ribbon',['product' => $product])
                   <div class="image-product text-center">
                     <a href="{{$product->route}}">
-                      <img src="{{$product->picture_url}}" alt="{{$product->product_model}}">
+                      <img src="{{asset(Storage::url($product->picture_url))}}" alt="{{$product->product_model}}">
                     </a>
                   </div>
                   <div class="content-product text-center">

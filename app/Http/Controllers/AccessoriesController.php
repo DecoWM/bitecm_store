@@ -21,7 +21,7 @@ class AccessoriesController extends Controller
 
     $search_result =  $this->shared->productSearch(2, null, $items_per_page, $current_page, "product_model", "desc");
     collect($search_result['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      //$item->picture_url = asset('images/productos/'.$item->picture_url);
       $item->route = route('accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug
@@ -58,7 +58,7 @@ class AccessoriesController extends Controller
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
-      $available[$i]->picture_url = asset('images/productos/'.$item->picture_url);
+      //$available[$i]->picture_url = asset('images/productos/'.$item->picture_url);
       $available[$i]->route = route('accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug

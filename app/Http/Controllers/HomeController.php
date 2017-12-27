@@ -7,6 +7,7 @@ use DB;
 use App\Product;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -24,7 +25,7 @@ class HomeController extends Controller
 
     $best_seller_smartphone = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, null, null, null, null, null, null, 'destacado');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       if (isset($item->affiliation_id)) {
         $item->route = route('postpaid_detail', [
           'brand'=>$item->brand_slug,
@@ -44,7 +45,7 @@ class HomeController extends Controller
     });
     $best_seller_tablet = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, 2);
     $best_seller_tablet = collect($best_seller_tablet['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       if (isset($item->affiliation_id)) {
         $item->route = route('postpaid_detail', [
           'brand'=>$item->brand_slug,
@@ -64,7 +65,7 @@ class HomeController extends Controller
     });
     $featured_products = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, 2);
     $featured_products = collect($featured_products['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
@@ -76,7 +77,7 @@ class HomeController extends Controller
     });
     $promo_pre = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, 1, 'product_id', 'asc');
     $promo_pre = collect($promo_pre['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('prepaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
@@ -86,7 +87,7 @@ class HomeController extends Controller
     });
     $promo_pos = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, 4, 1, 'product_id', 'desc');
     $promo_pos = collect($promo_pos['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,

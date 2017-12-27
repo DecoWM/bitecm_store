@@ -26,7 +26,7 @@ class PromoController extends Controller
 
     $search_result =  $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
     collect($search_result['products'])->map(function ($item, $key) {
-      $item->picture_url = asset('images/productos/'.$item->picture_url);
+      //$item->picture_url = asset('images/productos/'.$item->picture_url);
 
       if (isset($item->product_variation_id)) {
         $item->product_price = $item->product_variation_price;
