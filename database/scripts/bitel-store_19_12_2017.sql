@@ -2204,10 +2204,10 @@ CREATE TABLE `tbl_order` (
 --
 
 INSERT INTO `tbl_order` (`order_id`, `idtype_id`, `payment_method_id`, `branch_id`, `tracking_code`, `first_name`, `last_name`, `id_number`, `billing_district`, `billing_phone`, `source_operator`, `porting_phone`, `delivery_address`, `delivery_district`, `contact_email`, `contact_phone`, `credit_status`, `has_debt`, `isdn_status`, `porting_request_id`, `mnp_request_id`, `porting_state_code`, `porting_status`, `porting_status_desc`, `total`, `total_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 4, NULL, NULL, 'Cliente', 'Prueba 1', '45678910', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'cliente.prueba@gmail.com', '987654321', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(2, 1, 3, NULL, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
-(3, 1, 3, 3, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
-(4, 1, 3, 3, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
+(1, 1, 4, 5, '12345876', 'Cliente', 'Prueba 1', '12345876', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'diego.chinga@forceclose.pe', '987654321', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(2, 1, 3, 4, '12345678', 'Juan', 'Perez', '12345678', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
+(3, 1, 2, 3, '12345679', 'Pedro', 'Jimenez', '12345679', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
+(4, 1, 1, 2, '12345680', 'José', 'Prado', '12345680', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2238,10 +2238,10 @@ CREATE TABLE `tbl_order_item` (
 --
 
 INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `product_variation_id`, `promo_id`, `quantity`, `subtotal`, `subtotal_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 6, 228, 4, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(2, 2, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
-(3, 3, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
-(4, 4, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
+(1, 1, 6, 488, 6, 1, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(2, 2, 7, 501, 5, 1, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
+(3, 3, 1, 345, NULL, 1, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
+(4, 4, 4, 436, NULL, 1, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2252,7 +2252,6 @@ INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `pr
 CREATE TABLE `tbl_order_status` (
   `order_status_id` int(11) NOT NULL,
   `order_status_name` varchar(50) NOT NULL,
-  `order_status_pos` int(2) NULL DEFAULT 1,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -2266,12 +2265,43 @@ CREATE TABLE `tbl_order_status` (
 -- Volcado de datos para la tabla `tbl_order_status`
 --
 
-INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `order_status_pos`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 'Pendiente', 1, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(2, 'Procesado', 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(3, 'Cancelado', 0, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(4, 'En Envío', 3, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(5, 'Completado', 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
+INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 'Pendiente', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(2, 'Procesado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(3, 'En Envío', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'Cancelado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(5, 'Completado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_order_status_flux`
+--
+
+CREATE TABLE `tbl_order_status_flux` (
+  `order_status_flux_id` int(11) NOT NULL,
+  `order_status_origin_id` int(11) NOT NULL,
+  `order_status_destination_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT '1',
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_order_status_flux`
+--
+
+INSERT INTO `tbl_order_status_flux` (`order_status_flux_id`, `order_status_origin_id`, `order_status_destination_id`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 1, 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(2, 2, 3, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(3, 2, 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 3, 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(5, 3, 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(6, 3, 5, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3387,8 +3417,8 @@ INSERT INTO `tbl_promo` (`promo_id`, `product_id`, `product_variation_id`, `add_
 (1, 7, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (2, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (3, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(4, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(5, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(4, 19, NULL, NULL, 2100, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(5, 19, NULL, NULL, 1800, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
 (6, 18, 488, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
@@ -3798,6 +3828,14 @@ ALTER TABLE `tbl_order_status`
   ADD PRIMARY KEY (`order_status_id`);
 
 --
+-- Indices de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  ADD PRIMARY KEY (`order_status_flux_id`),
+  ADD KEY `fk_tbl_order_status_flux_tbl_order_status1_idx` (`order_status_origin_id`),
+  ADD KEY `fk_tbl_order_status_flux_tbl_order_status2_idx` (`order_status_destination_id`);
+
+--
 -- Indices de la tabla `tbl_order_status_history`
 --
 ALTER TABLE `tbl_order_status_history`
@@ -3961,6 +3999,12 @@ ALTER TABLE `tbl_order_status`
   MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  MODIFY `order_status_flux_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_order_status_history`
 --
 ALTER TABLE `tbl_order_status_history`
@@ -4055,6 +4099,13 @@ ALTER TABLE `tbl_order_item`
   ADD CONSTRAINT `fk_tbl_order_item_tbl_product_variation1` FOREIGN KEY (`product_variation_id`) REFERENCES `tbl_product_variation` (`product_variation_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tbl_order_item_tbl_promo1` FOREIGN KEY (`promo_id`) REFERENCES `tbl_promo` (`promo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tbl_order_item_tbl_stock_model1` FOREIGN KEY (`stock_model_id`) REFERENCES `tbl_stock_model` (`stock_model_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Indices de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  ADD CONSTRAINT `fk_tbl_order_status_flux_tbl_order_status1` FOREIGN KEY (`order_status_origin_id`) REFERENCES `tbl_order_status` (`order_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_order_status_flux_tbl_order_status2` FOREIGN KEY (`order_status_destination_id`) REFERENCES `tbl_order_status` (`order_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_order_status_history`
