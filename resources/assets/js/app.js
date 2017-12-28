@@ -70,6 +70,7 @@ const app = new Vue({
         baseUrl : document.head.querySelector('meta[name="base-url"]').content,
         prefix : document.head.querySelector('meta[name="prefix"]').content,
         type : document.head.querySelector('meta[name="type"]').content,
+        isMobile: false,
         bestSeller : "smartphone",
         promo : "postpago",
         itemsPerPage : "12",
@@ -189,6 +190,12 @@ const app = new Vue({
         toggleAccordion : function (item) {
           item.isOpen = !item.isOpen;
         },
+        toggleAccordionMobile : function (item) {
+          self = this
+          if (self.isMobile) {
+            item.isOpen = !item.isOpen;
+          }
+        },
         transitionEnter : function(el, done){
           Velocity(el, 'slideDown', {duration: 300, easing: "easeInBack"},{complete: done});
         },
@@ -289,6 +296,8 @@ const app = new Vue({
 
     },
     mounted: function () {
+        self = this
+
         $('#banner-principal').slick({
             arrows: true,
             dots: false,
@@ -851,33 +860,55 @@ const app = new Vue({
             }
         });
 
-      $(window).on('resize', function(){
 
-            var contentCatalogo = $('.content-catalogo');
-            var win = $(this); 
+      //FILTROS DESPLEGABLES EN RESPONSIVE
+      if ($(window).width() < 767) {
+          $('.content-catalogo').show();
+          self.isMobile = true
+          for (var variable in this.filters[this.type]) {
+              if (this.filters[this.type][variable].hasOwnProperty('isOpen')) {
+                  this.filters[this.type][variable].isOpen = false
+              }
+          }
+          $('.responsive-sidebar-item').append($('.content-catalogo'));
+      } else {
+          $('.sidebarbox').append($('.content-catalogo')).next();
+      }
 
-            if (win.width() < 767) {
-              /* ... */ 
+      $(window).on('resize', function() {
+          var contentCatalogo = $('.content-catalogo');
+          var win = $(this);
+
+          if (win.width() < 767) {
+              $('.content-catalogo').show();
+              self.isMobile = true
+              for (var variable in self.filters[self.type]) {
+                  if (self.filters[self.type][variable].hasOwnProperty('isOpen')) {
+                      self.filters[self.type][variable].isOpen = false
+                  }
+              }
               $('.responsive-sidebar-item').append(contentCatalogo);
-
-            } else{
+          } else {
+              self.isMobile = false
+              self.filters.accesorios.price.isOpen = true
+              self.filters.accesorios.manufacturer.isOpen = true
+              self.filters.promociones.type.isOpen = true
+              self.filters.promociones.price.isOpen = true
+              self.filters.promociones.manufacturer.isOpen = true
+              self.filters.prepago.type.isOpen = true
+              self.filters.prepago.price.isOpen = true
+              self.filters.prepago.price.isOpen = true
+              self.filters.postpago.type.isOpen = true
+              self.filters.postpago.affiliation.isOpen = true
               $('.sidebarbox').append(contentCatalogo).next();
-
-            }
+          }
       });
 
-        $('.responsive-sidebar-title').on('click', function(event) {
+      $('.responsive-sidebar-title').on('click', function(event) {
           event.preventDefault();
-          /* Act on the event */
-          // $('.responsive-sidebar').toggleClass('is-open-sidebar');
-          $('.responsive-sidebar-item').slideToggle(400);
-        });
-
-        $(window).on('resize', function() {
-          /* Act on the event */
-
-        });
-
+          $('.responsive-sidebar-item').slideToggle(300);
+          $(this).children('.btl-caret ').children('.glyphicon').toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+      });
 
     }
 });

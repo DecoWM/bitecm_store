@@ -1,18 +1,25 @@
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-3 sidebarbox">
           <div class="sidebar-box">
             <form id="search-product" class="form-inline" v-on:submit.prevent="searchProduct(1)">
               <input type="text" placeholder="Busca por modelo" class="form-control" v-model="searchedString">
               <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
             </form>
           </div>
+          <div class="responsive-sidebar">
+            <div class="responsive-sidebar-title">
+              <span>Filtrar equipos por</span>
+              <div class="pull-right btl-caret">
+                <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>
+              </div>
+            </div>
+            <div class="responsive-sidebar-item" v-cloak></div>
+          </div>
           <div id="plan" class="content-catalogo">
-            {{-- <div class="title-select" v-on:click="toggleAccordion(filters[type].type)"> --}}
-            <div class="title-select">
+            <div class="title-select" v-on:click="toggleAccordionMobile(filters[type].type)">
               <div class="btn-acordion"></div><span>Tipo de Plan</span>
-              {{-- <div class="pull-right btl-caret" v-cloak>
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters[type].type.isOpen"></span>
-                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters[type].type.isOpen"></span>
-              </div> --}}
+              <div class="pull-right btl-caret" v-if="isMobile" v-cloak>
+                <span class="glyphicon " :class="filters[type].type.isOpen ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" aria-hidden="true"></span>
+              </div>
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave">
               <div class="select-item" v-show="filters[type].type.isOpen">
@@ -32,14 +39,13 @@
             </transition>
           </div>
           <div id="precio-equipo" class="content-catalogo">
-            <div class="title-select" v-on:click="toggleAccordion(filters[type].price)">
+            <div class="title-select" v-on:click="toggleAccordionMobile(filters[type].price)">
               <div class="btn-acordion"></div><span>Precio de equipo:</span>
-              <div class="pull-right btl-caret" v-cloak>
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters[type].price.isOpen"></span>
-                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters[type].price.isOpen"></span>
+              <div class="pull-right btl-caret" v-if="isMobile" v-cloak>
+                <span class="glyphicon " :class="filters[type].price.isOpen ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" aria-hidden="true"></span>
               </div>
             </div>
-            <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave" v-cloak>
+            <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave">
               <div class="select-item" v-show="filters[type].price.isOpen">
                 <div class="item">
                   <input id="price-opt-0" type="radio" name="price" v-bind:value="{x : 0, y : 0}" v-model="filters[type].price.value" v-on:change="searchProduct(1)">
