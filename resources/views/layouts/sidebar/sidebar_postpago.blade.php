@@ -6,24 +6,20 @@
             </form>
           </div>
           <div class="responsive-sidebar">
-              <!-- <a href="#">Filtrar equipos por <i class="fa-"></i></a> -->
-              <div class="responsive-sidebar-title">
-                <span>Filtrar equipos por</span>
-                <div class="pull-right btl-caret">
-                    <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>
-                    <span aria-hidden="true" class="glyphicon glyphicon-chevron-up" style="display: none;"></span>
-                </div>
+            <div class="responsive-sidebar-title">
+              <span>Filtrar equipos por</span>
+              <div class="pull-right btl-caret">
+                <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>
               </div>
-              <div class="responsive-sidebar-item"></div>
+            </div>
+            <div class="responsive-sidebar-item" v-cloak></div>
           </div>
           <div id="plan" class="content-catalogo">
-            {{-- <div class="title-select" v-on:click="toggleAccordion(filters[type].type)"> --}}
-            <div class="title-select">
+            <div class="title-select" v-on:click="toggleAccordionMobile(filters[type].type)">
               <div class="btn-acordion"></div><span>Tipo de Plan</span>
-              {{-- <div class="pull-right btl-caret" v-cloak>
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters[type].type.isOpen"></span>
-                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters[type].type.isOpen"></span>
-              </div> --}}
+              <div class="pull-right btl-caret" v-if="isMobile" v-cloak>
+                <span class="glyphicon " :class="filters[type].type.isOpen ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" aria-hidden="true"></span>
+              </div>
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave">
               <div class="select-item" v-show="filters[type].type.isOpen">
@@ -43,13 +39,12 @@
             </transition>
           </div>
           <div id="lo-quieres" class="content-catalogo">
-            {{-- <div class="title-select" v-on:click="toggleAccordion(filters[type].affiliation)"> --}}
-            <div class="title-select">
+            <div class="title-select" v-on:click="toggleAccordionMobile(filters[type].affiliation)">
+            {{-- <div class="title-select"> --}}
               <div class="btn-acordion"></div><span>Lo quieres en</span>
-              {{-- <div class="pull-right btl-caret" v-cloak>
-                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters[type].affiliation.isOpen"></span>
-                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters[type].affiliation.isOpen"></span>
-              </div> --}}
+              <div class="pull-right btl-caret" v-if="isMobile" v-cloak>
+                <span class="glyphicon " :class="filters[type].affiliation.isOpen ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" aria-hidden="true"></span>
+              </div>
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave">
               <div class="select-item" v-show="filters[type].affiliation.isOpen">

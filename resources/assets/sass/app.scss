@@ -15,7 +15,7 @@
 
 #planes .select-plan{
     padding-right: 25px ;
-    padding-left: 15px;  
+    padding-left: 15px;
 }
 
 
@@ -628,7 +628,7 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 #especificaciones-tecnicas .slick-track{
-    // width: 100% !important; 
+    // width: 100% !important;
 }
 
 #especificaciones-tecnicas .content-detalle .descripcion-detalle ul{
@@ -681,7 +681,7 @@ li.item-nav-mobile.search #search .btn-search {
         position: absolute;
         right: 15px;
         width: auto;
-        z-index: 99;
+        z-index: 100;
     }
 
     li.nav-mobile.item-nav-mobile {
@@ -729,7 +729,7 @@ li.item-nav-mobile.search #search .btn-search {
                 // transform:scaleY(1);
                  // transform-origin: top;
             }
-                
+
         }
         .responsive-sidebar-title{
             padding-left: 20px;
@@ -759,7 +759,7 @@ li.item-nav-mobile.search #search .btn-search {
     #compara-tus-equipos  .slick-next{
         top: 160px;
         right: 30px;
-    }   
+    }
 
     #descripcion-equipo .content-section form .content-product .color-product{
         margin-top: 10px;
@@ -929,7 +929,7 @@ li.item-nav-mobile.search #search .btn-search {
 
 @media (max-width: 374px){
     .col-12-mob {
-        width: 100%; 
+        width: 100%;
     }
 }
 
