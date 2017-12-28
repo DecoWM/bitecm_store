@@ -155,8 +155,8 @@
                       <span v-show="errors.has('email')" class="help is-danger" v-cloak>Introduce una dirección de correo electrónico válida</span>
                     </div>
                     <div class="form-group form-select">
-                      <label for="delivery_distric">DISTRITO DE DELIVERY</label>
-                      <select id="delivery_distric" name="delivery_distric" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
+                      <label for="delivery_district">DISTRITO DE DELIVERY</label>
+                      <select id="delivery_district" name="delivery_district" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_district')}">
                         <option value="" selected>Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
                         <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>

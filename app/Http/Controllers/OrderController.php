@@ -205,18 +205,33 @@ class OrderController extends Controller
     $total_igv = 0;
     $equipo = null;
 
+    $order_detail = [];
+
     foreach ($cart as $item) {
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
+          $order_detail['service_type'] = 'Accesorios';
+          $order_detail['affiliation_type'] = null;
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
+          $order_detail['service_type'] = 'Prepago';
+          $affiliation = DB::table('tbl_affiliation')
+            ->where('affiliation_id', $request->affiliation)
+            ->get();
+          if (count($affiliation)) {
+            $order_detail['affiliation_type'] = $affiliation[0]->affiliation_name;
+          } else {
+            $order_detail['affiliation_type'] = null;
+          }
           break;
         case 2:
           $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
+          $order_detail['service_type'] = 'Postpago';
+          $order_detail['affiliation_type'] = $equipo->affiliation_name;
           break;
       }
 
@@ -243,7 +258,7 @@ class OrderController extends Controller
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => $subtotal,
-        'subtotal_igv' => $subtotal_igv
+        'subtotal_igv' => round($subtotal_igv, 2)
       ]);
     }
 
@@ -252,21 +267,19 @@ class OrderController extends Controller
       return redirect()->route('show_cart')->with('msg', 'Ha ocurrido un error con el carrito de compras');
     }
 
-    $order_detail = [
-      'idtype_id' => $request->document_type,
-      'payment_method_id' => $request->payment_method,
-      'branch_id' => $this->shared->branchByDistrict($request->delivery_distric),
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
-      'id_number' => $request->document_number,
-      'tracking_code' => $request->document_number,
-      'billing_district' => $request->district,
-      'billing_phone' => $request->phone_number,
-      'delivery_address' => $request->delivery_address,
-      'delivery_district' => $request->delivery_distric,
-      'contact_email' => $request->email,
-      'contact_phone' => $request->contact_phone
-    ];
+    $order_detail['idtype_id'] = $request->document_type;
+    $order_detail['payment_method_id'] = $request->payment_method;
+    $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
+    $order_detail['first_name'] = $request->first_name;
+    $order_detail['last_name'] = $request->last_name;
+    $order_detail['id_number'] = $request->document_number;
+    $order_detail['tracking_code'] = $request->document_number;
+    $order_detail['billing_district'] = $request->district;
+    $order_detail['billing_phone'] = $request->phone_number;
+    $order_detail['delivery_address'] = $request->delivery_address;
+    $order_detail['delivery_district'] = $request->delivery_district;
+    $order_detail['contact_email'] = $request->email;
+    $order_detail['contact_phone'] = $request->contact_phone;
 
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
       $source_operators = $this->shared->operatorList();
@@ -343,8 +356,10 @@ class OrderController extends Controller
       'delivery_district' => $order_detail['delivery_district'],
       'contact_email' => $order_detail['contact_email'],
       'contact_phone' => $order_detail['contact_phone'],
+      'service_type' => $order_detail['service_type'],
+      'affiliation_type' => $order_detail['affiliation_type'],
       'total' => $order_detail['total'],
-      'total_igv' => $order_detail['total_igv']
+      'total_igv' => round($order_detail['total_igv'], 2)
     ]);
 
     $now = new \DateTime('America/Lima');

@@ -2181,6 +2181,8 @@ CREATE TABLE `tbl_order` (
   `contact_email` varchar(150) NOT NULL,
   `contact_phone` varchar(20) NOT NULL,
   `credit_status` enum('Pendiente','Aprobada','Rechazada','Observada') DEFAULT 'Pendiente',
+  `service_type` varchar(150) DEFAULT NULL,
+  `affiliation_type` varchar(150) DEFAULT NULL,
   `has_debt` tinyint(1) NOT NULL DEFAULT '0',
   `isdn_status` enum('0','5','4','6') NOT NULL DEFAULT '0',
   `porting_request_id` varchar(20) DEFAULT NULL,
@@ -2203,11 +2205,11 @@ CREATE TABLE `tbl_order` (
 -- Volcado de datos para la tabla `tbl_order`
 --
 
-INSERT INTO `tbl_order` (`order_id`, `idtype_id`, `payment_method_id`, `branch_id`, `tracking_code`, `first_name`, `last_name`, `id_number`, `billing_district`, `billing_phone`, `source_operator`, `porting_phone`, `delivery_address`, `delivery_district`, `contact_email`, `contact_phone`, `credit_status`, `has_debt`, `isdn_status`, `porting_request_id`, `mnp_request_id`, `porting_state_code`, `porting_status`, `porting_status_desc`, `total`, `total_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 4, 5, '12345876', 'Cliente', 'Prueba 1', '12345876', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'diego.chinga@forceclose.pe', '987654321', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(2, 1, 3, 4, '12345678', 'Juan', 'Perez', '12345678', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
-(3, 1, 2, 3, '12345679', 'Pedro', 'Jimenez', '12345679', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
-(4, 1, 1, 2, '12345680', 'José', 'Prado', '12345680', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
+INSERT INTO `tbl_order` (`order_id`, `idtype_id`, `payment_method_id`, `branch_id`, `tracking_code`, `first_name`, `last_name`, `id_number`, `billing_district`, `billing_phone`, `source_operator`, `porting_phone`, `delivery_address`, `delivery_district`, `contact_email`, `contact_phone`, `credit_status`, `service_type`, `affiliation_type`, `has_debt`, `isdn_status`, `porting_request_id`, `mnp_request_id`, `porting_state_code`, `porting_status`, `porting_status_desc`, `total`, `total_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 1, 4, 5, '12345876', 'Cliente', 'Prueba 1', '12345876', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'diego.chinga@forceclose.pe', '987654321', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(2, 1, 3, 4, '12345678', 'Juan', 'Perez', '12345678', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
+(3, 1, 2, 3, '12345679', 'Pedro', 'Jimenez', '12345679', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
+(4, 1, 1, 2, '12345680', 'José', 'Prado', '12345680', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
