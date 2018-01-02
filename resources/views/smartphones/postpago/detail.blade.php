@@ -58,7 +58,7 @@
                         {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
                         <select form="purchase-form" name="affiliation" @change="selectAffiliation({
                           @foreach ($affiliations as $affiliation)
-                          '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                            '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                           @endforeach
                         },$event)">
                           @foreach ($affiliations as $affiliation)
@@ -68,7 +68,7 @@
                       </div>
                       @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                     </div>
-                    <div class="col-xs-7 col-sm-6 col-12-mob">
+                    <div class="col-xs-7 col-sm-6 col-12-mob" v-if="Object.keys(product).length == 0">
                       {{--<div class="detalle-product" v-cloak>--}}
                       <div class="detalle-product">
                         {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
@@ -88,6 +88,7 @@
                         </div>
                       </div>
                     </div>
+                    <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
                       {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                       {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
@@ -114,7 +115,7 @@
                 <div class="movil-select-product">
                   <select @change="selectAffiliation({
                     @foreach ($affiliations as $affiliation)
-                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                     @endforeach
                   },$event)">
                     <option name="" value="">Lo quieres en</option>
@@ -133,12 +134,13 @@
           @endforeach
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
-            <div class="select-plan">
+            <div v-if="Object.keys(product).length == 0" class="select-plan">
               @foreach ($plans as $plan)
               <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
-                <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')">
+                {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
+                <div class="content-plan" v-on:click="setUrl('{{$plan->route}}', '{{$plan->api_route}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
@@ -164,6 +166,7 @@
               </label>
               @endforeach
             </div>
+            <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan>
           </div>
 
         </div>
@@ -171,7 +174,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           <div class="add-select-plan"></div>
-          
+
         </div>
       </div>
       <div class="row">
@@ -219,7 +222,7 @@
             <div class="title-detalle">
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
-            <div class="list-producto">
+            <div class="list-producto" v-if="Object.keys(product).length === 0">
               @foreach ($available as $item)
               <div class="producto">
                 <div class="image-product text-center">
@@ -248,6 +251,7 @@
               </div>
               @endforeach
             </div>
+            <postpaid-available v-if="Object.keys(product).length != 0" :products="product.available"></postpaid-available>
           </div>
         </div>
       </div>

@@ -22,3 +22,5 @@ Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
 Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
 Route::get('/accesorios/buscar', 'Api\SearchController@searchAccesorios');
 Route::get('/promociones/buscar', 'Api\SearchController@searchPromos');
+
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'Api\PostpaidController@show')->name('api_postpaid_detail');

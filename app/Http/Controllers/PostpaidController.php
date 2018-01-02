@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
+use Illuminate\Support\Facades\Storage;
 
 class PostpaidController extends Controller
 {
@@ -45,7 +46,7 @@ class PostpaidController extends Controller
     return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string]);
   }
 
-  public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
+  public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
 
     if(empty($product)) {
@@ -63,6 +64,13 @@ class PostpaidController extends Controller
         'affiliation'=>$affiliation_slug,
         'contract'=>$contract_slug
       ]);
+      $available[$i]->api_route = route('api_postpaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'plan'=>$plan_slug,
+        'affiliation'=>$affiliation_slug,
+        'contract'=>$contract_slug
+      ]);
     }
 
     $stock_models = [];
@@ -71,6 +79,14 @@ class PostpaidController extends Controller
       $stock_models = $this->shared->productStockModels($product->product_id);
       foreach($stock_models as $i => $item) {
         $stock_models[$i]->route = route('postpaid_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$plan_slug,
+          'affiliation'=>$affiliation_slug,
+          'contract'=>$contract_slug,
+          'color'=>$item->color_slug
+        ]);
+        $stock_models[$i]->api_route = route('api_postpaid_detail', [
           'brand'=>$brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
@@ -99,11 +115,25 @@ class PostpaidController extends Controller
         'affiliation'=>$product->affiliation_slug,
         'contract'=>$product->contract_slug
       ]);
+      $item->api_route = route('api_postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$product->affiliation_slug,
+        'contract'=>$product->contract_slug
+      ]);
       return $item;
     });
 
     collect($product_affiliations)->map(function ($item, $key) use ($product) {
       $item->route = route('postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$product->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$product->contract_slug
+      ]);
+      $item->api_route = route('api_postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
         'plan'=>$product->plan_slug,

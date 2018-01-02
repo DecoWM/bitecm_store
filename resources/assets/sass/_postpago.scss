@@ -5,6 +5,10 @@
   display: none;
 }
 
+.option-select .radio-inline.is-active {
+  border: 1px solid #008c95;
+}
+
 @media (max-width: 480px) {
   // .col-12-mob {
   //   width: 100%;
