@@ -21,6 +21,28 @@ class PostpaidController extends Controller
 
 
     public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
+        $inputs = [
+            'brand_slug' => $brand_slug,
+            'product_slug' => $product_slug,
+            'affiliation_slug' => $affiliation_slug,
+            'plan_slug' => $plan_slug,
+            'contract_slug' => $contract_slug,
+            'color_slug' => $color_slug
+        ];
+
+        $validator = Validator::make($inputs, [
+            'brand_slug' => 'required|exists:tbl_brand',
+            'product_slug' => 'required|exists:tbl_product',
+            'affiliation_slug' => 'required|exists:tbl_affiliation',
+            'plan_slug' => 'required|exists:tbl_plan',
+            'contract_slug' => 'required|exists:tbl_contract',
+            'color_slug' => 'nullable|exists:tbl_color'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(["error" => ["message" => "Product not found."]], 404);
+        }
+
       $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
 
       if(empty($product)) {
@@ -97,6 +119,13 @@ class PostpaidController extends Controller
 
       collect($product_affiliations)->map(function ($item, $key) use ($product) {
         $item->route = route('postpaid_detail', [
+          'brand'=>$product->brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$product->plan_slug,
+          'affiliation'=>$item->affiliation_slug,
+          'contract'=>$product->contract_slug
+        ]);
+        $item->api_route = route('api_postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$product->plan_slug,
