@@ -25,6 +25,11 @@ Vue.component('products', require('./components/products.vue'));
 Vue.component('promos', require('./components/promos.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
+Vue.component('postpaidAvailable', require('./components/postpaid/available.vue'));
+Vue.component('postpaidPrice', require('./components/postpaid/price.vue'));
+Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
+Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
+
 
 var VeeValidate = require('vee-validate');
 
@@ -168,7 +173,11 @@ const app = new Vue({
               portability : 59,
               new : 299
             }
-        }
+        },
+        //AJAX
+        product: {},
+        current_url: "",
+        initial_url: ""
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -279,8 +288,35 @@ const app = new Vue({
         },
         selectAffiliation: function(affiliation_routes,event) {
           if(event.target.value.length > 0) {
-            document.location = affiliation_routes[event.target.value];
+            // document.location = affiliation_routes[event.target.value];
+            route = affiliation_routes[event.target.value].split(",")
+            this.current_url = route[0]
+            window.history.replaceState("", "", route[0]);
+            this.getProduct(route[1]);
           }
+        },
+        setUrl: function (history_url, request_url) {
+            this.current_url = history_url
+            window.history.replaceState("", "", history_url);
+            this.getProduct(request_url);
+        },
+        isActiveUrl: function (url) {
+            if (url == this.current_url) {
+                return true
+            }
+            return false
+        },
+        getProduct: function(url) {
+            self = this
+            axios.get(url).then((response) => {
+                self.product = response.data
+                console.log(self.product);
+                $('input[name="stock_model"]').val(self.product.product.stock_model_id);
+                $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+                $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+            }, (error) => {
+                console.log(error);
+            });
         }
     },
     beforeMount : function () {
@@ -293,7 +329,10 @@ const app = new Vue({
           searchedString = $('#search-init').val()
           self.searchedString  = searchedString
         }
-
+        if($('#route-init').length) {
+          current_url = $('#route-init').val()
+          self.current_url = current_url
+        }
     },
     mounted: function () {
         self = this
@@ -714,10 +753,12 @@ const app = new Vue({
             $(this).closest('.radio-inline').addClass('option-active');
         });
 
-        // $('.select-plan .plan').on('click', function() {
-        //     $('.plan').removeClass('plan-active');
-        //     $(this).addClass('plan-active');
-        // });
+        $('.select-plan .plan').on('click', function() {
+            $('.select-plan label').removeClass('label-active');
+            $(this).parent().addClass('label-active');
+            $('.plan').removeClass('plan-active');
+            $(this).addClass('plan-active');
+        });
 
         $('#zoom_01').elevateZoom({
             zoomType: "inner",

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Validator;
 use App\Http\Controllers\BaseController;
 use App\Product;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ProductController extends Controller
   public function __construct (BaseController $shared) {
     $this->shared = $shared;
   }
-    
+
   /**
    * Display a listing of the resource.
    *
@@ -62,6 +63,22 @@ class ProductController extends Controller
    */
   // public function show(Product $product)
   public function show($brand,$product,$color=null) {
+      $inputs = [
+          'brand_slug' => $brand,
+          'product_slug' => $product,
+          'color_slug' => $color
+      ];
+
+      $validator = Validator::make($inputs, [
+          'brand_slug' => 'required|exists:tbl_brand',
+          'product_slug' => 'required|exists:tbl_product',
+          'color_slug' => 'nullable|exists:tbl_color'
+      ]);
+
+      if ($validator->fails()) {
+          abort(404);
+      }
+
     $product = $this->shared->productBySlug($brand,$product,$color);
 
     if(empty($product)) {
