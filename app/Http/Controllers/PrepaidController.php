@@ -89,6 +89,12 @@ class PrepaidController extends Controller
           'plan'=>$plan_slug,
           'color'=>$item->color_slug
         ]);
+        $stock_models[$i]->api_route = route('api_prepaid_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$plan_slug,
+          'color'=>$item->color_slug
+        ]);
       }
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
