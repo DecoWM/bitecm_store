@@ -11996,6 +11996,42 @@ var app = new Vue({
             window.history.replaceState("", "", history_url);
             this.getProduct(request_url);
         },
+        setPlan: function setPlan(plan_id) {
+            self = this;
+            console.log(plan_id);
+            console.log(self.product.plans);
+            var current_plan = self.product.plans.find(function (item) {
+                return item.plan_id == plan_id;
+            });
+            console.log(current_plan.route);
+            console.log(current_plan.api_route);
+            if (self.current_url != current_plan.route) {
+                this.setUrl(current_plan.route, current_plan.api_route);
+            }
+        },
+        setAffiliation: function setAffiliation(event) {
+            self = this;
+            affiliation_id = event.target.value;
+            console.log(affiliation_id);
+            console.log(event);
+            current_affiliation = self.product.affiliations.find(function (item) {
+                return item.affiliation_id == affiliation_id;
+            });
+            console.log(current_affiliation.route);
+            console.log(current_affiliation.api_route);
+            if (self.current_url != current_affiliation.route) {
+                this.setUrl(current_affiliation.route, current_affiliation.api_route);
+            }
+        },
+        setColor: function setColor(stock_model_id) {
+            self = this;
+            current_color = self.product.stock_models.find(function (item) {
+                return item.stock_model_id == stock_model_id;
+            });
+            if (self.current_url != current_color.route) {
+                this.setUrl(current_color.route, current_color.api_route);
+            }
+        },
         isActiveUrl: function isActiveUrl(url) {
             if (url == this.current_url) {
                 return true;
@@ -12025,9 +12061,9 @@ var app = new Vue({
             searchedString = $('#search-init').val();
             self.searchedString = searchedString;
         }
-        if ($('#route-init').length) {
-            current_url = $('#route-init').val();
-            self.current_url = current_url;
+        if ($('#product-init').length) {
+            product = $('#product-init').val();
+            self.product = JSON.parse(product);
         }
     },
     mounted: function mounted() {

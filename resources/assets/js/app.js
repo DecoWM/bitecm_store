@@ -300,6 +300,36 @@ const app = new Vue({
             window.history.replaceState("", "", history_url);
             this.getProduct(request_url);
         },
+        setPlan: function(plan_id) {
+            self = this
+            console.log(plan_id);
+            console.log(self.product.plans);
+            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
+            console.log(current_plan.route);
+            console.log(current_plan.api_route);
+            if (self.current_url != current_plan.route) {
+              this.setUrl(current_plan.route, current_plan.api_route)
+            }
+        },
+        setAffiliation: function(event) {
+            self = this
+            affiliation_id = event.target.value
+            console.log(affiliation_id);
+            console.log(event);
+            current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
+            console.log(current_affiliation.route);
+            console.log(current_affiliation.api_route);
+            if (self.current_url != current_affiliation.route) {
+              this.setUrl(current_affiliation.route, current_affiliation.api_route)
+            }
+        },
+        setColor: function (stock_model_id) {
+            self = this
+            current_color = self.product.stock_models.find(item => item.stock_model_id == stock_model_id);
+            if (self.current_url != current_color.route) {
+              this.setUrl(current_color.route, current_color.api_route)
+            }
+        },
         isActiveUrl: function (url) {
             if (url == this.current_url) {
                 return true
@@ -309,13 +339,13 @@ const app = new Vue({
         getProduct: function(url) {
             self = this
             axios.get(url).then((response) => {
-                self.product = response.data
-                console.log(self.product);
-                $('input[name="stock_model"]').val(self.product.product.stock_model_id);
-                $('input[name="product_variation"]').val(self.product.product.product_variation_id);
-                $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+              self.product = response.data
+              console.log(self.product);
+              $('input[name="stock_model"]').val(self.product.product.stock_model_id);
+              $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+              $('input[name="affiliation"]').val(self.product.product.affiliation_id);
             }, (error) => {
-                console.log(error);
+              console.log(error);
             });
         }
     },
@@ -329,9 +359,9 @@ const app = new Vue({
           searchedString = $('#search-init').val()
           self.searchedString  = searchedString
         }
-        if($('#route-init').length) {
-          current_url = $('#route-init').val()
-          self.current_url = current_url
+        if($('#product-init').length) {
+          product = $('#product-init').val()
+          self.product = JSON.parse(product)
         }
     },
     mounted: function () {
