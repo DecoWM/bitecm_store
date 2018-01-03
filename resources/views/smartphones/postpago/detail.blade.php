@@ -56,11 +56,12 @@
                     <div class="col-xs-5 col-sm-6">
                       <div class="select-product"><span class="title-select">Lo quieres en</span>
                         {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
-                        <select form="purchase-form" name="affiliation" @change="selectAffiliation({
+                        {{-- <select form="purchase-form" name="affiliation" @change="selectAffiliation({
                           @foreach ($affiliations as $affiliation)
                             '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                           @endforeach
-                        },$event)">
+                        },$event)"> --}}
+                        <select form="purchase-form" name="affiliation" @change="setAffiliation($event)">
                           @foreach ($affiliations as $affiliation)
                           <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                           @endforeach
@@ -134,13 +135,14 @@
           @endforeach
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
-            <div v-if="Object.keys(product).length == 0" class="select-plan">
+            {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
+            <div class="select-plan">
               @foreach ($plans as $plan)
               <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
-                <div class="content-plan" v-on:click="setUrl('{{$plan->route}}', '{{$plan->api_route}}')">
+                <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
@@ -166,7 +168,7 @@
               </label>
               @endforeach
             </div>
-            <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan>
+            {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}
           </div>
 
         </div>
@@ -251,10 +253,21 @@
               </div>
               @endforeach
             </div>
-            <postpaid-available v-if="Object.keys(product).length != 0" :products="product.available"></postpaid-available>
+            {{-- <postpaid-available v-if="Object.keys(product).length != 0" :products="product.available"></postpaid-available> --}}
           </div>
         </div>
       </div>
       @endif
     </div>
+    @php
+      $product_init = [
+          'product' => $product,
+          'product_images' => $product_images,
+          'stock_models' => $stock_models,
+          'available' => $available,
+          'plans' => $plans,
+          'affiliations' => $affiliations,
+      ];
+    @endphp
+    <input id="product-init" type="hidden" value='@json($product_init)'>
 @endsection
