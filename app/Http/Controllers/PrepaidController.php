@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Validator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -42,6 +43,24 @@ class PrepaidController extends Controller
   }
 
   public function show($brand_slug,$product_slug,$plan_slug,$color_slug=null) {
+      $inputs = [
+          'brand_slug' => $brand_slug,
+          'product_slug' => $product_slug,
+          'plan_slug' => $plan_slug,
+          'color_slug' => $color_slug
+      ];
+
+      $validator = Validator::make($inputs, [
+          'brand_slug' => 'required|exists:tbl_brand',
+          'product_slug' => 'required|exists:tbl_product',
+          'plan_slug' => 'required|exists:tbl_plan',
+          'color_slug' => 'nullable|exists:tbl_color'
+      ]);
+
+      if ($validator->fails()) {
+          abort(404);
+      }
+
     $product = $this->shared->productPrepaidBySlug($brand_slug,$product_slug,$plan_slug,$color_slug);
 
     if(empty($product)) {
@@ -65,6 +84,12 @@ class PrepaidController extends Controller
       $stock_models = $this->shared->productStockModels($product->product_id);
       foreach($stock_models as $i => $item) {
         $stock_models[$i]->route = route('prepaid_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$plan_slug,
+          'color'=>$item->color_slug
+        ]);
+        $stock_models[$i]->api_route = route('api_prepaid_detail', [
           'brand'=>$brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,

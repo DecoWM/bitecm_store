@@ -14,19 +14,51 @@
 Route::get('/', 'HomeController@index')->name('home');
 
 //RUTA PRODUCTO
-Route::get('/producto/{brand}/{product}/{color?}', 'ProductController@show')->name('product_detail');
+Route::get('/producto/{brand}/{product}/{color?}', 'ProductController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('product_detail');
 
 //RUTAS PREPAGO
 Route::get('/prepago', 'PrepaidController@index')->name('prepaid');
-Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show')->name('prepaid_detail');
+Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'plan' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('prepaid_detail');
 
 //RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')->name('postpaid_detail');
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'affiliation' => '^([a-zA-Z0-9_-]+)$',
+        'plan' => '^([a-zA-Z0-9_-]+)$',
+        'contract' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('postpaid_detail');
 
 //RUTAS ACCESORIOS
 Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
-Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show')->name('accessory_detail');
+Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('accessory_detail');
 
 //RUTAS ACCESORIOS
 Route::get('/promociones', 'PromoController@index')->name('promociones');

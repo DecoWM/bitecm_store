@@ -98,7 +98,7 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
-  protected function createConsultantRequest($order_detail) 
+  protected function createConsultantRequest(&$order_detail) 
   // public function show() 
   {
     $req = [
@@ -120,6 +120,7 @@ class OrderController extends Controller
     if($response->return->errorCodeMNP == '0'){
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
+      $order_detail['porting_request_id'] = $response->return->portingRequestId;
       return true;
     }
 
@@ -131,7 +132,7 @@ class OrderController extends Controller
   * @var stateCode: 02 -> return true: Exito
   *                 else -> return false: Rechazado
   */
-  protected function checkSuccessPortingRequest($order_detail) 
+  protected function checkSuccessPortingRequest(&$order_detail) 
   // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
@@ -139,7 +140,17 @@ class OrderController extends Controller
       'dni' => $order_detail['id_number'],
       'isdn' => $order_detail['porting_phone'],
     ]);
-    return ($response->return->errorCode == '02');
+
+    if ($response->return->errorCodeMNP == '0') {
+      $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
+      $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
+      $order_detail['porting_status'] = $response->return->listPortingRequest->status;
+      $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+      return true
+    }
+
+    return false;
+    // return ($response->return->errorCode == '02');
   }
 
   public function createOrder (Request $request) {
@@ -205,18 +216,33 @@ class OrderController extends Controller
     $total_igv = 0;
     $equipo = null;
 
+    $order_detail = [];
+
     foreach ($cart as $item) {
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
+          $order_detail['service_type'] = 'Accesorios';
+          $order_detail['affiliation_type'] = null;
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
+          $order_detail['service_type'] = 'Prepago';
+          $affiliation = DB::table('tbl_affiliation')
+            ->where('affiliation_id', $request->affiliation)
+            ->get();
+          if (count($affiliation)) {
+            $order_detail['affiliation_type'] = $affiliation[0]->affiliation_name;
+          } else {
+            $order_detail['affiliation_type'] = null;
+          }
           break;
         case 2:
           $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
+          $order_detail['service_type'] = 'Postpago';
+          $order_detail['affiliation_type'] = $equipo->affiliation_name;
           break;
       }
 
@@ -243,7 +269,7 @@ class OrderController extends Controller
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => $subtotal,
-        'subtotal_igv' => $subtotal_igv
+        'subtotal_igv' => round($subtotal_igv, 2)
       ]);
     }
 
@@ -252,21 +278,19 @@ class OrderController extends Controller
       return redirect()->route('show_cart')->with('msg', 'Ha ocurrido un error con el carrito de compras');
     }
 
-    $order_detail = [
-      'idtype_id' => $request->document_type,
-      'payment_method_id' => $request->payment_method,
-      'branch_id' => $this->shared->branchByDistrict($request->delivery_distric),
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name,
-      'id_number' => $request->document_number,
-      'tracking_code' => $request->document_number,
-      'billing_district' => $request->district,
-      'billing_phone' => $request->phone_number,
-      'delivery_address' => $request->delivery_address,
-      'delivery_district' => $request->delivery_distric,
-      'contact_email' => $request->email,
-      'contact_phone' => $request->contact_phone
-    ];
+    $order_detail['idtype_id'] = $request->document_type;
+    $order_detail['payment_method_id'] = $request->payment_method;
+    $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
+    $order_detail['first_name'] = $request->first_name;
+    $order_detail['last_name'] = $request->last_name;
+    $order_detail['id_number'] = $request->document_number;
+    $order_detail['tracking_code'] = $request->document_number;
+    $order_detail['billing_district'] = $request->district;
+    $order_detail['billing_phone'] = $request->phone_number;
+    $order_detail['delivery_address'] = $request->delivery_address;
+    $order_detail['delivery_district'] = $request->delivery_district;
+    $order_detail['contact_email'] = $request->email;
+    $order_detail['contact_phone'] = $request->contact_phone;
 
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
       $source_operators = $this->shared->operatorList();
@@ -299,30 +323,42 @@ class OrderController extends Controller
 
       // Check if have many lines
       if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)){
-        return 'No puede tener más números telefónicos';
+        return redirect()->route('envio')->with('ws_result', json_encode([
+            'title' => 'te comunica que',
+            'message' => 'No puede tener más números telefónicos.'
+          ]));
       }
 
       // check if is client
       if($data_customer = $this->getInfoCustomer($order_detail)){
         // check if have debt
         if($this->checkHaveDebit($data_customer->custId)){
-          return redirect()->route('envio')->with('ws_result', 2);
+          return redirect()->route('envio')->with('ws_result', json_encode([
+            'title' => 'te recuerda que',
+            'message' => 'Tienes una deuda pendiente con BITEL, acércate a cancelar a la agencia más cercana.'
+          ]));
         }
       }
 
       // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-      /*if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
+      if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
         // process request portability
         if($this->createConsultantRequest($order_detail)){
           // check if is possible migrate to bitel
           if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
-            return 'No es posible realizar la portabilidad con su número';
+            return redirect()->route('envio')->with('ws_result', json_encode([
+              'title' => 'te comunica que',
+              'message' => 'No es posible realizar la portabilidad con su número.'
+            ]));
           }
         }
-        else{
-          return 'Error creando la solicitud de portabilidad';
+        else {
+          return redirect()->route('envio')->with('ws_result', json_encode([
+            'title' => 'te comunica que',
+            'message' => 'Ocurrió un error creando la solicitud de portabilidad.'
+          ]));
         }
-      }*/
+      }
     }
 
     $order_detail['total'] = $total;
@@ -343,8 +379,10 @@ class OrderController extends Controller
       'delivery_district' => $order_detail['delivery_district'],
       'contact_email' => $order_detail['contact_email'],
       'contact_phone' => $order_detail['contact_phone'],
+      'service_type' => $order_detail['service_type'],
+      'affiliation_type' => $order_detail['affiliation_type'],
       'total' => $order_detail['total'],
-      'total_igv' => $order_detail['total_igv']
+      'total_igv' => round($order_detail['total_igv'], 2)
     ]);
 
     $now = new \DateTime('America/Lima');

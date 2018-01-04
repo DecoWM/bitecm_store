@@ -9,31 +9,33 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class OrderCompleted extends Mailable
 {
-    use Queueable, SerializesModels;
+  use Queueable, SerializesModels;
 
-    public $order;
+  public $order;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    /*public function __construct($order)
-    {
-        $this->order = $order;
-    }*/
+  /**
+   * Create a new message instance.
+   *
+   * @return void
+   */
+  /*public function __construct($order)
+  {
+      $this->order = $order;
+  }*/
 
-    public function __construct($order) {
-        $this->order = $order;
-    }
+  public function __construct($order) {
+    $this->order = $order;
+  }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
-    {
-        return $this->view('emails.order', $this->order);
-    }
+  /**
+   * Build the message.
+   *
+   * @return $this
+   */
+  public function build()
+  {
+    return $this
+      ->subject("Tu pedido #{$this->order['order_id']} esta siendo evaluado")
+      ->view('emails.order', $this->order);
+  }
 }

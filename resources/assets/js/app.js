@@ -25,6 +25,11 @@ Vue.component('products', require('./components/products.vue'));
 Vue.component('promos', require('./components/promos.vue'));
 Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
+Vue.component('postpaidAvailable', require('./components/postpaid/available.vue'));
+Vue.component('postpaidPrice', require('./components/postpaid/price.vue'));
+Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
+Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
+
 
 var VeeValidate = require('vee-validate');
 
@@ -70,6 +75,7 @@ const app = new Vue({
         baseUrl : document.head.querySelector('meta[name="base-url"]').content,
         prefix : document.head.querySelector('meta[name="prefix"]').content,
         type : document.head.querySelector('meta[name="type"]').content,
+        isMobile: false,
         bestSeller : "smartphone",
         promo : "postpago",
         itemsPerPage : "12",
@@ -167,7 +173,11 @@ const app = new Vue({
               portability : 59,
               new : 299
             }
-        }
+        },
+        //AJAX
+        product: {},
+        current_url: "",
+        initial_url: ""
     },
     methods: {
         toggleBestSeller: function (str) {
@@ -188,6 +198,12 @@ const app = new Vue({
         },
         toggleAccordion : function (item) {
           item.isOpen = !item.isOpen;
+        },
+        toggleAccordionMobile : function (item) {
+          self = this
+          if (self.isMobile) {
+            item.isOpen = !item.isOpen;
+          }
         },
         transitionEnter : function(el, done){
           Velocity(el, 'slideDown', {duration: 300, easing: "easeInBack"},{complete: done});
@@ -272,8 +288,65 @@ const app = new Vue({
         },
         selectAffiliation: function(affiliation_routes,event) {
           if(event.target.value.length > 0) {
-            document.location = affiliation_routes[event.target.value];
+            // document.location = affiliation_routes[event.target.value];
+            route = affiliation_routes[event.target.value].split(",")
+            this.current_url = route[0]
+            window.history.replaceState("", "", route[0]);
+            this.getProduct(route[1]);
           }
+        },
+        setUrl: function (history_url, request_url) {
+            this.current_url = history_url
+            window.history.replaceState("", "", history_url);
+            this.getProduct(request_url);
+        },
+        setPlan: function(plan_id) {
+            self = this
+            console.log(plan_id);
+            console.log(self.product.plans);
+            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
+            console.log(current_plan.route);
+            console.log(current_plan.api_route);
+            if (self.current_url != current_plan.route) {
+              this.setUrl(current_plan.route, current_plan.api_route)
+            }
+        },
+        setAffiliation: function(event) {
+            self = this
+            affiliation_id = event.target.value
+            console.log(affiliation_id);
+            console.log(event);
+            current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
+            console.log(current_affiliation.route);
+            console.log(current_affiliation.api_route);
+            if (self.current_url != current_affiliation.route) {
+              this.setUrl(current_affiliation.route, current_affiliation.api_route)
+            }
+        },
+        setColor: function (stock_model_id) {
+            self = this
+            current_color = self.product.stock_models.find(item => item.stock_model_id == stock_model_id);
+            if (self.current_url != current_color.route) {
+              this.setUrl(current_color.route, current_color.api_route)
+            }
+        },
+        isActiveUrl: function (url) {
+            if (url == this.current_url) {
+                return true
+            }
+            return false
+        },
+        getProduct: function(url) {
+            self = this
+            axios.get(url).then((response) => {
+              self.product = response.data
+              console.log(self.product);
+              $('input[name="stock_model"]').val(self.product.product.stock_model_id);
+              $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+              $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+            }, (error) => {
+              console.log(error);
+            });
         }
     },
     beforeMount : function () {
@@ -286,9 +359,14 @@ const app = new Vue({
           searchedString = $('#search-init').val()
           self.searchedString  = searchedString
         }
-
+        if($('#product-init').length) {
+          product = $('#product-init').val()
+          self.product = JSON.parse(product)
+        }
     },
     mounted: function () {
+        self = this
+
         $('#banner-principal').slick({
             arrows: true,
             dots: false,
@@ -705,10 +783,17 @@ const app = new Vue({
             $(this).closest('.radio-inline').addClass('option-active');
         });
 
-        // $('.select-plan .plan').on('click', function() {
-        //     $('.plan').removeClass('plan-active');
-        //     $(this).addClass('plan-active');
-        // });
+        $('.select-plan .plan').on('click', function() {
+            $('.select-plan label').removeClass('label-active');
+            $(this).parent().addClass('label-active');
+            $('.plan').removeClass('plan-active');
+            $(this).addClass('plan-active');
+        });
+
+        $('.option-select .radio-inline').on('click', function() {
+            $('.option-select .radio-inline').removeClass('is-active');
+            $(this).addClass('is-active');
+        });
 
         $('#zoom_01').elevateZoom({
             zoomType: "inner",
@@ -851,6 +936,7 @@ const app = new Vue({
             }
         });
 
+<<<<<<< HEAD
         $(window).on('resize', function(){
 
               var contentCatalogo = $('.content-catalogo');
@@ -865,9 +951,55 @@ const app = new Vue({
 
               }
         });
+=======
 
-        $('.responsive-sidebar-title').on('click', function(event) {
+      //FILTROS DESPLEGABLES EN RESPONSIVE
+      if ($(window).width() < 767) {
+          $('.content-catalogo').show();
+          self.isMobile = true
+          for (var variable in this.filters[this.type]) {
+              if (this.filters[this.type][variable].hasOwnProperty('isOpen')) {
+                  this.filters[this.type][variable].isOpen = false
+              }
+          }
+          $('.responsive-sidebar-item').append($('.content-catalogo'));
+      } else {
+          $('.sidebarbox').append($('.content-catalogo')).next();
+      }
+
+      $(window).on('resize', function() {
+          var contentCatalogo = $('.content-catalogo');
+          var win = $(this);
+
+          if (win.width() < 767) {
+              $('.content-catalogo').show();
+              self.isMobile = true
+              for (var variable in self.filters[self.type]) {
+                  if (self.filters[self.type][variable].hasOwnProperty('isOpen')) {
+                      self.filters[self.type][variable].isOpen = false
+                  }
+              }
+              $('.responsive-sidebar-item').append(contentCatalogo);
+          } else {
+              self.isMobile = false
+              self.filters.accesorios.price.isOpen = true
+              self.filters.accesorios.manufacturer.isOpen = true
+              self.filters.promociones.type.isOpen = true
+              self.filters.promociones.price.isOpen = true
+              self.filters.promociones.manufacturer.isOpen = true
+              self.filters.prepago.type.isOpen = true
+              self.filters.prepago.price.isOpen = true
+              self.filters.prepago.price.isOpen = true
+              self.filters.postpago.type.isOpen = true
+              self.filters.postpago.affiliation.isOpen = true
+              $('.sidebarbox').append(contentCatalogo).next();
+          }
+      });
+>>>>>>> a25eb0178c0cd23c6fefd29db7c1ea6fd3e6136d
+
+      $('.responsive-sidebar-title').on('click', function(event) {
           event.preventDefault();
+<<<<<<< HEAD
           /* Act on the event */
           // $('.responsive-sidebar').toggleClass('is-open-sidebar');
           $('.responsive-sidebar-item').slideToggle(400);
@@ -893,6 +1025,11 @@ const app = new Vue({
         // });
 
 
+=======
+          $('.responsive-sidebar-item').slideToggle(300);
+          $(this).children('.btl-caret ').children('.glyphicon').toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
+      });
+>>>>>>> a25eb0178c0cd23c6fefd29db7c1ea6fd3e6136d
 
     }
 });

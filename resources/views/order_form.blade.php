@@ -1,13 +1,16 @@
 @extends('layouts.master')
 @section('content')
 @if (session('ws_result'))
+  @php 
+  $ws_result = json_decode(session('ws_result'));
+  @endphp
   {{-- @if (session('ws_result') == 2) --}}
     <div class="alert alert-warning alert-ws alert-dismissible" role="alert">
       <div class="alert-header">
         <div class="row">
           <div class="col-xs-12 col-sm-8 col-sm-push-4" >
             <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span><b>BITEL</b> te recuerda que</span>
+            <span><b>BITEL</b> {{$ws_result['title']}}</span>
           </div>
         </div>
       </div>
@@ -18,7 +21,7 @@
               <img class="img-responsive" src="{{asset('images/alerts/img-bitel.png')}}" alt="">
             </div>
             <div class="col-xs-12 col-sm-8">
-              <p>Tienes una deuda pendiente con BITEL, acércate a cancelar a la agencia más cercana.</p>
+              <p>{{$ws_result['message']}}</p>
                 {{-- {{session('msg')}} --}}
             </div>
           </div>
@@ -155,8 +158,8 @@
                       <span v-show="errors.has('email')" class="help is-danger" v-cloak>Introduce una dirección de correo electrónico válida</span>
                     </div>
                     <div class="form-group form-select">
-                      <label for="delivery_distric">DISTRITO DE DELIVERY</label>
-                      <select id="delivery_distric" name="delivery_distric" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_distric')}">
+                      <label for="delivery_district">DISTRITO DE DELIVERY</label>
+                      <select id="delivery_district" name="delivery_district" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_district')}">
                         <option value="" selected>Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
                         <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>

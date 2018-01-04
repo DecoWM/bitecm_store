@@ -10,13 +10,13 @@
             @include('products.tag',['product' => $product])
             <div id="image-equipo">
               @if(count($product_images)>0)
-                <div class="image-product text-center"><img id="zoom_02" src="{{asset('images/productos/'.$product_images[0]->product_image_url)}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset('images/productos/'.$product_images[0]->product_image_url)}}">--}}
+                <div class="image-product text-center"><img id="zoom_02" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
                 </div>
                 @if(count($product_images)>1)
                 <div id="gallery_01" class="galeria-min">
                   @foreach($product_images as $image)
-                  <a href="#" data-image="{{asset('images/productos/'.$image->product_image_url)}}">{{-- data-zoom-image="{{asset('images/productos/'.$image->product_image_url)}}">--}}
-                    <img src="{{asset('images/productos/'.$image->product_image_url)}}" alt="{{$product->product_model}}">
+                  <a href="#" data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
+                    <img src="{{asset(Storage::url($image->product_image_url))}}" alt="{{$product->product_model}}">
                   </a>
                   @endforeach
                   <div class="clearfix"></div>
@@ -25,7 +25,7 @@
                 <div id="gallery_01" class="galeria-min"></div>
                 @endif
               @else
-              <div class="image-product text-center"><img id="zoom_02" src="{{asset('images/productos/'.$product->product_image_url)}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset('images/productos/'.$product->product_image_url)}}">--}}
+              <div class="image-product text-center"><img id="zoom_02" src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
               </div>
               <div id="gallery_01" class="galeria-min"></div>
               @endif
@@ -56,11 +56,12 @@
                     <div class="col-xs-5 col-sm-6">
                       <div class="select-product"><span class="title-select">Lo quieres en</span>
                         {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
-                        <select form="purchase-form" name="affiliation" @change="selectAffiliation({
+                        {{-- <select form="purchase-form" name="affiliation" @change="selectAffiliation({
                           @foreach ($affiliations as $affiliation)
-                          '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                            '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                           @endforeach
-                        },$event)">
+                        },$event)"> --}}
+                        <select form="purchase-form" name="affiliation" @change="setAffiliation($event)">
                           @foreach ($affiliations as $affiliation)
                           <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                           @endforeach
@@ -68,7 +69,7 @@
                       </div>
                       @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                     </div>
-                    <div class="col-xs-7 col-sm-6 col-12-mob">
+                    <div class="col-xs-7 col-sm-6 col-12-mob" v-if="Object.keys(product).length == 0">
                       {{--<div class="detalle-product" v-cloak>--}}
                       <div class="detalle-product">
                         {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
@@ -88,6 +89,7 @@
                         </div>
                       </div>
                     </div>
+                    <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
                     <div class="col-xs-12 col-sm-offset-6 col-sm-6">
                       {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                       {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
@@ -114,7 +116,7 @@
                 <div class="movil-select-product">
                   <select @change="selectAffiliation({
                     @foreach ($affiliations as $affiliation)
-                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}}',
+                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                     @endforeach
                   },$event)">
                     <option name="" value="">Lo quieres en</option>
@@ -133,12 +135,14 @@
           @endforeach
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
+            {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
             <div class="select-plan">
               @foreach ($plans as $plan)
               <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
-                <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')">
+                {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
+                <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
@@ -164,6 +168,7 @@
               </label>
               @endforeach
             </div>
+            {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}
           </div>
 
         </div>
@@ -171,7 +176,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           <div class="add-select-plan"></div>
-          
+
         </div>
       </div>
       <div class="row">
@@ -219,12 +224,12 @@
             <div class="title-detalle">
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
-            <div class="list-producto">
+            <div class="list-producto" v-if="Object.keys(product).length === 0">
               @foreach ($available as $item)
               <div class="producto">
                 <div class="image-product text-center">
                   <a href="{{$item->route}}">
-                    <img src="{{asset('images/productos/'.$item->picture_url)}}" alt="equipos">
+                    <img src="{{asset(Storage::url($item->picture_url))}}" alt="equipos">
                   </a>
                 </div>
                 <div class="content-product text-center">
@@ -248,9 +253,21 @@
               </div>
               @endforeach
             </div>
+            {{-- <postpaid-available v-if="Object.keys(product).length != 0" :products="product.available"></postpaid-available> --}}
           </div>
         </div>
       </div>
       @endif
     </div>
+    @php
+      $product_init = [
+          'product' => $product,
+          'product_images' => $product_images,
+          'stock_models' => $stock_models,
+          'available' => $available,
+          'plans' => $plans,
+          'affiliations' => $affiliations,
+      ];
+    @endphp
+    <input id="product-init" type="hidden" value='@json($product_init)'>
 @endsection

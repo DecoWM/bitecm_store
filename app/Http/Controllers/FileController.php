@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -74,7 +75,7 @@ class FileController extends Controller
             ->get();
 
         if (count($filename)) {
-            return redirect(asset($filename[0]->product_data_sheet));
+            return redirect(asset(Storage::url($filename[0]->product_data_sheet)));
         } else {
             return abort(404);
         }

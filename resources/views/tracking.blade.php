@@ -22,7 +22,7 @@
                   <div class="row">
                     <div class="col-xs-6 col-sm-12 col-md-4 col-lg-4">
                       <div class="equipo-seleccionado">
-                        <div class="image"><img src="{{asset('images/productos/'.$product->product_image_url)}}" alt="equipos"></div>
+                        <div class="image"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="equipos"></div>
                         <div class="contenido">
                           <h2 class="text-uppercase title-contenido">
                             <b>{{$product->brand_name}}</b> {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}
@@ -33,11 +33,6 @@
                             <span>Plan:</span>
                             {{$product->plan_name}}
                           </p>
-                          @endif
-                          @if(isset($product->product_variation_id))
-                            @php
-                            $product->product_price = $product->product_variation_price;
-                            @endphp
                           @endif
                           @if(isset($product->promo_id))
                           <p>

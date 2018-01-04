@@ -22,3 +22,25 @@ Route::get('/prepago/buscar', 'Api\SearchController@searchPrepaid');
 Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
 Route::get('/accesorios/buscar', 'Api\SearchController@searchAccesorios');
 Route::get('/promociones/buscar', 'Api\SearchController@searchPromos');
+
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'Api\PostpaidController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'affiliation' => '^([a-zA-Z0-9_-]+)$',
+        'plan' => '^([a-zA-Z0-9_-]+)$',
+        'contract' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('api_postpaid_detail');
+
+Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'Api\PrepaidController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'plan' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('api_prepaid_detail');

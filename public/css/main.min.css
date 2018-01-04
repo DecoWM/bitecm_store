@@ -3590,7 +3590,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   }
 }
 @media (max-width: 767px) {
-  .content-catalogo .select-item {
+  .content-catalogo {
     display: none;
   }
 }

@@ -38,6 +38,10 @@
       <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-8.css')}}" />
       <script src="{{asset('js/css3-mediaqueries.min.js')}}"></script>
      <![endif]-->
+<<<<<<< HEAD
+=======
+
+>>>>>>> a25eb0178c0cd23c6fefd29db7c1ea6fd3e6136d
   </head>
   <body>
 @if (Request::segment(1) == 'envio')
