@@ -186,4 +186,13 @@
       </div>
       @endif
     </div>
+    @php
+      $product_init = [
+          'product' => $product,
+          'product_images' => $product_images,
+          'stock_models' => $stock_models,
+          'available' => $available
+      ];
+    @endphp
+    <input id="product-init" type="hidden" value='@json($product_init)'>
 @endsection
