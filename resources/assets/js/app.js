@@ -851,20 +851,20 @@ const app = new Vue({
             }
         });
 
-      $(window).on('resize', function(){
+        $(window).on('resize', function(){
 
-            var contentCatalogo = $('.content-catalogo');
-            var win = $(this); 
+              var contentCatalogo = $('.content-catalogo');
+              var win = $(this); 
 
-            if (win.width() < 767) {
-              /* ... */ 
-              $('.responsive-sidebar-item').append(contentCatalogo);
+              if (win.width() < 767) {
+                /* ... */ 
+                $('.responsive-sidebar-item').append(contentCatalogo);
 
-            } else{
-              $('.sidebarbox').append(contentCatalogo).next();
+              } else{
+                $('.sidebarbox').append(contentCatalogo).next();
 
-            }
-      });
+              }
+        });
 
         $('.responsive-sidebar-title').on('click', function(event) {
           event.preventDefault();
@@ -873,10 +873,25 @@ const app = new Vue({
           $('.responsive-sidebar-item').slideToggle(400);
         });
 
-        $(window).on('resize', function() {
-          /* Act on the event */
 
-        });
+
+        // $(function() {
+        //   if(Modernizr.svg) {
+        //     // $.each($('img[src$="svg"][data-png]'),
+        //     // function() {
+        //     //   var element = $(this);
+        //     //   element.attr('src', element.attr('data-png'));
+        //     // });
+        //     $('img[src*="svg"]').attr('src', function() {
+        //         return $(this).attr('src').replace('.svg', '.png');
+        //     });
+        //     console.log('Soporta')
+        //   }else{
+            
+        //     console.log('No Soporta');
+        //   }
+        // });
+
 
 
     }

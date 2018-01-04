@@ -3,7 +3,15 @@
           <div id="mapa-sitio">
             <div class="row">
               <div class="col-xs-12 col-sm-6 col-sm-push-6">
-                <div class="logo-footer text-right"><img src="/images/footer/svg/logo.svg" alt="logotipo-footer"></div>
+                <div class="logo-footer text-right">
+                  <!--[if lte IE 8]>
+                    <img src="/images/footer/svg/logo.png" alt="logotipo-footer">
+                  <![endif]-->
+                  <!--[if gte IE 9]><!-->
+                    <img src="/images/footer/svg/logo.svg" alt="logotipo-footer">
+                  <!--<![endif]-->
+
+                  </div>
               </div>
               <div class="col-xs-12 col-sm-6 col-sm-pull-6"><span class="mapa">MAPA DE SITIO</span></div>
             </div>
