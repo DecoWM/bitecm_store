@@ -314,11 +314,7 @@ const app = new Vue({
         setAffiliation: function(event) {
             self = this
             affiliation_id = event.target.value
-            console.log(affiliation_id);
-            console.log(event);
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
-            console.log(current_affiliation.route);
-            console.log(current_affiliation.api_route);
             if (self.current_url != current_affiliation.route) {
               this.setUrl(current_affiliation.route, current_affiliation.api_route)
             }
@@ -341,6 +337,9 @@ const app = new Vue({
             axios.get(url).then((response) => {
               self.product = response.data
               console.log(self.product);
+              title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
+              $('.title h1').text(title);
+              $('.title h2').text(title);
               $('input[name="stock_model"]').val(self.product.product.stock_model_id);
               $('input[name="product_variation"]').val(self.product.product.product_variation_id);
               $('input[name="affiliation"]').val(self.product.product.affiliation_id);
@@ -788,6 +787,11 @@ const app = new Vue({
             $(this).parent().addClass('label-active');
             $('.plan').removeClass('plan-active');
             $(this).addClass('plan-active');
+        });
+
+        $('.option-select .radio-inline').on('click', function() {
+            $('.option-select .radio-inline').removeClass('is-active');
+            $(this).addClass('is-active');
         });
 
         $('#zoom_01').elevateZoom({

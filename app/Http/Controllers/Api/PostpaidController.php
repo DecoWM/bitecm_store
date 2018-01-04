@@ -99,38 +99,42 @@ class PostpaidController extends Controller
       $product_plans = DB::select('call PA_planList(2)');
       $product_affiliations = DB::select('call PA_affiliationList()');
 
-      collect($product_plans)->map(function ($item, $key) use ($product) {
+      collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
         $item->route = route('postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$item->plan_slug,
           'affiliation'=>$product->affiliation_slug,
-          'contract'=>$product->contract_slug
+          'contract'=>$product->contract_slug,
+          'color' => isset($color_slug) ? $color_slug : null
         ]);
         $item->api_route = route('api_postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$item->plan_slug,
           'affiliation'=>$product->affiliation_slug,
-          'contract'=>$product->contract_slug
+          'contract'=>$product->contract_slug,
+          'color' => isset($color_slug) ? $color_slug : null
         ]);
         return $item;
       });
 
-      collect($product_affiliations)->map(function ($item, $key) use ($product) {
+      collect($product_affiliations)->map(function ($item, $key) use ($product, $color_slug) {
         $item->route = route('postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$product->plan_slug,
           'affiliation'=>$item->affiliation_slug,
-          'contract'=>$product->contract_slug
+          'contract'=>$product->contract_slug,
+          'color' => isset($color_slug) ? $color_slug : null
         ]);
         $item->api_route = route('api_postpaid_detail', [
           'brand'=>$product->brand_slug,
           'product'=>$product->product_slug,
           'plan'=>$product->plan_slug,
           'affiliation'=>$item->affiliation_slug,
-          'contract'=>$product->contract_slug
+          'contract'=>$product->contract_slug,
+          'color' => isset($color_slug) ? $color_slug : null
         ]);
         return $item;
       });
