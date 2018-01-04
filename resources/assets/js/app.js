@@ -790,6 +790,11 @@ const app = new Vue({
             $(this).addClass('plan-active');
         });
 
+        $('.option-select .radio-inline').on('click', function() {
+            $('.option-select .radio-inline').removeClass('is-active');
+            $(this).addClass('is-active');
+        });
+
         $('#zoom_01').elevateZoom({
             zoomType: "inner",
             cursor: "crosshair",
