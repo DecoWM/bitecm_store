@@ -38,7 +38,6 @@
       <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-8.css')}}" />
       <script src="{{asset('js/css3-mediaqueries.min.js')}}"></script>
      <![endif]-->
-
   </head>
   <body>
 @if (Request::segment(1) == 'envio')
