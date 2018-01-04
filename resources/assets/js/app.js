@@ -936,22 +936,6 @@ const app = new Vue({
             }
         });
 
-<<<<<<< HEAD
-        $(window).on('resize', function(){
-
-              var contentCatalogo = $('.content-catalogo');
-              var win = $(this); 
-
-              if (win.width() < 767) {
-                /* ... */ 
-                $('.responsive-sidebar-item').append(contentCatalogo);
-
-              } else{
-                $('.sidebarbox').append(contentCatalogo).next();
-
-              }
-        });
-=======
 
       //FILTROS DESPLEGABLES EN RESPONSIVE
       if ($(window).width() < 767) {
@@ -995,41 +979,12 @@ const app = new Vue({
               $('.sidebarbox').append(contentCatalogo).next();
           }
       });
->>>>>>> a25eb0178c0cd23c6fefd29db7c1ea6fd3e6136d
 
       $('.responsive-sidebar-title').on('click', function(event) {
           event.preventDefault();
-<<<<<<< HEAD
-          /* Act on the event */
-          // $('.responsive-sidebar').toggleClass('is-open-sidebar');
-          $('.responsive-sidebar-item').slideToggle(400);
-        });
-
-
-
-        // $(function() {
-        //   if(Modernizr.svg) {
-        //     // $.each($('img[src$="svg"][data-png]'),
-        //     // function() {
-        //     //   var element = $(this);
-        //     //   element.attr('src', element.attr('data-png'));
-        //     // });
-        //     $('img[src*="svg"]').attr('src', function() {
-        //         return $(this).attr('src').replace('.svg', '.png');
-        //     });
-        //     console.log('Soporta')
-        //   }else{
-            
-        //     console.log('No Soporta');
-        //   }
-        // });
-
-
-=======
           $('.responsive-sidebar-item').slideToggle(300);
           $(this).children('.btl-caret ').children('.glyphicon').toggleClass('glyphicon-chevron-down glyphicon-chevron-up');
       });
->>>>>>> a25eb0178c0cd23c6fefd29db7c1ea6fd3e6136d
 
     }
 });
