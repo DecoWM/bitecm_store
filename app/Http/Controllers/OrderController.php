@@ -49,7 +49,7 @@ class OrderController extends Controller
   * @var isOverQuota: 0 -> return false
   *                  else -> return true
   **/
-  protected function checkIsOverQouta($order_detail) 
+  protected function checkIsOverQouta($order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
       'paymethodType' => $order_detail['type_id'],
@@ -66,7 +66,7 @@ class OrderController extends Controller
   *              else -> return false: Not have debt
   */
   protected function getInfoCustomer($order_detail)
-  // public function show() 
+  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
       'idType' => '01', // persona natural !!!
@@ -84,7 +84,7 @@ class OrderController extends Controller
   *                 else -> return false: Not have debt
   */
   protected function checkHaveDebit($custId)
-  // public function show() 
+  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
       'custId' => $custId
@@ -98,8 +98,8 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
-  protected function createConsultantRequest(&$order_detail) 
-  // public function show() 
+  protected function createConsultantRequest(&$order_detail)
+  // public function show()
   {
     $req = [
       'staffCode' => 'CM_THUYNTT',
@@ -116,7 +116,7 @@ class OrderController extends Controller
     ];
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
-    
+
     if($response->return->errorCodeMNP == '0'){
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
@@ -132,8 +132,8 @@ class OrderController extends Controller
   * @var stateCode: 02 -> return true: Exito
   *                 else -> return false: Rechazado
   */
-  protected function checkSuccessPortingRequest(&$order_detail) 
-  // public function show() 
+  protected function checkSuccessPortingRequest(&$order_detail)
+  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
@@ -146,7 +146,7 @@ class OrderController extends Controller
       $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
       $order_detail['porting_status'] = $response->return->listPortingRequest->status;
       $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
-      return true
+      return true;
     }
 
     return false;
@@ -160,16 +160,16 @@ class OrderController extends Controller
       return redirect()->route('home');
     }
 
-    // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO', 
-    //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO', 
-    //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE', 
-    //   'LOS OLIVOS', 'LURIGANCHO', 'LURIN', 'MAGDALENA DEL MAR', 'MAGDALENA VIEJA', 
+    // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO',
+    //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO',
+    //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE',
+    //   'LOS OLIVOS', 'LURIGANCHO', 'LURIN', 'MAGDALENA DEL MAR', 'MAGDALENA VIEJA',
     //   'MIRAFLORES', 'PACHACAMAC', 'PUCUSANA', 'PUENTE PIEDRA', 'PUNTA HERMOSA',
     //   'PUNTA NEGRA', 'RÍMAC', 'SAN BARTOLO', 'SAN BORJA', 'SAN ISIDRO',
     //   'SAN JUAN DE LURIGANCHO', 'SAN JUAN DE MIRAFLORES', 'SAN LUIS',
     //   'SAN MARTÍN DE PORRES', 'SAN MIGUEL', 'SANTA ANITA', 'SANTA MARÍA DEL MAR',
     //   'SANTA ROSA', 'SANTIAGO DE SURCO', 'SURQUILLO', 'VILLA EL SALVADOR',
-    //   'SURQUILLO', 'VILLA EL SALVADOR', 'VILLA MARÍA DEL TRIUNFO',  'CALLAO', 
+    //   'SURQUILLO', 'VILLA EL SALVADOR', 'VILLA MARÍA DEL TRIUNFO',  'CALLAO',
     //   'BELLAVISTA', 'CARMEN DE LA LEGUA REYNOSO', 'LA PERLA', 'LA PUNTA', 'VENTANILLA'
     // ];
 
@@ -178,7 +178,7 @@ class OrderController extends Controller
     $source_operators = $this->shared->operatorList();
 
     $affiliation_list = DB::select('call PA_affiliationList()');
-    
+
     $equipo = null;
     foreach ($cart as $item) {
       switch ($item['type_id']) {
@@ -192,7 +192,7 @@ class OrderController extends Controller
           break;
       }
     }
-    
+
     return view('order_form', [
       'item' => $equipo,
       'distritos' => $distritos,
