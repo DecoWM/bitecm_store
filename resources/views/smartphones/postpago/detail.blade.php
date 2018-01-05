@@ -224,7 +224,8 @@
             <div class="title-detalle">
               <h5>PRODUCTOS DISPONIBLES</h5>
             </div>
-            <div class="list-producto" v-if="Object.keys(product).length === 0">
+            <div class="list-producto">
+            {{-- <div class="list-producto" v-if="Object.keys(product).length === 0"> --}}
               @foreach ($available as $item)
               <div class="producto">
                 <div class="image-product text-center">

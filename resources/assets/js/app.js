@@ -374,7 +374,6 @@ const app = new Vue({
 
             } else {
                 image_src = self.baseUrl + '/storage/' + self.product.product.product_image_url;
-                console.log(image_src);
                 $('#zoom_01').attr('src', image_src);
             }
 
