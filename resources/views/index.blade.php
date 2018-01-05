@@ -215,21 +215,43 @@
           <div class="row">
             <div class="col-xs-4">
               <div class="text-center">
-                <div class="image"><img src="./images/home/svg/garantia.svg" alt="" class="garantia"></div>
+                <div class="image">
+                  <!--[if lte IE 8]>
+                    <img src="./images/home/svg/garantia.png" alt="garantia" class="garantia">
+                  <![endif]-->
+                  <!--[if gte IE 9]><!-->
+                    <img src="./images/home/svg/garantia.svg" alt="garantia" class="garantia">
+                  <!--<![endif]-->
+                </div>
                 <h2>Garantía</h2>
                 <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p>
               </div>
             </div>
             <div class="col-xs-4">
               <div class="text-center">
-                <div class="image"><img src="./images/home/svg/delivery.svg" alt="" class="delivery"></div>
+                <div class="image">
+                  <!--[if lte IE 8]>
+                    <img src="./images/home/svg/delivery.png" alt="delivery" class="delivery">
+                  <![endif]-->
+                  <!--[if gte IE 9]><!-->
+                    <img src="./images/home/svg/delivery.svg" alt="delivery" class="delivery">
+                  <!--<![endif]-->
+                 
+                </div>
                 <h2>Delivery Gratis</h2>
                 <p>Entrega gratuita en Lima y Provincias*<br>*Mira la lista detallada de la cobertura por delivery </p>
               </div>
             </div>
             <div class="col-xs-4">
               <div class="text-center">
-                <div class="image"><img src="./images/home/svg/pago-seguro.svg" alt="" class="pago-seguro"></div>
+                <div class="image">
+                  <!--[if lte IE 8]>
+                    <img src="./images/home/svg/pago-seguro.png" alt="pago seguro" class="pago-seguro">
+                  <![endif]-->
+                  <!--[if gte IE 9]><!-->
+                    <img src="./images/home/svg/pago-seguro.svg" alt="pago seguro" class="pago-seguro">
+                  <!--<![endif]-->
+                </div>
                 <h2>Pago Seguro</h2>
                 <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p>
               </div>

@@ -1,3 +1,37 @@
+/* HEADER */
+
 header #site-header .container .info-bitel ul li{
   float: left;
 }
+
+/* HOME */
+
+section#equipos-vendidos .container .row .sub-heading,
+section#equipos-promocion .container .row .sub-heading{
+	/*background: red;*/
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+section#equipos-promocion .container .row .sub-heading h3,
+section#equipos-vendidos .container .row .sub-heading h3{
+	float: left;
+}
+
+/* DESCRIPCION EQUIPO*/
+
+/*#content-page #image-equipo .image-product img{
+	height: auto;
+}*/
+
+/* FOOTER */
+
+footer .container #info-footer .row .social-media UL LI{
+  float: left;
+}
+
+footer .container #mapa-sitio .row .logo-footer img{
+  height: auto;
+}
+

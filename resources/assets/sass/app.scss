@@ -236,7 +236,7 @@ input:checked ~ .checkmark:after {
 
 #list-equipos .image-product img {
     height: 100%;
-    // width: 100%;
+    width: auto;
     // object-fit: contain;
 }
 
@@ -332,6 +332,8 @@ section#equipos-promocion .container .row .content-tab-pro .producto,
 section#equipos-vendidos .container .row .content-tab-pro .producto {
     padding-top: 22px;
     padding-bottom: 174px;
+    max-width: 265px;
+    
 }
 
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .price-product,

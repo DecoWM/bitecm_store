@@ -314,11 +314,7 @@ const app = new Vue({
         setAffiliation: function(event) {
             self = this
             affiliation_id = event.target.value
-            console.log(affiliation_id);
-            console.log(event);
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
-            console.log(current_affiliation.route);
-            console.log(current_affiliation.api_route);
             if (self.current_url != current_affiliation.route) {
               this.setUrl(current_affiliation.route, current_affiliation.api_route)
             }
@@ -341,12 +337,46 @@ const app = new Vue({
             axios.get(url).then((response) => {
               self.product = response.data
               console.log(self.product);
+              title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
+              $('.title h1').text(title);
+              $('.title h2').text(title);
               $('input[name="stock_model"]').val(self.product.product.stock_model_id);
               $('input[name="product_variation"]').val(self.product.product.product_variation_id);
               $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+
+              self.replaceProductImages();
             }, (error) => {
               console.log(error);
             });
+        },
+        replaceProductImages: function () {
+            images = "";
+
+            if (self.product.product_images.length > 0) {
+                image_src = self.baseUrl + '/storage/' + self.product.product_images[0].product_image_url;
+                $('#zoom_01').attr('src', image_src);
+                $('#gallery_01').html("");
+                if (self.product.product_images.length > 1) {
+                  for (image of self.product.product_images) {
+                    images += '<a href="#" data-image="' + self.baseUrl + '/storage/' + image.product_image_url + '"><img src="' + self.baseUrl + '/storage/' + image.product_image_url + '" alt="' + self.product.product.product_model + '"></a>';
+                  }
+                  $('#gallery_01').html(images);
+
+                  $('#zoom_01').elevateZoom({
+                    zoomType: "inner",
+                    cursor: "default",
+                    zoomWindowFadeIn: 500,
+                    zoomWindowFadeOut: 750,
+                    gallery : "gallery_01",
+                    galleryActiveClass: "active",
+                  });
+                }
+
+            } else {
+                image_src = self.baseUrl + '/storage/' + self.product.product.product_image_url;
+                $('#zoom_01').attr('src', image_src);
+            }
+
         }
     },
     beforeMount : function () {
@@ -797,11 +827,11 @@ const app = new Vue({
 
         $('#zoom_01').elevateZoom({
             zoomType: "inner",
-            cursor: "crosshair",
+            cursor: "default",
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 750,
             gallery : "gallery_01",
-            galleryActiveClass: "active"
+            galleryActiveClass: "active",
         });
 
         $(".option-select input").change(function(e){
