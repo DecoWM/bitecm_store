@@ -924,6 +924,7 @@ BEGIN
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR PRD.product_model like ''%',product_string_search,'%''
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
@@ -938,7 +939,8 @@ BEGIN
       1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
-      WHERE PRD.`active` = 1');
+      WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
     -- order
     SET cad_order = ' ORDER BY ';
     SET cad_order_comma = '';
@@ -1601,6 +1603,7 @@ BEGIN
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR PRD.product_model like ''%',product_string_search,'%''
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
@@ -1615,7 +1618,8 @@ BEGIN
       1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
-      WHERE PRD.`active` = 1');
+      WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
     -- order
     SET cad_order = ' ORDER BY ';
     SET cad_order_comma = '';
