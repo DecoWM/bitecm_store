@@ -427,9 +427,61 @@ var app = new Vue({
                 $('input[name="stock_model"]').val(self.product.product.stock_model_id);
                 $('input[name="product_variation"]').val(self.product.product.product_variation_id);
                 $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+
+                self.replaceProductImages();
             }, function (error) {
                 console.log(error);
             });
+        },
+        replaceProductImages: function replaceProductImages() {
+            images = "";
+
+            if (self.product.product_images.length > 0) {
+                image_src = self.baseUrl + '/storage/' + self.product.product_images[0].product_image_url;
+                $('#zoom_01').attr('src', image_src);
+                $('#gallery_01').html("");
+                if (self.product.product_images.length > 1) {
+                    var _iteratorNormalCompletion = true;
+                    var _didIteratorError = false;
+                    var _iteratorError = undefined;
+
+                    try {
+                        for (var _iterator = self.product.product_images[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                            image = _step.value;
+
+                            images += '<a href="#" data-image="' + self.baseUrl + '/storage/' + image.product_image_url + '"><img src="' + self.baseUrl + '/storage/' + image.product_image_url + '" alt="' + self.product.product.product_model + '"></a>';
+                        }
+                    } catch (err) {
+                        _didIteratorError = true;
+                        _iteratorError = err;
+                    } finally {
+                        try {
+                            if (!_iteratorNormalCompletion && _iterator.return) {
+                                _iterator.return();
+                            }
+                        } finally {
+                            if (_didIteratorError) {
+                                throw _iteratorError;
+                            }
+                        }
+                    }
+
+                    $('#gallery_01').html(images);
+
+                    $('#zoom_01').elevateZoom({
+                        zoomType: "inner",
+                        cursor: "default",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750,
+                        gallery: "gallery_01",
+                        galleryActiveClass: "active"
+                    });
+                }
+            } else {
+                image_src = self.baseUrl + '/storage/' + self.product.product.product_image_url;
+                console.log(image_src);
+                $('#zoom_01').attr('src', image_src);
+            }
         }
     },
     beforeMount: function beforeMount() {
@@ -812,7 +864,7 @@ var app = new Vue({
 
         $('#zoom_01').elevateZoom({
             zoomType: "inner",
-            cursor: "crosshair",
+            cursor: "default",
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 750,
             gallery: "gallery_01",
