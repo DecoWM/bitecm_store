@@ -323,7 +323,7 @@ class OrderController extends Controller
 
       // Check if have many lines
       if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)){
-        return redirect()->route('envio')->with('ws_result', json_encode([
+        return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te comunica que',
             'message' => 'No puede tener más números telefónicos.'
           ]));
@@ -333,7 +333,7 @@ class OrderController extends Controller
       if($data_customer = $this->getInfoCustomer($order_detail)){
         // check if have debt
         if($this->checkHaveDebit($data_customer->custId)){
-          return redirect()->route('envio')->with('ws_result', json_encode([
+          return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te recuerda que',
             'message' => 'Tienes una deuda pendiente con BITEL, acércate a cancelar a la agencia más cercana.'
           ]));
@@ -346,14 +346,14 @@ class OrderController extends Controller
         if($this->createConsultantRequest($order_detail)){
           // check if is possible migrate to bitel
           if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
-            return redirect()->route('envio')->with('ws_result', json_encode([
+            return redirect()->route('create_order')->with('ws_result', json_encode([
               'title' => 'te comunica que',
               'message' => 'No es posible realizar la portabilidad con su número.'
             ]));
           }
         }
         else {
-          return redirect()->route('envio')->with('ws_result', json_encode([
+          return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te comunica que',
             'message' => 'Ocurrió un error creando la solicitud de portabilidad.'
           ]));
