@@ -406,6 +406,8 @@ class OrderController extends Controller
       'products' => $products
     ]));
 
+    DB::commit();
+    
     $request->session()->flush();
 
     return view('order_detail', ['products' => $products, 'order_id' => $order_id]);
