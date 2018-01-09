@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\SoapWrapper; // For use client SOAP service
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -66,16 +67,18 @@ class OrderController extends Controller
   *              else -> return false: Not have debt
   */
   protected function getInfoCustomer($order_detail)
-  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
       'idType' => '01', // persona natural !!!
       'idNo' => $order_detail['id_number']
     ]);
-    if(isset($response->return->result))
+    if(isset($response->return->result)) {
       return $response->return->result;
-    else
+    }
+    else {
+      Log::warning('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
       return false;
+    }
   }
 
   /**
@@ -84,12 +87,15 @@ class OrderController extends Controller
   *                 else -> return false: Not have debt
   */
   protected function checkHaveDebit($custId)
-  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
       'custId' => $custId
     ]);
-    return ($response->return->errorCode == -1);
+    if ($response->return->errorCode == -1) {
+      return true;
+    }
+    Log::warning('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
+    return false;
   }
 
   /**
@@ -99,7 +105,6 @@ class OrderController extends Controller
   * @var portingRequestId: id for request created
   */
   protected function createConsultantRequest(&$order_detail)
-  // public function show()
   {
     $req = [
       'staffCode' => 'CM_THUYNTT',
@@ -117,13 +122,14 @@ class OrderController extends Controller
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
 
-    if($response->return->errorCodeMNP == '0'){
+    if ($response->return->errorCodeMNP == '0') {
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
       $order_detail['porting_request_id'] = $response->return->portingRequestId;
       return true;
     }
 
+    Log::warning('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
     return false;
   }
 
@@ -149,6 +155,7 @@ class OrderController extends Controller
       return true;
     }
 
+    Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
     return false;
     // return ($response->return->errorCode == '02');
   }
@@ -399,15 +406,19 @@ class OrderController extends Controller
       'order_status_id' => \Config::get('filter.order_status_id')
     ]);
 
-    Mail::to($request->email)->send(new OrderCompleted([
-      'order_id' => $order_id,
-      'order_detail' => $order_detail,
-      'order_items' => $order_items,
-      'products' => $products
-    ]));
+    try {
+      Mail::to($request->email)->send(new OrderCompleted([
+        'order_id' => $order_id,
+        'order_detail' => $order_detail,
+        'order_items' => $order_items,
+        'products' => $products
+      ]));
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar correo a '.$request->email.' por la orden #'.$order_id);
+    }
 
     DB::commit();
-    
+
     $request->session()->flush();
 
     return view('order_detail', ['products' => $products, 'order_id' => $order_id]);
