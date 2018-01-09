@@ -10,7 +10,7 @@
         <div class="row">
           <div class="col-xs-12 col-sm-8 col-sm-push-4" >
             <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span><b>BITEL</b> {{$ws_result['title']}}</span>
+            <span><b>BITEL</b> {{$ws_result->title}}</span>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
               <img class="img-responsive" src="{{asset('images/alerts/img-bitel.png')}}" alt="">
             </div>
             <div class="col-xs-12 col-sm-8">
-              <p>{{$ws_result['message']}}</p>
+              <p>{{$ws_result->message}}</p>
                 {{-- {{session('msg')}} --}}
             </div>
           </div>
