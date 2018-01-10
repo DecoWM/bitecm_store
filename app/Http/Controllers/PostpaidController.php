@@ -75,7 +75,7 @@ class PostpaidController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, $product->product_id);
+    $available_products = $this->shared->searchProductPostpaid('1,3', $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {

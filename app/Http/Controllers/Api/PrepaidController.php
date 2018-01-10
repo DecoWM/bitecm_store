@@ -44,7 +44,7 @@ class PrepaidController extends Controller
           return response()->json(["error" => ["message" => "Product not found."]], 404);
       }
 
-      $available_products = $this->shared->searchProductPrepaid(1, $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
+      $available_products = $this->shared->searchProductPrepaid('1,3', $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
       $available = $available_products['products'];
       foreach($available as $i => $item) {

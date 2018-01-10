@@ -275,7 +275,7 @@ DELIMITER $$
 -- Procedimiento para listar equipos sin variacion con filtrado / paginado
 --
 CREATE PROCEDURE PA_productSearch(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
@@ -302,7 +302,7 @@ BEGIN
   SET cad_order = " ";
   SET cad_order_comma = " ";
   -- checking null values
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
@@ -314,8 +314,8 @@ BEGIN
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
 
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for manufacturer
   IF (product_brands <> '') THEN
@@ -464,7 +464,7 @@ DELIMITER $$
 -- Procedimiento para contar el total de equipos sin variacion con filtrado
 --
 CREATE PROCEDURE PA_productCount(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
@@ -481,7 +481,7 @@ BEGIN
   -- conditional string query
   SET cad_condition = "";
   -- checking null values
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
@@ -489,8 +489,8 @@ BEGIN
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
 
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for manufacturer
   IF (product_brands <> '') THEN
@@ -760,7 +760,7 @@ DELIMITER $$
 -- Procedimiento para listar equipos prepago con filtrado / paginado
 --
 CREATE PROCEDURE PA_productSearchPrepago(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN plan_id INT,
   IN product_price_ini DECIMAL(6,2),
@@ -770,7 +770,7 @@ CREATE PROCEDURE PA_productSearchPrepago(
   IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),
   IN sort_direction VARCHAR(5),
-  IN product_tag VARCHAR(15),
+  IN product_tag VARCHAR(255),
   IN product_ignore_ids VARCHAR(50)
 )
 BEGIN
@@ -796,13 +796,13 @@ BEGIN
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET plan_id = IFNULL(plan_id, 0); -- set value 14 (Prepago B-Voz) if null
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET pag_actual = IFNULL(pag_actual, 0); -- set value if null
   SET pag_total_by_page = IFNULL(pag_total_by_page, 8); -- set value if null
   SET product_string_search = IFNULL(product_string_search,'');
   SET sort_by = IFNULL(sort_by,'');
   SET sort_direction = IFNULL(sort_direction,'');
-  SET product_tag = IFNULL(product_tag,'');
+  SET product_tag = IFNULL(product_tag, '');
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
   -- setting actual page if wrong value
   IF (pag_actual < 1) THEN
@@ -826,8 +826,8 @@ BEGIN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for plan
   IF (plan_id > 0) THEN
@@ -835,7 +835,8 @@ BEGIN
   END IF;
   -- conditional filter for tag product (nuevo / destacado)
   IF (product_tag <> '') THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag = ''', product_tag,' '' ');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag IN (', product_tag, ')');
+    SET cad_condition = CONCAT(cad_condition, ' AND STM.stock_model_id IS NOT NULL');
   END IF;
   -- conditional filter for ignore ids products and not stock
   IF (product_ignore_ids <> '') THEN
@@ -1002,7 +1003,7 @@ DELIMITER $$
 -- Procedimiento para contar el total equipos prepago con filtrado
 --
 CREATE PROCEDURE PA_productCountPrepago(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN plan_id INT,
   IN product_price_ini DECIMAL(6,2),
@@ -1030,9 +1031,9 @@ BEGIN
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET plan_id = IFNULL(plan_id, 14); -- set value 14 (Prepago B-Voz) if null
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET product_string_search = IFNULL(product_string_search,'');
-  SET product_tag = IFNULL(product_tag,'');
+  SET product_tag = IFNULL(product_tag, '');
   SET product_ignore_ids = IFNULL(product_ignore_ids,'');
 
   -- cad_condition filter for price
@@ -1053,8 +1054,8 @@ BEGIN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for plan
   IF (plan_id > 0) THEN
@@ -1062,7 +1063,8 @@ BEGIN
   END IF;
   -- conditional filter for tag product (nuevo / destacado)
   IF (product_tag <> '') THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag = ''', product_tag,' '' ');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag IN (', product_tag, ')');
+    SET cad_condition = CONCAT(cad_condition, ' AND STM.stock_model_id IS NOT NULL');
   END IF;
   -- conditional filter for ignore ids products and not stock
   IF (product_ignore_ids <> '') THEN
@@ -1136,6 +1138,7 @@ BEGIN
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
@@ -1145,7 +1148,8 @@ BEGIN
     SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
-      WHERE PRD.`active` = 1');
+      WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
   END IF;
 
   SET cad_condition = CONCAT(cad_condition, '
@@ -1426,7 +1430,7 @@ DELIMITER $$
 
 
 CREATE PROCEDURE PA_productSearchPostpago(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN affiliation_id INT,
   IN plan_id INT,
@@ -1438,6 +1442,7 @@ CREATE PROCEDURE PA_productSearchPostpago(
   IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),
   IN sort_direction VARCHAR(5),
+  IN product_tag VARCHAR(255),
   IN product_ignore_ids VARCHAR(50)
 )
 BEGIN
@@ -1463,7 +1468,7 @@ BEGIN
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET plan_id = IFNULL(plan_id, 7); -- set value 7 (Postpago iChip 99.9) if null
   SET affiliation_id = IFNULL(affiliation_id, 1); -- set value 1 (Portabilidad) if null
   SET contract_id = IFNULL(contract_id, 1); -- set value 1 (18 meses) if null
@@ -1472,6 +1477,7 @@ BEGIN
   SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
   SET sort_direction = IFNULL(sort_direction, '');
+  SET product_tag = IFNULL(product_tag, '');
   SET product_ignore_ids = IFNULL(product_ignore_ids, '');
   -- setting actual page if wrong value
   IF (pag_actual < 1) THEN
@@ -1495,8 +1501,8 @@ BEGIN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
   END IF;
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for plan
   IF (plan_id > 0) THEN
@@ -1509,6 +1515,11 @@ BEGIN
   -- conditional filter for contract
   IF (contract_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.contract_id = ', contract_id);
+  END IF;
+  -- conditional filter for tag product (nuevo / destacado)
+  IF (product_tag <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag IN (', product_tag, ')');
+    SET cad_condition = CONCAT(cad_condition, ' AND STM.stock_model_id IS NOT NULL');
   END IF;
   -- conditional filter for manufacturer
   IF (product_ignore_ids <> '') THEN
@@ -1681,7 +1692,7 @@ DELIMITER $$
 -- Procedimiento para contar el total equipos postpago con filtrado
 --
 CREATE PROCEDURE PA_productCountPostpago(
-  IN category_id INT,
+  IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN affiliation_id INT,
   IN plan_id INT,
@@ -1689,6 +1700,7 @@ CREATE PROCEDURE PA_productCountPostpago(
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
   IN product_string_search VARCHAR(255),
+  IN product_tag VARCHAR(255),
   IN product_ignore_ids VARCHAR(50)
 )
 BEGIN
@@ -1707,11 +1719,12 @@ BEGIN
   SET product_price_ini = IFNULL(product_price_ini, -1); -- set value if null
   SET product_price_end = IFNULL(product_price_end, -1); -- set value if null
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
-  SET category_id = IFNULL(category_id, -1); -- set value if null
+  SET product_categories = IFNULL(product_categories, ''); -- set value if null
   SET plan_id = IFNULL(plan_id, 7); -- set value 7 (Postpago iChip 99.9) if null
   SET affiliation_id = IFNULL(affiliation_id, 1); -- set value 1 (Portabilidad) if null
   SET contract_id = IFNULL(contract_id, 1); -- set value 1 (18 meses) if null
   SET product_string_search = IFNULL(product_string_search, '');
+  SET product_tag = IFNULL(product_tag, '');
   SET product_ignore_ids = IFNULL(product_ignore_ids, '');
 
   -- cad_condition filter for price
@@ -1729,11 +1742,11 @@ BEGIN
   END IF;
   -- conditional filter for manufacturer
   IF (product_brands <> '') THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands,')');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.brand_id IN (', product_brands, ')');
   END IF;
   -- conditional filter for category (smartphone, tablet, basic, etc)
-  IF (category_id > 0) THEN
-    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id = ', category_id);
+  IF (product_categories <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.category_id IN (', product_categories, ')');
   END IF;
   -- conditional filter for plan
   IF (plan_id > 0) THEN
@@ -1746,6 +1759,11 @@ BEGIN
   -- conditional filter for contract
   IF (contract_id > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.contract_id = ', contract_id);
+  END IF;
+  -- conditional filter for tag product (nuevo / destacado)
+  IF (product_tag <> '') THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD.product_tag IN (', product_tag, ')');
+    SET cad_condition = CONCAT(cad_condition, ' AND STM.stock_model_id IS NOT NULL');
   END IF;
   -- conditional filter for manufacturer
   IF (product_ignore_ids <> '') THEN
@@ -1826,6 +1844,7 @@ BEGIN
       join_segment, '
       -- Filter by search words
       WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
@@ -1835,7 +1854,8 @@ BEGIN
     SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
-      WHERE PRD.`active` = 1');
+      WHERE PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
   END IF;
 
   -- validation for PLAN and promo price

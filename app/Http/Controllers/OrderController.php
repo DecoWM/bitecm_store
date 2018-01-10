@@ -139,7 +139,6 @@ class OrderController extends Controller
   *                 else -> return false: Rechazado
   */
   protected function checkSuccessPortingRequest(&$order_detail)
-  // public function show()
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
