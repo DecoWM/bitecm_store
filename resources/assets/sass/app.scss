@@ -659,7 +659,7 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 
-@media (max-width: 767px){
+@media screen and (max-width: 767px){
 
     #form-cliente form .btn-detalle a.regresar{
         width: 100% !important;
@@ -792,19 +792,28 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 
-@media (max-width: 768px) {
-  #nav-carrito ul:before {
-    width: 2px;
-    height: 100px;
-    top: 10px;
-    left: 4px;
-    bottom: initial;
-  }
+@media screen and (max-width: 768px) {
+    #nav-carrito ul:before {
+        width: 2px;
+        height: 100px;
+        top: 10px;
+        left: 4px;
+        bottom: initial;
+    }
+    section#equipos-promocion .container .row .content-tab-pro .producto,
+    section#equipos-vendidos .container .row .content-tab-pro .producto{
+        max-width: 100%;
+    }  
 }
 
 
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
+
+    section#equipos-promocion .container .row .content-tab-pro .producto,
+    section#equipos-vendidos .container .row .content-tab-pro .producto{
+        max-width: 100%;
+    }   
 
     #section-pedido .row .btn-detalle a.regresar{
         width: 100%;
@@ -929,13 +938,15 @@ li.item-nav-mobile.search #search .btn-search {
 
 }
 
-@media (max-width: 374px){
+
+
+@media screen and (max-width: 374px){
     .col-12-mob {
         width: 100%;
     }
 }
 
-@media (max-width: 320px) {
+@media screen and (max-width: 320px) {
 
     .ver-mas-equipo .title-detalle h4{
         font-size: 12px;

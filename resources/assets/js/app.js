@@ -465,7 +465,7 @@ const app = new Vue({
 
         $('.promociones-tab').slick({
             arrows: true,
-            dots: true,
+            dots: false,
             infinite: true,
             autoplay: true,
             arrows: true,
