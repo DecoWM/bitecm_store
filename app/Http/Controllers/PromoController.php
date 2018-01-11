@@ -24,7 +24,7 @@ class PromoController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result =  $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
+    $search_result =  $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc");
     collect($search_result['products'])->map(function ($item, $key) {
       //$item->picture_url = asset('images/productos/'.$item->picture_url);
 

@@ -2155,6 +2155,7 @@ DELIMITER $$
 -- Procedimiento para listar promociones con filtrado / paginado
 --
 CREATE PROCEDURE PA_productSearchPromo(
+  IN variation_type_id INT,
   IN plan_pre_id INT,
   IN plan_post_id INT,
   IN affiliation_id INT,
@@ -2185,6 +2186,7 @@ BEGIN
   SET cad_order = " ";
   SET cad_order_comma = " ";
   -- checking null values
+  SET variation_type_id = IFNULL(variation_type_id, -1); -- set value if null
   SET plan_pre_id = IFNULL(plan_pre_id, -1); -- set value if null
   SET plan_post_id = IFNULL(plan_post_id, -1); -- set value if null
   SET affiliation_id = IFNULL(affiliation_id, -1); -- set value if null
@@ -2197,6 +2199,12 @@ BEGIN
   SET product_string_search = IFNULL(product_string_search, '');
   SET sort_by = IFNULL(sort_by, '');
   SET sort_direction = IFNULL(sort_direction, '');
+
+  -- variation type
+  IF (variation_type_id > 0) THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.`variation_type_id` IS NOT NULL');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.`variation_type_id` = ', variation_type_id);
+  END IF;
   -- setting actual page if wrong value
   IF (pag_actual < 1) THEN
     SET pag_actual = 1;
@@ -2427,6 +2435,7 @@ DELIMITER $$
 -- Procedimiento para contar promociones con filtrado y busqueda
 --
 CREATE PROCEDURE PA_productCountPromo(
+  IN variation_type_id INT,
   IN plan_pre_id INT,
   IN plan_post_id INT,
   IN affiliation_id INT,
@@ -2447,6 +2456,7 @@ BEGIN
   -- conditional string query
   SET cad_condition = "";
   -- checking null values
+  SET variation_type_id = IFNULL(variation_type_id, -1); -- set value if null
   SET plan_pre_id = IFNULL(plan_pre_id, -1); -- set value if null
   SET plan_post_id = IFNULL(plan_post_id, -1); -- set value if null
   SET affiliation_id = IFNULL(affiliation_id, -1); -- set value if null
@@ -2456,6 +2466,12 @@ BEGIN
   SET product_brands = IFNULL(product_brands, ''); -- set value if null
   SET product_string_search = IFNULL(product_string_search, '');
 
+  -- variation type
+  IF (variation_type_id > 0) THEN
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.`variation_type_id` IS NOT NULL');
+    SET cad_condition = CONCAT(cad_condition, ' AND PRD_VAR.`variation_type_id` = ', variation_type_id);
+  END IF;
+  
   -- cad_condition filter for price
   IF (product_price_ini > 0 AND product_price_end > 0) THEN
     SET cad_condition = CONCAT(cad_condition, ' AND (IF(PRM.promo_discount IS NOT NULL, ((1-PRM.promo_discount) * PRD_VAR.product_variation_price), IFNULL(PRM.promo_price,product_variation_price)) BETWEEN ',(product_price_ini - 0.5),' AND ', (product_price_end + 0.5) , ') ');

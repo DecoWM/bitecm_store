@@ -190,7 +190,7 @@ class SearchController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result = $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));

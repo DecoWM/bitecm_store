@@ -75,7 +75,7 @@ class HomeController extends Controller
       ]);
       return $item;
     });
-    $promo_pre = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, null, 4, 1, 'product_id', 'asc');
+    $promo_pre = $this->shared->productSearchPromo(1, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, 4, 1, 'publish_at', 'desc');
     $promo_pre = collect($promo_pre['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('prepaid_detail', [
@@ -85,7 +85,7 @@ class HomeController extends Controller
       ]);
       return $item;
     });
-    $promo_pos = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, null, 4, 1, 'product_id', 'desc');
+    $promo_pos = $this->shared->productSearchPromo(2, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, 4, 1, 'publish_at', 'desc');
     $promo_pos = collect($promo_pos['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('postpaid_detail', [
