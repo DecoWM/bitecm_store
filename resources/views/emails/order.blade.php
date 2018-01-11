@@ -60,7 +60,7 @@
 			@foreach($order_items as $i => $item)
 			<tr style="height: 45px;">
 				<td style="border: 1px solid #008c95">{{$products[$i]->brand_name}} {{$products[$i]->product_model}}</td>
-				<td style="border: 1px solid #008c95">24 horas después de la coordinación con el asesor telfónico</td>
+				<td style="border: 1px solid #008c95">24 horas después de la coordinación con el asesor telefónico</td>
 				<td style="border: 1px solid #008c95">{{$item['quantity']}}</td>
 				@if(isset($item['promo_id']))
 				<td style="border: 1px solid #008c95">

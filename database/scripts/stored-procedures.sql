@@ -2878,7 +2878,8 @@ BEGIN
     OST.`order_status_name`,
     IDT.`idtype_name`,
     BCH.`branch_name`,
-    ORD.`created_at`';
+    ORD.`created_at`,
+    IFNULL(ORD.`updated_at`, ORD.`created_at`) as updated_date';
 
   SET from_query = '
     FROM tbl_order as ORD
