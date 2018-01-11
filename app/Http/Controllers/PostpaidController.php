@@ -127,7 +127,14 @@ class PostpaidController extends Controller
 
     // TEMPORAL
     $product_plans = DB::select('call PA_planList(2)');
-    $product_affiliations = DB::select('call PA_affiliationList()');
+    // $product_affiliations = DB::select('call PA_affiliationList()');
+
+    $product_affiliations = DB::table('tbl_product_variation')
+                  ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
+                  ->where('tbl_product_variation.product_id', $product->product_id)
+                  ->select('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+                  ->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+                  ->get();
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
       $item->route = route('postpaid_detail', [
