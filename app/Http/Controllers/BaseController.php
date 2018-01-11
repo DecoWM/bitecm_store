@@ -11,7 +11,7 @@ class BaseController extends Controller
 {
   public function searchProductPrepaid ($category_id=1, $plan_id=null, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="", $product_ignore_ids="") {
     $products = DB::select('call PA_productSearchPrepago(
-      :category_id,
+      :product_categories,
       :product_brands,
       :plan_id,
       :product_price_ini,
@@ -24,7 +24,7 @@ class BaseController extends Controller
       :product_tag,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'plan_id' => $plan_id,
       'product_price_ini' => $product_price_ini,
@@ -39,7 +39,7 @@ class BaseController extends Controller
     ]);
 
     $total = DB::select('call PA_productCountPrepago(
-      :category_id,
+      :product_categories,
       :product_brands,
       :plan_id,
       :product_price_ini,
@@ -48,7 +48,7 @@ class BaseController extends Controller
       :product_tag,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'plan_id' => $plan_id,
       'product_price_ini' => $product_price_ini,
@@ -91,7 +91,7 @@ class BaseController extends Controller
 
   public function searchProductPostpaid($category_id=1, $affiliation_id=1, $plan_id=7, $contract_id=1, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="", $product_ignore_ids = "") {
     $products = DB::select('call PA_productSearchPostpago(
-      :category_id,
+      :product_categories,
       :product_brands,
       :affiliation_id,
       :plan_id,
@@ -106,7 +106,7 @@ class BaseController extends Controller
       :product_tag,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'affiliation_id' => $affiliation_id,
       'plan_id' => $plan_id,
@@ -123,7 +123,7 @@ class BaseController extends Controller
     ]);
 
     $total = DB::select('call PA_productCountPostpago(
-      :category_id,
+      :product_categories,
       :product_brands,
       :affiliation_id,
       :plan_id,
@@ -134,7 +134,7 @@ class BaseController extends Controller
       :product_tag,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'affiliation_id' => $affiliation_id,
       'plan_id' => $plan_id,
@@ -183,7 +183,7 @@ class BaseController extends Controller
 
   public function productSearch($category_id=2, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_ignore_ids="") {
     $products = DB::select('call PA_productSearch(
-      :category_id,
+      :product_categories,
       :product_brands,
       :product_price_ini,
       :product_price_end,
@@ -194,7 +194,7 @@ class BaseController extends Controller
       :sort_direction,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,
@@ -207,14 +207,14 @@ class BaseController extends Controller
     ]);
 
     $total = DB::select('call PA_productCount(
-      :category_id,
+      :product_categories,
       :product_brands,
       :product_price_ini,
       :product_price_end,
       :product_string_search,
       :product_ignore_ids
     )', [
-      'category_id' => $category_id,
+      'product_categories' => $category_id,
       'product_brands' => strval($product_brands),
       'product_price_ini' => $product_price_ini,
       'product_price_end' => $product_price_end,

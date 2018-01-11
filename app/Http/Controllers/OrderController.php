@@ -159,6 +159,10 @@ class OrderController extends Controller
     // return ($response->return->errorCode == '02');
   }
 
+  protected function schedulePortingRequestJob($order_detail) {
+    
+  }
+
   public function createOrder (Request $request) {
     $cart = collect($request->session()->get('cart')); //Carrito de compras
 
@@ -350,13 +354,13 @@ class OrderController extends Controller
       if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
         // process request portability
         if($this->createConsultantRequest($order_detail)){
-          // check if is possible migrate to bitel
-          if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
+          $this->schedulePortingRequestJob($order_detail);
+          /* if(!$this->checkSuccessPortingRequest($order_detail)){ 
             return redirect()->route('create_order')->with('ws_result', json_encode([
               'title' => 'te comunica que',
               'message' => 'No es posible realizar la portabilidad con su número.'
             ]));
-          }
+          }*/
         }
         else {
           return redirect()->route('create_order')->with('ws_result', json_encode([
