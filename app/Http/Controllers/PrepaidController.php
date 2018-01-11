@@ -67,7 +67,7 @@ class PrepaidController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->searchProductPrepaid(1, $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
+    $available_products = $this->shared->searchProductPrepaid('1,3', $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {

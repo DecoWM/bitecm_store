@@ -41,7 +41,7 @@ class SearchController extends Controller
 
     $plan_pre_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : \Config::get('filter.plan_pre_id');
 
-    $search_result = $this->shared->searchProductPrepaid(1, $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) use ($affiliation_slug,$plan_post_slug,$contract_slug) {
       $item->picture_url = asset(Storage::url($item->picture_url));
@@ -59,12 +59,6 @@ class SearchController extends Controller
       ]);
       return $item;
     });
-
-    // $response = [
-    //   'data' => $data
-    // ];
-    //
-    // return response()->json($response);
 
     $paginator = new Paginator(
       $data,
@@ -99,7 +93,7 @@ class SearchController extends Controller
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
     $pages = intval(ceil($search_result['total'] / $items_per_page));
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
@@ -196,7 +190,7 @@ class SearchController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result = $this->shared->productSearchPromo($plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $search_result = $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
@@ -232,12 +226,6 @@ class SearchController extends Controller
 
       return $item;
     });
-
-    // $response = [
-    //   'data' => $data
-    // ];
-    //
-    // return response()->json($response);
 
     $paginator = new Paginator(
       $data,

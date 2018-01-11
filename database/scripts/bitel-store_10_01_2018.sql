@@ -153,7 +153,8 @@ CREATE TABLE `tbl_category` (
 
 INSERT INTO `tbl_category` (`category_id`, `category_name`, `category_slug`, `allow_variation`, `weight`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
 (1, 'Equipos', 'equipos', 1, 1, '2017-12-05 12:32:36', NULL, NULL, 1, NULL, NULL, 1),
-(2, 'Accesorios', 'accesorios', 0, 1, '2017-12-05 12:32:36', NULL, NULL, 1, NULL, NULL, 1);
+(2, 'Accesorios', 'accesorios', 0, 1, '2017-12-05 12:32:36', NULL, NULL, 1, NULL, NULL, 1),
+(3, 'Tablets', 'tablets', 1, 1, '2018-01-10 12:00:00', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2181,6 +2182,8 @@ CREATE TABLE `tbl_order` (
   `contact_email` varchar(150) NOT NULL,
   `contact_phone` varchar(20) NOT NULL,
   `credit_status` enum('Pendiente','Aprobada','Rechazada','Observada') DEFAULT 'Pendiente',
+  `service_type` varchar(150) DEFAULT NULL,
+  `affiliation_type` varchar(150) DEFAULT NULL,
   `has_debt` tinyint(1) NOT NULL DEFAULT '0',
   `isdn_status` enum('0','5','4','6') NOT NULL DEFAULT '0',
   `porting_request_id` varchar(20) DEFAULT NULL,
@@ -2203,11 +2206,11 @@ CREATE TABLE `tbl_order` (
 -- Volcado de datos para la tabla `tbl_order`
 --
 
-INSERT INTO `tbl_order` (`order_id`, `idtype_id`, `payment_method_id`, `branch_id`, `tracking_code`, `first_name`, `last_name`, `id_number`, `billing_district`, `billing_phone`, `source_operator`, `porting_phone`, `delivery_address`, `delivery_district`, `contact_email`, `contact_phone`, `credit_status`, `has_debt`, `isdn_status`, `porting_request_id`, `mnp_request_id`, `porting_state_code`, `porting_status`, `porting_status_desc`, `total`, `total_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 4, NULL, NULL, 'Cliente', 'Prueba 1', '45678910', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'cliente.prueba@gmail.com', '987654321', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(2, 1, 3, NULL, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
-(3, 1, 3, 3, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
-(4, 1, 3, 3, '12345876', 'juan', 'perez', '12345876', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'development@forceclose.pe', '26328382', 'Pendiente', 0, '0', NULL, NULL, NULL, NULL, NULL, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
+INSERT INTO `tbl_order` (`order_id`, `idtype_id`, `payment_method_id`, `branch_id`, `tracking_code`, `first_name`, `last_name`, `id_number`, `billing_district`, `billing_phone`, `source_operator`, `porting_phone`, `delivery_address`, `delivery_district`, `contact_email`, `contact_phone`, `credit_status`, `service_type`, `affiliation_type`, `has_debt`, `isdn_status`, `porting_request_id`, `mnp_request_id`, `porting_state_code`, `porting_status`, `porting_status_desc`, `total`, `total_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 1, 4, 5, '12345876', 'Cliente', 'Prueba 1', '12345876', 1252, '987654321', NULL, NULL, 'Av. Javier Prado 123', 1252, 'diego.chinga@forceclose.pe', '987654321', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(2, 1, 3, 4, '12345678', 'Juan', 'Perez', '12345678', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
+(3, 1, 2, 3, '12345679', 'Pedro', 'Jimenez', '12345679', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
+(4, 1, 1, 2, '12345680', 'José', 'Prado', '12345680', 1252, '898982982928', 'Entel Perú S.A', '94959594851', 'direm', 1270, 'diego.chinga@forceclose.pe', '26328382', 'Pendiente', 'Postpago', 'Portabilidad', 0, '0', NULL, NULL, NULL, NULL, NULL, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2238,10 +2241,10 @@ CREATE TABLE `tbl_order_item` (
 --
 
 INSERT INTO `tbl_order_item` (`order_item_id`, `order_id`, `stock_model_id`, `product_variation_id`, `promo_id`, `quantity`, `subtotal`, `subtotal_igv`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 6, 228, 4, 1, '1500.00', '1770.00', '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(2, 2, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
-(3, 3, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
-(4, 4, 7, 501, 3, 1, '9.00', '10.62', '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
+(1, 1, 6, 488, 6, 1, 1500.00, 1770.00, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(2, 2, 7, 501, 5, 1, 1800.00, 2124.00, '2017-12-11 15:36:27', NULL, NULL, 1, NULL, NULL, 1),
+(3, 3, 1, 345, NULL, 1, 1199.00, 1414.82, '2017-12-11 15:54:30', NULL, NULL, 1, NULL, NULL, 1),
+(4, 4, 4, 436, NULL, 1, 199.00, 234.82, '2017-12-11 15:59:31', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2268,9 +2271,40 @@ CREATE TABLE `tbl_order_status` (
 INSERT INTO `tbl_order_status` (`order_status_id`, `order_status_name`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
 (1, 'Pendiente', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
 (2, 'Procesado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(3, 'Cancelado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
-(4, 'Entregado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(3, 'En Envío', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'Cancelado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
 (5, 'Completado', '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_order_status_flux`
+--
+
+CREATE TABLE `tbl_order_status_flux` (
+  `order_status_flux_id` int(11) NOT NULL,
+  `order_status_origin_id` int(11) NOT NULL,
+  `order_status_destination_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL,
+  `created_by` int(11) DEFAULT '1',
+  `updated_by` int(11) DEFAULT NULL,
+  `deleted_by` int(11) DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_order_status_flux`
+--
+
+INSERT INTO `tbl_order_status_flux` (`order_status_flux_id`, `order_status_origin_id`, `order_status_destination_id`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
+(1, 1, 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(2, 2, 3, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(3, 2, 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(4, 3, 2, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(5, 3, 4, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1),
+(6, 3, 5, '2017-12-05 12:32:35', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2328,10 +2362,10 @@ CREATE TABLE `tbl_payment_method` (
 --
 
 INSERT INTO `tbl_payment_method` (`payment_method_id`, `method_name`, `method_icon_url`, `method_tip`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 'Visa', NULL, NULL, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(2, 'Mastercard', NULL, NULL, '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1),
-(3, 'American Express', NULL, NULL, '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1),
-(4, 'En efectivo', NULL, 'Lorem ipsum dolor sit amet lorem ipsum dolor sithem', '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1);
+(1, 'Visa', 'payment_icons/icon_america.png', NULL, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(2, 'Mastercard', 'payment_icons/icon_mastercard.png', NULL, '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1),
+(3, 'American Express', 'payment_icons/icon_visa.png', NULL, '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1),
+(4, 'En efectivo', NULL, 'La cancelación se realiza contra entrega', '2017-12-05 12:32:41', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -2400,9 +2434,8 @@ CREATE TABLE `tbl_product` (
   `product_description` varchar(500) DEFAULT NULL,
   `product_general_specifications` text,
   `product_data_sheet` varchar(200) DEFAULT NULL COMMENT 'URL del documento de especificaciones técnicas\n',
-  `product_commercial_considerations` varchar(200) DEFAULT NULL COMMENT 'URL del documento de consideraciones comerciales\n',
-  `product_ram_memory` decimal(5,2) DEFAULT NULL,
-  `product_internal_memory` decimal(6,2) DEFAULT NULL,
+  `product_external_memory` varchar(20) DEFAULT NULL,
+  `product_internal_memory` varchar(20) DEFAULT NULL,
   `product_screen_size` varchar(5) DEFAULT NULL,
   `product_camera_1` varchar(6) DEFAULT NULL,
   `product_camera_2` varchar(6) DEFAULT NULL,
@@ -2411,9 +2444,16 @@ CREATE TABLE `tbl_product` (
   `product_processor_name` varchar(25) DEFAULT NULL,
   `product_processor_power` varchar(12) DEFAULT NULL,
   `product_processor_cores` varchar(20) DEFAULT NULL,
-  `product_band` varchar(3) DEFAULT NULL COMMENT '2G / 3G / 4G',
+  `product_band` varchar(10) DEFAULT NULL COMMENT '2G / 3G / 4G',
+  `product_radio` varchar(50) DEFAULT NULL,
+  `product_wlan` varchar(50) DEFAULT NULL,
+  `product_bluetooth` varchar(50) DEFAULT NULL,
+  `product_os` varchar(50) DEFAULT NULL,
+  `product_gps` varchar(50) DEFAULT NULL,
+  `product_battery` varchar(50) DEFAULT NULL,
   `product_slug` varchar(150) DEFAULT NULL,
   `product_tag` enum('Nuevo','Destacado') DEFAULT NULL,
+  `product_priority` int(3) DEFAULT 1,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
@@ -2429,48 +2469,48 @@ CREATE TABLE `tbl_product` (
 -- Volcado de datos para la tabla `tbl_product`
 --
 
-INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_commercial_considerations`, `product_ram_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_power`, `product_processor_cores`, `product_band`, `product_slug`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
-(1, 1, 1, 'A3 XL', 'ALCATEL/ALCATEL-A3-XL.jpg', NULL, '449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'a3-xl', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(2, 1, 2, 'L640', 'BITEL/BITEL-L640.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'l640', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(3, 1, 2, 'B9501', 'BITEL/Bitel-B9501.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'b9501', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(4, 1, 3, 'Y360II', 'HUAWEII/HUAWEI-Y360-II.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'y360ii', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(5, 1, 3, 'Y6 II Compact', 'HUAWEII/Huawei-Y6-II-Compact.jpg', NULL, '439.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'y6-ii-compact', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(6, 1, 3, 'P9 Lite', 'HUAWEII/Huawei-P9-Lite.jpg', NULL, '779.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'p9-lite', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(7, 1, 3, 'P9', 'HUAWEII/Huawei-P9.jpg', NULL, '1679.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'p9', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(8, 1, 3, 'Y5II', 'HUAWEII/Huawei-Y5-II.jpg', NULL, '299.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'y5ii', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(9, 1, 3, 'P8 Lite', 'HUAWEII/Huawei-P8-Lite.jpg', NULL, '599.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'p8-lite', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(10, 1, 4, 'Vibe b', 'LENOVO/Lenovo-Vibe-b.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'vibe-b', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(11, 1, 5, 'K10 2017', 'LG/LG-K10-2017.jpg', NULL, '599.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'k10-2017', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(12, 1, 5, 'G6 New', 'LG/LG-G6.jpg', NULL, '2699.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'g6-new', '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
-(13, 1, 5, 'K4 2017', 'LG/LG-K4-2017.jpg', NULL, '399.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'k4-2017', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(14, 1, 5, 'Stylus 3', 'LG/LG-STYLUS-3.jpg', NULL, '1799.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'stylus-3', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(15, 1, 5, 'X Power K220', 'LG/LG-X-POWER-K220.jpg', NULL, '599.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'x-power-k220', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(16, 1, 5, 'X220M', 'LG/LG-X-220m.jpg', NULL, '299.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'x220m', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(17, 1, 6, 'Galaxy J7 Prime', 'SAMSUNG/SAMSUNG-GALAXY-J7-PRIME.jpg', NULL, '999.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'galaxy-j7-prime', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(18, 1, 6, 'S7', 'SAMSUNG/SAMSUNG-S7.jpg', NULL, '2499.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 's7', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(19, 1, 6, 'S7 Edge', 'SAMSUNG/SAMSUNG-S7-EDGE.jpg', NULL, '2999.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 's7-edge', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(20, 1, 7, '5.0', 'SKY/SKY-5.0-.jpg', NULL, '259.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '5.0', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(21, 1, 2, 'Chip Bifri 5', NULL, NULL, '5.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'chip-bifri-5', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(22, 2, 5, 'Headset 1', 'accesorios.jpg', NULL, '449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-1', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(23, 2, 5, 'Headset 2', 'accesorios.jpg', NULL, '249.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-2', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(24, 2, 5, 'Headset 3', 'accesorios.jpg', NULL, '149.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-3', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(25, 2, 5, 'Headset 4', 'accesorios.jpg', NULL, '349.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-4', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(26, 2, 5, 'Headset 5', 'accesorios.jpg', NULL, '649.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-5', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(27, 2, 6, 'Headset 6', 'accesorios.jpg', NULL, '549.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-6', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(28, 2, 6, 'Headset 7', 'accesorios.jpg', NULL, '849.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-7', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(29, 2, 6, 'Headset 8', 'accesorios.jpg', NULL, '749.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-8', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(30, 2, 6, 'Headset 9', 'accesorios.jpg', NULL, '1049.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-9', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(31, 2, 6, 'Headset 10', 'accesorios.jpg', NULL, '1449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-10', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(32, 2, 5, 'Headset 11', 'accesorios.jpg', NULL, '449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-11', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(33, 2, 5, 'Headset 12', 'accesorios.jpg', NULL, '249.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-12', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(34, 2, 5, 'Headset 13', 'accesorios.jpg', NULL, '149.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-13', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(35, 2, 5, 'Headset 14', 'accesorios.jpg', NULL, '349.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-14', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(36, 2, 5, 'Headset 15', 'accesorios.jpg', NULL, '649.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-15', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(37, 2, 6, 'Headset 16', 'accesorios.jpg', NULL, '549.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-16', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(38, 2, 6, 'Headset 17', 'accesorios.jpg', NULL, '849.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-17', '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
-(39, 2, 6, 'Headset 18', 'accesorios.jpg', NULL, '749.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-18', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
-(40, 2, 6, 'Headset 19', 'accesorios.jpg', NULL, '1049.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-19', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
-(41, 2, 6, 'Headset 20', 'accesorios.jpg', NULL, '1449.00', NULL, NULL, 'files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf', 'files/pdf/footer/Consideraciones-Comerciales-Post-Pago-Prepago.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-20', '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1);
+INSERT INTO `tbl_product` (`product_id`, `category_id`, `brand_id`, `product_model`, `product_image_url`, `product_keywords`, `product_price`, `product_description`, `product_general_specifications`, `product_data_sheet`, `product_external_memory`, `product_internal_memory`, `product_screen_size`, `product_camera_1`, `product_camera_2`, `product_camera_3`, `product_camera_4`, `product_processor_name`, `product_processor_power`, `product_processor_cores`, `product_band`, `product_radio`, `product_wlan`, `product_bluetooth`, `product_os`, `product_gps`, `product_battery`, `product_slug`, `product_priority`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
+(1, 1, 1, 'A3 XL', 'productos/ALCATEL/ALCATEL-A3-XL.jpg', NULL, '449.00', NULL, NULL, 'data_sheets/Ficha_tecnica_ALCATEL_A3_XL.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '2000', 'a3-xl', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(2, 1, 2, 'L640', 'productos/BITEL/BITEL-L640.jpg', NULL, '259.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_L640.pdf', '64', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '3000', 'l640', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(3, 1, 2, 'B9501', 'productos/BITEL/Bitel-B9501.jpg', NULL, '259.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', '32', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '4000', 'b9501', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(4, 1, 3, 'Y360II', 'productos/HUAWEII/HUAWEI-Y360-II.jpg', NULL, '259.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '2000', 'y360ii', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(5, 1, 3, 'Y6 II Compact', 'productos/HUAWEII/Huawei-Y6-II-Compact.jpg', NULL, '439.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', '128', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '3000', 'y6-ii-compact', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(6, 1, 3, 'P9 Lite', 'productos/HUAWEII/Huawei-P9-Lite.jpg', NULL, '779.00', NULL, NULL, 'data_sheets/Ficha_tecnica_HUAWEI_P9_LITE.pdf', '64', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '4000', 'p9-lite', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(7, 1, 3, 'P9', 'productos/HUAWEII/Huawei-P9.jpg', NULL, '1679.00', NULL, NULL, 'data_sheets/Ficha_tecnica_HUAWEI_P9.pdf', '32', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '2000', 'p9', 100, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(8, 1, 3, 'Y5II', 'productos/HUAWEII/Huawei-Y5-II.jpg', NULL, '299.00', NULL, NULL, 'data_sheets/Ficha_tecnica_HUAWEI_Y5_II.pdf', '64', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '3000', 'y5ii', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(9, 1, 3, 'P8 Lite', 'productos/HUAWEII/Huawei-P8-Lite.jpg', NULL, '599.00', NULL, NULL, 'data_sheets/Ficha_tecnica_HUAWEI_P8_LITE.pdf', '32', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '4000', 'p8-lite', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(10, 1, 4, 'Vibe b', 'productos/LENOVO/Lenovo-Vibe-b.jpg', NULL, '259.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LENOVO_VIBE_B.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '2000', 'vibe-b', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(11, 1, 5, 'K10 2017', 'productos/LG/LG-K10-2017.jpg', NULL, '599.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', '64', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '3000', 'k10-2017', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(12, 1, 5, 'G6 New', 'productos/LG/LG-G6.jpg', NULL, '2699.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LG_G6.pdf', '32', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '4000', 'g6-new', DEFAULT, '2017-12-05 12:32:37', NULL, NULL, '2017-12-05 12:32:37', 1, NULL, NULL, 1, 1),
+(13, 1, 5, 'K4 2017', 'productos/LG/LG-K4-2017.jpg', NULL, '399.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LG_K4_2017.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '2000', 'k4-2017', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(14, 1, 5, 'Stylus 3', 'productos/LG/LG-STYLUS-3.jpg', NULL, '1799.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LG_STYLUS_3.pdf', '64', '4', '4.5', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '3000', 'stylus-3', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(15, 1, 5, 'X Power K220', 'productos/LG/LG-X-POWER-K220.jpg', NULL, '599.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LG_X_POWER_K220.pdf', '32', '2', '4', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '4000', 'x-power-k220', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(16, 1, 5, 'X220M', 'productos/LG/LG-X-220m.jpg', NULL, '299.00', NULL, NULL, 'data_sheets/Ficha_tecnica_LG_X220M.pdf', '128', '8', '5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '2000', 'x220m', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(17, 1, 6, 'Galaxy J7 Prime', 'productos/SAMSUNG/SAMSUNG-GALAXY-J7-PRIME.jpg', NULL, '999.00', NULL, NULL, 'data_sheets/Ficha_tecnica_SAMSUNG_GALAXY_J7 PRIME.pdf', '128', '4', '4.5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '3000', 'galaxy-j7-prime', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(18, 1, 6, 'S7', 'productos/SAMSUNG/SAMSUNG-S7.jpg', NULL, '2499.00', NULL, NULL, 'data_sheets/Ficha_tecnica_SAMSUNG_S7.pdf', '64', '2', '4', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '4000', 's7', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(19, 1, 6, 'S7 Edge', 'productos/SAMSUNG/SAMSUNG-S7-EDGE.jpg', NULL, '2999.00', NULL, NULL, 'data_sheets/Ficha_tecnica_SAMSUNG_S7_EDGE.pdf', '128', '8', '5', '16', '10', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '2000', 's7-edge', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(20, 1, 7, '5.0', 'productos/SKY/SKY-5.0-.jpg', NULL, '259.00', NULL, NULL, 'data_sheets/Ficha_tecnica_SKY_5.0LM.pdf', '32', '4', '4.5', '12', '8', NULL, NULL, NULL, NULL, NULL, NULL, 'No', 'No', 'No', 'iOS 11', 'No', '3000', '5.0', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(21, 1, 2, 'Chip Bifri 5', NULL, NULL, '5.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', '128', '2', '4', '14', '9', NULL, NULL, NULL, NULL, NULL, NULL, 'Si', 'Si', 'Si', 'Android 6.0', 'Si', '4000', 'chip-bifri-5', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(22, 2, 5, 'Headset 1', 'productos/accesorios.jpg', NULL, '449.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-1', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(23, 2, 5, 'Headset 2', 'productos/accesorios.jpg', NULL, '249.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-2', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(24, 2, 5, 'Headset 3', 'productos/accesorios.jpg', NULL, '149.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-3', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(25, 2, 5, 'Headset 4', 'productos/accesorios.jpg', NULL, '349.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-4', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(26, 2, 5, 'Headset 5', 'productos/accesorios.jpg', NULL, '649.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-5', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(27, 2, 6, 'Headset 6', 'productos/accesorios.jpg', NULL, '549.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-6', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(28, 2, 6, 'Headset 7', 'productos/accesorios.jpg', NULL, '849.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-7', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(29, 2, 6, 'Headset 8', 'productos/accesorios.jpg', NULL, '749.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-8', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(30, 2, 6, 'Headset 9', 'productos/accesorios.jpg', NULL, '1049.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-9', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(31, 2, 6, 'Headset 10', 'productos/accesorios.jpg', NULL, '1449.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-10', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(32, 2, 5, 'Headset 11', 'productos/accesorios.jpg', NULL, '449.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-11', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(33, 2, 5, 'Headset 12', 'productos/accesorios.jpg', NULL, '249.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-12', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(34, 2, 5, 'Headset 13', 'productos/accesorios.jpg', NULL, '149.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-13', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(35, 2, 5, 'Headset 14', 'productos/accesorios.jpg', NULL, '349.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-14', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(36, 2, 5, 'Headset 15', 'productos/accesorios.jpg', NULL, '649.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-15', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(37, 2, 6, 'Headset 16', 'productos/accesorios.jpg', NULL, '549.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-16', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(38, 2, 6, 'Headset 17', 'productos/accesorios.jpg', NULL, '849.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-17', DEFAULT, '2017-12-05 12:32:38', NULL, NULL, '2017-12-05 12:32:38', 1, NULL, NULL, 1, 1),
+(39, 2, 6, 'Headset 18', 'productos/accesorios.jpg', NULL, '749.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-18', DEFAULT, '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
+(40, 2, 6, 'Headset 19', 'productos/accesorios.jpg', NULL, '1049.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-19', DEFAULT, '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1),
+(41, 2, 6, 'Headset 20', 'productos/accesorios.jpg', NULL, '1449.00', NULL, NULL, 'data_sheets/Ficha_tecnica_BITEL_9501.pdf', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'headset-20', DEFAULT, '2017-12-05 12:32:39', NULL, NULL, '2017-12-05 12:32:39', 1, NULL, NULL, 1, 1);
 
 UPDATE `tbl_product` SET `product_tag`='Destacado' WHERE `product_id` IN (4,9,12,18);
 UPDATE `tbl_product` SET `product_tag`='Nuevo' WHERE `product_id` IN (14,16,32,36);
@@ -2499,13 +2539,13 @@ CREATE TABLE `tbl_product_image` (
 --
 
 INSERT INTO `tbl_product_image` (`product_image_id`, `stock_model_id`, `product_image_url`, `weight`, `created_at`, `updated_at`, `deleted_at`, `created_by`, `updated_by`, `deleted_by`, `active`) VALUES
-(1, 1, 'HUAWEII/Huawei-P9.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(2, 2, 'HUAWEII/Huawei-P9.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(3, 3, 'LG/LG-G6.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(4, 4, 'LG/LG-STYLUS-3.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(5, 5, 'LG/LG-STYLUS-3.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(6, 6, 'SAMSUNG/SAMSUNG-S7.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
-(7, 7, 'SAMSUNG/SAMSUNG-S7-EDGE.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1);
+(1, 1, 'productos/HUAWEII/Huawei-P9.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(2, 2, 'productos/HUAWEII/Huawei-P9.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(3, 3, 'productos/LG/LG-G6.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(4, 4, 'productos/LG/LG-STYLUS-3.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(5, 5, 'productos/LG/LG-STYLUS-3.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(6, 6, 'productos/SAMSUNG/SAMSUNG-S7.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1),
+(7, 7, 'productos/SAMSUNG/SAMSUNG-S7-EDGE.jpg', 1, '2017-12-05 12:32:40', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3318,27 +3358,27 @@ INSERT INTO `tbl_product_variation` (`product_variation_id`, `variation_type_id`
 (778, 2, 20, 11, 3, 1, '219.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
 (779, 2, 20, 12, 3, 1, '179.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
 (780, 2, 20, 13, 3, 1, '59.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(791, 1, 1, 14, NULL, NULL, '449.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(792, 1, 2, 14, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(793, 1, 3, 14, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(794, 1, 4, 14, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(795, 1, 5, 14, NULL, NULL, '439.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(796, 1, 6, 14, NULL, NULL, '779.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(797, 1, 7, 14, NULL, NULL, '1679.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(798, 1, 8, 14, NULL, NULL, '299.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(799, 1, 9, 14, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(800, 1, 10, 14, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(801, 1, 11, 14, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(802, 1, 12, 14, NULL, NULL, '2699.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(803, 1, 13, 14, NULL, NULL, '399.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(804, 1, 14, 14, NULL, NULL, '1799.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(805, 1, 15, 14, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(806, 1, 16, 14, NULL, NULL, '299.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
-(807, 1, 17, 14, NULL, NULL, '999.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(808, 1, 18, 14, NULL, NULL, '2499.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(809, 1, 19, 14, NULL, NULL, '2999.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(810, 1, 20, 14, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
-(811, 1, 21, 15, NULL, NULL, '5.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1);
+(791, 1, 1, 15, NULL, NULL, '449.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(792, 1, 2, 15, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(793, 1, 3, 15, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(794, 1, 4, 15, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(795, 1, 5, 15, NULL, NULL, '439.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(796, 1, 6, 15, NULL, NULL, '779.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(797, 1, 7, 15, NULL, NULL, '1679.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(798, 1, 8, 15, NULL, NULL, '299.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(799, 1, 9, 15, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(800, 1, 10, 15, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(801, 1, 11, 15, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(802, 1, 12, 15, NULL, NULL, '2699.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(803, 1, 13, 15, NULL, NULL, '399.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(804, 1, 14, 15, NULL, NULL, '1799.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(805, 1, 15, 15, NULL, NULL, '599.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(806, 1, 16, 15, NULL, NULL, '299.00', NULL, NULL, '2017-12-05 12:33:11', NULL, NULL, 1, NULL, NULL, 1),
+(807, 1, 17, 15, NULL, NULL, '999.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(808, 1, 18, 15, NULL, NULL, '2499.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(809, 1, 19, 15, NULL, NULL, '2999.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1),
+(810, 1, 20, 15, NULL, NULL, '259.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1);
+-- Chip (811, 1, 21, 15, NULL, NULL, '5.00', NULL, NULL, '2017-12-05 12:33:12', NULL, NULL, 1, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3377,10 +3417,12 @@ CREATE TABLE `tbl_promo` (
 --
 
 INSERT INTO `tbl_promo` (`promo_id`, `product_id`, `product_variation_id`, `add_product_id`, `promo_price`, `promo_discount`, `promo_add_product_price`, `promo_add_product_discount`, `promo_title`, `promo_description`, `promo_start_date`, `promo_expiration_date`, `allow_all_variations`, `allowed_variation_type_id`, `created_at`, `updated_at`, `deleted_at`, `publish_at`, `created_by`, `updated_by`, `deleted_by`, `publish_by`, `active`) VALUES
-(1, 10, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(2, 12, NULL, NULL, 89, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(3, 19, NULL, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, NULL, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
-(4, 18, 488, NULL, 1500, NULL, NULL, NULL, 'promocion navideña', 'esta es una promoción de navidad!', '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, NULL, 1);
+(1, 7, NULL, NULL, 499, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:17', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(2, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(3, 12, NULL, NULL, NULL, 0.20, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 15:15:32', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(4, 19, NULL, NULL, 2100, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 1, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(5, 19, NULL, NULL, 1800, NULL, NULL, NULL, NULL, NULL, '2017-11-26 00:00:00', '2017-12-28 00:00:00', 1, 2, '2017-12-05 12:32:40', '2017-12-07 17:57:33', NULL, '2017-12-05 12:32:40', 1, NULL, NULL, 1, 1),
+(6, 18, 488, NULL, 1500, NULL, NULL, NULL, NULL, NULL, '2017-12-07 17:56:13', '2017-12-28 00:00:00', 0, NULL, '2017-12-07 17:56:13', '2017-12-07 18:24:49', NULL, '2017-12-07 18:09:34', 1, NULL, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3789,6 +3831,14 @@ ALTER TABLE `tbl_order_status`
   ADD PRIMARY KEY (`order_status_id`);
 
 --
+-- Indices de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  ADD PRIMARY KEY (`order_status_flux_id`),
+  ADD KEY `fk_tbl_order_status_flux_tbl_order_status1_idx` (`order_status_origin_id`),
+  ADD KEY `fk_tbl_order_status_flux_tbl_order_status2_idx` (`order_status_destination_id`);
+
+--
 -- Indices de la tabla `tbl_order_status_history`
 --
 ALTER TABLE `tbl_order_status_history`
@@ -3952,6 +4002,12 @@ ALTER TABLE `tbl_order_status`
   MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  MODIFY `order_status_flux_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_order_status_history`
 --
 ALTER TABLE `tbl_order_status_history`
@@ -4046,6 +4102,13 @@ ALTER TABLE `tbl_order_item`
   ADD CONSTRAINT `fk_tbl_order_item_tbl_product_variation1` FOREIGN KEY (`product_variation_id`) REFERENCES `tbl_product_variation` (`product_variation_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tbl_order_item_tbl_promo1` FOREIGN KEY (`promo_id`) REFERENCES `tbl_promo` (`promo_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_tbl_order_item_tbl_stock_model1` FOREIGN KEY (`stock_model_id`) REFERENCES `tbl_stock_model` (`stock_model_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Indices de la tabla `tbl_order_status_flux`
+--
+ALTER TABLE `tbl_order_status_flux`
+  ADD CONSTRAINT `fk_tbl_order_status_flux_tbl_order_status1` FOREIGN KEY (`order_status_origin_id`) REFERENCES `tbl_order_status` (`order_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tbl_order_status_flux_tbl_order_status2` FOREIGN KEY (`order_status_destination_id`) REFERENCES `tbl_order_status` (`order_status_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tbl_order_status_history`

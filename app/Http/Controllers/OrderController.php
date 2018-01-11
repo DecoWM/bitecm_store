@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\SoapWrapper; // For use client SOAP service
+use Illuminate\Support\Facades\Log;
 
 class OrderController extends Controller
 {
@@ -49,7 +50,7 @@ class OrderController extends Controller
   * @var isOverQuota: 0 -> return false
   *                  else -> return true
   **/
-  protected function checkIsOverQouta($order_detail) 
+  protected function checkIsOverQouta($order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
       'paymethodType' => $order_detail['type_id'],
@@ -66,16 +67,18 @@ class OrderController extends Controller
   *              else -> return false: Not have debt
   */
   protected function getInfoCustomer($order_detail)
-  // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
       'idType' => '01', // persona natural !!!
       'idNo' => $order_detail['id_number']
     ]);
-    if(isset($response->return->result))
+    if(isset($response->return->result)) {
       return $response->return->result;
-    else
+    }
+    else {
+      Log::warning('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
       return false;
+    }
   }
 
   /**
@@ -84,12 +87,15 @@ class OrderController extends Controller
   *                 else -> return false: Not have debt
   */
   protected function checkHaveDebit($custId)
-  // public function show() 
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
       'custId' => $custId
     ]);
-    return ($response->return->errorCode == -1);
+    if ($response->return->errorCode == -1) {
+      return true;
+    }
+    Log::warning('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
+    return false;
   }
 
   /**
@@ -98,8 +104,7 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
-  protected function createConsultantRequest(&$order_detail) 
-  // public function show() 
+  protected function createConsultantRequest(&$order_detail)
   {
     $req = [
       'staffCode' => 'CM_THUYNTT',
@@ -116,14 +121,15 @@ class OrderController extends Controller
     ];
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
-    
-    if($response->return->errorCodeMNP == '0'){
+
+    if ($response->return->errorCodeMNP == '0') {
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
       $order_detail['porting_request_id'] = $response->return->portingRequestId;
       return true;
     }
 
+    Log::warning('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
     return false;
   }
 
@@ -132,8 +138,7 @@ class OrderController extends Controller
   * @var stateCode: 02 -> return true: Exito
   *                 else -> return false: Rechazado
   */
-  protected function checkSuccessPortingRequest(&$order_detail) 
-  // public function show() 
+  protected function checkSuccessPortingRequest(&$order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
@@ -146,9 +151,10 @@ class OrderController extends Controller
       $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
       $order_detail['porting_status'] = $response->return->listPortingRequest->status;
       $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
-      return true
+      return true;
     }
 
+    Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
     return false;
     // return ($response->return->errorCode == '02');
   }
@@ -160,16 +166,16 @@ class OrderController extends Controller
       return redirect()->route('home');
     }
 
-    // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO', 
-    //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO', 
-    //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE', 
-    //   'LOS OLIVOS', 'LURIGANCHO', 'LURIN', 'MAGDALENA DEL MAR', 'MAGDALENA VIEJA', 
+    // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO',
+    //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO',
+    //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE',
+    //   'LOS OLIVOS', 'LURIGANCHO', 'LURIN', 'MAGDALENA DEL MAR', 'MAGDALENA VIEJA',
     //   'MIRAFLORES', 'PACHACAMAC', 'PUCUSANA', 'PUENTE PIEDRA', 'PUNTA HERMOSA',
     //   'PUNTA NEGRA', 'RÍMAC', 'SAN BARTOLO', 'SAN BORJA', 'SAN ISIDRO',
     //   'SAN JUAN DE LURIGANCHO', 'SAN JUAN DE MIRAFLORES', 'SAN LUIS',
     //   'SAN MARTÍN DE PORRES', 'SAN MIGUEL', 'SANTA ANITA', 'SANTA MARÍA DEL MAR',
     //   'SANTA ROSA', 'SANTIAGO DE SURCO', 'SURQUILLO', 'VILLA EL SALVADOR',
-    //   'SURQUILLO', 'VILLA EL SALVADOR', 'VILLA MARÍA DEL TRIUNFO',  'CALLAO', 
+    //   'SURQUILLO', 'VILLA EL SALVADOR', 'VILLA MARÍA DEL TRIUNFO',  'CALLAO',
     //   'BELLAVISTA', 'CARMEN DE LA LEGUA REYNOSO', 'LA PERLA', 'LA PUNTA', 'VENTANILLA'
     // ];
 
@@ -178,7 +184,7 @@ class OrderController extends Controller
     $source_operators = $this->shared->operatorList();
 
     $affiliation_list = DB::select('call PA_affiliationList()');
-    
+
     $equipo = null;
     foreach ($cart as $item) {
       switch ($item['type_id']) {
@@ -192,7 +198,7 @@ class OrderController extends Controller
           break;
       }
     }
-    
+
     return view('order_form', [
       'item' => $equipo,
       'distritos' => $distritos,
@@ -323,7 +329,7 @@ class OrderController extends Controller
 
       // Check if have many lines
       if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)){
-        return redirect()->route('envio')->with('ws_result', json_encode([
+        return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te comunica que',
             'message' => 'No puede tener más números telefónicos.'
           ]));
@@ -333,7 +339,7 @@ class OrderController extends Controller
       if($data_customer = $this->getInfoCustomer($order_detail)){
         // check if have debt
         if($this->checkHaveDebit($data_customer->custId)){
-          return redirect()->route('envio')->with('ws_result', json_encode([
+          return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te recuerda que',
             'message' => 'Tienes una deuda pendiente con BITEL, acércate a cancelar a la agencia más cercana.'
           ]));
@@ -346,14 +352,14 @@ class OrderController extends Controller
         if($this->createConsultantRequest($order_detail)){
           // check if is possible migrate to bitel
           if(!$this->checkSuccessPortingRequest($order_detail)){  // ***** REVISAR LAS POSIBLES RESPUESTAS DESPUES DE LA RESPUESTA DE BITEL AL CORREO SOBRE LOS SERVICIOS !!!
-            return redirect()->route('envio')->with('ws_result', json_encode([
+            return redirect()->route('create_order')->with('ws_result', json_encode([
               'title' => 'te comunica que',
               'message' => 'No es posible realizar la portabilidad con su número.'
             ]));
           }
         }
         else {
-          return redirect()->route('envio')->with('ws_result', json_encode([
+          return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te comunica que',
             'message' => 'Ocurrió un error creando la solicitud de portabilidad.'
           ]));
@@ -399,12 +405,18 @@ class OrderController extends Controller
       'order_status_id' => \Config::get('filter.order_status_id')
     ]);
 
-    Mail::to($request->email)->send(new OrderCompleted([
-      'order_id' => $order_id,
-      'order_detail' => $order_detail,
-      'order_items' => $order_items,
-      'products' => $products
-    ]));
+    try {
+      Mail::to($request->email)->send(new OrderCompleted([
+        'order_id' => $order_id,
+        'order_detail' => $order_detail,
+        'order_items' => $order_items,
+        'products' => $products
+      ]));
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar correo a '.$request->email.' por la orden #'.$order_id);
+    }
+
+    DB::commit();
 
     $request->session()->flush();
 

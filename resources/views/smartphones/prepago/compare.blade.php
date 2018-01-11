@@ -110,10 +110,10 @@
                     <p>{{$product->product_screen_size}}"</p>
                   </div>
                   <div class="bg-gray"><span>Memoria Externa</span>
-                    <p>{{$product->product_external_memory}}</p>
+                    <p>{{$product->product_external_memory}} GB</p>
                   </div>
                   <div class="bg-white"><span>Memoria Interna</span>
-                    <p>{{$product->product_internal_memory}}GB</p>
+                    <p>{{$product->product_internal_memory}} GB</p>
                   </div>
                   <div class="bg-gray"><span>WLAN</span>
                     <p>{{$product->product_wlan}}</p>
@@ -128,7 +128,7 @@
                     <p>{{$product->product_gps}}</p>
                   </div>
                   <div class="bg-gray"><span>Batería</span>
-                    <p>{{$product->product_battery}}</p>
+                    <p>{{$product->product_battery}} mAh</p>
                   </div>
                 </div>
               </div>

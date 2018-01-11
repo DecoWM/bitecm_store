@@ -50,7 +50,7 @@ class PostpaidController extends Controller
         abort(404);
       }
 
-      $available_products = $this->shared->searchProductPostpaid(1, $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, $product->product_id);
+      $available_products = $this->shared->searchProductPostpaid('1,3', $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, null, $product->product_id);
 
       $available = $available_products['products'];
       foreach($available as $i => $item) {
@@ -97,7 +97,14 @@ class PostpaidController extends Controller
 
       // TEMPORAL
       $product_plans = DB::select('call PA_planList(2)');
-      $product_affiliations = DB::select('call PA_affiliationList()');
+      // $product_affiliations = DB::select('call PA_affiliationList()');
+
+      $product_affiliations = DB::table('tbl_product_variation')
+                    ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
+                    ->where('tbl_product_variation.product_id', $product->product_id)
+                    ->select('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+                    ->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+                    ->get();
 
       collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
         $item->route = route('postpaid_detail', [
