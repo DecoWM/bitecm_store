@@ -160,7 +160,7 @@ class OrderController extends Controller
   }
 
   protected function schedulePortingRequestJob($order_detail) {
-    
+
   }
 
   public function createOrder (Request $request) {
@@ -354,13 +354,13 @@ class OrderController extends Controller
       if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
         // process request portability
         if($this->createConsultantRequest($order_detail)){
-          $this->schedulePortingRequestJob($order_detail);
-          /* if(!$this->checkSuccessPortingRequest($order_detail)){ 
+          //$this->schedulePortingRequestJob($order_detail);
+          if(!$this->checkSuccessPortingRequest($order_detail)){ 
             return redirect()->route('create_order')->with('ws_result', json_encode([
               'title' => 'te comunica que',
               'message' => 'No es posible realizar la portabilidad con su número.'
             ]));
-          }*/
+          }
         }
         else {
           return redirect()->route('create_order')->with('ws_result', json_encode([
