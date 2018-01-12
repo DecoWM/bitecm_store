@@ -4226,6 +4226,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #compara-tus-equipos .info-lista .especificaciones div {
   box-sizing: border-box;
   border-bottom: 1px solid #c4c4c4;
+  border-left: 1px solid #c4c4c4;
 }
 #compara-tus-equipos .info-lista .especificaciones div span {
   color: #008c95;
@@ -13518,3 +13519,46 @@ button.close {
   opacity: 0.75;
   color: #000;
 }
+
+@media screen and (max-width: 768px) {
+
+  #compara-tus-equipos .lista-equipos .equipo-seleccionado{
+    margin-bottom: 3px;
+    padding-bottom: 3px;
+  }
+
+  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-white p{
+      text-align: left;
+      margin-left: 10px;
+
+  }
+
+  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray p{
+    text-align: left;
+    margin-left: 10px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+  #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) div.especificaciones{
+    border-left: 1px solid #c4c4c4;
+  }
+  
+}
+
+#compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray{
+      box-sizing: border-box;
+}
+
+#compara-tus-equipos .lista-equipos .eselec-4 div.bg-gray{
+  border-right: 1px solid #c4c4c4;
+}
+
+ #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
+    height: 336px !important;
+ }
+
+ #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div:last-child{
+  border-bottom: 1px solid transparent;
+ }
