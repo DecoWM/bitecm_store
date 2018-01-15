@@ -10,12 +10,12 @@
             @include('products.tag',['product' => $product])
             <div id="image-equipo">
               @if(count($product_images)>0)
-                <div class="image-product text-center"><img id="zoom_02" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
+                <div class="image-product text-center"><img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
                 </div>
                 @if(count($product_images)>1)
                 <div id="gallery_01" class="galeria-min">
                   @foreach($product_images as $image)
-                  <a href="#" data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
+                  <a data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
                     <img src="{{asset(Storage::url($image->product_image_url))}}" alt="{{$product->product_model}}">
                   </a>
                   @endforeach
@@ -25,7 +25,7 @@
                 {{--<div id="gallery_01" class="galeria-min"></div>--}}
                 @endif
               @else
-              <div class="image-product text-center"><img id="zoom_02" src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
+              <div class="image-product text-center"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
               </div>
               {{--<div id="gallery_01" class="galeria-min"></div>--}}
               @endif

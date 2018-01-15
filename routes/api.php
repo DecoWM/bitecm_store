@@ -44,3 +44,7 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'Api\PrepaidController@
         'color' => '^([a-zA-Z0-9_-]+)$',
       ])
     ->name('api_prepaid_detail');
+
+Route::post('check_porting_status/{order_id}', 'Api\PortingController@handle');
+
+Route::post('test/{param}', 'Api\PortingController@test');

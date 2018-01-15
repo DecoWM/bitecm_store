@@ -35,7 +35,7 @@ class OrderController extends Controller
   private function initSoapWrapper(){
     $this->soapWrapper->add('bitelSoap', function ($service) {
       $service
-        ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')   // La ip se debe mover a una variable de configuración !!!
+        ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
         ->trace(true);
     });
   }
@@ -53,10 +53,10 @@ class OrderController extends Controller
   protected function checkIsOverQouta($order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
-      'paymethodType' => $order_detail['type_id'],
+      'paymethodType' => strval($order_detail['type_id']),
       'busType' => 'INDI',
-      'idNo' => $order_detail['id_number'],
-      'productCode' => $order_detail['product_code']
+      'idNo' => strval($order_detail['id_number']),
+      'productCode' => strval($order_detail['product_code'])
     ]);
     return ($response->return->isOverQouta != 0);
   }
@@ -89,7 +89,7 @@ class OrderController extends Controller
   protected function checkHaveDebit($custId)
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
-      'custId' => $custId
+      'custId' => strval($custId)
     ]);
     if ($response->return->errorCode == -1) {
       return true;
@@ -109,15 +109,15 @@ class OrderController extends Controller
     $req = [
       'staffCode' => 'CM_THUYNTT',
       'shopCode' => 'VTP',
-      'dni' => $order_detail['id_number'],
-      'isdn' => $order_detail['porting_phone'],
-      'sourceOperator' => isset($order_detail['source_operator']) ? $order_detail['source_operator'] : '',
-      'sourcePayment' => $order_detail['type_id'],
-      'email' => $order_detail['contact_email'],
-      'phone' => $order_detail['contact_phone'],
-      'custName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
-      'contactName' => $order_detail['first_name'] . ' ' . $order_detail['last_name'],
-      'reasonId' => $order_detail['reason_code']
+      'dni' => strval($order_detail['id_number']),
+      'isdn' => strval($order_detail['porting_phone']),
+      'sourceOperator' => isset($order_detail['source_operator']) ? strval($order_detail['source_operator']) : '',
+      'sourcePayment' => strval($order_detail['type_id']),
+      'email' => strval($order_detail['contact_email']),
+      'phone' => strval($order_detail['contact_phone']),
+      'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+      'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+      'reasonId' => strval($order_detail['reason_code'])
     ];
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
@@ -142,8 +142,8 @@ class OrderController extends Controller
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
       'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-      'dni' => $order_detail['id_number'],
-      'isdn' => $order_detail['porting_phone'],
+      'dni' => strval($order_detail['id_number']),
+      'isdn' => strval($order_detail['porting_phone']),
     ]);
 
     if ($response->return->errorCodeMNP == '0') {
@@ -160,7 +160,31 @@ class OrderController extends Controller
   }
 
   protected function schedulePortingRequestJob($order_detail) {
-    
+    $client = new \GuzzleHttp\Client();
+    try {
+      $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
+        \GuzzleHttp\RequestOptions::JSON => [
+          'dni' => $order_detail['id_number'],
+          'isdn' => $order_detail['porting_phone']
+        ]
+      ]); 
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar la solicitud de cola de portabilidad');
+    }
+  }
+
+  protected function notifyAdmin($order_detail) {
+    $client = new \GuzzleHttp\Client();
+    try {
+      $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/notify/order_complete', [
+        \GuzzleHttp\RequestOptions::JSON => [
+          'order_id' => $order_detail['order_id'],
+          'plan_name' => $order_detail['plan_name']
+        ]
+      ]);
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar la solicitud de notificación');
+    }
   }
 
   public function createOrder (Request $request) {
@@ -226,6 +250,7 @@ class OrderController extends Controller
     $total_igv = 0;
     $equipo = null;
 
+    $schedule_porting_request = false;
     $order_detail = [];
 
     foreach ($cart as $item) {
@@ -354,7 +379,7 @@ class OrderController extends Controller
       if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
         // process request portability
         if($this->createConsultantRequest($order_detail)){
-          $this->schedulePortingRequestJob($order_detail);
+          $schedule_porting_request = true;
           /* if(!$this->checkSuccessPortingRequest($order_detail)){ 
             return redirect()->route('create_order')->with('ws_result', json_encode([
               'title' => 'te comunica que',
@@ -373,6 +398,7 @@ class OrderController extends Controller
 
     $order_detail['total'] = $total;
     $order_detail['total_igv'] = $total_igv;
+
     $order_id = DB::table('tbl_order')->insertGetId([
       'idtype_id' => $order_detail['idtype_id'],
       'payment_method_id' => $order_detail['payment_method_id'],
@@ -409,6 +435,15 @@ class OrderController extends Controller
       'order_status_id' => \Config::get('filter.order_status_id')
     ]);
 
+    $order_detail['order_id'] = $order_id;
+    $order_detail['plan_name'] = $equipo->plan_name;
+
+    if ($schedule_porting_request) {
+      $this->schedulePortingRequestJob($order_detail);
+    }
+
+    $this->notifyAdmin($order_detail);
+
     try {
       Mail::to($request->email)->send(new OrderCompleted([
         'order_id' => $order_id,
@@ -438,5 +473,21 @@ class OrderController extends Controller
       'status_list' => $status_list,
       'status_id' => $status_history[0]->order_status_id
     ]);
+  }
+
+  public function testJob (Request $request) {
+    $client = new \GuzzleHttp\Client();
+    $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/schedule/test/12', [
+      \GuzzleHttp\RequestOptions::JSON => [
+        'dni' => '45677136',
+        'isdn' => '996800986'
+      ]
+    ]);
+    echo $res->getStatusCode();
+    // 200
+    echo $res->getHeaderLine('content-type');
+    // 'application/json; charset=utf8'
+    echo $res->getBody();
+    // '{"id": 1420053, "name": "guzzle", ...}'
   }
 }
