@@ -161,22 +161,30 @@ class OrderController extends Controller
 
   protected function schedulePortingRequestJob($order_detail) {
     $client = new \GuzzleHttp\Client();
-    $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
-      \GuzzleHttp\RequestOptions::JSON => [
-        'dni' => $order_detail['id_number'],
-        'isdn' => $order_detail['porting_phone']
-      ]
-    ]);
+    try {
+      $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
+        \GuzzleHttp\RequestOptions::JSON => [
+          'dni' => $order_detail['id_number'],
+          'isdn' => $order_detail['porting_phone']
+        ]
+      ]); 
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar la solicitud de cola de portabilidad');
+    }
   }
 
   protected function notifyAdmin($order_detail) {
     $client = new \GuzzleHttp\Client();
-    $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/notify/order_complete', [
-      \GuzzleHttp\RequestOptions::JSON => [
-        'order_id' => $order_detail['order_id'],
-        'plan_name' => $order_detail['plan_name']
-      ]
-    ]);
+    try {
+      $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/notify/order_complete', [
+        \GuzzleHttp\RequestOptions::JSON => [
+          'order_id' => $order_detail['order_id'],
+          'plan_name' => $order_detail['plan_name']
+        ]
+      ]);
+    } catch (\Exception $e) {
+      Log::warning('Error al enviar la solicitud de notificación');
+    }
   }
 
   public function createOrder (Request $request) {
