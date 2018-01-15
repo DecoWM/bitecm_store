@@ -362,14 +362,19 @@ const app = new Vue({
                   }
                   $('#gallery_01').html(images);
 
-                  $('#zoom_01').elevateZoom({
+                  $('.galeria-min a').click(function(){
+                    var src = $(this).data('image');
+                    $('#zoom_01').attr('src', src);
+                  });
+                  
+                  /*$('#zoom_01').elevateZoom({
                     zoomType: "inner",
                     cursor: "default",
                     zoomWindowFadeIn: 500,
                     zoomWindowFadeOut: 750,
                     gallery : "gallery_01",
                     galleryActiveClass: "active",
-                  });
+                  });*/
                 }
 
             } else {
@@ -825,13 +830,18 @@ const app = new Vue({
             $(this).addClass('is-active');
         });
 
-        $('#zoom_01').elevateZoom({
+        /*$('#zoom_01').elevateZoom({
             zoomType: "inner",
             cursor: "default",
             zoomWindowFadeIn: 500,
             zoomWindowFadeOut: 750,
             gallery : "gallery_01",
             galleryActiveClass: "active",
+        });*/
+
+        $('.galeria-min a').click(function(){
+          var src = $(this).data('image');
+          $('#zoom_01').attr('src', src);
         });
 
         $(".option-select input").change(function(e){
@@ -858,9 +868,9 @@ const app = new Vue({
           $('#gallery_01 a').removeClass('active').eq(currentValue-1).addClass('active');
 
 
-           var ez =   $('#zoom_01').data('elevateZoom');
+          /* var ez = $('#zoom_01').data('elevateZoom');
 
-          ez.swaptheimage(smallImage, largeImage);
+          ez.swaptheimage(smallImage, largeImage); */
 
         });
         // $("#zoom_03").elevateZoom({
