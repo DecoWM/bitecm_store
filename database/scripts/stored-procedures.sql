@@ -638,7 +638,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       INNER JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
     SET where_query = CONCAT(where_query, '
@@ -649,7 +649,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       LEFT JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
   END IF;
@@ -1268,7 +1268,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       INNER JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
     SET where_query = CONCAT(where_query, '
@@ -1279,7 +1279,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       LEFT JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
   END IF;
@@ -1989,7 +1989,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       INNER JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
     SET where_query = CONCAT(where_query, '
@@ -2000,7 +2000,7 @@ BEGIN
       CLR.`color_id`, CLR.`color_name`');
     SET from_query = CONCAT(from_query, '
       LEFT JOIN tbl_stock_model as STM
-        ON PRD.`product_id` = STM.`product_id`
+        ON (PRD.`product_id` = STM.`product_id` AND STM.`active` = 1)
       LEFT JOIN tbl_color as CLR
         ON STM.`color_id` = CLR.`color_id`');
   END IF;
@@ -2662,7 +2662,7 @@ DELIMITER $$
 -- Procedimiento para obtener las imÃ¡genes de un equipo
 --
 CREATE PROCEDURE PA_productImagesByStock(
-    IN stock_model_id INT
+  IN stock_model_id INT
 )
 BEGIN
   DECLARE stored_query TEXT;
@@ -2679,7 +2679,9 @@ BEGIN
   SET from_query = 'FROM `tbl_product_image`';
 
   SET where_query = CONCAT('
-    WHERE stock_model_id = ', stock_model_id
+    WHERE active = 1
+      AND stock_model_id = ', stock_model_id, '
+    ORDER BY weight DESC'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);

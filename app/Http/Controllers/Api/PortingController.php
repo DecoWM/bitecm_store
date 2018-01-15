@@ -42,6 +42,23 @@ class PortingController extends Controller
     return response()->json(false);
   }
 
+  public function test(Request $request, $order_id) {
+    $dni = $request->input('dni', null);
+    $isdn = $request->input('isdn', null);
+
+    if(!isset($dni) || !isset($isdn)) {
+      return response()->json(false);
+    }
+
+    /*return response()->json([
+      'order_id' => $order_id,
+      'dni' => $dni,
+      'isdn' => $isdn
+    ]);*/
+
+    return response()->json(true);
+  }
+
   private function initSoapWrapper(){
     $this->soapWrapper->add('bitelSoap', function ($service) {
       $service

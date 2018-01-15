@@ -431,7 +431,7 @@ class OrderController extends Controller
     $order_detail['plan_name'] = $equipo->plan_name;
 
     if ($schedule_porting_request) {
-      // $this->schedulePortingRequestJob($order_detail);
+      $this->schedulePortingRequestJob($order_detail);
     }
 
     $this->notifyAdmin($order_detail);
@@ -465,5 +465,21 @@ class OrderController extends Controller
       'status_list' => $status_list,
       'status_id' => $status_history[0]->order_status_id
     ]);
+  }
+
+  public function testJob (Request $request) {
+    $client = new \GuzzleHttp\Client();
+    $res = $client->request('POST', env('NOTIFICATION_SERVER_URL').'/api/schedule/test/12', [
+      \GuzzleHttp\RequestOptions::JSON => [
+        'dni' => '45677136',
+        'isdn' => '996800986'
+      ]
+    ]);
+    echo $res->getStatusCode();
+    // 200
+    echo $res->getHeaderLine('content-type');
+    // 'application/json; charset=utf8'
+    echo $res->getBody();
+    // '{"id": 1420053, "name": "guzzle", ...}'
   }
 }

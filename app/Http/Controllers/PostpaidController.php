@@ -47,27 +47,27 @@ class PostpaidController extends Controller
   }
 
   public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
-      $inputs = [
-          'brand_slug' => $brand_slug,
-          'product_slug' => $product_slug,
-          'affiliation_slug' => $affiliation_slug,
-          'plan_slug' => $plan_slug,
-          'contract_slug' => $contract_slug,
-          'color_slug' => $color_slug
-      ];
+    $inputs = [
+        'brand_slug' => $brand_slug,
+        'product_slug' => $product_slug,
+        'affiliation_slug' => $affiliation_slug,
+        'plan_slug' => $plan_slug,
+        'contract_slug' => $contract_slug,
+        'color_slug' => $color_slug
+    ];
 
-      $validator = Validator::make($inputs, [
-          'brand_slug' => 'required|exists:tbl_brand',
-          'product_slug' => 'required|exists:tbl_product',
-          'affiliation_slug' => 'required|exists:tbl_affiliation',
-          'plan_slug' => 'required|exists:tbl_plan',
-          'contract_slug' => 'required|exists:tbl_contract',
-          'color_slug' => 'nullable|exists:tbl_color'
-      ]);
+    $validator = Validator::make($inputs, [
+        'brand_slug' => 'required|exists:tbl_brand',
+        'product_slug' => 'required|exists:tbl_product',
+        'affiliation_slug' => 'required|exists:tbl_affiliation',
+        'plan_slug' => 'required|exists:tbl_plan',
+        'contract_slug' => 'required|exists:tbl_contract',
+        'color_slug' => 'nullable|exists:tbl_color'
+    ]);
 
-      if ($validator->fails()) {
-          abort(404);
-      }
+    if ($validator->fails()) {
+        abort(404);
+    }
 
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
 

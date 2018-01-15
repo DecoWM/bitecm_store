@@ -106,3 +106,5 @@ Route::get('/email/orden', function () {
 // Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
+
+Route::get('/test_job', 'OrderController@testJob');
