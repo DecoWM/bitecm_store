@@ -15,7 +15,7 @@
 <script>
     export default {
         props: [
-            'stock_models'
+          'stock_models'
         ],
         // data: function () {
         //     return {
@@ -23,15 +23,15 @@
         //     }
         // },
         methods: {
-            isActiveUrl: function (url) {
-              return this.$parent.isActiveUrl(url);
-            },
-            setUrl: function (route, api_route) {
-              this.$parent.setUrl(route, api_route)
+          isActiveUrl: function (url) {
+            return this.$parent.isActiveUrl(url);
+          },
+          setUrl: function (route, api_route) {
+            this.$parent.setUrl(route, api_route)
             }
         },
         mounted() {
-            console.log('Component mounted bitel.')
+          console.log('Component mounted bitel.')
         }
     }
 </script>

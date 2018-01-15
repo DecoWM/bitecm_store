@@ -290,6 +290,7 @@ input:checked ~ .checkmark:after {
     border-radius: 3px;
     display: inline-block;
     visibility: visible;
+    cursor: pointer;
 }
 
 .stock-exhausted {

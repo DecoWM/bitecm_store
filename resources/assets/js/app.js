@@ -289,53 +289,53 @@ const app = new Vue({
         selectAffiliation: function(affiliation_routes,event) {
           if(event.target.value.length > 0) {
             // document.location = affiliation_routes[event.target.value];
-            route = affiliation_routes[event.target.value].split(",")
-            this.current_url = route[0]
+            route = affiliation_routes[event.target.value].split(",");
+            this.current_url = route[0];
             window.history.replaceState("", "", route[0]);
             this.getProduct(route[1]);
           }
         },
         setUrl: function (history_url, request_url) {
-            this.current_url = history_url
+            this.current_url = history_url;
             window.history.replaceState("", "", history_url);
             this.getProduct(request_url);
         },
         setPlan: function(plan_id) {
-            self = this
+            self = this;
             console.log(plan_id);
             console.log(self.product.plans);
             var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
             console.log(current_plan.route);
             console.log(current_plan.api_route);
             if (self.current_url != current_plan.route) {
-              this.setUrl(current_plan.route, current_plan.api_route)
+              this.setUrl(current_plan.route, current_plan.api_route);
             }
         },
         setAffiliation: function(event) {
-            self = this
-            affiliation_id = event.target.value
+            self = this;
+            affiliation_id = event.target.value;
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
             if (self.current_url != current_affiliation.route) {
               this.setUrl(current_affiliation.route, current_affiliation.api_route)
             }
         },
         setColor: function (stock_model_id) {
-            self = this
+            self = this;
             current_color = self.product.stock_models.find(item => item.stock_model_id == stock_model_id);
             if (self.current_url != current_color.route) {
-              this.setUrl(current_color.route, current_color.api_route)
+              this.setUrl(current_color.route, current_color.api_route);
             }
         },
         isActiveUrl: function (url) {
             if (url == this.current_url) {
-                return true
+                return true;
             }
-            return false
+            return false;
         },
         getProduct: function(url) {
-            self = this
+            self = this;
             axios.get(url).then((response) => {
-              self.product = response.data
+              self.product = response.data;
               console.log(self.product);
               title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
               $('.title h1').text(title);
