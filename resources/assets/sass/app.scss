@@ -782,8 +782,8 @@ li.item-nav-mobile.search #search .btn-search {
 #nav-carrito ul:before {
   content: "";
   position: absolute;
-  width: 77%;
-  height: 1px;
+  width: 79%;
+  height: 2px;
   background-color: #cecece;
   bottom: -16px;
   left: 11%;
@@ -793,9 +793,18 @@ li.item-nav-mobile.search #search .btn-search {
 
 
 @media screen and (max-width: 768px) {
+    #nav-carrito ul li:last-child{
+        margin-bottom: 0;
+    }
+    #nav-carrito ul{
+        display: flex;
+        margin-bottom: 0;
+        flex-flow: column;
+    }
+
     #nav-carrito ul:before {
         width: 2px;
-        height: 100px;
+        height: calc(100% - 20px);
         top: 10px;
         left: 4px;
         bottom: initial;
@@ -1005,9 +1014,38 @@ li.item-nav-mobile.search #search .btn-search {
   border-bottom: 1px solid transparent;
  }
 
+ #producto-disponibles .list-producto .slick-prev {
+    left: -30px;
+}
+
+ #producto-disponibles .list-producto .slick-next {
+    right: -30px;
+}
 
 
 
+ #producto-disponibles .list-producto .slick-prev:after{
+    width: 14px;
+    height: 2px;
+    position: absolute;
+    top: 5px;
+ }
+
+ #producto-disponibles .list-producto .slick-prev:before {
+
+    width: 14px;
+    height: 2px;
+    bottom: 3px;
+}
+
+#producto-disponibles .list-producto  .slick-slider .slick-next:before{
+    width: 14px;
+    height: 2px;
+}
+#producto-disponibles .list-producto  .slick-slider .slick-next:after {
+    width: 14px;
+    height: 2px;
+}
 
 
 @import "bitel_variables";
