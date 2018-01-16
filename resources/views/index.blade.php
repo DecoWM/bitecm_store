@@ -1,8 +1,10 @@
 @extends('layouts.master')
 @section('content')
       <div id="banner-principal">
-        <div class="slider"><img src="{{asset('images/banner/banner-principal.jpg')}}" alt="banner principal"></div>
-        <div class="slider"><img src="{{asset('images/banner/banner-principal.jpg')}}" alt="banner principal"></div>
+        <!-- <div class="slider"><img src="{{asset('images/banner/banner-principal.jpg')}}" alt="banner principal"></div> -->
+        <!-- <div class="slider"><img src="{{asset('images/banner/BANNER-POSTPAGO.jpg')}}" alt="banner principal"></div> -->
+        <!-- <div class="slider"><img src="{{asset('images/banner/banner-PREPAGO.jpg')}}" alt="banner principal"></div> -->
+        <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
       </div>
       <section id="equipos-vendidos">
         <div class="container">
@@ -18,7 +20,7 @@
               <div class="content-tab-vendidos">
                 {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
                   <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
-                    <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
+                    <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
                       <div class="btn-catalogo">
                         <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
                       </div>
@@ -59,7 +61,7 @@
                     </div>
                   </div>
                   <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
-                    <div class="producto catalogo"><img src="./images/home/promo-bitel.jpg" alt="bitel">
+                    <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
                       <div class="btn-catalogo">
                         <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
                       </div>
@@ -104,7 +106,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6 no-padding">
               <div class="promociones">
-                <img src="./images/home/promo-s8.jpg" alt="promoción galaxy s8">
+                <img src="./images/home/HUAWEI-P10-AD.jpg" alt="promoción Huawei p10">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
                     <a href="{{$featured_products[0]->route}}" class="btn btn-default">COMPRAR</a>
@@ -114,7 +116,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 no-padding">
               <div class="promociones">
-                <img src="./images/home/promo-note.jpg" alt="promoción note4">
+                <img src="./images/home/LG-G6-AD.jpg" alt="promoción Lg G6">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
                     <a href="{{$featured_products[1]->route}}" class="btn btn-default">COMPRAR</a>
