@@ -492,7 +492,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 }
 
 #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image {
-    margin-right: 7px;
+    margin-right: 10px;
 }
 
 
@@ -990,10 +990,49 @@ li.item-nav-mobile.search #search .btn-search {
   }
 }
 
+
+
+
+
+@media screen and (max-width: 480px){
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image{
+        padding-top: 10px;
+        display: block;
+        margin-right: 0px;
+    }
+    #nav-carrito{
+        height: auto;
+        padding-left: 10%;
+    }
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .col-xs-6{
+        width: 100%;
+    }
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 60%
+    }
+}
+
+@media screen and (max-width: 375px){
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image{
+        padding-top: 20px;
+        margin-right: 10px;
+    }
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 70%
+    }
+}
+
 @media screen and (max-width: 320px) {
+
   #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) div.especificaciones{
     border-left: 1px solid #c4c4c4;
   }
+  #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 80%
+    }
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray{
@@ -1060,6 +1099,23 @@ li.item-nav-mobile.search #search .btn-search {
   max-width: 100%;
   width: auto !important;
 }
+
+
+#page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+    max-width: 210px;
+}
+
+@media screen and (max-width: 990px){
+  #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        max-width: 110px;
+    }  
+} 
+
+.equipo-seleccionado .contenido{
+    margin-left: 10px;
+}
+
+
 
 @import "bitel_variables";
 @import "base";
