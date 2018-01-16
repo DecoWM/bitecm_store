@@ -437,7 +437,10 @@ class OrderController extends Controller
     ]);
 
     $order_detail['order_id'] = $order_id;
-    $order_detail['plan_name'] = $equipo->plan_name;
+
+    if (isset($equipo)) {
+      $order_detail['plan_name'] = $equipo->plan_name;
+    }
 
     if ($schedule_porting_request) {
       $this->schedulePortingRequestJob($order_detail);
