@@ -175,8 +175,8 @@ header #site-header .container .info-bitel ul li {
   font-size: 13px;
 }
 header #site-header .container .info-bitel ul li:first-child {
-  border-right: 1px solid #797878;
-  padding-right: 20px;
+  /*border-right: 1px solid #797878;*/
+  /*padding-right: 20px;*/
 }
 @media (max-width: 767px) {
   header #site-header .container .info-bitel ul li:first-child {
