@@ -66,6 +66,20 @@ const form = new Vue({
     }
   },
   mounted: function() {
+
+    phone_number.addEventListener("keypress", soloNumeros, false);
+    porting_phone.addEventListener("keypress", soloNumeros, false);
+    contact_phone.addEventListener("keypress", soloNumeros, false);
+    
+
+    //Solo permite introducir numeros.
+    function soloNumeros(e){
+      var key = window.event ? e.which : e.keyCode;
+      if (key < 48 || key > 57) {
+        e.preventDefault();
+      }
+    }
+
   }
 });
 

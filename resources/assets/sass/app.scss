@@ -1076,11 +1076,11 @@ li.item-nav-mobile.search #search .btn-search {
     bottom: 3px;
 }
 
-#producto-disponibles .list-producto  .slick-slider .slick-next:before{
+#producto-disponibles .list-producto .slick-next:before{
     width: 14px;
     height: 2px;
 }
-#producto-disponibles .list-producto  .slick-slider .slick-next:after {
+#producto-disponibles .list-producto .slick-next:after {
     width: 14px;
     height: 2px;
 
@@ -1115,7 +1115,18 @@ li.item-nav-mobile.search #search .btn-search {
     margin-left: 10px;
 }
 
-
+li.cart{
+    a.mi-bitel{
+        font-weight: bold;
+        padding-left: 0 !important;
+        position: initial !important;
+        color: #797878 !important;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
 
 @import "bitel_variables";
 @import "base";

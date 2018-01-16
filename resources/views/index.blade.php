@@ -223,8 +223,8 @@
                     <img src="./images/home/svg/garantia.svg" alt="garantia" class="garantia">
                   <!--<![endif]-->
                 </div>
-                <h2>Garantía</h2>
-                <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p>
+                <h2>Reserva Online</h2>
+                <p>Haz la reserva de tu equipo desde <br>cualquier dispositivo de manera <br>simple, rápida y seguro</p>
               </div>
             </div>
             <div class="col-xs-4">
@@ -239,7 +239,8 @@
                  
                 </div>
                 <h2>Delivery Gratis</h2>
-                <p>Entrega gratuita en Lima y Provincias*<br>*Mira la lista detallada de la cobertura por delivery </p>
+                <!-- <p>Entrega gratuita en Lima y Provincias*<br>*Mira la lista detallada de la cobertura por delivery </p> -->
+                <p>Nuestros productos incluyen <br>delivery todo Lima metropolitana.</p>
               </div>
             </div>
             <div class="col-xs-4">
@@ -253,7 +254,8 @@
                   <!--<![endif]-->
                 </div>
                 <h2>Pago Seguro</h2>
-                <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p>
+                <!-- <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p> -->
+                <p>Todos los productos tienen <br>Garantía por parte de Bitel.</p>
               </div>
             </div>
           </div>
