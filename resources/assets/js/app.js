@@ -67,6 +67,7 @@ const form = new Vue({
   },
   mounted: function() {
 
+
     phone_number.addEventListener("keypress", soloNumeros, false);
     porting_phone.addEventListener("keypress", soloNumeros, false);
     contact_phone.addEventListener("keypress", soloNumeros, false);
