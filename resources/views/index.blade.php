@@ -223,7 +223,7 @@
                     <img src="./images/home/svg/garantia.svg" alt="garantia" class="garantia">
                   <!--<![endif]-->
                 </div>
-                <h2>Garantía</h2>
+                <h2>Reserva Online</h2>
                 <p>Haz la reserva de tu equipo desde <br>cualquier dispositivo de manera <br>simple, rápida y seguro</p>
               </div>
             </div>

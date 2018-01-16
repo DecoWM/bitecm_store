@@ -70,6 +70,7 @@ const form = new Vue({
     phone_number.addEventListener("keypress", soloNumeros, false);
     porting_phone.addEventListener("keypress", soloNumeros, false);
     contact_phone.addEventListener("keypress", soloNumeros, false);
+    
 
     //Solo permite introducir numeros.
     function soloNumeros(e){
