@@ -65,13 +65,21 @@
                 return pagesArray;
             }
         },
+        mounted : function() {
+            $('.pagination li a').on('click', function(event) {
+              event.preventDefault();
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              // console.log('Holas')
+              /* Act on the event */
+            });
+        },
         methods : {
             changePage: function (page) {
                 if (this.pagination.current_page != page) {
                     this.$emit('changepage', page)
                 }
                 // this.pagination.current_page = page;
-            }
+            },
         }
     }
 </script>
