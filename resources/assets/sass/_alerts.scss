@@ -122,12 +122,12 @@
     .center-flex {
       display: block;
       img {
-        width: 130px;
+        width: 90px;
         margin: auto;
       }
     }
     .alert-body {
-      margin: 10px 0;
+      margin: 20px 0 !important;
     }
   }
   .alert-warning.alert-ws {
@@ -135,3 +135,4 @@
     right: inherit;
   }
 }
+

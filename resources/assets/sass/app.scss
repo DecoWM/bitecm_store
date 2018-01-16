@@ -492,7 +492,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 }
 
 #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image {
-    margin-right: 7px;
+    margin-right: 10px;
 }
 
 
@@ -783,8 +783,8 @@ li.item-nav-mobile.search #search .btn-search {
 #nav-carrito ul:before {
   content: "";
   position: absolute;
-  width: 77%;
-  height: 1px;
+  width: 79%;
+  height: 2px;
   background-color: #cecece;
   bottom: -16px;
   left: 11%;
@@ -794,9 +794,18 @@ li.item-nav-mobile.search #search .btn-search {
 
 
 @media screen and (max-width: 768px) {
+    #nav-carrito ul li:last-child{
+        margin-bottom: 0;
+    }
+    #nav-carrito ul{
+        display: flex;
+        margin-bottom: 0;
+        flex-flow: column;
+    }
+
     #nav-carrito ul:before {
         width: 2px;
-        height: 100px;
+        height: calc(100% - 20px);
         top: 10px;
         left: 4px;
         bottom: initial;
@@ -981,10 +990,49 @@ li.item-nav-mobile.search #search .btn-search {
   }
 }
 
+
+
+
+
+@media screen and (max-width: 480px){
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image{
+        padding-top: 10px;
+        display: block;
+        margin-right: 0px;
+    }
+    #nav-carrito{
+        height: auto;
+        padding-left: 10%;
+    }
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .col-xs-6{
+        width: 100%;
+    }
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 60%
+    }
+}
+
+@media screen and (max-width: 375px){
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image{
+        padding-top: 20px;
+        margin-right: 10px;
+    }
+
+    #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 70%
+    }
+}
+
 @media screen and (max-width: 320px) {
+
   #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) div.especificaciones{
     border-left: 1px solid #c4c4c4;
   }
+  #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        width: 80%
+    }
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray{
@@ -1001,6 +1049,41 @@ li.item-nav-mobile.search #search .btn-search {
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div:last-child{
   border-bottom: 1px solid transparent;
+
+ }
+
+ #producto-disponibles .list-producto .slick-prev {
+    left: -30px;
+}
+
+ #producto-disponibles .list-producto .slick-next {
+    right: -30px;
+}
+
+
+
+ #producto-disponibles .list-producto .slick-prev:after{
+    width: 14px;
+    height: 2px;
+    position: absolute;
+    top: 5px;
+ }
+
+ #producto-disponibles .list-producto .slick-prev:before {
+
+    width: 14px;
+    height: 2px;
+    bottom: 3px;
+}
+
+#producto-disponibles .list-producto  .slick-slider .slick-next:before{
+    width: 14px;
+    height: 2px;
+}
+#producto-disponibles .list-producto  .slick-slider .slick-next:after {
+    width: 14px;
+    height: 2px;
+
 }
 
 #image-equipo .galeria-min a {
@@ -1008,6 +1091,7 @@ li.item-nav-mobile.search #search .btn-search {
   padding: 2px;
   text-align: center;
   cursor: pointer;
+
 }
 
 #image-equipo .galeria-min a img {
@@ -1015,6 +1099,23 @@ li.item-nav-mobile.search #search .btn-search {
   max-width: 100%;
   width: auto !important;
 }
+
+
+#page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+    max-width: 210px;
+}
+
+@media screen and (max-width: 990px){
+  #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
+        max-width: 110px;
+    }  
+} 
+
+.equipo-seleccionado .contenido{
+    margin-left: 10px;
+}
+
+
 
 @import "bitel_variables";
 @import "base";
