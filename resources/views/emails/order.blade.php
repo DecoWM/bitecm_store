@@ -129,7 +129,7 @@
 			<tr>
 				
 				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>ingresa al siguiente link: https://tienda.bitel.com.pe/terminosycondiciones</td>
+				<td>ingresa al siguiente link: {{env('APP_URL')}}/files/terminos</td>
 			</tr>
 			<tr>
 				
