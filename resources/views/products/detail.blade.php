@@ -39,9 +39,6 @@
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @include('products.tag',['product' => $product])
               </div>
-              <div class="descripcion">
-                <p>{{$product->product_description}}</p>
-              </div>
             </div>
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
@@ -93,6 +90,9 @@
               </form>
             </div>
           </section>
+          <div class="descripcion" style="margin-top: 20px">
+            <p>{{$product->product_description}}</p>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -161,4 +161,13 @@
       </div>
       @endif
     </div>
+    @php
+      $product_init = [
+        'product' => $product,
+        'product_images' => $product_images,
+        'stock_models' => $stock_models,
+        'available' => $available
+      ];
+    @endphp
+    <input id="product-init" type="hidden" value='@json($product_init)'>
 @endsection

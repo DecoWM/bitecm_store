@@ -45,6 +45,15 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'Api\PrepaidController@
       ])
     ->name('api_prepaid_detail');
 
+Route::get('/accesorios/{brand}/{product}/{color?}', 'Api\ProductController@show')
+    ->where(
+      [
+        'brand' => '^([a-zA-Z0-9_-]+)$',
+        'product' => '^([a-zA-Z0-9_-]+)$',
+        'color' => '^([a-zA-Z0-9_-]+)$',
+      ])
+    ->name('api_accessory_detail');
+
 Route::post('check_porting_status/{order_id}', 'Api\PortingController@handle');
 
 Route::post('test/{param}', 'Api\PortingController@test');

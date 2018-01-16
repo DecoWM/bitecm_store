@@ -60,32 +60,52 @@
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">
                             @foreach($status_list as $status)
-                            <li class="col-xs-4 col-sm-4 {{$status_id == $status->order_status_id ? 'active' : ''}} {{$status_id == 3 ? 'text-muted' : ''}} {{$status_id > $status->order_status_id ? 'is-completed' : ''}}">
+                            <li class="col-xs-4 col-sm-4 {{$status_id == $status->order_status_id ? 'active' : ''}} {{$status_id == 4 ? 'text-muted' : ''}} {{$status_id > $status->order_status_id ? 'is-completed' : ''}}">
                               <span>{{$status->order_status_name}}</span>
                             </li>
                             @endforeach
                           </ul>
                         </div>
                         <div class="resp-proceso-web text-center">
-                          @if ($status_id == 1 || $status_id == 2)
-                            <p>¡Tu pedido está siendo evaluado!</p>
-                          @elseif ($status_id == 3)
-                            <p>Tu pedido ha sido cancelado</p>
-                          @elseif ($status_id == 4 || $status_id == 5)
-                            <p>¡Tu pedido ha sido entregado!</p>
-                          @endif
+                          @switch($status_id)
+                            @case(1)
+                              <p>¡Tu pedido está siendo evaluado!</p>
+                              @break
+                            @case(2)
+                              <p>¡Tu pedido ya fue procesado!</p>
+                              @break
+                            @case(3)
+                              <p>¡Tu pedido esta siendo enviado!</p>
+                              @break
+                            @case(4)
+                              <p>¡Tu pedido ha sido cancelado!</p>
+                              @break
+                            @case(5)
+                              <p>¡Tu pedido ha sido entregado!</p>
+                              @break
+                          @endswitch
                         </div>
                       </div>
                     </div>
                     <div class="col-xs-12">
                       <div class="resp-proceso-movil text-center">
-                        @if ($status_id == 1 || $status_id == 2)
-                          <p>¡Tu pedido está siendo evaluado!</p>
-                        @elseif ($status_id == 3)
-                          <p>Tu pedido ha sido cancelado</p>
-                        @elseif ($status_id == 4 || $status_id == 5)
-                          <p>¡Tu pedido ha sido entregado!</p>
-                        @endif
+                        @switch($status_id)
+                          @case(1)
+                            <p>¡Tu pedido está siendo evaluado!</p>
+                            @break
+                          @case(2)
+                            <p>¡Tu pedido ya fue procesado!</p>
+                            @break
+                          @case(3)
+                            <p>¡Tu pedido esta siendo enviado!</p>
+                            @break
+                          @case(4)
+                            <p>¡Tu pedido ha sido cancelado!</p>
+                            @break
+                          @case(5)
+                            <p>¡Tu pedido ha sido entregado!</p>
+                            @break
+                          @endswitch
                       </div>
                     </div>
                   </div>

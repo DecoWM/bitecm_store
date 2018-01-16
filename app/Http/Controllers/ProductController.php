@@ -85,9 +85,13 @@ class ProductController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->productSearch(2, $product->brand_id, 4);
+    $available_products = $this->shared->productSearch(2, null, 4, 1, null, null, null, null, null, null, $product->product_id);
     $available = collect($available_products['products'])->map(function ($item, $key) use ($product) {
       $item->route = route('accessory_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug
+      ]);
+      $item->api_route = route('api_accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug
       ]);
@@ -103,11 +107,18 @@ class ProductController extends Controller
           'product'=>$product->product_slug,
           'color'=>$item->color_slug
         ]);
+        $stock_models[$i]->api_route = route('api_accessory_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'color'=>$item->color_slug
+        ]);
       }
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
     $response = [
       'product' => $product,
+      'product_images' => $product_images,
+      'stock_models' => $stock_models,
       'available' => $available
     ];
     return view('products.detail', $response);

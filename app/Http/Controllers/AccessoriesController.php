@@ -71,12 +71,16 @@ class AccessoriesController extends Controller
       abort(404);
     }
 
-    $available_products = $this->shared->productSearch(2, $product->brand_id, 4, null, null, null, null, null, null, $product->product_id);
+    $available_products = $this->shared->productSearch(2, null, 4, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
     foreach($available as $i => $item) {
       //$available[$i]->picture_url = asset('images/productos/'.$item->picture_url);
       $available[$i]->route = route('accessory_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug
+      ]);
+      $available[$i]->api_route = route('api_accessory_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug
       ]);
@@ -87,7 +91,12 @@ class AccessoriesController extends Controller
       $stock_models = $this->shared->productStockModels($product->product_id);
       foreach($stock_models as $i => $item) {
         $stock_models[$i]->route = route('accessory_detail', [
-          'brand'=>$product->brand_slug,
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'color'=>$item->color_slug
+        ]);
+        $stock_models[$i]->api_route = route('api_accessory_detail', [
+          'brand'=>$brand_slug,
           'product'=>$product->product_slug,
           'color'=>$item->color_slug
         ]);
