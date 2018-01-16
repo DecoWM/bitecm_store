@@ -29,7 +29,7 @@
           <span v-if="product.promo_id" class="normal-price">s/.{{product.product_price}}</span>
         </div>
         <div class="plan-product">
-          <p>en plan <span>{{product.plan_name}}</span></p>
+          <p>en plan Prepago <span>{{product.plan_name}}</span></p>
         </div>
         <div class="btn-product form-inline">
           <div class="form-group btn-comprar">

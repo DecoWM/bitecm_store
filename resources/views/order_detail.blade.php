@@ -29,10 +29,12 @@
                         </div>
                         <div class="info">
                           <p>Tu solicitud ha sido enviada correctamente por:</p>
-                          @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
-                          <p>
-                            Plan <span> s/. {{$product->plan_price}} </span>mensual
-                          </p>
+                          @if(isset($product->variation_type_id))
+                            @if($product->variation_type_id == 2)
+                            <p>Plan <span> s/. {{$product->plan_price}} </span>mensual</p>
+                            @else
+                            <p>Plan Prepago <span>{{$product->plan_name}}</span></p>
+                            @endif
                           @endif
                           @if(isset($product->promo_id))
                           <p>
@@ -53,9 +55,11 @@
                           <span class="text-uppercase title-contenido">
                             {{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}
                           </span>
-                          @if(isset($product->variation_type_id) && $product->variation_type_id == 2)
-                          <p>{{$product->affiliation_name}}</p>
-                          <p>Contrato 18 meses</p>
+                          @if(isset($product->variation_type_id))
+                            <p>{{$order['affiliation_type']}}</p>
+                            @if($product->variation_type_id == 2)
+                            <p>Contrato 18 meses</p>
+                            @endif
                           @endif
                           <p> <span>Cantidad:</span> {{$product->quantity}}</p>
                         </div>

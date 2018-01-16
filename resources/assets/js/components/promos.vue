@@ -20,7 +20,7 @@
             <span class="normal-price">S/.{{product.product_price}}</span>
           </div>
           <div class="plan-product">
-            <p><a :href="product.route_post">Ver en plan postpago</a></p>
+            <p>en plan Prepago <span>{{product.plan_name}}</span></p>
           </div>
           </template>
           <template v-else-if="product.variation_type_id == 2">

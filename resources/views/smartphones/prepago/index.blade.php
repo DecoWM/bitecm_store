@@ -55,7 +55,7 @@
                       @endif
                     </div>
                     <div class="plan-product">
-                      <p>en plan <span>{{$smartphone->plan_name}}</span></p>
+                      <p>en plan Prepago <span>{{$smartphone->plan_name}}</span></p>
                     </div>
                     {{--<div class="plan-product">
                       <p><a href="{{route('postpaid_detail', [

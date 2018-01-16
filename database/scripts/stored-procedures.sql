@@ -2733,7 +2733,8 @@ BEGIN
       ON STM.`color_id` = CLR.`color_id`';
 
   SET where_query = CONCAT('
-    WHERE STM.`product_id` = ', product_id);
+    WHERE STM.`active` = 1
+      AND STM.`product_id` = ', product_id);
 
   IF (color_required > 0) THEN
     SET where_query = CONCAT(where_query, '

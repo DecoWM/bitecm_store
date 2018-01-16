@@ -167,7 +167,7 @@ class OrderController extends Controller
           'dni' => $order_detail['id_number'],
           'isdn' => $order_detail['porting_phone']
         ]
-      ]); 
+      ]);
     } catch (\Exception $e) {
       Log::warning('Error al enviar la solicitud de cola de portabilidad');
     }
@@ -258,7 +258,8 @@ class OrderController extends Controller
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
           $order_detail['service_type'] = 'Accesorios';
-          $order_detail['affiliation_type'] = null;
+          if (!isset($order_detail['affiliation_type']))
+            $order_detail['affiliation_type'] = null;
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
@@ -459,7 +460,7 @@ class OrderController extends Controller
 
     $request->session()->flush();
 
-    return view('order_detail', ['products' => $products, 'order_id' => $order_id]);
+    return view('order_detail', ['products' => $products, 'order_id' => $order_id, 'order' => $order_detail]);
   }
 
   public function trackOrder (Request $request, $order_id) {
