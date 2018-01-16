@@ -45,8 +45,8 @@
             console.log('Component mounted bitel.')
         },
         methods : {
-            removeItem (product) {
-                this.$emit('removeitem', product)
+            removeItem (product_variation_id) {
+                this.$emit('removeitem', product_variation_id)
             },
             compareList () {
                 self = this

@@ -16,11 +16,11 @@
         //     }
         // },
         mounted() {
-            console.log('Component mounted bitel.')
+            console.log('Component mounted bitel.');
         },
         methods: {
             removeItem : function () {
-                this.$emit('removeItem', this.product.product_id)
+                this.$emit('removeItem', this.product.product_variation_id);
             }
         }
     }

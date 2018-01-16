@@ -96,15 +96,30 @@ class PostpaidController extends Controller
       // $product_contracts = $this->shared->productContracts($product->product_id);
 
       // TEMPORAL
-      $product_plans = DB::select('call PA_planList(2)');
+      // $product_plans = DB::select('call PA_planList(2)');
       // $product_affiliations = DB::select('call PA_affiliationList()');
 
-      $product_affiliations = DB::table('tbl_product_variation')
-                    ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
-                    ->where('tbl_product_variation.product_id', $product->product_id)
-                    ->select('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
-                    ->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
-                    ->get();
+      $product_plans = DB::table('tbl_product_variation')
+      ->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')
+      ->where('tbl_product_variation.product_id', $product->product_id)
+      ->where('tbl_product_variation.affiliation_id', $product->affiliation_id)
+      ->where('tbl_product_variation.contract_id', $product->contract_id)
+      ->where('tbl_product_variation.variation_type_id', 2)
+      ->where('tbl_product_variation.active', 1)
+      ->select('tbl_plan.*')
+      //->groupBy('tbl_plan.plan_id', 'tbl_plan.plan_name', 'tbl_plan.plan_slug')
+      ->get();
+
+    $product_affiliations = DB::table('tbl_product_variation')
+      ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
+      ->where('tbl_product_variation.product_id', $product->product_id)
+      ->where('tbl_product_variation.plan_id', $product->plan_id)
+      ->where('tbl_product_variation.contract_id', $product->contract_id)
+      ->where('tbl_product_variation.variation_type_id', 2)
+      ->select('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+      ->where('tbl_product_variation.active', 1)
+      //->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+      ->get();
 
       collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
         $item->route = route('postpaid_detail', [

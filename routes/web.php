@@ -108,3 +108,4 @@ Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
 
 Route::get('/test_job', 'OrderController@testJob');
+//Route::get('/borrar_session', 'OrderController@borrar_session');

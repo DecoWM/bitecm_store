@@ -491,4 +491,8 @@ class OrderController extends Controller
     echo $res->getBody();
     // '{"id": 1420053, "name": "guzzle", ...}'
   }
+
+  public function borrar_session() {
+    DB::table('sessions')->delete();
+  }
 }

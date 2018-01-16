@@ -200,7 +200,7 @@ const app = new Vue({
             self.bestSeller=str;
             this.$nextTick(function(){
                 $('.list-productos').slick('setPosition');
-              // $('#banner-principal').get(0).slick.setPosition();
+                // $('#banner-principal').get(0).slick.setPosition();
             });
         },
         togglePromo: function (str) {
@@ -208,14 +208,14 @@ const app = new Vue({
             self.promo = str;
             this.$nextTick(function(){
                 $('.promociones-tab').slick('setPosition');
-              // $('#banner-principal').get(0).slick.setPosition();
+                // $('#banner-principal').get(0).slick.setPosition();
             });
         },
         toggleAccordion : function (item) {
           item.isOpen = !item.isOpen;
         },
         toggleAccordionMobile : function (item) {
-          self = this
+          self = this;
           if (self.isMobile) {
             item.isOpen = !item.isOpen;
           }
@@ -230,10 +230,10 @@ const app = new Vue({
             self = this;
             self.compare.push(product);
         },
-        removeItem: function (product_id) {
+        removeItem: function (product_variation_id) {
             self = this;
             item = self.compare.find( function (e) {
-                return e.product_id == product_id;
+                return e.product_variation_id == product_variation_id;
             });
             index = self.compare.indexOf(item);
             if (index !== -1) {
@@ -241,7 +241,7 @@ const app = new Vue({
             }
         },
         selectAllFilter: function (filter) {
-            self = this
+            self = this;
             if (!self.filters[self.type][filter].all) {
                 self.filters[self.type][filter].value = '';
                 self.searchProduct(1);
@@ -279,7 +279,7 @@ const app = new Vue({
             };
             axios.get(url, data).then((response) => {
               console.log(response.data);
-              self.searchResult = response.data.data
+              self.searchResult = response.data.data;
               if (self.searchResult.length == 0) {
                   self.noResults = true;
               }
