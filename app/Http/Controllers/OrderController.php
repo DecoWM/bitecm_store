@@ -33,11 +33,15 @@ class OrderController extends Controller
   }
 
   private function initSoapWrapper(){
-    $this->soapWrapper->add('bitelSoap', function ($service) {
-      $service
-        ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
-        ->trace(true);
-    });
+    try {
+      $this->soapWrapper->add('bitelSoap', function ($service) {
+        $service
+          ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
+          ->trace(true);
+      });
+    } catch (\Exception $e) {
+      Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
+    }
   }
 
   /**
@@ -52,16 +56,21 @@ class OrderController extends Controller
   **/
   protected function checkIsOverQouta($order_detail)
   {
-    $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
-      "checkOverQoutaIdNo" => array(
-        'paymethodType' => strval($order_detail['type_id']),
-        'busType' => 'INDI',
-        'idNo' => strval($order_detail['id_number']),
-        'productCode' => strval($order_detail['product_code'])
-      )
-    ]);
-    Log::info('Respuesta bitelSoap.checkOverQoutaIdNo: ', (array) $response->return);
-    return ($response->return->isOverQouta != 0);
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
+        'checkOverQoutaIdNo' => array(
+          'paymethodType' => strval($order_detail['type_id']),
+          'busType' => 'INDI',
+          'idNo' => strval($order_detail['id_number']),
+          'productCode' => strval($order_detail['product_code'])
+        )
+      ]);
+      Log::info('Respuesta bitelSoap.checkOverQoutaIdNo: ', (array) $response->return);
+      return ($response->return->isOverQouta != 0);
+    } catch (\Exception $e) {
+      Log::error('El método checkOverQoutaIdNo no se encuentra disponible o recibió parametros erroneos');
+      return false;
+    }
   }
 
   /**
@@ -71,19 +80,24 @@ class OrderController extends Controller
   */
   protected function getInfoCustomer($order_detail)
   {
-    $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
-      "getCustomer" => array(
-        'idType' => '01', // persona natural !!!
-        'idNo' => $order_detail['id_number']
-      )
-    ]);
-    if(isset($response->return->result)) {
-      Log::info('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
-      return $response->return->result;
-    }
-    else {
-      Log::warning('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
-      return false;
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
+        'getCustomer' => array(
+          'idType' => '01', // persona natural !!!
+          'idNo' => $order_detail['id_number']
+        )
+      ]);
+      if(isset($response->return->result)) {
+        Log::info('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
+        return $response->return->result;
+      }
+      else {
+        Log::warning('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
+        return false;
+      }
+    } catch (\Exception $e) {
+      Log::error('El método getCustomer no se encuentra disponible o recibió parametros erroneos');
+      return null;
     }
   }
 
@@ -94,17 +108,22 @@ class OrderController extends Controller
   */
   protected function checkHaveDebit($custId)
   {
-    $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
-      "getInfoDebitByCustId" => array(
-        'custId' => strval($custId)
-      )
-    ]);
-    if ( isset($response->return->errorCode) && $response->return->errorCode == -1) {  
-      Log::info('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
+        'getInfoDebitByCustId' => array(
+          'custId' => strval($custId)
+        )
+      ]);
+      if ( isset($response->return->errorCode) && $response->return->errorCode == -1) {  
+        Log::info('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
+        return true;
+      }
+      Log::warning('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
+      return false;
+    } catch (\Exception $e) {
+      Log::error('El método getInfoDebitByCustId no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
-    Log::warning('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
-    return false;
   }
 
   /**
@@ -115,34 +134,39 @@ class OrderController extends Controller
   */
   protected function createConsultantRequest(&$order_detail)
   {
-    $req = [
-      "createConsultantRequest" => array(
-        'staffCode' => 'CM_THUYNTT',
-        'shopCode' => 'VTP',
-        'dni' => strval($order_detail['id_number']),
-        'isdn' => strval($order_detail['porting_phone']),
-        'sourceOperator' => isset($order_detail['source_operator_id']) ? strval($order_detail['source_operator_id']) : '',
-        'sourcePayment' => strval($order_detail['type_id']),
-        'email' => strval($order_detail['contact_email']),
-        'phone' => strval($order_detail['contact_phone']),
-        'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-        'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-        'reasonId' => strval($order_detail['reason_code'])
-      )
-    ];
+    try {
+      $req = [
+        'createConsultantRequest' => array(
+          'staffCode' => 'CM_THUYNTT',
+          'shopCode' => 'VTP',
+          'dni' => strval($order_detail['id_number']),
+          'isdn' => strval($order_detail['porting_phone']),
+          'sourceOperator' => isset($order_detail['source_operator_id']) ? strval($order_detail['source_operator_id']) : '',
+          'sourcePayment' => strval($order_detail['type_id']),
+          'email' => strval($order_detail['contact_email']),
+          'phone' => strval($order_detail['contact_phone']),
+          'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+          'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+          'reasonId' => strval($order_detail['reason_code'])
+        )
+      ];
 
-    $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
+      $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
 
-    if ($response->return->errorCodeMNP == '0') {
-      // set the portingRequestId from response
-      $this->portingRequestId = $response->return->portingRequestId;
-      $order_detail['porting_request_id'] = $response->return->portingRequestId;
-      Log::info('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
+      if ($response->return->errorCodeMNP == '0') {
+        // set the portingRequestId from response
+        $this->portingRequestId = $response->return->portingRequestId;
+        $order_detail['porting_request_id'] = $response->return->portingRequestId;
+        Log::info('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
+        return true;
+      }
+
+      Log::warning('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
+      return false;
+    } catch (\Exception $e) {
+      Log::error('El método createConsultantRequest no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
-
-    Log::warning('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
-    return false;
   }
 
   /**
@@ -152,26 +176,31 @@ class OrderController extends Controller
   */
   protected function checkSuccessPortingRequest(&$order_detail)
   {
-    $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
-      "getListPortingRequest" => array(
-        'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-        'dni' => strval($order_detail['id_number']),
-        'isdn' => strval($order_detail['porting_phone']),
-      )
-    ]);
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
+        'getListPortingRequest' => array(
+          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+          'dni' => strval($order_detail['id_number']),
+          'isdn' => strval($order_detail['porting_phone']),
+        )
+      ]);
 
-    if ($response->return->errorCodeMNP == '0') {
-      $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
-      $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
-      $order_detail['porting_status'] = $response->return->listPortingRequest->status;
-      $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
-      Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+      if ($response->return->errorCodeMNP == '0') {
+        $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
+        $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
+        $order_detail['porting_status'] = $response->return->listPortingRequest->status;
+        $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+        return true;
+      }
+
+      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+      return false;
+      // return ($response->return->errorCode == '02');
+    } catch (\Exception $e) {
+      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
-
-    Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-    return false;
-    // return ($response->return->errorCode == '02');
   }
 
   protected function schedulePortingRequestJob($order_detail) {
