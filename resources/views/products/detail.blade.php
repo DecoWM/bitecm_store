@@ -135,7 +135,7 @@
               <div class="producto">
                 <div class="image-product text-center">
                   <a href="{{$item->route}}">
-                    <img src="{{$item->picture_url}}" alt="equipos">
+                    <img src="{{asset(Storage::url($item->picture_url))}}" alt="equipos">
                   </a>
                 </div>
                 <div class="content-product text-center">
