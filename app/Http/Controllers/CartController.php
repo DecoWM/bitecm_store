@@ -117,7 +117,7 @@ class CartController extends Controller
         $has_item = $cart->search(function($item, $key) use ($cart_item) {
           return $item['product_variation_id'] == $cart_item['product_variation_id'] && $item['stock_model_id'] == $cart_item['stock_model_id'];
         });
-        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 2) && count($cart) < 1) {
+        if ($has_item === false && !$cart->contains('type_id', 2)) {
           $request->session()->push('cart', $cart_item);
         } else {
           return redirect()->route('show_cart')->with('msg', $limit_message);
@@ -129,7 +129,7 @@ class CartController extends Controller
         $has_item = $cart->search(function($item, $key) use ($cart_item) {
           return $item['product_variation_id'] == $cart_item['product_variation_id'] && $item['stock_model_id'] == $cart_item['stock_model_id'];
         });
-        if ($has_item === false && !$cart->contains('type_id', 0) && !$cart->contains('type_id', 1) && count($cart) < 1) {
+        if ($has_item === false && !$cart->contains('type_id', 1)) {
           $request->session()->push('cart', $cart_item);
         } else {
           return redirect()->route('show_cart')->with('msg', $limit_message);

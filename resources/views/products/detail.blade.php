@@ -15,7 +15,7 @@
                 @if(count($product_images)>1)
                 <div id="gallery_01" class="galeria-min">
                   @foreach($product_images as $image)
-                  <a data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
+                  <a href="javascript:void(0)" data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
                     <img src="{{asset(Storage::url($image->product_image_url))}}" alt="{{$product->product_model}}">
                   </a>
                   @endforeach
