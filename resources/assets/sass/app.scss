@@ -1128,6 +1128,14 @@ li.cart{
     }
 }
 
+section#equipos-promocion .container .row .content-tab-pro .producto .image-product img{
+    max-height: 250px;
+}
+
+section#equipos-vendidos .container .row .content-tab-pro .producto .image-product img{
+    max-height: 250px;
+}
+
 @import "bitel_variables";
 @import "base";
 @import "common";

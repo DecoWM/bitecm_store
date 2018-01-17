@@ -695,15 +695,44 @@ const app = new Vue({
                 {
                   breakpoint: 480,
                   settings: {
+                      // initialSlide: $('#planes .slick-slide .slick-active').next(),
                       arrows: true,
                       dots: false,
                       centerMode: false,
-                      slidesToShow: 1
+                      slidesToShow: 1,
+                      slickCurrentSlide : $('#planes').data('slick-index' + 1)
+
+
 
                   }
                 },
             ]
         });
+
+        // $('.select-plan').slick('setPosition');
+
+        // function resizeSelectPlan() {
+
+        //   // body...
+        //   var WindoWSelect = $(window).width();
+
+        //   if (WindoWSelect < 480) {
+        //     console.log('hola');
+        //     $('.select-plan').on('setPosition', function(event, slick, currentSlide, nextSlide){
+        //       console.log($(this));
+        //     });
+        //   } 
+
+        //   // else {}
+
+        // }
+
+        // resizeSelectPlan();
+
+        // $(window).resize(resizeSelectPlan);
+
+
+
 
         $('.descripcion-detalle ul').slick({
             arrows: true,

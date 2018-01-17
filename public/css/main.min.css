@@ -3924,16 +3924,27 @@ section#garantia .container .row .col-xs-4 .text-center p {
     justify-content: center;
   }
 }
+#list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul{
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
 #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li {
   margin-bottom: 10px;
   position: relative;
+  width: 70px;
+  overflow: hidden;
+  margin: 0 auto;
+  margin-top: 5px;
 }
+
 #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li img {
   width: 50px;
 }
 @media (max-width: 1366px) {
   #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li img {
-    width: 35px;
+    width: auto;
+    max-height: 75px
   }
 }
 #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li button {
@@ -3949,7 +3960,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 @media (max-width: 1366px) {
   #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li button {
-    left: 15px;
+    left: 0px;
   }
 }
 @media (max-width: 767px) {
