@@ -60,31 +60,42 @@ class PortingController extends Controller
   }
 
   private function initSoapWrapper(){
-    $this->soapWrapper->add('bitelSoap', function ($service) {
-      $service
-        ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
-        ->trace(true);
-    });
+    try {
+      $this->soapWrapper->add('bitelSoap', function ($service) {
+        $service
+          ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
+          ->trace(true);
+      });
+    } catch (\Exception $e) {
+      Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
+    }
   }
 
   private function checkSuccessPortingRequest(&$order_detail)
   {
-    $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
-      'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-      'dni' => strval($order_detail['id_number']),
-      'isdn' => strval($order_detail['porting_phone']),
-    ]);
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [ 
+        'getListPortingRequest' => [
+          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+          'dni' => strval($order_detail['id_number']),
+          'isdn' => strval($order_detail['porting_phone']),
+        ]
+      ]);
 
-    if ($response->return->errorCodeMNP == '0') {
-      $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
-      $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
-      $order_detail['porting_status'] = $response->return->listPortingRequest->status;
-      $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+      if ($response->return->errorCodeMNP == '0') {
+        $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
+        $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
+        $order_detail['porting_status'] = $response->return->listPortingRequest->status;
+        $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+        return true;
+      }
+
+      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+      return false;
+      // return ($response->return->errorCode == '02');
+    } catch (\Exception $e) {
+      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
-
-    Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-    return false;
-    // return ($response->return->errorCode == '02');
   }
 }
