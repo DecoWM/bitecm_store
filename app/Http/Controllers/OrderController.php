@@ -53,11 +53,14 @@ class OrderController extends Controller
   protected function checkIsOverQouta($order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
-      'paymethodType' => strval($order_detail['type_id']),
-      'busType' => 'INDI',
-      'idNo' => strval($order_detail['id_number']),
-      'productCode' => strval($order_detail['product_code'])
+      "checkOverQoutaIdNo" => array(
+        'paymethodType' => strval($order_detail['type_id']),
+        'busType' => 'INDI',
+        'idNo' => strval($order_detail['id_number']),
+        'productCode' => strval($order_detail['product_code'])
+      )
     ]);
+    Log::info('Respuesta bitelSoap.checkOverQoutaIdNo: ', (array) $response->return);
     return ($response->return->isOverQouta != 0);
   }
 
@@ -69,10 +72,13 @@ class OrderController extends Controller
   protected function getInfoCustomer($order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
-      'idType' => '01', // persona natural !!!
-      'idNo' => $order_detail['id_number']
+      "getCustomer" => array(
+        'idType' => '01', // persona natural !!!
+        'idNo' => $order_detail['id_number']
+      )
     ]);
     if(isset($response->return->result)) {
+      Log::info('Respuesta bitelSoap.getCustomer: ', (array) $response->return);
       return $response->return->result;
     }
     else {
@@ -89,9 +95,12 @@ class OrderController extends Controller
   protected function checkHaveDebit($custId)
   {
     $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
-      'custId' => strval($custId)
+      "getInfoDebitByCustId" => array(
+        'custId' => strval($custId)
+      )
     ]);
-    if ($response->return->errorCode == -1) {
+    if ( isset($response->return->errorCode) && $response->return->errorCode == -1) {  
+      Log::info('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
       return true;
     }
     Log::warning('Respuesta bitelSoap.getInfoDebitByCustId: ', (array) $response->return);
@@ -107,17 +116,19 @@ class OrderController extends Controller
   protected function createConsultantRequest(&$order_detail)
   {
     $req = [
-      'staffCode' => 'CM_THUYNTT',
-      'shopCode' => 'VTP',
-      'dni' => strval($order_detail['id_number']),
-      'isdn' => strval($order_detail['porting_phone']),
-      'sourceOperator' => isset($order_detail['source_operator']) ? strval($order_detail['source_operator']) : '',
-      'sourcePayment' => strval($order_detail['type_id']),
-      'email' => strval($order_detail['contact_email']),
-      'phone' => strval($order_detail['contact_phone']),
-      'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-      'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-      'reasonId' => strval($order_detail['reason_code'])
+      "createConsultantRequest" => array(
+        'staffCode' => 'CM_THUYNTT',
+        'shopCode' => 'VTP',
+        'dni' => strval($order_detail['id_number']),
+        'isdn' => strval($order_detail['porting_phone']),
+        'sourceOperator' => isset($order_detail['source_operator_id']) ? strval($order_detail['source_operator_id']) : '',
+        'sourcePayment' => strval($order_detail['type_id']),
+        'email' => strval($order_detail['contact_email']),
+        'phone' => strval($order_detail['contact_phone']),
+        'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+        'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
+        'reasonId' => strval($order_detail['reason_code'])
+      )
     ];
 
     $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
@@ -126,6 +137,7 @@ class OrderController extends Controller
       // set the portingRequestId from response
       $this->portingRequestId = $response->return->portingRequestId;
       $order_detail['porting_request_id'] = $response->return->portingRequestId;
+      Log::info('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
       return true;
     }
 
@@ -141,9 +153,11 @@ class OrderController extends Controller
   protected function checkSuccessPortingRequest(&$order_detail)
   {
     $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
-      'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-      'dni' => strval($order_detail['id_number']),
-      'isdn' => strval($order_detail['porting_phone']),
+      "getListPortingRequest" => array(
+        'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+        'dni' => strval($order_detail['id_number']),
+        'isdn' => strval($order_detail['porting_phone']),
+      )
     ]);
 
     if ($response->return->errorCodeMNP == '0') {
@@ -151,6 +165,7 @@ class OrderController extends Controller
       $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
       $order_detail['porting_status'] = $response->return->listPortingRequest->status;
       $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+      Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
       return true;
     }
 
@@ -331,6 +346,7 @@ class OrderController extends Controller
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
       $source_operators = $this->shared->operatorList();
       $order_detail['source_operator'] = $source_operators[$request->operator];
+      $order_detail['source_operator_id'] = $request->operator;
       $order_detail['porting_phone'] = $request->porting_phone;
     } else {
       $order_detail['source_operator'] = null;
@@ -353,7 +369,7 @@ class OrderController extends Controller
       $order_detail['product_code'] = $equipo->product_code;
     }
 
-    if(isset($equipo) && \Config::get('filter.use_bcss')) {
+    if(isset($equipo) && \Config::get('filter.use_bcss')) { 
       // Apply validations with Bitel webservice before insert
       $this->initSoapWrapper(); // Init the bitel soap webservice
 
