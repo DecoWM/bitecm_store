@@ -135,8 +135,9 @@ class PostpaidController extends Controller
       ->where('tbl_product_variation.contract_id', $product->contract_id)
       ->where('tbl_product_variation.variation_type_id', 2)
       ->where('tbl_product_variation.active', 1)
+      ->where('tbl_plan.active', 1)
       ->select('tbl_plan.*')
-      //->groupBy('tbl_plan.plan_id', 'tbl_plan.plan_name', 'tbl_plan.plan_slug')
+      ->groupBy('tbl_plan.plan_id', 'tbl_plan.plan_name', 'tbl_plan.plan_slug')
       ->get();
 
     $product_affiliations = DB::table('tbl_product_variation')
@@ -147,7 +148,8 @@ class PostpaidController extends Controller
       ->where('tbl_product_variation.variation_type_id', 2)
       ->select('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
       ->where('tbl_product_variation.active', 1)
-      //->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
+      ->where('tbl_affiliation.active', 1)
+      ->groupBy('tbl_affiliation.affiliation_id', 'tbl_affiliation.affiliation_name', 'tbl_affiliation.affiliation_slug')
       ->get();
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {

@@ -373,7 +373,7 @@ const app = new Vue({
                 $('#gallery_01').html("");
                 if (self.product.product_images.length > 1) {
                   for (image of self.product.product_images) {
-                    images += '<a href="#" data-image="' + self.baseUrl + '/storage/' + image.product_image_url + '"><img src="' + self.baseUrl + '/storage/' + image.product_image_url + '" alt="' + self.product.product.product_model + '"></a>';
+                    images += '<a href="javascript:void(0)" data-image="' + self.baseUrl + '/storage/' + image.product_image_url + '"><img src="' + self.baseUrl + '/storage/' + image.product_image_url + '" alt="' + self.product.product.product_model + '"></a>';
                   }
                   $('#gallery_01').html(images);
 

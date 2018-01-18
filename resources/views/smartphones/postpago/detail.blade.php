@@ -147,17 +147,23 @@
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">
                     @if ($plan->plan_unlimited_calls == 1)
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas</li>
-                    @endif
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="internet">{{$plan->plan_data_cap}} internet</li>
-                    @if ($plan->plan_unlimited_rpb == 1)
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">RPB ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas (**)</li>
+                    @elseif ($plan->plan_unlimited_calls > 1)
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} min de Llamadas</li>
                     @endif
                     @if ($plan->plan_unlimited_sms == 1)
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado (**)</li>
+                    @elseif ($plan->plan_unlimited_sms > 1)
+                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>
+                    @endif
+                    @if (isset($plan->plan_data_cap) && $plan->plan_data_cap != '')
+                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="Internet">{!!$plan->plan_data_cap!!}</li>
+                    @endif
+                    @if ($plan->plan_unlimited_rpb == 1)
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">Llamada todo Bitel Gratis</li>
                     @endif
                     @if ($plan->plan_free_facebook == 1)
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Flex Gratis</li>
                     @endif
                     @if ($plan->plan_unlimited_whatsapp == 1)
                     <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
