@@ -104,17 +104,32 @@ class PrepaidController extends Controller
     $contract_id = \Config::get('filter.contract_id');
 
     $variation = DB::table('tbl_product_variation')
-      ->where('variation_type_id', 2)
-      ->where('plan_id', $plan_post_id)
-      ->where('affiliation_id', $affiliation_id)
-      ->where('contract_id', $contract_id)
-      ->where('product_id', $product->product_id)
+      ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+      ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
+      ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
+      ->where('tbl_product_variation.variation_type_id', 2)
+      ->where('tbl_product_variation.plan_id', $plan_post_id)
+      ->where('tbl_product_variation.affiliation_id', $affiliation_id)
+      ->where('tbl_product_variation.contract_id', $contract_id)
+      ->where('tbl_product_variation.product_id', $product->product_id)
+      ->where('tbl_product_variation.active', 1)
+      ->where('tbl_plan.active', 1)
+      ->where('tbl_affiliation.active', 1)
+      ->where('tbl_contract.active', 1)
+      ->limit(1)
       ->get();
 
     if (!count($variation)) {
       $variation = DB::table('tbl_product_variation')
-        ->where('variation_type_id', 2)
-        ->where('product_id', $product->product_id)
+        ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+        ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
+        ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
+        ->where('tbl_product_variation.variation_type_id', 2)
+        ->where('tbl_product_variation.product_id', $product->product_id)
+        ->where('tbl_product_variation.active', 1)
+        ->where('tbl_plan.active', 1)
+        ->where('tbl_affiliation.active', 1)
+        ->where('tbl_contract.active', 1)
         ->limit(1)
         ->get();
       if (count($variation)) {
