@@ -1142,6 +1142,18 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .image-produ
     }
 }
 
+section.descrip-consideracion{
+    margin-top: 20px;
+    h1{
+        font-size: 16px;
+        color: #008c95;
+    }
+    p{
+        line-height: 20px;
+        margin-bottom: 3px;
+    }
+}
+
 @import "bitel_variables";
 @import "base";
 @import "common";

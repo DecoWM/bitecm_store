@@ -5205,7 +5205,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   text-align: left;
   font-size: 11px;
   position: relative;
-  padding-left: 20px;
+  padding-left: 10px;
   margin-bottom: 2px;
   display: flex;
   align-items: center;
@@ -5216,7 +5216,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-right: 5px;
 }
 #planes .select-plan .plan .content-plan ul li:before {
-  content: "";
+  /*content: "";*/
   width: 5px;
   height: 5px;
   display: block;

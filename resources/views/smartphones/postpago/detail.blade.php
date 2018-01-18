@@ -154,7 +154,7 @@
                     @if ($plan->plan_unlimited_sms == 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado (**)</li>
                     @elseif ($plan->plan_unlimited_sms > 1)
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>
                     @endif
                     @if (isset($plan->plan_data_cap) && $plan->plan_data_cap != '')
                     <li><img src="/images/equipo/svg/planes/internet.svg" alt="Internet">{!!$plan->plan_data_cap!!}</li>
@@ -176,7 +176,11 @@
             </div>
             {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}
           </div>
-
+          <section class="descrip-consideracion">
+              <!-- <h1>Consideraciones comerciales</h1> -->
+              <p>* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ipsa tenetur.</p>
+          </section>
+        
         </div>
       </div>
       <div class="row">
