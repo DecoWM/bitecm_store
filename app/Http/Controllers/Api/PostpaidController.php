@@ -107,6 +107,7 @@ class PostpaidController extends Controller
       ->where('tbl_product_variation.variation_type_id', 2)
       ->where('tbl_product_variation.active', 1)
       ->where('tbl_plan.active', 1)
+      ->orderBy('tbl_plan.plan_id')
       ->select(DB::raw('DISTINCT(tbl_plan.plan_id), tbl_plan.*'))
       ->get();
 
