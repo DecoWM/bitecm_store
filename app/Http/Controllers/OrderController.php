@@ -340,16 +340,18 @@ class OrderController extends Controller
       }
 
       $subtotal = $final_price * $item['quantity'];
+      $subtotal_net = $subtotal * (1-$igv);
       $subtotal_igv = $subtotal * (1+$igv);
       $total += $subtotal;
+      $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
       array_push($order_items, [
         'stock_model_id' => $item['stock_model_id'],
         'product_variation_id' => $item['product_variation_id'],
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
-        'subtotal' => $subtotal,
-        'subtotal_igv' => round($subtotal_igv, 2)
+        'subtotal' => round($subtotal_net, 2),
+        'subtotal_igv' => $subtotal, //round($subtotal_igv, 2)
       ]);
     }
 
@@ -463,8 +465,8 @@ class OrderController extends Controller
       'contact_phone' => $order_detail['contact_phone'],
       'service_type' => $order_detail['service_type'],
       'affiliation_type' => $order_detail['affiliation_type'],
-      'total' => $order_detail['total'],
-      'total_igv' => round($order_detail['total_igv'], 2)
+      'total' => round($order_detail['total_net'], 2),
+      'total_igv' => $order_detail['total'], //round($order_detail['total_igv'], 2)
     ]);
 
     $now = new \DateTime('America/Lima');

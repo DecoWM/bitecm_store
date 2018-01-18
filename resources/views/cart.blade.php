@@ -127,9 +127,19 @@
             <div class="main-detalle col-offset">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
-                  <p class="version-mobil text-right">PRECIO SIN IGV</p>
+                  <p class="version-mobil text-right">COSTO DE ENVÍO</p>
                 </div>
-                <div class="col-xs-6 col-sm-4"><span class="title-detalle">PRECIO SIN IGV</span>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">COSTO DE ENVÍO</span>
+                  <p>GRATIS</p>
+                </div>
+              </div>
+            </div>
+            <div class="main-detalle col-offset">
+              <div class="row">
+                <div class="col-xs-12 col-sm-4">
+                  <p class="version-mobil text-right">TOTAL + IGV</p>
+                </div>
+                <div class="col-xs-6 col-sm-4"><span class="title-detalle">TOTAL + IGV</span>
                   <p>
                     <span>S/. {{$total}}<span>
                   </p>
@@ -143,17 +153,7 @@
                 </div>
               </div>
             </div>
-            <div class="main-detalle col-offset">
-              <div class="row">
-                <div class="col-xs-12 col-sm-4">
-                  <p class="version-mobil text-right">COSTO DE ENVÍO</p>
-                </div>
-                <div class="col-xs-6 col-sm-4"><span class="title-detalle">COSTO DE ENVÍO</span>
-                  <p>GRATIS</p>
-                </div>
-              </div>
-            </div>
-            <div class="main-detalle col-offset sinborder">
+            {{--<div class="main-detalle col-offset sinborder">
               <div class="row">
                 <div class="col-xs-12 col-sm-4">
                   <p class="version-mobil text-right">TOTAL + IGV</p>
@@ -163,7 +163,7 @@
                   <p>S/. {{$total_igv}}</p>
                 </div>
               </div>
-            </div>
+            </div>--}}
             @else
             <div class="main-detalle equipos">
               <div class="row">

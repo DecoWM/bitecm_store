@@ -23,7 +23,7 @@ class HomeController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $best_seller_smartphone = $this->shared->searchProductPrepaid(1, $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
+    $best_seller_smartphone = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       if (isset($item->affiliation_id)) {
@@ -43,7 +43,7 @@ class HomeController extends Controller
       }
       return $item;
     });
-    $best_seller_tablet = $this->shared->searchProductPrepaid(3, $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
+    $best_seller_tablet = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_tablet = collect($best_seller_tablet['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       if (isset($item->affiliation_id)) {

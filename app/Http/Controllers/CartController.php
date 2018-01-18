@@ -55,14 +55,14 @@ class CartController extends Controller
       $product->type_id = $item['type_id'];
 
       if(isset($product->promo_id)) {
-        $product->promo_price = $product->promo_price * $product->quantity;
-        $product->product_price = $product->product_price * $product->quantity;
+        $product->promo_price = round($product->promo_price * $product->quantity, 2);
+        $product->product_price = round($product->product_price * $product->quantity, 2);
         $total += $product->promo_price;
-        $total_igv += $product->promo_price * (1 + $igv);
+        $total_igv += $product->promo_price; //$product->promo_price * (1 + $igv);
       } else {
-        $product->product_price = $product->product_price * $product->quantity;
+        $product->product_price = round($product->product_price * $product->quantity, 2);
         $total += $product->product_price;
-        $total_igv += $product->product_price * (1 + $igv);
+        $total_igv += $product->product_price; //$product->product_price * (1 + $igv);
       }
 
       array_push($products, $product);

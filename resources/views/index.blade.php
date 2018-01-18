@@ -14,8 +14,8 @@
                 <h2 class="text-center">Equipos</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="#smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Smartphones</a></h3>
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="#tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Tablets</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="#smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Prepago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="#tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Postpago</a></h3>
               </div>
               <div class="content-tab-vendidos">
                 {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
@@ -47,9 +47,9 @@
                             <span>S/.{{$smartphone->product_price}}</span>
                             @endif
                           </div>
-                          @if (isset($smartphone->affiliation_id))
+                          @if (isset($smartphone->plan_name))
                           <div class="plan-product">
-                            <p>en plan <span>{{$smarthphone->plan_name}}</span></p>
+                            <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                           </div>
                           @endif
                           <div class="btn-comprar">
@@ -88,6 +88,11 @@
                             <span>S/.{{$tablet->product_price}}</span>
                             @endif
                           </div>
+                          @if (isset($tablet->plan_name))
+                          <div class="plan-product">
+                            <p>en plan <span>{{$tablet->plan_name}}</span></p>
+                          </div>
+                          @endif
                           <div class="btn-comprar">
                             <a href="{{$tablet->route}}" class="btn btn-default">COMPRAR</a>
                           </div>

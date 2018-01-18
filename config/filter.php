@@ -4,7 +4,7 @@ return [
 
   'plan_pre_id' => env('PLAN_PRE_ID', 15),
 
-  'plan_post_id' => env('PLAN_POST_ID', 7),
+  'plan_post_id' => env('PLAN_POST_ID', 8),
 
   'affiliation_id' => env('AFFILIATION_ID', 1),
 
