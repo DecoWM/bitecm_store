@@ -43,23 +43,23 @@ class PrepaidController extends Controller
   }
 
   public function show($brand_slug,$product_slug,$plan_slug,$color_slug=null) {
-      $inputs = [
-          'brand_slug' => $brand_slug,
-          'product_slug' => $product_slug,
-          'plan_slug' => $plan_slug,
-          'color_slug' => $color_slug
-      ];
+    $inputs = [
+      'brand_slug' => $brand_slug,
+      'product_slug' => $product_slug,
+      'plan_slug' => $plan_slug,
+      'color_slug' => $color_slug
+    ];
 
-      $validator = Validator::make($inputs, [
-          'brand_slug' => 'required|exists:tbl_brand',
-          'product_slug' => 'required|exists:tbl_product',
-          'plan_slug' => 'required|exists:tbl_plan',
-          'color_slug' => 'nullable|exists:tbl_color'
-      ]);
+    $validator = Validator::make($inputs, [
+      'brand_slug' => 'required|exists:tbl_brand',
+      'product_slug' => 'required|exists:tbl_product',
+      'plan_slug' => 'required|exists:tbl_plan',
+      'color_slug' => 'nullable|exists:tbl_color'
+    ]);
 
-      if ($validator->fails()) {
-          abort(404);
-      }
+    if ($validator->fails()) {
+      abort(404);
+    }
 
     $product = $this->shared->productPrepaidBySlug($brand_slug,$product_slug,$plan_slug,$color_slug);
 
