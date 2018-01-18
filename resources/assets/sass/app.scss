@@ -1136,6 +1136,12 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .image-produ
     max-height: 250px;
 }
 
+@media screen and (max-width: 375px){
+    #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo .content-product .price-product span.normal-price{
+        display: none;
+    }
+}
+
 @import "bitel_variables";
 @import "base";
 @import "common";
