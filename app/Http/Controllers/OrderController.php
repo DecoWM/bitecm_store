@@ -291,6 +291,7 @@ class OrderController extends Controller
     $products = [];
     $order_items = [];
     $total = 0;
+    $total_net = 0;
     $total_igv = 0;
     $equipo = null;
 
@@ -340,8 +341,8 @@ class OrderController extends Controller
       }
 
       $subtotal = $final_price * $item['quantity'];
-      $subtotal_net = $subtotal * (1-$igv);
-      $subtotal_igv = $subtotal * (1+$igv);
+      $subtotal_net = $subtotal * (1 - $igv);
+      $subtotal_igv = $subtotal * (1 + $igv);
       $total += $subtotal;
       $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
