@@ -351,7 +351,7 @@ class OrderController extends Controller
         'product_variation_id' => $item['product_variation_id'],
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
-        'subtotal' => round($subtotal_net, 2),
+        'subtotal' => number_format($subtotal_net, 2, '.', ''),
         'subtotal_igv' => $subtotal, //round($subtotal_igv, 2)
       ]);
     }
@@ -466,7 +466,7 @@ class OrderController extends Controller
       'contact_phone' => $order_detail['contact_phone'],
       'service_type' => $order_detail['service_type'],
       'affiliation_type' => $order_detail['affiliation_type'],
-      'total' => round($order_detail['total'], 2),
+      'total' => number_format($order_detail['total'], 2, '.', ''),
       'total_igv' => $order_detail['total_igv']
     ]);
 

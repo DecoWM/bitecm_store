@@ -159,10 +159,7 @@ class PrepaidController extends Controller
       'product' => $product,
       'product_images' => $product_images,
       'stock_models' => $stock_models,
-      'available' => $available,
-      'affiliation_slug' => $affiliation_slug,
-      'plan_post_slug' => $plan_post_slug,
-      'contract_slug' => $contract_slug
+      'available' => $available
     ];
     return view('smartphones.prepago.detail', $response);
   }
