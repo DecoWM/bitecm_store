@@ -445,8 +445,8 @@ class OrderController extends Controller
       }
     }
 
-    $order_detail['total'] = $total;
-    $order_detail['total_igv'] = $total_igv;
+    $order_detail['total'] = $total_net;
+    $order_detail['total_igv'] = $total;
 
     $order_id = DB::table('tbl_order')->insertGetId([
       'idtype_id' => $order_detail['idtype_id'],
@@ -466,8 +466,8 @@ class OrderController extends Controller
       'contact_phone' => $order_detail['contact_phone'],
       'service_type' => $order_detail['service_type'],
       'affiliation_type' => $order_detail['affiliation_type'],
-      'total' => round($order_detail['total_net'], 2),
-      'total_igv' => $order_detail['total'], //round($order_detail['total_igv'], 2)
+      'total' => round($order_detail['total'], 2),
+      'total_igv' => $order_detail['total_igv']
     ]);
 
     $now = new \DateTime('America/Lima');
