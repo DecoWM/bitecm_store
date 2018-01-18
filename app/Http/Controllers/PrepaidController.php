@@ -67,6 +67,15 @@ class PrepaidController extends Controller
       abort(404);
     }
 
+
+    $product->route_postpago = route('postpaid_detail', [
+      'brand'=>$product->brand_slug,
+      'product'=>$product->product_slug,
+      'affiliation'=>$affiliation_slug,
+      'plan'=>$plan_post_slug,
+      'contract'=>$contract_slug
+    ])
+
     $available_products = $this->shared->searchProductPrepaid('1,3', $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];

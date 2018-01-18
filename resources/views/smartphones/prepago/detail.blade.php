@@ -77,13 +77,7 @@
                       </div>
                       @endif--}}
                       <div class="btn-linea">
-                        <a href="{{route('postpaid_detail', [
-                          'brand'=>$product->brand_slug,
-                          'product'=>$product->product_slug,
-                          'affiliation'=>$affiliation_slug,
-                          'plan'=>$plan_post_slug,
-                          'contract'=>$contract_slug
-                        ])}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
+                        <a href="{{$product->route_postpago}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
                       </div>
                       @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">
