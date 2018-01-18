@@ -429,8 +429,8 @@ const app = new Vue({
         });
 
         $('.list-productos').slick({
-            arrows: true,
-            dots: true,
+            arrows: false,
+            dots: false,
             infinite: true,
             autoplay: true,
             arrows: true,
