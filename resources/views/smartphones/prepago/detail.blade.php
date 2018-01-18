@@ -77,7 +77,9 @@
                       </div>
                       @endif--}}
                       <div class="btn-linea">
+                        @if(isset($product->route_postpago))
                         <a href="{{$product->route_postpago}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
+                        @endif
                       </div>
                       @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">

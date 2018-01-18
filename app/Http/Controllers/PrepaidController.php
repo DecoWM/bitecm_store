@@ -67,15 +67,6 @@ class PrepaidController extends Controller
       abort(404);
     }
 
-
-    $product->route_postpago = route('postpaid_detail', [
-      'brand'=>$product->brand_slug,
-      'product'=>$product->product_slug,
-      'affiliation'=>$affiliation_slug,
-      'plan'=>$plan_post_slug,
-      'contract'=>$contract_slug
-    ])
-
     $available_products = $this->shared->searchProductPrepaid('1,3', $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
 
     $available = $available_products['products'];
@@ -108,9 +99,46 @@ class PrepaidController extends Controller
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
 
-    $plan_post_slug = $this->shared->planSlug(\Config::get('filter.plan_post_id'));
-    $affiliation_slug = $this->shared->affiliationSlug(\Config::get('filter.affiliation_id'));
-    $contract_slug = $this->shared->contractSlug(\Config::get('filter.contract_id'));
+    $plan_post_id = \Config::get('filter.plan_post_id');
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $contract_id = \Config::get('filter.contract_id');
+
+    $variation = DB::table('tbl_product_variation')
+      ->where('variation_type_id', 2)
+      ->where('plan_id', $plan_post_id)
+      ->where('affiliation_id', $affiliation_id)
+      ->where('contract_id', $contract_id)
+      ->where('product_id', $product->product_id)
+      ->get();
+
+    if (!count($variation)) {
+      $variation = DB::table('tbl_product_variation')
+        ->where('variation_type_id', 2)
+        ->where('product_id', $product->product_id)
+        ->limit(1)
+        ->get();
+      if (count($variation)) {
+        $plan_post_id = $variation[0]->plan_id;
+        $affiliation_id = $variation[0]->affiliation_id;
+        $contract_id = $variation[0]->contract_id;
+      }
+    }
+
+    if (count($variation)) {
+      $plan_post_slug = $this->shared->planSlug($plan_post_id);
+      $affiliation_slug = $this->shared->affiliationSlug($affiliation_id);
+      $contract_slug = $this->shared->contractSlug($contract_id);
+
+      $product->route_postpago = route('postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'affiliation'=>$affiliation_slug,
+        'plan'=>$plan_post_slug,
+        'contract'=>$contract_slug
+      ]);
+    } else {
+      $product->route_postpago = null;
+    }
 
     $response = [
       'product' => $product,
