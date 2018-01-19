@@ -132,6 +132,9 @@
             @if($plan->plan_id == $product->plan_id)
               @php $selected_plan = $i > 0 ? $i - 1 : $i; @endphp
             @endif
+            @if(!isset($selected_plan))
+              @php $selected_plan = 0; @endphp
+            @endif
           @endforeach
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>

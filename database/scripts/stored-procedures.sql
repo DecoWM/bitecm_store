@@ -25,7 +25,7 @@ BEGIN
     --
     SELECT affiliation_id,affiliation_name,affiliation_slug
         FROM tbl_affiliation
-        ORDER BY weight ASC;
+        ORDER BY weight, affiliation_id ASC;
 
 END $$
 
@@ -46,7 +46,7 @@ BEGIN
     --
     SELECT brand_id,brand_name
         FROM tbl_brand
-        ORDER BY weight ASC;
+        ORDER BY weight, brand_id ASC;
 
 END $$
 
@@ -72,7 +72,7 @@ BEGIN
   SELECT *
     FROM tbl_plan
   WHERE IF(_plan_type > 0, plan_type = _plan_type, 1)
-  ORDER BY  weight ASC;
+  ORDER BY weight, plan_id ASC;
 
 END $$
 
@@ -733,8 +733,7 @@ BEGIN
       )');
 
   SET where_query = CONCAT('
-    WHERE PRD.`active` = 1
-      AND STM.`stock_model_id` = ', stock_model_id
+    WHERE STM.`stock_model_id` = ', stock_model_id
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
@@ -1257,6 +1256,7 @@ BEGIN
 
   SET where_query = CONCAT('
     WHERE PRD.`active` = 1
+      AND PRD_VAR.`active` = 1
       AND BRN.`brand_slug` = "', brand_slug, '"
       AND PRD.`product_slug` = "', product_slug, '"
       AND PLN.`plan_slug` = "', plan_slug, '"'
@@ -1400,8 +1400,7 @@ BEGIN
       )');
 
   SET where_query = CONCAT('
-    WHERE PRD.`active` = 1
-      AND STM.`stock_model_id` = ', stock_model_id, '
+    WHERE STM.`stock_model_id` = ', stock_model_id, '
       AND PRD_VAR.`product_variation_id` = ', product_variation_id
   );
 
@@ -1976,7 +1975,9 @@ BEGIN
       ON CTR.`contract_id` = PRD_VAR.`contract_id`';
 
   SET where_query = CONCAT('
-    WHERE BRN.`brand_slug` = "', brand_slug, '"
+    WHERE PRD.`active` = 1
+      AND PRD_VAR.`active` = 1
+      AND BRN.`brand_slug` = "', brand_slug, '"
       AND PRD.`product_slug` = "', product_slug, '"
       AND AFF.`affiliation_slug` = "', affiliation_slug, '"
       AND PLN.`plan_slug` = "', plan_slug, '"
@@ -2127,8 +2128,7 @@ BEGIN
       )');
 
   SET where_query = CONCAT('
-    WHERE PRD.`active` = 1
-      AND STM.`stock_model_id` = ', stock_model_id, '
+    WHERE STM.`stock_model_id` = ', stock_model_id, '
       AND PRD_VAR.`product_variation_id` = ', product_variation_id
   );
 
@@ -2362,7 +2362,9 @@ BEGIN
       MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''') as mscore',
       join_segment, '
       -- Filter by search words
-      WHERE PRM.`active` = 1 AND PRD.`active` = 1
+      WHERE PRM.`active` = 1 
+        AND PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR PRD.product_model like ''%',product_string_search,'%''
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
@@ -2377,7 +2379,9 @@ BEGIN
       1 as pscore, 1 as mscore',
       join_segment, '
       -- Filter by search words
-      WHERE PRM.`active` = 1 AND PRD.`active` = 1');
+      WHERE PRM.`active` = 1 
+        AND PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
     -- order
     SET cad_order = ' ORDER BY ';
     SET cad_order_comma = '';
@@ -2609,7 +2613,9 @@ BEGIN
     SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
-      WHERE PRM.`active` = 1 AND PRD.`active` = 1
+      WHERE PRM.`active` = 1 
+        AND PRD.`active` = 1
+        AND PRD_VAR.`active` = 1
         AND (MATCH(PRD.`product_model`, PRD.`product_keywords`, PRD.`product_description`) AGAINST(''',product_string_search,''')
         OR MATCH(BRN.`brand_name`) AGAINST(''',product_string_search,''')
         OR BRN.`brand_name` like ''%',product_string_search,'%''  )
@@ -2619,7 +2625,9 @@ BEGIN
     SET stored_query = CONCAT(select_segment,
       join_segment, '
       -- Filter by search words
-      WHERE PRM.`active` = 1 AND PRD.`active` = 1');
+      WHERE PRM.`active` = 1 
+        AND PRD.`active` = 1
+        AND PRD_VAR.`active` = 1');
   END IF;
 
   IF (plan_pre_id > 0 AND plan_post_id > 0 AND affiliation_id > 0 AND contract_id > 0) THEN
@@ -2681,7 +2689,7 @@ BEGIN
   SET where_query = CONCAT('
     WHERE active = 1
       AND stock_model_id = ', stock_model_id, '
-    ORDER BY weight DESC'
+    ORDER BY weight DESC, product_image_id ASC'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);

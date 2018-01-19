@@ -14,53 +14,12 @@
                 <h2 class="text-center">Equipos</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="#smartphones" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Prepago</a></h3>
-                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="#tablets" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Postpago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='smartphone', opt2: bestSeller=='smartphone'}"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="toggleBestSeller('smartphone')">Postpago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: bestSeller!='tablet', opt2: bestSeller=='tablet'}"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="toggleBestSeller('tablet')">Prepago</a></h3>
               </div>
               <div class="content-tab-vendidos">
                 {{-- <transition-group name="fadeOutDown" leave-active-class="animated zoomOut"> --}}
                   <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
-                    <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
-                      <div class="btn-catalogo">
-                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
-                      </div>
-                    </div>
-                    <div class="list-productos">
-                      @foreach ($best_seller_smartphone as $smartphone)
-                      <div class="producto">
-                        @include('products.ribbon',['product' => $smartphone])
-                        <div class="image-product text-center">
-                          <a href="{{$smartphone->route}}">
-                            <img src="{{$smartphone->picture_url}}" alt="equipos">
-                          </a>
-                        </div>
-                        <div class="content-product text-center">
-                          <div class="title-product">
-                            <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
-                            <h4 class="text-center">{{$smartphone->product_model}}</h4>
-                          </div>
-                          <div class="price-product">
-                            @if($smartphone->promo_id)
-                            <span>S/.{{$smartphone->promo_price}}</span>
-                            <span class="normal-price">S/.{{$smartphone->product_price}}</span>
-                            @else
-                            <span>S/.{{$smartphone->product_price}}</span>
-                            @endif
-                          </div>
-                          @if (isset($smartphone->plan_name))
-                          <div class="plan-product">
-                            <p>en plan <span>{{$smartphone->plan_name}}</span></p>
-                          </div>
-                          @endif
-                          <div class="btn-comprar">
-                            <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
-                          </div>
-                        </div>
-                      </div>
-                    @endforeach
-                    </div>
-                  </div>
-                  <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
                     <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
                       <div class="btn-catalogo">
                         <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
@@ -95,6 +54,47 @@
                           @endif
                           <div class="btn-comprar">
                             <a href="{{$tablet->route}}" class="btn btn-default">COMPRAR</a>
+                          </div>
+                        </div>
+                      </div>
+                      @endforeach
+                    </div>
+                  </div>
+                  <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
+                    <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
+                      <div class="btn-catalogo">
+                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
+                      </div>
+                    </div>
+                    <div class="list-productos">
+                      @foreach ($best_seller_smartphone as $smartphone)
+                      <div class="producto">
+                        @include('products.ribbon',['product' => $smartphone])
+                        <div class="image-product text-center">
+                          <a href="{{$smartphone->route}}">
+                            <img src="{{$smartphone->picture_url}}" alt="equipos">
+                          </a>
+                        </div>
+                        <div class="content-product text-center">
+                          <div class="title-product">
+                            <h4 class="text-center"><b>{{$smartphone->brand_name}}</b></h4>
+                            <h4 class="text-center">{{$smartphone->product_model}}</h4>
+                          </div>
+                          <div class="price-product">
+                            @if($smartphone->promo_id)
+                            <span>S/.{{$smartphone->promo_price}}</span>
+                            <span class="normal-price">S/.{{$smartphone->product_price}}</span>
+                            @else
+                            <span>S/.{{$smartphone->product_price}}</span>
+                            @endif
+                          </div>
+                          @if (isset($smartphone->plan_name))
+                          <div class="plan-product">
+                            <p>en plan <span>{{$smartphone->plan_name}}</span></p>
+                          </div>
+                          @endif
+                          <div class="btn-comprar">
+                            <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
                           </div>
                         </div>
                       </div>
@@ -140,8 +140,8 @@
                 <h2 class="text-center">Promociones</h2>
               </div>
               <div class="sub-heading">
-                <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="#postpago" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
-                <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="#prepago" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
+                <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
 
               <div class="content-tab-promociones">

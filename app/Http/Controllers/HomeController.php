@@ -26,45 +26,31 @@ class HomeController extends Controller
     $best_seller_smartphone = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
-      if (isset($item->affiliation_id)) {
-        $item->route = route('postpaid_detail', [
-          'brand'=>$item->brand_slug,
-          'product'=>$item->product_slug,
-          'affiliation'=>$item->affiliation_slug,
-          'plan'=>$item->plan_slug,
-          'contract'=>$item->contract_slug
-        ]);
-      } else {
-        $item->route = route('prepaid_detail', [
-          'brand'=>$item->brand_slug,
-          'product'=>$item->product_slug,
-          'plan'=>$item->plan_slug
-        ]);
-      }
+      $item->route = route('prepaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'plan'=>$item->plan_slug
+      ]);
       return $item;
     });
     $best_seller_tablet = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_tablet = collect($best_seller_tablet['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
-      if (isset($item->affiliation_id)) {
-        $item->route = route('postpaid_detail', [
-          'brand'=>$item->brand_slug,
-          'product'=>$item->product_slug,
-          'affiliation'=>$item->affiliation_slug,
-          'plan'=>$item->plan_slug,
-          'contract'=>$item->contract_slug
-        ]);
-      } else {
-        $item->route = route('prepaid_detail', [
-          'brand'=>$item->brand_slug,
-          'product'=>$item->product_slug,
-          'plan'=>$item->plan_slug
-        ]);
-      }
+      $item->route = route('postpaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'plan'=>$item->plan_slug,
+        'contract'=>$item->contract_slug
+      ]);
       return $item;
     });
-    $featured_products = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, null, 2);
-    $featured_products = collect($featured_products['products'])->map(function ($item, $key) {
+    $featured_products = [];
+    $featured_product_1 = $this->shared->productVariationDetail(env('FEATURED_VARIATION_1'));
+    if (isset($featured_product_1)) $featured_products[] = $featured_product_1;
+    $featured_product_2 = $this->shared->productVariationDetail(env('FEATURED_VARIATION_2'));
+    if (isset($featured_product_2)) $featured_products[] = $featured_product_2;
+    $featured_products = collect($featured_products)->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('postpaid_detail', [
         'brand'=>$item->brand_slug,
