@@ -1,4 +1,6 @@
 @extends('layouts.master')
+
+
 @section('content')
       <div id="banner-principal">
         <!-- <div class="slider"><img src="{{asset('images/banner/banner-principal.jpg')}}" alt="banner principal"></div> -->
@@ -6,6 +8,7 @@
         <!-- <div class="slider"><img src="{{asset('images/banner/banner-PREPAGO.jpg')}}" alt="banner principal"></div> -->
         <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
       </div>
+      
       <section id="equipos-vendidos">
         <div class="container">
           <div class="row">
@@ -26,6 +29,7 @@
                       </div>
                     </div>
                     <div class="list-productos">
+
                       @foreach ($best_seller_tablet as $tablet)
                       <div class="producto">
                         @include('products.ribbon',['product' => $tablet])
@@ -58,7 +62,7 @@
                         </div>
                       </div>
                       @endforeach
-                    </div>
+            </div>
                   </div>
                   <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
                     <div class="producto catalogo"><img src="./images/home/CATALOGO-BOTON.jpg" alt="bitel">
@@ -99,6 +103,7 @@
                         </div>
                       </div>
                       @endforeach
+
                     </div>
                   </div>
               </div>
@@ -114,6 +119,7 @@
                 <img src="./images/home/HUAWEI-P10-AD.jpg" alt="promoción Huawei p10">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
+
                     <a href="{{$featured_products[0]->route}}" class="btn btn-default">COMPRAR</a>
                   </div>
                 </div>
@@ -132,6 +138,7 @@
           </div>
         </div>
       </div>
+
       <section id="equipos-promocion">
         <div class="container">
           <div class="row">
@@ -144,6 +151,8 @@
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
 
+
+             
               <div class="content-tab-promociones">
 
                 <div class="content-tab-pro promociones-tab" v-show="promo=='postpago'" key="postpago">
@@ -178,6 +187,8 @@
                     </div>
                   </div>
                   @endforeach
+
+        
                 </div>
                 <div class="content-tab-pro promociones-tab" v-show="promo=='prepago'" key="prepago">
                   @foreach ($promo_prepaid as $smartphone)
