@@ -151,7 +151,7 @@ const app = new Vue({
                   isOpen : true
               },
               plan : {
-                  value : '7',
+                  value : '8',
                   isOpen : false
               },
               price : {
