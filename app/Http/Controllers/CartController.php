@@ -72,9 +72,7 @@ class CartController extends Controller
       $request->session()->forget('cart');
     }
 
-    if (!in_array(url()->previous(), [route('create_order'), route('update_cart')])) {
-      $this->shared->setPreviousUrl(url()->previous());
-    }
+    $this->preventHistory();
     
     return view('cart', [
       'equipo' => $equipo,
@@ -157,6 +155,7 @@ class CartController extends Controller
         }
       }
     }
+    $this->preventHistory();
     return redirect()->route('show_cart');
   }
 
@@ -179,6 +178,13 @@ class CartController extends Controller
         }
       }
     }
+    $this->preventHistory();
     return redirect()->route('show_cart');
+  }
+
+  private function preventHistory() {
+    if (!in_array(url()->previous(), [route('create_order'), route('update_cart'), route('show_cart')])) {
+      $this->shared->setPreviousUrl(url()->previous());
+    }
   }
 }
