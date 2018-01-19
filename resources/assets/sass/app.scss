@@ -1155,6 +1155,16 @@ section.descrip-consideracion{
     }
 }
 
+
+section#equipos-vendidos .container .row .content-tab-pro .list-productos{
+    overflow: hidden
+}
+
+.cons-cart{
+    margin-top: 40px;
+    text-align: justify;
+}
+
 @import "bitel_variables";
 @import "base";
 @import "common";

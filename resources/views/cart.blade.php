@@ -49,10 +49,10 @@
                   <p>descripción</p>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <p>último pago</p>
+                  <p>Único pago</p>
                 </div>
                 <div class="col-xs-12 col-sm-4">
-                  <p>pago mensual</p>
+                  <p>Pago plan mensual</p>
                 </div>
               </div>
             </div>
@@ -152,6 +152,9 @@
                   @endif
                 </div>
               </div>
+            </div>
+            <div class="cons-cart">
+              <p>* Al hacer click en “comprar” aceptas las condiciones comerciales de ventas de equipos de Bitel, basado en la aplicación de rentas adelantadas de acuerdo al plan contratado posteriormente.</p>
             </div>
             {{--<div class="main-detalle col-offset sinborder">
               <div class="row">
