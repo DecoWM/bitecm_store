@@ -72,7 +72,7 @@ class CartController extends Controller
       $request->session()->forget('cart');
     }
 
-    if (url()->previous() != route('create_order')) {
+    if (!in_array(url()->previous(), [route('create_order'), route('update_cart')])) {
       $this->shared->setPreviousUrl(url()->previous());
     }
     
