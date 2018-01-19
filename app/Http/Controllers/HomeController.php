@@ -46,9 +46,9 @@ class HomeController extends Controller
       return $item;
     });
     $featured_products = [];
-    $featured_product_1 = $this->shared->productVariationDetail(env('FEATURED_VARIATION_1'));
+    $featured_product_1 = $this->shared->productVariationDetail(\Config::get('filter.featured_variation_1'));
     if (isset($featured_product_1)) $featured_products[] = $featured_product_1;
-    $featured_product_2 = $this->shared->productVariationDetail(env('FEATURED_VARIATION_2'));
+    $featured_product_2 = $this->shared->productVariationDetail(\Config::get('filter.featured_variation_2'));
     if (isset($featured_product_2)) $featured_products[] = $featured_product_2;
     $featured_products = collect($featured_products)->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));

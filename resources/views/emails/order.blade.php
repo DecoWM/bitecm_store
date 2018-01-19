@@ -19,7 +19,7 @@
 	<table style="width:100%;max-width:600px;margin:0px auto;border-collapse:collapse">
 		<thead style="background: #ffe60d; ">
 			<tr>
-				<th width="8%"><img src="{{env('APP_URL')}}/images/email/bg-header.png" alt="lo  gotipo"></th>
+				<th width="8%"><img src="{{config('app.url')}}/images/email/bg-header.png" alt="lo  gotipo"></th>
 				<th style="height: 40px;color: #008c95; font-size: 19px;padding-top: 20px; padding-bottom: 15px; text-align: right; padding-right: 30px;"><strong>Tu pedido esta siendo evaluado</strong></th>
 			</tr>
 		</thead>
@@ -100,40 +100,40 @@
 		</thead>
 		<tbody>
 			<tr><td>Podrás dar seguimiento a tu pedido ingresando al siguiente link:</td></tr>
-			<tr><td><strong>{{env('APP_URL')}}/trackeo/{{$order_id}}</strong></td></tr>
+			<tr><td><strong>{{config('app.url')}}/trackeo/{{$order_id}}</strong></td></tr>
 		</tbody>
 	</table>
 	<table style="width:100%;max-width:550px;margin:20px auto;border-collapse:collapse;">
 		<tbody>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>El pago del plan son de 2 rentas adelantadas.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>La coordinación con el asesor telefónico se realizará dentro de</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>24 horas después de haber realizado la solicitud en la plataforma web.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>El costo de envío es gratis.</td></tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
 				<td>Para poder ver los términos y condiciones de uso de la tienda virtual Bitel</td>
 			</tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>ingresa al siguiente link: {{env('APP_URL')}}/files/terminos</td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td>ingresa al siguiente link: {{config('app.url')}}/files/terminos</td>
 			</tr>
 			<tr>
 				
-				<td style="vertical-align: top;"><img src="{{env('APP_URL')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>Para cualquier consulta llamar al 123/930123123/080079123 o enviar un correo servicioalcliente@viettelperu.com.pe</td>
 			</tr>
 		</tbody>

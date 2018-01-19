@@ -99,28 +99,8 @@ class PostpaidController extends Controller
     // $product_plans = DB::select('call PA_planList(2)');
     // $product_affiliations = DB::select('call PA_affiliationList()');
 
-    $product_plans = DB::table('tbl_product_variation')
-      ->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')
-      ->where('tbl_product_variation.product_id', $product->product_id)
-      ->where('tbl_product_variation.affiliation_id', $product->affiliation_id)
-      ->where('tbl_product_variation.contract_id', $product->contract_id)
-      ->where('tbl_product_variation.variation_type_id', 2)
-      ->where('tbl_product_variation.active', 1)
-      ->where('tbl_plan.active', 1)
-      ->orderBy('tbl_plan.plan_id')
-      ->select(DB::raw('DISTINCT(tbl_plan.plan_id), tbl_plan.*'))
-      ->get();
-
-    $product_affiliations = DB::table('tbl_product_variation')
-      ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
-      ->where('tbl_product_variation.product_id', $product->product_id)
-      ->where('tbl_product_variation.plan_id', $product->plan_id)
-      ->where('tbl_product_variation.contract_id', $product->contract_id)
-      ->where('tbl_product_variation.variation_type_id', 2)
-      ->where('tbl_product_variation.active', 1)
-      ->where('tbl_affiliation.active', 1)
-      ->select(DB::raw('DISTINCT(tbl_affiliation.affiliation_id), tbl_affiliation.*'))
-      ->get();
+    $product_plans = $this->shared->getProductPlans($product);
+    $product_affiliations = $this->shared->getProductAffiliations($product);
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
       $item->route = route('postpaid_detail', [

@@ -16,6 +16,12 @@ return [
 
   'order_status_id' => env('ORDER_STATUS_ID', 1),
 
-  'use_bcss' => env('USE_BCSS', 1)
+  'use_bcss' => env('USE_BCSS', 1),
+
+  'featured_variation_1' => env('FEATURED_VARIATION_1'),
+  
+  'featured_variation_2' => env('FEATURED_VARIATION_2'),
+
+  'notification_server_url' => env('NOTIFICATION_SERVER_URL')
 
 ];
