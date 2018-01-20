@@ -120,7 +120,7 @@
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
                         <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
                         <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
                       </ul>
                     </div>
                   </div>
@@ -137,7 +137,7 @@
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
                         <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
                         <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 3er día de recarga</span></li>
                       </ul>
                     </div>
                   </div>
@@ -154,7 +154,7 @@
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
                         <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
                         <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube">Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 7mo día de recarga</span></li>
                       </ul>
                     </div>
                   </div>
