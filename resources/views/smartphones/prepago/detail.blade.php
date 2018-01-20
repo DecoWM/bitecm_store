@@ -39,9 +39,7 @@
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @include('products.tag',['product' => $product])
               </div>
-              <div class="descripcion">
-                <p>{{$product->product_description}}</p>
-              </div>
+              
             </div>
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
@@ -103,6 +101,70 @@
                 </div> --}}
               </form>
             </div>
+          </section>
+          <div class="descripcion">
+            <!-- <span>HOLA</span> -->
+            <p>{{$product->product_description}}</p>
+          </div>
+          <div id="planes" class="planes-prepago">
+            <div class="select-plan">
+                <label for="">
+                  <div class="plan">
+                    <div class="content-plan">
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
+                <label for="">
+                  <div class="plan plan-active">
+                    <div class="content-plan">
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/5</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
+                <label for="">
+                  <div class="plan">
+                    <div class="content-plan">
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/10</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube">Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga </span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
+            </div>
+          </div>
+          <section class="descrip-consideracion">
+            <!-- <h1>Consideraciones comerciales</h1> -->
+            <p>Nota:</p>
+            <p>Acceso a app gratuita Cineplanet, Tu ruta, Aló bodega, Mi Media Manzana, También recibirá sin condición y valido mientras que la línea este activa Facebook Flex o Facebook en Modo Gratuito</p>
           </section>
         </div>
       </div>

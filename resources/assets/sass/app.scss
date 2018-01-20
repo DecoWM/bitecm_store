@@ -1144,6 +1144,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .image-produ
 }
 
 section.descrip-consideracion{
+    text-align: justify;
     margin-top: 20px;
     h1{
         font-size: 16px;
@@ -1164,6 +1165,46 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     margin-top: 40px;
     text-align: justify;
 }
+
+
+#planes.planes-prepago .select-plan{
+    height: 380px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#planes.planes-prepago .select-plan .slick-track{
+    padding-bottom: 20px;
+}
+
+#planes.planes-prepago .recarga{
+    font-size: 18px !important;
+    font-weight: normal !important
+}
+
+#planes.planes-prepago .text-center{
+    text-align: center !important;
+    margin-top: 8px;
+}
+
+#planes.planes-prepago .select-plan .plan .content-plan ul li{
+    font-size: 12px !important;
+    font-weight: normal;
+}
+
+#planes.planes-prepago .select-plan .plan{
+    padding: 2px !important;
+}
+
+
+#planes.planes-prepago .images-prepago-left{
+    margin-left: 30px;
+}
+
+#planes.planes-prepago ul{
+    margin-top: 5px !important;
+}
+
 
 @import "bitel_variables";
 @import "base";
