@@ -1205,6 +1205,27 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     margin-top: 5px !important;
 }
 
+#planes.planes-prepago .plan{
+    max-width: 280px;
+}
+
+#planes .select-plan .slick-next,
+#planes .select-plan .slick-prev{
+    display: none !important;
+}
+
+
+@media screen and (max-width: 480px){
+
+#planes .select-plan .slick-next,
+#planes .select-plan .slick-prev{
+    display: block !important;
+}
+
+}
+
+
+
 
 @import "bitel_variables";
 @import "base";

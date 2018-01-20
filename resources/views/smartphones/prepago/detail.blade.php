@@ -144,7 +144,7 @@
                 </label>
                 <label for="">
                   <div class="plan">
-                    <div class="content-plan">
+                    <div class="content-plan"> 
                       <div class="precio-plan"><span class="recarga">Recarga</span> s/10</div>
                       <ul class="list-unstyled">
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
