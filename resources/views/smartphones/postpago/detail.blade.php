@@ -183,7 +183,6 @@
             <!-- <h1>Consideraciones comerciales</h1> -->
             <p>Nota:</p>
             <p>(*) Más detalles en consideraciones comerciales</p>
-            <p>(**) Llamadas ilimitadas su uso hasta 70 contactos diferentes por mes , sms ilimitado su uso hasta 100 contactos diferentes por mes</p>
           </section>
         
         </div>
