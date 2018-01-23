@@ -513,11 +513,6 @@ section#equipos-vendidos .container .row .sub-heading h3.opt2 a{
     text-decoration: none !important;
 }
 
-
-
-
-
-
 section#equipos-promocion .container .row .sub-heading h3,
 section#equipos-vendidos .container .row .sub-heading h3{
     font-size: 18px;
@@ -643,7 +638,6 @@ li.item-nav-mobile.search #search .btn-search {
     // min-width: auto;
     width: auto;
 }
-
 
 #navbar{}
 #navbar ul{}
@@ -949,8 +943,6 @@ li.item-nav-mobile.search #search .btn-search {
 
 }
 
-
-
 @media screen and (max-width: 374px){
     .col-12-mob {
         width: 100%;
@@ -972,7 +964,6 @@ li.item-nav-mobile.search #search .btn-search {
   background-color: #169599;
 }
 
-
 @media screen and (max-width: 768px) {
 
   #compara-tus-equipos .lista-equipos .equipo-seleccionado{
@@ -990,10 +981,6 @@ li.item-nav-mobile.search #search .btn-search {
     margin-left: 10px;
   }
 }
-
-
-
-
 
 @media screen and (max-width: 480px){
 
@@ -1144,12 +1131,13 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .image-produ
 }
 
 section.descrip-consideracion{
+    text-align: justify;
     margin-top: 20px;
-    h1{
+    h1 {
         font-size: 16px;
         color: #008c95;
     }
-    p{
+    p {
         line-height: 20px;
         margin-bottom: 3px;
     }
@@ -1164,11 +1152,65 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     text-align: justify;
 }
 
+#planes.planes-prepago .select-plan{
+    height: 380px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#planes.planes-prepago .select-plan .slick-track{
+    padding-bottom: 20px;
+}
+
+#planes.planes-prepago .recarga{
+    font-size: 18px !important;
+    font-weight: normal !important
+}
+
+#planes.planes-prepago .text-center{
+    text-align: center !important;
+    margin-top: 8px;
+}
+
+#planes.planes-prepago .select-plan .plan .content-plan ul li{
+    font-size: 12px !important;
+    font-weight: normal;
+}
+
+#planes.planes-prepago .select-plan .plan{
+    padding: 2px !important;
+}
+
+#planes.planes-prepago .images-prepago-left{
+    margin-left: 30px;
+}
+
+#planes.planes-prepago ul{
+    margin-top: 5px !important;
+}
+
+#planes.planes-prepago .plan{
+    max-width: 280px;
+}
+
+#planes .select-plan .slick-next,
+#planes .select-plan .slick-prev{
+    display: none !important;
+}
+
+@media screen and (max-width: 480px){
+    #planes .select-plan .slick-next,
+    #planes .select-plan .slick-prev {
+        display: block !important;
+    }
+}
+
 @media screen and (min-width: 1200px) {
     .select-plan.just-3 .slick-list .slick-track {
         transform: translate3d(0px, 0px, 0px) !important;
     }
 }
+
 
 @import "bitel_variables";
 @import "base";

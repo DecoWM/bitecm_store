@@ -5131,7 +5131,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   margin-bottom: 0;
 }
 #planes .select-plan .slick-prev {
-  left: -10px;
+  left: -9px;
 }
 @media (max-width: 320px) {
   #planes .select-plan .slick-prev {

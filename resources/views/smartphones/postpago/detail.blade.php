@@ -172,8 +172,9 @@
             {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}
           </div>
           <section class="descrip-consideracion">
-              <!-- <h1>Consideraciones comerciales</h1> -->
-              <p>* Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ipsa tenetur.</p>
+            <!-- <h1>Consideraciones comerciales</h1> -->
+            <p>Nota:</p>
+            <p>(*) Más detalles en consideraciones comerciales</p>
           </section>
         
         </div>
