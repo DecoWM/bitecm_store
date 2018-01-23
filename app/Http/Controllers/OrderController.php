@@ -448,41 +448,60 @@ class OrderController extends Controller
     $order_detail['total'] = $total_net;
     $order_detail['total_igv'] = $total;
 
-    $order_id = DB::table('tbl_order')->insertGetId([
-      'idtype_id' => $order_detail['idtype_id'],
-      'payment_method_id' => $order_detail['payment_method_id'],
-      'branch_id' => $order_detail['branch_id'],
-      'tracking_code' => $order_detail['tracking_code'],
-      'first_name' => $order_detail['first_name'],
-      'last_name' => $order_detail['last_name'],
-      'id_number' => $order_detail['id_number'],
-      'billing_district' => $order_detail['billing_district'],
-      'billing_phone' => $order_detail['billing_phone'],
-      'source_operator' => $order_detail['source_operator'],
-      'porting_phone' => $order_detail['porting_phone'],
-      'delivery_address' => $order_detail['delivery_address'],
-      'delivery_district' => $order_detail['delivery_district'],
-      'contact_email' => $order_detail['contact_email'],
-      'contact_phone' => $order_detail['contact_phone'],
-      'service_type' => $order_detail['service_type'],
-      'affiliation_type' => $order_detail['affiliation_type'],
-      'total' => number_format($order_detail['total'], 2, '.', ''),
-      'total_igv' => $order_detail['total_igv']
-    ]);
+    DB::commit();
 
-    $now = new \DateTime('America/Lima');
-    $order_detail['fecha'] = $now->format('d/m/Y H:i:s');
+    try {
+      DB::beginTransaction();
+      $order_id = DB::table('tbl_order')->insertGetId([
+        'idtype_id' => $order_detail['idtype_id'],
+        'payment_method_id' => $order_detail['payment_method_id'],
+        'branch_id' => $order_detail['branch_id'],
+        'tracking_code' => $order_detail['tracking_code'],
+        'first_name' => $order_detail['first_name'],
+        'last_name' => $order_detail['last_name'],
+        'id_number' => $order_detail['id_number'],
+        'billing_district' => $order_detail['billing_district'],
+        'billing_phone' => $order_detail['billing_phone'],
+        'source_operator' => $order_detail['source_operator'],
+        'porting_phone' => $order_detail['porting_phone'],
+        'delivery_address' => $order_detail['delivery_address'],
+        'delivery_district' => $order_detail['delivery_district'],
+        'contact_email' => $order_detail['contact_email'],
+        'contact_phone' => $order_detail['contact_phone'],
+        'service_type' => $order_detail['service_type'],
+        'affiliation_type' => $order_detail['affiliation_type'],
+        'total' => number_format($order_detail['total'], 2, '.', ''),
+        'total_igv' => $order_detail['total_igv']
+      ]);
 
-    foreach($order_items as $i => $item) {
-      $order_items[$i]['order_id'] = $order_id;
+      $now = new \DateTime('America/Lima');
+      $order_detail['fecha'] = $now->format('d/m/Y H:i:s');
+
+      foreach($order_items as $i => $item) {
+        $order_items[$i]['order_id'] = $order_id;
+      }
+
+      DB::table('tbl_order_item')->insert($order_items);
+
+      DB::table('tbl_order_status_history')->insert([
+        'order_id' => $order_id,
+        'order_status_id' => \Config::get('filter.order_status_id')
+      ]);
+      DB::commit();
+    } catch(\Illuminate\Database\QueryException $e) {
+      DB::rollback();
+      return redirect()->route('create_order')->with('ws_result', json_encode([
+        'title' => 'te informa que',
+        'message' => 'Ocurrió un error creando la orden.'
+      ]));
     }
-
-    DB::table('tbl_order_item')->insert($order_items);
-
-    DB::table('tbl_order_status_history')->insert([
-      'order_id' => $order_id,
-      'order_status_id' => \Config::get('filter.order_status_id')
-    ]);
+    
+    if (!isset($order_id)) {
+      return redirect()->route('create_order')->with('ws_result', json_encode([
+        'title' => 'te informa que',
+        'message' => 'Ocurrió un error creando la orden.'
+      ]));
+    }
 
     $order_detail['order_id'] = $order_id;
 
@@ -506,8 +525,6 @@ class OrderController extends Controller
     } catch (\Exception $e) {
       Log::warning('Error al enviar correo a '.$request->email.' por la orden #'.$order_id);
     }
-
-    DB::commit();
 
     $request->session()->flush();
 
