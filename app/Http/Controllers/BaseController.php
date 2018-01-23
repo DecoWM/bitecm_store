@@ -348,7 +348,8 @@ class BaseController extends Controller
   public function getProductPlans($product) {
     $affiliation_id = \Config::get('filter.affiliation_id');
     $contract_id = \Config::get('filter.contract_id');
-    return DB::table('tbl_product_variation')
+    
+    $result = DB::table('tbl_product_variation')
       ->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')
       ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
       ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
@@ -358,7 +359,7 @@ class BaseController extends Controller
       ->where('tbl_affiliation.active', 1)
       ->where('tbl_contract.active', 1)
       ->where('tbl_product_variation.product_id', $product->product_id)
-      /*->where(function ($query) use ($product, $affiliation_id, $contract_id) => {
+      /*->where(function ($query) use ($product, $affiliation_id, $contract_id) {
         $query
           ->where(function ($subquery) use ($product) {
             $subquery
@@ -369,19 +370,34 @@ class BaseController extends Controller
             $subquery
               ->where('tbl_product_variation.affiliation_id', $affiliation_id)
               ->where('tbl_product_variation.contract_id', $contract_id);
-          });
-          //->orWhere('1','1')
+          })
+          ->orWhere(DB::raw('null'));
       })*/
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
-      ->select(DB::raw('DISTINCT(tbl_plan.plan_id), tbl_plan.*'))
+      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
       ->get();
+    
+    $unique = [];
+
+    foreach ($result as $key => $plan) {
+      if (!isset($unique[$plan->plan_id])) {
+        $unique[$plan->plan_id] = $plan;
+      } else {
+        if (($unique[$plan->plan_id]->affiliation_id != $product->affiliation_id || $unique[$plan->plan_id]->contract_id != $product->contract_id) && (($plan->affiliation_id == $product->affiliation_id && $plan->contract_id == $product->contract_id) || ($plan->affiliation_id == $affiliation_id && $plan->contract_id == $contract_id))) {
+          $unique[$plan->plan_id] = $plan;
+        }
+      }
+    }
+
+    return array_values($unique);
   }
 
   public function getProductAffiliations($product) {
     $plan_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
-    return DB::table('tbl_product_variation')
+    
+    $result = DB::table('tbl_product_variation')
       ->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')
       ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
       ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
@@ -390,21 +406,39 @@ class BaseController extends Controller
       ->where('tbl_plan.active', 1)
       ->where('tbl_affiliation.active', 1)
       ->where('tbl_contract.active', 1)
-      ->orWhere(function ($subquery) use ($product) {
-        $subquery
-          ->where('tbl_product_variation.plan_id', $product->plan_id)
-          ->where('tbl_product_variation.contract_id', $product->contract_id);
-      })
-      ->orWhere(function ($subquery) use ($plan_id, $contract_id) {
-        $subquery
-          ->where('tbl_product_variation.plan_id', $plan_id)
-          ->where('tbl_product_variation.contract_id', $contract_id);
-      })
       ->where('tbl_product_variation.product_id', $product->product_id)
+      /*->where(function ($query) use ($product, $plan_id, $contract_id) {
+        $query
+          ->where(function ($subquery) use ($product) {
+            $subquery
+              ->where('tbl_product_variation.plan_id', $product->plan_id)
+              ->where('tbl_product_variation.contract_id', $product->contract_id);
+          })
+          ->orWhere(function ($subquery) use ($plan_id, $contract_id) {
+            $subquery
+              ->where('tbl_product_variation.plan_id', $plan_id)
+              ->where('tbl_product_variation.contract_id', $contract_id);
+          })
+          ->orWhere(DB::raw('null'));
+      })*/
       ->orderBy('tbl_affiliation.weight')
       ->orderBy('tbl_affiliation.affiliation_id')
-      ->select(DB::raw('DISTINCT(tbl_affiliation.affiliation_id), tbl_affiliation.*'))
+      ->select(DB::raw('tbl_affiliation.*, tbl_plan.plan_id, tbl_plan.plan_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
       ->get();
+
+    $unique = [];
+
+    foreach ($result as $key => $affiliation) {
+      if(!isset($unique[$affiliation->affiliation_id])) {
+        $unique[$affiliation->affiliation_id] = $affiliation;
+      } else {
+        if(($unique[$affiliation->affiliation_id]->plan_id != $product->plan_id || $unique[$affiliation->affiliation_id]->contract_id != $product->contract_id) && (($affiliation->plan_id == $product->plan_id && $affiliation->contract_id == $product->contract_id) || ($affiliation->plan_id == $plan_id && $affiliation->contract_id == $contract_id))) {
+          $unique[$affiliation->affiliation_id] = $affiliation;
+        }
+      }
+    }
+
+    return array_values($unique);
   }
 
   public function statusHistory($order_id = null) {

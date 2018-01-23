@@ -331,7 +331,7 @@ const app = new Vue({
             affiliation_id = event.target.value;
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
             if (self.current_url != current_affiliation.route) {
-              this.setUrl(current_affiliation.route, current_affiliation.api_route)
+              this.setUrl(current_affiliation.route, current_affiliation.api_route);
             }
         },
         setColor: function (stock_model_id) {
@@ -358,8 +358,10 @@ const app = new Vue({
               $('input[name="stock_model"]').val(self.product.product.stock_model_id);
               $('input[name="product_variation"]').val(self.product.product.product_variation_id);
               $('input[name="affiliation"]').val(self.product.product.affiliation_id);
-
               self.replaceProductImages();
+              document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
+              document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
+              $('#plan'+self.product.product.plan_id).trigger('click');
             }, (error) => {
               console.log(error);
             });

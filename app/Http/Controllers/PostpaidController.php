@@ -137,16 +137,16 @@ class PostpaidController extends Controller
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
-        'affiliation'=>$product->affiliation_slug,
-        'contract'=>$product->contract_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
-        'affiliation'=>$product->affiliation_slug,
-        'contract'=>$product->contract_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;
@@ -156,21 +156,38 @@ class PostpaidController extends Controller
       $item->route = route('postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
-        'plan'=>$product->plan_slug,
+        'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$product->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
-        'plan'=>$product->plan_slug,
+        'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$product->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;
     });
+
+    foreach($product_plans as $i => $plan) {
+      if($plan->plan_id == $product->plan_id) {
+        $selected_plan = $i;
+        /*if(count($product_plans) == 3 && $i == 2) {
+          $selected_plan = 0;
+        } else if ($i > 0) {
+          $selected_plan = $i - 1;
+        } else {
+          $selected_plan = $i;
+        }*/
+      }
+    }
+
+    if(!isset($selected_plan)) {
+      $selected_plan = 0;
+    }
 
     $response = [
       'product' => $product,
@@ -179,6 +196,7 @@ class PostpaidController extends Controller
       'available' => $available,
       'plans' => $product_plans,
       'affiliations' => $product_affiliations,
+      'selected_plan' => $selected_plan
     ];
 
     return view('smartphones.postpago.detail', $response);

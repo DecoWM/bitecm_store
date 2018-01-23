@@ -61,9 +61,9 @@
                             '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                           @endforeach
                         },$event)"> --}}
-                        <select form="purchase-form" name="affiliation" @change="setAffiliation($event)">
-                          @foreach ($affiliations as $affiliation)
-                          <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                        <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
+                          @foreach ($affiliations as $ix => $affiliation)
+                          <option id="aff{{$affiliation->affiliation_id}}" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                           @endforeach
                         </select>
                       </div>
@@ -114,38 +114,30 @@
                   </div>
                 </div>
                 <div class="movil-select-product">
-                  <select @change="selectAffiliation({
+                  <select id="affsel-mov" @change="selectAffiliation({
                     @foreach ($affiliations as $affiliation)
                     '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                     @endforeach
                   },$event)">
                     <option name="" value="">Lo quieres en</option>
-                    @foreach ($affiliations as $affiliation)
-                    <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                    @foreach ($affiliations as $ix => $affiliation)
+                    <option id="aff{{$affiliation->affiliation_id}}-mov" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                     @endforeach
                   </select>
                 </div>
               </form>
             </div>
           </section>
-          @foreach ($plans as $i => $plan)
-            @if($plan->plan_id == $product->plan_id)
-              @php $selected_plan = $i > 0 ? $i - 1 : $i; @endphp
-            @endif
-            @if(!isset($selected_plan))
-              @php $selected_plan = 0; @endphp
-            @endif
-          @endforeach
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
-            <div class="select-plan">
+            <div class="select-plan {{count($plans) == 3 ? 'just-3' : ''}}">
               @foreach ($plans as $plan)
               <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
-                <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
+                <div id="plan{{$plan->plan_id}}" class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">

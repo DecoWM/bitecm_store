@@ -1155,7 +1155,6 @@ section.descrip-consideracion{
     }
 }
 
-
 section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     overflow: hidden
 }
@@ -1163,6 +1162,12 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 .cons-cart{
     margin-top: 40px;
     text-align: justify;
+}
+
+@media screen and (min-width: 1200px) {
+    .select-plan.just-3 .slick-list .slick-track {
+        transform: translate3d(0px, 0px, 0px) !important;
+    }
 }
 
 @import "bitel_variables";
