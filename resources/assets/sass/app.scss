@@ -1158,8 +1158,19 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     padding-right: 0;
 }
 
+
 #planes.planes-prepago .select-plan .slick-track{
     padding-bottom: 20px;
+    // transform: none !important;  
+}
+
+@media screen and (max-width: 480px) {
+   #planes.planes-prepago .select-plan .slick-track{
+       transform: translate3d(-387px, 0px, 0px) !important;  
+    } 
+}
+#planes.planes-prepago .select-plan .slick-track{
+
 }
 
 #planes.planes-prepago .recarga{
@@ -1196,6 +1207,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 #planes .planes-prepago .slick-next,
 #planes .planes-prepago .slick-prev{
     display: none !important;
+}
+
+.content-tab-promociones{
+    overflow: initial;
 }
 
 @media screen and (max-width: 480px){
