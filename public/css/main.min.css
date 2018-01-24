@@ -4078,7 +4078,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
     opacity: 1;
     height: 205px;
     width: 100%;
-    top: 55px;
+    top: 0;
     left: 0;
     z-index: 99;
     box-shadow: 0 5px 5px rgba(0,0,0,0.2);
@@ -4101,6 +4101,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border: 1px solid #cecece;
   border-bottom: none;
   padding: 12px 0;
+  max-width: 228px;
 }
 @media (max-width: 767px) {
   #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {
