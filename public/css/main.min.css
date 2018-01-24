@@ -4101,7 +4101,13 @@ section#garantia .container .row .col-xs-4 .text-center p {
   border: 1px solid #cecece;
   border-bottom: none;
   padding: 12px 0;
-  max-width: 228px;
+  /*max-width: 228px;*/
+}
+
+@media (min-width: 1200px){
+  #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado{
+    max-width: 228px;
+  }
 }
 @media (max-width: 767px) {
   #fixed-nav-comp #scroll-compara .nav-compara .equipo-seleccionado {

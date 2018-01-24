@@ -790,10 +790,10 @@ li.item-nav-mobile.search #search .btn-search {
 
 @media screen and (max-width: 768px) {
 
-    #fixed-nav-comp.fixed-nav{
-        top: 55px;
-    }
-    
+    // #fixed-nav-comp.fixed-nav{
+    //     top: 55px;
+    // }
+
     #nav-carrito ul li:last-child{
         margin-bottom: 0;
     }
@@ -819,6 +819,10 @@ li.item-nav-mobile.search #search .btn-search {
 
 
 @media screen and (max-width: 480px) {
+
+    #fixed-nav-comp.fixed-nav{
+        top: 55px;
+    }
 
     section#equipos-promocion .container .row .content-tab-pro .producto,
     section#equipos-vendidos .container .row .content-tab-pro .producto{
