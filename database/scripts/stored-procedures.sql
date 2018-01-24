@@ -2689,7 +2689,7 @@ BEGIN
   SET where_query = CONCAT('
     WHERE active = 1
       AND stock_model_id = ', stock_model_id, '
-    ORDER BY weight DESC, product_image_id ASC'
+    ORDER BY weight ASC, product_image_id ASC'
   );
 
   SET stored_query = CONCAT(select_query, from_query, where_query);
