@@ -1164,15 +1164,6 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     // transform: none !important;  
 }
 
-@media screen and (max-width: 480px) {
-   #planes.planes-prepago .select-plan .slick-track{
-       transform: translate3d(-387px, 0px, 0px) !important;  
-    } 
-}
-#planes.planes-prepago .select-plan .slick-track{
-
-}
-
 #planes.planes-prepago .recarga{
     font-size: 18px !important;
     font-weight: normal !important
