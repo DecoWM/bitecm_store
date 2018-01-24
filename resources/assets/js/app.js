@@ -650,7 +650,7 @@ const app = new Vue({
             initialSlide: $('#planes').data('selected'),
             arrows: true,
             dots: false,
-            infinite: false,
+            infinite: true,
             autoplay: false,
             speed: 500,
             slidesToShow: 3,
