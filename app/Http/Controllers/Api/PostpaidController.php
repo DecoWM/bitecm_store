@@ -142,6 +142,16 @@ class PostpaidController extends Controller
       return $item;
     });
 
+    foreach($product_plans as $i => $plan) {
+      if($plan->plan_id == $product->plan_id) {
+        $selected_plan = $i;
+      }
+    }
+
+    if(!isset($selected_plan)) {
+      $selected_plan = 0;
+    }
+
     $response = [
       'product' => $product,
       'product_images' => $product_images,
@@ -149,6 +159,7 @@ class PostpaidController extends Controller
       'available' => $available,
       'plans' => $product_plans,
       'affiliations' => $product_affiliations,
+      'selected_plan' => $selected_plan
     ];
 
     return response()->json($response);

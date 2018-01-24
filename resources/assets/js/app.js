@@ -352,6 +352,7 @@ const app = new Vue({
             axios.get(url).then((response) => {
               self.product = response.data;
               console.log(self.product);
+              console.log('selected plan: '+self.product.selected_plan);
               title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
               $('.title h1').text(title);
               $('.title h2').text(title);
@@ -361,7 +362,10 @@ const app = new Vue({
               self.replaceProductImages();
               document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
               document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
+              $('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
               $('#plan'+self.product.product.plan_id).trigger('click');
+              //$('.select-plan').slick('unslick');
+              //$('.select-plan').slick(self.getSlickPlansSettings(self.product.selected_plan));
             }, (error) => {
               console.log(error);
             });
@@ -398,36 +402,98 @@ const app = new Vue({
                 image_src = self.baseUrl + '/storage/' + self.product.product.product_image_url;
                 $('#zoom_01').attr('src', image_src);
             }
-
+        },
+        getSlickPlansSettings: function(selectedPlan) {
+          return  {
+            initialSlide: selectedPlan,
+            arrows: true,
+            dots: false,
+            infinite: true,
+            autoplay: false,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            centerMode: true,
+            centerPadding: '0px',
+            //variableWidth: true,
+            responsive: [
+              {
+                breakpoint: 1200,
+                settings: {
+                  arrows: true,
+                  dots: false,
+                  centerMode: false,
+                  slidesToShow: 2
+                }
+              },
+              {
+                breakpoint: 996,
+                settings: {
+                  arrows: true,
+                  dots: false,
+                  centerMode: false,
+                  slidesToShow: 1
+                }
+              },
+              {
+                breakpoint: 768,
+                settings: {
+                  arrows: true,
+                  dots: false,
+                  centerMode: false,
+                  slidesToShow: 3
+                }
+              },
+              {
+                breakpoint: 667,
+                settings: {
+                  arrows: true,
+                  dots: false,
+                  centerMode: false,
+                  slidesToShow: 2
+                }
+              },
+              {
+                breakpoint: 480,
+                settings: {
+                  // initialSlide: $('#planes .slick-slide .slick-active').next(),
+                  arrows: true,
+                  dots: false,
+                  centerMode: false,
+                  slidesToShow: 1
+                }
+              },
+            ]
+          };
         }
     },
-    beforeMount : function () {
+    beforeMount: function () {
         self = this
         if($('#pagination-init').length) {
-          paginationData = $('#pagination-init').val()
-          self.pagination = JSON.parse(paginationData)
+          paginationData = $('#pagination-init').val();
+          self.pagination = JSON.parse(paginationData);
         }
         if($('#search-init').length) {
-          searchedString = $('#search-init').val()
-          self.searchedString  = searchedString
+          searchedString = $('#search-init').val();
+          self.searchedString  = searchedString;
         }
         if($('#product-init').length) {
-          product = $('#product-init').val()
-          self.product = JSON.parse(product)
+          product = $('#product-init').val();
+          self.product = JSON.parse(product);
         }
     },
     mounted: function () {
         self = this
 
         $('#banner-principal').slick({
-            arrows: true,
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            arrows: true,
-            speed: 300,
-            slidesToShow: 1,
-            slidesToScroll: 1
+          arrows: true,
+          dots: false,
+          infinite: true,
+          autoplay: true,
+          arrows: true,
+          speed: 300,
+          slidesToShow: 1,
+          slidesToScroll: 1
         });
 
         $('.list-productos').slick({
@@ -439,8 +505,8 @@ const app = new Vue({
             speed: 300,
             slidesToShow: 3,
             slidesToScroll: 1,
-       	// centerMode: true,
-       	// variableWidth: true,
+       	    // centerMode: true,
+       	    // variableWidth: true,
             responsive: [
                 {
                   breakpoint: 1040,
@@ -645,72 +711,7 @@ const app = new Vue({
           ]
         });
 
-
-        $('.select-plan').slick({
-            initialSlide: $('#planes').data('selected'),
-            arrows: true,
-            dots: false,
-            infinite: true,
-            autoplay: false,
-            speed: 500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            centerMode: true,
-            centerPadding: '0px',
-        // variableWidth: true,
-            responsive: [
-                {
-                  breakpoint: 1200,
-                  settings: {
-                      arrows: true,
-                      dots: false,
-                      centerMode: false,
-                      slidesToShow: 2
-                  }
-                },
-                {
-                  breakpoint: 996,
-                  settings: {
-                      arrows: true,
-                      dots: false,
-                      centerMode: false,
-                      slidesToShow: 1
-                  }
-                },
-                {
-                  breakpoint: 768,
-                  settings: {
-                      arrows: true,
-                      dots: false,
-                      centerMode: false,
-                      slidesToShow: 3
-                  }
-                },
-                {
-                  breakpoint: 667,
-                  settings: {
-                      arrows: true,
-                      dots: false,
-                      centerMode: false,
-                      slidesToShow: 2
-                  }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                      // initialSlide: $('#planes .slick-slide .slick-active').next(),
-                      arrows: true,
-                      dots: false,
-                      centerMode: false,
-                      slidesToShow: 1,
-                      slickCurrentSlide : $('#planes').data('slick-index' + 1)
-
-
-
-                  }
-                },
-            ]
-        });
+        $('.select-plan').slick(self.getSlickPlansSettings($('#planes').data('selected')));
 
         // $('.select-plan').slick('setPosition');
 
