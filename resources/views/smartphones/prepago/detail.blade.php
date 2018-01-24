@@ -107,7 +107,7 @@
             <p>{{$product->product_description}}</p>
           </div>
           <div id="planes" class="planes-prepago">
-            <div class="select-plan">
+            <div class="select-plan just-3">
                 <label for="">
                   <div class="plan">
                     <div class="content-plan">
