@@ -121,7 +121,7 @@
                   },$event)">
                     <option name="" value="">Lo quieres en</option>
                     @foreach ($affiliations as $ix => $affiliation)
-                    <option id="aff{{$affiliation->affiliation_id}}-mov" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                    <option id="aff{{$affiliation->affiliation_id}}-mov" data-ix="{{$ix+1}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                     @endforeach
                   </select>
                 </div>
