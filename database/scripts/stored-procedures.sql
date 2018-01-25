@@ -3198,3 +3198,130 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+
+-- ------------------------------------------
+-- Insert store order
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_INS_storeOrder;
+
+DELIMITER $$
+--
+-- Procedimiento insertar un store order 
+--  --OUT order_id INT
+CREATE PROCEDURE PA_INS_storeOrder(
+  IN order_id INT,
+  IN idtype_id INT,
+  IN payment_method_id INT,
+  IN branch_id INT,
+  IN tracking_code VARCHAR(50),
+  IN first_name VARCHAR(100),
+  IN last_name VARCHAR(100),
+  IN id_number VARCHAR(20),
+  IN billing_district INT,
+  IN billing_phone VARCHAR(20),
+  IN source_operator VARCHAR(45),
+  IN porting_phone VARCHAR(45),
+  IN delivery_address VARCHAR(150),
+  IN delivery_district INT,
+  IN contact_email VARCHAR(150),
+  IN contact_phone VARCHAR(20),
+  IN service_type VARCHAR(150),
+  IN affiliation_type VARCHAR(150),
+  IN total DECIMAL(6,2),
+  IN total_igv DECIMAL(6,2)
+)
+BEGIN
+
+  DECLARE stored_query TEXT;
+
+
+
+  SET stored_query = CONCAT(" 
+
+      INSERT INTO tbl_order
+      (
+        order_id,
+        idtype_id,
+        payment_method_id,
+        branch_id,
+        tracking_code,
+        first_name,
+        last_name,
+        id_number,
+        billing_district,
+        billing_phone,
+        source_operator,
+        porting_phone,
+        delivery_address,
+        delivery_district,
+        contact_email,
+        contact_phone,
+        service_type,
+        affiliation_type,
+        total,
+        total_igv
+      )     
+      SELECT ", 
+          order_id, " as order_id , ",
+          idtype_id, " as idtype_id , " ,
+          payment_method_id, " as payment_method_id, " ,
+          branch_id, " as branch_id,",
+          "'" , tracking_code, "'" ," as tracking_code,",
+          "'" , first_name, "'" ," as first_name,",
+          "'" , last_name, "'" ," as last_name,",
+          "'" , id_number, "'" ," as id_number,",
+          billing_district, " as billing_district,",
+          "'" , billing_phone, "'" ," as billing_phone,",
+          "'" , source_operator, "'" ," as source_operator,",
+          "'" , porting_phone, "'" ," as porting_phone,",
+          "'" , delivery_address, "'" ," as delivery_address,",
+          delivery_district, " as delivery_district,",
+          "'" , contact_email, "'" ," as contact_email,",
+          "'" , contact_phone, "'" ," as contact_phone,",
+          "'" , service_type, "'" ," as service_type,",
+          "'" , affiliation_type, "'" ," as affiliation_type,",
+          total, " as total,",
+          total_igv, " as total_igv",   
+      " FROM tbl_order
+
+        ");
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
+END $$
+
+DELIMITER ;
+
+
+-- ------------------------------------------
+-- select max  store order
+-- ------------------------------------------
+
+DROP PROCEDURE IF EXISTS PA_storeOrderMaxID;
+
+DELIMITER $$
+--
+-- Procedimiento para listar el maximo id
+
+CREATE PROCEDURE PA_storeOrderMaxID()
+BEGIN
+
+  DECLARE stored_query TEXT;
+
+  SET stored_query = " SELECT CASE WHEN MAX(order_id) is null then 0 else MAX(order_id) +1  end as order_id FROM tbl_order ";
+
+  -- Executing query
+  SET @consulta = stored_query;
+  -- select @consulta;
+  PREPARE exec_strquery FROM @consulta;
+  EXECUTE exec_strquery;
+
+END $$
+
+DELIMITER ;

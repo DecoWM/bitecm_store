@@ -451,28 +451,56 @@ class OrderController extends Controller
     DB::commit();
 
     try {
+      // $order_id = DB::table('tbl_order')->insertGetId([
+      //   'idtype_id' => $order_detail['idtype_id'],
+      //   'payment_method_id' => $order_detail['payment_method_id'],
+      //   'branch_id' => $order_detail['branch_id'],
+      //   'tracking_code' => $order_detail['tracking_code'],
+      //   'first_name' => $order_detail['first_name'],
+      //   'last_name' => $order_detail['last_name'],
+      //   'id_number' => $order_detail['id_number'],
+      //   'billing_district' => $order_detail['billing_district'],
+      //   'billing_phone' => $order_detail['billing_phone'],
+      //   'source_operator' => $order_detail['source_operator'],
+      //   'porting_phone' => $order_detail['porting_phone'],
+      //   'delivery_address' => $order_detail['delivery_address'],
+      //   'delivery_district' => $order_detail['delivery_district'],
+      //   'contact_email' => $order_detail['contact_email'],
+      //   'contact_phone' => $order_detail['contact_phone'],
+      //   'service_type' => $order_detail['service_type'],
+      //   'affiliation_type' => $order_detail['affiliation_type'],
+      //   'total' => number_format($order_detail['total'], 2, '.', ''),
+      //   'total_igv' => $order_detail['total_igv']
+      // ]);
       DB::beginTransaction();
-      $order_id = DB::table('tbl_order')->insertGetId([
-        'idtype_id' => $order_detail['idtype_id'],
-        'payment_method_id' => $order_detail['payment_method_id'],
-        'branch_id' => $order_detail['branch_id'],
-        'tracking_code' => $order_detail['tracking_code'],
-        'first_name' => $order_detail['first_name'],
-        'last_name' => $order_detail['last_name'],
-        'id_number' => $order_detail['id_number'],
-        'billing_district' => $order_detail['billing_district'],
-        'billing_phone' => $order_detail['billing_phone'],
-        'source_operator' => $order_detail['source_operator'],
-        'porting_phone' => $order_detail['porting_phone'],
-        'delivery_address' => $order_detail['delivery_address'],
-        'delivery_district' => $order_detail['delivery_district'],
-        'contact_email' => $order_detail['contact_email'],
-        'contact_phone' => $order_detail['contact_phone'],
-        'service_type' => $order_detail['service_type'],
-        'affiliation_type' => $order_detail['affiliation_type'],
-        'total' => number_format($order_detail['total'], 2, '.', ''),
-        'total_igv' => $order_detail['total_igv']
-      ]);
+       
+
+      $order_id = $this->shared->getMaxStoreOrderID();
+
+      $res = $this->shared->insertStoreOrder(
+        $order_id,
+        $order_detail['idtype_id'],
+        $order_detail['payment_method_id'],
+        $order_detail['branch_id'],
+        $order_detail['tracking_code'],
+        $order_detail['first_name'],
+        $order_detail['last_name'],
+        $order_detail['id_number'],
+        $order_detail['billing_district'],
+        $order_detail['billing_phone'],
+        $order_detail['source_operator'],
+        $order_detail['porting_phone'],
+        $order_detail['delivery_address'],
+        $order_detail['delivery_district'],
+        $order_detail['contact_email'],
+        $order_detail['contact_phone'],
+        $order_detail['service_type'],
+        $order_detail['affiliation_type'],
+        number_format($order_detail['total'], 2, '.', ''),
+        $order_detail['total_igv']
+      );
+
+      
 
       $now = new \DateTime('America/Lima');
       $order_detail['fecha'] = $now->format('d/m/Y H:i:s');
