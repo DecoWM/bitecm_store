@@ -419,7 +419,7 @@ class BaseController extends Controller
   }
   /////////////////////////////////////////////
 
-public function getMaxStoreOrderID () {
+  public function getMaxStoreOrderID () {
 
     $result = DB::select('call PA_storeOrderMaxID()');
 

@@ -473,7 +473,6 @@ class OrderController extends Controller
       //   'total_igv' => $order_detail['total_igv']
       // ]);
       DB::beginTransaction();
-       
 
       $order_id = $this->shared->getMaxStoreOrderID();
 
@@ -500,8 +499,6 @@ class OrderController extends Controller
         $order_detail['total_igv']
       );
 
-      
-
       $now = new \DateTime('America/Lima');
       $order_detail['fecha'] = $now->format('d/m/Y H:i:s');
 
@@ -518,6 +515,7 @@ class OrderController extends Controller
       DB::commit();
     } catch(\Illuminate\Database\QueryException $e) {
       DB::rollback();
+      Log::error('Ocurrió un error creando la orden en la base de datos, rollback');
       return redirect()->route('create_order')->with('ws_result', json_encode([
         'title' => 'te informa que',
         'message' => 'Ocurrió un error creando la orden.'
@@ -525,6 +523,7 @@ class OrderController extends Controller
     }
     
     if (!isset($order_id)) {
+      Log::error('Ocurrió un error creando la orden, no se tiene el order_id');
       return redirect()->route('create_order')->with('ws_result', json_encode([
         'title' => 'te informa que',
         'message' => 'Ocurrió un error creando la orden.'
