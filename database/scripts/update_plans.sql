@@ -1,3 +1,5 @@
+USE `bitel_ecommerce` ;
+
 ALTER TABLE tbl_plan MODIFY plan_unlimited_calls INT(11) NOT NULL DEFAULT '1';
 ALTER TABLE tbl_plan MODIFY plan_unlimited_sms INT(11) NOT NULL DEFAULT '1';
 ALTER TABLE tbl_plan MODIFY plan_data_cap VARCHAR(255) NOT NULL;

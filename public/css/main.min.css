@@ -3940,13 +3940,15 @@ section#garantia .container .row .col-xs-4 .text-center p {
 
 #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li img {
   width: 50px;
+  width: auto;
+  max-height: 75px
 }
-@media (max-width: 1366px) {
+
+/*@media (max-width: 1366px) {
   #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li img {
-    width: auto;
-    max-height: 75px
   }
-}
+}*/
+
 #list-equipos #list-equipos-comparar .equipos-comp .list-equipos ul li button {
   position: absolute;
   background-color: #008c95;
