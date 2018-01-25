@@ -512,6 +512,7 @@ class OrderController extends Controller
         'order_id' => $order_id,
         'order_status_id' => \Config::get('filter.order_status_id')
       ]);
+      
       DB::commit();
     } catch(\Illuminate\Database\QueryException $e) {
       DB::rollback();
