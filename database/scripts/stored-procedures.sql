@@ -3262,31 +3262,28 @@ BEGIN
         affiliation_type,
         total,
         total_igv
-      )     
-      SELECT ", 
-          order_id, " as order_id , ",
-          idtype_id, " as idtype_id , " ,
-          payment_method_id, " as payment_method_id, " ,
-          branch_id, " as branch_id,",
-          "'" , tracking_code, "'" ," as tracking_code,",
-          "'" , first_name, "'" ," as first_name,",
-          "'" , last_name, "'" ," as last_name,",
-          "'" , id_number, "'" ," as id_number,",
-          billing_district, " as billing_district,",
-          "'" , billing_phone, "'" ," as billing_phone,",
-          "'" , source_operator, "'" ," as source_operator,",
-          "'" , porting_phone, "'" ," as porting_phone,",
-          "'" , delivery_address, "'" ," as delivery_address,",
-          delivery_district, " as delivery_district,",
-          "'" , contact_email, "'" ," as contact_email,",
-          "'" , contact_phone, "'" ," as contact_phone,",
-          "'" , service_type, "'" ," as service_type,",
-          "'" , affiliation_type, "'" ," as affiliation_type,",
-          total, " as total,",
-          total_igv, " as total_igv",   
-      " FROM tbl_order
-
-        ");
+      ) values 
+      ( ",
+        order_id, " , " ,
+        idtype_id, " , " ,
+        payment_method_id, " , " ,
+        branch_id, " , " ,
+        "'", tracking_code, "' , " ,
+        "'", first_name, "' , " ,
+        "'", last_name, "' , " ,
+        "'", id_number, "' , " ,
+        billing_district, " , " ,
+        "'", billing_phone, "' , " ,
+        "'", source_operator, "' , " ,
+        "'", porting_phone, "' , " ,
+        "'", delivery_address, "' , " ,
+        delivery_district, " , " ,
+        "'", contact_email, "' , " ,
+        "'", contact_phone, "' , " ,
+        "'", service_type, "' , " ,
+        "'", affiliation_type, "' , " ,
+        total, " , " ,
+        total_igv, " ) ");
 
   -- Executing query
   SET @consulta = stored_query;
