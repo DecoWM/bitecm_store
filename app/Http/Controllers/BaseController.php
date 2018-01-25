@@ -349,27 +349,28 @@ class BaseController extends Controller
 
   /////////////////////////////////////////////
   public function insertStoreOrder (
-        $order_id,
+        $order_id ,
         $idtype_id ,
-        $payment_method_id,
-        $branch_id,
-        $tracking_code,
-        $first_name,
+        $payment_method_id ,
+        $branch_id ,
+        $tracking_code ,
+        $first_name ,
         $last_name,
         $id_number,
         $billing_district,
-        $billing_phone,
-        $source_operator,
-        $porting_phone,
-        $delivery_address,
-        $delivery_district,
-        $contact_email,
-        $contact_phone,
-        $service_type,
-        $affiliation_type,
+        $billing_phone = null,
+        $source_operator = null,
+        $porting_phone = null,
+        $delivery_address ,
+        $delivery_district ,
+        $contact_email ,
+        $contact_phone ,
+        $service_type = null,
+        $affiliation_type = null,
         $total,
         $total_igv
   ) {
+
 
     $result = DB::select('call PA_INS_storeOrder(
         :order_id,

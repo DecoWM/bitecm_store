@@ -3236,6 +3236,9 @@ BEGIN
 
   DECLARE stored_query TEXT;
 
+  SET source_operator = IFNULL(source_operator, ''); 
+  SET porting_phone = IFNULL(porting_phone, '');
+  SET affiliation_type = IFNULL(affiliation_type, ''); 
 
 
   SET stored_query = CONCAT(" 
