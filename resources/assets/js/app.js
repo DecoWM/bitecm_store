@@ -62,7 +62,7 @@ const form = new Vue({
       });
     },
     change () {
-      console.log(this.affiliation);
+      // console.log(this.affiliation);
     }
   },
   mounted: function() {
@@ -267,7 +267,7 @@ const app = new Vue({
             if (self.type != 'accesorios' && self.type != 'promociones') {
               (self.filters[self.type].plan.value != '') ? self.filters[self.type].plan.all = false : self.filters[self.type].plan.all = true;
             }
-            console.log(self.baseUrl);
+            //console.log(self.baseUrl);
             let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {
                 params: {
@@ -278,7 +278,7 @@ const app = new Vue({
                 }
             };
             axios.get(url, data).then((response) => {
-              console.log(response.data);
+              //console.log(response.data);
               self.searchResult = response.data.data;
               if (self.searchResult.length == 0) {
                   self.noResults = true;
@@ -317,11 +317,11 @@ const app = new Vue({
         },
         setPlan: function(plan_id) {
             self = this;
-            console.log(plan_id);
-            console.log(self.product.plans);
+            //console.log(plan_id);
+            //console.log(self.product.plans);
             var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
-            console.log(current_plan.route);
-            console.log(current_plan.api_route);
+            //console.log(current_plan.route);
+            //console.log(current_plan.api_route);
             if (self.current_url != current_plan.route) {
               this.setUrl(current_plan.route, current_plan.api_route);
             }
@@ -351,8 +351,8 @@ const app = new Vue({
             self = this;
             axios.get(url).then((response) => {
               self.product = response.data;
-              console.log(self.product);
-              console.log('selected plan: '+self.product.selected_plan);
+              //console.log(self.product);
+              //console.log('selected plan: '+self.product.selected_plan);
               title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
               $('.title h1').text(title);
               $('.title h2').text(title);
