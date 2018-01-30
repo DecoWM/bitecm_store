@@ -1,6 +1,6 @@
 use bitel_ecommerce;
 
-delete o from tbl_product_variation as o 
+delete o from tbl_product_variation as o
 left join (
   select max(product_variation_id) as product_variation_id
   from tbl_product_variation
