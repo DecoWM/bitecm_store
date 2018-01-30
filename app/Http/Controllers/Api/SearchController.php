@@ -171,7 +171,24 @@ class SearchController extends Controller
 
     $brand_ids = implode(',',$filters->manufacturer->value);
 
-    $search_result = $this->shared->productSearch(2, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $searched_string = $request->searched_string;
+
+    $search_result = $this->shared->productSearch(2, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $searched_string);
+
+    $filtered_product = null;
+    foreach ($search_result['products'] as $ix => $prod) {
+      $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
+      $prod_model_name = strtolower($prod->product_model);
+      $searched_string = strtolower(trim($searched_string));
+      if ($searched_string == $prod_full_name || $searched_string == $prod_model_name) {
+        $filtered_product = $prod;
+      }
+    }
+
+    if (isset($filtered_product)) {
+      $search_result['products'] = [$filtered_product];
+      $search_result['total'] = 1;  
+    }
 
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
@@ -223,8 +240,25 @@ class SearchController extends Controller
     $plan_post_id = \Config::get('filter.plan_post_id');
     $contract_id = \Config::get('filter.contract_id');
 
-    $search_result = $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $request->searched_string);
+    $searched_string = $request->searched_string;
 
+    $search_result = $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $searched_string);
+
+    $filtered_product = null;
+    foreach ($search_result['products'] as $ix => $prod) {
+      $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
+      $prod_model_name = strtolower($prod->product_model);
+      $searched_string = strtolower(trim($searched_string));
+      if ($searched_string == $prod_full_name || $searched_string == $prod_model_name) {
+        $filtered_product = $prod;
+      }
+    }
+
+    if (isset($filtered_product)) {
+      $search_result['products'] = [$filtered_product];
+      $search_result['total'] = 1;  
+    }
+    
     $data = collect($search_result['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
 
