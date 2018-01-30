@@ -29,7 +29,7 @@ Vue.component('postpaidAvailable', require('./components/postpaid/available.vue'
 Vue.component('postpaidPrice', require('./components/postpaid/price.vue'));
 Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
-
+Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
 
 var VeeValidate = require('vee-validate');
 
@@ -189,6 +189,7 @@ const app = new Vue({
               new : 299
             }
         },
+        plans: [],
         //AJAX
         product: {},
         current_url: "",
@@ -270,19 +271,40 @@ const app = new Vue({
             //console.log(self.baseUrl);
             let url = self.baseUrl + '/api' + self.prefix +'buscar';
             let data = {
-                params: {
-                    searched_string: self.searchedString,
-                    items_per_page: self.itemsPerPage,
-                    filters : self.filters[self.type],
-                    pag : self.pagination.current_page
-                }
+              params: {
+                searched_string: self.searchedString,
+                items_per_page: self.itemsPerPage,
+                filters : self.filters[self.type],
+                pag : self.pagination.current_page
+              }
             };
             axios.get(url, data).then((response) => {
               //console.log(response.data);
-              self.searchResult = response.data.data;
-              if (self.searchResult.length == 0) {
-                  self.noResults = true;
-              }
+              let result = response.data.data;
+              if (result.length == 0) {
+                self.noResults = true;
+              } /* else {
+                self.searchResult = result;
+                self.pagination = response.data;
+                result.forEach(function(prod, ix) {
+                  const prod_full_name = (prod.brand_name + ' ' + prod.product_model).toLowerCase();
+                  const prod_model_name = prod.product_model.toLowerCase();
+                  const searched_string = self.searchedString.trim().toLowerCase();
+                  if (searched_string === prod_full_name || searched_string === prod_model_name) {
+                    self.searchResult = [prod];
+                    self.pagination.last_page_url = self.pagination.first_page_url;
+                    self.pagination.last_page = 1;
+                    self.pagination.next_page_url = null;
+                    self.pagination.prev_page_url = null;
+                    self.pagination.to = 1;
+                    self.pagination.total = 1;
+                  }
+                  if (result.length === (ix + 1) && self.searchResult.length == 0) {
+                    self.searchResult = result;
+                  }
+                });
+              }*/
+              self.searchResult = result;
               self.pagination = response.data;
               self.isSearching = false;
             }, (error) => {
@@ -305,15 +327,12 @@ const app = new Vue({
           if(event.target.value.length > 0) {
             // document.location = affiliation_routes[event.target.value];
             route = affiliation_routes[event.target.value].split(",");
-            this.current_url = route[0];
-            window.history.replaceState("", "", route[0]);
-            this.getProduct(route[1]);
+            this.getProductByAffiliation(route[0], route[1]);
           }
         },
-        setUrl: function (history_url, request_url) {
+        setUrl: function (history_url) {
             this.current_url = history_url;
             window.history.replaceState("", "", history_url);
-            this.getProduct(request_url);
         },
         setPlan: function(plan_id) {
             self = this;
@@ -323,7 +342,7 @@ const app = new Vue({
             //console.log(current_plan.route);
             //console.log(current_plan.api_route);
             if (self.current_url != current_plan.route) {
-              this.setUrl(current_plan.route, current_plan.api_route);
+              this.getProductByPlan(current_plan.route, current_plan.api_route);
             }
         },
         setAffiliation: function(event) {
@@ -331,14 +350,14 @@ const app = new Vue({
             affiliation_id = event.target.value;
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
             if (self.current_url != current_affiliation.route) {
-              this.setUrl(current_affiliation.route, current_affiliation.api_route);
+              this.getProductByAffiliation(current_affiliation.route, current_affiliation.api_route);
             }
         },
         setColor: function (stock_model_id) {
             self = this;
             current_color = self.product.stock_models.find(item => item.stock_model_id == stock_model_id);
             if (self.current_url != current_color.route) {
-              this.setUrl(current_color.route, current_color.api_route);
+              this.getProductByStockModel(current_color.route, current_color.api_route);
             }
         },
         isActiveUrl: function (url) {
@@ -347,28 +366,62 @@ const app = new Vue({
             }
             return false;
         },
-        getProduct: function(url) {
-            self = this;
-            axios.get(url).then((response) => {
-              self.product = response.data;
-              //console.log(self.product);
-              //console.log('selected plan: '+self.product.selected_plan);
-              title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
-              $('.title h1').text(title);
-              $('.title h2').text(title);
-              $('input[name="stock_model"]').val(self.product.product.stock_model_id);
-              $('input[name="product_variation"]').val(self.product.product.product_variation_id);
-              $('input[name="affiliation"]').val(self.product.product.affiliation_id);
-              self.replaceProductImages();
-              document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
-              document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
-              $('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
-              $('#plan'+self.product.product.plan_id).trigger('click');
-              //$('.select-plan').slick('unslick');
-              //$('.select-plan').slick(self.getSlickPlansSettings(self.product.selected_plan));
-            }, (error) => {
-              console.log(error);
+        getProductByPlan: function(history_url, request_url) {
+          self = this;
+          axios.get(request_url).then((response) => {
+            self.product = response.data;
+            //console.log(self.product);
+            $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+            //document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
+            //document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
+            //$('#plans-slick').slick('slickGoTo', parseInt(self.product.selected_plan));
+            //$('#plans-slick').slick('setPosition');
+          }, (error) => {
+            console.log(error);
+          });
+          this.setUrl(history_url);
+        },
+        getProductByAffiliation: function(history_url, request_url) {
+          self = this;
+          axios.get(request_url).then((response) => {
+            self.product = response.data;
+            //console.log(self.product);
+            $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+            $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+
+            const plans_filtered = []; let i = 0;
+            self.product.plans.forEach(function(plan, ix) {
+              if(plan.affiliation_id == self.product.product.affiliation_id) {
+                plans_filtered.push(plan);
+              }
+              i++;
+              if (self.product.plans.length == i) {
+                self.plans = plans_filtered;
+              }
             });
+
+            //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
+            //$('#plan'+self.product.product.plan_id).trigger('click');
+          }, (error) => {
+            console.log(error);
+          });
+          this.setUrl(history_url);
+        },
+        getProductByStockModel: function(history_url, request_url) {
+          self = this;
+          axios.get(request_url).then((response) => {
+            self.product = response.data;
+            //console.log(self.product);
+            //console.log('selected plan: '+self.product.selected_plan);
+            title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
+            $('.title h1').text(title);
+            $('.title h2').text(title);
+            $('input[name="stock_model"]').val(self.product.product.stock_model_id);
+            self.replaceProductImages();
+          }, (error) => {
+            console.log(error);
+          });
+          this.setUrl(history_url);
         },
         replaceProductImages: function () {
             images = "";
@@ -403,18 +456,18 @@ const app = new Vue({
                 $('#zoom_01').attr('src', image_src);
             }
         },
-        getSlickPlansSettings: function(selectedPlan) {
-          return  {
+        getSlickPlansSettings: function(selectedPlan, just_3) {
+          let options = {
             initialSlide: selectedPlan,
             arrows: true,
             dots: false,
-            infinite: true,
             autoplay: false,
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1,
-            centerMode: true,
             centerPadding: '0px',
+            //infinite: true,
+            //centerMode: true,
             //variableWidth: true,
             responsive: [
               {
@@ -423,6 +476,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
+                  infinite: true,
                   slidesToShow: 2
                 }
               },
@@ -432,6 +486,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
+                  infinite: true,
                   slidesToShow: 1
                 }
               },
@@ -440,7 +495,8 @@ const app = new Vue({
                 settings: {
                   arrows: true,
                   dots: false,
-                  centerMode: false,
+                  //centerMode: true,
+                  //infinite: true,
                   slidesToShow: 3
                 }
               },
@@ -450,25 +506,40 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
+                  infinite: true,
                   slidesToShow: 2
                 }
               },
               {
                 breakpoint: 480,
                 settings: {
-                  // initialSlide: $('#planes .slick-slide .slick-active').next(),
                   arrows: true,
                   dots: false,
                   centerMode: false,
+                  infinite: true,
                   slidesToShow: 1
                 }
               },
             ]
           };
+
+          if (just_3 && just_3 === true) {
+            options.infinite = false;
+            options.centerMode = false;
+            options.responsive[2].settings.infinite = false;
+            options.responsive[2].settings.centerMode = false;
+          } else {
+            options.infinite = true;
+            options.centerMode = true;
+            options.responsive[2].settings.infinite = true;
+            options.responsive[2].settings.centerMode = true;
+          }
+
+          return options;
         }
     },
     beforeMount: function () {
-        self = this
+        self = this;
         if($('#pagination-init').length) {
           paginationData = $('#pagination-init').val();
           self.pagination = JSON.parse(paginationData);
@@ -483,7 +554,7 @@ const app = new Vue({
         }
     },
     mounted: function () {
-        self = this
+        self = this;
 
         $('#banner-principal').slick({
           arrows: true,
@@ -711,7 +782,7 @@ const app = new Vue({
           ]
         });
 
-        $('.select-plan').slick(self.getSlickPlansSettings($('#planes').data('selected')));
+        $('.select-plan').slick(self.getSlickPlansSettings($('#planes').data('selected'), $('#plans-slick').hasClass('just-3')));
 
         // $('.select-plan').slick('setPosition');
 
@@ -734,9 +805,6 @@ const app = new Vue({
         // resizeSelectPlan();
 
         // $(window).resize(resizeSelectPlan);
-
-
-
 
         $('.descripcion-detalle ul').slick({
             arrows: true,

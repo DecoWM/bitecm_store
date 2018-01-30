@@ -51,13 +51,13 @@
               <div class="especificaciones">
                 <!-- <div class="bg-gray"><span>Marca</span></div> -->
                 <div class="bg-white"><span>Color</span></div>
-                <div class="bg-gray"><span>Cámara Principal</span></div>
-                <div class="bg-white"><span>Cámara Posterior</span></div>
+                <div class="bg-gray"><span>Cámara Frontal</span></div>
+                <div class="bg-white"><span>Cámara Trasera</span></div>
                 <div class="bg-gray"><span>Radio</span></div>
                 <div class="bg-white"><span>Pantalla</span></div>
                 <div class="bg-gray"><span>Memoria Externa</span></div>
                 <div class="bg-white"><span>Memoria Interna</span></div>
-                <div class="bg-gray"><span>WLAN</span></div>
+                <div class="bg-gray"><span>NFC</span></div>
                 <div class="bg-white"><span>Bluetooth</span></div>
                 <div class="bg-gray"><span>Sistema Operativo</span></div>
                 <div class="bg-white"><span>GPS</span></div>

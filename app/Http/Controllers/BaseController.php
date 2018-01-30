@@ -459,6 +459,7 @@ class BaseController extends Controller
       })*/
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
+      ->orderBy('tbl_plan.plan_price')
       ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
       ->get();
     
@@ -472,6 +473,10 @@ class BaseController extends Controller
           $unique[$plan->plan_id] = $plan;
         }
       }
+    }
+
+    foreach ($result as $key => $plan) {
+      $unique[$plan->plan_id]->affiliations[] = $plan->affiliation_id;
     }
 
     return array_values($unique);

@@ -131,9 +131,11 @@
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
-            <div class="select-plan {{count($plans) == 3 ? 'just-3' : ''}}">
+            <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
+            <div v-if="plans.length == 0" id="plans-slick" class="select-plan {{$just_3 ? 'just-3' : ''}}">
               @foreach ($plans as $plan)
-              <label class="{{$plan->plan_id == $product->plan_id ? 'label-active' : ''}}">
+              @if($plan->affiliation_id == $product->affiliation_id)
+              <label class="plan-parent {{$plan->plan_id == $product->plan_id ? 'label-active' : ''}} {{$plan->affil_classes}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
               <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
@@ -167,6 +169,7 @@
                 </div>
               </div>
               </label>
+              @endif
               @endforeach
             </div>
             {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}

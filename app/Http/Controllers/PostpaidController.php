@@ -31,6 +31,22 @@ class PostpaidController extends Controller
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
     $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
+
+    $filtered_product = null;
+    foreach ($search_result['products'] as $ix => $prod) {
+      $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
+      $prod_model_name = strtolower($prod->product_model);
+      $searched_string = strtolower(trim($searched_string));
+      if ($searched_string == $prod_full_name || $searched_string == $prod_model_name) {
+        $filtered_product = $prod;
+      }
+    }
+
+    if (isset($filtered_product)) {
+      $search_result['products'] = [$filtered_product];
+      $search_result['total'] = 1;  
+    }
+
     $pages = intval(ceil($search_result['total'] / $items_per_page));
     $paginator = new Paginator(
       $search_result['products'],
@@ -149,6 +165,10 @@ class PostpaidController extends Controller
         'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
+      foreach ($item->affiliations as $key => $affil) {
+        $item->affil_classes[] = 'plan_aff_'.$affil;
+      }
+      $item->affil_classes = implode(' ', $item->affil_classes);
       return $item;
     });
 
@@ -172,16 +192,13 @@ class PostpaidController extends Controller
       return $item;
     });
 
-    foreach($product_plans as $i => $plan) {
-      if($plan->plan_id == $product->plan_id) {
-        $selected_plan = $i;
-        /*if(count($product_plans) == 3 && $i == 2) {
-          $selected_plan = 0;
-        } else if ($i > 0) {
-          $selected_plan = $i - 1;
-        } else {
+    $i = 0;
+    foreach($product_plans as $plan) {
+      if($plan->affiliation_id == $product->affiliation_id) {
+        if($plan->plan_id == $product->plan_id) {
           $selected_plan = $i;
-        }*/
+        }
+        $i++;
       }
     }
 
@@ -196,7 +213,8 @@ class PostpaidController extends Controller
       'available' => $available,
       'plans' => $product_plans,
       'affiliations' => $product_affiliations,
-      'selected_plan' => $selected_plan
+      'selected_plan' => $selected_plan,
+      'just_3' => $i == 3
     ];
 
     return view('smartphones.postpago.detail', $response);
