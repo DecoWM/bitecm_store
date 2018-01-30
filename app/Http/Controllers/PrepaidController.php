@@ -28,7 +28,7 @@ class PrepaidController extends Controller
 
     $search_result =  $this->shared->searchProductPrepaid(1, $plan_pre_id, null, $items_per_page, $current_page, "publish_at", "desc");
 
-    $filtered_product = null;
+    /*$filtered_product = null;
     foreach ($search_result['products'] as $ix => $prod) {
       $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
       $prod_model_name = strtolower($prod->product_model);
@@ -41,7 +41,7 @@ class PrepaidController extends Controller
     if (isset($filtered_product)) {
       $search_result['products'] = [$filtered_product];
       $search_result['total'] = 1;  
-    }
+    }*/
 
     $pages = intval(ceil($search_result['total'] / $items_per_page));
     $paginator = new Paginator(

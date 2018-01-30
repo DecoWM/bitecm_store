@@ -374,7 +374,11 @@ BEGIN
     INNER JOIN tbl_brand as BRN
       ON PRD.`brand_id` = BRN.`brand_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -536,7 +540,11 @@ BEGIN
     INNER JOIN tbl_brand as BRN
       ON PRD.`brand_id` = BRN.`brand_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -907,7 +915,11 @@ BEGIN
     INNER JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -1122,7 +1134,11 @@ BEGIN
     INNER JOIN tbl_plan as PLN
       ON PLN.`plan_id` = PRD_VAR.`plan_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -1570,7 +1586,8 @@ BEGIN
 
   SET select_segment = 'SELECT
     DISTINCT(PRD.`product_id`), PRD.*, PRD.`product_image_url` AS picture_url, PRD_VAR.`product_variation_id`, PRD_VAR.`product_variation_price` as product_price,
-    PRM.promo_id, PRM.promo_price, PRM.promo_discount, PRM.promo_add_product_price, PRM.promo_add_product_discount, PRM.promo_title, PRM.promo_description, PRM.`publish_at`, STM.`stock_model_id`,
+    PRM.promo_id, PRM.promo_price, PRM.promo_discount, PRM.promo_add_product_price, PRM.promo_add_product_discount, PRM.promo_title, PRM.promo_description, PRM.`publish_at`,
+    STM.`stock_model_id`,
     PLN.`plan_id`, PLN.`plan_name`,
     PLN.`plan_price`, PLN.`plan_slug`,
     AFF.`affiliation_name`, AFF.`affiliation_slug`,
@@ -1596,7 +1613,11 @@ BEGIN
     INNER JOIN tbl_contract as CTR
       ON CTR.`contract_id` = PRD_VAR.`contract_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
@@ -1828,7 +1849,11 @@ BEGIN
     INNER JOIN tbl_contract as CTR
       ON CTR.`contract_id` = PRD_VAR.`contract_id`
     -- Check stock models
-    LEFT JOIN tbl_stock_model as STM
+    LEFT JOIN (
+      SELECT stock_model_id, product_id
+      FROM tbl_stock_model
+      WHERE active = 1
+    ) as STM
       ON PRD.`product_id` = STM.`product_id`
     -- Check promos
     LEFT JOIN tbl_promo as PRM
