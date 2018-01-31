@@ -1,8 +1,8 @@
 <template lang="html">
-  <div id="plans-slick" :class="{'just-3': plans.length == 3, 'select-plan': true}">
+  <div id="plans-slick" :class="{'just-3': plans.length <= 3, 'select-plan': true}">
     <label v-for="plan in plans">
       <input type="radio" name="plan" form="purchase-form" :value="plan.plan_id" style="display:none;" :checked="isActive(plan.plan_id)">
-      <div class="plan" :class="{'plan-active': isActive(plan.plan_id)}">
+      <div id="plan{{plan.plan_id}}" class="plan" :class="{'plan-active': isActive(plan.plan_id)}">
         <div class="content-plan" v-on:click="setPlan(plan.plan_id)">
           <span class="title-plan">{{plan.plan_name}}</span>
           <div class="precio-plan">S/. {{plan.plan_price}}<span>al mes</span></div>
@@ -24,10 +24,14 @@
 
 <script>
   export default {
-    props: [
-      'plans',
-      'product'
-    ],
+    props: {
+      plans: Array,
+      product: Object,
+      plansChanged: {
+        type: Number,
+        default: 0
+      }
+    },
     methods: {
       isActive: function (plan_id) {
         return plan_id == this.product.product.plan_id;
@@ -39,26 +43,33 @@
         this.$parent.setPlan(plan_id);
       },
       slider() {
-        if ($('#plans-slick').hasClass('slick-initialized')) {
-          $('#plans-slick').slick('unslick');
-        }
         $('#plans-slick').slick(this.$parent.getSlickPlansSettings(this.product.selected_plan, this.product.just_3));
         // $('.select-plan').slick('slickGoTo', parseInt(this.product.selected_plan));
         // $('#plan'+this.product.product.plan_id).trigger('click');
       }
     },
     mounted() {
-      self = this;
       if (this.plans.length > 0) {
-        self.slider();
+        this.slider();
+      }
+    },
+    beforeUpdate() {
+      if (this.plansChanged && $('#plans-slick').hasClass('slick-initialized')) {
+        console.log('plans-filtered component: before update');
+        $('#plans-slick').slick('unslick');
+      }
+    },
+    updated() {
+      if (this.plansChanged && this.plans.length > 0) {
+        console.log('plans-filtered component: updated');
+        this.slider();
+        this.plansChanged = 0;
       }
     },
     watch: {
       plans: function () {
-        self = this;
-        if (this.plans.length > 0) {
-          self.slider();
-        }
+        console.log('plans-filtered component: plans prop updated');
+        this.plansChanged = 1;
       }
     }
   }

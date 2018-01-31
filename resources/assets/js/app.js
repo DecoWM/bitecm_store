@@ -341,6 +341,8 @@ const app = new Vue({
             var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
             //console.log(current_plan.route);
             //console.log(current_plan.api_route);
+            $('.plan').removeClass('plan-active');
+            $('#plan'+plan_id).addClass('plan-active');
             if (self.current_url != current_plan.route) {
               this.getProductByPlan(current_plan.route, current_plan.api_route);
             }
@@ -376,10 +378,10 @@ const app = new Vue({
             //document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
             //$('#plans-slick').slick('slickGoTo', parseInt(self.product.selected_plan));
             //$('#plans-slick').slick('setPosition');
+            this.setUrl(history_url);
           }, (error) => {
             console.log(error);
           });
-          this.setUrl(history_url);
         },
         getProductByAffiliation: function(history_url, request_url) {
           self = this;
@@ -399,13 +401,13 @@ const app = new Vue({
                 self.plans = plans_filtered;
               }
             });
-
             //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
             //$('#plan'+self.product.product.plan_id).trigger('click');
+
+            this.setUrl(history_url);
           }, (error) => {
             console.log(error);
           });
-          this.setUrl(history_url);
         },
         getProductByStockModel: function(history_url, request_url) {
           self = this;
@@ -418,10 +420,10 @@ const app = new Vue({
             $('.title h2').text(title);
             $('input[name="stock_model"]').val(self.product.product.stock_model_id);
             self.replaceProductImages();
+            this.setUrl(history_url);
           }, (error) => {
             console.log(error);
           });
-          this.setUrl(history_url);
         },
         replaceProductImages: function () {
             images = "";
