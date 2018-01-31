@@ -86,26 +86,15 @@ a:hover {
   transform: rotate(-45deg);
   z-index: 99;
 }
-.slick-slider ul.slick-dots {
-  display: none !important;
-  border-radius: 10px;
-  background-color: #9c9aa0;
-  left: 10px;
-  right: 10px;
-  width: 90%;
-  height: 18px;
-  bottom: -30px;
+/*.slick-slider ul.slick-dots {
+
 }
 .slick-slider ul.slick-dots li {
-  top: -6px;
-  background: transparent;
-  width: 40px;
-  height: 14px;
-  margin: 0;
+
 }
 .slick-slider ul.slick-dots li button {
-  width: 40px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   padding: 0;
 }
 .slick-slider ul.slick-dots li button:before {
@@ -122,7 +111,7 @@ a:hover {
   .slick-slider ul.slick-dots {
     display: block !important;
   }
-}
+}*/
 header {
   color: #797878;
 }
@@ -2832,8 +2821,19 @@ footer .container .copyright {
   bottom: 10px;
 }
 #banner-principal .slick-dots li button:before {
-  font-size: 8px;
-  color: #fff;
+  font-size: 15px;
+  color: #169599;
+  content: "";
+  background: #909090;
+  /*border: 2px solid #ffe60d;*/
+  border-radius: 50%;
+  width: 13px;
+  height: 13px;
+}
+
+#banner-principal .slick-dots li.slick-active button:before{
+  opacity: 1;
+
 }
 section#equipos-vendidos .container .row .heading h2 {
   color: #008c95;

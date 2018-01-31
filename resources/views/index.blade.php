@@ -7,6 +7,7 @@
         <!-- <div class="slider"><img src="{{asset('images/banner/BANNER-POSTPAGO.jpg')}}" alt="banner principal"></div> -->
         <!-- <div class="slider"><img src="{{asset('images/banner/banner-PREPAGO.jpg')}}" alt="banner principal"></div> -->
         <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
+        <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
       </div>
       
       <section id="equipos-vendidos">

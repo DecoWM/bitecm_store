@@ -558,7 +558,7 @@ const app = new Vue({
 
         $('#banner-principal').slick({
           arrows: true,
-          dots: false,
+          dots: true,
           infinite: true,
           autoplay: true,
           arrows: true,
@@ -637,7 +637,7 @@ const app = new Vue({
                 {
                   breakpoint: 1040,
                   settings: {
-                      arrows: false,
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 3
                   }
@@ -645,7 +645,7 @@ const app = new Vue({
                 {
                   breakpoint: 768,
                   settings: {
-                      arrows: false,
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 2
                   }
@@ -653,7 +653,7 @@ const app = new Vue({
                 {
                   breakpoint: 667,
                   settings: {
-                      arrows: false,
+                      arrows: true,
                       centerMode: false,
                       slidesToShow: 2
                   }
