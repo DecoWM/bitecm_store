@@ -164,7 +164,7 @@ class PostpaidController extends Controller
       'plans' => $product_plans,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
-      'just_3' => $i == 3
+      'just_3' => $i <= 3
     ];
 
     return response()->json($response);

@@ -137,9 +137,9 @@
               @if($plan->affiliation_id == $product->affiliation_id)
               <label class="plan-parent {{$plan->plan_id == $product->plan_id ? 'label-active' : ''}} {{$plan->affil_classes}}">
               <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
-              <div class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
+              <div id="plan{{$plan->plan_id}}" class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
-                <div id="plan{{$plan->plan_id}}" class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
+                <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
                   <ul class="list-unstyled">

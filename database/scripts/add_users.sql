@@ -9,11 +9,11 @@ INSERT INTO `tbl_user` (`user_name`, `user_email`, `password`, `user_rol`) VALUE
 -- password: operador
 ('Operador 1', 'operador1@prueba.pe', '$2y$10$nbXbilm1oaoftlZ6OzxiduGC62yQgba6vXUkNRbMeiHy6Zc0cMSRW', 3);
 
--- UPDATE tbl_user SET 
+UPDATE tbl_user SET 
 -- No es necesario actualizar todos los campos, puede ser solo 1
--- user_name = 'nuevo_nombre', 
--- user_email = 'nuevo_email', 
--- password = 'nuevo_password',
--- user_rol = 1|2|3
+user_name = 'nuevo_nombre', 
+user_email = 'nuevo_email', 
+password = 'nuevo_password',
+user_rol = 1|2|3
 -- IMPORTANTE colocar el email actual del usuario a modificar
--- WHERE user_email = 'actual_email'; 
+WHERE user_email = 'actual_email';
