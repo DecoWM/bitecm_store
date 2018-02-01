@@ -83,12 +83,16 @@ class HomeController extends Controller
       ]);
       return $item;
     });
+
+    $image_list = $this->shared->listImages('SLIDER');
+
     return view('index', [
       'best_seller_smartphone' => $best_seller_smartphone,
       'best_seller_tablet' => $best_seller_tablet,
       'featured_products' => $featured_products,
       'promo_prepaid' => $promo_pre,
       'promo_postpaid' => $promo_pos,
+      'slider_images' => $image_list,
     ]);
   }
 }
