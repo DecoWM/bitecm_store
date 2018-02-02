@@ -14,6 +14,8 @@ UPDATE tbl_user SET
 user_name = 'nuevo_nombre', 
 user_email = 'nuevo_email', 
 password = 'nuevo_password',
-user_rol = 1|2|3
+user_rol = 1|2|3,
+-- para desactivar un usuario
+active = 1|0
 -- IMPORTANTE colocar el email actual del usuario a modificar
 WHERE user_email = 'actual_email';
