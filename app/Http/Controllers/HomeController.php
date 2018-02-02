@@ -84,7 +84,9 @@ class HomeController extends Controller
       return $item;
     });
 
-    $image_list = $this->shared->listImages('SLIDER');
+    $slider_list = $this->shared->listImages('SLIDER');
+
+    $home_list = $this->shared->listImages('HOME');
 
     return view('index', [
       'best_seller_smartphone' => $best_seller_smartphone,
@@ -92,7 +94,8 @@ class HomeController extends Controller
       'featured_products' => $featured_products,
       'promo_prepaid' => $promo_pre,
       'promo_postpaid' => $promo_pos,
-      'slider_images' => $image_list,
+      'slider_images' => $slider_list,
+      'home_images' => $home_list,
     ]);
   }
 }

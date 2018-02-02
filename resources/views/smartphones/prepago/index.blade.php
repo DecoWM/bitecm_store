@@ -8,7 +8,7 @@
           </div>
         </div>
       </div>
-      @include('layouts.banner_smartphone', ['filters' => $filters])
+      @include('layouts.banner_smartphone', ['filters' => $filters, 'banners_list' => $banners_list])
       <div class="row">
         @include('layouts.sidebar.sidebar_prepago')
         <div class="col-xs-12 col-sm-9">
