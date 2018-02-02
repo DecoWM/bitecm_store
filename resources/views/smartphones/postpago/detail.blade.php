@@ -179,7 +179,6 @@
             <p>Nota:</p>
             <p>(*) Más detalles en consideraciones comerciales</p>
           </section>
-        
         </div>
       </div>
       <div class="row">
@@ -271,12 +270,12 @@
     </div>
     @php
       $product_init = [
-          'product' => $product,
-          'product_images' => $product_images,
-          'stock_models' => $stock_models,
-          'available' => $available,
-          'plans' => $plans,
-          'affiliations' => $affiliations,
+        'product' => $product,
+        'product_images' => $product_images,
+        'stock_models' => $stock_models,
+        'available' => $available,
+        'plans' => $plans,
+        'affiliations' => $affiliations
       ];
     @endphp
     <input id="product-init" type="hidden" value='@json($product_init)'>

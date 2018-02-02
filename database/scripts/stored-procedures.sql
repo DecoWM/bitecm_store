@@ -3254,6 +3254,7 @@ CREATE PROCEDURE PA_INS_storeOrder(
   IN contact_phone VARCHAR(20),
   IN service_type VARCHAR(150),
   IN affiliation_type VARCHAR(150),
+  IN porting_request_id VARCHAR(20),
   IN total DECIMAL(6,2),
   IN total_igv DECIMAL(6,2)
 )
@@ -3261,10 +3262,11 @@ BEGIN
 
   DECLARE stored_query TEXT;
 
-  SET source_operator = IFNULL(source_operator, ''); 
+  SET source_operator = IFNULL(source_operator, '');
   SET porting_phone = IFNULL(porting_phone, '');
-  SET affiliation_type = IFNULL(affiliation_type, ''); 
-
+  SET affiliation_type = IFNULL(affiliation_type, '');
+  SET service_type = IFNULL(service_type, '');
+  SET porting_request_id = IFNULL(porting_request_id, ''); 
 
   SET stored_query = CONCAT(" 
 
@@ -3288,6 +3290,7 @@ BEGIN
         contact_phone,
         service_type,
         affiliation_type,
+        porting_request_id,
         total,
         total_igv
       ) values 
@@ -3310,6 +3313,7 @@ BEGIN
         "'", contact_phone, "' , " ,
         "'", service_type, "' , " ,
         "'", affiliation_type, "' , " ,
+        "'", porting_request_id, "' , " ,
         total, " , " ,
         total_igv, " ) ");
 

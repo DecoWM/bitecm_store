@@ -155,7 +155,7 @@ class OrderController extends Controller
 
       if ($response->return->errorCodeMNP == '0') {
         // set the portingRequestId from response
-        $this->portingRequestId = $response->return->portingRequestId;
+        // $this->portingRequestId = $response->return->portingRequestId;
         $order_detail['porting_request_id'] = $response->return->portingRequestId;
         Log::info('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
         return true;
@@ -290,7 +290,6 @@ class OrderController extends Controller
 
     $products = [];
     $order_items = [];
-    $total = 0;
     $total_net = 0;
     $total_igv = 0;
     $equipo = null;
@@ -342,8 +341,7 @@ class OrderController extends Controller
 
       $subtotal = $final_price * $item['quantity'];
       $subtotal_net = $subtotal * (1 - $igv);
-      $subtotal_igv = $subtotal * (1 + $igv);
-      $total += $subtotal;
+      $subtotal_igv = $subtotal;
       $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
       array_push($order_items, [
@@ -352,7 +350,7 @@ class OrderController extends Controller
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => number_format($subtotal_net, 2, '.', ''),
-        'subtotal_igv' => $subtotal, //round($subtotal_igv, 2)
+        'subtotal_igv' => number_format($subtotal_igv, 2, '.', '')
       ]);
     }
 
@@ -374,6 +372,7 @@ class OrderController extends Controller
     $order_detail['delivery_district'] = $request->delivery_district;
     $order_detail['contact_email'] = $request->email;
     $order_detail['contact_phone'] = $request->contact_phone;
+    $order_detail['porting_request_id'] = null;
 
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
       $source_operators = $this->shared->operatorList();
@@ -406,15 +405,15 @@ class OrderController extends Controller
       $this->initSoapWrapper(); // Init the bitel soap webservice
 
       // Check if have many lines
-      if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)){
+      if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)) {
         return redirect()->route('create_order')->with('ws_result', json_encode([
-            'title' => 'te comunica que',
-            'message' => 'No puede tener más números telefónicos.'
-          ]));
+          'title' => 'te comunica que',
+          'message' => 'No puede tener más números telefónicos.'
+        ]));
       }
 
       // check if is client
-      if($data_customer = $this->getInfoCustomer($order_detail)){
+      if($data_customer = $this->getInfoCustomer($order_detail)) {
         // check if have debt
         if($this->checkHaveDebit($data_customer->custId)){
           return redirect()->route('create_order')->with('ws_result', json_encode([
@@ -425,9 +424,9 @@ class OrderController extends Controller
       }
 
       // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-      if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1){
+      if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1) {
         // process request portability
-        if($this->createConsultantRequest($order_detail)){
+        if($this->createConsultantRequest($order_detail)) {
           $schedule_porting_request = true;
           /* if(!$this->checkSuccessPortingRequest($order_detail)){ 
             return redirect()->route('create_order')->with('ws_result', json_encode([
@@ -446,7 +445,7 @@ class OrderController extends Controller
     }
 
     $order_detail['total'] = $total_net;
-    $order_detail['total_igv'] = $total;
+    $order_detail['total_igv'] = $total_igv;
 
     DB::commit();
 
@@ -469,8 +468,9 @@ class OrderController extends Controller
       //   'contact_phone' => $order_detail['contact_phone'],
       //   'service_type' => $order_detail['service_type'],
       //   'affiliation_type' => $order_detail['affiliation_type'],
+      //   'porting_request_id' => $order_detail['porting_request_id'],
       //   'total' => number_format($order_detail['total'], 2, '.', ''),
-      //   'total_igv' => $order_detail['total_igv']
+      //   'total_igv' => number_format($order_detail['total_igv'], 2, '.', '')
       // ]);
       DB::beginTransaction();
 
@@ -495,8 +495,9 @@ class OrderController extends Controller
         $order_detail['contact_phone'],
         $order_detail['service_type'],
         $order_detail['affiliation_type'],
+        $order_detail['porting_request_id'],
         number_format($order_detail['total'], 2, '.', ''),
-        $order_detail['total_igv']
+        number_format($order_detail['total_igv'], 2, '.', '')
       );
 
       $now = new \DateTime('America/Lima');
@@ -516,7 +517,7 @@ class OrderController extends Controller
       DB::commit();
     } catch(\Illuminate\Database\QueryException $e) {
       DB::rollback();
-      Log::error('Ocurrió un error creando la orden en la base de datos, rollback');
+      Log::error($e->getMessage());
       return redirect()->route('create_order')->with('ws_result', json_encode([
         'title' => 'te informa que',
         'message' => 'Ocurrió un error creando la orden.'
