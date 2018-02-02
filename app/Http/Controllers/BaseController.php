@@ -7,6 +7,8 @@ use Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 
 class BaseController extends Controller
 {
@@ -644,4 +646,19 @@ class BaseController extends Controller
   public static function getPreviousUrl() {
       return Session::get('back_button', null);
   }
+
+  public function listImages($type) {
+
+      $image_list = DB::table('tbl_image')
+          ->where('tbl_image.image_type', $type)
+          ->select('tbl_image.image_id', 'tbl_image.image_name', 'tbl_image.image_description', 'tbl_image.image_url', 'tbl_image.image_link', 'active')
+          ->get();
+
+      foreach ($image_list as $image) {
+              $image->image_url = asset(Storage::url($image->image_url));
+          }
+
+      return $image_list;
+  }
+
 }

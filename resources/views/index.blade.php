@@ -6,8 +6,17 @@
         <!-- <div class="slider"><img src="{{asset('images/banner/banner-principal.jpg')}}" alt="banner principal"></div> -->
         <!-- <div class="slider"><img src="{{asset('images/banner/BANNER-POSTPAGO.jpg')}}" alt="banner principal"></div> -->
         <!-- <div class="slider"><img src="{{asset('images/banner/banner-PREPAGO.jpg')}}" alt="banner principal"></div> -->
-        <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
-        <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div>
+
+        @foreach ($slider_images as $image)
+
+          @if($image->active == 1 )
+            <div class="slider">
+                <a href="{{$image->image_link}}"><img src="{{$image->image_url}}" alt="banner principal"></a>
+              </div>
+          @endif
+
+        @endforeach
+        <!-- <div class="slider"><img src="{{asset('images/banner/BANNER-SAMSUNG-HOME.jpg')}}" alt="banner principal"></div> -->
       </div>
       
       <section id="equipos-vendidos">
