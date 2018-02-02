@@ -468,7 +468,7 @@ const app = new Vue({
             slidesToShow: 3,
             slidesToScroll: 1,
             centerPadding: '0px',
-            //infinite: true,
+            //infinite: false,
             //centerMode: true,
             //variableWidth: true,
             responsive: [
@@ -478,7 +478,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
-                  infinite: true,
+                  infinite: false,
                   slidesToShow: 2
                 }
               },
@@ -488,7 +488,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
-                  infinite: true,
+                  infinite: false,
                   slidesToShow: 1
                 }
               },
@@ -498,7 +498,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   //centerMode: true,
-                  //infinite: true,
+                  //infinite: false,
                   slidesToShow: 3
                 }
               },
@@ -508,7 +508,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
-                  infinite: true,
+                  infinite: false,
                   slidesToShow: 2
                 }
               },
@@ -518,7 +518,7 @@ const app = new Vue({
                   arrows: true,
                   dots: false,
                   centerMode: false,
-                  infinite: true,
+                  infinite: false,
                   slidesToShow: 1
                 }
               },
@@ -531,10 +531,10 @@ const app = new Vue({
             options.responsive[2].settings.infinite = false;
             options.responsive[2].settings.centerMode = false;
           } else {
-            options.infinite = true;
-            options.centerMode = true;
-            options.responsive[2].settings.infinite = true;
-            options.responsive[2].settings.centerMode = true;
+            options.infinite = false;
+            options.centerMode = false;
+            options.responsive[2].settings.infinite = false;
+            options.responsive[2].settings.centerMode = false;
           }
 
           return options;

@@ -349,7 +349,6 @@ class BaseController extends Controller
     return ['products' => $products, 'total' => $total[0]->total_promos];
   }
 
-  /////////////////////////////////////////////
   public function insertStoreOrder (
         $order_id ,
         $idtype_id ,
@@ -360,7 +359,7 @@ class BaseController extends Controller
         $last_name,
         $id_number,
         $billing_district,
-        $billing_phone = null,
+        $billing_phone,
         $source_operator = null,
         $porting_phone = null,
         $delivery_address ,
@@ -369,11 +368,10 @@ class BaseController extends Controller
         $contact_phone ,
         $service_type = null,
         $affiliation_type = null,
+        $porting_request_id = null,
         $total,
         $total_igv
   ) {
-
-
     $result = DB::select('call PA_INS_storeOrder(
         :order_id,
         :idtype_id,
@@ -393,34 +391,35 @@ class BaseController extends Controller
         :contact_phone,
         :service_type,
         :affiliation_type,
+        :porting_request_id,
         :total,
         :total_igv
     )', [
-        'order_id' => $order_id ,
-        'idtype_id'=> $idtype_id ,
-        'payment_method_id' => $payment_method_id ,
-        'branch_id' => $branch_id ,
-        'tracking_code' => $tracking_code ,
-        'first_name'=> $first_name ,
-        'last_name'=> $last_name ,
-        'id_number' => $id_number ,
+        'order_id' => $order_id,
+        'idtype_id'=> $idtype_id,
+        'payment_method_id' => $payment_method_id,
+        'branch_id' => $branch_id,
+        'tracking_code' => $tracking_code,
+        'first_name'=> $first_name,
+        'last_name'=> $last_name,
+        'id_number' => $id_number,
         'billing_district' => $billing_district,
-        'billing_phone' => $billing_phone ,
-        'source_operator' => $source_operator ,
-        'porting_phone' => $porting_phone ,
-        'delivery_address' => $delivery_address ,
-        'delivery_district' => $delivery_district ,
-        'contact_email' => $contact_email ,
-        'contact_phone' => $contact_phone ,
-        'service_type' => $service_type ,
-        'affiliation_type' => $affiliation_type ,
-        'total' => $total ,
+        'billing_phone' => $billing_phone,
+        'source_operator' => $source_operator,
+        'porting_phone' => $porting_phone,
+        'delivery_address' => $delivery_address,
+        'delivery_district' => $delivery_district,
+        'contact_email' => $contact_email,
+        'contact_phone' => $contact_phone,
+        'service_type' => $service_type,
+        'affiliation_type' => $affiliation_type,
+        'porting_request_id' => $porting_request_id,
+        'total' => $total,
         'total_igv' => $total_igv
     ]);
 
     return 0;
   }
-  /////////////////////////////////////////////
 
   public function getMaxStoreOrderID () {
 
@@ -428,8 +427,6 @@ class BaseController extends Controller
 
     return $result[0]->order_id;
   }
-
-  ///////////////////////////////////////////
 
   public function getProductPlans($product) {
     $affiliation_id = \Config::get('filter.affiliation_id');
