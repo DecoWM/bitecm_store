@@ -195,6 +195,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -357,6 +358,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
     ';
@@ -528,6 +530,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
   ';
@@ -621,6 +624,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
   ';
@@ -716,6 +720,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
     ORDER BY PRMsub.product_variation_id desc -- priority for product variation defined
     LIMIT 0,1
   ';
@@ -864,6 +869,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -1091,6 +1097,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -1224,6 +1231,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -1356,6 +1364,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -1555,6 +1564,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -1799,7 +1809,8 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
-    AND
+      AND PRMsub.active = 1
+      AND
       (
         (
           PRMsub.allow_all_variations = 1
@@ -1945,6 +1956,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -2087,6 +2099,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -2328,6 +2341,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
@@ -2590,6 +2604,7 @@ BEGIN
       tbl_promo as PRMsub
     WHERE
       PRMsub.product_id = PRD.product_id
+      AND PRMsub.active = 1
       AND
       (
         (
