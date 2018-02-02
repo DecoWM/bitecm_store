@@ -175,6 +175,7 @@
                   </div>
                   <div class="title-page">
                     <h3>SELECCIONA TU MEDIO DE PAGO</h3>
+                    <span style="padding-left:15px">Te informamos que tu pago se hará en el delivery</span>
                   </div>
                   <div class="section-form mediosdepago">
                     <div class="form-group">

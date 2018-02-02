@@ -51,7 +51,7 @@
 		<thead style="background-color: #f1f8f8">
 			<tr style="height: 40px;">
 				<th style="border-left: 1px solid white;border-right: 1px solid white;width: 25%;">Producto</th>
-				<th style="border-left: 1px solid white;border-right: 1px solid white;width: 40%;">Tiempo de entrega</th>
+				<th style="border-left: 1px solid white;border-right: 1px solid white;width: 40%;">Tiempo Estimado de Entrega</th>
 				<th style="border-left: 1px solid white;border-right: 1px solid white;width: 10%;">Cantidad</th>
 				<th style="border-left: 1px solid white;border-right: 1px solid white;width: 25%;">Precio</th>
 			</tr>
@@ -60,7 +60,7 @@
 			@foreach($order_items as $i => $item)
 			<tr style="height: 45px;">
 				<td style="border: 1px solid #008c95">{{$products[$i]->brand_name}} {{$products[$i]->product_model}}</td>
-				<td style="border: 1px solid #008c95">24 horas después de la coordinación con el asesor telefónico</td>
+				<td style="border: 1px solid #008c95">Dentro de las 24 horas después de la coordinación con el asesor telefónico</td>
 				<td style="border: 1px solid #008c95">{{$item['quantity']}}</td>
 				@if(isset($item['promo_id']))
 				<td style="border: 1px solid #008c95">
@@ -106,33 +106,26 @@
 	<table style="width:100%;max-width:550px;margin:20px auto;border-collapse:collapse;">
 		<tbody>
 			<tr>
-				
 				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>El pago del plan son de 2 rentas adelantadas.</td></tr>
-			<tr>
-				
-				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>La coordinación con el asesor telefónico se realizará dentro de</td></tr>
-			<tr>
-				
-				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>24 horas después de haber realizado la solicitud en la plataforma web.</td></tr>
-			<tr>
-				
-				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>El costo de envío es gratis.</td></tr>
-			<tr>
-				
-				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
-				<td>Para poder ver los términos y condiciones de uso de la tienda virtual Bitel</td>
+				<td>Dependiendo de la evaluación del asesor telefónico se pagarán rentas adelantadas.</td>
 			</tr>
 			<tr>
-				
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td>La coordinación con el asesor telefónico se realizará dentro de 6 horas después de haber realizado la solicitud en la plataforma web.</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
+				<td>El costo de envío es gratis.</td>
+			</tr>
+			<tr>
+				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px">
+				<td>Para poder ver los términos y condiciones de uso de la tienda virtual Bitel.</td>
+			</tr>
+			<tr>
 				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>ingresa al siguiente link: {{config('app.url')}}/files/terminos</td>
 			</tr>
 			<tr>
-				
 				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
 				<td>Para cualquier consulta llamar al 123/930123123/080079123 o enviar un correo servicioalcliente@viettelperu.com.pe</td>
 			</tr>
