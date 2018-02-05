@@ -637,25 +637,29 @@ class BaseController extends Controller
   }
 
   public static function setPreviousUrl($url) {
-      Session::put('back_button', $url);
+    Session::put('back_button', $url);
   }
 
   public static function getPreviousUrl() {
-      return Session::get('back_button', null);
+    return Session::get('back_button', null);
   }
 
   public function listImages($type) {
+    $image_list = DB::table('tbl_image')
+      ->where('tbl_image.image_type', $type)
+      ->select('tbl_image.image_id', 'tbl_image.image_name', 'tbl_image.image_description', 'tbl_image.image_url', 'tbl_image.image_link', 'active')
+      ->get();
 
-      $image_list = DB::table('tbl_image')
-          ->where('tbl_image.image_type', $type)
-          ->select('tbl_image.image_id', 'tbl_image.image_name', 'tbl_image.image_description', 'tbl_image.image_url', 'tbl_image.image_link', 'active')
-          ->get();
+    foreach ($image_list as $image) {
+      $image->image_url = asset(Storage::url($image->image_url));
+    }
 
-      foreach ($image_list as $image) {
-              $image->image_url = asset(Storage::url($image->image_url));
-          }
-
-      return $image_list;
+    return $image_list;
   }
 
+  public function getImage($image_id) {
+    return DB::table('tbl_image')
+      ->where('image_id', $image_id)
+      ->first();
+  }
 }

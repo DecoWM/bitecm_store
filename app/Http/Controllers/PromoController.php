@@ -69,14 +69,14 @@ class PromoController extends Controller
 
     $filterList = $this->shared->getFiltersPromo();
 
-    $banners_list = $this->shared->listImages('BANNERS');
+    $banner = $this->shared->getImage(13);
 
     return view('promo.index', [
       'title' => 'Promociones',
       'products' => $paginator,
       'pages' => $pages,
       'filters' => $filterList,
-      'banners_list' => $banners_list
+      'banner' => $banner
     ]);
   }
 }

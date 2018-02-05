@@ -9,7 +9,7 @@
         </div>
       </div>
       {{-- @include('layouts.search_navbar') --}}
-      @include('layouts.banner_smartphone_accesorios', ['filters' => $filters, 'banners_list' => $banners_list])
+      @include('layouts.banner_top', ['filters' => $filters, 'banner' => $banner])
       <div class="row">
         @include('layouts.sidebar.sidebar_products')
         <div class="col-xs-12 col-sm-9">

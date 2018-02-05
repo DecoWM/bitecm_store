@@ -40,14 +40,14 @@ class AccessoriesController extends Controller
 
     $filterList = $this->shared->getFiltersProduct();
 
-    $banners_list = $this->shared->listImages('BANNERS');
+    $banner = $this->shared->getImage(12);
 
     return view('products.index', [
       'title' => 'Accesorios',
       'products' => $paginator,
       'pages' => $pages,
       'filters' => $filterList,
-      'banners_list' => $banners_list
+      'banner' => $banner
     ]);
   }
 

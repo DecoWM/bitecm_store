@@ -59,9 +59,9 @@ class PostpaidController extends Controller
 
     $filterList = $this->shared->getFiltersPostpaid();
 
-    $banners_list = $this->shared->listImages('BANNERS');
+    $banner = $this->shared->getImage(10);
 
-    return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banners_list' => $banners_list]);
+    return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banner' => $banner]);
   }
 
   public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {

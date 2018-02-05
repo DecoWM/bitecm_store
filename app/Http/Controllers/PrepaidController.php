@@ -54,9 +54,9 @@ class PrepaidController extends Controller
 
     $filterList = $this->shared->getFiltersPrepaid();
 
-    $banners_list = $this->shared->listImages('BANNERS');
+    $banner = $this->shared->getImage(11);
 
-    return view('smartphones.prepago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'affiliation_slug' => $affiliation_slug, 'plan_post_slug' => $plan_post_slug, 'contract_slug' => $contract_slug,  'banners_list' => $banners_list]);
+    return view('smartphones.prepago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'affiliation_slug' => $affiliation_slug, 'plan_post_slug' => $plan_post_slug, 'contract_slug' => $contract_slug, 'banner' => $banner]);
   }
 
   public function show($brand_slug,$product_slug,$plan_slug,$color_slug=null) {
