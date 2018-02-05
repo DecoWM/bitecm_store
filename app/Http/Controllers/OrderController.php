@@ -147,7 +147,7 @@ class OrderController extends Controller
           'phone' => strval($order_detail['contact_phone']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-          'reasonId' => strval($order_detail['reason_code'])
+          'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : '';
         )
       ];
 
@@ -430,7 +430,7 @@ class OrderController extends Controller
       }
 
       // IF IS PORTABILITY APPLY THE NEXT PROCCESS AND VALIDATIONS
-      if(isset($order_detail['reason_code']) && isset($request->affiliation) && $request->affiliation == 1) {
+      if(isset($request->affiliation) && $request->affiliation == 1) {
         // process request portability
         if($this->createConsultantRequest($order_detail)) {
           $schedule_porting_request = true;
