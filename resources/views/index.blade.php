@@ -35,11 +35,10 @@
                   <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
                     <div class="producto catalogo"><img src="{{$home_images[0]->image_url}}" alt="bitel">
                       <div class="btn-catalogo">
-                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
+                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver catálogo</a></div>
                       </div>
                     </div>
                     <div class="list-productos">
-
                       @foreach ($best_seller_tablet as $tablet)
                       <div class="producto">
                         @include('products.ribbon',['product' => $tablet])
@@ -72,12 +71,12 @@
                         </div>
                       </div>
                       @endforeach
-            </div>
+                    </div>
                   </div>
                   <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
                     <div class="producto catalogo"><img src="{{$home_images[0]->image_url}}" alt="bitel">
                       <div class="btn-catalogo">
-                        <div class="border-btn"><a href="{{route('postpaid')}}" class="btn btn-default">ver catálogo</a></div>
+                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver catálogo</a></div>
                       </div>
                     </div>
                     <div class="list-productos">
