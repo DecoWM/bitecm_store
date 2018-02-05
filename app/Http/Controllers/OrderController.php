@@ -447,8 +447,6 @@ class OrderController extends Controller
     $order_detail['total'] = $total_net;
     $order_detail['total_igv'] = $total_igv;
 
-    DB::commit();
-
     try {
       // $order_id = DB::table('tbl_order')->insertGetId([
       //   'idtype_id' => $order_detail['idtype_id'],
@@ -472,6 +470,7 @@ class OrderController extends Controller
       //   'total' => number_format($order_detail['total'], 2, '.', ''),
       //   'total_igv' => number_format($order_detail['total_igv'], 2, '.', '')
       // ]);
+
       DB::beginTransaction();
 
       $order_id = $this->shared->getMaxStoreOrderID();
@@ -555,6 +554,7 @@ class OrderController extends Controller
       Log::warning('Error al enviar correo a '.$request->email.' por la orden #'.$order_id);
     }
 
+    DB::commit();
     $request->session()->flush();
 
     return view('order_detail', ['products' => $products, 'order_id' => $order_id, 'order' => $order_detail]);
