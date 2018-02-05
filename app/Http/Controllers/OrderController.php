@@ -301,28 +301,14 @@ class OrderController extends Controller
       switch ($item['type_id']) {
         case 0:
           $product = $this->shared->productByStock($item['stock_model_id']);
-          $order_detail['service_type'] = 'Accesorios';
-          if (!isset($order_detail['affiliation_type']))
-            $order_detail['affiliation_type'] = null;
           break;
         case 1:
           $product = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
-          $order_detail['service_type'] = 'Prepago';
-          $affiliation = DB::table('tbl_affiliation')
-            ->where('affiliation_id', $request->affiliation)
-            ->get();
-          if (count($affiliation)) {
-            $order_detail['affiliation_type'] = $affiliation[0]->affiliation_name;
-          } else {
-            $order_detail['affiliation_type'] = null;
-          }
           break;
         case 2:
           $product = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           $equipo = $product;
-          $order_detail['service_type'] = 'Postpago';
-          $order_detail['affiliation_type'] = $equipo->affiliation_name;
           break;
       }
 
@@ -352,6 +338,26 @@ class OrderController extends Controller
         'subtotal' => number_format($subtotal_net, 2, '.', ''),
         'subtotal_igv' => number_format($subtotal_igv, 2, '.', '')
       ]);
+    }
+
+    if(!isset($equipo)) { //Accesorio
+      $order_detail['service_type'] = 'Accesorios';
+      $order_detail['affiliation_type'] = null;
+    } else {
+      if (!isset($equipo->affiliation_name)) { //Prepago
+        $order_detail['service_type'] = 'Prepago';
+        $affiliation = DB::table('tbl_affiliation')
+          ->where('affiliation_id', $request->affiliation)
+          ->first();
+        if (isset($affiliation)) {
+          $order_detail['affiliation_type'] = $affiliation->affiliation_name;
+        } else {
+          $order_detail['affiliation_type'] = null;
+        }
+      } else { //Postpago
+        $order_detail['service_type'] = 'Postpago';
+        $order_detail['affiliation_type'] = $equipo->affiliation_name;
+      }
     }
 
     if (count($order_items) == 0 && count($cart) > 0) {
@@ -448,29 +454,6 @@ class OrderController extends Controller
     $order_detail['total_igv'] = $total_igv;
 
     try {
-      // $order_id = DB::table('tbl_order')->insertGetId([
-      //   'idtype_id' => $order_detail['idtype_id'],
-      //   'payment_method_id' => $order_detail['payment_method_id'],
-      //   'branch_id' => $order_detail['branch_id'],
-      //   'tracking_code' => $order_detail['tracking_code'],
-      //   'first_name' => $order_detail['first_name'],
-      //   'last_name' => $order_detail['last_name'],
-      //   'id_number' => $order_detail['id_number'],
-      //   'billing_district' => $order_detail['billing_district'],
-      //   'billing_phone' => $order_detail['billing_phone'],
-      //   'source_operator' => $order_detail['source_operator'],
-      //   'porting_phone' => $order_detail['porting_phone'],
-      //   'delivery_address' => $order_detail['delivery_address'],
-      //   'delivery_district' => $order_detail['delivery_district'],
-      //   'contact_email' => $order_detail['contact_email'],
-      //   'contact_phone' => $order_detail['contact_phone'],
-      //   'service_type' => $order_detail['service_type'],
-      //   'affiliation_type' => $order_detail['affiliation_type'],
-      //   'porting_request_id' => $order_detail['porting_request_id'],
-      //   'total' => number_format($order_detail['total'], 2, '.', ''),
-      //   'total_igv' => number_format($order_detail['total_igv'], 2, '.', '')
-      // ]);
-
       DB::beginTransaction();
 
       $order_id = $this->shared->getMaxStoreOrderID();
