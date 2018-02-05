@@ -147,7 +147,7 @@ class OrderController extends Controller
           'phone' => strval($order_detail['contact_phone']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
-          'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : '';
+          'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : ''
         )
       ];
 
