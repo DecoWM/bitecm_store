@@ -91,6 +91,7 @@ class PortingController extends Controller
         if ($response->return->listPortingRequest[$l-1]->statusDescription == '01_NEW') {
           Log::warning('Solicitud de portabilidad nueva aun no procesada');
         }
+        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
         return true;
       }
 
