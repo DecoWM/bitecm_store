@@ -26,7 +26,7 @@ class PostpaidController extends Controller
       'buscar' => 'nullable|max:30|regex:/(^[A-Za-z0-9. ]+$)+/'
     ]);
 
-    $searched_string = $request->has('buscar') ? $request->buscar : '';
+    $searched_string = $request->has('buscar') ? str_replace('+', '', str_replace('-', '', $request->buscar)) : '';
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
@@ -56,7 +56,7 @@ class PostpaidController extends Controller
     );
 
     $paginator->withPath('postpago');
-    
+
     $filterList = $this->shared->getFiltersPostpaid();
 
     $banner = $this->shared->getImage(10);
