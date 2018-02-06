@@ -80,18 +80,21 @@ class PortingController extends Controller
           'dni' => strval($order_detail['id_number']),
           'isdn' => strval($order_detail['porting_phone'])
         ]
-      ]);
+      ]);      
 
-      Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-
-      if ($response->return->errorCodeMNP == '0') {
-        $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
-        $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
-        $order_detail['porting_status'] = $response->return->listPortingRequest->status;
-        $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+      if ($response->return->errorCodeMNP == '0' && count($response->return->listPortingRequest)) {
+        $l = count($response->return->listPortingRequest);
+        $order_detail['mnp_request_id'] = $response->return->listPortingRequest[$l-1]->requestId;
+        $order_detail['porting_state_code'] = $response->return->listPortingRequest[$l-1]->stateCode;
+        $order_detail['porting_status'] = $response->return->listPortingRequest[$l-1]->status;
+        $order_detail['porting_status_desc'] = $response->return->listPortingRequest[$l-1]->statusDescription;
+        if ($response->return->listPortingRequest[$l-1]->statusDescription == '01_NEW') {
+          Log::warning('Solicitud de portabilidad nueva aun no procesada');
+        }
         return true;
       }
 
+      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
       return false;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
