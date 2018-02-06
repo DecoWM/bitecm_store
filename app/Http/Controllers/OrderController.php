@@ -209,7 +209,8 @@ class OrderController extends Controller
       $res = $client->request('POST', \Config::get('filter.notification_server_url').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
         \GuzzleHttp\RequestOptions::JSON => [
           'dni' => $order_detail['id_number'],
-          'isdn' => $order_detail['porting_phone']
+          'isdn' => $order_detail['porting_phone'],
+          'porting_request_id' => $order_detail['porting_request_id']
         ]
       ]);
     } catch (\Exception $e) {

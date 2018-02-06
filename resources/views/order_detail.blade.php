@@ -1,5 +1,9 @@
 @extends('layouts.master')
 @section('content')
+      <script>
+        fbq('track', 'CompleteRegistration');
+        console.log('fbq complete registration');
+      </script>
       <div class="container">
         <div class="row">
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">

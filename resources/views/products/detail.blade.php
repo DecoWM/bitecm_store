@@ -77,7 +77,13 @@
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>--}}
                       <div class="btn-comprar-prepago">
-                        <button type="submit" class="btn-default btn-buy">Comprar Ahora</button>
+                        <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
+                        <script>
+                          $('#addToCart').click(function() {
+                            fbq('track', 'AddToCart');
+                            console.log('fbq add to cart');
+                          });
+                        </script>
                       </div>
                       @else
                       <div class="stock-exhausted">

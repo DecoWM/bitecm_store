@@ -5,29 +5,29 @@
   $ws_result = json_decode(session('ws_result'));
   @endphp
   {{-- @if (session('ws_result') == 2) --}}
-    <div class="alert alert-warning alert-ws alert-dismissible" role="alert">
-      <div class="alert-header">
-        <div class="row">
-          <div class="col-xs-12 col-sm-8 col-sm-push-4" >
-            <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span><b>BITEL</b> {{$ws_result->title}}</span>
-          </div>
+  <div class="alert alert-warning alert-ws alert-dismissible" role="alert">
+    <div class="alert-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-push-4" >
+          <button type="button" class="btn-close close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <span><b>BITEL</b> {{$ws_result->title}}</span>
         </div>
       </div>
-      <div class="alert-body">
-        <div class="row">
-          <div class="center-flex">
-            <div class="col-xs-12 col-sm-4">
-              <img class="img-responsive" src="{{asset('images/alerts/img-bitel.png')}}" alt="">
-            </div>
-            <div class="col-xs-12 col-sm-8">
-              <p>{{$ws_result->message}}</p>
-                {{-- {{session('msg')}} --}}
-            </div>
+    </div>
+    <div class="alert-body">
+      <div class="row">
+        <div class="center-flex">
+          <div class="col-xs-12 col-sm-4">
+            <img class="img-responsive" src="{{asset('images/alerts/img-bitel.png')}}" alt="">
+          </div>
+          <div class="col-xs-12 col-sm-8">
+            <p>{{$ws_result->message}}</p>
+              {{-- {{session('msg')}} --}}
           </div>
         </div>
       </div>
     </div>
+  </div>
   {{-- @endif --}}
 @endif
       <div class="container">

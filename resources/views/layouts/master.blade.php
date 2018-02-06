@@ -28,30 +28,50 @@
     <!-- <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-9.css')}}"/> -->
 
     <!--[if lte IE 9]>
-      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-9.css')}}" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-9.css')}}" />
 
     <![endif]-->
 
     <!--[if lte IE 8]>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-8.css')}}" />
+    <script src="{{asset('js/css3-mediaqueries.min.js')}}"></script>
+    <![endif]-->
 
-      <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-8.css')}}" />
-      <script src="{{asset('js/css3-mediaqueries.min.js')}}"></script>
-     <![endif]-->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-54402503-11"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-54402503-11');
+    </script>
+    <!-- End Google Analytics Code --> 
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '<FB_PIXEL_ID>');
+    fbq('track', "PageView");
+    console.log('fbq page view');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=<FB_PIXEL_ID>&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Facebook Pixel Code -->  
   </head>
   <body>
-@if (Request::segment(1) == 'envio')
-  <div>
-@else
-  <div id="app">
-@endif
-      @include('layouts.header')
-      @include('layouts.nav')
-@yield('content')
-      @include('layouts.footer')
-    </div>
-    {{-- <script type="text/javascript" src="{{asset('js/main.min.js')}}"></script> --}}
-    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
-
+  <div {{ Request::segment(1) == 'envio' ? 'id="app"' : ''}}>
+    @include('layouts.header')
+    @include('layouts.nav')
+    @yield('content')
+    @include('layouts.footer')
+  </div>
+  {{-- <script type="text/javascript" src="{{asset('js/main.min.js')}}"></script> --}}
+  <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
   </body>
 </html>
