@@ -67,7 +67,7 @@ class PortingController extends Controller
           ->trace(true);
       });
     } catch (\Exception $e) {
-      Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
+      Log::error($e->getMessage());
     }
   }
 
@@ -76,9 +76,9 @@ class PortingController extends Controller
     try {
       $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [ 
         'getListPortingRequest' => [
-          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+          'staffCode' => 'CM_THUYNTT',
           'dni' => strval($order_detail['id_number']),
-          'isdn' => strval($order_detail['porting_phone']),
+          'isdn' => strval($order_detail['porting_phone'])
         ]
       ]);
 
@@ -94,7 +94,7 @@ class PortingController extends Controller
       return false;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
-      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return true;
     }
   }
