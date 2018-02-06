@@ -50,7 +50,7 @@ Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}
     ->name('postpaid_detail');
 
 //RUTAS ACCESORIOS
-Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
+/*Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show')
     ->where(
       [
@@ -58,7 +58,7 @@ Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show
         'product' => '^([a-zA-Z0-9_-]+)$',
         'color' => '^([a-zA-Z0-9_-]+)$',
       ])
-    ->name('accessory_detail');
+    ->name('accessory_detail');*/
 
 //RUTAS ACCESORIOS
 Route::get('/promociones', 'PromoController@index')->name('promociones');
@@ -96,9 +96,8 @@ Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename
 
 //MAIL
 Route::get('/email/orden', function () {
-    //$invoice = App\Invoice::find(1);
-
-    return new App\Mail\OrderCompleted();
+  //$invoice = App\Invoice::find(1);
+  return new App\Mail\OrderCompleted();
 });
 
 //TEST

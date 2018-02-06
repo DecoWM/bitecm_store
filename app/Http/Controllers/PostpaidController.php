@@ -56,7 +56,7 @@ class PostpaidController extends Controller
     );
 
     $paginator->withPath('postpago');
-
+    
     $filterList = $this->shared->getFiltersPostpaid();
 
     $banner = $this->shared->getImage(10);

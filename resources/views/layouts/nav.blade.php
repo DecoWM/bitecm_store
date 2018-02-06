@@ -16,17 +16,17 @@
             <ul class="nav navbar-nav navbar-right">
               <li class="{{Request::is('postpago*') ? 'active' : ''}}"><a href="{{Route('postpaid')}}">Postpago</a></li>
               <li class="{{Request::is('prepago*') ? 'active' : ''}}"><a href="{{Route('prepaid')}}">Prepago</a></li>
-              <li class="{{Request::is('accesorios*') ? 'active' : ''}}"><a href="{{Route('accessories')}}">Accesorios</a></li>
+              {{--<li class="{{Request::is('accesorios*') ? 'active' : ''}}"><a href="{{Route('accessories')}}">Accesorios</a></li>--}}
               <li class="{{Request::is('promociones*') ? 'active' : ''}}"><a href="{{Route('promociones')}}">Promociones</a></li>
               <li class="nav-mobile item-nav-mobile first-item-nav"><a href="http://bitel.com.pe/">Personas</a></li>
               <li class="nav-mobile item-nav-mobile"><a href="http://empresas.bitel.com.pe/">Empresas</a></li>
               <li class="nav-mobile item-nav-mobile"><a href="">Mi Bitel</a></li>
-              <li class="nav-mobile item-nav-mobile search">
-                  <form id="search">
-                    <input type="text" class="form-control">
-                    <button type="submit" class="btn btn-default btn-search"> <span class="fa fa-search"></span></button>
-                  </form>
-              </li>
+              {{--<li class="nav-mobile item-nav-mobile search">
+                <form id="search">
+                  <input type="text" class="form-control">
+                  <button type="submit" class="btn btn-default btn-search"><span class="fa fa-search"></span></button>
+                </form>
+              </li>--}}
             </ul>
           </div>
         </div>

@@ -20,8 +20,9 @@ class PortingController extends Controller
   public function handle(Request $request, $order_id) {
     $dni = $request->input('dni', null);
     $isdn = $request->input('isdn', null);
+    $porting_request_id = $request->input('porting_request_id', null);
 
-    if(!isset($dni) || !isset($isdn)) {
+    if(!isset($dni) || !isset($isdn) || !isset($porting_request_id)) {
       return response()->json(false);
     }
 
@@ -29,7 +30,8 @@ class PortingController extends Controller
 
     $order_detail = [
       'id_number' => $dni,
-      'porting_phone' => $isdn
+      'porting_phone' => $isdn,
+      'porting_request_id' => $porting_request_id
     ];
 
     if ($this->checkSuccessPortingRequest($order_detail)) {

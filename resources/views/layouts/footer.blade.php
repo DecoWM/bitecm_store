@@ -21,9 +21,9 @@
               <div class="col-xs-12 col-sm-6">
                 <div class="nav-footer foo-sect-1">
                   <ul class="list-unstyled">
-                    <li><a href="{{route('postpaid')}}">Post Pago</a></li>
+                    <li><a href="{{route('postpaid')}}">Postpago</a></li>
                     <li><a href="{{route('prepaid')}}">Prepago</a></li>
-                    <li><a href="{{route('accessories')}}">Accesorios</a></li>
+                    {{--<li><a href="{{route('accessories')}}">Accesorios</a></li>--}}
                   </ul>
                 </div>
                 <div class="nav-footer foo-sect-2">

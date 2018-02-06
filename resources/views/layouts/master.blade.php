@@ -65,7 +65,7 @@
     <!-- End Facebook Pixel Code -->  
   </head>
   <body>
-  <div {{ Request::segment(1) == 'envio' ? 'id="app"' : ''}}>
+  <div id="{{ Request::segment(1) != 'envio' ? 'app' : '' }}">
     @include('layouts.header')
     @include('layouts.nav')
     @yield('content')
