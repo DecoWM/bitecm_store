@@ -82,6 +82,8 @@ class PortingController extends Controller
         ]
       ]);
 
+      Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+
       if ($response->return->errorCodeMNP == '0') {
         $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
         $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
@@ -90,7 +92,6 @@ class PortingController extends Controller
         return true;
       }
 
-      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
       return false;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
