@@ -23,10 +23,10 @@ class PostpaidController extends Controller
     $contract_id = \Config::get('filter.contract_id');
 
     $request->validate([
-      'buscar' => 'nullable|max:30|regex:/(^[A-Za-z0-9. ]+$)+/'
+      'buscar' => 'nullable|max:30|regex:/(^[A-Za-z0-9.\+\- ]+$)+/'
     ]);
 
-    $searched_string = $request->has('buscar') ? str_replace('+', '', str_replace('-', '', $request->buscar)) : '';
+    $searched_string = $request->has('buscar') ? $searched_string = $request->buscar : '';
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
