@@ -52,6 +52,7 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente(){
+      $('#submitOrder').attr('disabled','disabled');
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.$refs.orderform.submit();
@@ -566,10 +567,6 @@ const app = new Vue({
         $('#initiateCheckout').click(function() {
           fbq('track', 'InitiateCheckout');
           console.log('fbq initiate checkout');
-        });
-
-        $('#submitOrder').click(function() {
-          $('#submitOrder').attr('disabled','disabled');
         });
 
         $('#banner-principal').slick({
