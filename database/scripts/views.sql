@@ -27,7 +27,7 @@ VIEW `vw_order_report` AS
                 JOIN `tbl_order_status` `ors` ON ((`osh`.`order_status_id` = `ors`.`order_status_id`)))
             WHERE
                 (`osh`.`order_id` = `ord`.`order_id`)
-            ORDER BY `ors`.`created_at` DESC
+            ORDER BY `osh`.`created_at` DESC
             LIMIT 1) AS `Estado`,
         (SELECT 
                 `osh`.`created_at`
@@ -36,7 +36,7 @@ VIEW `vw_order_report` AS
                 JOIN `tbl_order_status` `ors` ON ((`osh`.`order_status_id` = `ors`.`order_status_id`)))
             WHERE
                 (`osh`.`order_id` = `ord`.`order_id`)
-            ORDER BY `ors`.`created_at` DESC
+            ORDER BY `osh`.`created_at` DESC
             LIMIT 1) AS `Fecha Estado`,
         `ord`.`total` AS `Total`,
         `ord`.`credit_status` AS `Evaluacion`
