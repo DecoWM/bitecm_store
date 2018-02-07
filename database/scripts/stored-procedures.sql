@@ -3407,26 +3407,31 @@ DELIMITER $$
 CREATE PROCEDURE `PA_productBestSellers`(IN start_date DATE, IN end_date DATE)
 BEGIN
 	-- Obtiene lista de productos y accesorios mas vendidos
-	SELECT * FROM (
-	SELECT
-		cat.category_name AS 'Categoria',
-		brn.brand_name AS 'Marca',
-		prd.product_model AS 'Modelo',
-		ord.affiliation_type AS 'Tipo Linea',
-		mdl.stock_model_code AS 'Stock Model',
-		pln.plan_name AS 'Plan',
-		COUNT(mdl.stock_model_code) AS 'Cantidad'
-	FROM tbl_order ord
-		JOIN tbl_branch bch ON ord.branch_id = bch.branch_id
-		JOIN tbl_district dst ON ord.delivery_district = dst.district_id
-		JOIN (tbl_order_item itm
-				LEFT JOIN (tbl_product_variation var JOIN tbl_plan pln ON var.plan_id = pln.plan_id) ON itm.product_variation_id = var.product_variation_id
-				JOIN (tbl_stock_model mdl JOIN (tbl_product prd
-				JOIN tbl_category cat ON prd.category_id = cat.category_id
-				JOIN tbl_brand brn ON prd.brand_id = brn.brand_id) ON mdl.product_id = prd.product_id)  ON itm.stock_model_id = mdl.stock_model_id)
-			ON ord.order_id = itm.order_id
-	WHERE ord.created_at BETWEEN start_date AND end_date
-	GROUP BY stock_model_code, ord.affiliation_type, pln.plan_name) res
-	ORDER BY res.Cantidad DESC;
+  SELECT * FROM (
+    SELECT res.Categoria, res.Marca, res.Modelo, res.`Stock Model`, res.Plan, COUNT(res.`Stock Model`) AS 'Cantidad' FROM (
+      SELECT
+        cat.category_name AS 'Categoria',
+        brn.brand_name AS 'Marca',
+        prd.product_model AS 'Modelo',
+        ord.affiliation_type AS 'Tipo Linea',
+        mdl.stock_model_code AS 'Stock Model',
+        pln.plan_name AS 'Plan',
+        (SELECT ors.order_status_id FROM tbl_order_status_history osh
+            JOIN tbl_order_status ors ON osh.order_status_id = ors.order_status_id
+            WHERE osh.order_id = ord.order_id
+            ORDER BY osh.created_at DESC LIMIT 1) AS 'Estado'
+      FROM tbl_order ord
+        JOIN tbl_branch bch ON ord.branch_id = bch.branch_id
+        JOIN tbl_district dst ON ord.delivery_district = dst.district_id
+        JOIN (tbl_order_item itm
+            LEFT JOIN (tbl_product_variation var JOIN tbl_plan pln ON var.plan_id = pln.plan_id) ON itm.product_variation_id = var.product_variation_id
+            JOIN (tbl_stock_model mdl JOIN (tbl_product prd
+            JOIN tbl_category cat ON prd.category_id = cat.category_id
+            JOIN tbl_brand brn ON prd.brand_id = brn.brand_id) ON mdl.product_id = prd.product_id)  ON itm.stock_model_id = mdl.stock_model_id)
+          ON ord.order_id = itm.order_id
+      WHERE ord.created_at BETWEEN start_date AND end_date) res
+    WHERE Estado = 5
+    GROUP BY `Stock Model`, `Tipo Linea`, Plan) tot
+  ORDER BY tot.Cantidad DESC;
 END$$
 DELIMITER ;
