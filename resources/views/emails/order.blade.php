@@ -123,7 +123,7 @@
 			</tr>
 			<tr>
 				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
-				<td>ingresa al siguiente link: {{config('app.url')}}/files/terminos</td>
+				<td>Ingresa al siguiente link: {{config('app.url')}}/files/terminos</td>
 			</tr>
 			<tr>
 				<td style="vertical-align: top;"><img src="{{config('app.url')}}/images/email/icon-email.png" width="8px" alt="icon" style="margin-right: 9px"></td>
