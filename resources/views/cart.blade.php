@@ -184,12 +184,6 @@
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
                   <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
-                  <script>
-                    $('#initiateCheckout').click(function() {
-                      fbq('track', 'InitiateCheckout');
-                      console.log('fbq initiate checkout');
-                    });
-                  </script>
                   @endif
                 </div>
               </div>

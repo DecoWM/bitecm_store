@@ -558,6 +558,16 @@ const app = new Vue({
     mounted: function () {
         self = this;
 
+        $('#addToCart').click(function() {
+          fbq('track', 'AddToCart');
+          console.log('fbq add to cart');
+        });
+
+        $('#initiateCheckout').click(function() {
+          fbq('track', 'InitiateCheckout');
+          console.log('fbq initiate checkout');
+        });
+
         $('#banner-principal').slick({
           arrows: true,
           dots: true,

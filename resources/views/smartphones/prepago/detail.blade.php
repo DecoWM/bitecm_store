@@ -82,12 +82,6 @@
                       @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">
                         <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
-                        <script>
-                          $('#addToCart').click(function() {
-                            fbq('track', 'AddToCart');
-                            console.log('fbq add to cart');
-                          });
-                        </script>
                       </div>
                       @else
                         <div class="btn-comprar-prepago">
