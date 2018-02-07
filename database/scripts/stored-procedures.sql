@@ -3358,7 +3358,7 @@ BEGIN
 
   DECLARE stored_query TEXT;
 
-  SET stored_query = " SELECT CASE WHEN MAX(order_id) is null then 0 else MAX(order_id) +1  end as order_id FROM tbl_order ";
+  SET stored_query = "SELECT CASE WHEN MAX(order_id) is null then 1 else MAX(order_id)+1  end as order_id FROM tbl_order";
 
   -- Executing query
   SET @consulta = stored_query;
