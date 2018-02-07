@@ -54,10 +54,10 @@ const form = new Vue({
     validateInfoCliente(){
       this.$validator.validateAll().then((result) => {
         if (result) {
-          // eslint-disable-next-line
-          // alert('Enviado a ' + this.first_name + '!')
           this.$refs.orderform.submit();
           return;
+        } else {
+          $('#submitOrder').removeAttr('disabled');
         }
       });
     },
@@ -566,6 +566,10 @@ const app = new Vue({
         $('#initiateCheckout').click(function() {
           fbq('track', 'InitiateCheckout');
           console.log('fbq initiate checkout');
+        });
+
+        $('#submitOrder').click(function() {
+          $('#submitOrder').attr('disabled','disabled');
         });
 
         $('#banner-principal').slick({

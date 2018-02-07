@@ -2,7 +2,7 @@
   <div id="plans-slick" :class="{'just-3': plans.length <= 3, 'select-plan': true}">
     <label v-for="plan in plans">
       <input type="radio" name="plan" form="purchase-form" :value="plan.plan_id" style="display:none;" :checked="isActive(plan.plan_id)">
-      <div id="plan{{plan.plan_id}}" class="plan" :class="{'plan-active': isActive(plan.plan_id)}">
+      <div :id="'plan'+plan.plan_id" class="plan" :class="{'plan-active': isActive(plan.plan_id)}">
         <div class="content-plan" v-on:click="setPlan(plan.plan_id)">
           <span class="title-plan">{{plan.plan_name}}</span>
           <div class="precio-plan">S/. {{plan.plan_price}}<span>al mes</span></div>
