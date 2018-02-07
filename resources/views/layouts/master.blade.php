@@ -8,7 +8,6 @@
     <meta name="base-url" content="{{ url('/') }}">
     <meta name="prefix" content="{{ Request::segment(1) ? '/'.Request::segment(1).'/' : '/' }}">
     <meta name="type" content="{{ Request::segment(1) ? Request::segment(1) : '' }}">
-    <meta name="robots" content="noindex">
     <title>Bitel</title>
 
     <meta property="og:description" content='Bitel'>
