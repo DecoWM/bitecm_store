@@ -546,6 +546,9 @@ class OrderController extends Controller
 
   public function trackOrder (Request $request, $order_id) {
     $order = DB::table('tbl_order')->where('order_id', $order_id)->first();
+    if (!isset($order)) {
+      return abort(404);
+    }
     $products = $this->shared->orderItems($order_id);
     $status_history = $this->shared->statusHistory($order_id);
     $status_list = $this->shared->statusList();
