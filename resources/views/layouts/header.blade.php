@@ -14,12 +14,12 @@
                   <a href="http://mi.bitel.com.pe/" class="mi-bitel" target="_blank">Mi Bitel</a>
                   <a href="{{route('show_cart')}}"><span class="icon-cart"></span><span class="icon-count">{{count(session('cart'))}}</span></a>
                 </li>
-                {{--<li class="search">
+                <li class="search">
                   <form id="search" action="{{route('postpaid')}}" method="get">
                     <input type="text" class="form-control" name="buscar">
                     <button type="submit" class="btn btn-default btn-search"><span class="fa fa-search"></span></button>
                   </form>
-                </li>--}}
+                </li>
               </ul>
             </div>
           </div>
