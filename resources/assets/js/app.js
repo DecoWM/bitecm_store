@@ -35,6 +35,10 @@ var VeeValidate = require('vee-validate');
 
 Vue.use(VeeValidate);
 
+function submitOrderForm() {
+  $('#form-vue-validator form').submit();
+}
+
 const form = new Vue({
   el: '#form-vue-validator',
   data: {
@@ -53,12 +57,11 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente() {
-      console.log('validating...');
       this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
-          console.log('submitting...');
           this.disabled = true;
-          $('#form-vue-validator form').submit();
+          submitOrderForm();
+          // $('#form-vue-validator form').submit();
           // this.$refs.orderform.submit();
           return;
         }

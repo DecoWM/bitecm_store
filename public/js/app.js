@@ -11732,6 +11732,10 @@ var VeeValidate = __webpack_require__(103);
 
 Vue.use(VeeValidate);
 
+function submitOrderForm() {
+  $('#form-vue-validator form').submit();
+}
+
 var form = new Vue({
   el: '#form-vue-validator',
   data: {
@@ -11752,12 +11756,11 @@ var form = new Vue({
     validateInfoCliente: function validateInfoCliente() {
       var _this = this;
 
-      console.log('validating...');
       this.$validator.validateAll().then(function (result) {
         if (result && !_this.disabled) {
-          console.log('submitting...');
           _this.disabled = true;
-          $('#form-vue-validator form').submit();
+          submitOrderForm();
+          // $('#form-vue-validator form').submit();
           // this.$refs.orderform.submit();
           return;
         }
