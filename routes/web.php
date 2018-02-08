@@ -78,7 +78,7 @@ Route::post('/carrito/actualizar', 'CartController@updateCart')->name('update_ca
 //RUTAS ORDEN
 Route::get('/envio', 'OrderController@createOrder')->name('create_order');
 Route::get('/envio/currency', 'OrderController@show')->name('currency');
-Route::post('/envio2', 'OrderController@storeOrder')->name('store_order');
+Route::post('/envio', 'OrderController@storeOrder')->name('store_order');
 Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
 Route::get('/trackeo/{order_id}', 'OrderController@trackOrder')->name('track_order');
 
