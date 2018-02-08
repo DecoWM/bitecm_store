@@ -52,8 +52,7 @@ const form = new Vue({
     disabled: false
   },
   methods: {
-    validateInfoCliente(event) {
-      event.preventDefault();
+    validateInfoCliente() {
       console.log('validating...');
       this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
