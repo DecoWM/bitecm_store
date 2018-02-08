@@ -53,10 +53,12 @@ const form = new Vue({
   methods: {
     validateInfoCliente(){
       this.$validator.validateAll().then((result) => {
-        if (result) {
+        var disabled = parseInt($('#submitOrder').data('disabled'));
+        if (result && !disabled) {
           this.$refs.orderform.submit();
-          $('#submitOrder').attr('disabled','disabled');
           return;
+        } else {
+          $('#submitOrder').data('disabled','0');
         }
       });
     },
@@ -565,6 +567,10 @@ const app = new Vue({
         $('#initiateCheckout').click(function() {
           fbq('track', 'InitiateCheckout');
           console.log('fbq initiate checkout');
+        });
+
+        $('#submitOrder').click(function() {
+          $('#submitOrder').data('disabled','1');
         });
 
         $('#banner-principal').slick({
