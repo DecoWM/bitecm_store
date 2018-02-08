@@ -221,7 +221,7 @@
                         <a href="{{route('show_cart')}}" class="btn btn-default regresar">REGRESAR</a>
                         {{-- <button type="button" class="btn btn-default regresar"></button> --}}
                         {{-- <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/pedido_completo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
-                        <button :click.prevent="validateInfoCliente" id="submitOrder" type="submit" class="btn btn-default comprar" data-sub="0">continuar</button>
+                        <button :click="validateInfoCliente" id="submitOrder" type="submit" class="btn btn-default comprar" data-sub="0">continuar</button>
                       </div>
                     </div>
                   </div>

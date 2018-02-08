@@ -51,7 +51,8 @@ const form = new Vue({
     affiliation: ''
   },
   methods: {
-    validateInfoCliente() {
+    validateInfoCliente(event) {
+      event.preventDefault();
       this.$validator.validateAll().then((result) => {
         var sub = parseInt($('#submitOrder').data('sub'));
         if (result && !sub) {
