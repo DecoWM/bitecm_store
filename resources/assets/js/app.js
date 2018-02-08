@@ -52,6 +52,7 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente(){
+      console.log('validando: sub: '+parseInt($('#submitOrder').data('sub')));
       $('#submitOrder').data('sub','1');
       this.$validator.validateAll().then((result) => {
         var sub = parseInt($('#submitOrder').data('sub'));
@@ -572,10 +573,6 @@ const app = new Vue({
           fbq('track', 'InitiateCheckout');
           console.log('fbq initiate checkout');
         });
-
-        /*$('#submitOrder').click(function() {
-          $('#submitOrder').data('noop','1');
-        });*/
 
         $('#banner-principal').slick({
           arrows: true,
