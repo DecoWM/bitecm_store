@@ -52,17 +52,17 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente(){
-      $('#submitOrder').data('noop','1');
+      $('#submitOrder').data('sub','1');
       this.$validator.validateAll().then((result) => {
-        var noop = parseInt($('#submitOrder').data('noop'));
-        console.log('noop: '+noop);
-        if (result && !noop) {
+        var sub = parseInt($('#submitOrder').data('sub'));
+        console.log('sub: '+sub.toString());
+        if (result && !sub) {
           console.log('submiting form');
           this.$refs.orderform.submit();
           return;
         } else {
           console.log('not submiting form');
-          $('#submitOrder').data('noop','0');
+          $('#submitOrder').data('sub','0');
         }
       });
     },
