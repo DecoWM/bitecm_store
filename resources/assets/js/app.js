@@ -56,8 +56,10 @@ const form = new Vue({
       console.log('validating...');
       this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
+          console.log('submitting...');
           this.disabled = true;
-          this.$refs.orderform.submit();
+          $('#form-vue-validator form').submit();
+          // this.$refs.orderform.submit();
           return;
         }
       });

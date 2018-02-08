@@ -11755,8 +11755,10 @@ var form = new Vue({
       console.log('validating...');
       this.$validator.validateAll().then(function (result) {
         if (result && !_this.disabled) {
+          console.log('submitting...');
           _this.disabled = true;
-          _this.$refs.orderform.submit();
+          $('#form-vue-validator form').submit();
+          // this.$refs.orderform.submit();
           return;
         }
       });
