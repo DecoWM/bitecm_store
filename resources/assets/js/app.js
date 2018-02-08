@@ -49,7 +49,7 @@ var options = {
   inverse: false
 };
 
-Vue.use(VueProgressBar, options)
+Vue.use(VueProgressBar, options);
 
 const form = new Vue({
   el: '#form-vue-validator',
