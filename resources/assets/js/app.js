@@ -55,6 +55,7 @@ const form = new Vue({
       this.$validator.validateAll().then((result) => {
         var noop = parseInt($('#submitOrder').data('noop'));
         if (result && !noop) {
+          console.log('submiting form');
           this.$refs.orderform.submit();
           return;
         } else {
