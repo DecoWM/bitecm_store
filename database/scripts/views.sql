@@ -38,7 +38,7 @@ VIEW `vw_order_report` AS
                 (`osh`.`order_id` = `ord`.`order_id`)
             ORDER BY `osh`.`created_at` DESC
             LIMIT 1) AS `Fecha Estado`,
-        `ord`.`total` AS `Total`,
+        `ord`.`total_igv` AS `Total`,
         `ord`.`credit_status` AS `Evaluacion`
     FROM
         (((`tbl_order` `ord`
