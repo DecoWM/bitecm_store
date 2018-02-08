@@ -52,8 +52,8 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente(){
-      $('#submitOrder').attr('disabled','disabled');
       this.$validator.validateAll().then((result) => {
+        $('#submitOrder').attr('disabled','disabled');
         if (result) {
           this.$refs.orderform.submit();
           return;
