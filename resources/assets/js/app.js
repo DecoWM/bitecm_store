@@ -53,12 +53,12 @@ const form = new Vue({
   methods: {
     validateInfoCliente(){
       this.$validator.validateAll().then((result) => {
-        var disabled = parseInt($('#submitOrder').data('disabled'));
-        if (result && !disabled) {
+        var noop = parseInt($('#submitOrder').data('noop'));
+        if (result && !noop) {
           this.$refs.orderform.submit();
           return;
         } else {
-          $('#submitOrder').data('disabled','0');
+          $('#submitOrder').data('noop','0');
         }
       });
     },
@@ -570,7 +570,7 @@ const app = new Vue({
         });
 
         $('#submitOrder').click(function() {
-          $('#submitOrder').data('disabled','1');
+          $('#submitOrder').data('noop','1');
         });
 
         $('#banner-principal').slick({
