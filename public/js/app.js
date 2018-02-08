@@ -11750,15 +11750,16 @@ var form = new Vue({
   },
   methods: {
     validateInfoCliente: function validateInfoCliente() {
-      $('#form-vue-validator form').submit();
-      /*this.$validator.validateAll().then((result) => {
-        if (result && !this.disabled) {
-          this.disabled = true;
+      var _this = this;
+
+      this.$validator.validateAll().then(function (result) {
+        if (result && !_this.disabled) {
+          _this.disabled = true;
           $('#form-vue-validator form').submit();
           // this.$refs.orderform.submit();
           return;
         }
-      });*/
+      });
     },
     change: function change() {
       // console.log(this.affiliation);
@@ -12073,7 +12074,7 @@ var app = new Vue({
       return false;
     },
     getProductByPlan: function getProductByPlan(history_url, request_url) {
-      var _this = this;
+      var _this2 = this;
 
       self = this;
       axios.get(request_url).then(function (response) {
@@ -12084,13 +12085,13 @@ var app = new Vue({
         //document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
         //$('#plans-slick').slick('slickGoTo', parseInt(self.product.selected_plan));
         //$('#plans-slick').slick('setPosition');
-        _this.setUrl(history_url);
+        _this2.setUrl(history_url);
       }, function (error) {
         console.log(error);
       });
     },
     getProductByAffiliation: function getProductByAffiliation(history_url, request_url) {
-      var _this2 = this;
+      var _this3 = this;
 
       self = this;
       axios.get(request_url).then(function (response) {
@@ -12112,13 +12113,13 @@ var app = new Vue({
         //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
         //$('#plan'+self.product.product.plan_id).trigger('click');
 
-        _this2.setUrl(history_url);
+        _this3.setUrl(history_url);
       }, function (error) {
         console.log(error);
       });
     },
     getProductByStockModel: function getProductByStockModel(history_url, request_url) {
-      var _this3 = this;
+      var _this4 = this;
 
       self = this;
       axios.get(request_url).then(function (response) {
@@ -12130,7 +12131,7 @@ var app = new Vue({
         $('.title h2').text(title);
         $('input[name="stock_model"]').val(self.product.product.stock_model_id);
         self.replaceProductImages();
-        _this3.setUrl(history_url);
+        _this4.setUrl(history_url);
       }, function (error) {
         console.log(error);
       });

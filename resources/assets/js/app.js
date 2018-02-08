@@ -53,15 +53,14 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente() {
-      $('#form-vue-validator form').submit();
-      /*this.$validator.validateAll().then((result) => {
+      this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
           this.disabled = true;
           $('#form-vue-validator form').submit();
           // this.$refs.orderform.submit();
           return;
         }
-      });*/
+      });
     },
     change () {
       // console.log(this.affiliation);
