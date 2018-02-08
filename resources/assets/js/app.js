@@ -52,13 +52,16 @@ const form = new Vue({
   },
   methods: {
     validateInfoCliente(){
+      $('#submitOrder').data('noop','1');
       this.$validator.validateAll().then((result) => {
         var noop = parseInt($('#submitOrder').data('noop'));
+        console.log('noop: '+noop);
         if (result && !noop) {
           console.log('submiting form');
           this.$refs.orderform.submit();
           return;
         } else {
+          console.log('not submiting form');
           $('#submitOrder').data('noop','0');
         }
       });
@@ -570,9 +573,9 @@ const app = new Vue({
           console.log('fbq initiate checkout');
         });
 
-        $('#submitOrder').click(function() {
+        /*$('#submitOrder').click(function() {
           $('#submitOrder').data('noop','1');
-        });
+        });*/
 
         $('#banner-principal').slick({
           arrows: true,
