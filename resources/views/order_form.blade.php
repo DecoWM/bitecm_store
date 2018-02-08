@@ -46,7 +46,7 @@
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             <div id="form-cliente">
               <div id="form-vue-validator">
-                <form @submit.prevent="validateInfoCliente" action="{{route('store_order')}}" method="POST" ref="orderform">
+                <form action="{{route('store_order')}}" method="POST" ref="orderform">
                   {{ csrf_field() }}
                   <div class="title-page">
                     <h2>INFORMACIÓN DEL CLIENTE</h2>
@@ -221,7 +221,7 @@
                         <a href="{{route('show_cart')}}" class="btn btn-default regresar">REGRESAR</a>
                         {{-- <button type="button" class="btn btn-default regresar"></button> --}}
                         {{-- <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/pedido_completo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
-                        <button id="submitOrder" type="submit" class="btn btn-default comprar" data-sub="0">continuar</button>
+                        <button :click.prevent="validateInfoCliente" id="submitOrder" type="submit" class="btn btn-default comprar" data-sub="0">continuar</button>
                       </div>
                     </div>
                   </div>
