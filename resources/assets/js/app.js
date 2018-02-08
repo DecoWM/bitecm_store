@@ -51,14 +51,12 @@ const form = new Vue({
     affiliation: ''
   },
   methods: {
-    validateInfoCliente(event) {
-      event.preventDefault();
+    validateInfoCliente() {
       this.$validator.validateAll().then((result) => {
         var sub = parseInt($('#submitOrder').data('sub'));
         if (result && !sub) {
           $('#submitOrder').data('sub','1');
           this.$refs.orderform.submit();
-          return;
         } else {
           $('#submitOrder').data('sub','0');
         }
