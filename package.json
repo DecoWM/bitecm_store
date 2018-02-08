@@ -23,6 +23,7 @@
     },
     "dependencies": {
         "@zeitiger/elevatezoom": "^2.5.4",
+        "block-ui": "^2.70.1",
         "slick-carousel": "1.6.0",
         "vee-validate": "^2.0.0-rc.21",
         "velocity-animate": "^1.5.0",

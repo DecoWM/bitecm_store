@@ -46,7 +46,6 @@
           <div class="col-xs-12 col-sm-10 col-sm-offset-1">
             <div id="form-cliente">
               <div id="form-vue-validator">
-                <vue-progress-bar></vue-progress-bar>
                 <form @submit.prevent="validateInfoCliente" action="{{route('store_order')}}" method="POST" ref="orderform">
                   {{ csrf_field() }}
                   <div class="title-page">

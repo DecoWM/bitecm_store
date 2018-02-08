@@ -5,6 +5,7 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+require('block-ui');
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -34,23 +35,6 @@ Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue
 var VeeValidate = require('vee-validate');
 Vue.use(VeeValidate);
 
-var VueProgressBar = require('vue-progressbar');
-var options = {
-  color: '#008994',
-  failedColor: '#874b4b',
-  thickness: '5px',
-  transition: {
-    speed: '0.2s',
-    opacity: '0.6s',
-    termination: 300
-  },
-  autoRevert: true,
-  location: 'top',
-  inverse: false
-};
-
-Vue.use(VueProgressBar, options);
-
 const form = new Vue({
   el: '#form-vue-validator',
   data: {
@@ -71,7 +55,21 @@ const form = new Vue({
     validateInfoCliente() {
       this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
-          this.$Progress.start();
+          $('#master').block({ message: `
+            <div class="spinner">
+              <div class="double-bounce1"></div>
+              <div class="double-bounce2"></div>
+            </div>
+            <span>Cargando...</span>`, css: {
+              position: 'fixed',
+              'z-index': '99999',
+              border: 'none',
+              padding: '15px',
+              'background-color': 'transparent',
+              '-webkit-border-radius': '10px',
+              '-moz-border-radius': '10px',
+              color: '#ffe60d'
+            } });
           this.disabled = true;
           this.$refs.orderform.submit();
           return;
@@ -83,8 +81,6 @@ const form = new Vue({
     }
   },
   mounted: function() {
-
-
     // phone_number.addEventListener("keypress", soloNumeros, false);
     // porting_phone.addEventListener("keypress", soloNumeros, false);
     // contact_phone.addEventListener("keypress", soloNumeros, false);
@@ -97,7 +93,6 @@ const form = new Vue({
     //     e.preventDefault();
     //   }
     // }
-
   }
 });
 
