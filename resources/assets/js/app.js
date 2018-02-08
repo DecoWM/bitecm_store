@@ -53,12 +53,10 @@ const form = new Vue({
   methods: {
     validateInfoCliente(){
       this.$validator.validateAll().then((result) => {
-        $('#submitOrder').attr('disabled','disabled');
         if (result) {
           this.$refs.orderform.submit();
+          $('#submitOrder').attr('disabled','disabled');
           return;
-        } else {
-          $('#submitOrder').removeAttr('disabled');
         }
       });
     },
