@@ -54,14 +54,11 @@ const form = new Vue({
     validateInfoCliente() {
       this.$validator.validateAll().then((result) => {
         var sub = parseInt($('#submitOrder').data('sub'));
-        console.log('sub: '+sub.toString());
         if (result && !sub) {
           $('#submitOrder').data('sub','1');
-          console.log('submiting form');
           this.$refs.orderform.submit();
           return;
         } else {
-          console.log('not submiting form');
           $('#submitOrder').data('sub','0');
         }
       });
