@@ -25,6 +25,7 @@
         "@zeitiger/elevatezoom": "^2.5.4",
         "slick-carousel": "1.6.0",
         "vee-validate": "^2.0.0-rc.21",
-        "velocity-animate": "^1.5.0"
+        "velocity-animate": "^1.5.0",
+        "vue-progressbar": "^0.7.3"
     }
 }

@@ -32,8 +32,24 @@ Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
 
 var VeeValidate = require('vee-validate');
-
 Vue.use(VeeValidate);
+
+var VueProgressBar = require('vue-progressbar');
+var options = {
+  color: '#008994',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  location: 'top',
+  inverse: false
+};
+
+Vue.use(VueProgressBar, options)
 
 const form = new Vue({
   el: '#form-vue-validator',
@@ -52,14 +68,12 @@ const form = new Vue({
     disabled: false
   },
   methods: {
-    validateInfoCliente(event) {
-      console.log(event);
-      event.preventDefault();
+    validateInfoCliente() {
       this.$validator.validateAll().then((result) => {
         if (result && !this.disabled) {
+          this.$Progress.start();
           this.disabled = true;
-          $('#form-vue-validator form').submit();
-          // this.$refs.orderform.submit();
+          this.$refs.orderform.submit();
           return;
         }
       });
