@@ -48,12 +48,14 @@ const form = new Vue({
     email:'',
     number_contact:'',
     mediopago:'',
-    affiliation: ''
+    affiliation: '',
+    disabled: false
   },
   methods: {
     validateInfoCliente() {
       this.$validator.validateAll().then((result) => {
-        if (result) {
+        if (result && !this.disabled) {
+          this.disabled = true;
           this.$refs.orderform.submit();
           return;
         }
