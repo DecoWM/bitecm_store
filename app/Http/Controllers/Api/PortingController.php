@@ -34,11 +34,11 @@ class PortingController extends Controller
       'porting_request_id' => $porting_request_id
     ];
 
-    if ($this->checkSuccessPortingRequest($order_detail)) {
+    if ($r = $this->checkSuccessPortingRequest($order_detail)) {
       DB::table('tbl_order')
         ->where('order_id', $order_id)
         ->update($order_detail);
-      return response()->json(true);
+      return response()->json($r);
     }
 
     return response()->json(false);
@@ -82,19 +82,17 @@ class PortingController extends Controller
           'dni' => strval($order_detail['id_number']),
           'isdn' => strval($order_detail['porting_phone'])
         ]
-      ]);      
+      ]);
 
       if ($response->return->errorCodeMNP == '0' && !empty($response->return->listPortingRequest)) {
         if (is_array($response->return->listPortingRequest)) {
-          foreach($response->return->listPortingRequest as $portingRequest) {
-            if($portingRequest->portingRequestId == $order_detail['porting_request_id']) {
+          foreach($response->return->listPortingRequest as $pRequest) {
+            if($pRequest->portingRequestId == $order_detail['porting_request_id']) {
+              $portingRequest = $pRequest;
               $order_detail['mnp_request_id'] = $portingRequest->requestId;
               $order_detail['porting_state_code'] = $portingRequest->stateCode;
               $order_detail['porting_status'] = $portingRequest->status;
               $order_detail['porting_status_desc'] = $portingRequest->statusDescription;
-              if ($portingRequest->statusDescription == '01_NEW') {
-                Log::warning('Solicitud de portabilidad nueva aun no procesada. Debería regresar a la cola?');
-              }
             }
           }
         } else {
@@ -103,20 +101,26 @@ class PortingController extends Controller
           $order_detail['porting_state_code'] = $portingRequest->stateCode;
           $order_detail['porting_status'] = $portingRequest->status;
           $order_detail['porting_status_desc'] = $portingRequest->statusDescription;
-          if ($portingRequest->statusDescription == '01_NEW') {
-            Log::warning('Solicitud de portabilidad nueva aun no procesada. Debería regresar a la cola?');
-          }
+        }
+        if ($portingRequest->statusDescription == '01_NEW') {
+          Log::warning('Solicitud de portabilidad nueva aun no procesada. Debe regresar a la cola.');
+          return 1;
+        } else if ($portingRequest->statusDescription == '01_PROCESSING') {
+          Log::warning('Solicitud de portabilidad procesandose. Debe regresar a la cola.');
+          return 1;
+        } else {
+          Log::warning('Solicitud de portabilidad procesada. Trabajo finalizado. No debe regresar a la cola.');
+          return 2;
         }
         Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-        return true;
       }
 
       Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-      return false;
+      return 0;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
       Log::error($e->getMessage());
-      return true;
+      return 0;
     }
   }
 }
