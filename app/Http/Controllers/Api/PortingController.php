@@ -41,7 +41,7 @@ class PortingController extends Controller
       return response()->json($r);
     }
 
-    return response()->json(false);
+    return response()->json(0);
   }
 
   public function test(Request $request, $order_id) {
@@ -116,7 +116,7 @@ class PortingController extends Controller
           Log::warning('Solicitud de portabilidad nueva aun no procesada. Debe regresar a la cola.');
           return 1;
         } else if ($portingRequest->statusDescription == '01_PROCESSING') {
-          Log::warning('Solicitud de portabilidad procesandose. Debe regresar a la cola.');
+          Log::warning('Solicitud de portabilidad aun procesandose. Debe regresar a la cola.');
           return 1;
         } else {
           Log::info('Solicitud de portabilidad procesada. Trabajo finalizado. No debe regresar a la cola.');
