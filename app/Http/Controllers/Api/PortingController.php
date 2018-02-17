@@ -84,6 +84,8 @@ class PortingController extends Controller
         ]
       ]);
 
+      $portingRequest = null;
+
       if ($response->return->errorCodeMNP == '0' && !empty($response->return->listPortingRequest)) {
         if (is_array($response->return->listPortingRequest)) {
           foreach($response->return->listPortingRequest as $pRequest) {
@@ -102,6 +104,14 @@ class PortingController extends Controller
           $order_detail['porting_status'] = $portingRequest->status;
           $order_detail['porting_status_desc'] = $portingRequest->statusDescription;
         }
+
+        if (!isset($portingRequest)) {
+          Log::warning('No existe esta solicitud de portabilidad');
+          return 0;
+        }
+
+        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+
         if ($portingRequest->statusDescription == '01_NEW') {
           Log::warning('Solicitud de portabilidad nueva aun no procesada. Debe regresar a la cola.');
           return 1;
@@ -109,10 +119,9 @@ class PortingController extends Controller
           Log::warning('Solicitud de portabilidad procesandose. Debe regresar a la cola.');
           return 1;
         } else {
-          Log::warning('Solicitud de portabilidad procesada. Trabajo finalizado. No debe regresar a la cola.');
+          Log::info('Solicitud de portabilidad procesada. Trabajo finalizado. No debe regresar a la cola.');
           return 2;
         }
-        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
       }
 
       Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
