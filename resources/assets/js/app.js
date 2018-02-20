@@ -413,6 +413,8 @@ const app = new Vue({
                 self.plans = plans_filtered;
               }
             });
+            
+            document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
             //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
             //$('#plan'+self.product.product.plan_id).trigger('click');
 
