@@ -264,10 +264,10 @@ class OrderController extends Controller
         case 0:
           break;
         case 1:
-          $equipo = $item;
+          $equipo = $this->shared->productPrepagoByStock($item['stock_model_id'],$item['product_variation_id']);
           break;
         case 2:
-          $equipo = $item;
+          $equipo = $this->shared->productPostpagoByStock($item['stock_model_id'],$item['product_variation_id']);
           break;
       }
     }
