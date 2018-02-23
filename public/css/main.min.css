@@ -112,13 +112,21 @@ a:hover {
     display: block !important;
   }
 }*/
+/*  CLES 23-02-2018 */
+@media (min-width: 767px) {
+  header #site-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
 header {
   color: #797878;
 }
-header #site-header {
+/*  CLES 23-02-2018 */
+/*header #site-header {
   padding-top: 15px;
   padding-bottom: 15px;
-}
+}*/
 header #site-header .container .select-persona ul li:first-child {
   border-right: 1px solid #797878;
   margin-right: 20px;

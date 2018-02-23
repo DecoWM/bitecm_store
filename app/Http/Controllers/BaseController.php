@@ -647,11 +647,12 @@ class BaseController extends Controller
   public function listImages($type) {
     $image_list = DB::table('tbl_image')
       ->where('tbl_image.image_type', $type)
-      ->select('tbl_image.image_id', 'tbl_image.image_name', 'tbl_image.image_description', 'tbl_image.image_url', 'tbl_image.image_link', 'active')
+      ->select('tbl_image.image_id', 'tbl_image.image_name', 'tbl_image.image_description', 'tbl_image.image_url', 'tbl_image.imagem_url', 'tbl_image.image_link', 'active')
       ->get();
 
     foreach ($image_list as $image) {
       $image->image_url = asset(Storage::url($image->image_url));
+      $image->imagem_url = asset(Storage::url($image->imagem_url));  // CLES 23-02-2018
     }
 
     return $image_list;

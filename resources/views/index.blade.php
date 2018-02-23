@@ -11,8 +11,13 @@
 
           @if($image->active == 1 )
             <div class="slider">
-                <a href="{{$image->image_link}}"><img src="{{$image->image_url}}" alt="banner principal"></a>
-              </div>
+                <a href="{{$image->image_link}}">
+                  <picture>
+                    <source media="(max-width:480px)" srcset="{{$image->imagem_url}}">
+                    <img src="{{$image->image_url}}" alt="banner principal">
+                  </picture>
+                </a>
+            </div>
           @endif
 
         @endforeach
