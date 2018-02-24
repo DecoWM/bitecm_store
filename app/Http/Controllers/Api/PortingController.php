@@ -23,7 +23,7 @@ class PortingController extends Controller
     $porting_request_id = $request->input('porting_request_id', null);
 
     if(!isset($dni) || !isset($isdn) || !isset($porting_request_id)) {
-      return response()->json(false);
+      return response()->json(0);
     }
 
     $this->initSoapWrapper();
