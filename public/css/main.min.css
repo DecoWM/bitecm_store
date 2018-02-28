@@ -3200,7 +3200,7 @@ section#equipos-promocion .container .row .content-tab-pro {
 }
 
 section#equipos-promocion .container .row .content-tab-pro .slick-track {
-    width: 2850px !important;
+    /* width: 2850px !important; */ /* CLES 28-02-2018  */
 }
 
 section#equipos-promocion .container .row .content-tab-pro .producto {
@@ -13317,6 +13317,7 @@ button.close {
 }
 .slick-slider {
   position: relative;
+  height: 484PX;  /* CLES 28-02-2018 */
   display: block;
   box-sizing: border-box;
   -webkit-user-select: none;

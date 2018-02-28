@@ -2,7 +2,10 @@
   <div class="col-xs-12">
     <div class="top-banner">
       <a href="{{$banner->image_link}}">
-        <img src="{{asset(Storage::url($banner->image_url))}}" alt="banner">
+      	<picture>
+          <source media="(max-width:480px)" srcset="{{asset(Storage::url($banner->imagem_url))}}">
+          <img src="{{asset(Storage::url($banner->image_url))}}" alt="banner">
+        </picture>  
       </a>
     </div>
   </div>
