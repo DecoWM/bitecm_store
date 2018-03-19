@@ -683,15 +683,16 @@ const app = new Vue({
                       centerMode: false,
                       slidesToShow: 2
                   }
-                },
-                {
-                  breakpoint: 480,
-                  settings: {
-                      arrows: true,
-                      centerMode: false,
-                      slidesToShow: 1
-                  }
                 }
+                //,
+                // {
+                //   breakpoint: 480,
+                //   settings: {
+                //       arrows: true,
+                //       centerMode: false,
+                //       slidesToShow: 1
+                //   }
+                // }
             ]
         });
 
@@ -737,15 +738,16 @@ const app = new Vue({
                 centerMode: false,
                 slidesToShow: 2
               }
-            },
-            {
-              breakpoint: 375,
-              settings: {
-                arrows: true,
-                centerMode: false,
-                slidesToShow: 1
-              }
             }
+            //,
+            // {
+            //   breakpoint: 375,
+            //   settings: {
+            //     arrows: true,
+            //     centerMode: false,
+            //     slidesToShow: 1
+            //   }
+            // }
           ]
         });
 
@@ -795,16 +797,17 @@ const app = new Vue({
                 centerMode: false,
                 slidesToShow: 2
               }
-            },
-            {
-              breakpoint: 375,
-              settings: {
-                arrows: true,
-                dots: false,
-                centerMode: false,
-                slidesToShow: 1
-              }
             }
+            //,
+            // {
+            //   breakpoint: 375,
+            //   settings: {
+            //     arrows: true,
+            //     dots: false,
+            //     centerMode: false,
+            //     slidesToShow: 1
+            //   }
+            // }
           ]
         });
 
