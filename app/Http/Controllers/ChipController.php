@@ -63,11 +63,19 @@ class ChipController extends Controller
 
     //return view('chips.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banner' => $banner]);
 
-    //huawei/p9/linea-nueva/ichip-129_90/18-meses
+    // huawei/p9/linea-nueva/ichip-129_90/18-meses
+    // postpago/lg/stylus-3/portabilidad/ichip-129_90/18-meses
 
-    $brand_slug = 'huawei'; 
-    $product_slug = 'p9';
-    $affiliation_slug = 'linea-nueva';
+    // $brand_slug = 'huawei'; 
+    // $product_slug = 'p9';
+    // $affiliation_slug = 'linea-nueva';
+    // $plan_slug = 'ichip-129_90';
+    // $contract_slug = '18-meses';
+    // $color_slug = null;
+
+    $brand_slug = 'lg'; 
+    $product_slug = 'stylus-3';
+    $affiliation_slug = 'portabilidad';
     $plan_slug = 'ichip-129_90';
     $contract_slug = '18-meses';
     $color_slug = null;
