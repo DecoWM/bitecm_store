@@ -994,6 +994,14 @@ li.item-nav-mobile.search #search .btn-search {
 
 @media screen and (max-width: 480px){
 
+    ul.item-show{
+        li.nav-mobile{
+            &.item-nav-mobile{
+                display: block;
+            }
+        }
+    }
+
     #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image{
         padding-top: 10px;
         display: block;
@@ -1306,3 +1314,124 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 @import "postpago";
 @import "carrito";
 @import "404";
+
+.menu-newbitel {
+    display: flex;
+    align-items: center;
+    margin-top: 6px;
+}
+
+#navbar ul li a:hover{
+    color: #008c95 !important;
+    text-decoration: none;
+}
+
+.postpago-item{
+    margin-right: 20px;
+    span{
+        font-weight: bold;
+        font-size: 14px;
+        color: #008c95;
+        margin-left: 20px;
+        padding-right: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background: url('/storage/images/flecha.png') right center no-repeat;
+
+    }
+         display: flex;
+         align-items: center;
+         padding-top: 3px;
+         padding-bottom: 3px;
+         padding-left: 10px;
+         padding-right: 10px;   
+         border-radius: 35px ;
+         border: 1px solid #EAC416;
+        .postpago-itemlist {
+                ul{
+                    li{
+                            list-style: none;
+                            float: left;
+                            a{
+                                color: black !important;
+                                display: block;
+                                padding-left: 30px;
+                                margin-right: 20px;
+                                &.item-equipo{
+                                    background: url('/storage/images/equipo.png') left center no-repeat;
+                                    background-size: containt;
+                                }
+                                 &.item-plan{
+                                    background: url('/storage/images/planes.png') left center no-repeat;
+                                }
+
+                                 &.item-promociones{
+                                    background: url('/storage/images/promociones.png') left center no-repeat;
+                                }
+                                
+                                
+                                &:hover{
+                                    background-color: transparent !important;
+                                    color: #008c95 !important;
+                                }
+
+                            }
+                    }
+                }
+
+        }
+}
+
+.prepago-item{
+    span{
+        font-weight: bold;
+        font-size: 14px;
+        color: #008c95;
+        margin-left: 20px;
+        padding-right: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background: url('/storage/images/flecha.png') right center no-repeat;
+
+    }
+         display: flex;
+         align-items: center; 
+         padding-top: 3px;
+         padding-bottom: 3px;
+         padding-left: 10px;
+         padding-right: 10px;   
+         border-radius: 35px;
+         border: 1px solid #EAC416;
+        .prepago-itemlist {
+                ul{
+                    li{
+                            list-style: none;
+                            float: left;
+                            a{
+                                color: black !important;
+                                display: block;
+                                padding-left: 30px;
+                                margin-right: 20px;
+                                &.item-equipo{
+                                    background: url('/storage/images/equipo.png') left center no-repeat;
+                                    background-size: containt;
+                                }
+                                 &.item-plan{
+                                    background: url('/storage/images/planes.png') left center no-repeat;
+                                }
+
+                                 &.item-promociones{
+                                    background: url('/storage/images/promociones.png') left center no-repeat;
+                                }
+                                
+                                &:hover{
+                                    background-color: transparent !important;
+                                    color: #008c95 !important;
+                                }
+
+                            }
+
+                    }
+                }
+        }
+}

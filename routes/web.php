@@ -63,6 +63,9 @@ Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show
 //RUTAS ACCESORIOS
 Route::get('/promociones', 'PromoController@index')->name('promociones');
 
+//RUTAS CHIP
+Route::get('/chip', 'ChipController@index')->name('chip');
+
 //RUTAS COMPARAR
 Route::get('/prepago/comparar', 'PrepaidController@compare');
 Route::get('/postpago/comparar', 'PostpaidController@compare');

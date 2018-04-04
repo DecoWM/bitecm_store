@@ -12,12 +12,49 @@
               <h1>TIENDA BITEL</h1>
             </a>
           </div>
+
+<!--           <div id="contenedor1" style="background:red; width: 350px;">Postpago</div><div id="contenedor2" >Prepago</div>
+ -->            
+
           <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="{{Request::is('postpago*') ? 'active' : ''}}"><a href="{{Route('postpaid')}}">Postpago</a></li>
-              <li class="{{Request::is('prepago*') ? 'active' : ''}}"><a href="{{Route('prepaid')}}">Prepago</a></li>
+             <div class="menu-newbitel">
+               <div class="postpago-item">
+                  <span>Postpago</span>
+                  <div class="postpago-itemlist">
+                    <ul>
+                      <li><a class="item-equipo" href="{{Route('postpaid')}}">Equipos</a></li>
+                      <li><a class="item-plan" href="">Planes</a></li>
+                      <li><a class="item-promociones" href="{{Route('promociones')}}">Promociones</a></li>
+                    </ul>
+                  </div>
+               </div>
+               <div class="prepago-item">
+                  <span>Prepago</span>
+                  <div class="prepago-itemlist">
+                    <ul>
+                      <li><a class="item-equipo" href="{{Route('prepaid')}}">Equipos</a></li>
+                      <li><a class="item-plan" href="{{Route('chip')}}">Chips</a></li>
+                    </ul>
+                  </div>
+               </div>
+            </div> 
+              <!-- <ul class="nav navbar-nav navbar-right">
+              <li class="{{Request::is('postpago*') ? 'active' : ''}}"><a href="{{Route('postpaid')}}">Postpago</a>
+                <ul class="nav navbar-nav navbar-left" style="margin:0px; padding-left:15px;">
+                  <li class="nav-mobile item-nav-mobile"><a href=""> Equipos</a></li>
+                  <li class="nav-mobile item-nav-mobile"><a href=""> Planes</a></li>
+                  <li class="nav-mobile item-nav-mobile"><a href=""> Promociones</a></li>
+                </ul>
+              </li>
+              <li class="{{Request::is('prepago*') ? 'active' : ''}}"><a href="{{Route('prepaid')}}">Prepago</a>
+                <ul class="nav navbar-nav" style="margin:0px; padding-left:15px;">
+                  <li class="nav-mobile item-nav-mobile"><a href=""> Equipos</a></li>
+                  <li class="nav-mobile item-nav-mobile"><a href=""> Chips</a></li>
+                </ul>
+              </li>
               {{--<li class="{{Request::is('accesorios*') ? 'active' : ''}}"><a href="{{Route('accessories')}}">Accesorios</a></li>--}}
               <li class="{{Request::is('promociones*') ? 'active' : ''}}"><a href="{{Route('promociones')}}">Promociones</a></li>
+              <li class="{{Request::is('chip*') ? 'active' : ''}}"><a href="{{Route('chip')}}">iChip</a></li>
               <li class="nav-mobile item-nav-mobile first-item-nav"><a href="http://bitel.com.pe/">Personas</a></li>
               <li class="nav-mobile item-nav-mobile"><a href="http://empresas.bitel.com.pe/">Empresas</a></li>
               <li class="nav-mobile item-nav-mobile"><a href="">Mi Bitel</a></li>
@@ -27,7 +64,7 @@
                   <button type="submit" class="btn btn-default btn-search"><span class="fa fa-search"></span></button>
                 </form>
               </li>
-            </ul>
-          </div>
+            </ul>-->
+          </div> 
         </div>
       </nav>
