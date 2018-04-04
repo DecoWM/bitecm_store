@@ -66,6 +66,9 @@ Route::get('/promociones', 'PromoController@index')->name('promociones');
 //RUTAS CHIP
 Route::get('/chip', 'ChipController@index')->name('chip');
 
+//RUTAS PLAN
+Route::get('/plan', 'PlanController@index')->name('plan');
+
 //RUTAS COMPARAR
 Route::get('/prepago/comparar', 'PrepaidController@compare');
 Route::get('/postpago/comparar', 'PostpaidController@compare');

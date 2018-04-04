@@ -22,9 +22,9 @@
                   <span>Postpago</span>
                   <div class="postpago-itemlist">
                     <ul>
-                      <li><a class="item-equipo" href="{{Route('postpaid')}}">Equipos</a></li>
-                      <li><a class="item-plan" href="">Planes</a></li>
-                      <li><a class="item-promociones" href="{{Route('promociones')}}">Promociones</a></li>
+                      <li class="{{Request::is('postpago*') ? 'active' : ''}}"><a class="item-equipo" href="{{Route('postpaid')}}">Equipos</a></li>
+                      <li class="{{Request::is('plan*') ? 'active' : ''}}"><a class="item-plan" href="{{Route('plan')}}">Planes</a></li>
+                      <li class="{{Request::is('promociones*') ? 'active' : ''}}"><a class="item-promociones" href="{{Route('promociones')}}">Promociones</a></li>
                     </ul>
                   </div>
                </div>
@@ -32,8 +32,8 @@
                   <span>Prepago</span>
                   <div class="prepago-itemlist">
                     <ul>
-                      <li><a class="item-equipo" href="{{Route('prepaid')}}">Equipos</a></li>
-                      <li><a class="item-plan" href="{{Route('chip')}}">Chips</a></li>
+                      <li class="{{Request::is('prepago*') ? 'active' : ''}}"><a class="item-equipo" href="{{Route('prepaid')}}">Equipos</a></li>
+                      <li class="{{Request::is('chip*') ? 'active' : ''}}"><a class="item-plan" href="{{Route('chip')}}">Chips</a></li>
                     </ul>
                   </div>
                </div>

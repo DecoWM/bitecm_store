@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Facades\Storage;
 
-class ChipController extends Controller
+class PlanController extends Controller
 {
   protected $shared;
 
@@ -73,12 +73,12 @@ class ChipController extends Controller
     // $contract_slug = '18-meses';
     // $color_slug = null;
 
-    $brand_slug = 'lg'; 
-    $product_slug = 'stylus-3';
-    $affiliation_slug = 'portabilidad';
-    $plan_slug = 'ichip-129_90';
-    $contract_slug = '18-meses';
-    $color_slug = null;
+    // $brand_slug = 'lg'; 
+    // $product_slug = 'stylus-3';
+    // $affiliation_slug = 'portabilidad';
+    // $plan_slug = 'ichip-129_90';
+    // $contract_slug = '18-meses';
+    // $color_slug = null;
 
     $brand_slug = 'Bitel'; 
     $product_slug = 'chip-bitel';
@@ -242,7 +242,7 @@ class ChipController extends Controller
       'just_3' => $i <= 3
     ];
 
-    return view('chips.index',$response);
+    return view('planes.index',$response);
   }
 
  /*
