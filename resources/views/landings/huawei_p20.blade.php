@@ -36,10 +36,10 @@
       <div class="content-slider-1 slider">
         <div class="container">
           <div class="row">
-            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 col-md-5 col-md-push-5">
+            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-6 col-md-5 col-md-push-5">
               <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider1/huawei.png')}}" alt="huawei"></div>
             </div>
-            <div data-aos-once="true" data-aos="fade-right" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
+            <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
               <div class="description">
                 <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo.png')}}" alt="logo">
                 <p class="ilumina">Ilumina tus sentidos y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
@@ -195,13 +195,13 @@
           <div class="row">
             <div class="col-xs-12 col-sm-10">
               <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-10 col-sm-12">
                   <div class="description">
                     <h1 class="text-center">¡Reserva tu <span class="text-secundary">Huawei P20 Pro </span>ahora!</h1>
                     <h2 class="text-center">Elige tu Huawei P20 Pro en portabilidad o línea nueva</h2>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-7">
+                <div class="col-xs-10 col-sm-12 col-md-7">
                   <div class="list-equipos">
                     <div class="row">
                       <div data-color="azul" class="equipos equipo-azul active col-xs-12 col-sm-12 col-md-6">
@@ -223,7 +223,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-5">
+                <div class="col-xs-10 col-sm-12 col-md-5">
                   <div class="informacion-reserva">
                     <h3 class="text-center">Resérvalo desde:</h3>
                     <div class="content-reserva">
@@ -272,7 +272,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12">
+                <div class="col-xs-10 col-sm-12">
                   <div class="text-center"><a href="#" class="btn-default btn reservar">QUIERO RESERVAR AHORA</a></div>
                 </div>
               </div>
