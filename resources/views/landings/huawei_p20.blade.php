@@ -11,7 +11,7 @@
 <div id="navslide">
   <ul>
     <li data-menuanchor="slide1" class="slide slide1"><a href="#slide1">
-        <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-huawei.png')}}" alt="huawei"></div>
+        <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-huawei.png')}}" alt="huawei" width="33" height="33"></div>
         <div class="description"><span class="text-title">Nuevo Huawei P20 Pro</span><span>Equipo exclusivo de Bitel</span></div></a></li>
     <li data-menuanchor="slide2" class="slide slide2"><a href="#slide2">
         <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-camara.svg')}}" alt="camara"></div>
@@ -36,10 +36,10 @@
       <div class="content-slider-1 slider">
         <div class="container">
           <div class="row">
-            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 col-md-5 col-md-push-5">
+            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-6 col-md-5 col-md-push-5">
               <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider1/huawei.png')}}" alt="huawei"></div>
             </div>
-            <div data-aos-once="true" data-aos="fade-right" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
+            <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
               <div class="description">
                 <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo.png')}}" alt="logo">
                 <p class="ilumina">Ilumina tus sentidos y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
@@ -104,8 +104,12 @@
                 <p>El sólido marco de metal con cuerpo de cristal resulta muy agradable de sostener y está disponible en una iconica gama de colores y pesa 165 gramos.</p>
               </div>
             </div>
-            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-5 col-md-offset-1">
-              <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider4/huawei.png')}}" alt="huawei"></div>
+            <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6">
+              <div class="image-description">
+                <!-- <img src="{{asset('images/landings/huawei_p20/slider4/huawei.png')}}" alt="huawei"> -->
+                    <img src="{{asset('images/landings/huawei_p20/slider4/huawei@2x.png')}}" alt="huawei" width="564" height="537">
+
+              </div>
             </div>
           </div>
         </div>
@@ -142,7 +146,7 @@
       <div class="content-slider-6 slider">
         <div class="container">
           <div class="row">
-            <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6">
+            <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-5">
               <div class="description">
                 <h1>Creado para entregar una experiencia superior</h1>
                 <p>Experimenta el poder de la IA con la unidad de procesamiento neuronal del Kirin 970. La extraordinaria duración de su batería y su impresionante velocidad suponen un gran avance para la serie P. </p>
@@ -195,13 +199,13 @@
           <div class="row">
             <div class="col-xs-12 col-sm-10">
               <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-10 col-sm-12">
                   <div class="description">
                     <h1 class="text-center">¡Reserva tu <span class="text-secundary">Huawei P20 Pro </span>ahora!</h1>
                     <h2 class="text-center">Elige tu Huawei P20 Pro en portabilidad o línea nueva</h2>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-7">
+                <div class="col-xs-10 col-sm-12 col-md-7">
                   <div class="list-equipos">
                     <div class="row">
                       <div data-color="azul" class="equipos equipo-azul active col-xs-12 col-sm-12 col-md-6">
@@ -223,7 +227,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-5">
+                <div class="col-xs-10 col-sm-12 col-md-5">
                   <div class="informacion-reserva">
                     <h3 class="text-center">Resérvalo desde:</h3>
                     <div class="content-reserva">
@@ -272,7 +276,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12">
+                <div class="col-xs-10 col-sm-12">
                   <div class="text-center"><a href="#" class="btn-default btn reservar">QUIERO RESERVAR AHORA</a></div>
                 </div>
               </div>
