@@ -107,11 +107,7 @@
             <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6">
               <div class="image-description">
                 <!-- <img src="{{asset('images/landings/huawei_p20/slider4/huawei.png')}}" alt="huawei"> -->
-                <picture>
-                    <source media="(min-width: 1920px)" srcset="{{asset('images/landings/huawei_p20/slider4/huawei@2x.png')}}">
-                    <!-- img tag for browsers that do not support picture element -->
-                    <img src="{{asset('images/landings/huawei_p20/slider4/huawei.png')}}" alt="huawei">
-                </picture>
+                    <img src="{{asset('images/landings/huawei_p20/slider4/huawei@2x.png')}}" alt="huawei" width="564" height="537">
 
               </div>
             </div>
