@@ -67,7 +67,10 @@
     <!-- End Facebook Pixel Code -->
   </head>
   <body>
+  @include('layouts.header')
+  @include('layouts.nav')
   @yield('content')
+  @include('layouts.footer')
   @yield('js')
   </body>
 </html>
