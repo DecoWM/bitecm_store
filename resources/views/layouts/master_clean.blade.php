@@ -23,7 +23,7 @@
 
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,600,700,800,900">
     {{-- <link type="text/css" rel="stylesheet" href="https://daneden.github.io/animate.css/animate.min.css"> --}}
-    <link type="text/css" rel="stylesheet" href="{{asset('css/main.min.css')}}">
+    {{--<link type="text/css" rel="stylesheet" href="{{asset('css/main.min.css')}}">--}}
     <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- <link rel="stylesheet" type="text/css" href="{{asset('css/ie-explorer-9.css')}}"/> -->
 
@@ -68,10 +68,10 @@
     <!-- End Facebook Pixel Code -->
   </head>
   <body>
-  @include('layouts.header')
-  @include('layouts.nav')
+  {{--@include('layouts.header')--}}
+  {{--@include('layouts.nav')--}}
   @yield('content')
-  @include('layouts.footer')
+  {{--@include('layouts.footer')--}}
   @yield('js')
   </body>
 </html>
