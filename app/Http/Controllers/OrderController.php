@@ -331,13 +331,22 @@ class OrderController extends Controller
       $subtotal_igv = $subtotal;
       $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
+
+      // CLES 09-04-2018
+      $equipo_plan = 0;
+      // si es solo un chip (producto de categoria chip)
+      if($product->category_id === 4){
+        $equipo_plan = 1;
+      }
+
       array_push($order_items, [
         'stock_model_id' => $item['stock_model_id'],
         'product_variation_id' => $item['product_variation_id'],
         'promo_id' => $product->promo_id,
         'quantity' => $item['quantity'],
         'subtotal' => number_format($subtotal_net, 2, '.', ''),
-        'subtotal_igv' => number_format($subtotal_igv, 2, '.', '')
+        'subtotal_igv' => number_format($subtotal_igv, 2, '.', ''),
+        'equipo_plan' => $equipo_plan
       ]);
     }
 

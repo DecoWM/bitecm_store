@@ -164,8 +164,6 @@
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
-
-
              
               <div class="content-tab-promociones">
 
