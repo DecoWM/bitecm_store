@@ -12103,7 +12103,7 @@ var app = new Vue({
       self = this;
       axios.get(request_url).then(function (response) {
         self.product = response.data;
-        //console.log(self.product);
+        console.log(self.product);
         $('input[name="product_variation"]').val(self.product.product.product_variation_id);
         $('input[name="affiliation"]').val(self.product.product.affiliation_id);
 

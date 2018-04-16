@@ -142,14 +142,22 @@
                 <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                   <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
+                  @foreach ($info_comercial as $info)
+                  @if($info->plan_id == $plan->plan_id)
                   <ul class="list-unstyled">
-                    @if ($plan->plan_unlimited_calls == 1)
+                    @if ($info->plan_infocomercial_flag_cantidad == 1)
+                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_descripcion}}</li>
+                    @elseif ($info->plan_infocomercial_flag_cantidad > 1)
+                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_flag_cantidad}} {{$info->plan_infocomercial_descripcion}}</li>
+                    @endif
+
+                    <!-- @if ($plan->plan_unlimited_calls == 1)
                     <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">Llamadas ilimitadas (**)</li>
                     @elseif ($plan->plan_unlimited_calls > 1)
                     <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} min de Llamadas</li>
                     @endif
                     @if ($plan->plan_unlimited_sms == 1)
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado (**)</li>
+                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">XXX SMS ilimitado (**)</li>
                     @elseif ($plan->plan_unlimited_sms > 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>
                     @endif
@@ -157,15 +165,17 @@
                     <li><img src="/images/equipo/svg/planes/internet.svg" alt="Internet">{!!$plan->plan_data_cap!!}</li>
                     @endif
                     @if ($plan->plan_unlimited_rpb == 1)
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">Llamada todo Bitel Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">AAA Llamada todo Bitel Gratis</li>
                     @endif
                     @if ($plan->plan_free_facebook == 1)
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">Facebook Flex Gratis</li>
+                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">BBB Facebook Flex Gratis</li>
                     @endif
                     @if ($plan->plan_unlimited_whatsapp == 1)
                     <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                    @endif
+                    @endif -->
                   </ul>
+                  @endif
+                  @endforeach
                 </div>
               </div>
               </label>

@@ -170,7 +170,8 @@ class PlanController extends Controller
     // $product_plans = DB::select('call PA_planList(2)');
     // $product_affiliations = DB::select('call PA_affiliationList()');
     
-    $product_plans = $this->shared->getProductPlans($product);
+    $product_plans = $this->shared->getProductPlansChips($product);
+    $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
     $product_affiliations = $this->shared->getProductAffiliations($product);
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
@@ -237,6 +238,7 @@ class PlanController extends Controller
       'stock_models' => $stock_models,
       'available' => $available,
       'plans' => $product_plans,
+      'info_comercial' => $infocomercial_product_plans,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
       'just_3' => $i <= 3

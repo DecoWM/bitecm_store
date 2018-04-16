@@ -148,6 +148,9 @@ class PostpaidController extends Controller
     // $product_affiliations = DB::select('call PA_affiliationList()');
     
     $product_plans = $this->shared->getProductPlans($product);
+    //error_log(print_r($product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+    $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
+    //error_log(print_r($infocomercial_product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
     $product_affiliations = $this->shared->getProductAffiliations($product);
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
@@ -214,6 +217,7 @@ class PostpaidController extends Controller
       'stock_models' => $stock_models,
       'available' => $available,
       'plans' => $product_plans,
+      'info_comercial' => $infocomercial_product_plans,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
       'just_3' => $i <= 3

@@ -346,19 +346,19 @@ const app = new Vue({
             this.current_url = history_url;
             window.history.replaceState("", "", history_url);
         },
-        setPlan: function(plan_id) {
-            self = this;
-            //console.log(plan_id);
-            //console.log(self.product.plans);
-            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
-            //console.log(current_plan.route);
-            //console.log(current_plan.api_route);
-            $('.plan').removeClass('plan-active');
-            $('#plan'+plan_id).addClass('plan-active');
-            if (self.current_url != current_plan.route) {
-              this.getProductByPlan(current_plan.route, current_plan.api_route);
-            }
-        },
+        // setPlan: function(plan_id) {
+        //     self = this;
+        //     //console.log(plan_id);
+        //     //console.log(self.product.plans);
+        //     var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
+        //     //console.log(current_plan.route);
+        //     //console.log(current_plan.api_route);
+        //     $('.plan').removeClass('plan-active');
+        //     $('#plan'+plan_id).addClass('plan-active');
+        //     if (self.current_url != current_plan.route) {
+        //       this.getProductByPlan(current_plan.route, current_plan.api_route);
+        //     }
+        // },
         setAffiliation: function(event) {
             self = this;
             affiliation_id = event.target.value;

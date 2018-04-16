@@ -428,6 +428,60 @@ class BaseController extends Controller
     return $result[0]->order_id;
   }
 
+  public function getProductPlansChips($product) {
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $contract_id = \Config::get('filter.contract_id');
+    
+    $result = DB::table('tbl_product_variation')
+      ->join('tbl_plan', 'tbl_product_variation.plan_id', '=', 'tbl_plan.plan_id')
+      ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
+      ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
+      ->where('tbl_product_variation.variation_type_id', 2)
+      ->where('tbl_product_variation.active', 1)
+      ->where('tbl_plan.active', 1)
+      ->where('tbl_plan.vende_en_chip', 'Si')
+      ->where('tbl_affiliation.active', 1)
+      ->where('tbl_contract.active', 1)
+      ->where('tbl_product_variation.product_id', $product->product_id)
+      /*->where(function ($query) use ($product, $affiliation_id, $contract_id) {
+        $query
+          ->where(function ($subquery) use ($product) {
+            $subquery
+              ->where('tbl_product_variation.affiliation_id', $product->affiliation_id)
+              ->where('tbl_product_variation.contract_id', $product->contract_id);
+          })
+          ->orWhere(function ($subquery) use ($affiliation_id, $contract_id) {
+            $subquery
+              ->where('tbl_product_variation.affiliation_id', $affiliation_id)
+              ->where('tbl_product_variation.contract_id', $contract_id);
+          })
+          ->orWhere(DB::raw('null'));
+      })*/
+      ->orderBy('tbl_plan.weight')
+      ->orderBy('tbl_plan.plan_id')
+      ->orderBy('tbl_plan.plan_price')
+      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
+      ->get();
+    
+    $unique = [];
+
+    foreach ($result as $key => $plan) {
+      if (!isset($unique[$plan->plan_id])) {
+        $unique[$plan->plan_id] = $plan;
+      } else {
+        if (($unique[$plan->plan_id]->affiliation_id != $product->affiliation_id || $unique[$plan->plan_id]->contract_id != $product->contract_id) && (($plan->affiliation_id == $product->affiliation_id && $plan->contract_id == $product->contract_id) || ($plan->affiliation_id == $affiliation_id && $plan->contract_id == $contract_id))) {
+          $unique[$plan->plan_id] = $plan;
+        }
+      }
+    }
+
+    foreach ($result as $key => $plan) {
+      $unique[$plan->plan_id]->affiliations[] = $plan->affiliation_id;
+    }
+
+    return array_values($unique);
+  }
+
   public function getProductPlans($product) {
     $affiliation_id = \Config::get('filter.affiliation_id');
     $contract_id = \Config::get('filter.contract_id');
@@ -479,6 +533,46 @@ class BaseController extends Controller
     }
 
     return array_values($unique);
+  }
+
+  public function getInfocomercialProductPlans($product_plans) {
+
+   // extraer todos los planes de ese producto para usarlo en la busqueda de la informacion comercial de esos planes
+    $i = 0;
+    $plan_id = [];
+    while($i < count($product_plans)){
+        if (!empty($product_plans[$i]->plan_id)) {
+          $plan_id[$i] = $product_plans[$i]->plan_id;
+        }
+        $i++;
+    }
+
+  // extraer toda la informacion comercial de los planes de ese productos
+    $result = DB::table('tbl_plan_infocomercial')
+      ->where('tbl_plan_infocomercial.active', 1)
+      ->whereIn('tbl_plan_infocomercial.plan_id', $plan_id)
+      ->orderBy('tbl_plan_infocomercial.plan_id')
+      ->select('tbl_plan_infocomercial.plan_id', 'tbl_plan_infocomercial.plan_infocomercial_img_url', 'tbl_plan_infocomercial.plan_infocomercial_descripcion', 'tbl_plan_infocomercial.plan_infocomercial_informacion_adicional', 'tbl_plan_infocomercial.plan_infocomercial_flag_cantidad')
+      ->get();
+    
+    // le agregamos la ruta donde estan las imagenes para que se puedan mostrar
+    $i = 0;
+    while($i < count($result)){
+        if (!empty($result[$i]->plan_infocomercial_img_url)) {
+          $result[$i]->plan_infocomercial_img_url = asset(Storage::url(($result[$i]->plan_infocomercial_img_url)));
+        }
+        $i++;
+    }
+
+    $unique = [];
+    $i = 0;
+    foreach ($result as $key => $plan) {
+         $unique[$i] = $plan;
+         $i++;
+    }
+
+    return array_values($unique);
+
   }
 
   public function getProductAffiliations($product) {
