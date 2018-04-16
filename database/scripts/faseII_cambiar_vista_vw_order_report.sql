@@ -1,7 +1,5 @@
 USE `bitel_ecommerce` ;
 
-DROP VIEW vw_order_report;
-
 CREATE OR REPLACE 
 VIEW `vw_order_report` AS
     SELECT
