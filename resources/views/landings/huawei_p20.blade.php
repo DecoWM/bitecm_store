@@ -266,7 +266,7 @@
                               <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/llamadas.svg')}}" alt="llamadas"><strong class="text-secundary">ilimitado</strong>
                                 <p>Llamadas</p>
                               </div>
-                            </div>landings/huawei_p20/
+                            </div>
                             <div class="col-xs-4">
                               <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/mensajes.svg')}}" alt="mensajes"><strong class="text-secundary">ilimitado </strong>
                                 <p>Mensaje</p>

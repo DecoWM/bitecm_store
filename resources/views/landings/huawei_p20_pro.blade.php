@@ -205,12 +205,12 @@
                       <div class="list-equipos">
                         <div class="row">
                           <div data-color="azul" class="equipos equipo-azul active col-xs-12 col-sm-12 col-md-6">
-                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azul@2x.png')}}" alt="huawei" width="220" height="345">
+                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azulpro@2x.png')}}" alt="huawei" width="220" height="345">
                               <p>Azul Oscuro</p>
                             </div>
                           </div>
                           <div data-color="negro" class="equipos equipo-negro col-xs-12 col-sm-12 col-md-6">
-                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20negro@2x.png')}}" alt="huawei" width="220" height="351">
+                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20negropro@2x.png')}}" alt="huawei" width="220" height="351">
                               <p>Negro</p>
                             </div>
                           </div>
