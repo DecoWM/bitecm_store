@@ -4,7 +4,7 @@ USE `bitel_ecommerce`$$
 
 DROP PROCEDURE IF EXISTS `PA_orderSearch`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_orderSearch`(
+CREATE PROCEDURE `PA_orderSearch`(
   IN pag_total_by_page INT, -- Items per page
   IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),

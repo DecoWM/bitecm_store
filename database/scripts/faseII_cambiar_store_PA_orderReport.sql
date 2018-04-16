@@ -4,7 +4,7 @@ USE `bitel_ecommerce`$$
 
 DROP PROCEDURE IF EXISTS `PA_orderReport`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_orderReport`(IN start_date DATE, IN end_date DATE)
+CREATE PROCEDURE `PA_orderReport`(IN start_date DATE, IN end_date DATE)
 BEGIN
      -- Prepara reporte de ordenes
     SELECT `Nº Pedido`, `Sucursal`, `Distrito de Envio`, `Fecha Creacion`, `Nombre Cliente`, `Numero Documento`, `Tipo Linea`,
