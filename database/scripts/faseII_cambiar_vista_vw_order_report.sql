@@ -5,7 +5,7 @@ DROP VIEW vw_order_report;
 CREATE OR REPLACE 
 VIEW `vw_order_report` AS
     SELECT
-  `ord`.`order_id`            AS `Nº Pedido`,
+  `ord`.`order_id`            AS `NÂº Pedido`,
   `bch`.`branch_name`         AS `Sucursal`,
   `dst`.`district_name`       AS `Distrito de Envio`,
   `ord`.`created_at`          AS `Fecha Creacion`,
