@@ -1,13 +1,14 @@
 @extends('layouts.master_clean')
 
 @section('css')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <link type="text/css" rel="stylesheet" href="{{asset('css/huawei_p20.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('css/landing-reset.css')}}">
 @endsection
 
 @section('content')
-<header>
-</header>
+<!-- <header>
+</header> -->
 <div id="navslide">
       <ul>
         <li data-menuanchor="slide1" class="slide slide1"><a href="#slide1">
@@ -31,15 +32,15 @@
       </ul>
     </div>
     <div id="fullpage">
-      <div class="section section-one">
+      <div class="section section-one section-initial">
         <section>
           <div class="content-slider-1 slider">
             <div class="container">
               <div class="row">
-                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 col-md-5 col-md-push-5">
+                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-6 col-md-5 col-md-push-5">
                   <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider1/huawei_p20pro@2x.png')}}" alt="huawei" width="411" height="548"></div>
                 </div>
-                <div data-aos-once="true" data-aos="fade-right" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
+                <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20pro@2x.png')}}" alt="logo" width="304" height="55">
                     <p class="ilumina">Ilumina tus sentidos y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
@@ -425,7 +426,7 @@
         </div>
       </div>
     </div>
-<footer></footer>
+<!-- <footer></footer> -->
 @endsection
 
 @section('js')

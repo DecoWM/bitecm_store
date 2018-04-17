@@ -1,13 +1,14 @@
 @extends('layouts.master_clean')
 
 @section('css')
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <link type="text/css" rel="stylesheet" href="{{asset('css/huawei_p20.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('css/landing-reset.css')}}">
 @endsection
 
 @section('content')
-<header>
-</header>
+<!-- <header>
+</header> -->
 <div id="navslide">
       <ul> 
         <li data-menuanchor="slide1" class="slide slide1"><a href="#slide1">
@@ -31,15 +32,15 @@
       </ul>
     </div>
     <div id="fullpage">
-      <div class="section section-one">
+      <div class="section section-one section-initial">
         <section>
           <div class="content-slider-1 slider">
             <div class="container">
               <div class="row">
-                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 col-md-5 col-md-push-5">
+                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-6 col-md-5 col-md-push-5">
                   <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider1/huawei_p20@2x.png')}}" alt="huawei" width="303" height="506"></div>
                 </div>
-                <div data-aos-once="true" data-aos="fade-right" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
+                <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Deslumbra con la nueva cámara <br> dual Leica del <span class="text-secundary">Huawei P20</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20@2x.png')}}" alt="logo" width="241" height="52">
                     <p class="ilumina">#SEEMOOORE</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
@@ -50,7 +51,7 @@
           </div>
         </section>
       </div>
-      <div class="section section-two fp-responsive fp-auto-height">
+      <div class="section section-two">
         <section class="section-one-responsive">
           <div class="content-slider-2 slider slider_huawei_p20">
             <div class="bg-huawei bg-huaweip20">
@@ -95,7 +96,7 @@
           </div>
         </section>
       </div>
-      <div class="section section-two fp-responsive fp-auto-height">
+      <div class="section section-two">
         <section>
           <div class="content-slider-4 slider">
             <div class="container">
@@ -429,7 +430,7 @@
         </div>
       </div>
     </div>
-<footer></footer>
+<!-- <footer></footer> -->
 @endsection
 
 @section('js')
