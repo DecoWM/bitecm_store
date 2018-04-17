@@ -43,7 +43,7 @@
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Deslumbra con la nueva cámara <br> dual Leica del <span class="text-secundary">Huawei P20</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20@2x.png')}}" alt="logo" width="241" height="52">
-                    <p class="ilumina">#SEEMOOORE</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
+                    <p class="ilumina">Deslumbra y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
                   </div>
                 </div>
               </div>
@@ -90,7 +90,7 @@
                     <p>El HUAWEI P20 utiliza su tecnología de modelado facial 3D impulsada por la inteligencia artificial para seguir los contornos de sus funciones, ajustándose a los selfies más halagadores. La función Iluminación de Retrato 3D ofrece también una gran cantidad de efectos profesionales para convertir las rápidas selfies en increíbles retratos.</p>
                   </div>
                 </div>
-                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-4 col-md-4"><img src="{{asset('images/landings/huawei_p20/slider3/huawei_p20@2x.png')}}" alt="huawei" width="244" height="553"></div>
+                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-4 col-md-4 text-center"><img src="{{asset('images/landings/huawei_p20/slider3/huawei_p20@2x.png')}}" alt="huawei" width="244" height="553"></div>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
       </div>
       <div class="section section-two">
         <section>
-          <div class="content-slider-4 slider">
+          <div class="content-slider-4 slider slider_huawei_p20">
             <div class="container">
               <div class="row">
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-5 col-md-4">
@@ -109,7 +109,7 @@
                     <p>Con un cuerpo hecho de paneles de cristal, aquí es donde la elegancia se encuentra con la durabilidad. Su curvatura es de precisión para que el dispositivo se adapte perfectamente al agarre y se pueda utilizar con una sola mano.</p>
                   </div>
                 </div>
-                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6">
+                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 ">
                   <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider4/huawei_p20@2x.png')}}" alt="huawei" width="524" height="394"></div>
                 </div>
               </div>
@@ -209,21 +209,26 @@
                     <div class="col-xs-12 col-sm-12 col-md-7">
                       <div class="list-equipos">
                         <div class="row">
-                          <div data-color="azul" class="equipos equipo-azul active col-xs-12 col-sm-12 col-md-6">
+                          <div data-color="azul" class="equipos equipo-azul active col-xs-6 col-sm-6 col-md-5">
                             <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azul@2x.png')}}" alt="huawei" width="204" height="331">
-                              <p>Azul Oscuro</p>
+                              <p>Huawei P20</p>
                             </div>
                           </div>
-                          <div data-color="negro" class="equipos equipo-negro col-xs-12 col-sm-12 col-md-6">
-                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20negro@2x.png')}}" alt="huawei" width="198" height="331">
-                              <p>Negro</p>
+                          <div data-color="negro" class="equipos equipo-negro equipo-regalo col-xs-6 col-sm-6 col-md-7">
+                            <div class="text-center">
+                              <div class="equipo-regalo-img">
+                                <img src="{{asset('images/landings/huawei_p20/slider8/huawei_regalo@2x.png')}}" alt="huawei" width="221" height="330">
+                              </div>
+                              <div class="descricion-regalo">
+                                <p>Huawei P Smart <span class="text-secundary">de regalo</span></p>
+                              </div>
                             </div>
                           </div>
                           <div class="select-equipo col-xs-12">
-                            <ul>
-                              <li><a href="#" class="azul active"></a></li>
-                              <li><a href="#" class="negro"></a></li>
-                            </ul>
+                              <div class="text-regalo-movil text-center">
+                                <p>Huawei P20 +</p>
+                                <p>Huawei P Smart <span class="text-secundary">de regalo</span></p>
+                              </div>
                           </div>
                         </div>
                       </div>
@@ -243,23 +248,23 @@
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="equipo">S/2,800</p>
+                                <p class="equipo">S/1,599</p>
                                 <p>Precio del equipo</p>
                               </div>
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="plan">S/149.90</p>
-                                <p>Cargo fijo mensual</p>
+                                <p class="plan">S/129.90</p>
+                                <p>Plan mensual</p>
                               </div>
                             </div>
                             <div class="col-xs-12">
                               <div class="info-plan text-center">
-                                <p class="text-secundary">40GB + 40GB de regalo por 1 año</p>
+                            <p class="text-secundary">20GB + 20GB de regalo por 1 año</p>
                               </div>
                             </div>
                             <div class="col-xs-4">
-                              <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/4g.svg')}}" alt="4g Lte"><strong class="text-secundary">80GB </strong>
+                              <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/4g.svg')}}" alt="4g Lte"><strong class="text-secundary">40GB </strong>
                                 <p>Internet</p>
                               </div>
                             </div>

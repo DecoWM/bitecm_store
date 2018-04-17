@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="43px" viewBox="0 0 22 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="42px" height="21px" viewBox="0 0 42 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
     <title>Camara</title>
     <desc>Created with Sketch.</desc>
     <defs></defs>
-    <g id="Landing-Huawei-P20---Cambios" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Landing-Huawei-P20" transform="translate(-1203.000000, -1034.000000)" fill="#FFFFFF">
-            <g id="Camara-1" transform="translate(0.000000, 780.000000)">
-                <g id="Group-16-Copy" transform="translate(1151.000000, 159.000000)">
+    <g id="Landing-Huawei-P20-Pro" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-1192.000000, -1825.000000)" fill="#FFFFFF" id="Camara-2">
+            <g transform="translate(0.000000, 1560.000000)">
+                <g id="Group-16-Copy" transform="translate(1150.000000, 159.000000)">
                     <g id="Group-6" transform="translate(0.000000, 81.000000)">
-                        <g id="Camara" transform="translate(63.000000, 35.500000) rotate(-90.000000) translate(-63.000000, -35.500000) translate(42.000000, 25.000000)">
+                        <g id="Camara" transform="translate(42.000000, 25.000000)">
                             <g id="Page-1">
                                 <path d="M10.4313725,0.828947368 C5.13333333,0.828947368 0.823529412,5.16710526 0.823529412,10.5 C0.823529412,15.8328947 5.13333333,20.1710526 10.4313725,20.1710526 L31.5686275,20.1710526 C36.8666667,20.1710526 41.1764706,15.8328947 41.1764706,10.5 C41.1764706,5.16710526 36.8666667,0.828947368 31.5686275,0.828947368 L10.4313725,0.828947368 Z M31.5686275,21 L10.4313725,21 C4.66666667,21 0,16.3026316 0,10.5 C0,4.69736842 4.66666667,0 10.4313725,0 L31.5686275,0 C37.3333333,0 42,4.69736842 42,10.5 C42,16.3026316 37.3333333,21 31.5686275,21 Z" id="Fill-1"></path>
                                 <path d="M31.1568627,3.17763158 C27.2313725,3.17763158 24.0196078,6.41052632 24.0196078,10.3618421 C24.0196078,14.3131579 27.2313725,17.5460526 31.1568627,17.5460526 C35.0823529,17.5460526 38.2941176,14.3131579 38.2941176,10.3618421 C38.2941176,6.41052632 35.0823529,3.17763158 31.1568627,3.17763158 M31.1568627,18.375 C26.7647059,18.375 23.1960784,14.7828947 23.1960784,10.3618421 C23.1960784,5.94078947 26.7647059,2.34868421 31.1568627,2.34868421 C35.5490196,2.34868421 39.1176471,5.94078947 39.1176471,10.3618421 C39.1176471,14.7828947 35.5490196,18.375 31.1568627,18.375" id="Fill-3"></path>

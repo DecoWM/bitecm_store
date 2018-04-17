@@ -53,7 +53,7 @@
       </div>
       <div class="section section-two fp-responsive fp-auto-height">
         <section class="section-one-responsive">
-          <div class="content-slider-2 slider">
+          <div class="content-slider-2 slider slider_huawei_p20_pro">
             <div class="bg-huawei"> 
               <div class="container">
                 <div class="row">
@@ -94,7 +94,7 @@
       </div>
       <div class="section section-two fp-responsive fp-auto-height">
         <section>
-          <div class="content-slider-4 slider">
+          <div class="content-slider-4 slider slider_huawei_p20_pro">
             <div class="container">
               <div class="row">
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-5 col-md-4">
