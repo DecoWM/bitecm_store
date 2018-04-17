@@ -547,6 +547,8 @@ class BaseController extends Controller
         $i++;
     }
 
+    // error_log(print_r($plan_id, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+
   // extraer toda la informacion comercial de los planes de ese productos
     $result = DB::table('tbl_plan_infocomercial')
       ->where('tbl_plan_infocomercial.active', 1)

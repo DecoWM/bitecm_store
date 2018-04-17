@@ -150,8 +150,8 @@
                     @elseif ($info->plan_infocomercial_flag_cantidad > 1)
                     <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_flag_cantidad}} {{$info->plan_infocomercial_descripcion}}</li>
                     @endif
-
-<!--                     @if ($plan->plan_unlimited_sms == 1)
+                    <!-- 
+                    @if ($plan->plan_unlimited_sms == 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">SMS ilimitado (**)</li>
                     @elseif ($plan->plan_unlimited_sms > 1)
                     <li><img src="/images/equipo/svg/planes/sms.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>

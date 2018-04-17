@@ -100,6 +100,9 @@ class PostpaidController extends Controller
     // $product_affiliations = DB::select('call PA_affiliationList()');
 
     $product_plans = $this->shared->getProductPlans($product);
+    // error_log(print_r($product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+
+    $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
     $product_affiliations = $this->shared->getProductAffiliations($product);
 
     collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
@@ -152,6 +155,28 @@ class PostpaidController extends Controller
       }
     }
 
+    //error_log(print_r($product_plans, true), 3 ,'c:/nginx-1.12.2/logs/frutaldia.log');
+
+    $product_plans_aux = [];
+    $product_plans_aux = $product_plans;
+
+    //---------------------------------------------------------------------
+    // agregando la informacion comercial de los planes a product_plans
+    //---------------------------------------------------------------------
+    $i = 0;
+    while($i < count($infocomercial_product_plans)) {
+      $x = 0;
+      while($x < count($product_plans_aux)) {
+        if($infocomercial_product_plans[$i]->plan_id == $product_plans_aux[$x]->plan_id) {
+            $product_plans[$x]->info_comercial[] = $infocomercial_product_plans[$i];
+        }
+        $x++;
+      }
+      $i++;
+    }
+
+    //error_log(print_r($product_plans, true), 3 ,'c:/nginx-1.12.2/logs/frutaldia.log');
+
     if(!isset($selected_plan)) {
       $selected_plan = 0;
     }
@@ -162,6 +187,7 @@ class PostpaidController extends Controller
       'stock_models' => $stock_models,
       'available' => $available,
       'plans' => $product_plans,
+      'info_comercial' => $infocomercial_product_plans,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
       'just_3' => $i <= 3

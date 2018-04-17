@@ -346,19 +346,19 @@ const app = new Vue({
             this.current_url = history_url;
             window.history.replaceState("", "", history_url);
         },
-        // setPlan: function(plan_id) {
-        //     self = this;
-        //     //console.log(plan_id);
-        //     //console.log(self.product.plans);
-        //     var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
-        //     //console.log(current_plan.route);
-        //     //console.log(current_plan.api_route);
-        //     $('.plan').removeClass('plan-active');
-        //     $('#plan'+plan_id).addClass('plan-active');
-        //     if (self.current_url != current_plan.route) {
-        //       this.getProductByPlan(current_plan.route, current_plan.api_route);
-        //     }
-        // },
+        setPlan: function(plan_id) {
+            self = this;
+            //console.log(plan_id);
+            //console.log(self.product.plans);
+            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
+            //console.log(current_plan.route);
+            //console.log(current_plan.api_route);
+            $('.plan').removeClass('plan-active');
+            $('#plan'+plan_id).addClass('plan-active');
+            if (self.current_url != current_plan.route) {
+              this.getProductByPlan(current_plan.route, current_plan.api_route);
+            }
+        },
         setAffiliation: function(event) {
             self = this;
             affiliation_id = event.target.value;
@@ -398,22 +398,44 @@ const app = new Vue({
         getProductByAffiliation: function(history_url, request_url) {
           self = this;
           axios.get(request_url).then((response) => {
+            //console.log(request_url);
             self.product = response.data;
             //console.log(self.product);
+            //console.log(self.info_comercial);
             $('input[name="product_variation"]').val(self.product.product.product_variation_id);
             $('input[name="affiliation"]').val(self.product.product.affiliation_id);
 
             const plans_filtered = []; let i = 0;
+            //const plans_infocomercial_filtered = []; let x = 0;
             self.product.plans.forEach(function(plan, ix) {
               if(plan.affiliation_id == self.product.product.affiliation_id) {
                 plans_filtered.push(plan);
+                //console.log(plans_filtered);
+                //console.log(self.product.info_comercial[0].plan_id);
+
+                // for(var x in self.product.info_comercial) {
+                //   if(plan.plan_id == self.product.info_comercial[x].plan_id) {
+                //     plans_infocomercial_filtered.push(self.product.info_comercial[x]);
+                //   }
+                //   x++;
+                // }
+
               }
+
+              //console.log(plans_infocomercial_filtered);
+
               i++;
+              // x++;
               if (self.product.plans.length == i) {
-                self.plans = plans_filtered;
+                 self.plans = plans_filtered;
+                 //self.info_comercial = plans_infocomercial_filtered;
               }
             });
             
+            //self.info_comercial = plans_infocomercial_filtered.push(self.product.info_comercial);
+            //console.log(self.plans);
+            //console.log(self.info_comercial);
+
             document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
             //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
             //$('#plan'+self.product.product.plan_id).trigger('click');

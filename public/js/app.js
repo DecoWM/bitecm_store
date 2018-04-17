@@ -12102,21 +12102,42 @@ var app = new Vue({
 
       self = this;
       axios.get(request_url).then(function (response) {
+        //console.log(request_url);
         self.product = response.data;
-        console.log(self.product);
+        //console.log(self.product);
+        //console.log(self.info_comercial);
         $('input[name="product_variation"]').val(self.product.product.product_variation_id);
         $('input[name="affiliation"]').val(self.product.product.affiliation_id);
 
         var plans_filtered = [];var i = 0;
+        //const plans_infocomercial_filtered = []; let x = 0;
         self.product.plans.forEach(function (plan, ix) {
           if (plan.affiliation_id == self.product.product.affiliation_id) {
             plans_filtered.push(plan);
+            //console.log(plans_filtered);
+            //console.log(self.product.info_comercial[0].plan_id);
+
+            // for(var x in self.product.info_comercial) {
+            //   if(plan.plan_id == self.product.info_comercial[x].plan_id) {
+            //     plans_infocomercial_filtered.push(self.product.info_comercial[x]);
+            //   }
+            //   x++;
+            // }
           }
+
+          //console.log(plans_infocomercial_filtered);
+
           i++;
+          // x++;
           if (self.product.plans.length == i) {
             self.plans = plans_filtered;
+            //self.info_comercial = plans_infocomercial_filtered;
           }
         });
+
+        //self.info_comercial = plans_infocomercial_filtered.push(self.product.info_comercial);
+        //console.log(self.plans);
+        //console.log(self.info_comercial);
 
         document.getElementById('affsel').selectedIndex = $('#aff' + self.product.product.affiliation_id).data('ix');
         //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
@@ -57419,12 +57440,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -57528,108 +57543,37 @@ var render = function() {
                   _c("span", [_vm._v("al mes")])
                 ]),
                 _vm._v(" "),
-                _c("ul", { staticClass: "list-unstyled" }, [
-                  plan.plan_unlimited_calls == 1
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/llamadas.svg",
-                            alt: "Llamadas"
-                          }
-                        }),
-                        _vm._v("Llamadas ilimitadas (**)")
-                      ])
-                    : plan.plan_unlimited_calls > 1
+                _vm._l(plan.info_comercial, function(item) {
+                  return _c("ul", { staticClass: "list-unstyled" }, [
+                    item.plan_infocomercial_flag_cantidad == 1
                       ? _c("li", [
                           _c("img", {
                             attrs: {
-                              src: "/images/equipo/svg/planes/llamadas.svg",
+                              src: item.plan_infocomercial_img_url,
                               alt: "Llamadas"
                             }
                           }),
-                          _vm._v(
-                            _vm._s(plan.plan_unlimited_calls) +
-                              " min de Llamadas"
-                          )
+                          _vm._v(_vm._s(item.plan_infocomercial_descripcion))
                         ])
-                      : _vm._e(),
-                  _vm._v(" "),
-                  plan.plan_unlimited_sms == 1
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/sms.svg",
-                            alt: "SMS"
-                          }
-                        }),
-                        _vm._v("SMS ilimitado (**)")
-                      ])
-                    : plan.plan_unlimited_sms > 1
-                      ? _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: "/images/equipo/svg/planes/sms.svg",
-                              alt: "SMS"
-                            }
-                          }),
-                          _vm._v(
-                            _vm._s(plan.plan_unlimited_calls) +
-                              " SMS todo operador"
-                          )
-                        ])
-                      : _vm._e(),
-                  _vm._v(" "),
-                  plan.plan_data_cap && plan.plan_data_cap !== ""
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/internet.svg",
-                            alt: "Internet"
-                          }
-                        }),
-                        _c("span", {
-                          domProps: { innerHTML: _vm._s(plan.plan_data_cap) }
-                        })
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  plan.plan_unlimited_rpb == 1
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/rpb.svg",
-                            alt: "RPB"
-                          }
-                        }),
-                        _vm._v("Llamada todo Bitel Gratis")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  plan.plan_free_facebook == 1
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/facebook.svg",
-                            alt: "Facebook"
-                          }
-                        }),
-                        _vm._v("Facebook Flex Gratis")
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  plan.plan_unlimited_whatsapp == 1
-                    ? _c("li", [
-                        _c("img", {
-                          attrs: {
-                            src: "/images/equipo/svg/planes/whatsapp.svg",
-                            alt: "WhatsApp"
-                          }
-                        }),
-                        _vm._v("WhatsApp Ilimitado")
-                      ])
-                    : _vm._e()
-                ])
-              ]
+                      : item.plan_infocomercial_flag_cantidad > 1
+                        ? _c("li", [
+                            _c("img", {
+                              attrs: {
+                                src: item.plan_infocomercial_img_url,
+                                alt: "Llamadas"
+                              }
+                            }),
+                            _vm._v(
+                              _vm._s(item.plan_infocomercial_flag_cantidad) +
+                                " " +
+                                _vm._s(item.plan_infocomercial_descripcion)
+                            )
+                          ])
+                        : _vm._e()
+                  ])
+                })
+              ],
+              2
             )
           ]
         )

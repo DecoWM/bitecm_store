@@ -61,6 +61,8 @@ class PostpaidController extends Controller
 
     $banner = $this->shared->getImage(10);
 
+    error_log(print_r($paginator, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+
     return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banner' => $banner]);
   }
 
