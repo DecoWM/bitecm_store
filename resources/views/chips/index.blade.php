@@ -206,43 +206,6 @@
           </a>
         </div>
       </div>
-      @if (count($available) > 0)
-      <div class="row">
-        <div class="col-xs-12">
-          <div id="producto-disponibles">
-            <div class="title-detalle">
-              <h5>PRODUCTOS DISPONIBLES</h5>
-            </div>
-            <div class="list-producto">
-              @foreach ($available as $item)
-              <div class="producto">
-                <div class="image-product text-center">
-                  <a href="{{$item->route}}">
-                    <img src="{{asset(Storage::url($item->picture_url))}}" alt="equipos">
-                  </a>
-                </div>
-                <div class="content-product text-center">
-                  <div class="title-product">
-                    <h3 class="text-center"><b>{{$item->brand_name}}</b></h3>
-                    <h3 class="text-center">{{$item->product_model}}</h3>
-                  </div>
-                  <div class="price-product">
-                    @if($item->promo_id)
-                    <span>S/.{{$item->promo_price}}</span>
-                    <span class="normal-price">S/.{{$item->product_price}}</span>
-                    @else
-                    <span>S/.{{$item->product_price}}</span>
-                    @endif
-                  </div>
-                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
-                </div>
-              </div>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      </div>
-      @endif
     </div>
     @php
       $product_init = [
