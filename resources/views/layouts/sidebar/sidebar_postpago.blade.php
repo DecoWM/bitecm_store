@@ -104,6 +104,10 @@
             </div>
             <transition v-on:enter="transitionEnter" v-on:leave="transitionLeave" v-cloak>
               <div class="select-item" v-show="filters[type].plan.isOpen">
+                <div class="item">
+                  <input id="plan-opt-0" type="radio" name="plan" value="0" v-model="filters[type].plan.value" v-on:change="searchProduct(1)">
+                  <label for="plan-opt-0">Todos</label>
+                </div>
                 @foreach ($filters['plan_list'] as $plan)
                 <div class="item">
                   <input id="plan-opt-{{$plan->plan_id}}" type="radio" name="plan" value="{{$plan->plan_id}}" v-model="filters[type].plan.value" v-on:change="searchProduct(1)">
