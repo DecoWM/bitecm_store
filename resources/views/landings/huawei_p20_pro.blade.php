@@ -205,7 +205,7 @@
                     <div class="col-xs-10 col-sm-12 col-md-7">
                       <div class="list-equipos">
                         <div class="row">
-                          <div data-color="azul" class="equipos equipo-azul active col-xs-6 col-sm-6 col-md-5">
+                          <div data-color="azul" class="equipos equipo-azul equipo-pro active col-xs-6 col-sm-6 col-md-5">
                             <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azulpro@2x.png')}}" alt="huawei" width="204" height="345">
                               <p>Huawei P20 Pro</p>
                             </div>
