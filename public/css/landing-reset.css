@@ -89,6 +89,18 @@ footer{
 	height: auto;
 }
 
+.content-slider-4 .row .description h1{
+	max-width: 300px;
+}
+
+.content-slider-5 .row .description h1{
+	max-width: 300px;
+}
+
+.equipo-regalo-img.regalop20pro{
+	margin-bottom: 15px;
+}
+
 @media screen and (max-width: 1200px){
 	.content-slider-8 .row .list-equipos .equipos img {
 	    width: 100%;
@@ -182,7 +194,7 @@ footer{
 	
 
 	.content-slider-8 .row .description h1 {
-	    width: 260px;
+	    /*width: 260px;*/
 	    margin: 0 auto;
 		margin-bottom: 40px;
 		font-size: 26px;
