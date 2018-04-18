@@ -40,7 +40,7 @@
                   <div class="content-tab-pro" v-show="bestSeller=='smartphone'" key="smartphone">
                     <div class="producto catalogo"><img src="{{$home_images[0]->image_url}}" alt="bitel">
                       <div class="btn-catalogo">
-                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver cat√°logo</a></div>
+                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver cat·logo</a></div>
                       </div>
                     </div>
                     <div class="list-productos">
@@ -81,7 +81,7 @@
                   <div class="content-tab-pro" v-show="bestSeller=='tablet'" key="tablet">
                     <div class="producto catalogo"><img src="{{$home_images[0]->image_url}}" alt="bitel">
                       <div class="btn-catalogo">
-                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver cat√°logo</a></div>
+                        <div class="border-btn"><a href="{{$home_images[0]->image_link}}" class="btn btn-default">ver cat·logo</a></div>
                       </div>
                     </div>
                     <div class="list-productos">
@@ -130,7 +130,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6 no-padding">
               <div class="promociones">
-                <img src="{{$home_images[1]->image_url}}" alt="promoci√≥n Huawei p10">
+                <img src="{{$home_images[1]->image_url}}" alt="promociÛn Huawei p10">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
 
@@ -141,7 +141,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 no-padding">
               <div class="promociones">
-                <img src="{{$home_images[2]->image_url}}" alt="promoci√≥n Lg G6">
+                <img src="{{$home_images[2]->image_url}}" alt="promociÛn Lg G6">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
                     <a href="{{$home_images[2]->image_link}}" class="btn btn-default">COMPRAR</a>
@@ -164,8 +164,6 @@
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='postpago', opt2: promo=='postpago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('postpago')">Postpago</a></h3>
                 <h3 class="text-center" v-bind:class="{ opt1: promo!='prepago', opt2: promo=='prepago' }"><a href="javascript:void(0)" class="text-uppercase" v-on:click.prevent="togglePromo('prepago')">Prepago</a></h3>
               </div>
-
-
              
               <div class="content-tab-promociones">
 
@@ -196,7 +194,7 @@
                         <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                       </div>
                       <div class="btn-comprar">
-                        <a href="{{$smartphone->route}}" class="btn btn-default">VER M√ÅS</a>
+                        <a href="{{$smartphone->route}}" class="btn btn-default">VER M¡S</a>
                       </div>
                     </div>
                   </div>
@@ -230,7 +228,7 @@
                         <p>en plan <span>{{$smartphone->plan_name}}</span></p>
                       </div>
                       <div class="btn-comprar">
-                        <a href="{{$smartphone->route}}" class="btn btn-default">VER M√ÅS</a>
+                        <a href="{{$smartphone->route}}" class="btn btn-default">VER M¡S</a>
                       </div>
                     </div>
                   </div>
@@ -243,6 +241,7 @@
         </div>
       </section>
       -->
+      
       <section id="garantia" style="display:none;">
         <div class="container">
           <div class="row">
@@ -257,7 +256,7 @@
                   <!--<![endif]-->
                 </div>
                 <h2>Reserva Online</h2>
-                <p>Haz la reserva de tu equipo desde <br>cualquier dispositivo de manera <br>simple, r√°pida y seguro</p>
+                <p>Haz la reserva de tu equipo desde <br>cualquier dispositivo de manera <br>simple, r·pida y seguro</p>
               </div>
             </div>
             <div class="col-xs-4">
@@ -288,10 +287,12 @@
                 </div>
                 <h2>Pago Seguro</h2>
                 <!-- <p>Morbi nex leo lucus.Donex or purusa odo<br>consectur tememetum</p> -->
-                <p>Todos los productos tienen <br>Garant√≠a por parte de Bitel.</p>
+                <p>Todos los productos tienen <br>GarantÌa por parte de Bitel.</p>
               </div>
             </div>
           </div>
         </div>
       </section>
+      
+
 @endsection
