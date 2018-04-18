@@ -22,12 +22,12 @@
                   <div class="clearfix"></div>
                 </div>
                 @else
-                <div id="gallery_01" class="galeria-min"></div>
+                {{--<div id="gallery_01" class="galeria-min"></div>--}}
                 @endif
               @else
               <div class="image-product text-center"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
               </div>
-              <div id="gallery_01" class="galeria-min"></div>
+              {{--<div id="gallery_01" class="galeria-min"></div>--}}
               @endif
             </div>
           </div>
@@ -39,156 +39,165 @@
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @include('products.tag',['product' => $product])
               </div>
-              <div class="descripcion">
-                <p>{{$product->product_description}}</p>
-              </div>
+              
             </div>
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
                 {{ csrf_field() }}
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
-                <input type="hidden" name="affiliation" value="{{$product->affiliation_id}}">
-                <input type="hidden" name="type" value="2">
+                <input type="hidden" name="type" value="1">
                 <input type="hidden" name="quantity" value="1">
-                <div class="content-product">
+                <div class="content-product equipo-prepago">
                   <div class="row">
-                    <div class="col-xs-5 col-sm-6">
-                      <div class="select-product"><span class="title-select">Lo quieres en</span>
-                        {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
-                        {{-- <select form="purchase-form" name="affiliation" @change="selectAffiliation({
-                          @foreach ($affiliations as $affiliation)
-                            '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
-                          @endforeach
-                        },$event)"> --}}
-                        <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
-                          @foreach ($affiliations as $ix => $affiliation)
-                          <option id="aff{{$affiliation->affiliation_id}}" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
-                          @endforeach
-                        </select>
-                      </div>
-                     <!--  @include('products.colors',['product' => $product, 'stock_models' => $stock_models]) -->
-                    </div>
-                    <div class="col-xs-7 col-sm-6 col-12-mob" v-if="Object.keys(product).length == 0">
-                      {{--<div class="detalle-product" v-cloak>--}}
-                      <div class="detalle-product">
-                        {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
-                        <div class="price-product" v-if="filters.affiliation.value != 1"><span>S/.</span>@{{selectedPlan.product_variation_price.new}}</div>--}}
-                        <div class="price-product">
-                          @if(isset($product->promo_id))
-                          <span>S/.{{$product->promo_price}}</span><span class="normal-price">S/.{{$product->product_price}}</span>
-                          @else
-                          <span>S/.{{$product->product_price}}</span>
-                          @endif
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="row">
+                        <div class="col-xs-7 col-xs-push-5 col-sm-12">
+                          <div class="detalle-product">
+                            <div class="price-product">
+                              @if(isset($product->promo_id))
+                              <span>S/.{{$product->promo_price}}</span><span class="normal-price">S/.{{$product->product_price}}</span>
+                              @else
+                              <span>S/.{{$product->product_price}}</span>
+                              @endif
+                            </div>
+                          </div>
                         </div>
-                        <div class="plan-product">
-                          <p>con <span>{{$product->plan_name}}</span></p>
-                        </div>
-                        <div class="tiempo-plan">
-                          <p>Contrato de {{$product->contract_name}}</p>
+                        <div class="col-xs-5 col-xs-pull-7 col-sm-12">
+                          @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                         </div>
                       </div>
                     </div>
-                    <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
-                    <div class="col-xs-12 col-sm-offset-6 col-sm-6">
-                      {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
-                      {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
+                    <div class="col-xs-12 col-sm-6">
+                      {{--@if($product->stock_model_id)
+                      <div class="btn-carrito">
+                        <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
+                      </div>
+                      @endif--}}
+                      <div class="btn-linea">
+                        @if(isset($product->route_postpago))
+                        <a href="{{$product->route_postpago}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
+                        @endif
+                      </div>
                       @if($product->stock_model_id)
-                      <div class="btn-comprar">
+                      <div class="btn-comprar-prepago">
                         <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
                       </div>
                       @else
-                      <div class="btn-comprar">
-                        <button class="btn-default" disabled>Comprar Ahora</button>
-                      </div>
-                      {{-- <div class="stock-exhausted">
-                        Agotado
-                      </div> --}}
+                        <div class="btn-comprar-prepago">
+                          <button class="btn-disabled" disabled>Agotado</button>
+                        </div>
                       @endif
-                      {{-- </form> --}}
-                      {{-- <div class="btn-comprar">
-                        <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
-                        {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
-                      {{-- </div> --}}
                     </div>
                   </div>
                 </div>
-                <div class="movil-select-product">
-                  <select id="affsel-mov" @change="selectAffiliation({
-                    @foreach ($affiliations as $affiliation)
-                    '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
-                    @endforeach
-                  },$event)">
+                {{-- <div class="movil-select-product">
+                  <select>
                     <option name="" value="">Lo quieres en</option>
-                    @foreach ($affiliations as $ix => $affiliation)
-                    <option id="aff{{$affiliation->affiliation_id}}-mov" data-ix="{{$ix+1}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
-                    @endforeach
+                    <option name="prepago" value="prepago">Portabilidad</option>
+                    <option name="linea nueva" value="linea nueva">Linea nueva</option>
+                    <option name="renovacion" value="renovacion">Renovación</option>
                   </select>
-                </div>
+                </div> --}}
               </form>
             </div>
           </section>
-          <div id="planes" class="planes" data-selected="{{$selected_plan}}">
-            <h3 class="title-plan">Escoge el plan que prefieras:</h3>
-            {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
-            <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
-            <div v-if="plans.length == 0" id="plans-slick" class="select-plan {{$just_3 ? 'just-3' : ''}}">
-              @foreach ($plans as $plan)
-              @if($plan->affiliation_id == $product->affiliation_id)
-              <label class="plan-parent {{$plan->plan_id == $product->plan_id ? 'label-active' : ''}} {{$plan->affil_classes}}">
-              <input type="radio" name="plan" form="purchase-form" value="{{$plan->plan_id}}" style="display:none;" {{$plan->plan_id == $product->plan_id ? 'checked' : ''}}>
-              <div id="plan{{$plan->plan_id}}" class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
-                {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
-                <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
-                  <span class="title-plan">{{$plan->plan_name}}</span>
-                  <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
-                  <ul class="list-unstyled">
-                    @if ($plan->plan_unlimited_calls == 1)
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">XXX Llamadas ilimitadas (**)</li>
-                    @elseif ($plan->plan_unlimited_calls > 1)
-                    <li><img src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} XXX min de Llamadas</li>
-                    @endif
-                    @if ($plan->plan_unlimited_sms == 1)
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="SMS">XXX SMS ilimitado (**)</li>
-                    @elseif ($plan->plan_unlimited_sms > 1)
-                    <li><img src="/images/equipo/svg/planes/sms.svg" alt="Llamadas">{{$plan->plan_unlimited_calls}} SMS todo operador</li>
-                    @endif
-                    @if (isset($plan->plan_data_cap) && $plan->plan_data_cap != '')
-                    <li><img src="/images/equipo/svg/planes/internet.svg" alt="Internet">{!!$plan->plan_data_cap!!}</li>
-                    @endif
-                    @if ($plan->plan_unlimited_rpb == 1)
-                    <li><img src="/images/equipo/svg/planes/rpb.svg" alt="RPB">Llamada todo Bitel Gratis</li>
-                    @endif
-                    @if ($plan->plan_free_facebook == 1)
-                    <li><img src="/images/equipo/svg/planes/facebook.svg" alt="Facebook">ssss Facebook Flex Gratis</li>
-                    @endif
-                    @if ($plan->plan_unlimited_whatsapp == 1)
-                    <li><img src="/images/equipo/svg/planes/whatsapp.svg" alt="WhatsApp">WhatsApp Ilimitado</li>
-                    @endif
-                  </ul>
-                </div>
-              </div>
-              </label>
-              @endif
-              @endforeach
+          <div class="descripcion">
+            <!-- <span>HOLA</span> -->
+            <p>{{$product->product_description}}</p>
+          </div>
+          <div id="planes" class="planes-prepago">
+            <div class="select-plan just-3">
+                <label for="">
+                  <div class="plan">
+                    <div class="content-plan">
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
+                <label for="">
+                  <div class="plan plan-active">
+                    <div class="content-plan">
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/5</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 3er día de recarga</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
+                <label for="">
+                  <div class="plan">
+                    <div class="content-plan"> 
+                      <div class="precio-plan"><span class="recarga">Recarga</span> s/10</div>
+                      <ul class="list-unstyled">
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube">Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 7mo día de recarga</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                </label>
             </div>
-            {{-- <postpaid-plan v-if="Object.keys(product).length != 0" :product="product.product" :plans="product.plans"></postpaid-plan> --}}
           </div>
           <section class="descrip-consideracion">
             <!-- <h1>Consideraciones comerciales</h1> -->
             <p>Nota:</p>
-            <p>(*) Más detalles en consideraciones comerciales</p>
+            <p>Acceso a app gratuita Cineplanet, Tu ruta, Aló bodega, Mi Media Manzana, También recibirá sin condición y valido mientras que la línea este activa Facebook Flex o Facebook en Modo Gratuito</p>
           </section>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xs-12 col-sm-offset-4 col-sm-8">
-          <div class="add-select-plan"></div>
-
+      <!--<div class="row">
+        <div class="col-xs-12">
+          <div id="especificaciones-tecnicas">
+            <div class="title-detalle">
+              <h4>ESPECIFICACIONES TÉCNICAS</h4>
+            </div>
+            <div class="content-detalle">
+              <div class="descripcion-detalle">
+                <ul class="list-unstyled">
+                  <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">{{$product->product_os}}</span><span class="description-dispositivo">Sistema Operativo</span></li>
+                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory}} GB / {{$product->product_external_memory}} GB</span><span class="description-dispositivo">Memoria</span></li>
+                  <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
+                  <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
+                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_power}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
+                </ul>
+              </div>
+              {{--<div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div>--}}
+            </div>
+          </div>
         </div>
-      </div>
+      </div>-->
       <div class="row">
         <div class="col-xs-12">
+          {{--<a href="{{route('download_FichaTecnica',[$product->product_id])}}" target="_blank" class="ver-mas-equipo">
+            <div class="title-detalle">
+              <span  class="btn-vmas"></span>
+              <!-- <a class="btn-vmas"></a> -->
+              <h4>VER DETALLES TÉCNICOS</h4>
+            </div>
+          </a>--}}
           <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
@@ -197,15 +206,50 @@
           </a>
         </div>
       </div>
+      @if (count($available) > 0)
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="producto-disponibles">
+            <div class="title-detalle">
+              <h5>PRODUCTOS DISPONIBLES</h5>
+            </div>
+            <div class="list-producto">
+              @foreach ($available as $item)
+              <div class="producto">
+                <div class="image-product text-center">
+                  <a href="{{$item->route}}">
+                    <img src="{{asset(Storage::url($item->picture_url))}}" alt="equipos">
+                  </a>
+                </div>
+                <div class="content-product text-center">
+                  <div class="title-product">
+                    <h3 class="text-center"><b>{{$item->brand_name}}</b></h3>
+                    <h3 class="text-center">{{$item->product_model}}</h3>
+                  </div>
+                  <div class="price-product">
+                    @if($item->promo_id)
+                    <span>S/.{{$item->promo_price}}</span>
+                    <span class="normal-price">S/.{{$item->product_price}}</span>
+                    @else
+                    <span>S/.{{$item->product_price}}</span>
+                    @endif
+                  </div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
+                </div>
+              </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
     </div>
     @php
       $product_init = [
-        'product' => $product,
-        'product_images' => $product_images,
-        'stock_models' => $stock_models,
-        'available' => $available,
-        'plans' => $plans,
-        'affiliations' => $affiliations
+          'product' => $product,
+          'product_images' => $product_images,
+          'stock_models' => $stock_models,
+          'available' => $available
       ];
     @endphp
     <input id="product-init" type="hidden" value='@json($product_init)'>

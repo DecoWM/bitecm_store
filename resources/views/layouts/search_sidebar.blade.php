@@ -107,7 +107,7 @@
 @if (Request::is('postpago') || Request::is('prepago'))
           <div id="precio-plan" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters.plan)">
-              <div class="btn-acordion"></div><span>PlanES</span>
+              <div class="btn-acordion"></div><span>Plan</span>
               <div class="pull-right btl-caret" v-cloak>
                 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters.plan.isOpen"></span>
                 <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters.plan.isOpen"></span>
