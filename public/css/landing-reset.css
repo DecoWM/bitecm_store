@@ -54,7 +54,9 @@ nav{
 }
 
 .content-slider-1 .row .description .reservar{
-	padding: 10px 20px;
+	padding: 14px 16px;
+    height: 48px;
+    max-width: 248px;
 }
 
 
@@ -134,6 +136,27 @@ footer{
 	background: url(../images/landings/huawei_p20/slider2/icon-camara-trasera-duo.svg) no-repeat top 5px left;
 }
 
+#myModalBitelP20 .modal-dialog .list-especificaciones,
+#myModalBitelP20PRO .modal-dialog .list-especificaciones{
+	margin-bottom: 5px;
+}
+
+#myModalBitelP20,
+#myModalBitelP20PRO{
+	padding-right: 0;
+	z-index: 99999;
+}
+
+#myModalBitelP20 .modal-header .btn-cerrar button, #myModalBitelP20PRO .modal-header .btn-cerrar button{
+	z-index: 99999;
+}
+
+body.modal-open{
+	padding-right: 0 !important;
+}
+body{
+	padding: 0 !important;
+}
 /*.disabled-link{*/
 
 /*D9D9D9

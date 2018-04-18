@@ -1361,6 +1361,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
             display: block;
             border-radius: none;
             border: none;
+            margin-left: 0;
          }
         .postpago-itemlist {
                 ul{
@@ -1390,7 +1391,9 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                             float: left;
                             @media screen and (max-width: 767px){
                                 float: initial;
-                                margin-bottom: 5px;
+                                margin-bottom: 15px;
+                                border-bottom: none;
+                                m
                             }
                             a{
                                 color: black !important;
