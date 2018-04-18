@@ -43,7 +43,9 @@
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Deslumbra con la nueva cámara <br> dual Leica del <span class="text-secundary">Huawei P20</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20@2x.png')}}" alt="logo" width="241" height="52">
-                    <p class="ilumina">Deslumbra y resérvalo ahora</p><a href="#reservar" class="btn-default btn reservar">Reservar</a>
+                    <p class="ilumina">Deslumbra y resérvalo ahora</p>
+                    <a href="#reservar" class="btn-default btn reservar disabled_reserva">CONOCE NUESTRA PROMOCIÓN</a>
+                    <!-- <p class="text-reserva disabled_fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> -->
                   </div>
                 </div>
               </div>
@@ -65,7 +67,7 @@
                       </h1>
                     </div>
                     <div class="description-camara">
-                      <div class="camara-trasera">
+                      <div class="camara-trasera p20-trasera">
                         <p><span class="text-primary">Cámara trasera: </span>12 MP (Color, f/1.8 apertura) + 20 MP (Monocromático, f/1.6 apertura), compatible con autofoco (enfoque láser, enfoque de profundidad, enfoque de fases, enfoque de contraste)</p>
                       </div>
                       <div class="camara-delantera">
@@ -283,7 +285,10 @@
                       </div>
                     </div>
                     <div class="col-xs-10 col-sm-12">
-                      <div class="text-center"><a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="btn-default btn reservar">QUIERO RESERVAR AHORA</a></div>
+                      <div class="text-center">
+                        <a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="enabled-reserva btn-default btn reservar">QUIERO RESERVAR AHORA</a>
+                        <p class="text-reserva disabled-fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> 
+                      </div>
                     </div>
                   </div>
                 </div>

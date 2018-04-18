@@ -43,7 +43,7 @@
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20pro@2x.png')}}" alt="logo" width="304" height="55">
-                    <p class="ilumina">Ilumina tus sentidos #SEEMOOORE</p><a href="#reservar" class="btn-default btn reservar">Reservar</a>
+                    <p class="ilumina">Ilumina tus sentidos #SEEMOOORE</p><a href="#reservar" class="btn-default btn reservar">CONOCE NUESTRA PROMOCIÓN</a>
                   </div>
                 </div>
               </div>
@@ -279,7 +279,10 @@
                       </div>
                     </div>
                     <div class="col-xs-10 col-sm-12">
-                      <div class="text-center"><a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="btn-default btn reservar">QUIERO RESERVAR AHORA</a></div>
+                      <div class="text-center">
+                        <a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="disabled-reserva btn-default btn reservar">QUIERO RESERVAR AHORA</a>
+                        <p class="text-reserva enabled-fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> 
+                      </div>
                     </div>
                   </div>
                 </div>
