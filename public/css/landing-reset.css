@@ -28,6 +28,35 @@ nav{
 	z-index: 999;
 }
 
+.text-reserva{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin-top: 15px;
+	margin-bottom: 0;
+	justify-content: center
+}
+
+.text-reserva img{
+	margin-right: 10px;
+	margin-bottom: 0 !important;
+	margin-top: 0 !important;
+}
+
+.text-reserva span{
+	text-align: left;
+}
+
+.text-reserva.disabled-fecha{
+	display: none;
+}
+
+.content-slider-1 .row .description .reservar{
+	padding: 10px 20px;
+}
+
 
 
 footer{
@@ -101,6 +130,24 @@ footer{
 	margin-bottom: 15px;
 }
 
+.content-slider-2 .bg-huawei .description-camara .camara-trasera.p20-trasera{
+	background: url(../images/landings/huawei_p20/slider2/icon-camara-trasera-duo.svg) no-repeat top 5px left;
+}
+
+/*.disabled-link{*/
+
+/*D9D9D9
+ - TEXTO
+9B9B9B - SHADOW*/
+
+/*}*/
+
+.content-slider-8 .row .reservar.disabled-reserva{
+	background: #D9D9D9;
+	color: #4D4D4D;
+	border-bottom: 2px solid #9B9B9B;
+}
+
 @media screen and (max-width: 1200px){
 	.content-slider-8 .row .list-equipos .equipos img {
 	    width: 100%;
@@ -164,6 +211,13 @@ footer{
 }
 
 @media screen and (max-width: 480px){
+
+	.texto-reserva img{
+		
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		width: auto !important;
+	}
 	.content-slider-1 .row .image-description img {
 	    height: auto;
 	    width: 100%;
@@ -207,6 +261,11 @@ footer{
 	    margin: 0 auto;
 		margin-bottom: 40px;
 		font-size: 26px;
+	}
+
+	.content-slider-1 .row .image-description img {
+	    padding-left: 25%;
+	    padding-right: 25%;
 	}
 
 }
