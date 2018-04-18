@@ -637,7 +637,8 @@ li.item-nav-mobile.search #search .btn-search {
     right: 15px;
     width: auto;
     z-index: 100;
-    top: 74px;
+    top: 69px;
+    width: 210px;
   }
 
   li.nav-mobile.item-nav-mobile {
@@ -729,7 +730,13 @@ li.item-nav-mobile.search #search .btn-search {
   z-index: 999;
 }
 
-@media screen and (max-width: 768px) {
+#navbar ul li.active a,
+#navbar ul li a:hover {
+  color: #008c95 !important;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 767px) {
   #nav-carrito ul li:last-child {
     margin-bottom: 0;
   }
@@ -756,6 +763,11 @@ li.item-nav-mobile.search #search .btn-search {
   section#equipos-promocion .container .row .content-tab-pro .producto,
   section#equipos-vendidos .container .row .content-tab-pro .producto {
     max-width: 100%;
+  }
+
+  #navbar ul li.active a,
+  #navbar ul li a:hover {
+    color: #ffe60d !important;
   }
 }
 
@@ -1720,12 +1732,6 @@ select {
   }
 }
 
-#navbar ul li.active a,
-#navbar ul li a:hover {
-  color: #008c95 !important;
-  text-decoration: none;
-}
-
 .postpago-item {
   margin-right: 20px;
   display: -webkit-box;
@@ -1758,6 +1764,7 @@ select {
     color: #ffffff;
     display: block;
     margin-bottom: 10px;
+    width: 130px;
   }
 }
 
@@ -1766,22 +1773,28 @@ select {
     display: block;
     border-radius: none;
     border: none;
+    margin-left: 0;
   }
 }
 
 .postpago-item .postpago-itemlist ul {
   margin-bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 767px) {
   .postpago-item .postpago-itemlist ul {
     padding-left: 10px;
+    display: block;
   }
 }
 
 .postpago-item .postpago-itemlist ul li {
   list-style: none;
   float: left;
+  border-bottom: none !important;
 }
 
 .postpago-item .postpago-itemlist ul li.active a.item-equipo {
@@ -1808,7 +1821,8 @@ select {
 @media screen and (max-width: 767px) {
   .postpago-item .postpago-itemlist ul li {
     float: initial;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: none !important;
   }
 }
 
@@ -1822,6 +1836,11 @@ select {
 @media screen and (max-width: 767px) {
   .postpago-item .postpago-itemlist ul li a {
     color: white !important;
+    background: none !important;
+  }
+
+  .postpago-item .postpago-itemlist ul li a:hover {
+    color: #ffe60d !important;
   }
 }
 
@@ -1846,6 +1865,12 @@ select {
 
 .postpago-item .postpago-itemlist ul li a.item-promociones {
   background: url("/storage/images/promociones.png") left center no-repeat;
+}
+
+@media screen and (max-width: 767px) {
+  .postpago-item .postpago-itemlist ul li a.item-promociones {
+    display: none;
+  }
 }
 
 .postpago-item .postpago-itemlist ul li a.item-promociones:hover {
@@ -1880,18 +1905,34 @@ select {
 }
 
 @media screen and (max-width: 767px) {
+  .prepago-item span {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 10px;
+    width: 130px;
+  }
+}
+
+@media screen and (max-width: 767px) {
   .prepago-item {
     display: block;
+    border-radius: none;
+    border: none;
+    margin-left: 0;
   }
 }
 
 .prepago-item .prepago-itemlist ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 767px) {
   .prepago-item .prepago-itemlist ul {
     padding-left: 10px;
+    display: block;
   }
 }
 
@@ -1913,6 +1954,8 @@ select {
 @media screen and (max-width: 767px) {
   .prepago-item .prepago-itemlist ul li {
     float: initial;
+    margin-bottom: 15px;
+    border-bottom: none !important;
   }
 }
 
@@ -1921,6 +1964,17 @@ select {
   display: block;
   padding-left: 30px;
   margin-right: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .prepago-item .prepago-itemlist ul li a {
+    color: white !important;
+    background: none !important;
+  }
+
+  .prepago-item .prepago-itemlist ul li a:hover {
+    color: white !important;
+  }
 }
 
 .prepago-item .prepago-itemlist ul li a.item-equipo {
@@ -1945,5 +1999,6 @@ select {
 nav#nav-bitel {
   padding-bottom: 9px;
   padding-top: 5px;
+  z-index: 999999;
 }
 

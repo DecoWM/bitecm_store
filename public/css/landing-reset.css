@@ -157,13 +157,10 @@ body.modal-open{
 body{
 	padding: 0 !important;
 }
-/*.disabled-link{*/
 
-/*D9D9D9
- - TEXTO
-9B9B9B - SHADOW*/
-
-/*}*/
+nav#nav-bitel .container #navbar{
+	top: 74px;
+}
 
 .content-slider-8 .row .reservar.disabled-reserva{
 	background: #D9D9D9;
