@@ -286,8 +286,8 @@
                     </div>
                     <div class="col-xs-10 col-sm-12">
                       <div class="text-center">
-                        <a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="enabled-reserva btn-default btn reservar">QUIERO RESERVAR AHORA</a>
-                        <p class="text-reserva disabled-fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> 
+                        <a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="disabled-reserva btn-default btn reservar">QUIERO RESERVAR AHORA</a>
+                        <p class="text-reserva enabled-fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> 
                       </div>
                     </div>
                   </div>

@@ -680,6 +680,7 @@ li.item-nav-mobile.search #search .btn-search {
         right: 15px;
         width: auto;
         z-index: 100;
+        top: 74px;
     }
 
     li.nav-mobile.item-nav-mobile {
@@ -1316,9 +1317,12 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 @import "404";
 
 .menu-newbitel {
-    display: flex;
+    display: flex; 
     align-items: center;
     margin-top: 9px;
+    @media screen and (max-width: 767px){
+        display: block;
+    }
 }
 
 #navbar ul li.active a,
@@ -1338,6 +1342,11 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
         padding-top: 5px;
         padding-bottom: 5px;
         background: url('/storage/images/flecha.png') right center no-repeat;
+        @media screen and (max-width: 767px){
+            color: #ffffff;
+            display: block;
+            margin-bottom: 10px;
+        }
 
     }
          display: flex;
@@ -1348,6 +1357,11 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          padding-right: 10px;   
          border-radius: 35px ;
          border: 1px solid #EAC416;
+         @media screen and (max-width: 767px){
+            display: block;
+            border-radius: none;
+            border: none;
+         }
         .postpago-itemlist {
                 ul{
                     margin-bottom: 0;
@@ -1366,16 +1380,26 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                             }
                              a.item-promociones{
                                background: url('/storage/images/promociones_icon.png') left center no-repeat; 
-                               background-color: transparent !important; 
+                               background-color: transparent !important;
+                               @media screen and (max-width: 767px){
+                                display: none;
+                               }
                             }
                         }
                             list-style: none;
                             float: left;
+                            @media screen and (max-width: 767px){
+                                float: initial;
+                                margin-bottom: 5px;
+                            }
                             a{
                                 color: black !important;
                                 display: block;
                                 padding-left: 30px;
                                 margin-right: 20px;
+                                @media screen and (max-width: 767px){
+                                    color: white !important
+                                }
                                 &.item-equipo{
                                     background: url('/storage/images/equipo.png') left center no-repeat;
                                     background-size: containt;
@@ -1442,6 +1466,9 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          padding-right: 10px;   
          border-radius: 35px;
          border: 1px solid #EAC416;
+         @media screen and (max-width: 767px){
+            display: block;
+        }
         .prepago-itemlist {
                 ul{
                     @media screen and (max-width: 1200px) {
@@ -1461,6 +1488,9 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                         }
                             list-style: none;
                             float: left;
+                            @media screen and (max-width: 767px){
+                                float: initial;
+                            }
                             a{
                                 color: black !important;
                                 display: block;
