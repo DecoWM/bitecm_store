@@ -1350,6 +1350,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          border: 1px solid #EAC416;
         .postpago-itemlist {
                 ul{
+                    margin-bottom: 0;
+                    @media screen and (max-width: 1200px) {
+                        padding-left: 10px;
+                    }
                     li{
                         &.active{
                             a.item-equipo{
@@ -1440,6 +1444,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          border: 1px solid #EAC416;
         .prepago-itemlist {
                 ul{
+                    @media screen and (max-width: 1200px) {
+                        padding-left: 10px;
+                    }
+                    margin-bottom: 0;
                     li{
                         &.active{
                             a.item-equipo{

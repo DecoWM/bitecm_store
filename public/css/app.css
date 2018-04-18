@@ -1746,6 +1746,16 @@ select {
   background: url("/storage/images/flecha.png") right center no-repeat;
 }
 
+.postpago-item .postpago-itemlist ul {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .postpago-item .postpago-itemlist ul {
+    padding-left: 10px;
+  }
+}
+
 .postpago-item .postpago-itemlist ul li {
   list-style: none;
   float: left;
@@ -1825,6 +1835,16 @@ select {
   padding-top: 5px;
   padding-bottom: 5px;
   background: url("/storage/images/flecha.png") right center no-repeat;
+}
+
+.prepago-item .prepago-itemlist ul {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .prepago-item .prepago-itemlist ul {
+    padding-left: 10px;
+  }
 }
 
 .prepago-item .prepago-itemlist ul li {
