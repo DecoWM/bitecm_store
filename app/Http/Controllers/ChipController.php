@@ -17,62 +17,139 @@ class ChipController extends Controller
     $this->shared = $shared;
   }
 
+  // CHIP PREPAGO
+  public function index(Request $request) {  
+
+    $brand_slug = 'Bitel'; 
+    $product_slug = 'chip-bitel';
+    //$affiliation_slug = 'portabilidad';
+    $plan_slug = 'b-voz';
+   //$contract_slug = '18-meses';
+    $color_slug = null;
+
+    $inputs = [
+      'brand_slug' => $brand_slug,
+      'product_slug' => $product_slug,
+      'plan_slug' => $plan_slug,
+      'color_slug' => $color_slug
+    ];
+
+    $validator = Validator::make($inputs, [
+      'brand_slug' => 'required|exists:tbl_brand',
+      'product_slug' => 'required|exists:tbl_product',
+      'plan_slug' => 'required|exists:tbl_plan',
+      'color_slug' => 'nullable|exists:tbl_color'
+    ]);
+
+    if ($validator->fails()) {
+      abort(404);
+    }
+
+    $product = $this->shared->productPrepaidBySlug($brand_slug,$product_slug,$plan_slug,$color_slug);
+
+    if(empty($product)) {
+      abort(404);
+    }
+
+    $available_products = $this->shared->searchProductPrepaid('1,3', $product->plan_id, null, 4, 1, null, null, null, null, null, null, $product->product_id);
+
+    $available = $available_products['products'];
+    foreach($available as $i => $item) {
+      $available[$i]->route = route('prepaid_detail', [
+        'brand'=>$item->brand_slug,
+        'product'=>$item->product_slug,
+        'plan'=>$plan_slug,
+      ]);
+    }
+
+    $stock_models = [];
+    $product_images = [];
+    if($product->stock_model_id) {
+      $stock_models = $this->shared->productStockModels($product->product_id);
+      foreach($stock_models as $i => $item) {
+        $stock_models[$i]->route = route('prepaid_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$plan_slug,
+          'color'=>$item->color_slug
+        ]);
+        $stock_models[$i]->api_route = route('api_prepaid_detail', [
+          'brand'=>$brand_slug,
+          'product'=>$product->product_slug,
+          'plan'=>$plan_slug,
+          'color'=>$item->color_slug
+        ]);
+      }
+      $product_images = $this->shared->productImagesByStock($product->stock_model_id);
+    }
+
+    $plan_post_id = \Config::get('filter.plan_post_id');
+    $affiliation_id = \Config::get('filter.affiliation_id');
+    $contract_id = \Config::get('filter.contract_id');
+
+    $variation = DB::table('tbl_product_variation')
+      ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+      ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
+      ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
+      ->where('tbl_product_variation.variation_type_id', 2)
+      ->where('tbl_product_variation.plan_id', $plan_post_id)
+      ->where('tbl_product_variation.affiliation_id', $affiliation_id)
+      ->where('tbl_product_variation.contract_id', $contract_id)
+      ->where('tbl_product_variation.product_id', $product->product_id)
+      ->where('tbl_product_variation.active', 1)
+      ->where('tbl_plan.active', 1)
+      ->where('tbl_affiliation.active', 1)
+      ->where('tbl_contract.active', 1)
+      ->limit(1)
+      ->get();
+
+    if (!count($variation)) {
+      $variation = DB::table('tbl_product_variation')
+        ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+        ->join('tbl_affiliation', 'tbl_affiliation.affiliation_id', '=', 'tbl_product_variation.affiliation_id')
+        ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
+        ->where('tbl_product_variation.variation_type_id', 2)
+        ->where('tbl_product_variation.product_id', $product->product_id)
+        ->where('tbl_product_variation.active', 1)
+        ->where('tbl_plan.active', 1)
+        ->where('tbl_affiliation.active', 1)
+        ->where('tbl_contract.active', 1)
+        ->limit(1)
+        ->get();
+      if (count($variation)) {
+        $plan_post_id = $variation[0]->plan_id;
+        $affiliation_id = $variation[0]->affiliation_id;
+        $contract_id = $variation[0]->contract_id;
+      }
+    }
+
+    if (count($variation)) {
+      $plan_post_slug = $this->shared->planSlug($plan_post_id);
+      $affiliation_slug = $this->shared->affiliationSlug($affiliation_id);
+      $contract_slug = $this->shared->contractSlug($contract_id);
+
+      $product->route_postpago = route('postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'affiliation'=>$affiliation_slug,
+        'plan'=>$plan_post_slug,
+        'contract'=>$contract_slug
+      ]);
+    } else {
+      $product->route_postpago = null;
+    }
+
+    $response = [
+      'product' => $product,
+      'product_images' => $product_images,
+      'stock_models' => $stock_models,
+      'available' => $available
+    ];
+    return view('chips.index', $response);
+  }
+
+  /*
   public function index(Request $request) {
-    // $affiliation_id = \Config::get('filter.affiliation_id');
-    // $plan_post_id = \Config::get('filter.plan_post_id');
-    // $contract_id = \Config::get('filter.contract_id');
-
-    // $request->validate([
-    //   'buscar' => 'nullable|max:30|regex:/(^[A-Za-z0-9.\+\- ]+$)+/'
-    // ]);
-
-    // $searched_string = 'promociones'; //$request->has('buscar') ? $searched_string = $request->buscar : '';
-
-    // $items_per_page = 12;
-    // $current_page = ($request->has('pag')) ? $request->pag : 1 ;
-    // $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
-    
-    // $filtered_product = null;
-    // foreach ($search_result['products'] as $ix => $prod) {
-    //   $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
-    //   $prod_model_name = strtolower($prod->product_model);
-    //   $searched_string = strtolower(trim($searched_string));
-    //   if ($searched_string == $prod_full_name || $searched_string == $prod_model_name) {
-    //     $filtered_product = $prod;
-    //   }
-    // }
-
-    // if (isset($filtered_product)) {
-    //   $search_result['products'] = [$filtered_product];
-    //   $search_result['total'] = 1;  
-    // }
-
-    // $pages = intval(ceil($search_result['total'] / $items_per_page));
-    // $paginator = new Paginator(
-    //   $search_result['products'],
-    //   $search_result['total'],
-    //   $items_per_page, $current_page,
-    //   [ 'pageName' => 'pag' ]
-    // );
-
-    // $paginator->withPath('postpago');
-
-    // $filterList = $this->shared->getFiltersPostpaid();
-
-    // $banner = $this->shared->getImage(10);
-
-    //return view('chips.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banner' => $banner]);
-
-    // huawei/p9/linea-nueva/ichip-129_90/18-meses
-    // postpago/lg/stylus-3/portabilidad/ichip-129_90/18-meses
-
-    // $brand_slug = 'huawei'; 
-    // $product_slug = 'p9';
-    // $affiliation_slug = 'linea-nueva';
-    // $plan_slug = 'ichip-129_90';
-    // $contract_slug = '18-meses';
-    // $color_slug = null;
-
     $brand_slug = 'lg'; 
     $product_slug = 'stylus-3';
     $affiliation_slug = 'portabilidad';
@@ -160,15 +237,6 @@ class ChipController extends Controller
       }
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
-
-    //TODO: Obtener valores de la BD con SP independientes. Cada cambio en el frontend debe ser una request independiente
-    // $product_affiliations = $this->shared->productAffiliations($product->product_id);
-    // $product_plans = $this->shared->productPlans($product->product_id);
-    // $product_contracts = $this->shared->productContracts($product->product_id);
-
-    // TEMPORAL
-    // $product_plans = DB::select('call PA_planList(2)');
-    // $product_affiliations = DB::select('call PA_affiliationList()');
     
     $product_plans = $this->shared->getProductPlans($product);
     $product_affiliations = $this->shared->getProductAffiliations($product);
@@ -244,190 +312,5 @@ class ChipController extends Controller
 
     return view('chips.index',$response);
   }
-
- /*
-  public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
-    $inputs = [
-        'brand_slug' => $brand_slug,
-        'product_slug' => $product_slug,
-        'affiliation_slug' => $affiliation_slug,
-        'plan_slug' => $plan_slug,
-        'contract_slug' => $contract_slug,
-        'color_slug' => $color_slug
-    ];
-
-    $validator = Validator::make($inputs, [
-        'brand_slug' => 'required|exists:tbl_brand',
-        'product_slug' => 'required|exists:tbl_product',
-        'affiliation_slug' => 'required|exists:tbl_affiliation',
-        'plan_slug' => 'required|exists:tbl_plan',
-        'contract_slug' => 'required|exists:tbl_contract',
-        'color_slug' => 'nullable|exists:tbl_color'
-    ]);
-
-    if ($validator->fails()) {
-        abort(404);
-    }
-
-    $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
-
-    if(empty($product)) {
-      abort(404);
-    }
-
-    $available_products = $this->shared->searchProductPostpaid('1,3', $product->affiliation_id, $product->plan_id, $product->contract_id, '', 4, 1, null, null,null, null, null, null, $product->product_id);
-
-    $available = $available_products['products'];
-    foreach($available as $i => $item) {
-      $available[$i]->route = route('postpaid_detail', [
-        'brand'=>$item->brand_slug,
-        'product'=>$item->product_slug,
-        'plan'=>$plan_slug,
-        'affiliation'=>$affiliation_slug,
-        'contract'=>$contract_slug
-      ]);
-      $available[$i]->api_route = route('api_postpaid_detail', [
-        'brand'=>$item->brand_slug,
-        'product'=>$item->product_slug,
-        'plan'=>$plan_slug,
-        'affiliation'=>$affiliation_slug,
-        'contract'=>$contract_slug
-      ]);
-    }
-
-    $stock_models = [];
-    $product_images = [];
-    if($product->stock_model_id) {
-      $stock_models = $this->shared->productStockModels($product->product_id);
-      foreach($stock_models as $i => $item) {
-        $stock_models[$i]->route = route('postpaid_detail', [
-          'brand'=>$brand_slug,
-          'product'=>$product->product_slug,
-          'plan'=>$plan_slug,
-          'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
-          'color'=>$item->color_slug
-        ]);
-        $stock_models[$i]->api_route = route('api_postpaid_detail', [
-          'brand'=>$brand_slug,
-          'product'=>$product->product_slug,
-          'plan'=>$plan_slug,
-          'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
-          'color'=>$item->color_slug
-        ]);
-      }
-      $product_images = $this->shared->productImagesByStock($product->stock_model_id);
-    }
-
-    //TODO: Obtener valores de la BD con SP independientes. Cada cambio en el frontend debe ser una request independiente
-    // $product_affiliations = $this->shared->productAffiliations($product->product_id);
-    // $product_plans = $this->shared->productPlans($product->product_id);
-    // $product_contracts = $this->shared->productContracts($product->product_id);
-
-    // TEMPORAL
-    // $product_plans = DB::select('call PA_planList(2)');
-    // $product_affiliations = DB::select('call PA_affiliationList()');
-    
-    $product_plans = $this->shared->getProductPlans($product);
-    $product_affiliations = $this->shared->getProductAffiliations($product);
-
-    collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
-      $item->route = route('postpaid_detail', [
-        'brand'=>$product->brand_slug,
-        'product'=>$product->product_slug,
-        'plan'=>$item->plan_slug,
-        'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
-        'color' => isset($color_slug) ? $color_slug : null
-      ]);
-      $item->api_route = route('api_postpaid_detail', [
-        'brand'=>$product->brand_slug,
-        'product'=>$product->product_slug,
-        'plan'=>$item->plan_slug,
-        'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
-        'color' => isset($color_slug) ? $color_slug : null
-      ]);
-      foreach ($item->affiliations as $key => $affil) {
-        $item->affil_classes[] = 'plan_aff_'.$affil;
-      }
-      $item->affil_classes = implode(' ', $item->affil_classes);
-      return $item;
-    });
-
-    collect($product_affiliations)->map(function ($item, $key) use ($product, $color_slug) {
-      $item->route = route('postpaid_detail', [
-        'brand'=>$product->brand_slug,
-        'product'=>$product->product_slug,
-        'plan'=>$item->plan_slug,
-        'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
-        'color' => isset($color_slug) ? $color_slug : null
-      ]);
-      $item->api_route = route('api_postpaid_detail', [
-        'brand'=>$product->brand_slug,
-        'product'=>$product->product_slug,
-        'plan'=>$item->plan_slug,
-        'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
-        'color' => isset($color_slug) ? $color_slug : null
-      ]);
-      return $item;
-    });
-
-    $i = 0;
-    foreach($product_plans as $plan) {
-      if($plan->affiliation_id == $product->affiliation_id) {
-        if($plan->plan_id == $product->plan_id) {
-          $selected_plan = $i;
-        }
-        $i++;
-      }
-    }
-
-    if(!isset($selected_plan)) {
-      $selected_plan = 0;
-    }
-
-    $response = [
-      'product' => $product,
-      'product_images' => $product_images,
-      'stock_models' => $stock_models,
-      'available' => $available,
-      'plans' => $product_plans,
-      'affiliations' => $product_affiliations,
-      'selected_plan' => $selected_plan,
-      'just_3' => $i <= 3
-    ];
-
-    return view('smartphones.postpago.detail', $response);
-  }
-
-  public function compare (Request $request) {
-    $request->validate([
-      'product_variation_id' => 'required|array',
-      'product_variation_id.*' => 'required|max:9|regex:/(^[0-9]+$)+/',
-    ]);
-    // return $request->all();
-    $products = [];
-    foreach ($request->product_variation_id as $product_variation_id) {
-      $product = $this->shared->productVariationDetail($product_variation_id);
-      if (isset($product)) {
-        $product->route = route('postpaid_detail', [
-          'brand'=>$product->brand_slug,
-          'product'=>$product->product_slug,
-          'affiliation'=>$product->affiliation_slug,
-          'plan'=>$product->plan_slug,
-          'contract'=>$product->contract_slug
-        ]);
-        array_push($products, $product);
-      } else {
-        abort(404);
-      }
-    }
-    // return $products;
-    return view('smartphones.postpago.compare', ['products' => $products]);
-  }
-  */
+*/
 }
