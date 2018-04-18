@@ -20,7 +20,8 @@
             <div id="section-pedido">
               <div class="row">
                 <div class="title-section-pedido text-center">
-                  <h3>¡GRACIAS POR COMPRAR EN BITEL !</h3>
+                  {{--<h3>¡GRACIAS POR COMPRAR EN BITEL !</h3>--}}
+                  <h3>¡Gracias por reservar en Bitel !</h3>
                   <h4>TU NÚMERO DE PEDIDO ES # {{$order_id}}</h4>
                 </div>
                 @foreach ($products as $product)
@@ -74,8 +75,10 @@
                 @endforeach
                 <div class="rastreo-de-compra">
                   <div class="text-center">
-                    <h4>HEMOS ENVIADO UN MENSAJE A SU CORREO PARA EL TRACKEO DE SU COMPRA</h4>
-                    <p>Un representante se comunicará contigo dentro de las 6 horas posteriores, previa evaluación crediticia y disponibilidad de stock.</p>
+                    {{--<h4>HEMOS ENVIADO UN MENSAJE A SU CORREO PARA EL TRACKEO DE SU COMPRA</h4>--}}
+                    <h4>Hemos enviado un mensaje para el trackeo de su reserva</h4>
+                    {{--<p>Un representante se comunicará contigo dentro de las 6 horas posteriores, previa evaluación crediticia y disponibilidad de stock.</p>--}}
+                    <p>Un representante se comunicará contigo dentro de las 6 horas posteriores, dependiendo disponibilidad de stock.</p>
                   </div>
                 </div>
                 <div class="btn-detalle">

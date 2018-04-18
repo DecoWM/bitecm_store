@@ -79,7 +79,7 @@
                       <span v-show="errors.has('document_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres Alfanuméricos</span>
                     </div>
                     <div class="form-group form-select">
-                      <label for="district">Distrito de domicilio</label>
+                      <label for="district">Lugar de domicilio</label>
                       <select id="district" name="district" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('district')}">
                         <option value="" selected="">Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
@@ -145,10 +145,10 @@
                     <h3>INFORMACIÓN DE DELIVERY</h3>
                   </div>
                   <div class="section-form">
-                    <div class="form-group">
+                    <div class="form-group" style="display:none;">
                       <label for="delivery_address">DIRECCIÓN DE DELIVERY</label>
-
-                      <input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9ñÑ#.,\s-]+)$/}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>
+                      <input id="delivery_address" type="hidden" name="delivery_address" value="PREVENTA HUAWEI">
+                      {{--<input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9ñÑ#.,\s-]+)$/}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>--}}
                       {{-- <span v-show="errors.has('delivery')" class="help is-danger">@{{ errors.first('delivery') }}</span> --}}
                     </div>
                     <div class="form-group">
@@ -158,7 +158,7 @@
                       <span v-show="errors.has('email')" class="help is-danger" v-cloak>Introduce una dirección de correo electrónico válida</span>
                     </div>
                     <div class="form-group form-select">
-                      <label for="delivery_district">DISTRITO DE DELIVERY</label>
+                      <label for="delivery_district">DISTRITO DE RECOJO</label>
                       <select id="delivery_district" name="delivery_district" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_district')}">
                         <option value="" selected>Seleccione Distrito</option>
                         @foreach ($distritos as $distrito)
@@ -173,11 +173,11 @@
                       <span v-show="errors.has('contact_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                     </div>
                   </div>
-                  <div class="title-page">
+                  <div class="title-page" style="display:none;">
                     <h3>SELECCIONA TU MEDIO DE PAGO</h3>
                     <span style="padding-left:15px">Te informamos que tu pago se hará en el delivery</span>
                   </div>
-                  <div class="section-form mediosdepago">
+                  <div class="section-form mediosdepago" style="display:none;">
                     <div class="form-group">
                       <div class="row">
                         <div class="col-xs-6 col-sm-3">
@@ -197,7 +197,7 @@
                         </div>
                         <div class="col-xs-6 col-sm-3">
                           <label>
-                            <input type="radio" name="payment_method" value="4">
+                            <input type="radio" name="payment_method" checked value="4">
                             <div class="efectivo">En Efectivo<span class="pop">?
                                 <div class="text-pop">
                                   <p>Esta opción es cuando usted va a cancelar en efectivo.</p>

@@ -152,7 +152,7 @@
           </div>
         </div>
       </div>
-
+      <!--
       <section id="equipos-promocion">
         <div class="container">
           <div class="row">
@@ -242,7 +242,8 @@
           </div>
         </div>
       </section>
-      <section id="garantia">
+      -->
+      <section id="garantia" style="display:none;">
         <div class="container">
           <div class="row">
             <div class="col-xs-4">
