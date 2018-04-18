@@ -209,6 +209,16 @@ footer{
 	}
 
 }
+@media screen and (max-width: 767px){
+
+	header{
+		display: none;
+	}
+
+	nav{
+		top: 0;
+	}
+}
 
 @media screen and (max-width: 480px){
 
@@ -227,9 +237,7 @@ footer{
 		display: none;
 	}
 
-	nav{
-		top: 0;
-	}
+	
 	.section-initial{
 		padding-top: 20px;
 	}

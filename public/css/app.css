@@ -637,6 +637,7 @@ li.item-nav-mobile.search #search .btn-search {
     right: 15px;
     width: auto;
     z-index: 100;
+    top: 74px;
   }
 
   li.nav-mobile.item-nav-mobile {
@@ -1713,6 +1714,12 @@ select {
   margin-top: 9px;
 }
 
+@media screen and (max-width: 767px) {
+  .menu-newbitel {
+    display: block;
+  }
+}
+
 #navbar ul li.active a,
 #navbar ul li a:hover {
   color: #008c95 !important;
@@ -1746,6 +1753,22 @@ select {
   background: url("/storage/images/flecha.png") right center no-repeat;
 }
 
+@media screen and (max-width: 767px) {
+  .postpago-item span {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .postpago-item {
+    display: block;
+    border-radius: none;
+    border: none;
+  }
+}
+
 .postpago-item .postpago-itemlist ul {
   margin-bottom: 0;
 }
@@ -1776,11 +1799,30 @@ select {
   background-color: transparent !important;
 }
 
+@media screen and (max-width: 767px) {
+  .postpago-item .postpago-itemlist ul li.active a.item-promociones {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .postpago-item .postpago-itemlist ul li {
+    float: initial;
+    margin-bottom: 5px;
+  }
+}
+
 .postpago-item .postpago-itemlist ul li a {
   color: black !important;
   display: block;
   padding-left: 30px;
   margin-right: 20px;
+}
+
+@media screen and (max-width: 767px) {
+  .postpago-item .postpago-itemlist ul li a {
+    color: white !important;
+  }
 }
 
 .postpago-item .postpago-itemlist ul li a.item-equipo {
@@ -1837,6 +1879,12 @@ select {
   background: url("/storage/images/flecha.png") right center no-repeat;
 }
 
+@media screen and (max-width: 767px) {
+  .prepago-item {
+    display: block;
+  }
+}
+
 .prepago-item .prepago-itemlist ul {
   margin-bottom: 0;
 }
@@ -1860,6 +1908,12 @@ select {
 .prepago-item .prepago-itemlist ul li.active a.item-plan {
   background: url("/storage/images/planes_icon.png") left center no-repeat;
   background-color: transparent !important;
+}
+
+@media screen and (max-width: 767px) {
+  .prepago-item .prepago-itemlist ul li {
+    float: initial;
+  }
 }
 
 .prepago-item .prepago-itemlist ul li a {
