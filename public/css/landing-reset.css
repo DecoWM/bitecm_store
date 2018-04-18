@@ -106,9 +106,18 @@ footer{
 	    width: 100%;
 	     height: auto; 
 	}
+
+	.content-slider-8 .row .list-equipos .equipos.equipo-pro img{
+		margin-top: 35px;
+	}
 }
 
 @media screen and (max-width: 991px){
+
+	.content-slider-8 .row .list-equipos .equipos.equipo-pro img{
+		margin-top: 15px;
+	}
+
 	.content-slider-8 .row .list-equipos .equipos {
 		display: block; 
 	}
