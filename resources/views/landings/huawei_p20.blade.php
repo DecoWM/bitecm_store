@@ -177,7 +177,7 @@
                 <div class="row">
                   <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-4">
                     <div class="description">
-                      <h1>Más energía,<span class="text-primary">durante más tiempo</span></h1>
+                      <h1>Más energía, <span class="text-primary">durante más tiempo</span></h1>
                       <p>El HUAWEI P20 alberga una batería enormemente potente que carga de forma segura y rápida, y mantiene su poder durante mucho más tiempo. Con el Súper Cargador* de HUAWEI la poderosa batería de 3,400 mAh** puede cargarse rápidamente a velocidad para una mayor comodidad.</p>
                       <div class="image"><img src="{{asset('images/landings/huawei_p20/slider7/icon-bateria.svg')}}" alt="batería"></div>
                     </div>

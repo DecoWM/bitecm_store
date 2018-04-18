@@ -64331,7 +64331,7 @@ var index_esm = {
 /* 105 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: \r\n                                m\r\n                               ^\r\n      Property \"m\" must be followed by a ':'\r\n      in C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\resources\\assets\\sass\\app.scss (line 1396, column 33)\n    at runLoaders (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\webpack\\lib\\NormalModule.js:195:19)\n    at C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\loader-runner\\lib\\LoaderRunner.js:364:11\n    at C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\loader-runner\\lib\\LoaderRunner.js:230:18\n    at context.callback (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\sass-loader\\lib\\loader.js:55:13)\n    at Object.<anonymous> (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\async\\dist\\async.js:2244:31)\n    at Object.callback (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\async\\dist\\async.js:906:16)\n    at options.error (C:\\nginx-1.12.2\\html\\Bitel\\bitecm-store\\node_modules\\node-sass\\lib\\index.js:294:32)");
 
 /***/ })
 /******/ ]);
