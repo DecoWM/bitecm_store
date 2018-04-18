@@ -43,7 +43,7 @@
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20pro@2x.png')}}" alt="logo" width="304" height="55">
-                    <p class="ilumina">Ilumina tus sentidos #SEEMOOORE</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
+                    <p class="ilumina">Ilumina tus sentidos #SEEMOOORE</p><a href="#reservar" class="btn-default btn reservar">Reservar</a>
                   </div>
                 </div>
               </div>

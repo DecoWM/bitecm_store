@@ -43,7 +43,7 @@
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Deslumbra con la nueva cámara <br> dual Leica del <span class="text-secundary">Huawei P20</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20@2x.png')}}" alt="logo" width="241" height="52">
-                    <p class="ilumina">Deslumbra y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
+                    <p class="ilumina">Deslumbra y resérvalo ahora</p><a href="#reservar" class="btn-default btn reservar">Reservar</a>
                   </div>
                 </div>
               </div>
