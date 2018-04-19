@@ -1,4 +1,3 @@
-
 USE `bitel_ecommerce`;
 
 INSERT INTO tbl_district (province_id, branch_id, district_name, active)
