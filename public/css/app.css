@@ -1766,6 +1766,7 @@ select {
     display: block;
     border-radius: none;
     border: none;
+    margin-left: 0;
   }
 }
 
@@ -1808,7 +1809,8 @@ select {
 @media screen and (max-width: 767px) {
   .postpago-item .postpago-itemlist ul li {
     float: initial;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: none;
   }
 }
 
