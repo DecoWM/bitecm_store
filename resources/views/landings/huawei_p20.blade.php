@@ -250,7 +250,7 @@
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="equipo">S/1,599</p>
+                                <p class="equipo">PRONTO</p>
                                 <p>Precio del equipo</p>
                               </div>
                             </div>
