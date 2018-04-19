@@ -168,6 +168,18 @@ nav#nav-bitel .container #navbar{
 	border-bottom: 2px solid #9B9B9B;
 }
 
+.content-slider-7 .bg-huawei .reservar{
+	max-width: 248px;
+    height: 48px;
+    padding: 16px 43px;
+}
+
+.content-slider-8 .row .reservar{
+	max-width: 248px;
+    height: 48px;
+    padding: 14px 33px;
+}
+
 @media screen and (max-width: 1200px){
 	.content-slider-8 .row .list-equipos .equipos img {
 	    width: 100%;
