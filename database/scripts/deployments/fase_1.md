@@ -8,6 +8,7 @@ add_chip_category.sql --> Ejecutado en UAT
 add_chip_product.sql --> Ejecutado en UAT
 PA_cargarChips.sql --> Ejecutado en UAT
 add_district.sql --> Ejecutado en UAT
+corregir_precio_chips.sql --> Ejecutado en UAT
 
 Chips Planes + Reportes Update (19/04/2018)
 ===========================================
