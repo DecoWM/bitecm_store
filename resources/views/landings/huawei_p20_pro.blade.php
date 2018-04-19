@@ -9,7 +9,7 @@
 @section('content')
 <!-- <header>
 </header> -->
-<div id="navslide">
+<div id="navslide" class="p20pronav">
       <ul>
         <li data-menuanchor="huawei" class="slide slide1"><a href="#huawei">
             <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-huawei.png')}}" alt="huawei" width="33" height="33"></div>
@@ -244,7 +244,7 @@
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="equipo">S/2,149</p>
+                                <p class="equipo">PRONTO</p>
                                 <p>Precio del equipo</p>
                               </div>
                             </div>
