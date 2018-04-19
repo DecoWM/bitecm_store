@@ -16,7 +16,7 @@ CREATE TABLE `tbl_plan_infocomercial` (
   `updated_by` datetime DEFAULT NULL,
   `deleted_by` datetime DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`plan_infocomercial_id`)
+  PRIMARY KEY (`plan_infocomercial_id`),
   KEY `fk_tbl_plan_infocomercial_tbl_plan1_idx` (`plan_id`),
   CONSTRAINT `fk_tbl_plan_infocomercial_tbl_plan1` 
     FOREIGN KEY (`plan_id`) REFERENCES `tbl_plan` (`plan_id`) 
