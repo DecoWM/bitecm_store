@@ -17,14 +17,12 @@ class ChipController extends Controller
     $this->shared = $shared;
   }
 
-
-public function index(Request $request) {
-
+  public function index(Request $request) {
     $brand_slug = 'Bitel'; 
     $product_slug = 'chip-bitel';
     //$affiliation_slug = 'portabilidad';
     $plan_slug = 'b-voz';
-   //$contract_slug = '18-meses';
+    //$contract_slug = '18-meses';
     $color_slug = null;
 
     $inputs = [
@@ -145,9 +143,7 @@ public function index(Request $request) {
       'stock_models' => $stock_models,
       'available' => $available
     ];
-    //return view('smartphones.prepago.detail', $response);
+    
     return view('chips.index', $response);
-
   }
-
 }
