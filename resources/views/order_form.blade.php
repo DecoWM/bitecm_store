@@ -145,8 +145,8 @@
                     <h3>INFORMACIÓN DE DELIVERY</h3>
                   </div>
                   <div class="section-form">
-                    <div class="form-group">
-                      <label for="delivery_address" style="display:none;">DIRECCIÓN DE DELIVERY</label>
+                    <div class="form-group" style="display:none;">
+                      <label for="delivery_address">DIRECCIÓN DE DELIVERY</label>
                       <input id="delivery_address" type="hidden" name="delivery_address" value="PREVENTA HUAWEI">
                       {{--<input id="delivery_address" type="text" name="delivery_address" v-model="delivery" v-validate="{required: true, max: 150, regex: /^([a-zA-Z0-9ñÑ#.,\s-]+)$/}" maxlength="150" :class="{'input': true, 'is-danger': errors.has('delivery_address')}"><i v-cloak v-show="errors.has('delivery_address')" class="fa fa-warning"></i>--}}
                       {{-- <span v-show="errors.has('delivery')" class="help is-danger">@{{ errors.first('delivery') }}</span> --}}

@@ -131,7 +131,11 @@
                       <div class="precio-plan"><span class="recarga">Recarga</span> s/5</div>
                       <ul class="list-unstyled">
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
+<<<<<<< HEAD
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+=======
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>200MB Alta disponible </span></li>
+>>>>>>> landings/huawei_p20
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
@@ -148,7 +152,7 @@
                       <div class="precio-plan"><span class="recarga">Recarga</span> s/10</div>
                       <ul class="list-unstyled">
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>500MB Alta disponible </span></li>
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
                         <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>

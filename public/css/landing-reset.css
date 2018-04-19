@@ -1,0 +1,318 @@
+body{
+	position: relative;
+}
+
+html{
+	zoom: initial;
+}
+
+
+nav,
+header{
+	zoom: 90%;
+}
+
+header{
+	position: absolute;
+	height: 55px;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+}
+
+nav{
+	position: absolute !important; 
+	height: 74px;
+	width: 100%;
+	top: 56px;
+	z-index: 999;
+}
+
+.text-reserva{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	margin-top: 15px;
+	margin-bottom: 0;
+	justify-content: center
+}
+
+.text-reserva img{
+	margin-right: 10px;
+	margin-bottom: 0 !important;
+	margin-top: 0 !important;
+}
+
+.text-reserva span{
+	text-align: left;
+}
+
+.text-reserva.disabled-fecha{
+	display: none;
+}
+
+.content-slider-1 .row .description .reservar{
+	padding: 14px 16px;
+    height: 48px;
+    max-width: 248px;
+}
+
+
+
+footer{
+	margin-top: 0;
+	position: absolute;
+	height: 207px;
+	width: 100%;
+	bottom: -207px;
+	z-index: 999;
+
+}
+
+.section-initial{
+	padding-top: 50px;
+}
+
+#navslide{
+	z-index: 9999;
+}
+
+.equipos p{
+	font-weight: bold;
+}
+.equipo-regalo{
+	padding-left: 0;
+}
+
+.equipo-regalo-img{
+	background: url(../images/landings/huawei_p20/slider8/icon_regalo.svg) no-repeat center left 12px;
+	padding-left: 70px;
+}
+
+.descricion-regalo{
+	padding-left: 40px;
+
+}
+
+.content-slider-8 .row .informacion-reserva .content-reserva .info-plan{
+	padding: 10px;
+}
+
+.content-slider-4.slider_huawei_p20{
+	background-image: -webkit-linear-gradient(top left, #7325B6 0%, #F79651 100%);
+	background-image: -o-linear-gradient(top left, #7325B6 0%, #F79651 100%);
+	background-image: linear-gradient(to bottom right, #7325B6 0%, #F79651 100%);
+}
+
+.text-regalo-movil{
+	font-weight: bold;
+	line-height: 20px;
+	margin-bottom: 30px;
+}
+
+.text-regalo-movil p{
+	margin-bottom: 0;
+}
+
+.content-slider-8 .row .list-equipos .equipos{
+	height: auto;
+}
+
+.content-slider-4 .row .description h1{
+	max-width: 300px;
+}
+
+.content-slider-5 .row .description h1{
+	max-width: 300px;
+}
+
+.equipo-regalo-img.regalop20pro{
+	margin-bottom: 15px;
+}
+
+.content-slider-2 .bg-huawei .description-camara .camara-trasera.p20-trasera{
+	background: url(../images/landings/huawei_p20/slider2/icon-camara-trasera-duo.svg) no-repeat top 5px left;
+}
+
+#myModalBitelP20 .modal-dialog .list-especificaciones,
+#myModalBitelP20PRO .modal-dialog .list-especificaciones{
+	margin-bottom: 5px;
+}
+
+#myModalBitelP20,
+#myModalBitelP20PRO{
+	padding-right: 0;
+	z-index: 99999;
+}
+
+#myModalBitelP20 .modal-header .btn-cerrar button, #myModalBitelP20PRO .modal-header .btn-cerrar button{
+	z-index: 99999;
+}
+
+body.modal-open{
+	padding-right: 0 !important;
+}
+body{
+	padding: 0 !important;
+}
+
+nav#nav-bitel .container #navbar{
+	top: 74px;
+}
+
+.content-slider-8 .row .reservar.disabled-reserva{
+	background: #D9D9D9;
+	color: #4D4D4D;
+	border-bottom: 2px solid #9B9B9B;
+}
+
+.content-slider-7 .bg-huawei .reservar{
+	max-width: 248px;
+    height: 48px;
+    padding: 16px 43px;
+}
+
+.content-slider-8 .row .reservar{
+	max-width: 248px;
+    height: 48px;
+    padding: 14px 33px;
+}
+
+@media screen and (max-width: 1200px){
+	.content-slider-8 .row .list-equipos .equipos img {
+	    width: 100%;
+	     height: auto; 
+	}
+
+	.content-slider-8 .row .list-equipos .equipos.equipo-pro img{
+		margin-top: 35px;
+	}
+}
+
+@media screen and (max-width: 991px){
+
+	.content-slider-8 .row .list-equipos .equipos.equipo-pro img{
+		margin-top: 15px;
+	}
+
+	.content-slider-8 .row .list-equipos .equipos {
+		display: block; 
+	}
+	.equipos p{
+		display: none;
+	}
+
+	.content-slider-8 .row .list-equipos .equipos{
+		/*margin-bottom: 30px;*/
+	}
+
+	.content-slider-8 .row .informacion-reserva .content-reserva .sub-title{
+		margin-bottom: 40px;
+	}
+
+	.content-slider-8 .row .list-equipos .equipos img {
+	    width: 100%;
+	     height: 100%; 
+	}
+
+	.equipo-regalo-img{
+		background: none;
+		padding-left: 0px;
+	}
+
+	.descricion-regalo{
+		padding-left: 0px;
+
+	}
+
+	.content-slider-8 .row .list-equipos .equipos img{
+		width: 70%;
+		height: auto;
+	}
+
+	.equipo-azul .text-center{
+		text-align: right;
+	}
+	
+	.equipo-negro .text-center{
+		text-align: left;
+	}
+
+}
+@media screen and (max-width: 767px){
+
+	header{
+		display: none;
+	}
+
+	nav{
+		top: 0;
+	}
+}
+
+@media screen and (max-width: 480px){
+
+	.texto-reserva img{
+		
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+		width: auto !important;
+	}
+	.content-slider-1 .row .image-description img {
+	    height: auto;
+	    width: 100%;
+	}
+
+	header{
+		display: none;
+	}
+
+	
+	.section-initial{
+		padding-top: 20px;
+	}
+
+	.content-slider-1 .row .description h1{
+		font-size: 18px;
+	}
+
+	.equipo-regalo-img{
+		background: none;
+		padding-left: 0px;
+	}
+
+	.descricion-regalo{
+		padding-left: 0px;
+
+	}
+
+
+	footer{
+		height: auto;
+		bottom: -440px;
+	}
+
+	
+
+	.content-slider-8 .row .description h1 {
+	    /*width: 260px;*/
+	    margin: 0 auto;
+		margin-bottom: 40px;
+		font-size: 26px;
+	}
+
+	.content-slider-1 .row .image-description img {
+	    padding-left: 25%;
+	    padding-right: 25%;
+	}
+
+}
+
+@media screen and (max-width: 320px){
+	.content-slider-1 .row .description h1{
+		font-size: 15px;
+		line-height: 22px;
+	}
+}

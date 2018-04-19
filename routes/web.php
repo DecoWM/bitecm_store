@@ -114,3 +114,6 @@ Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
 
 Route::get('/test_job', 'OrderController@testJob');
 //Route::get('/borrar_session', 'OrderController@borrar_session');
+
+Route::get('/huawei_p20_pro', 'LandingController@huawei_p20_pro')->name('huawei_p20_pro');
+Route::get('/huawei_p20', 'LandingController@huawei_p20')->name('huawei_p20');

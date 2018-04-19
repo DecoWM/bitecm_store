@@ -6,7 +6,7 @@ CREATE TABLE `tbl_plan_infocomercial` (
   `plan_infocomercial_img_url` varchar(150) DEFAULT 'images/equipo.png',
   `plan_infocomercial_descripcion` varchar(150) DEFAULT NULL,
   `plan_infocomercial_informacion_adicional` varchar(150) DEFAULT NULL,
-  `plan_infocomercial_flag_cantidad` tinyint(4) DEFAULT NULL,
+  `plan_infocomercial_flag_cantidad` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
