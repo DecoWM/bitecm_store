@@ -444,6 +444,6 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<!-- <script type="text/javascript" src="{{asset('js/app.js')}}"></script> -->
 <script type="text/javascript" src="{{asset('js/huawei_p20.min.js')}}"></script>
 @endsection
