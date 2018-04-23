@@ -110,6 +110,8 @@ class SearchController extends Controller
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
     $contract_id = \Config::get('filter.contract_id');
 
+    //error_log($plan_post_id, 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+
     $searched_string = $request->searched_string;
 
     $search_result = $this->shared->searchProductPostpaid('1,3', $affiliation_id, $plan_post_id, $contract_id, $brand_ids, $items_per_page, $current_page, "publish_at", "desc", $product_price_ini, $product_price_end, $searched_string);

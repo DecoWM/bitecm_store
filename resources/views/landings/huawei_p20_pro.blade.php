@@ -1,49 +1,48 @@
 @extends('layouts.master_clean')
 
 @section('css')
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link type="text/css" rel="stylesheet" href="{{asset('css/huawei_p20.min.css')}}">
-<link type="text/css" rel="stylesheet" href="{{asset('css/landing-reset.css')}}">
 @endsection
 
 @section('content')
-<!-- <header>
-</header> -->
+<header>
+</header>
 <div id="navslide">
       <ul>
-        <li data-menuanchor="huawei" class="slide slide1"><a href="#huawei">
+        <li data-menuanchor="slide1" class="slide slide1"><a href="#slide1">
             <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-huawei.png')}}" alt="huawei" width="33" height="33"></div>
             <div class="description"><span class="text-title">Nuevo Huawei P20 Pro</span><span>Equipo exclusivo de Bitel</span></div></a></li>
-        <li data-menuanchor="camara" class="slide slide2"><a href="#camara">
-            <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-camara_triple.svg')}}" alt="camara"></div>
+        <li data-menuanchor="slide2" class="slide slide2"><a href="#slide2">
+            <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-camara.svg')}}" alt="camara"></div>
             <div class="description"><span class="text-title">Triple Cámara LEICA</span><span>Asistido por IA</span></div></a></li>
-        <li data-menuanchor="pantalla" class="slide slide3"><a href="#pantalla">
+        <li data-menuanchor="slide3" class="slide slide3"><a href="#slide3">
             <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-pantalla.svg')}}" alt="pantalla"></div>
             <div class="description"><span class="text-title">Pantalla FHD+</span><span>6,1 pulgadas, colores vivos</span></div></a></li>
-        <li data-menuanchor="procesador" class="slide slide4"><a href="#procesador">
+        <li data-menuanchor="slide4" class="slide slide4"><a href="#slide4">
             <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-procesador.svg')}}" alt="procesador"></div>
             <div class="description"><span class="text-title">Procesador neuronal</span><span>Kirin 970</span></div></a></li>
-        <li data-menuanchor="bateria" class="slide slide5"><a href="#bateria">
+        <li data-menuanchor="slide5" class="slide slide5"><a href="#slide5">
             <div class="image"><img src="{{asset('images/landings/huawei_p20/navslide/icon-bateria.svg')}}" alt="bateria"></div>
             <div class="description"><span class="text-title">Batería de 4000 mAh</span><span>Dura más y carga más rápido</span></div></a></li>
-        <li data-menuanchor="reservar" class="slide slide6"><a href="#reservar">
+        <li data-menuanchor="slide6" class="slide slide6"><a href="#slide6">
             <div class="image not-opacity"><img src="{{asset('images/landings/huawei_p20/navslide/icon-reserva.svg')}}" alt="reserva"></div>
             <div class="description"><span class="text-title">¡Resérvalo ahora!</span><span>Con tu plan favorito</span></div></a></li>
       </ul>
     </div>
     <div id="fullpage">
-      <div class="section section-one section-initial">
+      <div class="section section-one">
         <section>
           <div class="content-slider-1 slider">
             <div class="container">
               <div class="row">
-                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-10 col-sm-6 col-md-5 col-md-push-5">
+                <div data-aos-once="true" data-aos="zoom-in" class="col-xs-12 col-sm-6 col-md-5 col-md-push-5">
                   <div class="image-description"><img src="{{asset('images/landings/huawei_p20/slider1/huawei_p20pro@2x.png')}}" alt="huawei" width="411" height="548"></div>
                 </div>
-                <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
+                <div data-aos-once="true" data-aos="fade-right" class="col-xs-12 col-sm-6 col-md-5 col-lg-5 col-md-pull-5">
                   <div class="description">
                     <h1>Revoluciona la fotografía con la Triple cámara del <span class="text-secundary">Huawei P20 Pro</span></h1><img src="{{asset('images/landings/huawei_p20/slider1/logo_p20pro@2x.png')}}" alt="logo" width="304" height="55">
-                    <p class="ilumina">Ilumina tus sentidos #SEEMOOORE</p><a href="#reservar" class="btn-default btn reservar">CONOCE NUESTRA PROMOCIÓN</a>
+                    <p class="ilumina">Ilumina tus sentidos y resérvalo ahora</p><a href="#slide6" class="btn-default btn reservar">Reservar</a>
                   </div>
                 </div>
               </div>
@@ -53,7 +52,7 @@
       </div>
       <div class="section section-two fp-responsive fp-auto-height">
         <section class="section-one-responsive">
-          <div class="content-slider-2 slider slider_huawei_p20_pro">
+          <div class="content-slider-2 slider">
             <div class="bg-huawei"> 
               <div class="container">
                 <div class="row">
@@ -94,7 +93,7 @@
       </div>
       <div class="section section-two fp-responsive fp-auto-height">
         <section>
-          <div class="content-slider-4 slider slider_huawei_p20_pro">
+          <div class="content-slider-4 slider">
             <div class="container">
               <div class="row">
                 <div data-aos-once="true" data-aos="fade-right" class="col-xs-10 col-sm-5 col-md-4">
@@ -196,40 +195,35 @@
               <div class="row">
                 <div class="col-xs-12 col-sm-10">
                   <div class="row">
-                    <div class="col-xs-10 col-sm-12">
+                    <div class="col-xs-12">
                       <div class="description">
                         <h1 class="text-center">¡Reserva tu <span class="text-secundary">Huawei P20 Pro </span>ahora!</h1>
                         <h2 class="text-center">Elige tu Huawei P20 Pro en portabilidad o línea nueva</h2>
                       </div>
                     </div>
-                    <div class="col-xs-10 col-sm-12 col-md-7">
+                    <div class="col-xs-12 col-sm-12 col-md-7">
                       <div class="list-equipos">
                         <div class="row">
-                          <div data-color="azul" class="equipos equipo-azul equipo-pro active col-xs-6 col-sm-6 col-md-5">
-                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azulpro@2x.png')}}" alt="huawei" width="204" height="345">
-                              <p>Huawei P20 Pro</p>
+                          <div data-color="azul" class="equipos equipo-azul active col-xs-12 col-sm-12 col-md-6">
+                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20azul@2x.png')}}" alt="huawei" width="220" height="345">
+                              <p>Azul Oscuro</p>
                             </div>
                           </div>
-                          <div data-color="negro" class="equipos equipo-negro equipo-regalo col-xs-6 col-sm-6 col-md-7">
-                            <div class="text-center">
-                              <div class="equipo-regalo-img regalop20pro">
-                                <img src="{{asset('images/landings/huawei_p20/slider8/huawei_regalo@2x.png')}}" alt="huawei" width="221" height="330">
-                              </div>
-                              <div class="descricion-regalo">
-                                <p>Huawei P Smart <span class="text-secundary">de regalo</span></p>
-                              </div>
+                          <div data-color="negro" class="equipos equipo-negro col-xs-12 col-sm-12 col-md-6">
+                            <div class="text-center"><img src="{{asset('images/landings/huawei_p20/slider8/huawei_p20negro@2x.png')}}" alt="huawei" width="220" height="351">
+                              <p>Negro</p>
                             </div>
                           </div>
                           <div class="select-equipo col-xs-12">
-                              <div class="text-regalo-movil text-center">
-                                <p>Huawei P20 +</p>
-                                <p>Huawei P Smart <span class="text-secundary">de regalo</span></p>
-                              </div>
+                            <ul>
+                              <li><a href="#" class="azul active"></a></li>
+                              <li><a href="#" class="negro"></a></li>
+                            </ul>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-xs-10 col-sm-12 col-md-5">
+                    <div class="col-xs-12 col-sm-12 col-md-5">
                       <div class="informacion-reserva">
                         <h3 class="text-center">Resérvalo desde:</h3>
                         <div class="content-reserva">
@@ -244,23 +238,23 @@
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="equipo">S/2,149</p>
+                                <p class="equipo">S/2,800</p>
                                 <p>Precio del equipo</p>
                               </div>
                             </div>
                             <div class="col-xs-6">
                               <div class="price text-center">
-                                <p class="plan">S/129.90</p>
+                                <p class="plan">S/149.90</p>
                                 <p>Cargo fijo mensual</p>
                               </div>
                             </div>
                             <div class="col-xs-12">
                               <div class="info-plan text-center">
-                                <p class="text-secundary">20GB + 20GB de regalo por 1 año</p>
+                                <p class="text-secundary">40GB + 40GB de regalo por 1 año</p>
                               </div>
                             </div>
                             <div class="col-xs-4">
-                              <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/4g.svg')}}" alt="4g Lte"><strong class="text-secundary">40GB </strong>
+                              <div class="detalle-plan text-center"><img src="{{asset('images/landings/huawei_p20/slider8/4g.svg')}}" alt="4g Lte"><strong class="text-secundary">80GB </strong>
                                 <p>Internet</p>
                               </div>
                             </div>
@@ -278,11 +272,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-xs-10 col-sm-12">
-                      <div class="text-center">
-                        <a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="disabled-reserva btn-default btn reservar">QUIERO RESERVAR AHORA</a>
-                        <p class="text-reserva enabled-fecha"><img src="{{asset('images/landings/huawei_p20/slider1/icon-calendar.svg')}}" alt="calendario"><span class="text-secundary">Reserva habilitada desde 20/04/2018</span></p> 
-                      </div>
+                    <div class="col-xs-12">
+                      <div class="text-center"><a href="https://bitel-store.clientes-forceclose.com/postpago/huawei/p20-pro/portabilidad/ichip-129_90/18-meses" target="_blank" class="btn-default btn reservar">QUIERO RESERVAR AHORA</a></div>
                     </div>
                   </div>
                 </div>
@@ -434,10 +425,10 @@
         </div>
       </div>
     </div>
-<!-- <footer></footer> -->
+<footer></footer>
 @endsection
 
 @section('js')
-<!-- <script type="text/javascript" src="{{asset('js/app.js')}}"></script> -->
+<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/huawei_p20.min.js')}}"></script>
 @endsection
