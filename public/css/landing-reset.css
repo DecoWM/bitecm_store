@@ -59,6 +59,16 @@ nav{
     max-width: 248px;
 }
 
+#navslide{
+	height: 400px;
+	display: block;
+}
+
+#navslide.p20pronav{
+	height: 405px;
+	display: block;
+}
+
 
 
 footer{
@@ -76,7 +86,7 @@ footer{
 }
 
 #navslide{
-	z-index: 9999;
+	z-index: 999999;
 }
 
 .equipos p{
@@ -144,7 +154,7 @@ footer{
 #myModalBitelP20,
 #myModalBitelP20PRO{
 	padding-right: 0;
-	z-index: 99999;
+	z-index: 9999999;
 }
 
 #myModalBitelP20 .modal-header .btn-cerrar button, #myModalBitelP20PRO .modal-header .btn-cerrar button{

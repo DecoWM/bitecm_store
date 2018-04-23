@@ -1,5 +1,7 @@
 USE `bitel_ecommerce` ;
 
+DROP TABLE IF EXISTS `tbl_plan_infocomercial`;
+
 CREATE TABLE `tbl_plan_infocomercial` (
   `plan_infocomercial_id` int(11) NOT NULL AUTO_INCREMENT,
   `plan_id` int(11) DEFAULT NULL,
@@ -14,5 +16,9 @@ CREATE TABLE `tbl_plan_infocomercial` (
   `updated_by` datetime DEFAULT NULL,
   `deleted_by` datetime DEFAULT NULL,
   `active` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`plan_infocomercial_id`)
+  PRIMARY KEY (`plan_infocomercial_id`),
+  KEY `fk_tbl_plan_infocomercial_tbl_plan1_idx` (`plan_id`),
+  CONSTRAINT `fk_tbl_plan_infocomercial_tbl_plan1` 
+    FOREIGN KEY (`plan_id`) REFERENCES `tbl_plan` (`plan_id`) 
+    ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8
