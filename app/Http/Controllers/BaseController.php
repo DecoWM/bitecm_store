@@ -154,7 +154,7 @@ class BaseController extends Controller
 
   public function getPostpaidChipValue($prepago_postpago) {
 
-    $category_id = 5; //\Config::get('filter.category_id');
+    $category_id = 4; //\Config::get('filter.category_id');
 
     $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug AS 'affiliation_slug', tbl_plan.plan_slug AS 'plan_slug' 
   FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
