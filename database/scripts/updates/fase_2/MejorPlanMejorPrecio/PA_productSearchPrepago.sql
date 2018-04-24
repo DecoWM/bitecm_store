@@ -237,5 +237,3 @@ BEGIN
 END$$
 
 DELIMITER ;
-
-CALL PA_productSearchPrepago();
