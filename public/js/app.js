@@ -57553,7 +57553,13 @@ var render = function() {
                               alt: "Llamadas"
                             }
                           }),
-                          _vm._v(_vm._s(item.plan_infocomercial_descripcion))
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(
+                                item.plan_infocomercial_descripcion
+                              )
+                            }
+                          })
                         ])
                       : item.plan_infocomercial_flag_cantidad > 1
                         ? _c("li", [
@@ -57565,9 +57571,15 @@ var render = function() {
                             }),
                             _vm._v(
                               _vm._s(item.plan_infocomercial_flag_cantidad) +
-                                " " +
-                                _vm._s(item.plan_infocomercial_descripcion)
-                            )
+                                " "
+                            ),
+                            _c("span", {
+                              domProps: {
+                                innerHTML: _vm._s(
+                                  item.plan_infocomercial_descripcion
+                                )
+                              }
+                            })
                           ])
                         : _vm._e()
                   ])

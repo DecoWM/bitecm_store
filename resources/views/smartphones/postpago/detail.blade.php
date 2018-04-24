@@ -146,9 +146,9 @@
                   @if($info->plan_id == $plan->plan_id)
                   <ul class="list-unstyled">
                     @if ($info->plan_infocomercial_flag_cantidad == 1)
-                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_descripcion}}</li>
+                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{!!$info->plan_infocomercial_descripcion!!}</li>
                     @elseif ($info->plan_infocomercial_flag_cantidad > 1)
-                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_flag_cantidad}} {{$info->plan_infocomercial_descripcion}}</li>
+                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_flag_cantidad}} {!!$info->plan_infocomercial_descripcion!!}</li>
                     @endif
                   </ul>
                   @endif

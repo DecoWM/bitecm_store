@@ -152,6 +152,23 @@ class BaseController extends Controller
     return ['products' => $products, 'total' => $total[0]->total_products];
   }
 
+  public function getPostpaidChipValue($prepago_postpago) {
+
+    $category_id = 5; //\Config::get('filter.category_id');
+
+    $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug AS 'affiliation_slug', tbl_plan.plan_slug AS 'plan_slug' 
+  FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
+        JOIN tbl_product_variation ON tbl_product.product_id = tbl_product_variation.product_id
+          JOIN tbl_affiliation ON tbl_product_variation.affiliation_id = tbl_affiliation.affiliation_id
+            JOIN tbl_plan ON tbl_plan.plan_id = tbl_product_variation.plan_id
+               WHERE tbl_product.category_id = 4 AND tbl_product_variation.affiliation_id > 0 AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = 2 AND
+               tbl_product_variation.active = 1 
+               ORDER BY tbl_product_variation.affiliation_id ASC
+               LIMIT 1"));
+
+    return count($results) > 0 ? $results[0] : null;
+  }
+
   public function productPostpaidBySlug($brand,$product,$affiliation,$plan,$contract,$color=null) {
     $result = DB::select('call PA_productPostpagoBySlug(
       :brand_slug,
@@ -439,7 +456,6 @@ class BaseController extends Controller
       ->where('tbl_product_variation.variation_type_id', 2)
       ->where('tbl_product_variation.active', 1)
       ->where('tbl_plan.active', 1)
-      ->where('tbl_plan.vende_en_chip', 'Si')
       ->where('tbl_affiliation.active', 1)
       ->where('tbl_contract.active', 1)
       ->where('tbl_product_variation.product_id', $product->product_id)

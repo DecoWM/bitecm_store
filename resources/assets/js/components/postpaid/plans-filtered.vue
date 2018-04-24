@@ -7,8 +7,8 @@
           <span class="title-plan">{{plan.plan_name}}</span>
           <div class="precio-plan">S/. {{plan.plan_price}}<span>al mes</span></div>
             <ul v-for="item in plan.info_comercial" class="list-unstyled">
-              <li v-if="item.plan_infocomercial_flag_cantidad == 1"><img :src="item.plan_infocomercial_img_url" alt="Llamadas">{{item.plan_infocomercial_descripcion}}</li>
-              <li v-else-if="item.plan_infocomercial_flag_cantidad > 1"><img :src="item.plan_infocomercial_img_url" alt="Llamadas">{{item.plan_infocomercial_flag_cantidad}} {{item.plan_infocomercial_descripcion}}</li>
+              <li v-if="item.plan_infocomercial_flag_cantidad == 1"><img :src="item.plan_infocomercial_img_url" alt="Llamadas"><span v-html="item.plan_infocomercial_descripcion"></span></li>
+              <li v-else-if="item.plan_infocomercial_flag_cantidad > 1"><img :src="item.plan_infocomercial_img_url" alt="Llamadas">{{item.plan_infocomercial_flag_cantidad}} <span v-html="item.plan_infocomercial_descripcion"></span></li>
             </ul>
         </div>
       </div>

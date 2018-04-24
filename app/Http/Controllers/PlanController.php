@@ -80,34 +80,46 @@ class PlanController extends Controller
     // $contract_slug = '18-meses';
     // $color_slug = null;
 
-    $brand_slug = 'Bitel'; 
-    $product_slug = 'chip-bitel';
-    $affiliation_slug = 'portabilidad';
-    $plan_slug = 'ichip-29_90';
+    $prepago_postpago = 2;  // 1 = prepago, 2 = postpago
+    $search = $this->shared->getPostpaidChipValue($prepago_postpago);
+
+    error_log(print_r($search, true),3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+
+    $brand_slug = $search->brand_slug; //'Bitel'; 
+    $product_slug = $search->product_slug; //'chip-bitel';
+    $affiliation_slug = $search->affiliation_slug; //'portabilidad';
+    $plan_slug = $search->plan_slug; //'ichip-29_90';
     $contract_slug = '18-meses';
     $color_slug = null;
 
-    $inputs = [
-        'brand_slug' => $brand_slug,
-        'product_slug' => $product_slug,
-        'affiliation_slug' => $affiliation_slug,
-        'plan_slug' => $plan_slug,
-        'contract_slug' => $contract_slug,
-        'color_slug' => $color_slug
-    ];
+    // $brand_slug = $search['brand_slug']; //'Bitel'; 
+    // $product_slug = $search['product_slug']; //'chip-bitel';
+    // $affiliation_slug = $search['affiliation_slug']; //'portabilidad';
+    // $plan_slug = $search['plan_slug']; //'ichip-29_90';
+    // $contract_slug = '18-meses';
+    // $color_slug = null;
 
-    $validator = Validator::make($inputs, [
-        'brand_slug' => 'required|exists:tbl_brand',
-        'product_slug' => 'required|exists:tbl_product',
-        'affiliation_slug' => 'required|exists:tbl_affiliation',
-        'plan_slug' => 'required|exists:tbl_plan',
-        'contract_slug' => 'required|exists:tbl_contract',
-        'color_slug' => 'nullable|exists:tbl_color'
-    ]);
+    // $inputs = [
+    //     'brand_slug' => $brand_slug,
+    //     'product_slug' => $product_slug,
+    //     'affiliation_slug' => $affiliation_slug,
+    //     'plan_slug' => $plan_slug,
+    //     'contract_slug' => $contract_slug,
+    //     'color_slug' => $color_slug
+    // ];
 
-    if ($validator->fails()) {
-        abort(404);
-    }
+    // $validator = Validator::make($inputs, [
+    //     'brand_slug' => 'required|exists:tbl_brand',
+    //     'product_slug' => 'required|exists:tbl_product',
+    //     'affiliation_slug' => 'required|exists:tbl_affiliation',
+    //     'plan_slug' => 'required|exists:tbl_plan',
+    //     'contract_slug' => 'required|exists:tbl_contract',
+    //     'color_slug' => 'nullable|exists:tbl_color'
+    // ]);
+
+    // if ($validator->fails()) {
+    //     abort(404);
+    // }
 
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
     //error_log(print_r($product), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
