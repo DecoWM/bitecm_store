@@ -83,7 +83,7 @@ class PlanController extends Controller
     $prepago_postpago = 2;  // 1 = prepago, 2 = postpago
     $search = $this->shared->getPostpaidChipValue($prepago_postpago);
 
-    error_log(print_r($search, true),3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+    //error_log(print_r($search, true),3, 'c:/nginx-1.12.2/logs/frutaldia.log');
 
     $brand_slug = $search->brand_slug; //'Bitel'; 
     $product_slug = $search->product_slug; //'chip-bitel';
