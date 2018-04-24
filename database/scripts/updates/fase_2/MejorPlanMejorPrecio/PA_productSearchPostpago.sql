@@ -17,8 +17,8 @@ CREATE PROCEDURE `PA_productSearchPostpago`(
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
   IN product_string_search VARCHAR(255),
-  IN pag_total_by_page INT, -- Items per page
-  IN pag_actual INT, -- Actual page
+  IN pag_total_by_page INT,
+  IN pag_actual INT,
   IN sort_by VARCHAR(50),
   IN sort_direction VARCHAR(5),
   IN product_tag VARCHAR(255),
