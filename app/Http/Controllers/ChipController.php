@@ -18,30 +18,41 @@ class ChipController extends Controller
   }
 
   public function index(Request $request) {
-    $brand_slug = 'Bitel'; 
-    $product_slug = 'chip-bitel';
+
+    $prepago_postpago = 1;  // 1 = prepago, 2 = postpago
+    $search = $this->shared->getPrepaidChipValue($prepago_postpago);
+
+    $brand_slug = $search->brand_slug; //'Bitel'; 
+    $product_slug = $search->product_slug; //'chip-bitel';
     //$affiliation_slug = 'portabilidad';
-    $plan_slug = 'b-voz';
+    $plan_slug = $search->plan_slug; //'b-voz';
     //$contract_slug = '18-meses';
     $color_slug = null;
 
-    $inputs = [
-      'brand_slug' => $brand_slug,
-      'product_slug' => $product_slug,
-      'plan_slug' => $plan_slug,
-      'color_slug' => $color_slug
-    ];
+    // $brand_slug = 'Bitel'; 
+    // $product_slug = 'chip-bitel';
+    // //$affiliation_slug = 'portabilidad';
+    // $plan_slug = 'b-voz';
+    // //$contract_slug = '18-meses';
+    // $color_slug = null;
 
-    $validator = Validator::make($inputs, [
-      'brand_slug' => 'required|exists:tbl_brand',
-      'product_slug' => 'required|exists:tbl_product',
-      'plan_slug' => 'required|exists:tbl_plan',
-      'color_slug' => 'nullable|exists:tbl_color'
-    ]);
+    // $inputs = [
+    //   'brand_slug' => $brand_slug,
+    //   'product_slug' => $product_slug,
+    //   'plan_slug' => $plan_slug,
+    //   'color_slug' => $color_slug
+    // ];
 
-    if ($validator->fails()) {
-      abort(404);
-    }
+    // $validator = Validator::make($inputs, [
+    //   'brand_slug' => 'required|exists:tbl_brand',
+    //   'product_slug' => 'required|exists:tbl_product',
+    //   'plan_slug' => 'required|exists:tbl_plan',
+    //   'color_slug' => 'nullable|exists:tbl_color'
+    // ]);
+
+    // if ($validator->fails()) {
+    //   abort(404);
+    // }
 
     $product = $this->shared->productPrepaidBySlug($brand_slug,$product_slug,$plan_slug,$color_slug);
 
