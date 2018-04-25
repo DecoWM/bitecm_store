@@ -129,3 +129,5 @@ ALTER TABLE tbl_plan DROP COLUMN plan_unlimited_rpb;
 ALTER TABLE tbl_plan DROP COLUMN plan_unlimited_sms;
 ALTER TABLE tbl_plan DROP COLUMN plan_unlimited_whatsapp;
 ALTER TABLE tbl_plan DROP COLUMN plan_free_facebook;
+
+UPDATE tbl_plan SET updated_at = created_at;
