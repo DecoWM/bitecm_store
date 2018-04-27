@@ -226,7 +226,7 @@ BEGIN
     PRD.`publish_at` DESC');
   IF (plan_id = 0) THEN
 	SET cad_order = CONCAT(cad_order, ',', '
-	PRD.`product_price` ASC');
+	PRD_VAR.`product_variation_price` ASC');
   END IF;  
   -- validation for PLAN and promo price
   SET cad_condition = CONCAT(cad_condition, '
