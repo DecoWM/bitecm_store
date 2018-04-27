@@ -206,6 +206,10 @@ BEGIN
     PRM.`publish_at` DESC,
     ISNULL(PRD.`product_tag`),
     PRD.`publish_at` DESC');
+  IF (plan_id = 0) THEN
+	SET cad_order = CONCAT(cad_order, ',', '
+	PRD.`product_price` ASC');
+  END IF;    
   SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ', variation_type_id);
   -- ORDER BY
