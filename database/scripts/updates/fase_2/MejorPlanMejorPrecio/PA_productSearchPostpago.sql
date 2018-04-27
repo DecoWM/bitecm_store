@@ -217,16 +217,25 @@ BEGIN
     SET cad_order = ' ORDER BY ';
     SET cad_order_comma = '';
   END IF;
-  SET cad_order = CONCAT(cad_order, cad_order_comma, '
-    ISNULL(STM.`stock_model_id`),
+  IF (plan_id > 0) THEN
+	SET cad_order = CONCAT(cad_order, cad_order_comma, '
+		 ISNULL(STM.`stock_model_id`),
     PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
     PRM.`publish_at` DESC,
     ISNULL(PRD.`product_tag`),
     PRD.`publish_at` DESC');
+  END IF;  
+  -- mejor plan mejor precio
   IF (plan_id = 0) THEN
-	SET cad_order = CONCAT(cad_order, ',', '
-	PRD_VAR.`product_variation_price` ASC');
+	SET cad_order = CONCAT(cad_order, cad_order_comma, '
+	 ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
+    PRD_VAR.`product_variation_price` ASC,
+    ISNULL(PRM.`publish_at`),
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
   END IF;  
   -- validation for PLAN and promo price
   SET cad_condition = CONCAT(cad_condition, '
