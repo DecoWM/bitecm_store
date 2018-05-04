@@ -171,7 +171,6 @@
       <div class="row">
         <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           <div class="add-select-plan"></div>
-
         </div>
       </div>
       <div class="row">
@@ -204,7 +203,7 @@
               <h4>VER DETALLES TÉCNICOS</h4>
             </div>
           </a>
-          <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
+          <a href="{{route('download_FichaComercial',[$product->product_id])}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>
