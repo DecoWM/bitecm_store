@@ -57,6 +57,7 @@
                 <div class="bg-white"><span>Pantalla</span></div>
                 <div class="bg-gray"><span>Memoria Externa</span></div>
                 <div class="bg-white"><span>Memoria Interna</span></div>
+                <div class="bg-white"><span>Memoria RAM</span></div>
                 <div class="bg-gray"><span>NFC</span></div>
                 <div class="bg-white"><span>Bluetooth</span></div>
                 <div class="bg-gray"><span>Sistema Operativo</span></div>
@@ -114,6 +115,9 @@
                   </div>
                   <div class="bg-white"><span>Memoria Interna</span>
                     <p>{{$product->product_internal_memory}} GB</p>
+                  </div>
+                  <div class="bg-white"><span>Memoria RAM</span>
+                    <p>{{$product->product_memory_ram}} GB</p>
                   </div>
                   <div class="bg-gray"><span>WLAN</span>
                     <p>{{$product->product_wlan}}</p>

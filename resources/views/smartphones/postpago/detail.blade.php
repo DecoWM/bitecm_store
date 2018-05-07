@@ -171,7 +171,6 @@
       <div class="row">
         <div class="col-xs-12 col-sm-offset-4 col-sm-8">
           <div class="add-select-plan"></div>
-
         </div>
       </div>
       <div class="row">
@@ -184,7 +183,7 @@
               <div class="descripcion-detalle">
                 <ul class="list-unstyled">
                   <li> <img src="/images/equipo/svg/android.svg" alt="android"><span class="title-dispositivo">{{$product->product_os}}</span><span class="description-dispositivo">Sistema Operativo</span></li>
-                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory}} GB / {{$product->product_external_memory}} GB</span><span class="description-dispositivo">Memoria</span></li>
+                  <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">{{$product->product_internal_memory}} GB / {{$product->product_external_memory}} GB</span><span class="description-dispositivo">Memoria RAM {{$product->product_memory_ram}} GB</span></li>
                   <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
                   <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
                   <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_power}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
@@ -204,7 +203,7 @@
               <h4>VER DETALLES TÉCNICOS</h4>
             </div>
           </a>
-          <a href="{{route('download_Consideraciones')}}" target="_blank" class="ver-mas-equipo">
+          <a href="{{route('download_FichaComercial',[$product->product_id])}}" target="_blank" class="ver-mas-equipo">
             <div class="title-detalle">
               <span class="btn-vmas"></span>
               <h4>VER CONSIDERACIONES COMERCIALES</h4>

@@ -93,6 +93,7 @@ Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename
 Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->name('download_Consideraciones');
 Route::get('/files/terminos', 'FileController@downloadFileTerminos')->name('download_Terminos');
 Route::get('/files/fichatecnica/{product_id}', 'FileController@downloadFileFichaTecnica')->name('download_FichaTecnica');
+Route::get('/files/fichacomercial/{product_id}', 'FileController@downloadFileFichaComercial')->name('download_FichaComercial');
 
 //RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');

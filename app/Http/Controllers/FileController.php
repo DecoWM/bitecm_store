@@ -80,4 +80,23 @@ class FileController extends Controller
             return abort(404);
         }
     }
+
+    public function downloadFileFichaComercial (Request $request, $product_id = null) {
+        /*$name = $slug = str_slug('Ficha-Técnica');
+        $ext = ".pdf";
+        $name = $name.$ext;
+        $path = public_path('/files/pdf/productos/e_bitel9501/Ficha-tecnica-para-Ecommerce-BITEL-9501.pdf');
+        return response()->download($path, $name);*/
+
+        $filename = DB::table('tbl_product')
+            ->where('product_id', $product_id)
+            ->select('product_general_specifications')
+            ->get();
+
+        if (count($filename)) {
+            return redirect(asset(Storage::url($filename[0]->product_general_specifications)));
+        } else {
+            return abort(404);
+        }
+    }
 }

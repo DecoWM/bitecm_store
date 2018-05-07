@@ -17,8 +17,8 @@ CREATE PROCEDURE `PA_productSearchPostpago`(
   IN product_price_ini DECIMAL(6,2),
   IN product_price_end DECIMAL(6,2),
   IN product_string_search VARCHAR(255),
-  IN pag_total_by_page INT,
-  IN pag_actual INT,
+  IN pag_total_by_page INT, -- Items per page
+  IN pag_actual INT, -- Actual page
   IN sort_by VARCHAR(50),
   IN sort_direction VARCHAR(5),
   IN product_tag VARCHAR(255),
@@ -217,13 +217,26 @@ BEGIN
     SET cad_order = ' ORDER BY ';
     SET cad_order_comma = '';
   END IF;
-  SET cad_order = CONCAT(cad_order, cad_order_comma, '
-    ISNULL(STM.`stock_model_id`),
+  IF (plan_id > 0) THEN
+	SET cad_order = CONCAT(cad_order, cad_order_comma, '
+		 ISNULL(STM.`stock_model_id`),
     PRD.`product_priority` DESC,
     ISNULL(PRM.`publish_at`),
     PRM.`publish_at` DESC,
     ISNULL(PRD.`product_tag`),
     PRD.`publish_at` DESC');
+  END IF;  
+  -- mejor plan mejor precio
+  IF (plan_id = 0) THEN
+	SET cad_order = CONCAT(cad_order, cad_order_comma, '
+	 ISNULL(STM.`stock_model_id`),
+    PRD.`product_priority` DESC,
+    PRD_VAR.`product_variation_price` ASC,
+    ISNULL(PRM.`publish_at`),
+    PRM.`publish_at` DESC,
+    ISNULL(PRD.`product_tag`),
+    PRD.`publish_at` DESC');
+  END IF;  
   -- validation for PLAN and promo price
   SET cad_condition = CONCAT(cad_condition, '
     AND PRD_VAR.`variation_type_id` = ',variation_type_id,'
