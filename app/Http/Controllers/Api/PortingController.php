@@ -83,7 +83,7 @@ class PortingController extends Controller
           'isdn' => strval($order_detail['porting_phone'])
         ]
       ]);
-
+      
       $portingRequest = null;
 
       if ($response->return->errorCodeMNP == '0' && !empty($response->return->listPortingRequest)) {

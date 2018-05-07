@@ -12,14 +12,16 @@ class ProcessPorta implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    protected $order_detail;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order_detail)
     {
-        //
+        $this->order_detail = $order_detail;
     }
 
     /**
