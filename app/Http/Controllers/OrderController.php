@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Mail\OrderCompleted;
+use App\Jobs\ProcessPorta;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
@@ -204,6 +205,10 @@ class OrderController extends Controller
   }
 
   protected function schedulePortingRequestJob($order_detail) {
+    
+  }
+
+  protected function schedulePortingRequestJobRequest($order_detail) {
     $client = new \GuzzleHttp\Client();
     try {
       $res = $client->request('POST', \Config::get('filter.notification_server_url').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
@@ -531,7 +536,8 @@ class OrderController extends Controller
     }
 
     if ($schedule_porting_request) {
-      $this->schedulePortingRequestJob($order_detail);
+      ProcessPorta::dispatch($order_detail);
+      // $this->schedulePortingRequestJob($order_detail);
     }
 
     $this->notifyAdmin($order_detail);
