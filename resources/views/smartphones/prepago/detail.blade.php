@@ -39,7 +39,9 @@
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @include('products.tag',['product' => $product])
               </div>
-              
+              <div class="descripcion">
+                <p>{{$product->product_description}}</p>
+              </div>
             </div>
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
@@ -102,11 +104,8 @@
               </form>
             </div>
           </section>
-          <div class="descripcion">
-            <!-- <span>HOLA</span> -->
-            <p>{{$product->product_description}}</p>
-          </div>
           <div id="planes" class="planes-prepago">
+            <h3 class="title-plan">Recarga y disfruta de estos beneficios</h3><br/>
             <div class="select-plan just-3">
                 <label for="">
                   <div class="plan">
