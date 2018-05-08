@@ -105,7 +105,7 @@
             </div>
           </section>
           <div id="planes" class="planes-prepago">
-            <h3 class="title-plan">Escoge el plan que prefieras:</h3><br/>
+            <h3 class="title-plan">Recarga y disfruta de estos beneficios</h3><br/>
             <div class="select-plan just-3">
                 <label for="">
                   <div class="plan">
