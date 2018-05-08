@@ -22,6 +22,8 @@ return [
   
   'featured_variation_2' => env('FEATURED_VARIATION_2'),
 
-  'notification_server_url' => env('NOTIFICATION_SERVER_URL')
+  'notification_server_url' => env('NOTIFICATION_SERVER_URL'),
+
+  'category_id' => env('CATEGORY_ID', 4)
 
 ];

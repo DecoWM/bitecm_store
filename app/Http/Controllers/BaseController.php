@@ -154,14 +154,14 @@ class BaseController extends Controller
 
   public function getPostpaidChipValue($prepago_postpago) {
 
-    $category_id = 4; //\Config::get('filter.category_id');
+    $category_id = \Config::get('filter.category_id');
 
     $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug AS 'affiliation_slug', tbl_plan.plan_slug AS 'plan_slug' 
   FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
         JOIN tbl_product_variation ON tbl_product.product_id = tbl_product_variation.product_id
           JOIN tbl_affiliation ON tbl_product_variation.affiliation_id = tbl_affiliation.affiliation_id
             JOIN tbl_plan ON tbl_plan.plan_id = tbl_product_variation.plan_id
-               WHERE tbl_product.category_id = 4 AND tbl_product_variation.affiliation_id > 0 AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
+               WHERE tbl_product.category_id = ".$category_id." AND tbl_product_variation.affiliation_id > 0 AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
                tbl_product_variation.active = 1 
                ORDER BY tbl_product_variation.affiliation_id ASC
                LIMIT 1"));
@@ -171,13 +171,13 @@ class BaseController extends Controller
 
   public function getPrepaidChipValue($prepago_postpago) {
 
-    $category_id = 4; //\Config::get('filter.category_id');
+    $category_id = \Config::get('filter.category_id');
 
     $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_plan.plan_slug AS 'plan_slug' 
   FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
         JOIN tbl_product_variation ON tbl_product.product_id = tbl_product_variation.product_id
             JOIN tbl_plan ON tbl_plan.plan_id = tbl_product_variation.plan_id
-               WHERE tbl_product.category_id = 4 AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
+               WHERE tbl_product.category_id = ".$category_id." AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
                tbl_product_variation.active = 1 
                LIMIT 1"));
 
