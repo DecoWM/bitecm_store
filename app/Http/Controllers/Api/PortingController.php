@@ -23,7 +23,7 @@ class PortingController extends Controller
     $porting_request_id = $request->input('porting_request_id', null);
 
     if(!isset($dni) || !isset($isdn) || !isset($porting_request_id)) {
-      return response()->json(0);
+      return response()->json(3);
     }
 
     $this->initSoapWrapper();
@@ -76,14 +76,14 @@ class PortingController extends Controller
   private function checkSuccessPortingRequest(&$order_detail)
   {
     try {
-      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [ 
+      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
         'getListPortingRequest' => [
           'staffCode' => 'CM_THUYNTT',
           'dni' => strval($order_detail['id_number']),
           'isdn' => strval($order_detail['porting_phone'])
         ]
       ]);
-
+      
       $portingRequest = null;
 
       if ($response->return->errorCodeMNP == '0' && !empty($response->return->listPortingRequest)) {
@@ -107,20 +107,20 @@ class PortingController extends Controller
 
         if (!isset($portingRequest)) {
           Log::warning('No existe esta solicitud de portabilidad');
-          return 0;
+          return 3;
         }
 
         Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
 
         if ($portingRequest->statusDescription == '01_NEW') {
           Log::warning('Solicitud de portabilidad nueva aun no procesada. Debe regresar a la cola.');
-          return 1;
+          return 2;
         } else if ($portingRequest->statusDescription == '01_PROCESSING') {
           Log::warning('Solicitud de portabilidad aun procesandose. Debe regresar a la cola.');
-          return 1;
+          return 2;
         } else {
           Log::info('Solicitud de portabilidad procesada. Trabajo finalizado. No debe regresar a la cola.');
-          return 2;
+          return 1;
         }
       }
 

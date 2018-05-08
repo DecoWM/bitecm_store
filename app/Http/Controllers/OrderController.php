@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Mail\OrderCompleted;
+use App\Jobs\ProcessPorta;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
@@ -203,7 +204,45 @@ class OrderController extends Controller
     }
   }
 
+  protected function checkIsRenovationUnavailable(&$order_detail)
+  {
+    try {
+      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
+        'getListPortingRequest' => array(
+          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
+          'dni' => strval($order_detail['id_number']),
+          'isdn' => strval($order_detail['porting_phone']),
+        )
+      ]);
+
+      if ($response->return->errorCodeMNP == '0') {
+        $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
+        $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
+        $order_detail['porting_status'] = $response->return->listPortingRequest->status;
+        $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
+        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+        return true;
+      }
+
+      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
+      return false;
+      // return ($response->return->errorCode == '02');
+    } catch (\Exception $e) {
+      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
+      return true;
+    }
+  }
+
   protected function schedulePortingRequestJob($order_detail) {
+    $payload = [
+      'dni' => $order_detail['id_number'],
+      'isdn' => $order_detail['porting_phone'],
+      'porting_request_id' => $order_detail['porting_request_id']
+    ];
+    ProcessPorta::dispatch($payload);
+  }
+
+  protected function schedulePortingRequestJobRequest($order_detail) {
     $client = new \GuzzleHttp\Client();
     try {
       $res = $client->request('POST', \Config::get('filter.notification_server_url').'/api/schedule/check_porting_status/'.$order_detail['order_id'], [
@@ -419,6 +458,15 @@ class OrderController extends Controller
     if(isset($equipo) && \Config::get('filter.use_bcss')) { 
       // Apply validations with Bitel webservice before insert
       $this->initSoapWrapper(); // Init the bitel soap webservice
+
+      if(isset($request->affiliation) && $request->affiliation == 3) {
+        /*if($this->checkIsRenovationUnavailable($order_detail)) {
+          return redirect()->route('create_order')->with('ws_result', json_encode([
+            'title' => 'te comunica que',
+            'message' => 'No puede continuar con el proceso de compra por renovación si su línea pertenece a otro operador. Elimine el equipo del carrito y seleccione otro tipo de afiliación.'
+          ]));
+        }*/
+      }
 
       // Check if have many lines
       if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)) {
