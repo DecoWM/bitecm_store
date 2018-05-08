@@ -234,7 +234,12 @@ class OrderController extends Controller
   }
 
   protected function schedulePortingRequestJob($order_detail) {
-    ProcessPorta::dispatch($order_detail);
+    $payload = [
+      'dni' => $order_detail['id_number'],
+      'isdn' => $order_detail['porting_phone'],
+      'porting_request_id' => $order_detail['porting_request_id']
+    ];
+    ProcessPorta::dispatch($payload);
   }
 
   protected function schedulePortingRequestJobRequest($order_detail) {
