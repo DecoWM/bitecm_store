@@ -32,4 +32,5 @@ pedidosAdicionales.sql --> Ejecutado en UAT
 
 Navegación entre Ordenes (03/05/2018)
 =====================================
+update_PA_orderCompletedReport.sql --> Ejecutado en UAT
 PA_orderBackNext.sql --> Ejecutado en UAT
