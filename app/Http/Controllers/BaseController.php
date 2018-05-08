@@ -156,32 +156,62 @@ class BaseController extends Controller
 
     $category_id = \Config::get('filter.category_id');
 
+    $result = DB::table('tbl_brand')
+    ->join('tbl_product', 'tbl_brand.brand_id', '=', 'tbl_product.brand_id')
+    ->join('tbl_product_variation', 'tbl_product.product_id', '=', 'tbl_product_variation.product_id')
+    ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
+    ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+    ->where('tbl_product.category_id', $category_id)
+    ->where('tbl_product_variation.affiliation_id', '>', 0)
+    ->where('tbl_plan.active', 1)
+    ->where('tbl_product_variation.variation_type_id', $prepago_postpago)
+    ->where('tbl_product_variation.active', 1)
+    ->orderBy('tbl_product_variation.affiliation_id')
+    ->select(DB::raw('tbl_brand.brand_slug, tbl_product.product_slug, tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_plan.plan_slug'))
+      ->first();
+
+    /*
     $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug AS 'affiliation_slug', tbl_plan.plan_slug AS 'plan_slug' 
-  FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
+  FROM tbl_brand 
+  JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
         JOIN tbl_product_variation ON tbl_product.product_id = tbl_product_variation.product_id
           JOIN tbl_affiliation ON tbl_product_variation.affiliation_id = tbl_affiliation.affiliation_id
             JOIN tbl_plan ON tbl_plan.plan_id = tbl_product_variation.plan_id
                WHERE tbl_product.category_id = ".$category_id." AND tbl_product_variation.affiliation_id > 0 AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
                tbl_product_variation.active = 1 
                ORDER BY tbl_product_variation.affiliation_id ASC
-               LIMIT 1"));
+               LIMIT 1"));*/
 
-    return count($results) > 0 ? $results[0] : null;
+    return count($result) > 0 ? $result : null;
+    //return count($results) > 0 ? $results[0] : null;
   }
 
   public function getPrepaidChipValue($prepago_postpago) {
 
     $category_id = \Config::get('filter.category_id');
 
+    $result = DB::table('tbl_brand')
+    ->join('tbl_product', 'tbl_brand.brand_id', '=', 'tbl_product.brand_id')
+    ->join('tbl_product_variation', 'tbl_product.product_id', '=', 'tbl_product_variation.product_id')
+    ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+    ->where('tbl_product.category_id', $category_id)
+    ->where('tbl_plan.active', 1)
+    ->where('tbl_product_variation.variation_type_id', $prepago_postpago)
+    ->where('tbl_product_variation.active', 1)
+    ->select(DB::raw('tbl_brand.brand_slug, tbl_product.product_slug, tbl_plan.plan_slug'))
+      ->first();
+
+    /*  
     $results = DB::select( DB::raw("SELECT tbl_brand.brand_slug AS 'brand_slug', tbl_product.product_slug AS 'product_slug', tbl_plan.plan_slug AS 'plan_slug' 
   FROM tbl_brand JOIN tbl_product ON tbl_brand.brand_id = tbl_product.brand_id
         JOIN tbl_product_variation ON tbl_product.product_id = tbl_product_variation.product_id
             JOIN tbl_plan ON tbl_plan.plan_id = tbl_product_variation.plan_id
                WHERE tbl_product.category_id = ".$category_id." AND tbl_plan.active = 1 AND tbl_product_variation.variation_type_id = ".$prepago_postpago." AND
                tbl_product_variation.active = 1 
-               LIMIT 1"));
+               LIMIT 1"));*/
 
-    return count($results) > 0 ? $results[0] : null;
+    return count($result)> 0 ? $result : null;
+    //return count($results) > 0 ? $results[0] : null;
   }
 
   public function productPostpaidBySlug($brand,$product,$affiliation,$plan,$contract,$color=null) {
