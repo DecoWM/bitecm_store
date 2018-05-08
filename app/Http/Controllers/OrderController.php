@@ -55,8 +55,7 @@ class OrderController extends Controller
   * @var isOverQuota: 0 -> return false
   *                  else -> return true
   **/
-  protected function checkIsOverQouta($order_detail)
-  {
+  protected function checkIsOverQouta($order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
         'checkOverQoutaIdNo' => array(
@@ -79,8 +78,7 @@ class OrderController extends Controller
   * @var result: if exists -> return object result
   *              else -> return false: Not have debt
   */
-  protected function getInfoCustomer($order_detail)
-  {
+  protected function getInfoCustomer($order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
         'getCustomer' => array(
@@ -107,8 +105,7 @@ class OrderController extends Controller
   * @var errorCode: -1 -> return true
   *                 else -> return false: Not have debt
   */
-  protected function checkHaveDebit($custId)
-  {
+  protected function checkHaveDebit($custId) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
         'getInfoDebitByCustId' => array(
@@ -133,8 +130,7 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
-  protected function createConsultantRequest(&$order_detail)
-  {
+  protected function createConsultantRequest(&$order_detail) {
     try {
       $req = [
         'createConsultantRequest' => array(
@@ -175,8 +171,7 @@ class OrderController extends Controller
   * @var stateCode: 02 -> return true: Exito
   *                 else -> return false: Rechazado
   */
-  protected function checkSuccessPortingRequest(&$order_detail)
-  {
+  protected function checkSuccessPortingRequest(&$order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
         'getListPortingRequest' => array(
@@ -204,8 +199,7 @@ class OrderController extends Controller
     }
   }
 
-  protected function checkIsRenovationUnavailable(&$order_detail)
-  {
+  protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
         'getListPortingRequest' => array(

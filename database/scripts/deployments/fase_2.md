@@ -1,7 +1,7 @@
 Fase 2
 ===========
 
-Landings Huawei (18/04/2018)
+Producto Chip (18/04/2018)
 ============================
 add_chip_brand.sql --> Ejecutado en UAT
 add_chip_category.sql --> Ejecutado en UAT
