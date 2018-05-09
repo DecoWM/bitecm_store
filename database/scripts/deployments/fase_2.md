@@ -3,6 +3,7 @@ Fase 2
 
 Producto Chip (18/04/2018)
 ============================
+add_order_equipo_plan.sql --> Ejecutado en UAT
 add_chip_brand.sql --> Ejecutado en UAT
 add_chip_category.sql --> Ejecutado en UAT
 add_chip_product.sql --> Ejecutado en UAT
@@ -20,15 +21,15 @@ update_vw_order_report.sql --> Ejecutado en UAT
 update_PA_orderCompletedReport.sql --> Ejecutado en UAT
 
 Mejor Plan Mejor Precio (24/04/2018)
-===================================
+====================================
 add_bestplan_tbl_product_variation.sql --> Ejecutado en UAT
 PA_productCountPostpago.sql --> Ejecutado en UAT
 PA_productCountPrepago.sql --> Ejecutado en UAT
 PA_productSearchPostpago.sql --> Ejecutado en UAT
 PA_productSearchPretpago.sql --> Ejecutado en UAT
 
-Pedidos Adicionales (25/04/2018)
-================================
+Pedidos Cambios Adicionales (25/04/2018)
+========================================
 pedidosAdicionales.sql --> Ejecutado en UAT
 
 Navegación entre Ordenes (03/05/2018)

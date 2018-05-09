@@ -118,3 +118,10 @@ Route::get('/test_job', 'OrderController@testJob');
 
 Route::get('/huawei_p20_pro', 'LandingController@huawei_p20_pro')->name('huawei_p20_pro');
 Route::get('/huawei_p20', 'LandingController@huawei_p20')->name('huawei_p20');
+
+Route::get('/test_job', function() {
+  \App\Jobs\ProcessPorta::dispatch([
+    'dni' => '45677136',
+    'isdn' => '996800986'
+  ]);
+});
