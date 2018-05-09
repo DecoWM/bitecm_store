@@ -123,5 +123,5 @@ Route::get('/test_job', function() {
   \App\Jobs\ProcessPorta::dispatch([
     'dni' => '45677136',
     'isdn' => '996800986'
-  ]);
+  ])->onQueue('porta');
 });
