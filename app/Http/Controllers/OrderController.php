@@ -10,6 +10,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Artisaninweb\SoapWrapper\SoapWrapper; // For use client SOAP service
 use Illuminate\Support\Facades\Log;
+use Illuminate\Queue\QueueManager;
 
 class OrderController extends Controller
 {
@@ -21,6 +22,7 @@ class OrderController extends Controller
   */
   protected $soapWrapper;
   protected $portingRequestId;
+  protected $queueManager;
 
   /**
   * SoapController constructor.
@@ -28,9 +30,10 @@ class OrderController extends Controller
   * @param SoapWrapper $soapWrapper
   */
 
-  public function __construct (BaseController $shared, SoapWrapper $soapWrapper) {
+  public function __construct (BaseController $shared, SoapWrapper $soapWrapper, QueueManager $queueManager) {
     $this->shared = $shared;
     $this->soapWrapper = $soapWrapper;
+    $this->queueManager = $queueManager;
   }
 
   private function initSoapWrapper(){
@@ -234,7 +237,9 @@ class OrderController extends Controller
       'isdn' => $order_detail['porting_phone'],
       'porting_request_id' => $order_detail['porting_request_id']
     ];
-    ProcessPorta::dispatch($payload)->onQueue('porta');
+    $connectionName = config('queue.default');
+    $this->queueManager->connection($connectionName)->pushRaw($payload, 'porta');
+    // ProcessPorta::dispatch($payload)->onQueue('porta');
   }
 
   protected function schedulePortingRequestJobRequest($order_detail) {
