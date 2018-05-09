@@ -238,7 +238,7 @@ class OrderController extends Controller
       'porting_request_id' => $order_detail['porting_request_id']
     ];
     $connectionName = config('queue.default');
-    $this->queueManager->connection($connectionName)->pushRaw($payload, 'porta');
+    $this->queueManager->connection($connectionName)->pushRaw(json_encode($payload), 'porta');
     // ProcessPorta::dispatch($payload)->onQueue('porta');
   }
 
