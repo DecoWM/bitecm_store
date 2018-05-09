@@ -83,7 +83,7 @@ class PortingController extends Controller
           'isdn' => strval($order_detail['porting_phone'])
         ]
       ]);
-      
+
       $portingRequest = null;
 
       if ($response->return->errorCodeMNP == '0' && !empty($response->return->listPortingRequest)) {
@@ -93,16 +93,16 @@ class PortingController extends Controller
               $portingRequest = $pRequest;
               $order_detail['mnp_request_id'] = $portingRequest->requestId;
               $order_detail['porting_state_code'] = $portingRequest->stateCode;
-              $order_detail['porting_status'] = $portingRequest->status;
-              $order_detail['porting_status_desc'] = $portingRequest->statusDescription;
+              $order_detail['porting_status'] = $portingRequest->statusDescription;
+              $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
             }
           }
         } else {
           $portingRequest = $response->return->listPortingRequest;
           $order_detail['mnp_request_id'] = $portingRequest->requestId;
           $order_detail['porting_state_code'] = $portingRequest->stateCode;
-          $order_detail['porting_status'] = $portingRequest->status;
-          $order_detail['porting_status_desc'] = $portingRequest->statusDescription;
+          $order_detail['porting_status'] = $portingRequest->statusDescription;
+          $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
         }
 
         if (!isset($portingRequest)) {
