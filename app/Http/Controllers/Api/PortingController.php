@@ -94,7 +94,8 @@ class PortingController extends Controller
               $order_detail['mnp_request_id'] = $portingRequest->requestId;
               $order_detail['porting_state_code'] = $portingRequest->stateCode;
               $order_detail['porting_status'] = $portingRequest->statusDescription;
-              $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
+              if(property_exists($portingRequest, 'errorMessage'))
+                $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
             }
           }
         } else {
@@ -102,7 +103,8 @@ class PortingController extends Controller
           $order_detail['mnp_request_id'] = $portingRequest->requestId;
           $order_detail['porting_state_code'] = $portingRequest->stateCode;
           $order_detail['porting_status'] = $portingRequest->statusDescription;
-          $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
+          if(property_exists($portingRequest, 'errorMessage'))
+            $order_detail['porting_status_desc'] = $portingRequest->errorMessage;
         }
 
         if (!isset($portingRequest)) {
