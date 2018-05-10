@@ -1,4 +1,4 @@
-USE `bitel_ecommerce` ;
+USE `bitel_ecommerce`;
 
 DROP TABLE IF EXISTS `jobs`;
 

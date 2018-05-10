@@ -35,3 +35,8 @@ pedidosAdicionales.sql --> Ejecutado en UAT
 Navegación entre Ordenes (03/05/2018)
 =====================================
 PA_orderBackNext.sql --> Ejecutado en UAT
+
+Cola de Portabilidad (11/05/2018)
+=================================
+create_table_jobs.sql --> Ejecutado en UAT
+update_order_table.sql --> Ejecutado en UAT
