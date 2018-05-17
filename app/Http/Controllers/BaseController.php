@@ -851,8 +851,4 @@ class BaseController extends Controller
     // One function to both clean the XML string and return an array
     return json_decode(json_encode(simplexml_load_string($this->removeNamespaceFromXML($xml))), true);
   }
-
-  public function namespacedXMLToObject($xml) {
-    return (object) $this->namespacedXMLToArray($xml);
-  }
 }
