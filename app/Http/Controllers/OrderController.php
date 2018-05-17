@@ -226,9 +226,6 @@ class OrderController extends Controller
           'username' => '938ed30650f53b911f39c8818c9bc6e1',
           'password' => '313d4015d3d32ba16b951ee3e4029b71',
           'wscode' => 'checkSubscriberExist',
-          /*'idNo' => strval($order_detail['id_number']),
-          'idType' => intval($order_detail['idtype_id']),
-          'isdn' => strval($order_detail['porting_phone'])*/
           'param' => [
             [
               '_' => '',
@@ -243,7 +240,7 @@ class OrderController extends Controller
             [
               '_' => '',
               'name' => 'isdn',
-              'value' => strval($order_detail['porting_phone'])
+              'value' => strval($order_detail['billing_phone'])
             ]
           ]
         ]
