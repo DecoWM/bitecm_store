@@ -678,7 +678,7 @@ class OrderController extends Controller
               'affiliation' => $product->affiliation_slug,
               'plan' => $product->plan_slug,
               'contract' => $product->contract_slug
-            ]
+            ];
             if (!empty($product->color_slug)) $params['color'] = $product->color_slug;
             break;
         }
