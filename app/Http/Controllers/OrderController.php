@@ -228,7 +228,7 @@ class OrderController extends Controller
             'password' => '313d4015d3d32ba16b951ee3e4029b71',
             'wscode' => 'checkSubscriberExist',
             'idNo' => strval($order_detail['id_number']),
-            'idType' => strval($order_detail['document_type']),
+            'idType' => strval($order_detail['idtype_id']),
             'isdn' => strval($order_detail['porting_phone'])
           ]
         ]
