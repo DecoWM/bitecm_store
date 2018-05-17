@@ -256,7 +256,7 @@ class OrderController extends Controller
 
       if ($response->error == '0') {
         if (!empty($response->original)) {
-          die(var_dump($response->original));
+          die(var_dump(simplexml_load_string($response->original)));
           $original = json_decode(json_encode(simplexml_load_string($response->original))); die(var_dump($original));
           Log::info('bitelSoapGW.gwOperation.original: ', (array) $original);
           if ($original->return->code != '0') {
