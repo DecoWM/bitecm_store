@@ -245,10 +245,10 @@ class OrderController extends Controller
                 'value' => strval($order_detail['porting_phone'])
               ]
             ]
-          ]
-          /*'idNo' => strval($order_detail['id_number']),
+          ],
+          'idNo' => strval($order_detail['id_number']),
           'idType' => strval($order_detail['idtype_id']),
-          'isdn' => strval($order_detail['porting_phone'])*/
+          'isdn' => strval($order_detail['porting_phone'])
         ]
       ]);
 
