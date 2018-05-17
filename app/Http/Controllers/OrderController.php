@@ -234,8 +234,8 @@ class OrderController extends Controller
 
       Log::info('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
 
-      if ($response->Result->error == '0' && $response->Result->original->return->code != '0') {
-        if ($response->Result->original->return->checkedSubscriber->isExist != 'false') {
+      if ($response->error == '0' && $response->original->return->code != '0') {
+        if ($response->original->return->checkedSubscriber->isExist != 'false') {
           return false; 
         } else {
           return true;
