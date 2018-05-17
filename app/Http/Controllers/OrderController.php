@@ -43,13 +43,20 @@ class OrderController extends Controller
           ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
           ->trace(true);
       });
-      $this->soapWrapper->add('bitelSoapGw', function ($service) {
+    } catch (\Exception $e) {
+      Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
+      Log::error($e->getMessage());
+    }
+
+    try {
+      $this->soapWrapper->add('bitelSoapGW', function ($service) {
         $service
           ->wsdl('http://10.121.4.61:8570/BCCSGateway?wsdl')
           ->trace(true);
       });
     } catch (\Exception $e) {
-      Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
+      Log::error('No se tiene acceso al servidor BCCSGateway. Puede que no se esté dentro de la red privada');
+      Log::error($e->getMessage());
     }
   }
 
@@ -77,6 +84,7 @@ class OrderController extends Controller
       return ($response->return->isOverQouta != 0);
     } catch (\Exception $e) {
       Log::error('El método checkOverQoutaIdNo no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return false;
     }
   }
@@ -104,6 +112,7 @@ class OrderController extends Controller
       }
     } catch (\Exception $e) {
       Log::error('El método getCustomer no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return null;
     }
   }
@@ -128,6 +137,7 @@ class OrderController extends Controller
       return false;
     } catch (\Exception $e) {
       Log::error('El método getInfoDebitByCustId no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return true;
     }
   }
@@ -170,6 +180,7 @@ class OrderController extends Controller
       return false;
     } catch (\Exception $e) {
       Log::error('El método createConsultantRequest no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return true;
     }
   }
@@ -203,13 +214,14 @@ class OrderController extends Controller
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
       Log::error('El método getListPortingRequest no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return true;
     }
   }
 
   protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
-      $response = $this->soapWrapper->call('bitelSoapGw.gwOperation', [
+      $response = $this->soapWrapper->call('bitelSoapGW.gwOperation', [
         'gwOperation' => [
           'Input' => [
             'username' => '938ed30650f53b911f39c8818c9bc6e1',
@@ -222,7 +234,7 @@ class OrderController extends Controller
         ]
       ]);
 
-      Log::info('Respuesta bitelSoapGw.gwOperation: ', (array) $response);
+      Log::info('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
 
       if ($response->Result->error == '0' && $response->Result->original->return->code != '0') {
         if ($response->Result->original->return->checkedSubscriber->isExist != 'false') {
@@ -233,12 +245,13 @@ class OrderController extends Controller
       }
 
       $order_detail['renov_ws_fail'] = 1;
-      Log::warning('Respuesta bitelSoapGw.gwOperation: ', (array) $response);
+      Log::warning('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
       return true;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
       $order_detail['renov_ws_fail'] = 1;
       Log::error('El método gwOperation no se encuentra disponible o recibió parametros erroneos');
+      Log::error($e->getMessage());
       return true;
     }
   }
