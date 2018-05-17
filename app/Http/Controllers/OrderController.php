@@ -205,14 +205,16 @@ class OrderController extends Controller
   protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.gwOperation', [
-        'gwOperation' => array(
-          'username' => '938ed30650f53b911f39c8818c9bc6e1',
-          'password' => '313d4015d3d32ba16b951ee3e4029b71',
-          'wscode' => 'checkSubscriberExist',
-          'idNo' => strval($order_detail['id_number']),
-          'idType' => strval($order_detail['document_type']),
-          'isdn' => strval($order_detail['porting_phone']),
-        )
+        'gwOperation' => [
+          'Input' => [
+            'username' => '938ed30650f53b911f39c8818c9bc6e1',
+            'password' => '313d4015d3d32ba16b951ee3e4029b71',
+            'wscode' => 'checkSubscriberExist',
+            'idNo' => strval($order_detail['id_number']),
+            'idType' => strval($order_detail['document_type']),
+            'isdn' => strval($order_detail['porting_phone'])
+          ]
+        ]
       ]);
 
       Log::info('Respuesta bitelSoap.gwOperation: ', (array) $response);
