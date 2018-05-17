@@ -219,7 +219,7 @@ class OrderController extends Controller
     }
   }
 
-  protected function checkIsRenovationUnavailable(&$order_detail) {
+  protected function checkIsRenovationUnavailable(&$order_detail) {die(print_r($order_detail));
     try {
       $response = $this->soapWrapper->call('bitelSoapGW.gwOperation', [
         'gwOperation' => [
@@ -270,7 +270,6 @@ class OrderController extends Controller
       }
 
       $order_detail['renov_ws_fail'] = 1;
-      Log::warning('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
       return true;
     } catch (\Exception $e) {
       $order_detail['renov_ws_fail'] = 1;
