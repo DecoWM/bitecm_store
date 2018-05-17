@@ -226,26 +226,51 @@ class OrderController extends Controller
           'username' => '938ed30650f53b911f39c8818c9bc6e1',
           'password' => '313d4015d3d32ba16b951ee3e4029b71',
           'wscode' => 'checkSubscriberExist',
-          'idNo' => strval($order_detail['id_number']),
+          'param' => [
+            [
+              '@attributes' => [
+                'name' => 'idNo',
+                'value' => strval($order_detail['id_number'])
+              ]
+            ],
+            [
+              '@attributes' => [
+                'name' => 'idType',
+                'value' => strval($order_detail['idtype_id'])
+              ]
+            ],
+            [
+              '@attributes' => [
+                'name' => 'isdn',
+                'value' => strval($order_detail['porting_phone'])
+              ]
+            ]
+          ]
+          /*'idNo' => strval($order_detail['id_number']),
           'idType' => strval($order_detail['idtype_id']),
-          'isdn' => strval($order_detail['porting_phone'])
+          'isdn' => strval($order_detail['porting_phone'])*/
         ]
       ]);
 
       Log::info('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
 
-      if ($response->error == '0' && $response->original->return->code != '0') {
-        if ($response->original->return->checkedSubscriber->isExist != 'false') {
-          return false; 
-        } else {
-          return true;
+      if ($response->error == '0') {
+        if (!empty($response->original)) {
+          $original = simplexml_load_string($response->original);
+          Log::info('bitelSoapGW.gwOperation.original: ', (array) $original);
+          if ($original->return->code != '0') {
+            if ($original->return->checkedSubscriber->isExist != 'false') {
+              return false; 
+            } else {
+              return true;
+            }
+          }
         }
       }
 
       $order_detail['renov_ws_fail'] = 1;
       Log::warning('Respuesta bitelSoapGW.gwOperation: ', (array) $response);
       return true;
-      // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
       $order_detail['renov_ws_fail'] = 1;
       Log::error('El método gwOperation no se encuentra disponible o recibió parametros erroneos');
