@@ -226,29 +226,26 @@ class OrderController extends Controller
           'username' => '938ed30650f53b911f39c8818c9bc6e1',
           'password' => '313d4015d3d32ba16b951ee3e4029b71',
           'wscode' => 'checkSubscriberExist',
-          'idNo' => strval($order_detail['id_number']),
+          /*'idNo' => strval($order_detail['id_number']),
           'idType' => intval($order_detail['idtype_id']),
-          'isdn' => strval($order_detail['porting_phone'])
-          /*'param' => [
+          'isdn' => strval($order_detail['porting_phone'])*/
+          'param' => [
             [
-              '@attributes' => [
-                'name' => 'idNo',
-                'value' => strval($order_detail['id_number'])
-              ]
+              '_' => '',
+              'name' => 'idNo',
+              'value' => strval($order_detail['id_number'])
             ],
             [
-              '@attributes' => [
-                'name' => 'idType',
-                'value' => strval($order_detail['idtype_id'])
-              ]
+              '_' => '',
+              'name' => 'idType',
+              'value' => strval($order_detail['idtype_id'])
             ],
             [
-              '@attributes' => [
-                'name' => 'isdn',
-                'value' => strval($order_detail['porting_phone'])
-              ]
+              '_' => '',
+              'name' => 'isdn',
+              'value' => strval($order_detail['porting_phone'])
             ]
-          ]*/
+          ]
         ]
       ]);
 
