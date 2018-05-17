@@ -698,7 +698,7 @@ class OrderController extends Controller
         switch ($item['type_id']) {
           case 1:
             $product = $this->shared->productPrepagoByStock($item['stock_model_id'], $item['product_variation_id']);
-            $route = 'prepaid';
+            $route = 'prepaid_detail';
             $params = [
               'brand' => $product->brand_slug,
               'product' => $product->product_slug,
@@ -708,7 +708,7 @@ class OrderController extends Controller
             break;
           case 2:
             $product = $this->shared->productPostpagoByStock($item['stock_model_id'], $item['product_variation_id']);
-            $route = 'postpaid';
+            $route = 'postpaid_detail';
             $params = [
               'brand' => $product->brand_slug,
               'product' => $product->product_slug,

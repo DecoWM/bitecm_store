@@ -13,20 +13,12 @@
             <div id="section-pedido">
               <div class="row">
                 <div class="title-section-pedido text-center">
-                  <h3>Tu pedido no pudo ser completado</h3>
+                  <h3>RENOVACIÓN NO APLICABLE</h3>
+                  <h4>Tu pedido no pudo ser completado</h4>
                 </div>
-                <div class="detalle-pedido">
-                  <div class="row">
-                    <div class="col-xs-12 col-sm-7">
-                      <div class="solicitud">
-                        <div class="btn-check">
-                          <div class="fa fa-check-circle"></div>
-                        </div>
-                        <div class="info">
-                          <p>No puede continuar con el proceso de compra por renovación si su línea pertenece a otro operador. Elimine el equipo del carrito y seleccione otro tipo de afiliación.</p>
-                        </div>
-                      </div>
-                    </div>
+                <div class="rastreo-de-compra">
+                  <div class="text-center">
+                    <p>No puede continuar con el proceso de compra por renovación si su línea pertenece a otro operador. Elimine el equipo del carrito y seleccione otro tipo de afiliación.</p>
                   </div>
                 </div>
                 <div class="btn-detalle">
