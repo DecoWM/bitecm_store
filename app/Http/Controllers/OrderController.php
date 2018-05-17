@@ -43,6 +43,11 @@ class OrderController extends Controller
           ->wsdl('http://10.121.4.36:8236/BCCSWS?wsdl')
           ->trace(true);
       });
+      $this->soapWrapper->add('bitelSoapGw', function ($service) {
+        $service
+          ->wsdl('http://10.121.4.61:8570/BCCSGateway?wsdl')
+          ->trace(true);
+      });
     } catch (\Exception $e) {
       Log::error('No se tiene acceso al servidor BCCSWS. Puede que no se esté dentro de la red privada');
     }
@@ -204,16 +209,20 @@ class OrderController extends Controller
 
   protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
-      $response = $this->soapWrapper->call('bitelSoap.gwOperation', [
-        'username' => '938ed30650f53b911f39c8818c9bc6e1',
-        'password' => '313d4015d3d32ba16b951ee3e4029b71',
-        'wscode' => 'checkSubscriberExist',
-        'idNo' => strval($order_detail['id_number']),
-        'idType' => strval($order_detail['document_type']),
-        'isdn' => strval($order_detail['porting_phone'])
+      $response = $this->soapWrapper->call('bitelSoapGw.gwOperation', [
+        'gwOperation' => [
+          'Input' => [
+            'username' => '938ed30650f53b911f39c8818c9bc6e1',
+            'password' => '313d4015d3d32ba16b951ee3e4029b71',
+            'wscode' => 'checkSubscriberExist',
+            'idNo' => strval($order_detail['id_number']),
+            'idType' => strval($order_detail['document_type']),
+            'isdn' => strval($order_detail['porting_phone'])
+          ]
+        ]
       ]);
 
-      Log::info('Respuesta bitelSoap.gwOperation: ', (array) $response);
+      Log::info('Respuesta bitelSoapGw.gwOperation: ', (array) $response);
 
       if ($response->Result->error == '0' && $response->Result->original->return->code != '0') {
         if ($response->Result->original->return->checkedSubscriber->isExist != 'false') {
@@ -224,7 +233,7 @@ class OrderController extends Controller
       }
 
       $order_detail['renov_ws_fail'] = 1;
-      Log::warning('Respuesta bitelSoap.gwOperation: ', (array) $response);
+      Log::warning('Respuesta bitelSoapGw.gwOperation: ', (array) $response);
       return true;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
