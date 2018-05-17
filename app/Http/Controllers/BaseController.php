@@ -826,7 +826,7 @@ class BaseController extends Controller
       // Because I know all of the the namespaces that will possibly appear in 
       // in the XML string I can just hard code them and check for 
       // them to remove them
-      $toRemove = ['ns2'];
+      $toRemove = ['S', 'ns2'];
       // This is part of a regex I will use to remove the namespace declaration from string
       $nameSpaceDefRegEx = '(\S+)=["\']?((?:.(?!["\']?\s+(?:\S+)=|[>"\']))+.)["\']?';
 
