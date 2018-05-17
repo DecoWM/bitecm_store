@@ -219,7 +219,7 @@ class OrderController extends Controller
     }
   }
 
-  protected function checkIsRenovationUnavailable(&$order_detail) {die(print_r($order_detail));
+  protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoapGW.gwOperation', [
         'gwOperation' => [
@@ -227,7 +227,7 @@ class OrderController extends Controller
           'password' => '313d4015d3d32ba16b951ee3e4029b71',
           'wscode' => 'checkSubscriberExist',
           'idNo' => strval($order_detail['id_number']),
-          'idType' => strval($order_detail['idtype_id']),
+          'idType' => intval($order_detail['idtype_id']),
           'isdn' => strval($order_detail['porting_phone'])
           /*'param' => [
             [
