@@ -256,7 +256,9 @@ class OrderController extends Controller
 
       if ($response->error == '0') {
         if (!empty($response->original)) {
-          $original = $this->shared->namespacedXMLToArray($response->original);
+          $original = simplexml_load_string($response->original);
+          die(var_dump($original->children('ns2', true)));
+          //$original = $this->shared->namespacedXMLToArray($response->original);
           Log::info('bitelSoapGW.gwOperation.original: ', (array) $original);
           if ($original->return->code != '0') {
             if ($original->return->checkedSubscriber->isExist != 'false') {
