@@ -13,7 +13,7 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
-//RUTA PRODUCTO
+// RUTA PRODUCTO
 Route::get('/producto/{brand}/{product}/{color?}', 'ProductController@show')
     ->where(
       [
@@ -23,7 +23,7 @@ Route::get('/producto/{brand}/{product}/{color?}', 'ProductController@show')
       ])
     ->name('product_detail');
 
-//RUTAS PREPAGO
+// RUTAS PREPAGO
 Route::get('/prepago', 'PrepaidController@index')->name('prepaid');
 Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show')
     ->where(
@@ -35,7 +35,7 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show
       ])
     ->name('prepaid_detail');
 
-//RUTAS POSTPAGO
+// RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
 Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')
     ->where(
@@ -49,7 +49,7 @@ Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}
       ])
     ->name('postpaid_detail');
 
-//RUTAS ACCESORIOS
+// RUTAS ACCESORIOS
 /*Route::get('/accesorios', 'AccessoriesController@index')->name('accessories');
 Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show')
     ->where(
@@ -60,64 +60,67 @@ Route::get('/accesorios/{brand}/{product}/{color?}', 'AccessoriesController@show
       ])
     ->name('accessory_detail');*/
 
-//RUTAS ACCESORIOS
+// RUTAS ACCESORIOS
 Route::get('/promociones', 'PromoController@index')->name('promociones');
 
-//RUTAS CHIP
+// RUTAS CHIP
 Route::get('/chip', 'ChipController@index')->name('chip');
 
-//RUTAS PLAN
+// RUTAS PLAN
 Route::get('/plan', 'PlanController@index')->name('plan');
 
-//RUTAS COMPARAR
+// RUTAS COMPARAR
 Route::get('/prepago/comparar', 'PrepaidController@compare');
 Route::get('/postpago/comparar', 'PostpaidController@compare');
 Route::get('/producto/comparar', 'PostpaidController@compare');
 
-//RUTAS CARRITO
+// RUTAS CARRITO
 Route::get('/carrito', 'CartController@showCart')->name('show_cart');
 Route::post('/carrito', 'CartController@addToCart')->name('add_to_cart');
 Route::post('/carrito/borrar', 'CartController@removeFromCart')->name('remove_from_cart');
 Route::post('/carrito/actualizar', 'CartController@updateCart')->name('update_cart');
 // Route::delete('/carrito/{product}', 'CartController@removeFromCart')->name('remove_from_cart');
 
-//RUTAS ORDEN
+// RUTAS ORDEN
 Route::get('/envio', 'OrderController@createOrder')->name('create_order');
 Route::get('/envio/currency', 'OrderController@show')->name('currency');
 Route::post('/envio', 'OrderController@storeOrder')->name('store_order');
 Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
 Route::get('/trackeo/{order_id}', 'OrderController@trackOrder')->name('track_order');
+Route::get('/renovacion_no_aplicable', 'OrderController@renovFail')->name('renov_fail');
+Route::get('/cambiar_afiliacion', 'OrderController@changeAffil')->name('change_affil');
 
-//ENLACES FOOTER
+// ENLACES FOOTER
 Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');
 Route::get('/files/consideraciones', 'FileController@downloadFileConsideraciones')->name('download_Consideraciones');
 Route::get('/files/terminos', 'FileController@downloadFileTerminos')->name('download_Terminos');
 Route::get('/files/fichatecnica/{product_id}', 'FileController@downloadFileFichaTecnica')->name('download_FichaTecnica');
 Route::get('/files/fichacomercial/{product_id}', 'FileController@downloadFileFichaComercial')->name('download_FichaComercial');
 
-//RUTAS ARCHIVOS
+// RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
-//RUTAS ARCHIVOS
+// RUTAS ARCHIVOS
 Route::get('/files/{filename}', 'FileController@downloadFile')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_file');
 
-//MAIL
+// MAIL
 Route::get('/email/orden', function () {
   //$invoice = App\Invoice::find(1);
   return new App\Mail\OrderCompleted();
 });
 
-//TEST
+// LANDINGS
+Route::get('/huawei_p20_pro', 'LandingController@huawei_p20_pro')->name('huawei_p20_pro');
+Route::get('/huawei_p20', 'LandingController@huawei_p20')->name('huawei_p20');
+
+// TEST
 // Route::get('/carrito', 'CartController@index')->name('carrito');
 // Route::get('/envio', 'CartController@index2')->name('envio');
 Route::get('/finalizado', 'CartController@index3')->name('finalizado');
 Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
 
 Route::get('/test_job', 'OrderController@testJob');
-//Route::get('/borrar_session', 'OrderController@borrar_session');
-
-Route::get('/huawei_p20_pro', 'LandingController@huawei_p20_pro')->name('huawei_p20_pro');
-Route::get('/huawei_p20', 'LandingController@huawei_p20')->name('huawei_p20');
+//Route::get('/borrar_session', 'OrderController@deleteSession');
 
 /*Route::get('/test_job', function() {
   \App\Jobs\ProcessPorta::dispatch([

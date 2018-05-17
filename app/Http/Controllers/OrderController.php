@@ -197,35 +197,41 @@ class OrderController extends Controller
       return false;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
-      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
+      Log::error('El método getListPortingRequest no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
   }
 
   protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
-      $response = $this->soapWrapper->call('bitelSoap.getListPortingRequest', [
-        'getListPortingRequest' => array(
-          'staffCode' => 'CM_THUYNTT', // ***** Change it for dynamic Value !!!
-          'dni' => strval($order_detail['id_number']),
+      $response = $this->soapWrapper->call('bitelSoap.gwOperation', [
+        'gwOperation' => array(
+          'username' => '938ed30650f53b911f39c8818c9bc6e1',
+          'password' => '313d4015d3d32ba16b951ee3e4029b71',
+          'wscode' => 'checkSubscriberExist',
+          'idNo' => strval($order_detail['id_number']),
+          'idType' => strval($order_detail['document_type']),
           'isdn' => strval($order_detail['porting_phone']),
         )
       ]);
 
-      if ($response->return->errorCodeMNP == '0') {
-        $order_detail['mnp_request_id'] = $response->return->listPortingRequest->requestId;
-        $order_detail['porting_state_code'] = $response->return->listPortingRequest->stateCode;
-        $order_detail['porting_status'] = $response->return->listPortingRequest->status;
-        $order_detail['porting_status_desc'] = $response->return->listPortingRequest->statusDescription;
-        Log::info('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-        return true;
+      Log::info('Respuesta bitelSoap.gwOperation: ', (array) $response);
+
+      if ($response->Result->error == '0' && $response->Result->original->return->code != '0') {
+        if ($response->Result->original->return->checkedSubscriber->isExist != 'false') {
+          return false; 
+        } else {
+          return true;
+        }
       }
 
-      Log::warning('Respuesta bitelSoap.getListPortingRequest: ', (array) $response->return);
-      return false;
+      $order_detail['renov_ws_fail'] = 1;
+      Log::warning('Respuesta bitelSoap.gwOperation: ', (array) $response);
+      return true;
       // return ($response->return->errorCode == '02');
     } catch (\Exception $e) {
-      Log::error('El método checkSuccessPortingRequest no se encuentra disponible o recibió parametros erroneos');
+      $order_detail['renov_ws_fail'] = 1;
+      Log::error('El método gwOperation no se encuentra disponible o recibió parametros erroneos');
       return true;
     }
   }
@@ -253,6 +259,7 @@ class OrderController extends Controller
         ]
       ]);
     } catch (\Exception $e) {
+      Log::error($e->getMessage());
       Log::warning('Error al enviar la solicitud de cola de portabilidad');
     }
   }
@@ -267,6 +274,7 @@ class OrderController extends Controller
         ]
       ]);
     } catch (\Exception $e) {
+      Log::error($e->getMessage());
       Log::warning('Error al enviar la solicitud de notificación');
     }
   }
@@ -460,12 +468,16 @@ class OrderController extends Controller
       $this->initSoapWrapper(); // Init the bitel soap webservice
 
       if(isset($request->affiliation) && $request->affiliation == 3) {
-        /*if($this->checkIsRenovationUnavailable($order_detail)) {
-          return redirect()->route('create_order')->with('ws_result', json_encode([
-            'title' => 'te comunica que',
-            'message' => 'No puede continuar con el proceso de compra por renovación si su línea pertenece a otro operador. Elimine el equipo del carrito y seleccione otro tipo de afiliación.'
-          ]));
-        }*/
+        if($this->checkIsRenovationUnavailable($order_detail)) {
+          if (isset($order_detail['renov_ws_fail'])) {
+            return redirect()->route('create_order')->with('ws_result', json_encode([
+              'title' => 'te comunica que',
+              'message' => 'Ocurrio un error al validar si usted es aplicable para renovación. Por favor, intente mas tarde.'
+            ]));
+          } else {
+            return view('renov_fail');
+          }
+        }
       }
 
       // Check if have many lines
@@ -633,7 +645,58 @@ class OrderController extends Controller
     // '{"id": 1420053, "name": "guzzle", ...}'
   }
 
-  public function borrar_session() {
+  public function deleteSession() {
     DB::table('sessions')->delete();
+  }
+
+  public function renovFail() {
+    return view('renov_fail');
+  }
+
+  public function changeAffil(Request $request) {
+    $cart = collect($request->session()->get('cart'));
+
+    if (count($cart) > 0) {
+      foreach ($cart as $item) {
+        switch ($item['type_id']) {
+          case 1:
+            $product = $this->shared->productPrepagoByStock($item['stock_model_id'], $item['product_variation_id']);
+            $route = 'prepaid';
+            $params = [
+              'brand' => $product->brand_slug,
+              'product' => $product->product_slug,
+              'plan' => $product->plan_slug
+            ];
+            if (!empty($product->color_slug)) $params['color'] = $product->color_slug;
+            break;
+          case 2:
+            $product = $this->shared->productPostpagoByStock($item['stock_model_id'], $item['product_variation_id']);
+            $route = 'postpaid';
+            $params = [
+              'brand' => $product->brand_slug,
+              'product' => $product->product_slug,
+              'affiliation' => $product->affiliation_slug,
+              'plan' => $product->plan_slug,
+              'contract' => $product->contract_slug
+            ]
+            if (!empty($product->color_slug)) $params['color'] = $product->color_slug;
+            break;
+        }
+
+        if(!isset($product)) {
+          continue;
+        }
+      }
+
+      $request->session()->forget('cart');
+
+      if (isset($product)) {
+        return redirect()->route($route, $params);
+      } else {
+        return redirect()->route('home');
+      }
+    } else {
+      return redirect()->route('home');
+    }    
   }
 }

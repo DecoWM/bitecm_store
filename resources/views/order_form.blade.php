@@ -70,7 +70,7 @@
                         <option value="" selected>Seleccione tipo de documento</option>
                         <option value="1">DNI</option>
                         <option value="2">CARNÉ DE EXTRANJERÍA</option>
-                        <option value="3">PASAPORTE</option>
+                        <option value="4">PASAPORTE</option>
                       </select>
                     </div>
                     <div class="form-group">
