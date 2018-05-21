@@ -152,7 +152,7 @@ header #site-header .container .select-persona ul li a:first-child {
 }
 @media (max-width: 992px) and (min-width: 776px) {
   header #site-header .container .select-persona {
-    float: right !important;
+    /*float: right !important;*/
     margin-bottom: 10px;
   }
 }
@@ -272,6 +272,7 @@ nav#nav-bitel {
   padding: 0px;
   margin-bottom: 0px;
   transition: 0.6s ease all;
+  height: 69px;
 }
 nav#nav-bitel .container .navbar-header .navbar-toggle {
   background-color: transparent;
@@ -303,7 +304,7 @@ nav#nav-bitel .container .navbar-header a.navbar-brand h1 {
 nav#nav-bitel .container #navbar {
   border-color: transparent;
 }
-@media (max-width: 767px) {
+@media (max-width: 1170px) {
   nav#nav-bitel .container #navbar {
     background-color: #008c95;
   }
@@ -317,7 +318,7 @@ nav#nav-bitel .container #navbar ul li a {
   color: #008c95;
   line-height: 40px;
 }
-@media (max-width: 767px) {
+@media (max-width: 1170px) {
   nav#nav-bitel .container #navbar ul li a {
     line-height: 20px;
   }
@@ -10816,7 +10817,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-collapse.in {
   overflow-y: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 1170px) {
   .navbar-collapse {
     width: auto;
     border-top: 0;
@@ -10940,7 +10941,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-toggle .icon-bar + .icon-bar {
   margin-top: 4px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1170px) {
   .navbar-toggle {
     display: none;
   }
