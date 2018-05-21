@@ -215,7 +215,7 @@
                       </div>
                     </div>
                   </div-->
-                  <input type="radio" name="payment_method" checked value="4">
+                  <input type="hidden" name="payment_method" value="4">
                   <div class="btn-detalle">
                     <div class="row">
                       <div class="col-xs-12 col-sm-8 col-sm-push-2">
