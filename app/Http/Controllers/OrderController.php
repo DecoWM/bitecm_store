@@ -323,6 +323,12 @@ class OrderController extends Controller
       return redirect()->route('home');
     }
 
+    if ($request->session()->has('order_detail')) {
+      $order_detail = json_decode($request->session()->get('order_detail'));
+    } else {
+      $order_detail = [];
+    }
+
     // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO',
     //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO',
     //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE',
@@ -360,7 +366,8 @@ class OrderController extends Controller
       'item' => $equipo,
       'distritos' => $distritos,
       'source_operators' => $source_operators,
-      'affiliation_list' => $affiliation_list
+      'affiliation_list' => $affiliation_list,
+      'order_detail' => $order_detail
     ]);
   }
 
@@ -438,6 +445,7 @@ class OrderController extends Controller
       $order_detail['service_type'] = 'Accesorios';
       $order_detail['affiliation_type'] = null;
     } else {
+      $order_detail['affiliation_id'] = $request->affiliation;
       if (!isset($equipo->affiliation_name)) { //Prepago
         $order_detail['service_type'] = 'Prepago';
         $affiliation = DB::table('tbl_affiliation')
@@ -512,7 +520,12 @@ class OrderController extends Controller
               'message' => 'Ocurrio un error al validar si usted es aplicable para renovación. Por favor, intente mas tarde.'
             ]));
           } else {
-            return view('renov_fail');
+            $request->session()->flash('order_detail', json_encode($order_detail));
+            if (!isset($equipo->affiliation_name)) { //Prepago
+              return view('renov_fail', ['postpago' => false]);
+            } else {
+              return view('renov_fail', ['postpago' => true]);
+            }
           }
         }
       }
@@ -735,5 +748,52 @@ class OrderController extends Controller
     } else {
       return redirect()->route('home');
     }    
+  }
+
+  public function retryCreateOrder(Request $request) {
+    $request->session()->keep('order_detail');
+    return redirect()->route('create_order');
+  }
+
+  public function changeAffilTo(Request $request, $affiliation_id) {
+    $cart = collect($request->session()->get('cart'));
+
+    if (count($cart) > 0) {
+      foreach ($cart as $item) {
+        if ($item['type_id'] == 2) {
+          $product = $this->shared->productPostpagoByStock($item['stock_model_id'], $item['product_variation_id']);
+          $route = 'postpaid_detail';
+          $params = [
+            'brand' => $product->brand_slug,
+            'product' => $product->product_slug,
+            'plan' => $product->plan_slug,
+            'contract' => $product->contract_slug
+          ];
+          if (!empty($product->color_slug)) $params['color'] = $product->color_slug;
+
+          $params['affiliation'] = $this->shared->affiliationSlug($affiliation_id);
+
+          $product = $this->shared->productPostpaidBySlug($params['brand'],$params['product'],$params['affiliation'],$params['plan'],$params['contract'],$params['color']);
+          
+          if(empty($product)) {
+            return redirect()->route('postpaid');
+          }
+        }
+
+        if(!isset($product)) {
+          continue;
+        }
+      }
+
+      $request->session()->forget('cart');
+
+      if (isset($product)) {
+        return redirect()->route($route, $params);
+      } else {
+        return redirect()->route('home');
+      }
+    } else {
+      return redirect()->route('home');
+    }
   }
 }

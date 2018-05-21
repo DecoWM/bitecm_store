@@ -32,6 +32,12 @@ Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
 
+Vue.directive('init', {
+  bind: function(el, binding, vnode) {
+    vnode.context[binding.arg] = binding.value;
+  }
+});
+
 var VeeValidate = require('vee-validate');
 Vue.use(VeeValidate);
 
@@ -45,11 +51,14 @@ const form = new Vue({
     distrito:'',
     number_phone:'',
     delivery:'',
+    delivery_district:'',
     email:'',
     number_contact:'',
     mediopago:'',
     affiliation: '',
-    disabled: false
+    disabled: false,
+    operator: '',
+    porting_phone: '',
   },
   methods: {
     validateInfoCliente() {
