@@ -177,7 +177,7 @@
                     <h3>SELECCIONA TU MEDIO DE PAGO</h3>
                     <span style="padding-left:15px">Te informamos que tu pago se hará en el delivery</span>
                   </div>
-                  <div class="section-form mediosdepago" style="display:none;">
+                  <!--div class="section-form mediosdepago" style="display:none;">
                     <div class="form-group">
                       <div class="row">
                         <div class="col-xs-6 col-sm-3">
@@ -214,7 +214,8 @@
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </div-->
+                  <input type="radio" name="payment_method" checked value="4">
                   <div class="btn-detalle">
                     <div class="row">
                       <div class="col-xs-12 col-sm-8 col-sm-push-2">
