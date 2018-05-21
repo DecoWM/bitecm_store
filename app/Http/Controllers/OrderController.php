@@ -325,7 +325,7 @@ class OrderController extends Controller
 
     if ($request->session()->has('order_detail')) {
       $order_detail = json_decode($request->session()->get('order_detail'));
-      Log::info('Detalle de orden', $order_detail);
+      Log::info('Detalle de orden', (array) $order_detail);
     } else {
       $order_detail = [];
     }

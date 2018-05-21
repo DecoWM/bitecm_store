@@ -25,7 +25,7 @@
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <a href="{{route('retry_create_order')}}" class="btn btn-default regresar">REGRESAR<span><br></span>AL FORMULARIO</a>
                     @if($postpago)
-                    <a href="{{route('change_affil_to', ['affiliation_id' => 1])}}" class="redirect-href btn btn-default comprar">CAMBIAR A<span><br></span>PORTABILIDAD</a>
+                    <a href="{{route('change_affil_to', ['affiliation_id' => 1])}}" class="redirect-href btn btn-default comprar" style="margin-bottom: 10px">CAMBIAR A<span><br></span>PORTABILIDAD</a>
                     <a href="{{route('change_affil_to', ['affiliation_id' => 2])}}" class="redirect-href btn btn-default comprar">CAMBIAR A<span><br></span>LINEA NUEVA</a>
                     @endif
                   </div>
