@@ -654,6 +654,30 @@ li.item-nav-mobile.search #search .btn-search {
     display: none;
 }
 
+@media screen and (max-width: 1170px){
+
+    nav#nav-bitel .container #navbar{
+        padding: 0;
+        position: absolute;
+        right: 0px;
+        width: auto;
+        z-index: 100;
+        top: 69px;
+        width: 210px;
+    }
+    
+  #nav-bitel{
+    .container{
+      width: 100%;
+      padding-left: 50px;
+      .navbar-header{
+        float: initial;
+      }
+    }
+  }
+
+
+}
 
 @media screen and (max-width: 767px){
 
@@ -674,15 +698,6 @@ li.item-nav-mobile.search #search .btn-search {
         margin-top: 0;
     }
 
-    nav#nav-bitel .container #navbar{
-        padding: 0;
-        position: absolute;
-        right: 15px;
-        width: auto;
-        z-index: 100;
-        top: 69px;
-        width: 210px;
-    }
 
     li.nav-mobile.item-nav-mobile {
         background-color : #107379;
@@ -817,16 +832,18 @@ li.item-nav-mobile.search #search .btn-search {
         left: 4px;
         bottom: initial;
     }
+    
+    #navbar ul li.active a,
+    #navbar ul li a:hover{
+        color: #ffe60d !important;
+    }
+    
     section#equipos-promocion .container .row .content-tab-pro .producto,
     section#equipos-vendidos .container .row .content-tab-pro .producto{
         max-width: 100%;
     } 
 
 
-    #navbar ul li.active a,
-    #navbar ul li a:hover{
-        color: #ffe60d !important;
-    }
 }
 
 
@@ -1331,7 +1348,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     display: flex; 
     align-items: center;
     margin-top: 9px;
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 1170px){
         display: block;
     }
 }
@@ -1349,7 +1366,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
         padding-top: 5px;
         padding-bottom: 5px;
         background: url('/storage/images/flecha.png') right center no-repeat;
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1170px){
             color: #ffffff;
             display: block;
             margin-bottom: 10px;
@@ -1365,7 +1382,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          padding-right: 10px;   
          border-radius: 35px ;
          border: 1px solid #EAC416;
-         @media screen and (max-width: 767px){
+         @media screen and (max-width: 1170px){
             display: block;
             border-radius: none;
             border: none;
@@ -1375,7 +1392,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                 ul{
                     margin-bottom: 0;
                     display: flex;
-                    @media screen and (max-width: 767px) {
+                    @media screen and (max-width: 1170px) {
                         padding-left: 10px;
                         display: block;
                     }
@@ -1392,7 +1409,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                              a.item-promociones{
                                background: url('/storage/images/promociones_icon.png') left center no-repeat; 
                                background-color: transparent !important;
-                               @media screen and (max-width: 767px){
+                               @media screen and (max-width: 1170px){
                                 display: none;
                                }
                             }
@@ -1400,7 +1417,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                             list-style: none;
                             float: left;
                             border-bottom: none !important;
-                            @media screen and (max-width: 767px){
+                            @media screen and (max-width: 1170px){
                                 float: initial; 
                                 margin-bottom: 15px;
                                 border-bottom: none !important;
@@ -1410,7 +1427,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                 display: block;
                                 padding-left: 30px;
                                 margin-right: 20px;
-                                @media screen and (max-width: 767px){
+                                @media screen and (max-width: 1170px){
                                     color: white !important;
                                     background: none !important;
                                     &:hover{
@@ -1434,7 +1451,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                 }
                                  &.item-promociones{
                                     background: url('/storage/images/promociones.png') left center no-repeat;
-                                    @media screen and (max-width: 767px){
+                                    @media screen and (max-width: 1170px){
                                         display: none;
                                     }
                                      &:hover{
@@ -1476,7 +1493,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
         padding-top: 5px;
         padding-bottom: 5px;
         background: url('/storage/images/flecha.png') right center no-repeat;
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1170px){
             color: #ffffff;
             display: block;
             margin-bottom: 10px;
@@ -1492,7 +1509,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          padding-right: 10px;   
          border-radius: 35px;
          border: 1px solid #EAC416;
-        @media screen and (max-width: 767px){
+        @media screen and (max-width: 1170px){
             display: block;
             border-radius: none;
             border: none;
@@ -1501,7 +1518,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
         .prepago-itemlist {
                 ul{
                     display: flex;
-                    @media screen and (max-width: 767px) {
+                    @media screen and (max-width: 1170px) {
                         padding-left: 10px;
                         display: block;
                     }
@@ -1519,7 +1536,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                         }
                             list-style: none;
                             float: left;
-                            @media screen and (max-width: 767px){
+                            @media screen and (max-width: 1170px){
                                 float: initial; 
                                 margin-bottom: 15px;
                                 border-bottom: none !important;
@@ -1530,7 +1547,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                 display: block;
                                 padding-left: 30px;
                                 margin-right: 20px;
-                                @media screen and (max-width: 767px){
+                                @media screen and (max-width: 1170px){
                                     color: white !important;
                                     background: none !important;
                                     &:hover{

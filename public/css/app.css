@@ -613,6 +613,27 @@ li.item-nav-mobile.search #search .btn-search {
   display: none;
 }
 
+@media screen and (max-width: 1170px) {
+  nav#nav-bitel .container #navbar {
+    padding: 0;
+    position: absolute;
+    right: 0px;
+    width: auto;
+    z-index: 100;
+    top: 69px;
+    width: 210px;
+  }
+
+  #nav-bitel .container {
+    width: 100%;
+    padding-left: 50px;
+  }
+
+  #nav-bitel .container .navbar-header {
+    float: initial;
+  }
+}
+
 @media screen and (max-width: 767px) {
   #form-cliente form .btn-detalle a.regresar {
     width: 100% !important;
@@ -629,16 +650,6 @@ li.item-nav-mobile.search #search .btn-search {
 
   section#equipos-vendidos .container .row .content-tab-pro {
     margin-top: 0;
-  }
-
-  nav#nav-bitel .container #navbar {
-    padding: 0;
-    position: absolute;
-    right: 15px;
-    width: auto;
-    z-index: 100;
-    top: 69px;
-    width: 210px;
   }
 
   li.nav-mobile.item-nav-mobile {
@@ -760,14 +771,14 @@ li.item-nav-mobile.search #search .btn-search {
     bottom: initial;
   }
 
-  section#equipos-promocion .container .row .content-tab-pro .producto,
-  section#equipos-vendidos .container .row .content-tab-pro .producto {
-    max-width: 100%;
-  }
-
   #navbar ul li.active a,
   #navbar ul li a:hover {
     color: #ffe60d !important;
+  }
+
+  section#equipos-promocion .container .row .content-tab-pro .producto,
+  section#equipos-vendidos .container .row .content-tab-pro .producto {
+    max-width: 100%;
   }
 }
 
@@ -1726,7 +1737,7 @@ select {
   margin-top: 9px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .menu-newbitel {
     display: block;
   }
@@ -1759,7 +1770,7 @@ select {
   background: url("/storage/images/flecha.png") right center no-repeat;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item span {
     color: #ffffff;
     display: block;
@@ -1768,7 +1779,7 @@ select {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item {
     display: block;
     border-radius: none;
@@ -1784,7 +1795,7 @@ select {
   display: flex;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item .postpago-itemlist ul {
     padding-left: 10px;
     display: block;
@@ -1812,13 +1823,13 @@ select {
   background-color: transparent !important;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item .postpago-itemlist ul li.active a.item-promociones {
     display: none;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item .postpago-itemlist ul li {
     float: initial;
     margin-bottom: 15px;
@@ -1833,7 +1844,7 @@ select {
   margin-right: 20px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item .postpago-itemlist ul li a {
     color: white !important;
     background: none !important;
@@ -1867,7 +1878,7 @@ select {
   background: url("/storage/images/promociones.png") left center no-repeat;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .postpago-item .postpago-itemlist ul li a.item-promociones {
     display: none;
   }
@@ -1904,7 +1915,7 @@ select {
   background: url("/storage/images/flecha.png") right center no-repeat;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .prepago-item span {
     color: #ffffff;
     display: block;
@@ -1913,7 +1924,7 @@ select {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .prepago-item {
     display: block;
     border-radius: none;
@@ -1929,7 +1940,7 @@ select {
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .prepago-item .prepago-itemlist ul {
     padding-left: 10px;
     display: block;
@@ -1951,7 +1962,7 @@ select {
   background-color: transparent !important;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .prepago-item .prepago-itemlist ul li {
     float: initial;
     margin-bottom: 15px;
@@ -1966,7 +1977,7 @@ select {
   margin-right: 20px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1170px) {
   .prepago-item .prepago-itemlist ul li a {
     color: white !important;
     background: none !important;
