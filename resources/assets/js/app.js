@@ -90,6 +90,26 @@ const form = new Vue({
     }
   },
   mounted: function() {
+    var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
+    console.log(order_detail);
+    this.first_name = order_detail.first_name;
+    this.last_name = order_detail.last_name;
+    this.select_document = order_detail.idtype_id;
+    this.number_document = order_detail.id_number;
+    this.distrito = order_detail.billing_district;
+    this.number_phone = order_detail.billing_phone;
+    this.delivery = order_detail.delivery_address;
+    this.email = order_detail.contact_email;
+    this.delivery_district = order_detail.delivery_district;
+    this.number_contact = order_detail.contact_phone;
+    this.mediopago = order_detail.payment_method_id;
+
+    if (order_detail.affiliation_id && order_detail.affiliation_id === 1) {
+      this.affiliation = order_detail.affiliation_id;
+      this.operator = order_detail.source_operator_id;
+      this.porting_phone = order_detail.porting_phone;
+    }
+
     // phone_number.addEventListener("keypress", soloNumeros, false);
     // porting_phone.addEventListener("keypress", soloNumeros, false);
     // contact_phone.addEventListener("keypress", soloNumeros, false);

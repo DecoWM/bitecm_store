@@ -8,6 +8,9 @@
     <meta name="base-url" content="{{ url('/') }}">
     <meta name="prefix" content="{{ Request::segment(1) ? '/'.Request::segment(1).'/' : '/' }}">
     <meta name="type" content="{{ Request::segment(1) ? Request::segment(1) : '' }}">
+    @if(isset($order_detail))
+    <meta name="order_detail" content="{{ json_encode($order_detail) }}">
+    @endif
     <meta name="robots" content="noindex"> <!-- ESTO NO DEBE IR EN PRODUCCIÓN -->
     <title>Bitel</title>
 
