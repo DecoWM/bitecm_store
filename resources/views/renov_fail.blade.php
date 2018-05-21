@@ -27,7 +27,7 @@
                     @if($postpago)
                     <a href="{{route('change_affil_to', ['affiliation_id' => 1])}}" class="redirect-href btn btn-default comprar">CAMBIAR A<span><br></span>PORTABILIDAD</a>
                     <a href="{{route('change_affil_to', ['affiliation_id' => 2])}}" class="redirect-href btn btn-default comprar">CAMBIAR A<span><br></span>LINEA NUEVA</a>
-                    @endif;
+                    @endif
                   </div>
                 </div>
               </div>
