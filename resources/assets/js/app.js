@@ -91,7 +91,7 @@ const form = new Vue({
   },
   mounted: function() {
     var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
-    
+
     this.first_name = order_detail.first_name;
     this.last_name = order_detail.last_name;
     this.select_document = order_detail.idtype_id;
@@ -104,10 +104,12 @@ const form = new Vue({
     this.number_contact = order_detail.contact_phone;
     this.mediopago = order_detail.payment_method_id;
 
-    if (order_detail.affiliation_id && order_detail.affiliation_id === 1) {
+    if (order_detail.affiliation_id) {
       this.affiliation = order_detail.affiliation_id;
-      this.operator = order_detail.source_operator_id;
-      this.porting_phone = order_detail.porting_phone;
+      if (order_detail.affiliation_id === 1) {
+        this.operator = order_detail.source_operator_id;
+        this.porting_phone = order_detail.porting_phone;
+      }
     }
 
     // phone_number.addEventListener("keypress", soloNumeros, false);
@@ -188,11 +190,11 @@ const app = new Vue({
                   isOpen : true
               },
               affiliation : {
-                  value : '1',
+                  value : document.head.querySelector('meta[name="affiliation_id"]').content,
                   isOpen : true
               },
               plan : {
-                  value : '0',
+                  value : document.head.querySelector('meta[name="plan_post_id"]').content,
                   isOpen : false
               },
               price : {

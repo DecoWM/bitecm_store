@@ -100,7 +100,6 @@ class PostpaidController extends Controller
     // $product_affiliations = DB::select('call PA_affiliationList()');
 
     $product_plans = $this->shared->getProductPlans($product);
-    // error_log(print_r($product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
 
     $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
     $product_affiliations = $this->shared->getProductAffiliations($product);
@@ -154,8 +153,6 @@ class PostpaidController extends Controller
         $i++;
       }
     }
-
-    //error_log(print_r($product_plans, true), 3 ,'c:/nginx-1.12.2/logs/frutaldia.log');
 
     $product_plans_aux = [];
     $product_plans_aux = $product_plans;
