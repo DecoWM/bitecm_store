@@ -91,7 +91,7 @@ const form = new Vue({
   },
   mounted: function() {
     var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
-    console.log(order_detail);
+    
     this.first_name = order_detail.first_name;
     this.last_name = order_detail.last_name;
     this.select_document = order_detail.idtype_id;
