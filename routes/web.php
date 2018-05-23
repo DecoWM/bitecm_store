@@ -89,6 +89,8 @@ Route::get('/pedido', 'OrderController@showOrder')->name('show_order');
 Route::get('/trackeo/{order_id}', 'OrderController@trackOrder')->name('track_order');
 Route::get('/renovacion_no_aplicable', 'OrderController@renovFail')->name('renov_fail');
 Route::get('/cambiar_afiliacion', 'OrderController@changeAffil')->name('change_affil');
+Route::get('/cambiar_afiliacion_a/{affiliation_id}', 'OrderController@changeAffilTo')->name('change_affil_to');
+Route::get('/reintentar_envio_orden', 'OrderController@retryCreateOrder')->name('retry_create_order');
 
 // ENLACES FOOTER
 Route::get('/files/aviso', 'FileController@downloadFileAviso')->where(['filename'=>'[A-Za-z0-9/-]+'])->name('download_Aviso');
