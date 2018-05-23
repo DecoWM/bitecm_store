@@ -21,15 +21,21 @@
                     <p>No puede continuar con el proceso de compra por renovación si su línea pertenece a otro operador. Elimine el equipo del carrito y seleccione otro tipo de afiliación.</p>
                   </div>
                 </div>
+                @if($postpago)
                 <div class="btn-detalle">
                   <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
                     <a href="{{route('retry_create_order')}}" class="btn btn-default regresar">REGRESAR<span><br></span>AL FORMULARIO</a>
-                    @if($postpago)
                     <a href="{{route('change_affil_to', ['affiliation_id' => 1])}}" class="redirect-href btn btn-default comprar">CAMBIAR A<span><br></span>PORTABILIDAD</a>
                     <a href="{{route('change_affil_to', ['affiliation_id' => 2])}}" class="redirect-href btn btn-default" style="line-height: 16px; margin: 0 auto;padding: 5px; background: lightgrey; margin-top: 10px;">CAMBIAR A<span><br></span>LINEA NUEVA</a>
-                    @endif
                   </div>
                 </div>
+                @else
+                <div class="btn-detalle">
+                  <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    <a href="{{route('retry_create_order')}}" class="btn btn-default regresar">REGRESAR<span><br></span>AL FORMULARIO</a>
+                  </div>
+                </div>
+                @endif
               </div>
             </div>
           </div>
