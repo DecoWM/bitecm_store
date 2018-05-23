@@ -122,6 +122,10 @@ Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
 Route::get('/test_job', 'OrderController@testJob');
 //Route::get('/borrar_session', 'OrderController@deleteSession');
 
+Route::get('/maquetacion_renovacion', function() {
+    return view('prueba');
+});
+
 /*Route::get('/test_job', function() {
   \App\Jobs\ProcessPorta::dispatch([
     'dni' => '45677136',
