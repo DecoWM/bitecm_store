@@ -78,7 +78,8 @@
                       <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}</h2>
                       @if (intval($product->type_id) == 2)
                       <span class="modo">{{$product->affiliation_name}}</span>
-                      <span class="contrato">Contrato {{$product->contract_name}}</span>
+                      <!--span class="contrato">Contrato {{--$product->contract_name--}}</span-->
+                      <span class="contrato">Sin contrato de permanencia (*)</span>
                       @elseif (intval($product->type_id) == 1)
                       <span class="modo">Prepago {{$product->plan_name}}</span>
                       @endif

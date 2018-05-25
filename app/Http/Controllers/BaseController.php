@@ -758,13 +758,13 @@ class BaseController extends Controller
 
   public function operatorList() {
     return [
-      '30' => 'Convergia Perú S.A.',
-      '37' => 'Americatel Perú S.A.C',
-      '32' => 'Fijo - Telefónica del Perú S.A.A.',
+      //'30' => 'Convergia Perú S.A.',
+      //'37' => 'Americatel Perú S.A.C',
+      //'32' => 'Fijo - Telefónica del Perú S.A.A.',
       '20' => 'Entel Perú S.A',
       '21' => 'Claro, América Móvil S.A.C',
       '22' => 'Movistar, Telefónica Móviles S.A',
-      '24' => 'Viettel Peru S.A.C.',
+      //'24' => 'Viettel Peru S.A.C.',
       '25' => 'Virgin Mobile'
     ];
   }
