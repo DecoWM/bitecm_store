@@ -9,7 +9,8 @@
         <p>con <span>{{product.plan_name}}</span></p>
       </div>
       <div class="tiempo-plan">
-        <p>Contrato de {{product.contract_name}}</p>
+        <!--p>Contrato de {{product.contract_name}}</p-->
+        <p>Sin contrato de permanencia (*)</p>
       </div>
     </div>
   </div>

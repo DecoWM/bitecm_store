@@ -85,7 +85,8 @@
                           <p>con <span>{{$product->plan_name}}</span></p>
                         </div>
                         <div class="tiempo-plan">
-                          <p>Contrato de {{$product->contract_name}}</p>
+                          <!--p>Contrato de {{--$product->contract_name--}}</p-->
+                          <p>Sin contrato de permanencia (*)</p>
                         </div>
                       </div>
                     </div>
@@ -119,7 +120,7 @@
                     '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
                     @endforeach
                   },$event)">
-                    <option name="" value="">Lo quieres en</option>
+                    <!--option name="" value="">Lo quieres en</option-->
                     @foreach ($affiliations as $ix => $affiliation)
                     <option id="aff{{$affiliation->affiliation_id}}-mov" data-ix="{{$ix+1}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
                     @endforeach
