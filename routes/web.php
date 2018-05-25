@@ -124,9 +124,9 @@ Route::get('/rastreo', 'TrackingController@index')->name('rastreo');
 Route::get('/test_job', 'OrderController@testJob');
 //Route::get('/borrar_session', 'OrderController@deleteSession');
 
-Route::get('/maquetacion_renovacion/{mode}', function($mode) {
+/*Route::get('/maquetacion_renovacion/{mode}', function($mode) {
     return view('prueba', ['postpago' => $mode]);
-});
+});*/
 
 /*Route::get('/test_job', function() {
   \App\Jobs\ProcessPorta::dispatch([

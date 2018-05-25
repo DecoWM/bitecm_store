@@ -172,8 +172,6 @@ class PostpaidController extends Controller
       $i++;
     }
 
-    //error_log(print_r($product_plans, true), 3 ,'c:/nginx-1.12.2/logs/frutaldia.log');
-
     if(!isset($selected_plan)) {
       $selected_plan = 0;
     }

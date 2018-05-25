@@ -522,10 +522,11 @@ class OrderController extends Controller
             ]));
           } else {
             $request->session()->flash('order_detail', json_encode($order_detail));
+            $tried_phone = implode(str_split($order_detail['billing_phone'], 3), ' ');
             if (!isset($equipo->affiliation_name)) { //Prepago
-              return view('renov_fail', ['postpago' => false]);
+              return view('renov_fail', ['postpago' => false, 'tried_phone' => $tried_phone]);
             } else {
-              return view('renov_fail', ['postpago' => true]);
+              return view('renov_fail', ['postpago' => true, 'tried_phone' => $tried_phone]);
             }
           }
         }
