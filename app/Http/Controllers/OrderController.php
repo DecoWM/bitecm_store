@@ -771,11 +771,14 @@ class OrderController extends Controller
             'plan' => $product->plan_slug,
             'contract' => $product->contract_slug
           ];
-          if (!empty($product->color_slug)) $params['color'] = $product->color_slug;
-
           $params['affiliation'] = $this->shared->affiliationSlug($affiliation_id);
 
-          $product = $this->shared->productPostpaidBySlug($params['brand'],$params['product'],$params['affiliation'],$params['plan'],$params['contract'],$params['color']);
+          if (!empty($product->color_slug)) {
+            $params['color'] = $product->color_slug;
+            $product = $this->shared->productPostpaidBySlug($params['brand'],$params['product'],$params['affiliation'],$params['plan'],$params['contract'],$params['color']);
+          } else {
+            $product = $this->shared->productPostpaidBySlug($params['brand'],$params['product'],$params['affiliation'],$params['plan'],$params['contract']);
+          }
           
           if(empty($product)) {
             return redirect()->route('postpaid');
