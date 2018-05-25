@@ -107,6 +107,7 @@
             <p>{{$product->product_description}}</p>
           </div>
           <div id="planes" class="planes-prepago">
+            <h3 class="title-plan">Recarga y disfruta de estos beneficios</h3><br/>
             <div class="select-plan just-3">
                 <label for="">
                   <div class="plan">
