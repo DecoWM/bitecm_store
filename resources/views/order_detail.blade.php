@@ -63,7 +63,7 @@
                           @if(isset($product->variation_type_id))
                             <p>{{$order['affiliation_type']}}</p>
                             @if($product->variation_type_id == 2)
-                            <p>Contrato 18 meses</p>
+                            <p>Sin contrato de permanencia (*)</p>
                             @endif
                           @endif
                           <p> <span>Cantidad:</span> {{$product->quantity}}</p>

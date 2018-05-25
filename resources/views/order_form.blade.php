@@ -89,7 +89,11 @@
                       {{-- <span v-show="errors.has('distrito')" class="help is-danger">@{{ errors.first('distrito') }}</span> --}}
                     </div>
                     <div class="form-group">
+                      @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
+                      <label for="phone_number">Número de telefono de Bitel</label>
+                      @else
                       <label for="phone_number">Número de telefono</label>
+                      @endif
                       <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                       <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                     </div>
