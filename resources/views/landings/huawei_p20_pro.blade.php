@@ -1,3 +1,10 @@
+@extends('layouts.master_clean')
+
+@section('css')
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+<link type="text/css" rel="stylesheet" href="{{asset('css/huawei_p20.min.css')}}">
+<link type="text/css" rel="stylesheet" href="{{asset('css/landing-reset.css')}}">
+@endsection
 
 @section('content')
 <!-- <header>

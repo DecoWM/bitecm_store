@@ -364,6 +364,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto .content-pro
 }
 #list-equipos .producto .content-product .title-product {
     margin: 7px 0;
+    min-height: 72px;
 }
 #list-equipos .producto .content-product .title-product h3 {
     margin: 9px 0;
@@ -611,7 +612,7 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 #list-equipos .producto{
-    min-height: initial;
+    min-height: 388px;
 }
 
 .content-catalogo .title-select .btn-acordion{

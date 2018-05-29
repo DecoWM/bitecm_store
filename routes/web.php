@@ -134,3 +134,8 @@ Route::get('/test_job', 'OrderController@testJob');
     'isdn' => '996800986'
   ])->onQueue('porta');
 });*/
+
+Route::get('/config_cache', function() {
+  Artisan::call('config:cache');
+  echo 'local config cache';
+});
