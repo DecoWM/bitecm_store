@@ -71,6 +71,7 @@ class FileController extends Controller
 
         $filename = DB::table('tbl_product')
             ->where('product_id', $product_id)
+            ->whereNotNull('product_data_sheet')
             ->select('product_data_sheet')
             ->get();
 
@@ -90,6 +91,7 @@ class FileController extends Controller
 
         $filename = DB::table('tbl_product')
             ->where('product_id', $product_id)
+            ->whereNotNull('product_general_specifications')
             ->select('product_general_specifications')
             ->get();
 
