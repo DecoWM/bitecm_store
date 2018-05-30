@@ -284,9 +284,10 @@ nav#nav-bitel .container .navbar-header .navbar-toggle span {
 }
 nav#nav-bitel .container .navbar-header a.navbar-brand {
   padding: 0;
-  background: url("../images/footer/svg/logo.svg") no-repeat 0;
+  background: url("../images/header/svg/logo.svg") no-repeat 0;
+  background-size: 190px;
   width: 220px;
-  margin-top: 10px;
+  height: 60px;
 }
 @media (max-width: 767px) {
   nav#nav-bitel .container .navbar-header a.navbar-brand {
