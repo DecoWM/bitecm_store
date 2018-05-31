@@ -675,10 +675,41 @@ class BaseController extends Controller
     return $result;
   }
 
+  public function getBrands() {
+    return DB::table('tbl_brand')
+      ->select('brand_id', 'brand_name')
+      ->where('active', 1)
+      ->orderBy('weight')
+      ->orderBy('brand_id')
+      ->get();
+  }
+
+  public function getPlans($plan_type = null) {
+    $query = DB::table('tbl_plan')
+      ->where('active', 1)
+      ->orderBy('weight')
+      ->orderBy('plan_id');
+
+    if (!empty($plan_type)) {
+      $query->where('plan_type', $plan_type);
+    }
+
+    return $query->get();
+  }
+
+  public function getAffiliations() {
+    return DB::table('tbl_affiliation')
+      ->select('affiliation_id','affiliation_name','affiliation_slug')
+      ->where('active', 1)
+      ->orderBy('weight')
+      ->orderBy('affiliation_id')
+      ->get();
+  }
+
   public function getFiltersPostpaid() {
-    $brand_list = DB::select('call PA_brandList()');
-    $plan_list = DB::select('call PA_planList(2)');
-    $affiliation_list = DB::select('call PA_affiliationList()');
+    $brand_list = $this->getBrands();
+    $plan_list = $this->getPlans(2);
+    $affiliation_list = $this->getAffiliations();
     return [
       'brand_list' => $brand_list,
       'plan_list' => $plan_list,
@@ -687,8 +718,8 @@ class BaseController extends Controller
   }
 
   public function getFiltersPrepaid() {
-    $brand_list = DB::select('call PA_brandList()');
-    $plan_list = DB::select('call PA_planList(1)');
+    $brand_list = $this->getBrands();
+    $plan_list = $this->getPlans(1);
     return [
       'brand_list' => $brand_list,
       'plan_list' => $plan_list,
@@ -696,14 +727,14 @@ class BaseController extends Controller
   }
 
   public function getFiltersProduct() {
-    $brand_list = DB::select('call PA_brandList()');
+    $brand_list = $this->getBrands();
     return [
       'brand_list' => $brand_list,
     ];
   }
 
   public function getFiltersPromo() {
-    $brand_list = DB::select('call PA_brandList()');
+    $brand_list = $this->getBrands();
     return [
       'brand_list' => $brand_list,
     ];
