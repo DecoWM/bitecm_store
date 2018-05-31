@@ -657,6 +657,7 @@ class OrderController extends Controller
       ]));
     } catch (\Exception $e) {
       Log::warning('Error al enviar correo a '.$request->email.' por la orden #'.$order_id);
+      Log::warning($e->getMessage());
     }
 
     DB::commit();
