@@ -285,15 +285,14 @@ nav#nav-bitel .container .navbar-header .navbar-toggle span {
 nav#nav-bitel .container .navbar-header a.navbar-brand {
   padding: 0;
   background: url("../images/header/svg/logo.svg") no-repeat 0;
-  background-size: 190px;
+  background-size: 180px;
   width: 220px;
   height: 60px;
 }
 @media (max-width: 767px) {
   nav#nav-bitel .container .navbar-header a.navbar-brand {
-    margin-left: 12px;
-    margin-top: 5px;
-    width: 100px;
+    width: 120px;
+    background-size: contain;
   }
 }
 nav#nav-bitel .container .navbar-header a.navbar-brand h1 {
