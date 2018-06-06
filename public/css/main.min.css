@@ -285,7 +285,7 @@ nav#nav-bitel .container .navbar-header .navbar-toggle span {
 nav#nav-bitel .container .navbar-header a.navbar-brand {
   padding: 0;
   background: url("../images/header/svg/logo.svg") no-repeat 0;
-  background-size: 180px;
+  background-size: 125px;
   width: 220px;
   height: 60px;
 }
