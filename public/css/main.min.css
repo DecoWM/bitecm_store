@@ -288,11 +288,13 @@ nav#nav-bitel .container .navbar-header a.navbar-brand {
   background-size: 125px;
   width: 220px;
   height: 60px;
+  margin-left: 0;
 }
 @media (max-width: 767px) {
   nav#nav-bitel .container .navbar-header a.navbar-brand {
     width: 120px;
     background-size: contain;
+    margin-left: -15px;
   }
 }
 nav#nav-bitel .container .navbar-header a.navbar-brand h1 {
