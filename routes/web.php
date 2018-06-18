@@ -37,7 +37,7 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show
 
 // RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'PostpaidController@show')
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{color?}/{contract?}', 'PostpaidController@show')
     ->where(
       [
         'brand' => '^([a-zA-Z0-9_-]+)$',
@@ -135,7 +135,7 @@ Route::get('/test_job', 'OrderController@testJob');
   ])->onQueue('porta');
 });*/
 
-Route::get('/config_cache', function() {
+/*Route::get('/config_cache', function() {
   Artisan::call('config:cache');
   echo 'local config cache';
-});
+});*/

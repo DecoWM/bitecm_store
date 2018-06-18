@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use DB;
-use Validator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;

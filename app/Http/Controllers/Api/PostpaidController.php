@@ -20,7 +20,7 @@ class PostpaidController extends Controller
   }
 
 
-  public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
+  public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$color_slug=null,$contract_slug='18-meses') {
       $inputs = [
           'brand_slug' => $brand_slug,
           'product_slug' => $product_slug,
@@ -59,7 +59,7 @@ class PostpaidController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        'contract'=>$contract_slug
+        //'contract'=>$contract_slug
       ]);
 
       $available[$i]->picture_url = asset(Storage::url($item->picture_url));
@@ -75,7 +75,7 @@ class PostpaidController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
+          //'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
         $stock_models[$i]->api_route = route('api_postpaid_detail', [
@@ -83,7 +83,7 @@ class PostpaidController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
+          //'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
       }
@@ -110,7 +110,7 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -118,7 +118,7 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;
@@ -130,7 +130,7 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -138,7 +138,7 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;

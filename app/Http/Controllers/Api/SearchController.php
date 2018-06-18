@@ -108,7 +108,7 @@ class SearchController extends Controller
     $brand_ids = implode(',',$filters->manufacturer->value);
     $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : $affiliation_id;
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
-    $contract_id = \Config::get('filter.contract_id');
+    //$contract_id = \Config::get('filter.contract_id');
 
     //error_log($plan_post_id, 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
 
@@ -138,7 +138,7 @@ class SearchController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug
+        //'contract'=>$item->contract_slug
       ]);
       return $item;
     });

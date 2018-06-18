@@ -5592,6 +5592,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #producto-disponibles .list-producto ul.slick-dots {
   bottom: 20px;
   left: 15px;
+  display: none !important;
 }
 @media (max-width: 480px) {
   #producto-disponibles .list-producto {

@@ -23,7 +23,7 @@ Route::get('/postpago/buscar', 'Api\SearchController@searchPostpaid');
 Route::get('/accesorios/buscar', 'Api\SearchController@searchAccesorios');
 Route::get('/promociones/buscar', 'Api\SearchController@searchPromos');
 
-Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract}/{color?}', 'Api\PostpaidController@show')
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{color?}/{contract?}', 'Api\PostpaidController@show')
     ->where(
       [
         'brand' => '^([a-zA-Z0-9_-]+)$',

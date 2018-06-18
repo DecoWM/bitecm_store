@@ -38,7 +38,7 @@
                   'product'=>$smartphone->product_slug,
                   'affiliation'=>$smartphone->affiliation_slug,
                   'plan'=>$smartphone->plan_slug,
-                  'contract'=>$smartphone->contract_slug
+                  //'contract'=>$smartphone->contract_slug
                 ])}}">
                   <img src="{{asset(Storage::url($smartphone->picture_url))}}" alt="{{$smartphone->product_model}}">
                 </a>
@@ -66,7 +66,7 @@
                       'product'=>$smartphone->product_slug,
                       'affiliation'=>$smartphone->affiliation_slug,
                       'plan'=>$smartphone->plan_slug,
-                      'contract'=>$smartphone->contract_slug
+                      //'contract'=>$smartphone->contract_slug
                     ])}}" class="btn btn-default">comprar</a></div>
                   <div class="checkbox btn-comparar">
                     <label>
