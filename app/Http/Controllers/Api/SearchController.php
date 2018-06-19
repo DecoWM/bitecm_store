@@ -280,7 +280,7 @@ class SearchController extends Controller
               'product' => $item->product_slug,
               'plan' => $item->plan_slug,
               'affiliation'=>$item->affiliation_slug,
-              'contract'=>$item->contract_slug
+              //'contract'=>$item->contract_slug
             ]);
             break;
         }
