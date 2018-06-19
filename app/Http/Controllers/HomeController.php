@@ -41,7 +41,7 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        'contract'=>$item->contract_slug
+        //'contract'=>$item->contract_slug
       ]);
       return $item;
     });
@@ -57,7 +57,7 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        'contract'=>$item->contract_slug
+        //'contract'=>$item->contract_slug
       ]);
       return $item;
     });
@@ -79,7 +79,7 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        'contract'=>$item->contract_slug
+        //'contract'=>$item->contract_slug
       ]);
       return $item;
     });
