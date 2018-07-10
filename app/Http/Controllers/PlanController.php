@@ -41,14 +41,14 @@ class PlanController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        'contract'=>$contract_slug
+        //'contract'=>$contract_slug
       ]);
       $available[$i]->api_route = route('api_postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        'contract'=>$contract_slug
+        //'contract'=>$contract_slug
       ]);
     }
 
@@ -62,7 +62,7 @@ class PlanController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
+          //'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
         $stock_models[$i]->api_route = route('api_postpaid_detail', [
@@ -70,7 +70,7 @@ class PlanController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          'contract'=>$contract_slug,
+          //'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
       }
@@ -87,7 +87,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -95,7 +95,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       foreach ($item->affiliations as $key => $affil) {
@@ -111,7 +111,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -119,7 +119,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        'contract'=>$item->contract_slug,
+        //'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;
