@@ -166,7 +166,7 @@ class PrepaidController extends Controller
         'product'=>$product->product_slug,
         'affiliation'=>$affiliation_slug,
         'plan'=>$plan_post_slug,
-        'contract'=>$contract_slug
+        //'contract'=>$contract_slug
       ]);
     } else {
       $product->route_postpago = null;
