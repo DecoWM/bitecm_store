@@ -148,6 +148,8 @@ class OrderController extends Controller
   *                 else -> return false: consultant not created
   * @var portingRequestId: id for request created
   */
+ // 'sourcePayment' => strval($order_detail['type_number_carry']),
+
   protected function createConsultantRequest(&$order_detail) {
     try {
       $req = [
@@ -160,7 +162,6 @@ class OrderController extends Controller
           'sourcePayment' => strval($order_detail['type_id']),
           'email' => strval($order_detail['contact_email']),
           'phone' => strval($order_detail['contact_phone']),
-          'sourcePayment' => strval($order_detail['type_number_carry']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : ''

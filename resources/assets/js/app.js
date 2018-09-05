@@ -156,7 +156,7 @@ const app = new Vue({
                 isOpen : true
             },
             contract : {
-                value : '2',
+                value : '21',
                 isOpen : true
             },
             price : {
@@ -195,7 +195,7 @@ const app = new Vue({
                   isOpen : true
               },
               contract : {
-                  value : '2',
+                  value : '21',
                   isOpen : true
               },
               affiliation : {
