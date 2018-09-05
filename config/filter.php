@@ -8,7 +8,7 @@ return [
 
   'affiliation_id' => env('AFFILIATION_ID', 1),
 
-  'contract_id' => env('CONTRACT_ID', 1),
+  'contract_id' => env('CONTRACT_ID', 2),
 
   'accessory_cat_id' => env('ACCESSORY_CAT_ID', 2),
 

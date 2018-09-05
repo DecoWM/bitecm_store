@@ -37,7 +37,8 @@ Route::get('/prepago/{brand}/{product}/{plan}/{color?}', 'PrepaidController@show
 
 // RUTAS POSTPAGO
 Route::get('/postpago', 'PostpaidController@index')->name('postpaid');
-Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{color?}/{contract?}', 'PostpaidController@show')
+
+Route::get('/postpago/{brand}/{product}/{affiliation}/{plan}/{contract?}/{color?}', 'PostpaidController@show')
     ->where(
       [
         'brand' => '^([a-zA-Z0-9_-]+)$',

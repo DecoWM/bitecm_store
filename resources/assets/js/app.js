@@ -31,6 +31,7 @@ Vue.component('postpaidPrice', require('./components/postpaid/price.vue'));
 Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
+Vue.component('affiliationsFiltered', require('./components/postpaid/affiliations-filtered.vue'));
 
 Vue.directive('init', {
   bind: function(el, binding, vnode) {
@@ -154,6 +155,10 @@ const app = new Vue({
                 value : '',
                 isOpen : true
             },
+            contract : {
+                value : '2',
+                isOpen : true
+            },
             price : {
                 value : {x: 0, y: 0},
                 isOpen : true
@@ -187,6 +192,10 @@ const app = new Vue({
           postpago : {
               type : {
                   value : '',
+                  isOpen : true
+              },
+              contract : {
+                  value : '2',
                   isOpen : true
               },
               affiliation : {
@@ -233,6 +242,8 @@ const app = new Vue({
             }
         },
         plans: [],
+        affiliations: [],
+        contracts: [],
         //AJAX
         product: {},
         current_url: "",
@@ -366,28 +377,32 @@ const app = new Vue({
         selectPlan : function (plan) {
           this.selectedPlan = plan;
         },
+        selectContract: function(contract_routes,event) {
+          if(event.target.value.length > 0) {
+            // document.location = affiliation_routes[event.target.value];
+            route = contract_routes[event.target.value].split(",");
+            this.getProductByContract(route[0], route[1]);
+          }
+        },
         selectAffiliation: function(affiliation_routes,event) {
           if(event.target.value.length > 0) {
             // document.location = affiliation_routes[event.target.value];
             route = affiliation_routes[event.target.value].split(",");
             this.getProductByAffiliation(route[0], route[1]);
+            //console.log(route[0]);
+            //console.log(route[1]);
           }
         },
         setUrl: function (history_url) {
             this.current_url = history_url;
             window.history.replaceState("", "", history_url);
         },
-        setPlan: function(plan_id) {
+        setContract: function(event) {
             self = this;
-            //console.log(plan_id);
-            //console.log(self.product.plans);
-            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
-            //console.log(current_plan.route);
-            //console.log(current_plan.api_route);
-            $('.plan').removeClass('plan-active');
-            $('#plan'+plan_id).addClass('plan-active');
-            if (self.current_url != current_plan.route) {
-              this.getProductByPlan(current_plan.route, current_plan.api_route);
+            contract_id = event.target.value;
+            current_contract = self.product.contracts.find(item => item.contract_id == contract_id)
+            if (self.current_url != current_contract.route) {
+              this.getProductByContract(current_contract.route, current_contract.api_route);
             }
         },
         setAffiliation: function(event) {
@@ -396,6 +411,15 @@ const app = new Vue({
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
             if (self.current_url != current_affiliation.route) {
               this.getProductByAffiliation(current_affiliation.route, current_affiliation.api_route);
+            }
+        },
+        setPlan: function(plan_id) {
+            self = this;
+            var current_plan = self.product.plans.find(item => item.plan_id == plan_id);
+            $('.plan').removeClass('plan-active');
+            $('#plan'+plan_id).addClass('plan-active');
+            if (self.current_url != current_plan.route) {
+              this.getProductByPlan(current_plan.route, current_plan.api_route);
             }
         },
         setColor: function (stock_model_id) {
@@ -426,51 +450,77 @@ const app = new Vue({
             console.log(error);
           });
         },
-        getProductByAffiliation: function(history_url, request_url) {
+        getProductByContract: function(history_url, request_url) {
           self = this;
           axios.get(request_url).then((response) => {
-            //console.log(request_url);
-            self.product = response.data;
-            //console.log(self.product);
-            //console.log(self.info_comercial);
+            self.product = response.data;  // AQUI HACE EL CAMBIO DEL COMBO AFILIACION
+       
             $('input[name="product_variation"]').val(self.product.product.product_variation_id);
             $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+            $('input[name="contract"]').val(self.product.product.contract_id);
 
-            const plans_filtered = []; let i = 0;
-            //const plans_infocomercial_filtered = []; let x = 0;
+            //----------------
+            // AFILIACIONES
+            //----------------
+            const affiliations_filtered = []; let i = 0;
+            self.product.affiliations.forEach(function(affiliation, ix) {
+              if(affiliation.contract_id == self.product.product.contract_id) {
+                affiliations_filtered.push(affiliation);
+              }
+
+              i++;
+              if (self.product.affiliations.length == i) {
+                 self.affiliations = affiliations_filtered;
+              }
+            });
+
+            //----------------
+            // PLANES
+            //----------------
+            const plans_filtered = []; let p = 0;
             self.product.plans.forEach(function(plan, ix) {
               if(plan.affiliation_id == self.product.product.affiliation_id) {
                 plans_filtered.push(plan);
-                //console.log(plans_filtered);
-                //console.log(self.product.info_comercial[0].plan_id);
-
-                // for(var x in self.product.info_comercial) {
-                //   if(plan.plan_id == self.product.info_comercial[x].plan_id) {
-                //     plans_infocomercial_filtered.push(self.product.info_comercial[x]);
-                //   }
-                //   x++;
-                // }
-
               }
 
-              //console.log(plans_infocomercial_filtered);
+              p++;
+              // x++;
+              if (self.product.plans.length == p) {
+                 self.plans = plans_filtered;
+              }
+            });
+
+            document.getElementById('contsel').selectedIndex = $('#cont'+self.product.product.contract_id).data('ix');
+            document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
+        
+            this.setUrl(history_url);
+          }, (error) => {
+            console.log(error);
+          });
+        },
+        getProductByAffiliation: function(history_url, request_url) {
+          self = this;
+          axios.get(request_url).then((response) => {
+            self.product = response.data;
+
+            $('input[name="product_variation"]').val(self.product.product.product_variation_id);
+            $('input[name="affiliation"]').val(self.product.product.affiliation_id);
+      
+            const plans_filtered = []; let i = 0;
+            self.product.plans.forEach(function(plan, ix) {
+              if(plan.affiliation_id == self.product.product.affiliation_id) {
+                plans_filtered.push(plan);
+              }
 
               i++;
-              // x++;
               if (self.product.plans.length == i) {
                  self.plans = plans_filtered;
-                 //self.info_comercial = plans_infocomercial_filtered;
               }
             });
             
-            //self.info_comercial = plans_infocomercial_filtered.push(self.product.info_comercial);
-            //console.log(self.plans);
-            //console.log(self.info_comercial);
-
+            document.getElementById('contsel').selectedIndex = $('#cont'+self.product.product.contract_id).data('ix');
             document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
-            //$('.select-plan').slick('slickGoTo', parseInt(self.product.selected_plan));
-            //$('#plan'+self.product.product.plan_id).trigger('click');
-
+      
             this.setUrl(history_url);
           }, (error) => {
             console.log(error);

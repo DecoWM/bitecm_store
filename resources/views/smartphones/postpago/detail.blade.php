@@ -49,24 +49,32 @@
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                 <input type="hidden" name="affiliation" value="{{$product->affiliation_id}}">
+                <input type="hidden" name="contract" value="{{$product->contract_id}}">
                 <input type="hidden" name="type" value="2">
                 <input type="hidden" name="quantity" value="1">
                 <div class="content-product">
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
-                      <div class="select-product"><span class="title-select">Lo quieres en</span>
-                        {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
-                        {{-- <select form="purchase-form" name="affiliation" @change="selectAffiliation({
-                          @foreach ($affiliations as $affiliation)
-                            '{{$affiliation->affiliation_id}}': '{{$affiliation->route}},{{$affiliation->api_route}}',
-                          @endforeach
-                        },$event)"> --}}
-                        <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
-                          @foreach ($affiliations as $ix => $affiliation)
-                          <option id="aff{{$affiliation->affiliation_id}}" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+
+                      <div class="select-product"><span class="title-select">Tipo de contrato</span>
+                        <select id="contsel" form="purchase-form" name="contract" @change="setContract($event)">
+                          @foreach ($contracts as $ix => $contract)
+                          <option id="cont{{$contract->contract_id}}" data-ix="{{$ix}}" value="{{$contract->contract_id}}" {{$contract->contract_id == $product->contract_id ? 'selected' : ''}}>{{$contract->contract_name}}</option>
                           @endforeach
                         </select>
                       </div>
+                      
+                      <div class="select-product"><span class="title-select">Lo quieres en</span>
+                        <affiliations-filtered v-if="affiliations.length > 0" :affiliations="affiliations" :product="product"></affiliations-filtered>
+                        <div v-if="affiliations.length == 0" id="affiliations-select" class="select-affiliation {{$just_3 ? 'just-3' : ''}}">
+                          <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
+                            @foreach ($affiliations as $ix => $affiliation)
+                            <option id="aff{{$affiliation->affiliation_id}}" data-ix="{{$ix}}" value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $product->affiliation_id ? 'selected' : ''}}>{{$affiliation->affiliation_name}}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+
                       @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                     </div>
                     <div class="col-xs-7 col-sm-6 col-12-mob" v-if="Object.keys(product).length == 0">
@@ -263,7 +271,8 @@
         'available' => $available,
         'plans' => $plans,
         'info_comercial' => $info_comercial,
-        'affiliations' => $affiliations
+        'affiliations' => $affiliations,
+        'contracts' => $contracts
       ];
     @endphp
     <input id="product-init" type="hidden" value='@json($product_init)'>

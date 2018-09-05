@@ -108,7 +108,8 @@ class SearchController extends Controller
     $brand_ids = implode(',',$filters->manufacturer->value);
     $affiliation_id = (isset($filters->affiliation->value)) ? $filters->affiliation->value : $affiliation_id;
     $plan_post_id = (isset($filters->plan->value) && $filters->plan->value!="") ? $filters->plan->value : $plan_post_id;
-    //$contract_id = \Config::get('filter.contract_id');
+    $contract_id = (isset($filters->contract->value)) ? $filters->contract->value : $contract_id;
+    //\Config::get('filter.contract_id');
 
     //error_log($plan_post_id, 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
 
@@ -138,7 +139,7 @@ class SearchController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug
+        'contract'=>$item->contract_slug
       ]);
       return $item;
     });
@@ -244,6 +245,12 @@ class SearchController extends Controller
 
     $searched_string = $request->searched_string;
 
+    $contract_id = (isset($filters->contract->value)) ? $filters->contract->value : $contract_id;
+
+    $datalog = 'null'.' | '. $plan_pre_id.' | '.$plan_post_id.' | '.$affiliation_id.' | '.$contract_id.' | '.$brand_ids.' | '.$request->items_per_page.' | '. '1'.' | '.'publish_at'.' | '.'desc'.' | '.$product_price_ini.' | '.$product_price_end.' | '.$searched_string;
+
+    error_log($datalog,3,'c:/nginx-1.12.2/logs/bitel-store.log');
+
     $search_result = $this->shared->productSearchPromo(null, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, $brand_ids, $request->items_per_page, 1, "publish_at", "desc", $product_price_ini, $product_price_end, $searched_string);
 
     $filtered_product = null;
@@ -280,7 +287,7 @@ class SearchController extends Controller
               'product' => $item->product_slug,
               'plan' => $item->plan_slug,
               'affiliation'=>$item->affiliation_slug,
-              //'contract'=>$item->contract_slug
+              'contract'=>$item->contract_slug
             ]);
             break;
         }

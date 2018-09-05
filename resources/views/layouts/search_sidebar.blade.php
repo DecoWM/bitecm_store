@@ -37,7 +37,7 @@
           <div id="lo-quieres" class="content-catalogo">
             {{-- <div class="title-select" v-on:click="toggleAccordion(filters.affiliation)"> --}}
             <div class="title-select">
-              <div class="btn-acordion"></div><span>Lo quieres en</span>
+              <div class="btn-acordion"></div><span>Lo quieres</span>
               {{-- <div class="pull-right btl-caret" v-cloak>
                 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters.affiliation.isOpen"></span>
                 <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters.affiliation.isOpen"></span>
@@ -69,7 +69,7 @@
 @endif
           <div id="precio-equipo" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters.price)">
-              <div class="btn-acordion"></div><span>Precio de equipo:</span>
+              <div class="btn-acordion"></div><span>Preciosss de equipoffff:</span>
               <div class="pull-right btl-caret" v-cloak>
                 <span class="glyphicon glyphicon-chevron-down" aria-hidden="true" v-show="!filters.price.isOpen"></span>
                 <span class="glyphicon glyphicon-chevron-up" aria-hidden="true" v-show="filters.price.isOpen"></span>

@@ -30,8 +30,11 @@ class PostpaidController extends Controller
 
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
+
+
     $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
     
+
     $filtered_product = null;
     foreach ($search_result['products'] as $ix => $prod) {
       $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);
@@ -61,12 +64,12 @@ class PostpaidController extends Controller
 
     $banner = $this->shared->getImage(10);
 
-    // error_log(print_r($paginator, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
-
     return view('smartphones.postpago.index', ['products' => $paginator, 'pages' => $pages, 'filters' => $filterList, 'searched_string' => $searched_string, 'banner' => $banner]);
   }
+  
+  //public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$color_slug=null,$contract_slug='18-meses') {
 
-  public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$color_slug=null,$contract_slug='18-meses') {
+  public function show(Request $request, $brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
     $inputs = [
         'brand_slug' => $brand_slug,
         'product_slug' => $product_slug,
@@ -89,7 +92,13 @@ class PostpaidController extends Controller
         abort(404);
     }
 
+    //$datalog = $brand_slug.' | '.$product_slug.' | '.$affiliation_slug.' | '.$plan_slug.' | '.$contract_slug.' | '.$color_slug;
+
+    //error_log(print_r($datalog, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
+
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
+
+    //error_log(print_r($product, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 
     if(empty($product)) {
       abort(404);
@@ -104,14 +113,14 @@ class PostpaidController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        //'contract'=>$contract_slug
+        'contract'=>$contract_slug
       ]);
       $available[$i]->api_route = route('api_postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        //'contract'=>$contract_slug
+        'contract'=>$contract_slug
       ]);
     }
 
@@ -125,7 +134,7 @@ class PostpaidController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          //'contract'=>$contract_slug,
+          'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
         $stock_models[$i]->api_route = route('api_postpaid_detail', [
@@ -133,7 +142,7 @@ class PostpaidController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          //'contract'=>$contract_slug,
+          'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
       }
@@ -149,19 +158,21 @@ class PostpaidController extends Controller
     // $product_plans = DB::select('call PA_planList(2)');
     // $product_affiliations = DB::select('call PA_affiliationList()');
     
-    $product_plans = $this->shared->getProductPlans($product);
-    //error_log(print_r($product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
-    $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
-    //error_log(print_r($infocomercial_product_plans, true), 3, 'c:/nginx-1.12.2/logs/frutaldia.log');
+    $product_contracts = $this->shared->getProductContracts($product);
+    
     $product_affiliations = $this->shared->getProductAffiliations($product);
 
-    collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
+    $product_plans = $this->shared->getProductPlans($product);
+    
+    $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
+ 
+    collect($product_contracts)->map(function ($item, $key) use ($product, $color_slug) {
       $item->route = route('postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -169,13 +180,9 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
-      foreach ($item->affiliations as $key => $affil) {
-        $item->affil_classes[] = 'plan_aff_'.$affil;
-      }
-      $item->affil_classes = implode(' ', $item->affil_classes);
       return $item;
     });
 
@@ -185,7 +192,7 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -193,9 +200,33 @@ class PostpaidController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
+      return $item;
+    });
+
+    collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
+      $item->route = route('postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
+        'color' => isset($color_slug) ? $color_slug : null
+      ]);
+      $item->api_route = route('api_postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
+        'color' => isset($color_slug) ? $color_slug : null
+      ]);
+      foreach ($item->affiliations as $key => $affil) {
+        $item->affil_classes[] = 'plan_aff_'.$affil;
+      }
+      $item->affil_classes = implode(' ', $item->affil_classes);
       return $item;
     });
 
@@ -220,6 +251,7 @@ class PostpaidController extends Controller
       'available' => $available,
       'plans' => $product_plans,
       'info_comercial' => $infocomercial_product_plans,
+      'contracts' => $product_contracts,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
       'just_3' => $i <= 3

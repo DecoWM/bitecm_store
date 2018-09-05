@@ -97,13 +97,14 @@
                       <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                       <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                     </div>
+
                     @if(isset($item))
                     <div class="form-group form-select">
-                      <label for="affiliation">Tipo de afiliación</label>
+                      <label for="affiliation">Tipo de afiliación1</label>
                       @if(isset($item['affiliation_id']))
                       <input type="hidden" name="affiliation" value="{{$item['affiliation_id']}}">
                       <select id="affiliation" disabled="" style="background-color:#e2e2e2">
-                        <option value="">Seleccione tipo de afiliación</option>
+                        <option value="">Seleccione tipo de afiliación1</option>
                         @foreach($affiliation_list as $affiliation)
                         <option value="{{$affiliation->affiliation_id}}" {{$affiliation->affiliation_id == $item['affiliation_id'] ? 'selected' : ''}}>
                           {{$affiliation->affiliation_name}}
@@ -111,7 +112,7 @@
                         @endforeach
                       @else
                       <select id="affiliation" name="affiliation" v-model="affiliation" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('affiliation')}">
-                        <option value="" selected>Seleccione tipo de afiliación</option>
+                        <option value="" selected>Seleccione tipo de afiliación2</option>
                         @foreach($affiliation_list as $affiliation)
                         <option value="{{$affiliation->affiliation_id}}">
                           {{$affiliation->affiliation_name}}
@@ -120,6 +121,20 @@
                       @endif
                       </select>
                     </div>
+                    
+                    @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 1)
+                    <div class="form-group form-select">
+                    @else
+                    <div class="form-group form-select" v-if="affiliation == 1">
+                    @endif
+                      <label for="type_number_carry">Tipo de número a portar:</label>
+                      <select id="type_number_carry" name="type_number_carry" v-model="type_number_carry" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_number_carry') }">
+                        <option value="" selected>Seleccione un tipo de número a portar</option>
+                        <option value="Prepaid">Prepaid</option>
+                        <option value="Postpaid">Postpaid</option>
+                      </select>
+                    </div>
+
                     @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 1)
                     <div class="form-group form-select">
                     @else

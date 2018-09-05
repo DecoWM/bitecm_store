@@ -160,6 +160,7 @@ class OrderController extends Controller
           'sourcePayment' => strval($order_detail['type_id']),
           'email' => strval($order_detail['contact_email']),
           'phone' => strval($order_detail['contact_phone']),
+          'sourcePayment' => strval($order_detail['type_number_carry']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : ''
@@ -468,6 +469,7 @@ class OrderController extends Controller
       return redirect()->route('show_cart')->with('msg', 'Ha ocurrido un error con el carrito de compras');
     }
 
+    $order_detail['type_number_carry'] = $request->type_number_carry;  
     $order_detail['idtype_id'] = $request->document_type;
     $order_detail['payment_method_id'] = $request->payment_method;
     $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
@@ -599,6 +601,7 @@ class OrderController extends Controller
         $order_detail['contact_phone'],
         $order_detail['service_type'],
         $order_detail['affiliation_type'],
+        $order_detail['type_number_carry'],  
         $order_detail['porting_request_id'],
         number_format($order_detail['total'], 2, '.', ''),
         number_format($order_detail['total_igv'], 2, '.', '')
@@ -672,14 +675,74 @@ class OrderController extends Controller
       return abort(404);
     }
     $products = $this->shared->orderItems($order_id);
+    
     $status_history = $this->shared->statusHistory($order_id);
-    $status_list = $this->shared->statusList();
-    return view('tracking', [
-      'order' => $order,
-      'products' => $products,
-      'status_list' => $status_list,
-      'status_id' => $status_history[0]->order_status_id
-    ]);
+
+    // Al inicio todos los estados por default
+    // Pendiente >> Aceptado >> Programado >> En Envío >> Completado
+    $status_list = $this->shared->statusList_12356();
+    $flag = 0;
+    // Pendiente >> Aceptado >> Programado >> En Envío >> Completado
+    if(count($status_history) == 1 && $status_history[0]->order_status_name == 'Pendiente'){
+      $status_list = $this->shared->statusList_12356();
+    }
+    elseif(count($status_history) == 2 && 
+      $status_history[0]->order_status_name == 'Aceptado' && $status_history[1]->order_status_name == 'Pendiente'){
+      // Pendiente >> Aceptado >> Programado >> En Envío >> Completado
+      $status_list = $this->shared->statusList_12356();
+    }
+    elseif($status_history[0]->order_status_name == 'No Contactado' && $status_history[1]->order_status_name == 'Pendiente' ||
+           $status_history[1]->order_status_name == 'No Contactado' && $status_history[2]->order_status_name == 'Pendiente'){
+      // Pendiente >> No Contactado >> Cancelado
+      if($status_history[0]->order_status_name == 'Cancelado'){
+        $status_list = $this->shared->statusList_174();
+      }
+      // Pendiente >> No Contactado >> Aceptado
+      elseif($status_history[0]->order_status_name == 'Aceptado'){
+        $flag = 1;
+        $status_list = $this->shared->statusList_172();
+      }     
+    }
+    // Pendiente >> Aceptado >> Programado >> En Envío >> Cancelado
+    elseif(count($status_history) == 5 && 
+      $status_history[0]->order_status_name == 'Cancelado' &&
+      $status_history[1]->order_status_name == 'En Envío' &&
+      $status_history[2]->order_status_name == 'Programado' &&
+      $status_history[3]->order_status_name == 'Aceptado' &&
+      $status_history[4]->order_status_name == 'Pendiente'
+     ){
+      $status_list = $this->shared->statusList_12634();
+    }
+
+    // valida que sea cualquier caso excepto : Pendiente -> No Contactado -> Aceeptado
+    // dado que es un caso que rompe la logica de la secuencia normal de estados
+    if($flag == 0){
+        return view('tracking', [
+          'order' => $order,
+          'products' => $products,
+          'status_list' => $status_list,
+          'status_id' => $status_history[0]->order_status_id,
+          'weight' => $status_history[0]->weight
+        ]);
+    }
+    // valida que SOLO sea el caso : Pendiente -> No Contactado -> Aceeptado
+    elseif($flag == 1){
+
+      $x = 0;
+      while($x < count($status_list)){
+        $status_list[$x]->weight =  $status_list[$x]->weight2;
+        $x++;
+      }
+
+      return view('tracking', [
+          'order' => $order,
+          'products' => $products,
+          'status_list' => $status_list,
+          'status_id' => $status_history[0]->order_status_id,
+          'weight' => $status_history[0]->weight2
+      ]);
+    }
+
   }
 
   public function testJob (Request $request) {

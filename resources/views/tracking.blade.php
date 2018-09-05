@@ -60,7 +60,7 @@
                         <div id="nav-carrito" class="nav-carrito">
                           <ul class="list-unstyled">
                             @foreach($status_list as $status)
-                            <li class="col-xs-4 col-sm-4 {{$status_id == $status->order_status_id ? 'active' : ''}} {{$status_id == 4 ? 'text-muted' : ''}} {{$status_id > $status->order_status_id ? 'is-completed' : ''}}">
+                            <li class="col-xs-4 col-sm-4 {{$weight == $status->weight ? 'active' : ''}} {{$weight == 8 ? 'text-muted' : ''}} {{$weight < $status->weight ? '' : 'is-completed'}}">
                               <span>{{$status->order_status_name}}</span>
                             </li>
                             @endforeach
@@ -72,18 +72,24 @@
                               <p>¡Tu pedido está siendo evaluado!</p>
                               @break
                             @case(2)
-                              <p>¡Tu pedido ya fue procesado!</p>
+                              <p>¡Tu pedido ya fue aceptado!</p>
                               @break
                             @case(3)
                               <p>¡Tu pedido esta siendo enviado!</p>
                               @break
                             @case(4)
                               <p>¡Tu pedido ha sido cancelado!</p>
-                              @break
+                              @break 
                             @case(5)
-                              <p>¡Tu pedido ha sido entregado!</p>
+                              <p>¡Tu pedido ha sido completado!</p>
                               @break
-                          @endswitch
+                            @case(6)
+                              <p>¡Tu pedido esta siendo programado!</p>
+                              @break
+                            @case(7)
+                              <p>¡No hemos podido contactarnos con usted!</p>
+                              @break
+                             @endswitch
                         </div>
                       </div>
                     </div>
@@ -94,17 +100,23 @@
                             <p>¡Tu pedido está siendo evaluado!</p>
                             @break
                           @case(2)
-                            <p>¡Tu pedido ya fue procesado!</p>
+                            <p>¡Tu pedido ya fue aceptado!</p>
+                            @break
+                          @case(6)
+                            <p>¡Tu pedido esta siendo programado!</p>
                             @break
                           @case(3)
                             <p>¡Tu pedido esta siendo enviado!</p>
                             @break
-                          @case(4)
-                            <p>¡Tu pedido ha sido cancelado!</p>
+                          @case(7)
+                            <p>¡No hemos podido contactarnos con usted!</p>
                             @break
                           @case(5)
-                            <p>¡Tu pedido ha sido entregado!</p>
-                            @break
+                            <p>¡Tu pedido ha sido completado!</p>
+                            @break  
+                          @case(4)
+                            <p>¡Tu pedido ha sido cancelado!</p>
+                            @break   
                           @endswitch
                       </div>
                     </div>

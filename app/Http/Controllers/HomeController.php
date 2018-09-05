@@ -21,7 +21,7 @@ class HomeController extends Controller
     $affiliation_id = \Config::get('filter.affiliation_id');
     $plan_pre_id = \Config::get('filter.plan_pre_id');
     $plan_post_id = \Config::get('filter.plan_post_id');
-    $contract_id = \Config::get('filter.contract_id');
+    $contract_id = 1; //\Config::get('filter.contract_id');
 
     $best_seller_smartphone = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {
@@ -41,7 +41,7 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        //'contract'=>$item->contract_slug
+        'contract'=>$item->contract_slug
       ]);
       return $item;
     });
@@ -57,11 +57,12 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        //'contract'=>$item->contract_slug
+        'contract'=>$item->contract_slug
       ]);
       return $item;
     });
-    $promo_pre = $this->shared->productSearchPromo(1, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, 8, 1, 'publish_at', 'desc');
+    
+     $promo_pre = $this->shared->productSearchPromo(1, $plan_pre_id, $plan_post_id, $affiliation_id, $contract_id, null, 8, 1, 'publish_at', 'desc');
     $promo_pre = collect($promo_pre['products'])->map(function ($item, $key) {
       $item->picture_url = asset(Storage::url($item->picture_url));
       $item->route = route('prepaid_detail', [
@@ -79,7 +80,7 @@ class HomeController extends Controller
         'product'=>$item->product_slug,
         'affiliation'=>$item->affiliation_slug,
         'plan'=>$item->plan_slug,
-        //'contract'=>$item->contract_slug
+        'contract'=>$item->contract_slug
       ]);
       return $item;
     });
