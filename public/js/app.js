@@ -11850,7 +11850,7 @@ var app = new Vue({
           isOpen: true
         },
         contract: {
-          value: '21',
+          value: '2',
           isOpen: true
         },
         price: {
@@ -11889,7 +11889,7 @@ var app = new Vue({
           isOpen: true
         },
         contract: {
-          value: '21',
+          value: '2',
           isOpen: true
         },
         affiliation: {
