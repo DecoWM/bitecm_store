@@ -376,6 +376,7 @@ class OrderController extends Controller
   }
 
   public function storeOrder (Request $request) {
+
     $cart = collect($request->session()->get('cart'));
 
     if (count($cart) == 0) {
@@ -471,7 +472,6 @@ class OrderController extends Controller
       return redirect()->route('show_cart')->with('msg', 'Ha ocurrido un error con el carrito de compras');
     }
 
-    $order_detail['type_number_carry'] = $request->type_number_carry;  
     $order_detail['idtype_id'] = $request->document_type;
     $order_detail['payment_method_id'] = $request->payment_method;
     $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
@@ -492,9 +492,11 @@ class OrderController extends Controller
       $order_detail['source_operator'] = $source_operators[$request->operator];
       $order_detail['source_operator_id'] = $request->operator;
       $order_detail['porting_phone'] = $request->porting_phone;
+      $order_detail['type_number_carry'] = $request->type_number_carry; 
     } else {
       $order_detail['source_operator'] = null;
       $order_detail['porting_phone'] = null;
+      $order_detail['type_number_carry'] = '';
     }
 
     if(isset($equipo) && isset($equipo->variation_type_id)) {
