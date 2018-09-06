@@ -705,7 +705,10 @@ class OrderController extends Controller
       elseif($status_history[0]->order_status_name == 'Aceptado'){
         $flag = 1;
         $status_list = $this->shared->statusList_172();
-      }     
+      }  
+      else{
+        $status_list = $this->shared->statusList_174();
+      }   
     }
     // Pendiente >> Aceptado >> Programado >> En Envío >> Cancelado
     elseif(count($status_history) == 5 && 
