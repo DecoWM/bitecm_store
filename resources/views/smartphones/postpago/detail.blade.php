@@ -64,7 +64,7 @@
                         </select>
                       </div>
                       
-                      <div class="select-product"><span class="title-select">Lo quieres en</span>
+                      <div class="select-product" style="margin-top: 10px"><span class="title-select">Lo quieres en</span>
                         <affiliations-filtered v-if="affiliations.length > 0" :affiliations="affiliations" :product="product"></affiliations-filtered>
                         <div v-if="affiliations.length == 0" id="affiliations-select" class="select-affiliation {{$just_3 ? 'just-3' : ''}}">
                           <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">

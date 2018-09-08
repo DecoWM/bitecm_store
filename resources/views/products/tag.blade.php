@@ -17,5 +17,7 @@
 <div class="state"><span>NUEVO</span></div>
 @elseif(($product->product_tag == 'Destacado'))
 <div class="state"><span>DESTACADO</span></div>
+@elseif(($product->product_sentinel))
+<div class="state"><span>SENTINEL</span></div>
 @endif
 @endif

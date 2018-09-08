@@ -179,12 +179,23 @@
             @endif
             <div class="btn-detalle">
               <div class="row">
+                @if (isset($equipo) && $equipo->product_sentinel)
+                <div class="col-xs-12 col-sm-3">
+                  <a href="" class="btn btn-default comprar" style="float: left;width: 100%;">EVALUACIÓN CREDITICIA</a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                @else
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
+                @endif
                   @if (count($products) > 0)
                   <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
+                  @if (isset($equipo) && $equipo->product_sentinel)
+                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" disabled="disabled">COMPRAR</a>
+                  @else
+                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">COMPRAR</a>
+                  @endif
                   @endif
                 </div>
               </div>

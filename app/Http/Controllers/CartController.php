@@ -72,8 +72,12 @@ class CartController extends Controller
       $request->session()->forget('cart');
     }
 
+    if ($equipo && $equipo->product_sentinel) {
+      $equipo->product_model .= ' +S';
+    }
+
     $this->preventHistory();
-    
+
     return view('cart', [
       'equipo' => $equipo,
       'products' => $products,
