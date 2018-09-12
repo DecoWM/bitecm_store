@@ -326,32 +326,6 @@ class OrderController extends Controller
       return redirect()->route('home');
     }
 
-    if ($request->session()->has('order_detail')) {
-      $order_detail = json_decode($request->session()->get('order_detail'));
-      Log::info('Detalle de orden', (array) $order_detail);
-    } else {
-      $order_detail = [];
-    }
-
-    // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO',
-    //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO',
-    //   'INDEPENDENCIA', 'JESÚS MARÍA', 'LA MOLINA', 'LA VICTORIA', 'LINCE',
-    //   'LOS OLIVOS', 'LURIGANCHO', 'LURIN', 'MAGDALENA DEL MAR', 'MAGDALENA VIEJA',
-    //   'MIRAFLORES', 'PACHACAMAC', 'PUCUSANA', 'PUENTE PIEDRA', 'PUNTA HERMOSA',
-    //   'PUNTA NEGRA', 'RÍMAC', 'SAN BARTOLO', 'SAN BORJA', 'SAN ISIDRO',
-    //   'SAN JUAN DE LURIGANCHO', 'SAN JUAN DE MIRAFLORES', 'SAN LUIS',
-    //   'SAN MARTÍN DE PORRES', 'SAN MIGUEL', 'SANTA ANITA', 'SANTA MARÍA DEL MAR',
-    //   'SANTA ROSA', 'SANTIAGO DE SURCO', 'SURQUILLO', 'VILLA EL SALVADOR',
-    //   'SURQUILLO', 'VILLA EL SALVADOR', 'VILLA MARÍA DEL TRIUNFO',  'CALLAO',
-    //   'BELLAVISTA', 'CARMEN DE LA LEGUA REYNOSO', 'LA PERLA', 'LA PUNTA', 'VENTANILLA'
-    // ];
-
-    $distritos = $this->shared->districtsList();
-
-    $source_operators = $this->shared->operatorList();
-
-    $affiliation_list = DB::select('call PA_affiliationList()');
-
     $equipo = null;
     foreach ($cart as $item) {
       switch ($item['type_id']) {
@@ -365,6 +339,25 @@ class OrderController extends Controller
           break;
       }
     }
+
+    $sentinel_check = DB::table('tbl_sentinel_check')->first();
+
+    if ((isset($equipo['sentinel']) && $equipo['sentinel']) && !$sentinel_check) {
+      return redirect()->route('show_cart')->with('msg', 'Este equipo requiere <b>aprobación de credito inmediata</b>. Antes de continuar con la compra debe verificar su estado crediticio con Bitel haciendo click en el botón <b>EVALUACIÓN CREDITICIA</b>');
+    }
+
+    if ($request->session()->has('order_detail')) {
+      $order_detail = json_decode($request->session()->get('order_detail'));
+      Log::info('Detalle de orden', (array) $order_detail);
+    } else {
+      $order_detail = [];
+    }
+
+    $distritos = $this->shared->districtsList();
+
+    $source_operators = $this->shared->operatorList();
+
+    $affiliation_list = DB::select('call PA_affiliationList()');
 
     return view('order_form', [
       'item' => $equipo,
@@ -428,7 +421,6 @@ class OrderController extends Controller
       $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
 
-      // CLES 09-04-2018
       $equipo_plan = 0;
       // si es solo un chip (producto de categoria chip)
       if($product->category_id === 4){
@@ -450,6 +442,9 @@ class OrderController extends Controller
       $order_detail['service_type'] = 'Accesorios';
       $order_detail['affiliation_type'] = null;
     } else {
+      if ($equipo->product_sentinel) {
+        $equipo->product_model .= ' +S';
+      }
       $order_detail['affiliation_id'] = $request->affiliation;
       if (!isset($equipo->affiliation_name)) { //Prepago
         $order_detail['service_type'] = 'Prepago';
@@ -581,6 +576,8 @@ class OrderController extends Controller
     $order_detail['total'] = $total_net;
     $order_detail['total_igv'] = $total_igv;
 
+    $order_detail['credit_status'] = DB::table('tbl_sentinel_check')->first() ? 'Aprobada' : 'Pendiente';
+
     try {
       DB::beginTransaction();
 
@@ -607,6 +604,7 @@ class OrderController extends Controller
         $order_detail['affiliation_type'],
         $order_detail['type_number_carry'],  
         $order_detail['porting_request_id'],
+        $order_detail['credit_status'],
         number_format($order_detail['total'], 2, '.', ''),
         number_format($order_detail['total_igv'], 2, '.', '')
       );
@@ -625,6 +623,8 @@ class OrderController extends Controller
         'order_status_id' => \Config::get('filter.order_status_id')
       ]);
       
+      DB::table('tbl_sentinel_check')->delete();
+
       DB::commit();
     } catch(\Illuminate\Database\QueryException $e) {
       DB::rollback();

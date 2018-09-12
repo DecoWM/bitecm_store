@@ -74,8 +74,9 @@ class CartController extends Controller
 
     if ($equipo && $equipo->product_sentinel) {
       $equipo->product_model .= ' +S';
+      $equipo->sentinel_check = DB::table('tbl_sentinel_check')->first();
     }
-
+    
     $this->preventHistory();
 
     return view('cart', [
@@ -97,10 +98,16 @@ class CartController extends Controller
     $cart_item = [
       'type_id' => $request->type, //Prepago o postpago o sin variación
       'stock_model_id' => $request->stock_model, //Id del producto en stock
-      'quantity' => $request->quantity //Unidades
+      'quantity' => $request->quantity, //Unidades
+      'sentinel' => $request->sentinel //Evaluacion crediticia inmediata
     ];
 
-    $limit_message = 'Al momento solo está disponible hacer la compra de un solo producto por pedido, si deseas comprar un producto adicional, termina el pedido seleccionado o borra el producto elegido.';
+    $limit_message = 'Al momento solo está disponible
+                hacer la compra de <b>un solo producto</b>
+                por pedido, si deseas comprar
+                un producto adicional, termina el
+                pedido seleccionado o borra el
+                producto elegido.';
 
     switch ($cart_item['type_id']) {
       case 0:
@@ -155,6 +162,7 @@ class CartController extends Controller
       foreach ($cart as $i => $item) {
         if($request->stock_model == $item['stock_model_id'] && $request->product_variation == $item['product_variation_id']) {
           $request->session()->forget('cart.'.$i);
+          DB::table('tbl_sentinel_check')->delete();
           break;
         }
       }

@@ -32,6 +32,7 @@ Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
 Vue.component('affiliationsFiltered', require('./components/postpaid/affiliations-filtered.vue'));
+Vue.component('checkCreditStatus', require('./components/check-credit-status.vue'));
 
 Vue.directive('init', {
   bind: function(el, binding, vnode) {
@@ -91,40 +92,30 @@ const form = new Vue({
     }
   },
   mounted: function() {
-    var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
+    let meta_order_detail = null;
+    if (meta_order_detail = document.head.querySelector('meta[name="order_detail"]')) {
+      var order_detail = JSON.parse(meta_order_detail.content);
 
-    this.first_name = order_detail.first_name;
-    this.last_name = order_detail.last_name;
-    this.select_document = order_detail.idtype_id;
-    this.number_document = order_detail.id_number;
-    this.distrito = order_detail.billing_district;
-    this.number_phone = order_detail.billing_phone;
-    this.delivery = order_detail.delivery_address;
-    this.email = order_detail.contact_email;
-    this.delivery_district = order_detail.delivery_district;
-    this.number_contact = order_detail.contact_phone;
-    this.mediopago = order_detail.payment_method_id;
+      this.first_name = order_detail.first_name;
+      this.last_name = order_detail.last_name;
+      this.select_document = order_detail.idtype_id;
+      this.number_document = order_detail.id_number;
+      this.distrito = order_detail.billing_district;
+      this.number_phone = order_detail.billing_phone;
+      this.delivery = order_detail.delivery_address;
+      this.email = order_detail.contact_email;
+      this.delivery_district = order_detail.delivery_district;
+      this.number_contact = order_detail.contact_phone;
+      this.mediopago = order_detail.payment_method_id;
 
-    if (order_detail.affiliation_id) {
-      this.affiliation = order_detail.affiliation_id;
-      if (order_detail.affiliation_id === 1) {
-        this.operator = order_detail.source_operator_id;
-        this.porting_phone = order_detail.porting_phone;
+      if (order_detail.affiliation_id) {
+        this.affiliation = order_detail.affiliation_id;
+        if (order_detail.affiliation_id === 1) {
+          this.operator = order_detail.source_operator_id;
+          this.porting_phone = order_detail.porting_phone;
+        }
       }
     }
-
-    // phone_number.addEventListener("keypress", soloNumeros, false);
-    // porting_phone.addEventListener("keypress", soloNumeros, false);
-    // contact_phone.addEventListener("keypress", soloNumeros, false);
-    
-
-    // //Solo permite introducir numeros.
-    // function soloNumeros(e){
-    //   var key = window.event ? e.which : e.keyCode;
-    //   if (key < 48 || key > 57) {
-    //     e.preventDefault();
-    //   }
-    // }
   }
 });
 
@@ -250,12 +241,14 @@ const app = new Vue({
         initial_url: ""
     },
     methods: {
+        showCreditStatusPopup: function() {
+          this.$refs.creditStatusPopup.show();
+        },
         toggleBestSeller: function (str) {
             self = this;
             self.bestSeller=str;
             this.$nextTick(function(){
                 $('.list-productos').slick('setPosition');
-                // $('#banner-principal').get(0).slick.setPosition();
             });
         },
         togglePromo: function (str) {
@@ -263,7 +256,6 @@ const app = new Vue({
             self.promo = str;
             this.$nextTick(function(){
                 $('.promociones-tab').slick('setPosition');
-                // $('#banner-principal').get(0).slick.setPosition();
             });
         },
         toggleAccordion : function (item) {
@@ -333,31 +325,10 @@ const app = new Vue({
               }
             };
             axios.get(url, data).then((response) => {
-              //console.log(response.data);
               let result = response.data.data;
               if (result.length == 0) {
                 self.noResults = true;
-              } /* else {
-                self.searchResult = result;
-                self.pagination = response.data;
-                result.forEach(function(prod, ix) {
-                  const prod_full_name = (prod.brand_name + ' ' + prod.product_model).toLowerCase();
-                  const prod_model_name = prod.product_model.toLowerCase();
-                  const searched_string = self.searchedString.trim().toLowerCase();
-                  if (searched_string === prod_full_name || searched_string === prod_model_name) {
-                    self.searchResult = [prod];
-                    self.pagination.last_page_url = self.pagination.first_page_url;
-                    self.pagination.last_page = 1;
-                    self.pagination.next_page_url = null;
-                    self.pagination.prev_page_url = null;
-                    self.pagination.to = 1;
-                    self.pagination.total = 1;
-                  }
-                  if (result.length === (ix + 1) && self.searchResult.length == 0) {
-                    self.searchResult = result;
-                  }
-                });
-              }*/
+              }
               self.searchResult = result;
               self.pagination = response.data;
               self.isSearching = false;
@@ -379,18 +350,14 @@ const app = new Vue({
         },
         selectContract: function(contract_routes,event) {
           if(event.target.value.length > 0) {
-            // document.location = affiliation_routes[event.target.value];
             route = contract_routes[event.target.value].split(",");
             this.getProductByContract(route[0], route[1]);
           }
         },
         selectAffiliation: function(affiliation_routes,event) {
           if(event.target.value.length > 0) {
-            // document.location = affiliation_routes[event.target.value];
             route = affiliation_routes[event.target.value].split(",");
             this.getProductByAffiliation(route[0], route[1]);
-            //console.log(route[0]);
-            //console.log(route[1]);
           }
         },
         setUrl: function (history_url) {
@@ -439,12 +406,7 @@ const app = new Vue({
           self = this;
           axios.get(request_url).then((response) => {
             self.product = response.data;
-            //console.log(self.product);
             $('input[name="product_variation"]').val(self.product.product.product_variation_id);
-            //document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
-            //document.getElementById('affsel-mov').selectedIndex = $('#aff'+self.product.product.affiliation_id+'-mov').data('ix');
-            //$('#plans-slick').slick('slickGoTo', parseInt(self.product.selected_plan));
-            //$('#plans-slick').slick('setPosition');
             this.setUrl(history_url);
           }, (error) => {
             console.log(error);
@@ -530,8 +492,6 @@ const app = new Vue({
           self = this;
           axios.get(request_url).then((response) => {
             self.product = response.data;
-            //console.log(self.product);
-            //console.log('selected plan: '+self.product.selected_plan);
             title = self.product.product.brand_name + ' ' + self.product.product.product_model + (self.product.product.color_id ? ' ' + self.product.product.color_name : '')
             $('.title h1').text(title);
             $('.title h2').text(title);
@@ -559,15 +519,6 @@ const app = new Vue({
                     var src = $(this).data('image');
                     $('#zoom_01').attr('src', src);
                   });
-                  
-                  /*$('#zoom_01').elevateZoom({
-                    zoomType: "inner",
-                    cursor: "default",
-                    zoomWindowFadeIn: 500,
-                    zoomWindowFadeOut: 750,
-                    gallery : "gallery_01",
-                    galleryActiveClass: "active",
-                  });*/
                 }
 
             } else {
@@ -705,8 +656,6 @@ const app = new Vue({
             speed: 300,
             slidesToShow: 3,
             slidesToScroll: 1,
-       	    // centerMode: true,
-       	    // variableWidth: true,
             responsive: [
                 {
                   breakpoint: 1040,
@@ -760,8 +709,6 @@ const app = new Vue({
             speed: 300,
             slidesToShow: 4,
             slidesToScroll: 1,
-            // centerMode: true,
-            // variableWidth: true,
             responsive: [
                 {
                   breakpoint: 1040,
@@ -787,15 +734,6 @@ const app = new Vue({
                       slidesToShow: 2
                   }
                 }
-                //,
-                // {
-                //   breakpoint: 480,
-                //   settings: {
-                //       arrows: true,
-                //       centerMode: false,
-                //       slidesToShow: 1
-                //   }
-                // }
             ]
         });
 
@@ -842,15 +780,6 @@ const app = new Vue({
                 slidesToShow: 2
               }
             }
-            //,
-            // {
-            //   breakpoint: 375,
-            //   settings: {
-            //     arrows: true,
-            //     centerMode: false,
-            //     slidesToShow: 1
-            //   }
-            // }
           ]
         });
 
@@ -864,8 +793,6 @@ const app = new Vue({
           slidesToShow: 4,
           slidesToScroll: 1,
           asNavFor: '.nav-compara',
-          // centerMode: true,
-          // variableWidth: true,
           responsive: [
           {
               breakpoint: 1040,
@@ -901,42 +828,10 @@ const app = new Vue({
                 slidesToShow: 2
               }
             }
-            //,
-            // {
-            //   breakpoint: 375,
-            //   settings: {
-            //     arrows: true,
-            //     dots: false,
-            //     centerMode: false,
-            //     slidesToShow: 1
-            //   }
-            // }
           ]
         });
 
         $('.select-plan').slick(self.getSlickPlansSettings($('#planes').data('selected'), $('#plans-slick').hasClass('just-3')));
-
-        // $('.select-plan').slick('setPosition');
-
-        // function resizeSelectPlan() {
-
-        //   // body...
-        //   var WindoWSelect = $(window).width();
-
-        //   if (WindoWSelect < 480) {
-        //     console.log('hola');
-        //     $('.select-plan').on('setPosition', function(event, slick, currentSlide, nextSlide){
-        //       console.log($(this));
-        //     });
-        //   } 
-
-        //   // else {}
-
-        // }
-
-        // resizeSelectPlan();
-
-        // $(window).resize(resizeSelectPlan);
 
         $('.descripcion-detalle ul').slick({
             arrows: true,
@@ -945,8 +840,6 @@ const app = new Vue({
             autoplay: false,
             slidesToShow: 5,
             slidesToScroll: 1,
-        // centerMode: true,
-        // variableWidth: true,
             responsive: [
             {
               breakpoint: 1040,
@@ -974,9 +867,8 @@ const app = new Vue({
                   centerMode: false,
                   slidesToShow: 2
               }
-            },
-
-            ]
+            }
+          ]
         });
 
         $('#producto-disponibles .list-producto').slick({
@@ -988,8 +880,6 @@ const app = new Vue({
             speed: 500,
             slidesToShow: 3,
             slidesToScroll: 1,
-            // centerMode: true,
-            // variableWidth: true,
             responsive: [
               {
                 breakpoint: 768,
@@ -1016,7 +906,6 @@ const app = new Vue({
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
             if (scroll >= 200) {
-                // $("#header-information").hide();
                 $('#list-equipos-comparar').css('top', '55px');
             } else if(scroll < 200) {
                 $('#list-equipos-comparar').css('top', '247px');
@@ -1026,7 +915,6 @@ const app = new Vue({
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
             if (scroll >= 55) {
-            // $("#header-information").hide();
                 $('#nav-bitel').addClass('nav-fixed');
             } else if(scroll < 55) {
                 $('#nav-bitel').removeClass('nav-fixed');
@@ -1078,63 +966,29 @@ const app = new Vue({
             $(this).addClass('is-active');
         });
 
-        /*$('#zoom_01').elevateZoom({
-            zoomType: "inner",
-            cursor: "default",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750,
-            gallery : "gallery_01",
-            galleryActiveClass: "active",
-        });*/
-
         $('.galeria-min a').click(function(){
           var src = $(this).data('image');
           $('#zoom_01').attr('src', src);
         });
 
         $(".option-select input").change(function(e){
-           // var defColor = $(this).attr('id');
-           var currentValue = $(".option-select input:checked").val();
-           // console.log('Select val ' + currentValue + defColor);
-              if(currentValue == 1){
-              smallImage = '/images/home/celular-1.jpg';
-              largeImage = '/images/home/celular-12.jpg';
-              }
-              if(currentValue == 2){
-              smallImage = '/images/home/celular-2.jpg';
-              largeImage = '/images/home/celular-22.jpg';
-              }
-              if(currentValue == 3){
-              smallImage = '/images/home/celular-3.jpg';
-              largeImage = '/images/home/celular-33.jpg';
-              }
-           // if(currentValue == 4){
-           // smallImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/small/image4.png';
-           // largeImage = 'http://www.elevateweb.co.uk/wp-content/themes/radial/zoom/images/large/image4.jpg';
-           // }
+          var currentValue = $(".option-select input:checked").val();
+          if(currentValue == 1){
+            smallImage = '/images/home/celular-1.jpg';
+            largeImage = '/images/home/celular-12.jpg';
+          }
+          if(currentValue == 2){
+            smallImage = '/images/home/celular-2.jpg';
+            largeImage = '/images/home/celular-22.jpg';
+          }
+          if(currentValue == 3){
+            smallImage = '/images/home/celular-3.jpg';
+            largeImage = '/images/home/celular-33.jpg';
+          }
           // Example of using Active Gallery
           $('#gallery_01 a').removeClass('active').eq(currentValue-1).addClass('active');
 
-
-          /* var ez = $('#zoom_01').data('elevateZoom');
-
-          ez.swaptheimage(smallImage, largeImage); */
-
         });
-        // $("#zoom_03").elevateZoom({
-        //   gallery:'gallery_01',
-        //  cursor: 'pointer',
-        //  galleryActiveClass: 'active',
-        //  imageCrossfade: true,
-        //  loadingIcon: 'http://www.elevateweb.co.uk/spinner.gif'}
-        //  );
-
-        // //pass the images to Fancybox
-        // $("#zoom_03").bind("click", function(e) {
-        //   var ez =   $('#zoom_03').data('elevateZoom');
-        //   $.fancybox(ez.getGalleryList());
-        //   return false;
-        // });
 
         $(".incr-btn").each(function(elem){
           var $button = $(this);
@@ -1203,16 +1057,6 @@ const app = new Vue({
         });
 
         $('.ver-mas-equipo .content-detalle').slideUp();
-
-        // $('.ver-mas-equipo .btn-vmas').on('click', function(j) {
-        //     j.preventDefault();
-
-        //     $('.ver-mas-equipo .content-detalle').slideUp();
-
-        //     $(this).closest('.title-detalle').next().slideDown();
-
-        // /* Act on the event */
-        // });
 
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();

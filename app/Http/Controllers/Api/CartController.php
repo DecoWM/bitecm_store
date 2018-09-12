@@ -29,26 +29,54 @@ class CartController extends Controller
       ]);
     }
 
-    $this->initSoapWrapper();
+    /*$cart = collect($request->session()->get('cart')); //Carrito de compras
+    if (!count($cart)) {
+      return response()->json([
+        'success' => false,
+        'error' => 'El carrito esta vacio'
+      ]);
+    }*/
 
-    $data = [
-      'dni' => $dni,
-      'stock_model_code' => $stock_model_code,
-      'product_code' => $product_code
-    ];
+    if (\Config::get('filter.use_bcss')) {
+      $this->initSoapWrapper();
 
-    if ($r = $this->checkCreditStatusSentinel($data)) {
-      if ($r->status === 'Aprobada') {
-        return response()->json([
-          'success' => true,
-          'msg' => 'Su credito fue aprobado'
-        ]);
-      } else {
-        return response()->json([
-          'success' => false,
-          'msg' => 'Su credito no fue aprobado'
-        ]);
+      $data = [
+        'dni' => $dni,
+        'stock_model_code' => $stock_model_code,
+        'product_code' => $product_code
+      ];
+
+      if ($r = $this->checkCreditStatusSentinel($data)) {
+        if ($r->status === 'Aprobada') {
+          DB::table('tbl_sentinel_check')->delete();
+          DB::table('tbl_sentinel_check')->insert(['status' => 1]);
+          /*foreach ($cart as $i => $item) {
+            if (isset($item['product_variation_id']) && $item['product_variation_id'] == $product_variation_id) {
+              $item['credit_status_checked'] = 1;
+              $request->session()->put('cart.'.$i, $item);
+            }
+          }*/
+          return response()->json([
+            'success' => true,
+            'aprobado' => true,
+            'msg' => 'Su credito fue aprobado'
+          ]);
+        } else {
+          return response()->json([
+            'success' => true,
+            'aprobado' => false,
+            'msg' => 'Su credito no fue aprobado'
+          ]);
+        }
       }
+    } else {
+      DB::table('tbl_sentinel_check')->delete();
+      DB::table('tbl_sentinel_check')->insert(['status' => 1]);
+      return response()->json([
+        'success' => true,
+        'aprobado' => true,
+        'msg' => 'Su credito fue aprobado'
+      ]);
     }
 
     return response()->json([

@@ -58,4 +58,4 @@ Route::post('check_porting_status/{order_id}', 'Api\PortingController@handle');
 
 Route::post('test/{param}', 'Api\PortingController@test');
 
-Route::post('check_credit_status', 'Api\CartController@checkCreditStatus');
+Route::get('/carrito/check_credit_status', 'Api\CartController@checkCreditStatus');
