@@ -79,6 +79,10 @@ class CartController extends Controller
     
     $this->preventHistory();
 
+    error_log(print_r($equipo, true) ,3, '/var/www/html/prueba.log');
+    error_log(print_r($products, true) ,3, '/var/www/html/prueba.log');
+    error_log('ingreso' ,3, '/var/www/html/prueba.log');
+
     return view('cart', [
       'equipo' => $equipo,
       'products' => $products,
