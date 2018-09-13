@@ -45,6 +45,7 @@
                 {{ csrf_field() }}
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="type" value="0">
+                <input type="hidden" name="sentinel" value="{{isset($product->product_sentinel) ? $product->product_sentinel : 0 }}">
                 <div class="content-product equipo-prepago">
                   <div class="row">
                     <div class="col-xs-12 col-sm-6">

@@ -407,6 +407,7 @@ class BaseController extends Controller
         $affiliation_type = null,
         $type_number_carry = null,
         $porting_request_id = null,
+        $credit_status,
         $total,
         $total_igv
   ) {
@@ -431,6 +432,7 @@ class BaseController extends Controller
         :affiliation_type,
         :type_number_carry,
         :porting_request_id,
+        :credit_status,
         :total,
         :total_igv
     )', [
@@ -454,6 +456,7 @@ class BaseController extends Controller
         'affiliation_type' => $affiliation_type,
         'type_number_carry' => $type_number_carry,
         'porting_request_id' => $porting_request_id,
+        'credit_status' => $credit_status,
         'total' => $total,
         'total_igv' => $total_igv
     ]);

@@ -50,6 +50,7 @@
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                 <input type="hidden" name="type" value="1">
                 <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="sentinel" value="{{isset($product->product_sentinel) ? $product->product_sentinel : 0 }}">
                 <div class="content-product equipo-prepago">
                   <div class="row">
                     <div class="col-xs-12 col-sm-6">

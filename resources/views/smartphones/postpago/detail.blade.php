@@ -52,6 +52,7 @@
                 <input type="hidden" name="contract" value="{{$product->contract_id}}">
                 <input type="hidden" name="type" value="2">
                 <input type="hidden" name="quantity" value="1">
+                <input type="hidden" name="sentinel" value="{{isset($product->product_sentinel) ? $product->product_sentinel : 0 }}">
                 <div class="content-product">
                   <div class="row">
                     <div class="col-xs-5 col-sm-6">
@@ -64,7 +65,7 @@
                         </select>
                       </div>
                       
-                      <div class="select-product"><span class="title-select">Lo quieres en</span>
+                      <div class="select-product" style="margin-top: 10px"><span class="title-select">Lo quieres en</span>
                         <affiliations-filtered v-if="affiliations.length > 0" :affiliations="affiliations" :product="product"></affiliations-filtered>
                         <div v-if="affiliations.length == 0" id="affiliations-select" class="select-affiliation {{$just_3 ? 'just-3' : ''}}">
                           <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
@@ -93,8 +94,8 @@
                           <p>con <span>{{$product->plan_name}}</span></p>
                         </div>
                         <div class="tiempo-plan">
-                          <!--p>Contrato de {{--$product->contract_name--}}</p-->
-                          <p>Sin contrato de permanencia (*)</p>
+                          <p>{{$product->contract_name}}</p>
+                          <!--p>Sin contrato de permanencia (*)</p-->
                         </div>
                       </div>
                     </div>

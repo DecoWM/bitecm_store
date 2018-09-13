@@ -326,12 +326,14 @@ class OrderController extends Controller
       return redirect()->route('home');
     }
 
+    /*
     if ($request->session()->has('order_detail')) {
       $order_detail = json_decode($request->session()->get('order_detail'));
       Log::info('Detalle de orden', (array) $order_detail);
     } else {
       $order_detail = [];
     }
+    */
 
     // $distritos = ['LIMA', 'ANCÓN', 'ATE', 'BARRANCO', 'BRENA', 'CARABAYLLO',
     //   'CHACLACAYO', 'CHORRILLOS', 'CIENEGUILLA', 'COMAS', 'EL AGUSTINO',
@@ -346,6 +348,7 @@ class OrderController extends Controller
     //   'BELLAVISTA', 'CARMEN DE LA LEGUA REYNOSO', 'LA PERLA', 'LA PUNTA', 'VENTANILLA'
     // ];
 
+    /*
     $distritos = $this->shared->districtsList();
 
     $source_operators = $this->shared->operatorList();
@@ -394,12 +397,76 @@ class OrderController extends Controller
         $distritos[$dist->district_id] = $dist;
       }
     }
+    */
 
     //error_log(print_r($departamentos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
     //error_log(print_r($provincias, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
     //error_log(print_r($distritos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
 
     //error_log(print_r($dept_prov_dist_branch_list, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
+
+    $equipo = null;
+    foreach ($cart as $item) {
+      switch ($item['type_id']) {
+        case 0:
+          break;
+        case 1:
+          $equipo = $item;
+          break;
+        case 2:
+          $equipo = $item;
+          break;
+      }
+    }
+    
+    $sentinel_check = DB::table('tbl_sentinel_check')->first();
+
+    if ((isset($equipo['sentinel']) && $equipo['sentinel']) && !$sentinel_check) {
+      return redirect()->route('show_cart')->with('msg', 'Este equipo requiere <b>aprobación de credito inmediata</b>. Antes de continuar con la compra debe verificar su estado crediticio con Bitel haciendo click en el botón <b>EVALUACIÓN CREDITICIA</b>');
+    }
+
+    if ($request->session()->has('order_detail')) {
+      $order_detail = json_decode($request->session()->get('order_detail'));
+      Log::info('Detalle de orden', (array) $order_detail);
+    } 
+    else {
+      $order_detail = [];
+    }
+
+    $distritos = $this->shared->districtsList();
+
+    $source_operators = $this->shared->operatorList();
+
+    $affiliation_list = DB::select('call PA_affiliationList()');
+
+    $dept_prov_dist_branch_list = DB::select('call PA_deptprovdistbrachList()');
+
+    // obtener los dfatos de departamento , provincia y distrito en base al primer registro 
+    $departamento = $dept_prov_dist_branch_list[0]->departament_id;
+    $provincia = $dept_prov_dist_branch_list[0]->province_id;
+    $distrito = $dept_prov_dist_branch_list[0]->district_id;
+
+    // obtener los datos de los departamentos unicos
+    $departamentos = array();
+    foreach ($dept_prov_dist_branch_list as $dept){
+      $departamentos[$dept->departament_id] = $dept;
+    }
+
+    // obtener las provincias en funciona al primer departamento
+    $provincias = array();
+    foreach ($dept_prov_dist_branch_list as $prov){
+      if($prov->departament_id == $departamento){
+        $provincias[$prov->province_id] = $prov;
+      }
+    }
+    
+    // obtener los distritos en funcion a la primera provincia
+    $distritos = array();
+    foreach ($dept_prov_dist_branch_list as $dist){
+      if($dist->departament_id == $departamento and $dist->province_id == $provincia){
+        $distritos[$dist->district_id] = $dist;
+      }
+    }
 
     return view('order_form', [
       'item' => $equipo,
@@ -466,7 +533,6 @@ class OrderController extends Controller
       $total_net += $subtotal_net;
       $total_igv += $subtotal_igv;
 
-      // CLES 09-04-2018
       $equipo_plan = 0;
       // si es solo un chip (producto de categoria chip)
       if($product->category_id === 4){
@@ -488,6 +554,9 @@ class OrderController extends Controller
       $order_detail['service_type'] = 'Accesorios';
       $order_detail['affiliation_type'] = null;
     } else {
+      if ($equipo->product_sentinel) {
+        $equipo->product_model .= ' +S';
+      }
       $order_detail['affiliation_id'] = $request->affiliation;
       if (!isset($equipo->affiliation_name)) { //Prepago
         $order_detail['service_type'] = 'Prepago';
@@ -619,6 +688,8 @@ class OrderController extends Controller
     $order_detail['total'] = $total_net;
     $order_detail['total_igv'] = $total_igv;
 
+    $order_detail['credit_status'] = DB::table('tbl_sentinel_check')->first() ? 'Aprobada' : 'Pendiente';
+
     try {
       DB::beginTransaction();
 
@@ -645,6 +716,7 @@ class OrderController extends Controller
         $order_detail['affiliation_type'],
         $order_detail['type_number_carry'],  
         $order_detail['porting_request_id'],
+        $order_detail['credit_status'],
         number_format($order_detail['total'], 2, '.', ''),
         number_format($order_detail['total_igv'], 2, '.', '')
       );
@@ -663,6 +735,8 @@ class OrderController extends Controller
         'order_status_id' => \Config::get('filter.order_status_id')
       ]);
       
+      DB::table('tbl_sentinel_check')->delete();
+
       DB::commit();
     } catch(\Illuminate\Database\QueryException $e) {
       DB::rollback();

@@ -5158,7 +5158,8 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #planes .select-plan {
   overflow: hidden;
-  height: 323px;
+  min-height: 290px;
+  max-height: 500px;
   margin-bottom: 0;
 }
 #planes .select-plan .slick-prev {

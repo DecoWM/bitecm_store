@@ -11,13 +11,7 @@
             </div>
             <div class="col-xs-12 col-sm-8">
               <div class="text-center">
-                {{-- {{session('msg')}} --}}
-                Al momento solo está disponible
-                hacer la compra de <b>un solo producto</b>
-                por pedido, si deseas comprar
-                un producto adicional, termina el
-                pedido seleccionado o borra el
-                producto elegido.
+                {!!session('msg')!!}
               </div>
             </div>
           </div>
@@ -78,8 +72,8 @@
                       <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_name) ? $product->color_name : ''}}</h2>
                       @if (intval($product->type_id) == 2)
                       <span class="modo">{{$product->affiliation_name}}</span>
-                      <!--span class="contrato">Contrato {{--$product->contract_name--}}</span-->
-                      <span class="contrato">Sin contrato de permanencia (*)</span>
+                      <span class="contrato">{{$product->contract_name}}</span>
+                      <!--span class="contrato">Sin contrato de permanencia (*)</span-->
                       @elseif (intval($product->type_id) == 1)
                       <span class="modo">Prepago {{$product->plan_name}}</span>
                       @endif
@@ -179,12 +173,31 @@
             @endif
             <div class="btn-detalle">
               <div class="row">
+                @if (isset($equipo) && $equipo->product_sentinel)
+                <div class="col-xs-12 col-sm-4">
+                  <a v-on:click="showCreditStatusPopup" ref="showCreditStatusPopup" class="btn btn-default comprar" style="float: left; width: auto; padding: 0 15px;" {{ $equipo->sentinel_check ? 'disabled="disabled"' : ''}}>EVALUACIÓN CREDITICIA</a>
+                  <span ref="creditStatusResult" style="
+                    @if (!$equipo->sentinel_check)
+                    display: none;
+                    @endif
+                    float: left;
+                    line-height: 30px;
+                    margin-left: 10px;
+                    color: green;">Aprobada</span>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-sm-offset-2">
+                @else
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
+                @endif
                   @if (count($products) > 0)
                   <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
                   {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                   {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">comprar</a>
+                  @if (isset($equipo) && $equipo->product_sentinel)
+                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">COMPRAR</a>
+                  @else
+                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">COMPRAR</a>
+                  @endif
                   @endif
                 </div>
               </div>
@@ -211,4 +224,7 @@
         </div>
       </div>
     </div>
+    @if (isset($equipo) && $equipo->product_sentinel)
+    <check-credit-status ref="creditStatusPopup" :stock_model_code="'{{$equipo->stock_model_code}}'" :product_code="'{{$equipo->product_code}}'"></check-credit-status>
+    @endif
 @endsection

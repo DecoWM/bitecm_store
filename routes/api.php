@@ -57,3 +57,5 @@ Route::get('/accesorios/{brand}/{product}/{color?}', 'Api\ProductController@show
 Route::post('check_porting_status/{order_id}', 'Api\PortingController@handle');
 
 Route::post('test/{param}', 'Api\PortingController@test');
+
+Route::get('/carrito/check_credit_status', 'Api\CartController@checkCreditStatus');
