@@ -10,7 +10,7 @@ CREATE PROCEDURE `PA_INS_storeOrder`(
   IN payment_method_id INT,
   IN branch_id INT,
   IN tracking_code VARCHAR(50),
-  IN first_name VARCHAR(100),
+  IN first_name VARCHAR(150),
   IN last_name VARCHAR(100),
   IN id_number VARCHAR(20),
   IN billing_district INT,
@@ -31,6 +31,7 @@ CREATE PROCEDURE `PA_INS_storeOrder`(
 )
 BEGIN
   DECLARE stored_query TEXT;
+  SET last_name = IFNULL(last_name, '');
   SET source_operator = IFNULL(source_operator, '');
   SET porting_phone = IFNULL(porting_phone, '');
   SET affiliation_type = IFNULL(affiliation_type, '');
