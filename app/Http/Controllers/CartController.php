@@ -72,11 +72,10 @@ class CartController extends Controller
       $request->session()->forget('cart');
     }
 
-    /*
     if ($equipo && $equipo->product_sentinel) {
       $equipo->product_model .= ' +S';
       $equipo->sentinel_check = DB::table('tbl_sentinel_check')->first();
-    }*/
+    }
     
     $this->preventHistory();
 
