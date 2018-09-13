@@ -11687,12 +11687,14 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(15);
-module.exports = __webpack_require__(105);
+module.exports = __webpack_require__(114);
 
 
 /***/ }),
 /* 15 */
 /***/ (function(module, exports, __webpack_require__) {
+
+var _data;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -11728,7 +11730,11 @@ Vue.component('postpaidPrice', __webpack_require__(86));
 Vue.component('postpaidColor', __webpack_require__(91));
 Vue.component('postpaidPlan', __webpack_require__(96));
 Vue.component('plansFiltered', __webpack_require__(101));
-Vue.component('affiliationsFiltered', __webpack_require__(109));
+Vue.component('affiliationsFiltered', __webpack_require__(104));
+Vue.component('provincesFiltered', __webpack_require__(107));
+Vue.component('districtsFiltered', __webpack_require__(110));
+Vue.component('provincesdFiltered', __webpack_require__(118));
+Vue.component('districtsdFiltered', __webpack_require__(121));
 
 Vue.directive('init', {
   bind: function bind(el, binding, vnode) {
@@ -11736,12 +11742,12 @@ Vue.directive('init', {
   }
 });
 
-var VeeValidate = __webpack_require__(104);
+var VeeValidate = __webpack_require__(113);
 Vue.use(VeeValidate);
 
 var form = new Vue({
   el: '#form-vue-validator',
-  data: {
+  data: (_data = {
     first_name: '',
     last_name: '',
     select_document: '',
@@ -11756,8 +11762,10 @@ var form = new Vue({
     affiliation: '',
     disabled: false,
     operator: '',
-    porting_phone: ''
-  },
+    porting_phone: '',
+    departamento: '',
+    provincia: ''
+  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _data),
   methods: {
     validateInfoCliente: function validateInfoCliente() {
       var _this = this;
@@ -11782,7 +11790,182 @@ var form = new Vue({
     },
     change: function change() {
       // console.log(this.affiliation);
+    },
+
+
+    //-----------------------
+    //  LUGAR DE DOMICILIO
+    //-----------------------
+    selectDepartament: function selectDepartament(event) {
+      if (event.target.value.length > 0) {
+        route = event.target.value;
+        this.getProvincesByDepartament(route);
+      }
+    },
+    getProvincesByDepartament: function getProvincesByDepartament(route) {
+      self = this;
+
+      //--------------------
+      // PROVINCIAS
+      //--------------------
+      var provinces_filtered = [];var i = 0;
+      self.dept_prov_dist_branch_list.forEach(function (province) {
+        if (province.departament_id == route) {
+          provinces_filtered.push(province);
+        }
+
+        i++;
+        if (self.dept_prov_dist_branch_list.length == i) {
+          //self.provinces = provinces_filtered;
+        }
+      });
+
+      // filtrado de las provincias unicas por departamento
+      var aux = provinces_filtered;
+      var aux2 = [];
+
+      aux2[0] = aux[0];
+      var a = 1;
+      for (var x = 0; x < aux.length; x++) {
+        var p = 0;
+        for (var y = 0; y < aux2.length; y++) {
+          if (aux[x]['province_id'] == aux2[y]['province_id']) {
+            p++;
+          }
+        }
+        if (p == 0) {
+          aux2[a] = aux[x];
+          a++;
+        }
+      }
+
+      // carga los valores en el combobox 
+      self.provinces = aux2;
+
+      //--------------------
+      // DISTRITOS
+      //--------------------
+      var districts_filtered = [];var b = 0;
+      self.dept_prov_dist_branch_list.forEach(function (district) {
+        if (district.province_id == aux2[0]['province_id']) {
+          districts_filtered.push(district);
+        }
+
+        b++;
+        if (self.dept_prov_dist_branch_list.length == b) {
+          self.districts = districts_filtered;
+        }
+      });
+    },
+    selectProvince: function selectProvince(event) {
+      if (event.target.value.length > 0) {
+        route = event.target.value;
+        this.getDistricsByProvince(route);
+      }
+    },
+    getDistricsByProvince: function getDistricsByProvince(route) {
+      self = this;
+      var districts_filtered = [];var i = 0;
+      self.dept_prov_dist_branch_list.forEach(function (district) {
+        if (district.province_id == route) {
+          districts_filtered.push(district);
+        }
+
+        i++;
+        if (self.dept_prov_dist_branch_list.length == i) {
+          self.districts = districts_filtered;
+        }
+      });
+    },
+
+    //-----------------------
+    //  LUGAR DE RECOJO
+    //-----------------------
+    selectDepartamentd: function selectDepartamentd(event) {
+      if (event.target.value.length > 0) {
+        route = event.target.value;
+        this.getProvincesByDepartamentd(route);
+      }
+    },
+    getProvincesByDepartamentd: function getProvincesByDepartamentd(route) {
+      self = this;
+
+      //--------------------
+      // PROVINCIAS
+      //--------------------
+      console.log('entro');
+      console.log(delivery_province);
+      var provinces_filtered = [];var i = 0;
+      self.dept_prov_dist_branch_list.forEach(function (delivery_province) {
+        if (delivery_province.departament_id == route) {
+          provinces_filtered.push(delivery_province);
+        }
+
+        i++;
+        if (self.dept_prov_dist_branch_list.length == i) {
+          //self.provinces = provinces_filtered;
+        }
+      });
+
+      // filtrado de las provincias unicas por departamento
+      var aux = provinces_filtered;
+      var aux2 = [];
+
+      aux2[0] = aux[0];
+      var a = 1;
+      for (var x = 0; x < aux.length; x++) {
+        var p = 0;
+        for (var y = 0; y < aux2.length; y++) {
+          if (aux[x]['province_id'] == aux2[y]['province_id']) {
+            p++;
+          }
+        }
+        if (p == 0) {
+          aux2[a] = aux[x];
+          a++;
+        }
+      }
+
+      // carga los valores en el combobox 
+      console.log(aux2);
+      self.delivery_provinces = aux2;
+
+      //--------------------
+      // DISTRITOS
+      //--------------------
+      var districts_filtered = [];var b = 0;
+      self.dept_prov_dist_branch_list.forEach(function (delivery_district) {
+        if (delivery_district.province_id == aux2[0]['province_id']) {
+          districts_filtered.push(delivery_district);
+        }
+
+        b++;
+        if (self.dept_prov_dist_branch_list.length == b) {
+          self.delivery_districts = districts_filtered;
+        }
+      });
+    },
+    selectProvinced: function selectProvinced(event) {
+      if (event.target.value.length > 0) {
+        route = event.target.value;
+        this.getDistricsByProvinced(route);
+      }
+    },
+    getDistricsByProvinced: function getDistricsByProvinced(route) {
+      self = this;
+      var districts_filtered = [];var i = 0;
+      self.dept_prov_dist_branch_list.forEach(function (delivery_district) {
+        if (delivery_district.province_id == route) {
+          districts_filtered.push(delivery_district);
+        }
+
+        i++;
+        if (self.dept_prov_dist_branch_list.length == i) {
+          self.delivery_districts = districts_filtered;
+        }
+      });
     }
+
   },
   mounted: function mounted() {
     var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
@@ -11806,6 +11989,10 @@ var form = new Vue({
         this.porting_phone = order_detail.porting_phone;
       }
     }
+
+    var depars = JSON.parse(document.head.querySelector('meta[name="dept_prov_dist_branch_list"]').content);
+
+    this.dept_prov_dist_branch_list = depars;
 
     // phone_number.addEventListener("keypress", soloNumeros, false);
     // porting_phone.addEventListener("keypress", soloNumeros, false);
@@ -11938,6 +12125,11 @@ var app = new Vue({
     plans: [],
     affiliations: [],
     contracts: [],
+    provinces: [],
+    districts: [],
+    delivery_provinces: [],
+    delivery_districts: [],
+    deptprovdist: [],
     //AJAX
     product: {},
     current_url: "",
@@ -57699,6 +57891,515 @@ if (false) {
 
 /***/ }),
 /* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(105)
+/* template */
+var __vue_template__ = __webpack_require__(106)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\affiliations-filtered.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4d63ddb0", Component.options)
+  } else {
+    hotAPI.reload("data-v-4d63ddb0", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 105 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    affiliations: Array,
+    product: Object,
+    affiliationsChanged: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {
+    isActive: function isActive(plan_id) {
+      return plan_id == this.product.product.plan_id;
+    },
+    isActiveUrl: function isActiveUrl(url) {
+      return this.$parent.isActiveUrl(url);
+    },
+    setAffiliation: function setAffiliation(event) {
+      this.$parent.setAffiliation(event);
+    }
+  },
+  mounted: function mounted() {
+    if (this.affiliations.length > 0) {
+      /*
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+      */
+    }
+  },
+  beforeUpdate: function beforeUpdate() {
+    /*if (this.affiliationsChanged) {
+      console.log('affiliations-filtered component: before update');
+    }*/
+  },
+  updated: function updated() {
+    /*if (this.affiliationsChanged && this.affiliations.length > 0) {
+      console.log('affiliations-filtered component: updated');
+      this.affiliationsChanged = 0;
+    }*/
+  },
+
+  watch: {
+    affiliations: function affiliations() {
+      /*
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+      */
+      this.affiliationsChanged = 1;
+    }
+  }
+});
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "affiliations-select" } }, [
+    _c(
+      "select",
+      {
+        attrs: { id: "affsel", form: "purchase-form", name: "affiliation" },
+        on: {
+          change: function($event) {
+            _vm.setAffiliation($event)
+          }
+        }
+      },
+      _vm._l(_vm.affiliations, function(affiliation, ix) {
+        return _c(
+          "option",
+          {
+            attrs: { id: "aff" + affiliation.affiliation_id, "data-ix": ix },
+            domProps: { value: affiliation.affiliation_id }
+          },
+          [_vm._v(_vm._s(affiliation.affiliation_name))]
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4d63ddb0", module.exports)
+  }
+}
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(108)
+/* template */
+var __vue_template__ = __webpack_require__(109)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\provinces-filtered.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-39e703ea", Component.options)
+  } else {
+    hotAPI.reload("data-v-39e703ea", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 108 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    provinces: Array,
+    provincesChanged: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {
+    selectProvince: function selectProvince(event) {
+      this.$parent.selectProvince(event);
+    }
+  },
+  mounted: function mounted() {
+    /*
+    if (this.setProvinces.length > 0) {
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+    }*/
+  },
+  beforeUpdate: function beforeUpdate() {
+    /*if (this.affiliationsChanged) {
+      console.log('affiliations-filtered component: before update');
+    }*/
+  },
+  updated: function updated() {
+    /*if (this.affiliationsChanged && this.affiliations.length > 0) {
+      console.log('affiliations-filtered component: updated');
+      this.affiliationsChanged = 0;
+    }*/
+  },
+
+  watch: {
+    provinces: function provinces() {
+      /*
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+      */
+      this.provincesChanged = 1;
+    }
+  }
+});
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "provinces-select" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.province,
+            expression: "province"
+          },
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          }
+        ],
+        class: { input: true, "is-danger": _vm.errors.has("province") },
+        attrs: { id: "province", name: "province" },
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.province = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              _vm.selectProvince($event)
+            }
+          ]
+        }
+      },
+      [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v("Seleccione Provincia")
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.provinces, function(province) {
+          return _c("option", { domProps: { value: province.province_id } }, [
+            _vm._v(_vm._s(province.province_name))
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-39e703ea", module.exports)
+  }
+}
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(111)
+/* template */
+var __vue_template__ = __webpack_require__(112)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\districts-filtered.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-171f0fc8", Component.options)
+  } else {
+    hotAPI.reload("data-v-171f0fc8", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    districts: Array,
+    districtsChanged: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {},
+  mounted: function mounted() {
+    /*
+    if (this.districts.length > 0) {
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+    }*/
+  },
+  beforeUpdate: function beforeUpdate() {
+    /*if (this.affiliationsChanged) {
+      console.log('affiliations-filtered component: before update');
+    }*/
+  },
+  updated: function updated() {
+    /*if (this.affiliationsChanged && this.affiliations.length > 0) {
+      console.log('affiliations-filtered component: updated');
+      this.affiliationsChanged = 0;
+    }*/
+  },
+
+  watch: {
+    districts: function districts() {
+      /*
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+      */
+      this.districtsChanged = 1;
+    }
+  }
+});
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "districts-select" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.district,
+            expression: "district"
+          },
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          }
+        ],
+        class: { input: true, "is-danger": _vm.errors.has("district") },
+        attrs: { id: "district", name: "district" },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.district = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v("Seleccione Distrito")
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.districts, function(district) {
+          return _c("option", { domProps: { value: district.district_id } }, [
+            _vm._v(_vm._s(district.district_name))
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-171f0fc8", module.exports)
+  }
+}
+
+/***/ }),
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64378,24 +65079,24 @@ var index_esm = {
 
 
 /***/ }),
-/* 105 */
+/* 114 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 106 */,
-/* 107 */,
-/* 108 */,
-/* 109 */
+/* 115 */,
+/* 116 */,
+/* 117 */,
+/* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(111)
+var __vue_script__ = __webpack_require__(119)
 /* template */
-var __vue_template__ = __webpack_require__(110)
+var __vue_template__ = __webpack_require__(120)
 /* template functional */
   var __vue_template_functional__ = false
 /* styles */
@@ -64412,7 +65113,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\affiliations-filtered.vue"
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\provincesd-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -64422,9 +65123,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4d63ddb0", Component.options)
+    hotAPI.createRecord("data-v-14361baa", Component.options)
   } else {
-    hotAPI.reload("data-v-4d63ddb0", Component.options)
+    hotAPI.reload("data-v-14361baa", Component.options)
 ' + '  }
   module.hot.dispose(function (data) {
     disposed = true
@@ -64435,49 +65136,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "affiliations-select" } }, [
-    _c(
-      "select",
-      {
-        attrs: { id: "affsel", form: "purchase-form", name: "affiliation" },
-        on: {
-          change: function($event) {
-            _vm.setAffiliation($event)
-          }
-        }
-      },
-      _vm._l(_vm.affiliations, function(affiliation, ix) {
-        return _c(
-          "option",
-          {
-            attrs: { id: "aff" + affiliation.affiliation_id, "data-ix": ix },
-            domProps: { value: affiliation.affiliation_id }
-          },
-          [_vm._v(_vm._s(affiliation.affiliation_name))]
-        )
-      })
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-4d63ddb0", module.exports)
-  }
-}
-
-/***/ }),
-/* 111 */
+/* 119 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -64490,34 +65149,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    affiliations: Array,
-    product: Object,
-    affiliationsChanged: {
+    delivery_provinces: Array,
+    delivery_provincesChanged: {
       type: Number,
       default: 0
     }
   },
   methods: {
-    isActive: function isActive(plan_id) {
-      return plan_id == this.product.product.plan_id;
-    },
-    isActiveUrl: function isActiveUrl(url) {
-      return this.$parent.isActiveUrl(url);
-    },
-    setAffiliation: function setAffiliation(event) {
-      this.$parent.setAffiliation(event);
+    selectProvinced: function selectProvinced(event) {
+      this.$parent.selectProvinced(event);
     }
   },
   mounted: function mounted() {
-    if (this.affiliations.length > 0) {
-      /*
+    /*
+    if (this.setProvinces.length > 0) {
       console.log(this.affiliations[0].affiliation_name);
       console.log('affiliations-filtered component: affiliations prop updated');
-      */
-    }
+    }*/
   },
   beforeUpdate: function beforeUpdate() {
     /*if (this.affiliationsChanged) {
@@ -64532,15 +65184,266 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   watch: {
-    affiliations: function affiliations() {
+    delivery_provinces: function delivery_provinces() {
       /*
       console.log(this.affiliations[0].affiliation_name);
       console.log('affiliations-filtered component: affiliations prop updated');
       */
-      this.affiliationsChanged = 1;
+      this.delivery_provincesChanged = 1;
     }
   }
 });
+
+/***/ }),
+/* 120 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "delivery_provinces-select" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.delivery_province,
+            expression: "delivery_province"
+          },
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          }
+        ],
+        class: {
+          input: true,
+          "is-danger": _vm.errors.has("delivery_province")
+        },
+        attrs: { id: "delivery_province", name: "delivery_province" },
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.delivery_province = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              _vm.selectProvinced($event)
+            }
+          ]
+        }
+      },
+      [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v("Seleccione Provincia")
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.delivery_provinces, function(province) {
+          return _c("option", { domProps: { value: province.province_id } }, [
+            _vm._v(_vm._s(province.province_name))
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-14361baa", module.exports)
+  }
+}
+
+/***/ }),
+/* 121 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(122)
+/* template */
+var __vue_template__ = __webpack_require__(123)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\districtsd-filtered.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4400e8e8", Component.options)
+  } else {
+    hotAPI.reload("data-v-4400e8e8", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 122 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    delivery_districts: Array,
+    delivery_districtsChanged: {
+      type: Number,
+      default: 0
+    }
+  },
+  methods: {},
+  mounted: function mounted() {
+    /*
+    if (this.districts.length > 0) {
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+    }*/
+  },
+  beforeUpdate: function beforeUpdate() {
+    /*if (this.affiliationsChanged) {
+      console.log('affiliations-filtered component: before update');
+    }*/
+  },
+  updated: function updated() {
+    /*if (this.affiliationsChanged && this.affiliations.length > 0) {
+      console.log('affiliations-filtered component: updated');
+      this.affiliationsChanged = 0;
+    }*/
+  },
+
+  watch: {
+    delivery_districts: function delivery_districts() {
+      /*
+      console.log(this.affiliations[0].affiliation_name);
+      console.log('affiliations-filtered component: affiliations prop updated');
+      */
+      this.delivery_districtsChanged = 1;
+    }
+  }
+});
+
+/***/ }),
+/* 123 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "delivery_districts-select" } }, [
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.delivery_district,
+            expression: "delivery_district"
+          },
+          { name: "validate", rawName: "v-validate" }
+        ],
+        class: {
+          input: true,
+          "is-danger": _vm.errors.has("delivery_district")
+        },
+        attrs: {
+          id: "delivery_district",
+          name: "delivery_district",
+          "data-vv-rules": "required"
+        },
+        on: {
+          change: function($event) {
+            var $$selectedVal = Array.prototype.filter
+              .call($event.target.options, function(o) {
+                return o.selected
+              })
+              .map(function(o) {
+                var val = "_value" in o ? o._value : o.value
+                return val
+              })
+            _vm.delivery_district = $event.target.multiple
+              ? $$selectedVal
+              : $$selectedVal[0]
+          }
+        }
+      },
+      [
+        _c("option", { attrs: { value: "", selected: "" } }, [
+          _vm._v("Seleccione Distrito")
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.delivery_districts, function(districtd) {
+          return _c("option", { domProps: { value: districtd.district_id } }, [
+            _vm._v(_vm._s(districtd.district_name))
+          ])
+        })
+      ],
+      2
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4400e8e8", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -352,6 +352,8 @@ class OrderController extends Controller
 
     $affiliation_list = DB::select('call PA_affiliationList()');
 
+    $dept_prov_dist_branch_list = DB::select('call PA_deptprovdistbrachList()');
+
     $equipo = null;
     foreach ($cart as $item) {
       switch ($item['type_id']) {
@@ -366,12 +368,48 @@ class OrderController extends Controller
       }
     }
 
+    // obtener los dfatos de departamento , provincia y distrito en base al primer registro 
+    $departamento = $dept_prov_dist_branch_list[0]->departament_id;
+    $provincia = $dept_prov_dist_branch_list[0]->province_id;
+    $distrito = $dept_prov_dist_branch_list[0]->district_id;
+
+    // obtener los datos de los departamentos unicos
+    $departamentos = array();
+    foreach ($dept_prov_dist_branch_list as $dept){
+      $departamentos[$dept->departament_id] = $dept;
+    }
+
+    // obtener las provincias en funciona al primer departamento
+    $provincias = array();
+    foreach ($dept_prov_dist_branch_list as $prov){
+      if($prov->departament_id == $departamento){
+        $provincias[$prov->province_id] = $prov;
+      }
+    }
+    
+    // obtener los distritos en funcion a la primera provincia
+    $distritos = array();
+    foreach ($dept_prov_dist_branch_list as $dist){
+      if($dist->departament_id == $departamento and $dist->province_id == $provincia){
+        $distritos[$dist->district_id] = $dist;
+      }
+    }
+
+    //error_log(print_r($departamentos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
+    //error_log(print_r($provincias, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
+    //error_log(print_r($distritos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
+
+    //error_log(print_r($dept_prov_dist_branch_list, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
+
     return view('order_form', [
       'item' => $equipo,
+      'departamentos' => $departamentos,
+      'provincias' => $provincias,
       'distritos' => $distritos,
       'source_operators' => $source_operators,
       'affiliation_list' => $affiliation_list,
-      'order_detail' => $order_detail
+      'order_detail' => $order_detail,
+      'dept_prov_dist_branch_list' => $dept_prov_dist_branch_list
     ]);
   }
 
@@ -476,7 +514,7 @@ class OrderController extends Controller
     $order_detail['payment_method_id'] = $request->payment_method;
     $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
     $order_detail['first_name'] = $request->first_name;
-    $order_detail['last_name'] = $request->last_name;
+    $order_detail['last_name'] = ''; //$request->last_name;
     $order_detail['id_number'] = $request->document_number;
     $order_detail['tracking_code'] = $request->document_number;
     $order_detail['billing_district'] = $request->district;

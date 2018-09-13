@@ -32,6 +32,10 @@ Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
 Vue.component('affiliationsFiltered', require('./components/postpaid/affiliations-filtered.vue'));
+Vue.component('provincesFiltered', require('./components/postpaid/provinces-filtered.vue'));
+Vue.component('districtsFiltered', require('./components/postpaid/districts-filtered.vue'));
+Vue.component('provincesdFiltered', require('./components/postpaid/provincesd-filtered.vue'));
+Vue.component('districtsdFiltered', require('./components/postpaid/districtsd-filtered.vue'));
 
 Vue.directive('init', {
   bind: function(el, binding, vnode) {
@@ -60,6 +64,16 @@ const form = new Vue({
     disabled: false,
     operator: '',
     porting_phone: '',
+    departamento: '',
+    provincia: '',
+    distrito: '',
+    type_number_carry: '',
+    provinces: '',
+    districts: '',
+    delivery_provinces: '',
+    delivery_districts: '',
+    delivery_province: '',
+    delivery_district: ''
   },
   methods: {
     validateInfoCliente() {
@@ -88,13 +102,189 @@ const form = new Vue({
     },
     change () {
       // console.log(this.affiliation);
+    },
+
+    //-----------------------
+    //  LUGAR DE DOMICILIO
+    //-----------------------
+    selectDepartament: function(event) {
+          if(event.target.value.length > 0) {
+            route = event.target.value;
+            this.getProvincesByDepartament(route);
+          }
+    },
+    getProvincesByDepartament: function(route) {
+          self = this; 
+
+          //--------------------
+          // PROVINCIAS
+          //--------------------
+          const provinces_filtered = []; let i = 0;
+            self.dept_prov_dist_branch_list.forEach(function(province) {
+              if(province.departament_id == route){
+                  provinces_filtered.push(province);
+              }
+
+              i++;
+              if (self.dept_prov_dist_branch_list.length == i) {
+                 //self.provinces = provinces_filtered;
+              }
+          });
+
+          // filtrado de las provincias unicas por departamento
+          var aux = provinces_filtered; 
+          var aux2 = []; 
+
+          aux2[0] = aux[0];
+          var a = 1;
+          for(var x = 0; x < aux.length; x++) {
+            var p = 0;
+            for(var y = 0; y < aux2.length; y++) {
+              if(aux[x]['province_id'] == aux2[y]['province_id']){
+                p++;
+              }
+            }
+            if(p == 0){
+              aux2[a] = aux[x];
+              a++;
+            }
+          }
+           
+          // carga los valores en el combobox 
+          self.provinces = aux2; 
+
+          //--------------------
+          // DISTRITOS
+          //--------------------
+          const districts_filtered = []; let b = 0;
+            self.dept_prov_dist_branch_list.forEach(function(district) {
+              if(district.province_id == aux2[0]['province_id']) {
+                districts_filtered.push(district);
+              }
+
+              b++;
+              if (self.dept_prov_dist_branch_list.length == b) {
+                 self.districts = districts_filtered;
+              }
+          });
+
+    },
+    selectProvince: function(event) {
+          if(event.target.value.length > 0) {
+            route = event.target.value;
+            this.getDistricsByProvince(route);
+          }
+    },
+    getDistricsByProvince: function(route) {
+          self = this;
+          const districts_filtered = []; let i = 0;
+            self.dept_prov_dist_branch_list.forEach(function(district) {
+              if(district.province_id == route) {
+                districts_filtered.push(district);
+              }
+
+              i++;
+              if (self.dept_prov_dist_branch_list.length == i) {
+                 self.districts = districts_filtered;
+              }
+          });
+    },
+
+    //-----------------------
+    //  LUGAR DE RECOJO
+    //-----------------------
+    selectDepartamentd: function(event) {
+          if(event.target.value.length > 0) {
+            route = event.target.value;
+            this.getProvincesByDepartamentd(route);
+          }
+    },
+    getProvincesByDepartamentd: function(route) {
+          self = this; 
+
+          //--------------------
+          // PROVINCIAS
+          //--------------------
+          console.log('entro');
+          console.log(delivery_province);
+          const provinces_filtered = []; let i = 0;
+            self.dept_prov_dist_branch_list.forEach(function(delivery_province) {
+              if(delivery_province.departament_id == route){
+                  provinces_filtered.push(delivery_province);
+              }
+
+              i++;
+              if (self.dept_prov_dist_branch_list.length == i) {
+                 //self.provinces = provinces_filtered;
+              }
+          });
+
+          // filtrado de las provincias unicas por departamento
+          var aux = provinces_filtered; 
+          var aux2 = []; 
+
+          aux2[0] = aux[0];
+          var a = 1;
+          for(var x = 0; x < aux.length; x++) {
+            var p = 0;
+            for(var y = 0; y < aux2.length; y++) {
+              if(aux[x]['province_id'] == aux2[y]['province_id']){
+                p++;
+              }
+            }
+            if(p == 0){
+              aux2[a] = aux[x];
+              a++;
+            }
+          }
+           
+          // carga los valores en el combobox 
+          console.log(aux2);
+          self.delivery_provinces = aux2; 
+
+          //--------------------
+          // DISTRITOS
+          //--------------------
+          const districts_filtered = []; let b = 0;
+            self.dept_prov_dist_branch_list.forEach(function(delivery_district) {
+              if(delivery_district.province_id == aux2[0]['province_id']) {
+                districts_filtered.push(delivery_district);
+              }
+
+              b++;
+              if (self.dept_prov_dist_branch_list.length == b) {
+                 self.delivery_districts = districts_filtered;
+              }
+          });
+
+    },
+    selectProvinced: function(event) {
+          if(event.target.value.length > 0) {
+            route = event.target.value;
+            this.getDistricsByProvinced(route);
+          }
+    },
+    getDistricsByProvinced: function(route) {
+          self = this;
+          const districts_filtered = []; let i = 0;
+            self.dept_prov_dist_branch_list.forEach(function(delivery_district) {
+              if(delivery_district.province_id == route) {
+                districts_filtered.push(delivery_district);
+              }
+
+              i++;
+              if (self.dept_prov_dist_branch_list.length == i) {
+                 self.delivery_districts = districts_filtered;
+              }
+          });
     }
+
   },
   mounted: function() {
     var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
 
     this.first_name = order_detail.first_name;
-    this.last_name = order_detail.last_name;
+    //this.last_name = order_detail.last_name;
     this.select_document = order_detail.idtype_id;
     this.number_document = order_detail.id_number;
     this.distrito = order_detail.billing_district;
@@ -112,6 +302,10 @@ const form = new Vue({
         this.porting_phone = order_detail.porting_phone;
       }
     }
+
+    var depars = JSON.parse(document.head.querySelector('meta[name="dept_prov_dist_branch_list"]').content);
+
+    this.dept_prov_dist_branch_list = depars;
 
     // phone_number.addEventListener("keypress", soloNumeros, false);
     // porting_phone.addEventListener("keypress", soloNumeros, false);
@@ -156,7 +350,7 @@ const app = new Vue({
                 isOpen : true
             },
             contract : {
-                value : '21',
+                value : '2',
                 isOpen : true
             },
             price : {
@@ -195,7 +389,7 @@ const app = new Vue({
                   isOpen : true
               },
               contract : {
-                  value : '21',
+                  value : '2',
                   isOpen : true
               },
               affiliation : {
@@ -244,6 +438,11 @@ const app = new Vue({
         plans: [],
         affiliations: [],
         contracts: [],
+        provinces: [],
+        districts: [],
+        delivery_provinces: [],
+        delivery_districts: [],
+        deptprovdist: [],
         //AJAX
         product: {},
         current_url: "",

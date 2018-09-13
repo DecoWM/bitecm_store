@@ -705,6 +705,7 @@ class BaseController extends Controller
       ->where('tbl_plan_infocomercial.active', 1)
       ->whereIn('tbl_plan_infocomercial.plan_id', $plan_id)
       ->orderBy('tbl_plan_infocomercial.plan_id')
+      ->orderBy('tbl_plan_infocomercial.weight')
       ->select('tbl_plan_infocomercial.plan_id', 'tbl_plan_infocomercial.plan_infocomercial_img_url', 'tbl_plan_infocomercial.plan_infocomercial_descripcion', 'tbl_plan_infocomercial.plan_infocomercial_informacion_adicional', 'tbl_plan_infocomercial.plan_infocomercial_flag_cantidad')
       ->get();
     

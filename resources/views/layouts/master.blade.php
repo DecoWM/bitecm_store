@@ -14,6 +14,9 @@
     @if(isset($order_detail))
     <meta name="order_detail" content="{{ json_encode($order_detail) }}">
     @endif
+    @if(isset($dept_prov_dist_branch_list))
+    <meta name="dept_prov_dist_branch_list" content="{{ json_encode($dept_prov_dist_branch_list) }}">
+    @endif
     <meta name="robots" content="noindex"> <!-- ESTO NO DEBE IR EN PRODUCCIÓN -->
     <meta property="og:description" content='Bitel'>
     <meta property="og:type" content="website">
