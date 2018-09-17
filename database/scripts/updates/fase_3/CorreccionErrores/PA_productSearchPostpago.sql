@@ -4,7 +4,7 @@ USE `bitel_ecommerce`$$
 
 DROP PROCEDURE IF EXISTS `PA_productSearchPostpago`$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `PA_productSearchPostpago`(
+CREATE PROCEDURE `PA_productSearchPostpago`(
   IN product_categories VARCHAR(200),
   IN product_brands VARCHAR(200),
   IN affiliation_id INT,
