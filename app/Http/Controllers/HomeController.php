@@ -21,7 +21,7 @@ class HomeController extends Controller
     $affiliation_id = \Config::get('filter.affiliation_id');
     $plan_pre_id = \Config::get('filter.plan_pre_id');
     $plan_post_id = \Config::get('filter.plan_post_id');
-    $contract_id = 1; //\Config::get('filter.contract_id');
+    $contract_id = \Config::get('filter.contract_id');
 
     $best_seller_smartphone = $this->shared->searchProductPrepaid('1,3', $plan_pre_id, null, 4, 1, null, null, null, null, null, '"Nuevo","Destacado"');
     $best_seller_smartphone = collect($best_seller_smartphone['products'])->map(function ($item, $key) {

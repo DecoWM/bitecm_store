@@ -587,7 +587,7 @@ class OrderController extends Controller
     $order_detail['id_number'] = $request->document_number;
     $order_detail['tracking_code'] = $request->document_number;
     $order_detail['billing_district'] = $request->district;
-    $order_detail['billing_phone'] = $request->phone_number;
+    //$order_detail['billing_phone'] = $request->phone_number;
     $order_detail['delivery_address'] = $request->delivery_address;
     $order_detail['delivery_district'] = $request->delivery_district;
     $order_detail['contact_email'] = $request->email;
@@ -598,12 +598,14 @@ class OrderController extends Controller
       $source_operators = $this->shared->operatorList();
       $order_detail['source_operator'] = $source_operators[$request->operator];
       $order_detail['source_operator_id'] = $request->operator;
+      $order_detail['billing_phone'] = $request->porting_phone;
       $order_detail['porting_phone'] = $request->porting_phone;
       $order_detail['type_number_carry'] = $request->type_number_carry; 
     } else {
       $order_detail['source_operator'] = null;
       $order_detail['porting_phone'] = null;
       $order_detail['type_number_carry'] = '';
+      $order_detail['billing_phone'] = $request->phone_number;
     }
 
     if(isset($equipo) && isset($equipo->variation_type_id)) {

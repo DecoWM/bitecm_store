@@ -739,8 +739,6 @@ class BaseController extends Controller
       'order_id' => $order_id
     ]);
 
-    //error_log(print_r($result, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     return $result;
   }
 

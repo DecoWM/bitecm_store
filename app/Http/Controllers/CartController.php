@@ -76,13 +76,7 @@ class CartController extends Controller
       $equipo->product_model .= ' +S';
       $equipo->sentinel_check = DB::table('tbl_sentinel_check')->first();
     }
-    
-    $this->preventHistory();
-
-    error_log(print_r($equipo, true) ,3, '/var/www/html/prueba.log');
-    error_log(print_r($products, true) ,3, '/var/www/html/prueba.log');
-    error_log('ingreso' ,3, '/var/www/html/prueba.log');
-
+       
     return view('cart', [
       'equipo' => $equipo,
       'products' => $products,
@@ -90,6 +84,7 @@ class CartController extends Controller
       'total_igv' => number_format($total_igv, 2, '.', ''),
       'igv' => $igv,
     ]);
+
   }
 
   public function addToCart (Request $request) {

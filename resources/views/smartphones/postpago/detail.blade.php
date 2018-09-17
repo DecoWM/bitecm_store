@@ -196,7 +196,7 @@
                   <li> <img src="/images/equipo/svg/memoria.svg" alt="android"><span class="title-dispositivo">Memoria Interna {{$product->product_internal_memory}} GB</span><span class="description-dispositivo">Memoria RAM {{$product->product_memory_ram}} GB</span></li>
                   <li> <img src="/images/equipo/svg/pantalla.svg" alt="android"><span class="title-dispositivo">{{$product->product_screen_size}}”</span><span class="description-dispositivo">Pantalla</span></li>
                   <li> <img src="/images/equipo/svg/camara.svg" alt="android"><span class="title-dispositivo">{{$product->product_camera_1}} MP / {{$product->product_camera_2}} MP</span><span class="description-dispositivo">Cámara</span></li>
-                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo">{{$product->product_processor_power}} GHz {{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
+                  <li> <img src="/images/equipo/svg/procesador.svg" alt="android"><span class="title-dispositivo"><!--{{$product->product_processor_power}} GHz -->{{$product->product_processor_name}}</span><span class="description-dispositivo">Procesador</span></li>
                 </ul>
               </div>
               {{--<div class="pdf-tecnica"><a href="{{route('download_file', ['filename' => str_slug($product->product_model)])}}">Descargar ficha técnica<span class="fa fa-download"></span></a></div>--}}

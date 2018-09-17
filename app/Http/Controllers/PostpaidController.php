@@ -92,13 +92,7 @@ class PostpaidController extends Controller
         abort(404);
     }
 
-    //$datalog = $brand_slug.' | '.$product_slug.' | '.$affiliation_slug.' | '.$plan_slug.' | '.$contract_slug.' | '.$color_slug;
-
-    //error_log(print_r($datalog, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
-
-    //error_log(print_r($product, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 
     if(empty($product)) {
       abort(404);

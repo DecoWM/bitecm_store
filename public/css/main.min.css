@@ -2798,7 +2798,8 @@ footer .container .copyright {
   font-size: 12px;
 }
 #banner-principal {
-  height: 396px;
+  /*height: 396px;*/
+  max-height: 640px;
   background-color: #cecece;
   margin-bottom: 30px;
   overflow: hidden;
