@@ -409,7 +409,8 @@ class BaseController extends Controller
         $porting_request_id = null,
         $credit_status,
         $total,
-        $total_igv
+        $total_igv,
+        $terminos_condiciones
   ) {
     $result = DB::select('call PA_INS_storeOrder(
         :order_id,
@@ -434,7 +435,8 @@ class BaseController extends Controller
         :porting_request_id,
         :credit_status,
         :total,
-        :total_igv
+        :total_igv,
+        :terminos_condiciones
     )', [
         'order_id' => $order_id,
         'idtype_id'=> $idtype_id,
@@ -458,7 +460,8 @@ class BaseController extends Controller
         'porting_request_id' => $porting_request_id,
         'credit_status' => $credit_status,
         'total' => $total,
-        'total_igv' => $total_igv
+        'total_igv' => $total_igv,
+        'terminos_condiciones' => $terminos_condiciones
     ]);
 
     return 0;

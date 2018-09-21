@@ -592,6 +592,14 @@ class OrderController extends Controller
     $order_detail['delivery_district'] = $request->delivery_district;
     $order_detail['contact_email'] = $request->email;
     $order_detail['contact_phone'] = $request->contact_phone;
+
+    $order_detail['terminos_condiciones'] = 0;
+    if($request->terminos_condiciones == 'on'){
+      $order_detail['terminos_condiciones'] = 1;
+      error_log($order_detail['terminos_condiciones'], 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
+    }
+    //error_log($request->terminos_condiciones, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
+
     $order_detail['porting_request_id'] = null;
 
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
@@ -720,7 +728,8 @@ class OrderController extends Controller
         $order_detail['porting_request_id'],
         $order_detail['credit_status'],
         number_format($order_detail['total'], 2, '.', ''),
-        number_format($order_detail['total_igv'], 2, '.', '')
+        number_format($order_detail['total_igv'], 2, '.', ''),
+        $order_detail['terminos_condiciones']
       );
 
       $now = new \DateTime('America/Lima');

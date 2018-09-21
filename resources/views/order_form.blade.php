@@ -272,6 +272,15 @@
                       {{-- <span v-show="errors.has('number_contact')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                       <span v-show="errors.has('contact_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                     </div>
+
+                    <div class="control">
+                      <label class="checkbox">
+                        <input id="terminos_condiciones" name="terminos_condiciones" type="checkbox" v-validate="'required'">
+                      </label>
+                      <a @click="terminoscondiciones($event)">Términos y condiciones</a>
+                      <span class="help is-danger" v-show="errors.has('terminos_condiciones')"> (Debe aceptar los términos y condiciones para poder realizar la compra).</span>  
+                    </div>
+
                   </div>
                   <div class="title-page" style="display:none;">
                     <h3>SELECCIONA TU MEDIO DE PAGO</h3>
@@ -332,4 +341,22 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="myModalTerminosCondiciones" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Términos y Condiciones</h4>
+            </div>
+            <div class="modal-body">
+              “El usuario autoriza expresamente a Bitel a usar y tratar los datos personales que el titular proporciona en la página web y la contratación de servicios, así como en la información que se derive de su uso. El tratamiento de la información tiene como finalidad crear perfiles y enviar ofertas personalizadas de productos y servicios de la empresa y de terceros. El usuario ejercerá conforme a Ley, en cualquier momento, los derechos de información, acceso, actualización, inclusión, rectificación, cancelación y oposición sobre sus datos personales enviando una comunicación escrita a cualquier Centro de Atención Bitel ó llamando al 123.”
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
 @endsection

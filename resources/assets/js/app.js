@@ -74,7 +74,8 @@ const form = new Vue({
     delivery_provinces: '',
     delivery_districts: '',
     delivery_province: '',
-    delivery_district: ''
+    delivery_district: '',
+    terminos_condiciones: false
   },
   methods: {
     validateInfoCliente() {
@@ -278,6 +279,10 @@ const form = new Vue({
                  self.delivery_districts = districts_filtered;
               }
           });
+    },
+    terminoscondiciones: function(event){
+      console.log("Si entra a la funcion");
+      $('#myModalTerminosCondiciones').modal('show');
     }
 
   },

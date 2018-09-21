@@ -165,7 +165,9 @@
           <section class="descrip-consideracion">
             <!-- <h1>Consideraciones comerciales</h1> -->
             <p>Nota:</p>
-            <p>Acceso a app gratuita Cineplanet, Tu ruta, Aló bodega, Mi Media Manzana, También recibirá sin condición y valido mientras que la línea este activa Facebook Flex o Facebook en Modo Gratuito</p>
+            <p>- Para todas los casos de Recarga, obtiene gratis los juegos: Clash Royale Y Clash of Clans.</p>
+            <p>- Desde Recarga de S/5: Acceso a App's gratuitas desde S/5: Facebook, Twitter, Cineplanet, Tu Ruta, Aló Bodega, Mi Media Manzana, Waze, Instagram, Radio Player, Reach, Bitel Deportes. Restricciones que aplican a estas aplicaciones pueden ser consultadas en la sección restricciones.</p>
+            <p>- YouTube gratis desde las 00:00 horas a las 05:00 horas.</p>
           </section>
         </div>
       </div>

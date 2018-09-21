@@ -11766,7 +11766,7 @@ var form = new Vue({
     porting_phone: '',
     departamento: '',
     provincia: ''
-  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _data),
+  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _defineProperty(_data, 'terminos_condiciones', false), _data),
   methods: {
     validateInfoCliente: function validateInfoCliente() {
       var _this = this;
@@ -11965,6 +11965,10 @@ var form = new Vue({
           self.delivery_districts = districts_filtered;
         }
       });
+    },
+    terminoscondiciones: function terminoscondiciones(event) {
+      console.log("Si entra a la funcion");
+      $('#myModalTerminosCondiciones').modal('show');
     }
 
   },
