@@ -596,7 +596,6 @@ class OrderController extends Controller
     $order_detail['terminos_condiciones'] = 0;
     if($request->terminos_condiciones == 'on'){
       $order_detail['terminos_condiciones'] = 1;
-      error_log($order_detail['terminos_condiciones'], 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
     }
     //error_log($request->terminos_condiciones, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 

@@ -10,7 +10,7 @@ CREATE PROCEDURE `PA_INS_storeOrder`(
   IN payment_method_id INT,
   IN branch_id INT,
   IN tracking_code VARCHAR(50),
-  IN first_name VARCHAR(100),
+  IN first_name VARCHAR(150),
   IN last_name VARCHAR(100),
   IN id_number VARCHAR(20),
   IN billing_district INT,
