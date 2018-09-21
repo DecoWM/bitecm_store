@@ -781,7 +781,7 @@ const app = new Vue({
             slidesToShow: 3,
             slidesToScroll: 1,
             centerPadding: '0px',
-            //infinite: false,
+            //infinite: true,
             //centerMode: true,
             //variableWidth: true,
             responsive: [
@@ -810,8 +810,8 @@ const app = new Vue({
                 settings: {
                   arrows: true,
                   dots: false,
-                  //centerMode: true,
-                  //infinite: false,
+                  //centerMode: true, // aqui
+                  //infinite: false,  // aqui
                   slidesToShow: 3
                 }
               },

@@ -142,7 +142,7 @@
             <h3 class="title-plan">Escoge el plan que prefieras:</h3>
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
             <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
-            <div v-if="plans.length == 0" id="plans-slick" class="select-plan {{$just_3 ? 'just-3' : ''}}">
+            <div v-if="plans.length == 0" id="plans-slick" class="hol select-plan {{$just_3 ? 'just-3' : ''}}">
               @foreach ($plans as $plan)
               @if($plan->affiliation_id == $product->affiliation_id)
               <label class="plan-parent {{$plan->plan_id == $product->plan_id ? 'label-active' : ''}} {{$plan->affil_classes}}">

@@ -12497,7 +12497,7 @@ var app = new Vue({
         slidesToShow: 3,
         slidesToScroll: 1,
         centerPadding: '0px',
-        //infinite: false,
+        //infinite: true,
         //centerMode: true,
         //variableWidth: true,
         responsive: [{
@@ -12523,8 +12523,8 @@ var app = new Vue({
           settings: {
             arrows: true,
             dots: false,
-            //centerMode: true,
-            //infinite: false,
+            //centerMode: true, // aqui
+            //infinite: false,  // aqui
             slidesToShow: 3
           }
         }, {
@@ -12549,12 +12549,12 @@ var app = new Vue({
       };
 
       if (just_3 && just_3 === true) {
-        options.infinite = false;
+        options.infinite = true;  // se cambio 21-09-2018
         options.centerMode = false;
         options.responsive[2].settings.infinite = false;
         options.responsive[2].settings.centerMode = false;
       } else {
-        options.infinite = false;
+        options.infinite = true;  // se cambio 21-09-2018
         options.centerMode = false;
         options.responsive[2].settings.infinite = false;
         options.responsive[2].settings.centerMode = false;
