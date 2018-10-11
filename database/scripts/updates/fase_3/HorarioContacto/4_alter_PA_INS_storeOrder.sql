@@ -29,7 +29,7 @@ CREATE PROCEDURE `PA_INS_storeOrder`(
   IN total DECIMAL(6,2),
   IN total_igv DECIMAL(6,2),
   IN terminos_condiciones TINYINT(1),
-  IN idschedule_id INT
+  IN idschedule_id INT(11)
 )
 BEGIN
   DECLARE stored_query TEXT;
@@ -92,7 +92,7 @@ BEGIN
         "'", credit_status, "' , " ,
         total, " , " ,
         total_igv, " , " ,
-        terminos_condiciones,
+        terminos_condiciones, " , " ,
         idschedule_id, " ) ");
   -- Executing query
   SET @consulta = stored_query;
