@@ -198,6 +198,9 @@ const form = new Vue({
     selectDepartamentd: function(event) {
           if(event.target.value.length > 0) {
             route = event.target.value;
+            console.log(route);
+            $("#departamentodelivery").css("display","none");
+            $("#provinciadelivery").css("display","block");
             this.getProvincesByDepartamentd(route);
           }
     },
@@ -244,26 +247,21 @@ const form = new Vue({
           console.log(aux2);
           self.delivery_provinces = aux2; 
 
-          //--------------------
-          // DISTRITOS
-          //--------------------
-          const districts_filtered = []; let b = 0;
-            self.dept_prov_dist_branch_list.forEach(function(delivery_district) {
-              if(delivery_district.province_id == aux2[0]['province_id']) {
-                districts_filtered.push(delivery_district);
-              }
-
-              b++;
-              if (self.dept_prov_dist_branch_list.length == b) {
-                 self.delivery_districts = districts_filtered;
-              }
-          });
-
     },
     selectProvinced: function(event) {
           if(event.target.value.length > 0) {
             route = event.target.value;
-            this.getDistricsByProvinced(route);
+            if(route != 0){
+              $("#departamentodelivery").css("display","none");
+              $("#provinciadelivery").css("display","none");
+              $("#distritodelivery").css("display","block");
+              this.getDistricsByProvinced(route);
+            }
+            else{
+              $("#departamentodelivery").css("display","block");
+              $("#provinciadelivery").css("display","none");
+              $("#distritodelivery").css("display","none");
+            }
           }
     },
     getDistricsByProvinced: function(route) {
@@ -279,6 +277,17 @@ const form = new Vue({
                  self.delivery_districts = districts_filtered;
               }
           });
+    },
+    selectDistrictd: function(event) {
+          if(event.target.value.length > 0) {
+            route = event.target.value;
+            // si se selecciona REGRESAR
+            if(route == 0){
+              $("#departamentodelivery").css("display","none");
+              $("#provinciadelivery").css("display","block");
+              $("#distritodelivery").css("display","none");
+            }
+          }
     },
     terminoscondiciones: function(event){
       console.log("Si entra a la funcion");

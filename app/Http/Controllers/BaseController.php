@@ -410,7 +410,8 @@ class BaseController extends Controller
         $credit_status,
         $total,
         $total_igv,
-        $terminos_condiciones
+        $terminos_condiciones,
+        $idschedule_id
   ) {
     $result = DB::select('call PA_INS_storeOrder(
         :order_id,
@@ -436,7 +437,8 @@ class BaseController extends Controller
         :credit_status,
         :total,
         :total_igv,
-        :terminos_condiciones
+        :terminos_condiciones,
+        :idschedule_id
     )', [
         'order_id' => $order_id,
         'idtype_id'=> $idtype_id,
@@ -461,7 +463,8 @@ class BaseController extends Controller
         'credit_status' => $credit_status,
         'total' => $total,
         'total_igv' => $total_igv,
-        'terminos_condiciones' => $terminos_condiciones
+        'terminos_condiciones' => $terminos_condiciones,
+        'idschedule_id' => $idschedule_id
     ]);
 
     return 0;

@@ -11885,6 +11885,9 @@ var form = new Vue({
     selectDepartamentd: function selectDepartamentd(event) {
       if (event.target.value.length > 0) {
         route = event.target.value;
+        console.log(route);
+        $("#departamentodelivery").css("display", "none");
+        $("#provinciadelivery").css("display", "block");
         this.getProvincesByDepartamentd(route);
       }
     },
@@ -11930,26 +11933,20 @@ var form = new Vue({
       // carga los valores en el combobox 
       console.log(aux2);
       self.delivery_provinces = aux2;
-
-      //--------------------
-      // DISTRITOS
-      //--------------------
-      var districts_filtered = [];var b = 0;
-      self.dept_prov_dist_branch_list.forEach(function (delivery_district) {
-        if (delivery_district.province_id == aux2[0]['province_id']) {
-          districts_filtered.push(delivery_district);
-        }
-
-        b++;
-        if (self.dept_prov_dist_branch_list.length == b) {
-          self.delivery_districts = districts_filtered;
-        }
-      });
     },
     selectProvinced: function selectProvinced(event) {
       if (event.target.value.length > 0) {
         route = event.target.value;
-        this.getDistricsByProvinced(route);
+        if (route != 0) {
+          $("#departamentodelivery").css("display", "none");
+          $("#provinciadelivery").css("display", "none");
+          $("#distritodelivery").css("display", "block");
+          this.getDistricsByProvinced(route);
+        } else {
+          $("#departamentodelivery").css("display", "block");
+          $("#provinciadelivery").css("display", "none");
+          $("#distritodelivery").css("display", "none");
+        }
       }
     },
     getDistricsByProvinced: function getDistricsByProvinced(route) {
@@ -11965,6 +11962,17 @@ var form = new Vue({
           self.delivery_districts = districts_filtered;
         }
       });
+    },
+    selectDistrictd: function selectDistrictd(event) {
+      if (event.target.value.length > 0) {
+        route = event.target.value;
+        // si se selecciona REGRESAR
+        if (route == 0) {
+          $("#departamentodelivery").css("display", "none");
+          $("#provinciadelivery").css("display", "block");
+          $("#distritodelivery").css("display", "none");
+        }
+      }
     },
     terminoscondiciones: function terminoscondiciones(event) {
       console.log("Si entra a la funcion");
@@ -12549,12 +12557,12 @@ var app = new Vue({
       };
 
       if (just_3 && just_3 === true) {
-        options.infinite = true;  // se cambio 21-09-2018
+        options.infinite = false;
         options.centerMode = false;
         options.responsive[2].settings.infinite = false;
         options.responsive[2].settings.centerMode = false;
       } else {
-        options.infinite = true;  // se cambio 21-09-2018
+        options.infinite = false;
         options.centerMode = false;
         options.responsive[2].settings.infinite = false;
         options.responsive[2].settings.centerMode = false;
@@ -58352,6 +58360,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -58453,6 +58462,8 @@ var render = function() {
           _vm._v("Seleccione Provincia")
         ]),
         _vm._v(" "),
+        _c("option", { attrs: { value: "0" } }, [_vm._v("Regresar...")]),
+        _vm._v(" "),
         _vm._l(_vm.delivery_provinces, function(province) {
           return _c("option", { domProps: { value: province.province_id } }, [
             _vm._v(_vm._s(province.province_name))
@@ -58536,6 +58547,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -58545,7 +58557,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: 0
     }
   },
-  methods: {},
+  methods: {
+    selectDistrictd: function selectDistrictd(event) {
+      this.$parent.selectDistrictd(event);
+    }
+  },
   mounted: function mounted() {
     /*
     if (this.districts.length > 0) {
@@ -58607,25 +58623,32 @@ var render = function() {
           "data-vv-rules": "required"
         },
         on: {
-          change: function($event) {
-            var $$selectedVal = Array.prototype.filter
-              .call($event.target.options, function(o) {
-                return o.selected
-              })
-              .map(function(o) {
-                var val = "_value" in o ? o._value : o.value
-                return val
-              })
-            _vm.delivery_district = $event.target.multiple
-              ? $$selectedVal
-              : $$selectedVal[0]
-          }
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.delivery_district = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              _vm.selectDistrictd($event)
+            }
+          ]
         }
       },
       [
         _c("option", { attrs: { value: "", selected: "" } }, [
           _vm._v("Seleccione Distrito")
         ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "0" } }, [_vm._v("Regresar...")]),
         _vm._v(" "),
         _vm._l(_vm.delivery_districts, function(districtd) {
           return _c("option", { domProps: { value: districtd.district_id } }, [

@@ -2,6 +2,7 @@
   <div id="delivery_provinces-select">
     <select id="delivery_province" name="delivery_province" v-model="delivery_province" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_province')}" @change="selectProvinced($event)">
       <option value="" selected>Seleccione Provincia</option> 
+      <option value="0">Regresar...</option>
       <option v-for="province in delivery_provinces" :value="province.province_id">{{province.province_name}}</option>
    </select>   
   </div>  

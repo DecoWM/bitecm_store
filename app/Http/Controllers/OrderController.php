@@ -433,12 +433,10 @@ class OrderController extends Controller
       $order_detail = [];
     }
 
-    $distritos = $this->shared->districtsList();
-
+    $distritosd = $this->shared->districtsList();
     $source_operators = $this->shared->operatorList();
-
     $affiliation_list = DB::select('call PA_affiliationList()');
-
+    $schedule_list = DB::select('call PA_scheduleList()');
     $dept_prov_dist_branch_list = DB::select('call PA_deptprovdistbrachList()');
 
     // obtener los dfatos de departamento , provincia y distrito en base al primer registro 
@@ -473,11 +471,14 @@ class OrderController extends Controller
       'departamentos' => $departamentos,
       'provincias' => $provincias,
       'distritos' => $distritos,
+      'distritosd' => $distritosd,
+      'horarios' => $schedule_list,
       'source_operators' => $source_operators,
       'affiliation_list' => $affiliation_list,
       'order_detail' => $order_detail,
       'dept_prov_dist_branch_list' => $dept_prov_dist_branch_list
     ]);
+
   }
 
   public function storeOrder (Request $request) {
@@ -597,8 +598,7 @@ class OrderController extends Controller
     if($request->terminos_condiciones == 'on'){
       $order_detail['terminos_condiciones'] = 1;
     }
-    //error_log($request->terminos_condiciones, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
+    $order_detail['idschedule_id'] = $request->delivery_schedule;
     $order_detail['porting_request_id'] = null;
 
     if(isset($equipo) && isset($request->affiliation) && $request->affiliation == 1) {
@@ -699,6 +699,8 @@ class OrderController extends Controller
 
     $order_detail['credit_status'] = DB::table('tbl_sentinel_check')->first() ? 'Aprobada' : 'Pendiente';
 
+    error_log(print_r($order_detail, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
+
     try {
       DB::beginTransaction();
 
@@ -721,14 +723,15 @@ class OrderController extends Controller
         $order_detail['delivery_district'],
         $order_detail['contact_email'],
         $order_detail['contact_phone'],
-        $order_detail['service_type'],
+        $order_detail['service_type'], 
         $order_detail['affiliation_type'],
         $order_detail['type_number_carry'],  
         $order_detail['porting_request_id'],
         $order_detail['credit_status'],
         number_format($order_detail['total'], 2, '.', ''),
         number_format($order_detail['total_igv'], 2, '.', ''),
-        $order_detail['terminos_condiciones']
+        $order_detail['terminos_condiciones'],
+        $order_detail['idschedule_id']
       );
 
       $now = new \DateTime('America/Lima');
