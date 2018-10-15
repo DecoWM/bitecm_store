@@ -699,8 +699,6 @@ class OrderController extends Controller
 
     $order_detail['credit_status'] = DB::table('tbl_sentinel_check')->first() ? 'Aprobada' : 'Pendiente';
 
-    //error_log(print_r($order_detail, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     try {
       DB::beginTransaction();
 
