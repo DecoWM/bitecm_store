@@ -631,6 +631,8 @@ const app = new Vue({
             affiliation_id = event.target.value;
             current_affiliation = self.product.affiliations.find(item => item.affiliation_id == affiliation_id)
             if (self.current_url != current_affiliation.route) {
+              console.log(current_affiliation.route);
+              console.log(current_affiliation.api_route);
               this.getProductByAffiliation(current_affiliation.route, current_affiliation.api_route);
             }
         },
@@ -706,10 +708,11 @@ const app = new Vue({
               }
             });
 
+            this.setUrl(history_url);
             document.getElementById('contsel').selectedIndex = $('#cont'+self.product.product.contract_id).data('ix');
             document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
         
-            this.setUrl(history_url);
+            //this.setUrl(history_url);
           }, (error) => {
             console.log(error);
           });
@@ -734,10 +737,11 @@ const app = new Vue({
               }
             });
             
+            this.setUrl(history_url);
             document.getElementById('contsel').selectedIndex = $('#cont'+self.product.product.contract_id).data('ix');
             document.getElementById('affsel').selectedIndex = $('#aff'+self.product.product.affiliation_id).data('ix');
       
-            this.setUrl(history_url);
+            //this.setUrl(history_url);
           }, (error) => {
             console.log(error);
           });

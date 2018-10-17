@@ -160,13 +160,15 @@ class BaseController extends Controller
     ->join('tbl_product_variation', 'tbl_product.product_id', '=', 'tbl_product_variation.product_id')
     ->join('tbl_affiliation', 'tbl_product_variation.affiliation_id', '=', 'tbl_affiliation.affiliation_id')
     ->join('tbl_plan', 'tbl_plan.plan_id', '=', 'tbl_product_variation.plan_id')
+    ->join('tbl_contract', 'tbl_contract.contract_id', '=', 'tbl_product_variation.contract_id')
     ->where('tbl_product.category_id', $category_id)
     ->where('tbl_product_variation.affiliation_id', '>', 0)
     ->where('tbl_plan.active', 1)
+    ->where('tbl_contract.active', 1)
     ->where('tbl_product_variation.variation_type_id', 2)
     ->where('tbl_product_variation.active', 1)
     ->orderBy('tbl_product_variation.affiliation_id')
-    ->select(DB::raw('tbl_brand.brand_slug, tbl_product.product_slug, tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_plan.plan_slug'))
+    ->select(DB::raw('tbl_brand.brand_slug, tbl_product.product_slug, tbl_product_variation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_plan.plan_slug, tbl_contract.contract_slug'))
       ->first();
 
     return count($result) > 0 ? $result : null;

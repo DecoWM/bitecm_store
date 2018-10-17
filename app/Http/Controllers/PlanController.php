@@ -23,7 +23,7 @@ class PlanController extends Controller
     $product_slug = $chip->product_slug; //'chip-bitel';
     $affiliation_slug = $chip->affiliation_slug; //'portabilidad';
     $plan_slug = $chip->plan_slug; //'ichip-29_90';
-    $contract_slug = '18-meses';
+    $contract_slug = $chip->contract_slug; //'18-meses';
     $color_slug = null;
 
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
@@ -41,14 +41,14 @@ class PlanController extends Controller
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        //'contract'=>$contract_slug
+        'contract'=>$contract_slug
       ]);
       $available[$i]->api_route = route('api_postpaid_detail', [
         'brand'=>$item->brand_slug,
         'product'=>$item->product_slug,
         'plan'=>$plan_slug,
         'affiliation'=>$affiliation_slug,
-        //'contract'=>$contract_slug
+        'contract'=>$contract_slug
       ]);
     }
 
@@ -62,7 +62,7 @@ class PlanController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          //'contract'=>$contract_slug,
+          'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
         $stock_models[$i]->api_route = route('api_postpaid_detail', [
@@ -70,24 +70,25 @@ class PlanController extends Controller
           'product'=>$product->product_slug,
           'plan'=>$plan_slug,
           'affiliation'=>$affiliation_slug,
-          //'contract'=>$contract_slug,
+          'contract'=>$contract_slug,
           'color'=>$item->color_slug
         ]);
       }
       $product_images = $this->shared->productImagesByStock($product->stock_model_id);
     }
     
+    $product_contracts = $this->shared->getProductContracts($product);
     $product_plans = $this->shared->getProductPlansChips($product);
     $infocomercial_product_plans = $this->shared->getInfocomercialProductPlans($product_plans);
     $product_affiliations = $this->shared->getProductAffiliations($product);
 
-    collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
+    collect($product_contracts)->map(function ($item, $key) use ($product, $color_slug) {
       $item->route = route('postpaid_detail', [
         'brand'=>$product->brand_slug,
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -95,7 +96,27 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
+        'color' => isset($color_slug) ? $color_slug : null
+      ]);
+      return $item;
+    });
+
+    collect($product_plans)->map(function ($item, $key) use ($product, $color_slug) {
+      $item->route = route('postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
+        'color' => isset($color_slug) ? $color_slug : null
+      ]);
+      $item->api_route = route('api_postpaid_detail', [
+        'brand'=>$product->brand_slug,
+        'product'=>$product->product_slug,
+        'plan'=>$item->plan_slug,
+        'affiliation'=>$item->affiliation_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       foreach ($item->affiliations as $key => $affil) {
@@ -111,7 +132,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       $item->api_route = route('api_postpaid_detail', [
@@ -119,7 +140,7 @@ class PlanController extends Controller
         'product'=>$product->product_slug,
         'plan'=>$item->plan_slug,
         'affiliation'=>$item->affiliation_slug,
-        //'contract'=>$item->contract_slug,
+        'contract'=>$item->contract_slug,
         'color' => isset($color_slug) ? $color_slug : null
       ]);
       return $item;
@@ -146,6 +167,7 @@ class PlanController extends Controller
       'available' => $available,
       'plans' => $product_plans,
       'info_comercial' => $infocomercial_product_plans,
+      'contracts' => $product_contracts,
       'affiliations' => $product_affiliations,
       'selected_plan' => $selected_plan,
       'just_3' => $i <= 3

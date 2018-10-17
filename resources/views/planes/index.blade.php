@@ -49,6 +49,7 @@
                 <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                 <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
                 <input type="hidden" name="affiliation" value="{{$product->affiliation_id}}">
+                <input type="hidden" name="contract" value="{{$product->contract_id}}">
                 <input type="hidden" name="type" value="2">
                 <input type="hidden" name="quantity" value="1">
                 <div class="content-product">
@@ -192,7 +193,8 @@
         'stock_models' => $stock_models,
         'available' => $available,
         'plans' => $plans,
-        'affiliations' => $affiliations
+        'affiliations' => $affiliations,
+        'contracts' => $contracts
       ];
     @endphp
     <input id="product-init" type="hidden" value='@json($product_init)'>
