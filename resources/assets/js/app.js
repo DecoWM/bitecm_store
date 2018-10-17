@@ -718,7 +718,6 @@ const app = new Vue({
           });
         },
         getProductByAffiliation: function(history_url, request_url) {
-          console.log("carlos");
           self = this;
           axios.get(request_url).then((response) => {
             self.product = response.data;

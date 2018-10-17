@@ -24,14 +24,6 @@ class PostpaidController extends Controller
   //public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$color_slug=null,$contract_slug) {
   public function show($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug=null) {
   
-      error_log("Aqui entra la busqueda", 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-      error_log("brand: ".$brand_slug, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-      error_log("producto: ".$product_slug, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-      error_log("afiliacion: ".$affiliation_slug, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-      error_log("plan: ".$plan_slug, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
-      error_log("contrato: ".$contract_slug, 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
       $inputs = [
           'brand_slug' => $brand_slug,
           'product_slug' => $product_slug,
