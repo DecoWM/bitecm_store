@@ -48,8 +48,6 @@ class PostpaidController extends Controller
 
     $product = $this->shared->productPostpaidBySlug($brand_slug,$product_slug,$affiliation_slug,$plan_slug,$contract_slug,$color_slug);
 
-    error_log(print_r($product, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     if(empty($product)) {
       return response()->json(["error" => ["message" => "Product not found2."]], 404);
       abort(404);
