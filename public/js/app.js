@@ -12522,7 +12522,7 @@ var app = new Vue({
             slidesToShow: 2
           }
         }, {
-          breakpoint: 996,
+          breakpoint: 990,
           settings: {
             arrows: true,
             dots: false,
@@ -12530,17 +12530,19 @@ var app = new Vue({
             infinite: false,
             slidesToShow: 1
           }
-        }, {
+        },
+        // {
+        //   breakpoint: 680,
+        //   settings: {
+        //     arrows: true,
+        //     dots: false,
+        //     //centerMode: true, // aqui
+        //     //infinite: false,  // aqui
+        //     slidesToShow: 1
+        //   }
+        // },
+        {
           breakpoint: 768,
-          settings: {
-            arrows: true,
-            dots: false,
-            //centerMode: true, // aqui
-            //infinite: false,  // aqui
-            slidesToShow: 3
-          }
-        }, {
-          breakpoint: 667,
           settings: {
             arrows: true,
             dots: false,
@@ -12549,7 +12551,7 @@ var app = new Vue({
             slidesToShow: 2
           }
         }, {
-          breakpoint: 480,
+          breakpoint: 745,
           settings: {
             arrows: true,
             dots: false,

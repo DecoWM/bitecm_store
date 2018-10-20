@@ -100,7 +100,7 @@
                       </div>
                     </div>
                     <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
-                    <div class="col-xs-12 col-sm-offset-6 col-sm-6">
+                    <div class="col-xs-12 col-sm-12">
                       {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                       {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
                       @if($product->stock_model_id)
@@ -138,8 +138,11 @@
               </form>
             </div>
           </section>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+          
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
-            <h3 class="title-plan">Escoge el plan que prefieras:</h3>
+            <h3 class="title-plan">¡Elige el plan que más te guste!</h3>
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
             <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
             <div v-if="plans.length == 0" id="plans-slick" class="hol select-plan {{$just_3 ? 'just-3' : ''}}">
@@ -150,19 +153,89 @@
               <div id="plan{{$plan->plan_id}}" class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
                 <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
-                  <span class="title-plan">{{$plan->plan_name}}</span>
-                  <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div>
-                  @foreach ($info_comercial as $info)
-                  @if($info->plan_id == $plan->plan_id)
-                  <ul class="list-unstyled">
-                    @if ($info->plan_infocomercial_flag_cantidad == 1)
-                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{!!$info->plan_infocomercial_descripcion!!}</li>
-                    @elseif ($info->plan_infocomercial_flag_cantidad > 1)
-                    <li><img src="{{$info->plan_infocomercial_img_url}}" alt="Llamadas">{{$info->plan_infocomercial_flag_cantidad}} {!!$info->plan_infocomercial_descripcion!!}</li>
-                    @endif
-                  </ul>
-                  @endif
-                  @endforeach
+                  <div class="box-plan-content-plan">
+
+                    <!-- <span class="title-plan">{{$plan->plan_name}}</span> -->
+                    <span class="precio-title-plan color-secundary">Precio del plan</span>
+                    <div class="precio-plan"><span>S/ </span> {{$plan->plan_price}}</div>
+                    <span class="box-contrato">Sin contrato de permanencia</span>
+                  </div>
+                  <div class="box-plan-content-comercial">
+                    <!-- <ul class="list-unstyled">
+                    @foreach ($info_comercial as $info)
+                    @if($info->plan_id == $plan->plan_id)
+                      @if ($info->plan_infocomercial_flag_cantidad == 1)
+                      <li><img src="{{$info->plan_infocomercial_img_url}}" alt="iconos"><span>{!!$info->plan_infocomercial_descripcion!!}</span></li>
+                      @elseif ($info->plan_infocomercial_flag_cantidad > 1)
+                      <li><img src="{{$info->plan_infocomercial_img_url}}" alt="iconos"><span>{{$info->plan_infocomercial_flag_cantidad}} {!!$info->plan_infocomercial_descripcion!!}</span></li>
+                      @endif
+                      @endif
+                      @endforeach
+                    </ul> -->
+                        <div class="box-item-comercial">
+                          <div class=box-column>
+                            <div class="item-comercial">
+                              <img src="/images/planes/icon.png" alt="">
+                              <span>Internet</span>
+                            </div>
+                          </div>
+                          <div class="box-column">
+                            <div class="item-comercial-detalle">
+                              <span>4gb + Ilimitado <br><strong> + 4GB x 12 meses</strong></span>
+                              <span></span>
+                            </div>
+                          </div>
+                          <div class="box-column">
+                            <div class="item-comercial-icon">
+                              <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="box-item-comercial">
+                          <div class=box-column>
+                            <div class="item-comercial">
+                              <img src="/images/planes/icon.png" alt="">
+                              <span>Llamadas</span>
+                            </div>
+                          </div>
+                          <div class="box-column">
+                            <div class="item-comercial-detalle">
+                              <span>Ilimitado</span>
+                            </div>
+                          </div>
+                          
+                        </div>
+                  </div>
+                  <div class="box-plan-content-apps-sociales">
+                    <p>Tus apps favoritas <span>ilimitadas</span></p>
+                    <ul>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                      <li><img src="/images/planes/icon.png" alt=""></li>
+                    </ul>
+                    <span class="color-secundary">Foto</span>
+                  </div>
+                  <div class="box-plan-content-apps">
+                    <div class="items-box-content box-video">
+                      <p>Video y Musica</p>
+                      <ul>
+                        <li><img src="/images/planes/icon.png" alt=""></li>
+                        <li><img src="/images/planes/icon.png" alt=""></li>
+                        <li><img src="/images/planes/icon.png" alt=""></li>
+                      </ul>
+                      <span class="color-secundary">Bono 1GB</span>
+                    </div>
+                    <div class="items-box-content box-juegos">
+                      <p>Juegos</p>
+                      <ul>
+                        <li><img src="/images/planes/icon.png" alt=""></li>
+                        <li><img src="/images/planes/icon.png" alt=""></li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
               </label>
