@@ -812,7 +812,7 @@ const app = new Vue({
                 }
               },
               {
-                breakpoint: 996,
+                breakpoint: 990,
                 settings: {
                   arrows: true,
                   dots: false,
@@ -821,18 +821,18 @@ const app = new Vue({
                   slidesToShow: 1
                 }
               },
+              // {
+              //   breakpoint: 680,
+              //   settings: {
+              //     arrows: true,
+              //     dots: false,
+              //     //centerMode: true, // aqui
+              //     //infinite: false,  // aqui
+              //     slidesToShow: 1
+              //   }
+              // },
               {
                 breakpoint: 768,
-                settings: {
-                  arrows: true,
-                  dots: false,
-                  //centerMode: true, // aqui
-                  //infinite: false,  // aqui
-                  slidesToShow: 3
-                }
-              },
-              {
-                breakpoint: 667,
                 settings: {
                   arrows: true,
                   dots: false,
@@ -842,7 +842,7 @@ const app = new Vue({
                 }
               },
               {
-                breakpoint: 480,
+                breakpoint: 745,
                 settings: {
                   arrows: true,
                   dots: false,
