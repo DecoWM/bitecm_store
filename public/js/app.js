@@ -11752,10 +11752,12 @@ var form = new Vue({
     first_name: '',
     last_name: '',
     select_document: '',
+    document_type: '',
     number_document: '',
     distrito: '',
     number_phone: '',
     delivery: '',
+    delivery_departament: '',
     delivery_district: '',
     email: '',
     number_contact: '',
@@ -11766,7 +11768,7 @@ var form = new Vue({
     porting_phone: '',
     departamento: '',
     provincia: ''
-  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _defineProperty(_data, 'terminos_condiciones', false), _data),
+  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _defineProperty(_data, 'delivery_schedule', ''), _defineProperty(_data, 'terminos_condiciones', false), _data),
   methods: {
     validateInfoCliente: function validateInfoCliente() {
       var _this = this;

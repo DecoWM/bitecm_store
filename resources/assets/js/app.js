@@ -52,11 +52,13 @@ const form = new Vue({
   data: {
     first_name:'',
     last_name:'',
-    select_document:'',
-    number_document:'',
+    select_document: '',
+    document_type: '',
+    number_document: '',
     distrito:'',
     number_phone:'',
     delivery:'',
+    delivery_departament: '',
     delivery_district:'',
     email:'',
     number_contact:'',
@@ -75,6 +77,7 @@ const form = new Vue({
     delivery_districts: '',
     delivery_province: '',
     delivery_district: '',
+    delivery_schedule: '',
     terminos_condiciones: false
   },
   methods: {
