@@ -72,8 +72,8 @@
                       <div class="row">
                         <div class="col-md-6 form-group form-select">
                           <label for="document_type">Tipo de documento</label>
-                          <select id="document_type" name="document_type" v-model="select_document" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }"><i v-cloak v-show="errors.has('document_type')" class="col-xs-12 fa fa-warning"> </i>
-                            <option value="" selected>Seleccione</option>
+                          <select id="document_type" name="document_type" v-model="document_type" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }">
+                            <option value="" selected>Tipo de Documento</option>
                             <option value="1">DNI</option>
                             <option value="2">CARNÉ DE EXTRANJERÍA</option>
                             <option value="3">PASAPORTE</option>
@@ -262,7 +262,7 @@
 
                     <div class="control">
                       <label class="checkbox">
-                        <input id="terminos_condiciones" name="terminos_condiciones" type="checkbox" v-validate="'required'">
+                        <input id="terminos_condiciones" name="terminos_condiciones" type="checkbox" v-validate="'required'" checked>
                       </label>
                       <a @click="terminoscondiciones($event)">Términos y condiciones</a>
                       <span class="help is-danger" v-show="errors.has('terminos_condiciones')"> (Debe aceptar los términos y condiciones para poder realizar la compra).</span>  

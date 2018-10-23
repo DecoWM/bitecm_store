@@ -26,8 +26,8 @@
               <div class="select-item" v-show="filters[type].contract.isOpen">
                 @foreach ($filters['contract_list'] as $contract)
                 <div class="item">
-                  <input id="type-opt-{{$contract->contract_id}}" type="radio" name="contract" value="{{$contract->contract_id}}" v-model="filters[type].contract.value" v-on:change="searchProduct(1)">
-                  <label for="type-opt-{{$contract->contract_id}}" style="max-width: 150px;">{{$contract->contract_name}}</label>
+                  <input id="type-cont-{{$contract->contract_id}}" type="radio" name="contract" value="{{$contract->contract_id}}" v-model="filters[type].contract.value" v-on:change="searchProduct(1)">
+                  <label for="type-cont-{{$contract->contract_id}}" style="max-width: 150px;">{{$contract->contract_name}}</label>
                 </div>
                 @endforeach
               </div>
@@ -137,6 +137,7 @@
               </div>
             </transition>
           </div>
+          <!-- por marca -->
           <div id="marca" class="content-catalogo">
             <div class="title-select" v-on:click="toggleAccordion(filters[type].manufacturer)">
               <div class="btn-acordion"></div><span>Filtrar por marca:</span>
