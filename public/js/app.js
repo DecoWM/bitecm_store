@@ -12593,7 +12593,7 @@ var app = new Vue({
     }
   },
   mounted: function mounted() {
-    var _$$slick, _$$slick2, _$$slick3, _$$slick4, _$$slick5;
+    var _$$slick, _$$slick2, _$$slick3, _$$slick4, _$$slick5, _$$slick6;
 
     self = this;
 
@@ -12614,12 +12614,19 @@ var app = new Vue({
       autoplay: true
     }, _defineProperty(_$$slick, 'arrows', true), _defineProperty(_$$slick, 'speed', 300), _defineProperty(_$$slick, 'slidesToShow', 1), _defineProperty(_$$slick, 'slidesToScroll', 1), _$$slick));
 
-    $('.list-productos').slick((_$$slick2 = {
+    $('.new-slider ul').slick((_$$slick2 = {
+      arrows: true,
+      dots: true,
+      infinite: true,
+      autoplay: true
+    }, _defineProperty(_$$slick2, 'arrows', true), _defineProperty(_$$slick2, 'speed', 300), _defineProperty(_$$slick2, 'slidesToShow', 1), _defineProperty(_$$slick2, 'slidesToScroll', 1), _$$slick2));
+
+    $('.list-productos').slick((_$$slick3 = {
       arrows: true,
       dots: false,
       infinite: true,
       autoplay: true
-    }, _defineProperty(_$$slick2, 'arrows', true), _defineProperty(_$$slick2, 'speed', 300), _defineProperty(_$$slick2, 'slidesToShow', 3), _defineProperty(_$$slick2, 'slidesToScroll', 1), _defineProperty(_$$slick2, 'responsive', [{
+    }, _defineProperty(_$$slick3, 'arrows', true), _defineProperty(_$$slick3, 'speed', 300), _defineProperty(_$$slick3, 'slidesToShow', 3), _defineProperty(_$$slick3, 'slidesToScroll', 1), _defineProperty(_$$slick3, 'responsive', [{
       breakpoint: 1040,
       settings: {
         arrows: false,
@@ -12654,14 +12661,14 @@ var app = new Vue({
         centerMode: false,
         slidesToShow: 1
       }
-    }]), _$$slick2));
+    }]), _$$slick3));
 
-    $('.promociones-tab').slick((_$$slick3 = {
+    $('.promociones-tab').slick((_$$slick4 = {
       arrows: true,
       dots: false,
       infinite: false,
       autoplay: true
-    }, _defineProperty(_$$slick3, 'arrows', true), _defineProperty(_$$slick3, 'speed', 300), _defineProperty(_$$slick3, 'slidesToShow', 4), _defineProperty(_$$slick3, 'slidesToScroll', 1), _defineProperty(_$$slick3, 'responsive', [{
+    }, _defineProperty(_$$slick4, 'arrows', true), _defineProperty(_$$slick4, 'speed', 300), _defineProperty(_$$slick4, 'slidesToShow', 4), _defineProperty(_$$slick4, 'slidesToScroll', 1), _defineProperty(_$$slick4, 'responsive', [{
       breakpoint: 1040,
       settings: {
         arrows: true,
@@ -12677,41 +12684,6 @@ var app = new Vue({
       }
     }, {
       breakpoint: 667,
-      settings: {
-        arrows: true,
-        centerMode: false,
-        slidesToShow: 2
-      }
-    }]), _$$slick3));
-
-    $('.nav-compara').slick((_$$slick4 = {
-      arrows: true,
-      dots: false,
-      infinite: false,
-      autoplay: false
-    }, _defineProperty(_$$slick4, 'arrows', true), _defineProperty(_$$slick4, 'speed', 300), _defineProperty(_$$slick4, 'slidesToShow', 4), _defineProperty(_$$slick4, 'slidesToScroll', 1), _defineProperty(_$$slick4, 'asNavFor', '.lista-equipos'), _defineProperty(_$$slick4, 'responsive', [{
-      breakpoint: 1040,
-      settings: {
-        arrows: true,
-        centerMode: false,
-        slidesToShow: 3
-      }
-    }, {
-      breakpoint: 768,
-      settings: {
-        arrows: true,
-        centerMode: false,
-        slidesToShow: 3
-      }
-    }, {
-      breakpoint: 667,
-      settings: {
-        arrows: true,
-        centerMode: false,
-        slidesToShow: 2
-      }
-    }, {
-      breakpoint: 480,
       settings: {
         arrows: true,
         centerMode: false,
@@ -12719,12 +12691,47 @@ var app = new Vue({
       }
     }]), _$$slick4));
 
-    $('.lista-equipos').slick((_$$slick5 = {
+    $('.nav-compara').slick((_$$slick5 = {
+      arrows: true,
+      dots: false,
+      infinite: false,
+      autoplay: false
+    }, _defineProperty(_$$slick5, 'arrows', true), _defineProperty(_$$slick5, 'speed', 300), _defineProperty(_$$slick5, 'slidesToShow', 4), _defineProperty(_$$slick5, 'slidesToScroll', 1), _defineProperty(_$$slick5, 'asNavFor', '.lista-equipos'), _defineProperty(_$$slick5, 'responsive', [{
+      breakpoint: 1040,
+      settings: {
+        arrows: true,
+        centerMode: false,
+        slidesToShow: 3
+      }
+    }, {
+      breakpoint: 768,
+      settings: {
+        arrows: true,
+        centerMode: false,
+        slidesToShow: 3
+      }
+    }, {
+      breakpoint: 667,
+      settings: {
+        arrows: true,
+        centerMode: false,
+        slidesToShow: 2
+      }
+    }, {
+      breakpoint: 480,
+      settings: {
+        arrows: true,
+        centerMode: false,
+        slidesToShow: 2
+      }
+    }]), _$$slick5));
+
+    $('.lista-equipos').slick((_$$slick6 = {
       arrows: false,
       dots: false,
       infinite: false,
       autoplay: false
-    }, _defineProperty(_$$slick5, 'arrows', true), _defineProperty(_$$slick5, 'speed', 300), _defineProperty(_$$slick5, 'slidesToShow', 4), _defineProperty(_$$slick5, 'slidesToScroll', 1), _defineProperty(_$$slick5, 'asNavFor', '.nav-compara'), _defineProperty(_$$slick5, 'responsive', [{
+    }, _defineProperty(_$$slick6, 'arrows', true), _defineProperty(_$$slick6, 'speed', 300), _defineProperty(_$$slick6, 'slidesToShow', 4), _defineProperty(_$$slick6, 'slidesToScroll', 1), _defineProperty(_$$slick6, 'asNavFor', '.nav-compara'), _defineProperty(_$$slick6, 'responsive', [{
       breakpoint: 1040,
       settings: {
         arrows: false,
@@ -12754,7 +12761,7 @@ var app = new Vue({
         centerMode: false,
         slidesToShow: 2
       }
-    }]), _$$slick5));
+    }]), _$$slick6));
 
     $('.select-plan').slick(self.getSlickPlansSettings($('#planes').data('selected'), $('#plans-slick').hasClass('just-3')));
 
@@ -56928,7 +56935,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56939,6 +56946,15 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -56978,28 +56994,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-7 col-sm-6 col-12-mob" }, [
-    _c("div", { staticClass: "detalle-product" }, [
-      _c("div", { staticClass: "price-product" }, [
-        _vm.product.promo_id
-          ? _c("span", [_vm._v("S/." + _vm._s(_vm.product.promo_price))])
-          : _vm._e(),
+  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-7  col-12-mob" }, [
+    _c("div", { attrs: { id: "box-detalle-product" } }, [
+      _c("div", { staticClass: "detalle-product" }, [
+        _c("div", { staticClass: "price-product" }, [
+          _c("p", [_vm._v("Precio del equipo")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "preci-cant" }, [
+            _vm.product.promo_id
+              ? _c("div", { staticClass: "preci-cant" }, [
+                  _c("span", [_vm._v("S")]),
+                  _c("span", [_vm._v("product.promo_price}}")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "preci-cant",
+                class: { "normal-price": _vm.product.promo_id != null }
+              },
+              [
+                _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+              ]
+            )
+          ])
+        ]),
         _vm._v(" "),
-        _c(
-          "span",
-          { class: { "normal-price": _vm.product.promo_id != null } },
-          [_vm._v("S/." + _vm._s(_vm.product.product_price))]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "plan-product" }, [
-        _c("p", [
-          _vm._v("con "),
-          _c("span", [_vm._v(_vm._s(_vm.product.plan_name))])
-        ])
-      ]),
-      _vm._v(" "),
-      _vm._m(0)
+        _vm._m(0)
+      ])
     ])
   ])
 }
@@ -57008,8 +57033,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tiempo-plan" }, [
-      _c("p", [_vm._v("Sin contrato de permanencia (*)")])
+    return _c("div", { staticClass: "plan-product" }, [
+      _c("p", { staticStyle: { color: "#9f5ed9" } }, [
+        _vm._v("Precio del Plan")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "preci-cant" }, [
+        _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+        _c("span", [_vm._v("29.90")])
+      ])
     ])
   }
 ]

@@ -1,0 +1,36 @@
+#image-equipo{
+    // overflow: hidden;
+    @media screen and (max-width: 992px){
+        margin-bottom: 42px;
+    }
+    .new-slider{
+        width: 340px;
+        margin: 0 auto;
+        @media screen and (max-width: 340px){
+            width: 320px;
+        }
+        ul{
+            width: 340px;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            @media screen and (max-width: 340px){
+                width: 320px;
+            }
+            li{
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            .slick-prev{
+                left: 25px;
+            }
+            .slick-next {
+                right: 25px;
+            }
+            .slick-dots{
+                bottom: 20px;
+            }
+        }
+    }
+}

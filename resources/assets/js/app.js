@@ -905,6 +905,17 @@ const app = new Vue({
           slidesToScroll: 1
         });
 
+        $('.new-slider ul').slick({
+          arrows: true,
+          dots: true,
+          infinite: true,
+          autoplay: true,
+          arrows: true,
+          speed: 300,
+          slidesToShow: 1,
+          slidesToScroll: 1
+        });
+
         $('.list-productos').slick({
             arrows: true,
             dots: false,

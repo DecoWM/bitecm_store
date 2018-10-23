@@ -1587,6 +1587,7 @@ nav#nav-bitel{
     padding-bottom: 9px;
     padding-top: 5px;
     z-index: 9998;
+    margin-bottom: 33px;
 }
 
 .box-bitel{
@@ -1669,4 +1670,111 @@ nav#nav-bitel{
 
 }
 
+
+#descripcion-equipo .content-section form .content-product .color-product fieldset legend{
+    float: none;
+}
+
+.content-box-shadow{
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.07);
+    border: solid 1px #e4e4e4;
+    border-radius: 4px;
+    // outline: solid 1px #e4e4e4;
+    position: relative;
+    // &::after{
+    //     content: '';
+    //     position: absolute;
+    //     top: -1px;
+    //     bottom: -1px;
+    //     left: -1px;
+    //     right: -1px;
+    //     border: 1px solid #e4e4e4;
+    //     border-radius: 4px;
+    // }
+}
+
+#descripcion-equipo .content-section form .content-product .select-product:after{
+    width: 8px;
+    top: 36px;
+    right: 21px;
+}
+
+#descripcion-equipo .content-section form .content-product .select-product:before{
+    width: 8px;
+    top: 36px;
+    right: 26px
+}
+
+#descripcion-equipo .content-section form .content-product .btn-comprar button{
+    
+}
+#descripcion-equipo .header-section .title{
+    margin-bottom: 16px;
+}
+
+#descripcion-equipo .header-section .title h1{
+    font-family: 'arialrounded_mtbold';
+    text-transform: initial;
+    color: #000000;
+    @media screen and (max-width: 520px){
+        font-size: 23px;
+    }
+}
+
+#descripcion-equipo .header-section .title .state{
+    width: auto;
+    padding: 0 14px;
+    background-color: #7ed321 !important;
+    border-radius: 4px;
+    span{
+        font-size: 12px;
+        color: #ffffff;
+    }
+
+}
+
+#descripcion-equipo .header-section{
+    margin-bottom: 34px;
+}
+
+#descripcion-equipo{
+    @media screen and (max-width: 992px) {
+        
+        padding: 0 20px;
+    }
+}
+
+#content-page #image-equipo{
+    margin-top: 0;
+    // padding-top: 30px;
+    padding-left: 0px;
+}
+
+.container-section-new-information{
+    overflow: hidden;
+    display: flex;
+    padding-left: 40px;
+    padding-top: 43px;
+    padding-bottom: 36px;
+    @media screen and (max-width:992px) {
+        flex-direction: column;
+        padding-left: 0px;
+    }
+    #content-page{
+        margin-top: 0;
+    }
+    #descripcion-equipo{
+        padding-left: 40px;
+        width: 100%;
+        margin-top: 0;
+        @media screen and (max-width: 992px){
+            padding-left: 20px;
+        }
+    }
+}
+
+
+
+@import './descripcion_equipos.scss';
 @import './planes.scss';
+@import './sliderNew.scss';

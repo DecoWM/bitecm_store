@@ -4687,9 +4687,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   line-height: 20px;
 }
 @media (max-width: 480px) {
-  #descripcion-equipo .header-section {
+  /* #descripcion-equipo .header-section {
     display: none;
-  }
+  } */
 }
 #descripcion-equipo .content-section form {
   width: 100%;
@@ -4748,9 +4748,9 @@ section#garantia .container .row .col-xs-4 .text-center p {
   z-index: 99;
 }
 @media (max-width: 480px) {
-  #descripcion-equipo .content-section form .content-product .select-product {
+  /* #descripcion-equipo .content-section form .content-product .select-product {
     display: none;
-  }
+  } */
 }
 #descripcion-equipo .content-section form .content-product .color-product {
   width: 100%;
@@ -13609,3 +13609,26 @@ button.close {
  #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div:last-child{
   border-bottom: 1px solid transparent;
  }
+
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400,500');
+
+
+
+@font-face {
+    font-family: 'arialrounded_mtbold';
+    src: url('../fonts/arialRounded/arialroundedmt-webfont.woff2') format('woff2'),
+         url('../fonts/arialRounded/arialroundedmt-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'arialrounded_mt';
+    src: url('../fonts/arialRounded/arialroundedmtstd-webfont.woff2') format('woff2'),
+         url('../fonts/arialRounded/arialroundedmtstd-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
