@@ -90,7 +90,7 @@
 
                                 <div class="select-product">
                                 <div class="box-title-select-cambiate">
-                                    <img src="http://via.placeholder.com/12x16" alt="">
+                                    <img src="/images/planes/4g.svg" width="12" alt="">
                                     <span class="title-select">Modalidad</span>
                                   </div>
                                   <affiliations-filtered v-if="affiliations.length > 0" :affiliations="affiliations" :product="product"></affiliations-filtered>
@@ -112,7 +112,7 @@
 
                                 <div class="select-product">
                                   <div class="box-title-select-contrato">
-                                    <img src="http://via.placeholder.com/12x16" alt="">
+                                    <img src="/images/planes/4g.svg" width="12" alt="">
                                     <span class="title-select">Tipo de contrato</span>
                                   </div>
                                   <select id="contsel" form="purchase-form" name="contract" @change="setContract($event)">
