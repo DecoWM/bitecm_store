@@ -18,7 +18,7 @@
                         <!-- <div class="image-product text-center">
                           <img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
                         </div> -->
-                        @if(count($product_images)>1)
+                        @if(count($product_images)>0)
                          <ul>
                           @foreach($product_images as $image)
                           <li>
