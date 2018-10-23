@@ -12624,6 +12624,7 @@ var app = new Vue({
     }, _defineProperty(_$$slick2, 'arrows', true), _defineProperty(_$$slick2, 'speed', 300), _defineProperty(_$$slick2, 'slidesToShow', 1), _defineProperty(_$$slick2, 'slidesToScroll', 1), _$$slick2));
 
     $('.img-loading').hide();
+
     $('.new-slider ul').show();
 
     // $('.new-slider').css('opacity','1');

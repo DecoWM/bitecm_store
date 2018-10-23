@@ -10,14 +10,38 @@
                   <div class="img-loading">
                     <img src="/images/planes/placeholder.png" alt="">
                   </div>
-                  <div class="new-slider">
-                    <ul>
+                  
+
+                   
+                   @if(count($product_images)>0)
+                     <div class="new-slider">
+                        <!-- <div class="image-product text-center">
+                          <img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
+                        </div> -->
+                        @if(count($product_images)>1)
+                         <ul>
+                          @foreach($product_images as $image)
+                          <li>
+                            <img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">
+                          </li>
+                          @endforeach
+                        </ul>
+                        @else
+                        @endif
+                        </div> 
+                      @else
+                        <div class="new-slider-one">
+                          <img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">
+                        </div>
+                      @endif
+                    
+                    <!-- <ul>
                       <li><img src="http://via.placeholder.com/340x320" alt=""></li>
                       <li><img src="http://via.placeholder.com/340x320" alt=""></li>
                       <li><img src="http://via.placeholder.com/340x320" alt=""></li>
                       <li><img src="http://via.placeholder.com/340x320" alt=""></li>
-                    </ul>
-                  </div>  
+                    </ul> -->
+                   
 
                 </div>
                 <!-- <div id="image-equipo">

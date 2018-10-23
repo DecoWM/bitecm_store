@@ -921,6 +921,7 @@ const app = new Vue({
         });
         
         $('.img-loading').hide();
+        
         $('.new-slider ul').show();
 
         // $('.new-slider').css('opacity','1');
