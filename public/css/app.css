@@ -2776,10 +2776,21 @@ nav#nav-bitel {
   font-weight: normal;
 }
 
+#image-equipo {
+  overflow: hidden;
+  height: 320px;
+}
+
 @media screen and (max-width: 992px) {
   #image-equipo {
     margin-bottom: 42px;
   }
+}
+
+#image-equipo .img-loading {
+  background: #f1f1f1;
+  height: 320px;
+  width: 340px;
 }
 
 #image-equipo .new-slider {
@@ -2794,6 +2805,7 @@ nav#nav-bitel {
 }
 
 #image-equipo .new-slider ul {
+  display: none;
   width: 340px;
   margin: 0;
   padding: 0;

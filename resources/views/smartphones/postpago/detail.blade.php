@@ -7,6 +7,9 @@
             <div class="container-section-new-information">
               <div id="content-page">
                 <div id="image-equipo">
+                  <div class="img-loading">
+                    <img src="/images/planes/placeholder.png" alt="">
+                  </div>
                   <div class="new-slider">
                     <ul>
                       <li><img src="http://via.placeholder.com/340x320" alt=""></li>

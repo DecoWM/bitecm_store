@@ -908,6 +908,7 @@ const app = new Vue({
           slidesToScroll: 1
         });
 
+        
         $('.new-slider ul').slick({
           arrows: true,
           dots: true,
@@ -918,7 +919,12 @@ const app = new Vue({
           slidesToShow: 1,
           slidesToScroll: 1
         });
+        
+        $('.img-loading').hide();
+        $('.new-slider ul').show();
 
+        // $('.new-slider').css('opacity','1');
+        
         $('.list-productos').slick({
             arrows: true,
             dots: false,

@@ -1,7 +1,13 @@
 #image-equipo{
-    // overflow: hidden;
+    overflow: hidden;
+    height: 320px;
     @media screen and (max-width: 992px){
         margin-bottom: 42px;
+    }
+    .img-loading{
+        background: #f1f1f1;
+        height: 320px;
+        width: 340px;
     }
     .new-slider{
         width: 340px;
@@ -10,6 +16,7 @@
             width: 320px;
         }
         ul{
+            display: none;
             width: 340px;
             margin: 0;
             padding: 0;
