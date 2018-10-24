@@ -301,6 +301,8 @@
                             
                           </div>
                     </div>
+
+
                     <div class="box-plan-content-apps-sociales">
                       <p>Tus apps favoritas <span>ilimitadas</span></p>
                       <ul>
@@ -331,6 +333,7 @@
                         </ul>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
                 </label>

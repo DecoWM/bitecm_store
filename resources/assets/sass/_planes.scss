@@ -208,6 +208,7 @@
         padding: 0;
         display: flex;
         margin-bottom: 5px !important;
+        flex-wrap: wrap;   
         li{
             padding-left: 0 !important;
             margin-right: 10px;
@@ -246,6 +247,7 @@
             padding: 0;
             display: flex;
             margin-bottom: 5px !important;
+            flex-wrap: wrap;   
             li{
                 padding-left: 0 !important;
                 margin-right: 10px;

@@ -2711,6 +2711,8 @@ nav#nav-bitel {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 5px !important;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .box-plan-content-apps-sociales ul li {
@@ -2765,6 +2767,8 @@ nav#nav-bitel {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 5px !important;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .box-plan-content-apps .items-box-content ul li {

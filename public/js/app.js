@@ -57671,6 +57671,90 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -57765,58 +57849,61 @@ var render = function() {
                 }
               },
               [
-                _c("span", { staticClass: "title-plan" }, [
-                  _vm._v(_vm._s(plan.plan_name))
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "precio-plan" }, [
-                  _vm._v("S/. " + _vm._s(plan.plan_price)),
-                  _c("span", [_vm._v("al mes")])
-                ]),
-                _vm._v(" "),
-                _vm._l(plan.info_comercial, function(item) {
-                  return _c("ul", { staticClass: "list-unstyled" }, [
-                    item.plan_infocomercial_flag_cantidad == 1
-                      ? _c("li", [
-                          _c("img", {
-                            attrs: {
-                              src: item.plan_infocomercial_img_url,
-                              alt: "Llamadas"
-                            }
-                          }),
-                          _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s(
-                                item.plan_infocomercial_descripcion
-                              )
-                            }
-                          })
-                        ])
-                      : item.plan_infocomercial_flag_cantidad > 1
-                        ? _c("li", [
-                            _c("img", {
-                              attrs: {
-                                src: item.plan_infocomercial_img_url,
-                                alt: "Llamadas"
-                              }
-                            }),
-                            _vm._v(
-                              _vm._s(item.plan_infocomercial_flag_cantidad) +
-                                " "
-                            ),
-                            _c("span", {
-                              domProps: {
-                                innerHTML: _vm._s(
-                                  item.plan_infocomercial_descripcion
-                                )
-                              }
-                            })
-                          ])
-                        : _vm._e()
+                _c("div", { staticClass: "box-plan-content-plan" }, [
+                  _c(
+                    "span",
+                    { staticClass: "precio-title-plan color-secundary" },
+                    [_vm._v("Precio del plan")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "precio-plan hola" }, [
+                    _vm._v("S/ " + _vm._s(plan.plan_price))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "box-contrato" }, [
+                    _vm._v("Sin contrato de permanencia")
                   ])
-                })
-              ],
-              2
+                ]),
+                _vm._v(" "),
+                _vm._m(0, true),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-plan-content-apps-sociales" }, [
+                  _vm._m(1, true),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    _vm._l(plan.info_comercial, function(item) {
+                      return _c("li", [
+                        item.plan_infocomercial_flag_cantidad == 1
+                          ? _c("span", [
+                              _c("img", {
+                                attrs: {
+                                  src: item.plan_infocomercial_img_url,
+                                  alt: "iconos"
+                                }
+                              })
+                            ])
+                          : item.plan_infocomercial_flag_cantidad > 1
+                            ? _c("span", [
+                                _c("img", {
+                                  attrs: {
+                                    src: item.plan_infocomercial_img_url,
+                                    alt: "iconos"
+                                  }
+                                })
+                              ])
+                            : _vm._e()
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "color-secundary" }, [
+                    _vm._v("Foto")
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2, true)
+              ]
             )
           ]
         )
@@ -57824,7 +57911,121 @@ var render = function() {
     })
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-plan-content-comercial" }, [
+      _c("div", { staticClass: "box-item-comercial" }, [
+        _c("div", { staticClass: "box-column" }, [
+          _c("div", { staticClass: "item-comercial" }, [
+            _c("img", { attrs: { src: "/images/planes/icon.png", alt: "" } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("Internet")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-column" }, [
+          _c("div", { staticClass: "item-comercial-detalle" }, [
+            _c("span", [
+              _vm._v("4gb + Ilimitado "),
+              _c("br"),
+              _c("strong", [_vm._v(" + 4GB x 12 meses")])
+            ]),
+            _vm._v(" "),
+            _c("span")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-column" }, [
+          _c("div", { staticClass: "item-comercial-icon" }, [
+            _c("span", { staticClass: "icon" }, [
+              _c("img", {
+                attrs: { src: "/images/planes/icon-info.png", alt: "" }
+              })
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box-item-comercial" }, [
+        _c("div", { staticClass: "box-column" }, [
+          _c("div", { staticClass: "item-comercial" }, [
+            _c("img", { attrs: { src: "/images/planes/icon.png", alt: "" } }),
+            _vm._v(" "),
+            _c("span", [_vm._v("Llamadas")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "box-column" }, [
+          _c("div", { staticClass: "item-comercial-detalle" }, [
+            _c("span", [_vm._v("Ilimitado")])
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", [
+      _vm._v("Tus apps favoritas "),
+      _c("span", [_vm._v("ilimitadas")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-plan-content-apps" }, [
+      _c("div", { staticClass: "items-box-content box-video" }, [
+        _c("p", [_vm._v("Video y Musica")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("img", {
+              attrs: { src: "/images/planes/video1.png", alt: "", width: "32" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("img", {
+              attrs: { src: "/images/planes/video2.png", alt: "", width: "32" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("img", {
+              attrs: { src: "/images/planes/video3.png", alt: "", width: "32" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("span", { staticClass: "color-secundary" }, [_vm._v("Bono 1GB")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "items-box-content box-juegos" }, [
+        _c("p", [_vm._v("Juegos")]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("img", {
+              attrs: { src: "/images/planes/juego1.png", alt: "", width: "32" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("img", {
+              attrs: { src: "/images/planes/juego2.png", alt: "", width: "32" }
+            })
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

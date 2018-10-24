@@ -4713,7 +4713,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 }
 #descripcion-equipo .content-section form .content-product .select-product select {
   line-height: 18px;
-  width: 100%;
+  width: 99%;
   height: 30px;
   border-color: #008c95;
   background: #fff;
@@ -5185,7 +5185,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 #planes .select-plan .plan {
   text-align: center;
   padding: 10px;
-  border: 1px solid transparent;
+  border: none;
   transition: 0.1s ease-out all;
   margin: 0 10px;
   float: left;
