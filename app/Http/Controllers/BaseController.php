@@ -717,7 +717,7 @@ class BaseController extends Controller
       ->whereIn('tbl_plan_infocomercial.plan_id', $plan_id)
       ->orderBy('tbl_plan_infocomercial.plan_id')
       ->orderBy('tbl_plan_infocomercial.weight')
-      ->select('tbl_plan_infocomercial.plan_id', 'tbl_plan_infocomercial.plan_infocomercial_img_url', 'tbl_plan_infocomercial.plan_infocomercial_descripcion', 'tbl_plan_infocomercial.plan_infocomercial_informacion_adicional', 'tbl_plan_infocomercial.plan_infocomercial_flag_cantidad')
+      ->select('tbl_plan_infocomercial.plan_id', 'tbl_plan_infocomercial.plan_infocomercial_img_url', 'tbl_plan_infocomercial.plan_infocomercial_descripcion', 'tbl_plan_infocomercial.plan_infocomercial_informacion_adicional', 'tbl_plan_infocomercial.plan_infocomercial_flag_cantidad','tbl_plan_infocomercial.weight','tbl_plan_infocomercial.tipo')
       ->get();
     
     // le agregamos la ruta donde estan las imagenes para que se puedan mostrar

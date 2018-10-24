@@ -10,9 +10,7 @@
                   <div class="img-loading">
                     <img src="/images/planes/placeholder.png" alt="">
                   </div>
-                  
-
-                   
+                                   
                    @if(count($product_images)>0)
                      <div class="new-slider">
                         <!-- <div class="image-product text-center">
@@ -249,91 +247,106 @@
                   {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
                   <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
                     <div class="box-plan-content-plan">
-
                       <!-- <span class="title-plan">{{$plan->plan_name}}</span> -->
                       <span class="precio-title-plan color-secundary">Precio del plan</span>
                       <div class="precio-plan"><span>S/ </span> {{$plan->plan_price}}</div>
                       <span class="box-contrato">Sin contrato de permanencia</span>
                     </div>
-                    <div class="box-plan-content-comercial">
-                      <!-- <ul class="list-unstyled">
-                      @foreach ($info_comercial as $info)
+
+                    <!-- PRIMERA CATEGORIA -->
+                    @foreach ($info_comercial as $info)
                       @if($info->plan_id == $plan->plan_id)
-                        @if ($info->plan_infocomercial_flag_cantidad == 1)
-                        <li><img src="{{$info->plan_infocomercial_img_url}}" alt="iconos"><span>{!!$info->plan_infocomercial_descripcion!!}</span></li>
-                        @elseif ($info->plan_infocomercial_flag_cantidad > 1)
-                        <li><img src="{{$info->plan_infocomercial_img_url}}" alt="iconos"><span>{{$info->plan_infocomercial_flag_cantidad}} {!!$info->plan_infocomercial_descripcion!!}</span></li>
-                        @endif
-                        @endif
-                        @endforeach
-                      </ul> -->
-                          <div class="box-item-comercial">
-                            <div class=box-column>
-                              <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="">
-                                <span>Internet</span>
-                              </div>
-                            </div>
-                            <div class="box-column">
-                              <div class="item-comercial-detalle">
-                                <span>4gb + Ilimitado <br><strong> + 4GB x 12 meses</strong></span>
-                                <span></span>
-                              </div>
-                            </div>
-                            <div class="box-column">
-                              <div class="item-comercial-icon">
-                                <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="box-item-comercial">
-                            <div class=box-column>
-                              <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="">
-                                <span>Llamadas</span>
-                              </div>
-                            </div>
-                            <div class="box-column">
-                              <div class="item-comercial-detalle">
-                                <span>Ilimitado</span>
-                              </div>
-                            </div>
-                            
-                          </div>
-                    </div>
+                        
+                        @if($info->tipo == 2)
+                          
+                          <div class="box-plan-content-comercial">
+                             
+                                <div class="box-item-comercial">
+                                  <div class=box-column>
+                                    <div class="item-comercial">
+                                      <img src="{{$info->plan_infocomercial_img_url}}" width="32" alt="">
+                                      <span>{!!$info->plan_infocomercial_descripcion!!}</span>
+                                    </div>
+                                  </div>
+                                  <div class="box-column">
+                                    <div class="item-comercial-detalle">
+                                      <span>{!!$info->plan_infocomercial_informacion_adicional!!}</span>
+                                      <span></span>
+                                    </div>
+                                  </div>
+                                  <!--
+                                  <div class="box-column">
+                                    <div class="item-comercial-icon">
+                                      <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
+                                    </div>
+                                  </div>
+                                  -->
+                                </div>
 
+                          </div>   
 
+                        @endif
+
+                      @endif
+                    @endforeach
+
+                    <!-- SEGUNDA CATEGORIA -->
                     <div class="box-plan-content-apps-sociales">
                       <p>Tus apps favoritas <span>ilimitadas</span></p>
-                      <ul>
-                        <li><img src="/images/planes/app1.png" alt="" width="32"></li>
-                        <li><img src="/images/planes/app2.png" alt="" width="32"></li>
-                        <li><img src="/images/planes/app3.png" alt="" width="32"></li>
-                        <li><img src="/images/planes/app4.png" alt="" width="32"></li>
-                        <li><img src="/images/planes/app5.png" alt="" width="32"></li>
-                        <li><img src="/images/planes/app6.png" alt="" width="32"></li>
-                      </ul>
-                      <span class="color-secundary">Foto</span>
+                        <ul>
+                          
+                          @foreach ($info_comercial as $info)
+                            @if($info->plan_id == $plan->plan_id)
+                            
+                              @if($info->tipo == 1)
+                                <li><img src="{{$info->plan_infocomercial_img_url}}" alt="" width="32"></li>
+                              @endif
+
+                            @endif
+                          @endforeach
+
+                        </ul>
+                      <!--<span class="color-secundary">Foto</span>-->
                     </div>
+                        
+                    <!-- TERCERA Y CUARTA CATEGORIA -->
                     <div class="box-plan-content-apps">
+
+                      <!-- TERCERA CATEGORIA -->
                       <div class="items-box-content box-video">
                         <p>Video y Musica</p>
                         <ul>
-                          <li><img src="/images/planes/video1.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/video2.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                          @foreach ($info_comercial as $info)
+                            @if($info->plan_id == $plan->plan_id)
+                          
+                              @if($info->tipo == 3)
+                                <li><img src="{{$info->plan_infocomercial_img_url}}" alt="" width="32"></li>
+                              @endif  
+
+                            @endif
+                          @endforeach    
                         </ul>
-                        <span class="color-secundary">Bono 1GB</span>
+                        <span class="color-secundary">{{$plan->plan_bono}}</span>
                       </div>
+                      
+                      <!-- CUARTA CATEGORIA -->
                       <div class="items-box-content box-juegos">
                         <p>Juegos</p>
                         <ul>
-                          <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                          @foreach ($info_comercial as $info)
+                            @if($info->plan_id == $plan->plan_id)
+
+                              @if($info->tipo == 4)
+                                <li><img src="{{$info->plan_infocomercial_img_url}}" alt="" width="32"></li>
+                              @endif  
+
+                            @endif
+                          @endforeach    
                         </ul>
                       </div>
+
                     </div>
-                    
+
                   </div>
                 </div>
                 </label>
