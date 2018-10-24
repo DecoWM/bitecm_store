@@ -2789,6 +2789,8 @@ nav#nav-bitel {
 #image-equipo {
   overflow: hidden;
   height: 320px;
+  border-radius: 4px;
+  border: solid 1px #e4e4e4;
 }
 
 @media screen and (max-width: 992px) {
