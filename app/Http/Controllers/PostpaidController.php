@@ -238,9 +238,6 @@ class PostpaidController extends Controller
       $selected_plan = 0;
     }
 
-    error_log(print_r($product_plans, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-    error_log(print_r($infocomercial_product_plans, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     $response = [
       'product' => $product,
       'product_images' => $product_images,

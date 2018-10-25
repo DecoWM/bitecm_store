@@ -399,12 +399,6 @@ class OrderController extends Controller
     }
     */
 
-    //error_log(print_r($departamentos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
-    //error_log(print_r($provincias, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
-    //error_log(print_r($distritos, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
-
-    //error_log(print_r($dept_prov_dist_branch_list, true), 3 , 'c:/nginx-1.12.2/logs/bitel-store.log');
-
     $equipo = null;
     foreach ($cart as $item) {
       switch ($item['type_id']) {
