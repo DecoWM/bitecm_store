@@ -162,7 +162,7 @@
 
 
 
-                        <div class="col-xs-12 col-sm-8 col-md-7 col-12-mob hola" v-if="Object.keys(product).length == 0">
+                        <div class="col-xs-12 col-sm-8 col-md-7 col-12-mob" v-if="Object.keys(product).length == 0">
                           {{--<div class="detalle-product" v-cloak>--}}
                           <div class="detalle-product">
                             {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
@@ -188,7 +188,7 @@
 
 
 
-                        <div class="col-xs-12 col-sm-4 hola">
+                        <div class="col-xs-12 col-sm-4">
                           <div id="box-button-comprar">
 
                           
@@ -236,6 +236,7 @@
             
             <div id="planes" class="planes" data-selected="{{$selected_plan}}">
               <h3 class="title-plan">¡Elige el plan que más te guste!</h3>
+              
               {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
               <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
               <div v-if="plans.length == 0" id="plans-slick" class="hol select-plan {{$just_3 ? 'just-3' : ''}}">
@@ -246,6 +247,7 @@
                 <div id="plan{{$plan->plan_id}}" class="plan {{$plan->plan_id == $product->plan_id ? 'plan-active' : ''}}">
                   {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
                   <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
+
                     <div class="box-plan-content-plan">
                       <!-- <span class="title-plan">{{$plan->plan_name}}</span> -->
                       <span class="precio-title-plan color-secundary">Precio del plan</span>

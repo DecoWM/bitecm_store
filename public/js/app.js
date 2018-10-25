@@ -57002,7 +57002,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-7  col-12-mob" }, [
+  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-5 col-12-mob" }, [
     _c("div", { attrs: { id: "box-detalle-product" } }, [
       _c("div", { staticClass: "detalle-product" }, [
         _c("div", { staticClass: "price-product" }, [
