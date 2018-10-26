@@ -81,7 +81,6 @@
                 </div>
               </div>
             
-            
             </div>
               
               <div class="content-section">
@@ -96,8 +95,6 @@
                   <div class="content-product">
                     <div class="row">
 
-
-                    
                       <div class="col-xs-12 col-sm-12 col-md-3">
                         <div id="box-select-cambiate">
                           <div class="select-product"><span class="title-select">Lo quieres en</span>
@@ -140,7 +137,7 @@
                           </div>
                         </div>
                       </div>
-                      <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
+                      <postpaid-price-plan v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price-plan>
                       <div class="col-xs-12 col-sm-3">
                         <div id="box-button-comprar">
                           {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
@@ -188,7 +185,6 @@
                 {{-- <div class="content-plan" v-on:click="redirectRel('{{$plan->route}}')"> --}}
                 <div class="content-plan" v-on:click="setPlan('{{$plan->plan_id}}')">
 
-
                   <!-- <span class="title-plan">{{$plan->plan_name}}</span>
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div> -->
                   <div class="box-plan-content-plan">
@@ -196,7 +192,7 @@
                       <span class="precio-title-plan color-secundary">Precio del plan</span>
                       <div class="precio-plan"><span>S/ </span> {{$plan->plan_price}}</div>
                       <span class="box-contrato">Sin contrato de permanencia</span>
-                    </div>
+                  </div>
 
                   <!-- @foreach ($info_comercial as $info)
                   @if($info->plan_id == $plan->plan_id)

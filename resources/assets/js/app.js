@@ -28,6 +28,7 @@ Vue.component('comparePostpaid', require('./components/compare-postpaid.vue'));
 Vue.component('comparePrepaid', require('./components/compare-prepaid.vue'));
 Vue.component('postpaidAvailable', require('./components/postpaid/available.vue'));
 Vue.component('postpaidPrice', require('./components/postpaid/price.vue'));
+Vue.component('postpaidPricePlan', require('./components/postpaid/price-plan.vue'));
 Vue.component('postpaidColor', require('./components/postpaid/color.vue'));
 Vue.component('postpaidPlan', require('./components/postpaid/plan.vue'));
 Vue.component('plansFiltered', require('./components/postpaid/plans-filtered.vue'));
