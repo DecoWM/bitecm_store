@@ -13591,7 +13591,7 @@ button.close {
   #compara-tus-equipos .lista-equipos .equipo-seleccionado:nth-child(even) div.especificaciones{
     /*border-left: 1px solid #c4c4c4;*/
   }
-  
+
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div.bg-gray{
@@ -13614,7 +13614,7 @@ button.close {
 
 
 
-@font-face {
+/* @font-face {
     font-family: 'arialrounded_mtbold';
     src: url('../fonts/arialRounded/arialroundedmt-webfont.woff2') format('woff2'),
          url('../fonts/arialRounded/arialroundedmt-webfont.woff') format('woff');
@@ -13631,4 +13631,4 @@ button.close {
     font-weight: normal;
     font-style: normal;
 
-}
+} */
