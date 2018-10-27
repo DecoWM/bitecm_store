@@ -3,6 +3,9 @@
     height: 320px;
     border-radius: 4px;
     border: solid 1px #e4e4e4;
+    &.images-chip{      
+      height: 200px
+    }
     @media screen and (max-width: 992px){
         margin-bottom: 42px;
     }
@@ -43,7 +46,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                height: 320px;  
+                height: 320px;
             }
             .slick-prev{
                 left: 25px;

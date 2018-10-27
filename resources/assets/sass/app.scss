@@ -335,7 +335,7 @@ section#equipos-vendidos .container .row .content-tab-pro .producto {
     padding-top: 22px;
     padding-bottom: 174px;
     max-width: 265px;
-    
+
 }
 
 section#equipos-promocion .container .row .content-tab-pro .producto .content-product .price-product,
@@ -666,7 +666,7 @@ li.item-nav-mobile.search #search .btn-search {
         top: 69px;
         width: 210px;
     }
-    
+
   #nav-bitel{
     .container{
       width: 100%;
@@ -833,16 +833,16 @@ li.item-nav-mobile.search #search .btn-search {
         left: 4px;
         bottom: initial;
     }
-    
+
     #navbar ul li.active a,
     #navbar ul li a:hover{
         color: #ffe60d !important;
     }
-    
+
     section#equipos-promocion .container .row .content-tab-pro .producto,
     section#equipos-vendidos .container .row .content-tab-pro .producto{
         max-width: 100%;
-    } 
+    }
 
 
 }
@@ -858,7 +858,7 @@ li.item-nav-mobile.search #search .btn-search {
     section#equipos-promocion .container .row .content-tab-pro .producto,
     section#equipos-vendidos .container .row .content-tab-pro .producto{
         max-width: 100%;
-    }   
+    }
 
     #section-pedido .row .btn-detalle a.regresar{
         width: 100%;
@@ -1080,7 +1080,7 @@ li.item-nav-mobile.search #search .btn-search {
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .equipo {
-  height: 336px 
+  height: 336px
 }
 
 #compara-tus-equipos .lista-equipos .equipo-seleccionado .especificaciones div:last-child{
@@ -1144,8 +1144,8 @@ li.item-nav-mobile.search #search .btn-search {
 @media screen and (max-width: 990px){
   #page-rastreo #content-rastreo section#detalle-rastreo .content-section .equipo-seleccionado .image img{
         max-width: 110px;
-    }  
-} 
+    }
+}
 
 .equipo-seleccionado .contenido{
     margin-left: 10px;
@@ -1230,7 +1230,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 
 #planes.planes-prepago .select-plan .slick-track{
     padding-bottom: 20px;
-    // transform: none !important;  
+    // transform: none !important;
 }
 
 #planes.planes-prepago .recarga{
@@ -1311,7 +1311,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
   position: absolute;
   top: 0;
   left: 0;
-  
+
   -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
   animation: sk-bounce 2.0s infinite ease-in-out;
 }
@@ -1327,10 +1327,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 }
 
 @keyframes sk-bounce {
-  0%, 100% { 
+  0%, 100% {
     transform: scale(0.0);
     -webkit-transform: scale(0.0);
-  } 50% { 
+  } 50% {
     transform: scale(1.0);
     -webkit-transform: scale(1.0);
   }
@@ -1346,7 +1346,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 @import "404";
 
 .menu-newbitel {
-    display: flex; 
+    display: flex;
     align-items: center;
     margin-top: 9px;
     @media screen and (max-width: 1170px){
@@ -1380,7 +1380,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
          padding-top: 3px;
          padding-bottom: 3px;
          padding-left: 10px;
-         padding-right: 10px;   
+         padding-right: 10px;
          border-radius: 35px ;
          border: 1px solid #EAC416;
          @media screen and (max-width: 1170px){
@@ -1400,15 +1400,15 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                     li{
                         &.active{
                             a.item-equipo{
-                               background: url('/storage/images/equipo_icon.png') left center no-repeat; 
-                               background-color: transparent !important; 
+                               background: url('/storage/images/equipo_icon.png') left center no-repeat;
+                               background-color: transparent !important;
                             }
                              a.item-plan{
-                               background: url('/storage/images/planes_icon.png') left center no-repeat; 
-                               background-color: transparent !important; 
+                               background: url('/storage/images/planes_icon.png') left center no-repeat;
+                               background-color: transparent !important;
                             }
                              a.item-promociones{
-                               background: url('/storage/images/promociones_icon.png') left center no-repeat; 
+                               background: url('/storage/images/promociones_icon.png') left center no-repeat;
                                background-color: transparent !important;
                                @media screen and (max-width: 1170px){
                                 display: none;
@@ -1419,7 +1419,7 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                             float: left;
                             border-bottom: none !important;
                             @media screen and (max-width: 1170px){
-                                float: initial; 
+                                float: initial;
                                 margin-bottom: 15px;
                                 border-bottom: none !important;
                             }
@@ -1439,14 +1439,14 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                     background: url('/storage/images/equipo.png') left center no-repeat;
                                     background-size: containt;
                                     &:hover{
-                                       background: url('/storage/images/equipo_icon.png') left center no-repeat; 
+                                       background: url('/storage/images/equipo_icon.png') left center no-repeat;
                                        background-color: transparent !important;
                                     }
                                 }
                                  &.item-plan{
                                     background: url('/storage/images/planes.png') left center no-repeat;
                                      &:hover{
-                                       background: url('/storage/images/planes_icon.png') left center no-repeat; 
+                                       background: url('/storage/images/planes_icon.png') left center no-repeat;
                                        background-color: transparent !important;
                                     }
                                 }
@@ -1457,10 +1457,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                     }
                                      &:hover{
                                        background: url('/storage/images/promociones_icon.png') left center no-repeat;
-                                       background-color: transparent !important; 
+                                       background-color: transparent !important;
                                     }
                                 }
-                                
+
                                 // &:hover{
                                 //     background-color: transparent !important;
                                 //     color: #008c95 !important;
@@ -1503,11 +1503,11 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 
     }
          display: flex;
-         align-items: center; 
+         align-items: center;
          padding-top: 3px;
          padding-bottom: 3px;
          padding-left: 10px;
-         padding-right: 10px;   
+         padding-right: 10px;
          border-radius: 35px;
          border: 1px solid #EAC416;
         @media screen and (max-width: 1170px){
@@ -1527,18 +1527,18 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                     li{
                         &.active{
                             a.item-equipo{
-                               background: url('/storage/images/equipo_icon.png') left center no-repeat; 
-                                       background-color: transparent !important; 
+                               background: url('/storage/images/equipo_icon.png') left center no-repeat;
+                                       background-color: transparent !important;
                             }
                             a.item-plan{
-                               background: url('/storage/images/planes_icon.png') left center no-repeat; 
-                                       background-color: transparent !important; 
+                               background: url('/storage/images/planes_icon.png') left center no-repeat;
+                                       background-color: transparent !important;
                             }
                         }
                             list-style: none;
                             float: left;
                             @media screen and (max-width: 1170px){
-                                float: initial; 
+                                float: initial;
                                 margin-bottom: 15px;
                                 border-bottom: none !important;
 
@@ -1559,18 +1559,18 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
                                     background: url('/storage/images/equipo.png') left center no-repeat;
                                     background-size: containt;
                                      &:hover{
-                                       background: url('/storage/images/equipo_icon.png') left center no-repeat; 
+                                       background: url('/storage/images/equipo_icon.png') left center no-repeat;
                                        background-color: transparent !important;
                                     }
                                 }
                                 &.item-plan{
                                     background: url('/storage/images/planes.png') left center no-repeat;
                                      &:hover{
-                                       background: url('/storage/images/planes_icon.png') left center no-repeat; 
+                                       background: url('/storage/images/planes_icon.png') left center no-repeat;
                                        background-color: transparent !important;
-                                    }  
+                                    }
                                 }
-                                
+
                                 // &:hover{
                                 //     background-color: transparent !important;
                                 //     color: #008c95 !important;
@@ -1706,7 +1706,7 @@ nav#nav-bitel{
 }
 
 #descripcion-equipo .content-section form .content-product .btn-comprar button{
-    
+
 }
 #descripcion-equipo .header-section .title{
     margin-bottom: 16px;
@@ -1739,7 +1739,7 @@ nav#nav-bitel{
 
 #descripcion-equipo{
     @media screen and (max-width: 992px) {
-        
+
         padding: 0 20px;
     }
 }
@@ -1775,6 +1775,10 @@ nav#nav-bitel{
 
 
 
+
+
+@import './font.scss';
 @import './descripcion_equipos.scss';
 @import './planes.scss';
 @import './sliderNew.scss';
+@import './formNew.scss';

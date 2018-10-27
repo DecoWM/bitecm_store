@@ -11660,7 +11660,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\compare-item.vue"
+Component.options.__file = "resources/assets/js/components/compare-item.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -11985,7 +11985,7 @@ var form = new Vue({
   mounted: function mounted() {
     /*
     var order_detail = JSON.parse(document.head.querySelector('meta[name="order_detail"]').content);
-      this.first_name = order_detail.first_name;
+     this.first_name = order_detail.first_name;
     //this.last_name = order_detail.last_name;
     this.select_document = order_detail.idtype_id;
     this.number_document = order_detail.id_number;
@@ -11996,20 +11996,20 @@ var form = new Vue({
     this.delivery_district = order_detail.delivery_district;
     this.number_contact = order_detail.contact_phone;
     this.mediopago = order_detail.payment_method_id;
-      if (order_detail.affiliation_id) {
+     if (order_detail.affiliation_id) {
       this.affiliation = order_detail.affiliation_id;
       if (order_detail.affiliation_id === 1) {
         this.operator = order_detail.source_operator_id;
         this.porting_phone = order_detail.porting_phone;
       }
     }
-      var depars = JSON.parse(document.head.querySelector('meta[name="dept_prov_dist_branch_list"]').content);
-      this.dept_prov_dist_branch_list = depars;
-      // phone_number.addEventListener("keypress", soloNumeros, false);
+     var depars = JSON.parse(document.head.querySelector('meta[name="dept_prov_dist_branch_list"]').content);
+     this.dept_prov_dist_branch_list = depars;
+     // phone_number.addEventListener("keypress", soloNumeros, false);
     // porting_phone.addEventListener("keypress", soloNumeros, false);
     // contact_phone.addEventListener("keypress", soloNumeros, false);
     
-      // //Solo permite introducir numeros.
+     // //Solo permite introducir numeros.
     // function soloNumeros(e){
     //   var key = window.event ? e.which : e.keyCode;
     //   if (key < 48 || key > 57) {
@@ -13698,13 +13698,13 @@ window._ = __webpack_require__(18);
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(4);
+  window.$ = window.jQuery = __webpack_require__(4);
 
-    __webpack_require__(20);
+  __webpack_require__(20);
 
-    var slick = __webpack_require__(21);
+  var slick = __webpack_require__(21);
 
-    var elevateZoom = __webpack_require__(22);
+  var elevateZoom = __webpack_require__(22);
 } catch (e) {}
 
 /**
@@ -13726,9 +13726,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -54448,7 +54448,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\loader.vue"
+Component.options.__file = "resources/assets/js/components/loader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -54624,7 +54624,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\paginator.vue"
+Component.options.__file = "resources/assets/js/components/paginator.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -54893,7 +54893,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid.vue"
+Component.options.__file = "resources/assets/js/components/postpaid.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -55212,7 +55212,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\prepaid.vue"
+Component.options.__file = "resources/assets/js/components/prepaid.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -55530,7 +55530,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\products.vue"
+Component.options.__file = "resources/assets/js/components/products.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -55775,7 +55775,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\promos.vue"
+Component.options.__file = "resources/assets/js/components/promos.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -56061,7 +56061,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\compare-postpaid.vue"
+Component.options.__file = "resources/assets/js/components/compare-postpaid.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -56398,7 +56398,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\compare-prepaid.vue"
+Component.options.__file = "resources/assets/js/components/compare-prepaid.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -56619,7 +56619,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\available.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/available.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -56886,7 +56886,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\price.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/price.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -57092,7 +57092,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\color.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/color.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -57275,7 +57275,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\plan.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/plan.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -57625,7 +57625,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\plans-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/plans-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58046,7 +58046,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\affiliations-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/affiliations-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58202,7 +58202,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\provinces-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/provinces-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58383,7 +58383,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\districts-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/districts-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58555,7 +58555,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\provincesd-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/provincesd-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58742,7 +58742,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\postpaid\\districtsd-filtered.vue"
+Component.options.__file = "resources/assets/js/components/postpaid/districtsd-filtered.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -58932,7 +58932,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\check-credit-status.vue"
+Component.options.__file = "resources/assets/js/components/check-credit-status.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */

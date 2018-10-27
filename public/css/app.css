@@ -2793,6 +2793,10 @@ nav#nav-bitel {
   border: solid 1px #e4e4e4;
 }
 
+#image-equipo.images-chip {
+  height: 200px;
+}
+
 @media screen and (max-width: 992px) {
   #image-equipo {
     margin-bottom: 42px;
@@ -2873,5 +2877,84 @@ nav#nav-bitel {
 
 #image-equipo .new-slider ul .slick-dots {
   bottom: 20px;
+}
+
+.form-checkbox {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 40px;
+  margin-top: 20px;
+  height: 40px;
+}
+
+.form-checkbox input {
+  width: 15px !important;
+  margin-right: 10px !important;
+}
+
+#form-cliente {
+  margin-top: 38px;
+  font-family: "Roboto", sans-serif;
+}
+
+#form-cliente .title-page {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border-bottom: none !important;
+}
+
+#form-cliente .title-page h2 {
+  padding-left: 0;
+  margin-top: 0;
+  font-size: 16px;
+}
+
+#form-cliente .form-group {
+  width: 100% !important;
+  margin-bottom: 20px !important;
+}
+
+#form-cliente .form-group label {
+  font-size: 14px !important;
+  color: #4a4a4a !important;
+  font-weight: 600 !important;
+  text-transform: inherit !important;
+}
+
+#form-cliente .form-group input {
+  border-radius: 4px;
+  border: 1px solid #d5d5d5 !important;
+}
+
+#form-cliente .form-group input::-webkit-input-placeholder {
+  font-size: 13px;
+  font-style: italic;
+  color: #9b9b9b;
+  font-weight: 300;
+}
+
+#form-cliente .form-group input:-ms-input-placeholder {
+  font-size: 13px;
+  font-style: italic;
+  color: #9b9b9b;
+  font-weight: 300;
+}
+
+#form-cliente .form-group input::-ms-input-placeholder {
+  font-size: 13px;
+  font-style: italic;
+  color: #9b9b9b;
+  font-weight: 300;
+}
+
+#form-cliente .form-group input::placeholder {
+  font-size: 13px;
+  font-style: italic;
+  color: #9b9b9b;
+  font-weight: 300;
 }
 
