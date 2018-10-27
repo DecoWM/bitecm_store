@@ -11727,6 +11727,7 @@ Vue.component('comparePostpaid', __webpack_require__(67));
 Vue.component('comparePrepaid', __webpack_require__(76));
 Vue.component('postpaidAvailable', __webpack_require__(81));
 Vue.component('postpaidPrice', __webpack_require__(86));
+Vue.component('postpaidPricePlan', __webpack_require__(129));
 Vue.component('postpaidColor', __webpack_require__(91));
 Vue.component('postpaidPlan', __webpack_require__(96));
 Vue.component('plansFiltered', __webpack_require__(101));
@@ -57002,7 +57003,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-5 col-12-mob" }, [
+  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-7 col-12-mob" }, [
     _c("div", { attrs: { id: "box-detalle-product" } }, [
       _c("div", { staticClass: "detalle-product" }, [
         _c("div", { staticClass: "price-product" }, [
@@ -65859,6 +65860,215 @@ var index_esm = {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 126 */,
+/* 127 */,
+/* 128 */,
+/* 129 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(130)
+}
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(132)
+/* template */
+var __vue_template__ = __webpack_require__(133)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\postpaid\\price-plan.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-362282b6", Component.options)
+  } else {
+    hotAPI.reload("data-v-362282b6", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 130 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(131);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(3)("2fef62da", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-362282b6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./price-plan.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-362282b6\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./price-plan.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 131 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(2)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 132 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['product'],
+    // data: function () {
+    //     return {
+    //         product_id : this.product,
+    //     }
+    // },
+    mounted: function mounted() {
+        console.log('Component mounted bitel.');
+    }
+});
+
+/***/ }),
+/* 133 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-5 col-12-mob" }, [
+    _c("div", { attrs: { id: "box-detalle-product" } }, [
+      _c("div", { staticClass: "detalle-product" }, [
+        _c("div", { staticClass: "price-product" }, [
+          _c("p", [_vm._v("Precio del equipo")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "preci-cant" }, [
+            _vm.product.promo_id
+              ? _c("div", { staticClass: "preci-cant" }, [
+                  _c("span", [_vm._v("S")]),
+                  _c("span", [_vm._v("product.promo_price}}")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "preci-cant",
+                class: { "normal-price": _vm.product.promo_id != null }
+              },
+              [
+                _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "plan-product" }, [
+      _c("p", { staticStyle: { color: "#9f5ed9" } }, [
+        _vm._v("Precio del Plan")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "preci-cant" }, [
+        _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+        _c("span", [_vm._v("29.90")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-362282b6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

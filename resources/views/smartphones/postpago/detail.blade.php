@@ -97,16 +97,12 @@
                         <!-- <div class="col-xs-12 col-sm-12"> -->
 
                           <!-- <div class="row"> -->
-                          
                             <div class="col-xs-12 col-sm-4 col-md-3">
                               <div id="box-color-product">
-
                                 @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
                               </div>
                             </div>
                             
-                            
-
                             <div class="col-xs-12 col-sm-4 col-md-4">
                               <div id="box-select-cambiate">
 
@@ -145,22 +141,10 @@
                                 </div>
 
                               </div>
-                              
                             </div>
-                          
                           </div>
 
-                        
-
-                      
-                          
-
-
-                          
                       <div class="row">
-
-
-
 
                         <div class="col-xs-12 col-sm-8 col-md-7 col-12-mob" v-if="Object.keys(product).length == 0">
                           {{--<div class="detalle-product" v-cloak>--}}
@@ -185,13 +169,8 @@
                         </div>
                         <postpaid-price v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price>
 
-
-
-
                         <div class="col-xs-12 col-sm-4">
                           <div id="box-button-comprar">
-
-                          
 
                             {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                             {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
@@ -217,10 +196,6 @@
 
                       </div>
                     </div>
-
-
-
-
                     
                   </form>
                 </div>
@@ -229,8 +204,6 @@
            </div>
 
           </div>
-
-
           
           <div class="col-xs-12 col-sm-12">
             
