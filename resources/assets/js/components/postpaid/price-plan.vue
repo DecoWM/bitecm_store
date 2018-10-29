@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="col-xs-12 col-sm-8 col-md-5 col-12-mob">
+  <div class="col-xs-12 col-sm-12 col-md-11 col-lg-5 col-12-mob">
     <div id="box-detalle-product">
       <div class="detalle-product">
         <div class="price-product">

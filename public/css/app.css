@@ -1138,16 +1138,6 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos {
   text-align: justify;
 }
 
-#planes.planes-prepago .select-plan {
-  height: 380px;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-#planes.planes-prepago .select-plan .slick-track {
-  padding-bottom: 20px;
-}
-
 #planes.planes-prepago .recarga {
   font-size: 18px !important;
   font-weight: normal !important;
@@ -1163,22 +1153,6 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos {
   font-weight: normal;
 }
 
-#planes.planes-prepago .select-plan .plan {
-  padding: 2px !important;
-}
-
-#planes.planes-prepago .images-prepago-left {
-  margin-left: 30px;
-}
-
-#planes.planes-prepago ul {
-  margin-top: 5px !important;
-}
-
-#planes.planes-prepago .plan {
-  max-width: 280px;
-}
-
 #planes .planes-prepago .slick-next,
 #planes .planes-prepago .slick-prev {
   display: none !important;
@@ -1186,6 +1160,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos {
 
 .content-tab-promociones {
   overflow: initial;
+}
+
+#planes .select-plan .plan {
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 480px) {
@@ -2398,6 +2376,7 @@ nav#nav-bitel {
 
 #box-detalle-product {
   font-family: 'Roboto', sans-serif !important;
+  margin-bottom: 30px;
 }
 
 #box-detalle-product .detalle-product {
@@ -2517,7 +2496,6 @@ nav#nav-bitel {
 
 #planes .select-plan {
   max-height: 520px;
-  padding-left: 10px;
 }
 
 #planes .select-plan .slick-slide.slick-active:hover {
@@ -2786,6 +2764,89 @@ nav#nav-bitel {
   font-weight: normal;
 }
 
+.plan .header-box {
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  border-bottom: 1px solid  #c5c5c5;
+}
+
+.plan .header-box .box-recarga {
+  width: 50%;
+  text-align: center;
+}
+
+.plan .header-box .box-recarga .preci-cant {
+  color: #000000;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  font-size: 32px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.plan .header-box .box-recarga .preci-cant span.moneda {
+  color: #000000;
+  font-size: 18px;
+  padding-top: 7px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.plan .header-box .box-recarga span.text-span {
+  font-family: "Roboto", sans-serif;
+  color: #10a8b0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.plan .header-box .box-vigencia {
+  width: 50%;
+  text-align: center;
+}
+
+.plan .header-box .box-vigencia p {
+  margin: 0;
+  color: #9f5ed9;
+  font-size: 20px;
+}
+
+.plan .header-box .box-vigencia span.text-span {
+  font-family: "Roboto", sans-serif;
+  color: #10a8b0;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.planes-prepago {
+  background-color: transparent !important;
+}
+
+.planes-prepago .content-plan {
+  padding: 0 !important;
+  border-bottom: 1px solid  #c5c5c5 !important;
+}
+
+.planes-prepago .content-plan:hover {
+  border: 1px solid  #c5c5c5 !important;
+}
+
+.planes-prepago .select-plan {
+  max-height: 540px !important;
+}
+
 #image-equipo {
   overflow: hidden;
   height: 320px;
@@ -3015,5 +3076,37 @@ nav#nav-bitel {
 
 #form-cliente .form-group.terminos-condiciones a {
   color: #129ea2;
+}
+
+#descripcion-equipo .equipo-prepago .btn-mas-options a {
+  line-height: 70px !important;
+  border-radius: 4px !important;
+  background-color: #4cb9ca !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+}
+
+#descripcion-equipo .equipo-prepago .btn-mas-options a:hover {
+  color: #008994 !important;
+  background: #fee945 !important;
+}
+
+#descripcion-equipo .equipo-prepago .btn-comprar-prepago button {
+  line-height: 70px !important;
+  border-radius: 4px !important;
+  background-color: #9f5ed9 !important;
+}
+
+#descripcion-equipo .equipo-prepago .btn-comprar-prepago button:hover {
+  color: #008994 !important;
+  background: #fee945 !important;
+}
+
+#descripcion-equipo .equipo-prepago .price-product {
+  width: 100%;
+}
+
+#descripcion-equipo .equipo-prepago .detalle-product::after {
+  display: none;
 }
 

@@ -57209,39 +57209,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xs-12 col-sm-8 col-md-5 col-12-mob" }, [
-    _c("div", { attrs: { id: "box-detalle-product" } }, [
-      _c("div", { staticClass: "detalle-product" }, [
-        _c("div", { staticClass: "price-product" }, [
-          _c("p", [_vm._v("Precio del equipo")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "preci-cant" }, [
-            _vm.product.promo_id
-              ? _c("div", { staticClass: "preci-cant" }, [
-                  _c("span", [_vm._v("S")]),
-                  _c("span", [_vm._v("product.promo_price}}")])
-                ])
-              : _vm._e(),
+  return _c(
+    "div",
+    { staticClass: "col-xs-12 col-sm-12 col-md-11 col-lg-5 col-12-mob" },
+    [
+      _c("div", { attrs: { id: "box-detalle-product" } }, [
+        _c("div", { staticClass: "detalle-product" }, [
+          _c("div", { staticClass: "price-product" }, [
+            _c("p", [_vm._v("Precio del equipo")]),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "preci-cant",
-                class: { "normal-price": _vm.product.promo_id != null }
-              },
-              [
-                _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
+            _c("div", { staticClass: "preci-cant" }, [
+              _vm.product.promo_id
+                ? _c("div", { staticClass: "preci-cant" }, [
+                    _c("span", [_vm._v("S")]),
+                    _c("span", [_vm._v("product.promo_price}}")])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "preci-cant",
+                  class: { "normal-price": _vm.product.promo_id != null }
+                },
+                [
+                  _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(0)
+        ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {

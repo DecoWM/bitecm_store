@@ -1,0 +1,55 @@
+#descripcion-equipo{
+    .equipo-prepago{
+        .btn-mas-options{
+            a{
+                line-height: 70px !important;
+                border-radius: 4px !important;
+                background-color: #4cb9ca !important;
+                padding: 0 !important;
+                color: #ffffff !important;
+                &:hover{
+                    color: #008994 !important;
+                    background: #fee945 !important;
+                }
+            }
+        }
+        .btn-comprar-prepago {
+            button{
+
+                line-height: 70px !important;
+                border-radius: 4px !important;
+                background-color: #9f5ed9 !important;
+                &:hover{
+                    color: #008994 !important;
+                    background: #fee945 !important;
+                }
+            }
+        }
+        // .detalle-product{
+        //     border: none !important;
+        //     .price-title{
+        //         font-size: 32px;
+        //     }
+        //     span{
+        //         font-size: 12px !important;
+        //         font-family: $fontfamilyroboto;
+        //         &.title-precio{
+        //             font-size: 12px;
+        //             color:  #10a8b0;
+        //         }
+        //     }
+
+        // }
+        .price-product{
+            width: 100%;
+        }
+
+        .detalle-product{
+            &::after{
+                display: none;
+            }
+        }
+        
+        
+    }
+}

@@ -1221,17 +1221,17 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     text-align: justify;
 }
 
-#planes.planes-prepago .select-plan{
-    height: 380px;
-    padding-left: 0;
-    padding-right: 0;
-}
+// #planes.planes-prepago .select-plan{
+//     height: 380px;
+//     padding-left: 0;
+//     padding-right: 0;
+// }
 
 
-#planes.planes-prepago .select-plan .slick-track{
-    padding-bottom: 20px;
-    // transform: none !important;
-}
+// #planes.planes-prepago .select-plan .slick-track{
+//     padding-bottom: 20px;
+//     // transform: none !important;
+// }
 
 #planes.planes-prepago .recarga{
     font-size: 18px !important;
@@ -1249,19 +1249,19 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 }
 
 #planes.planes-prepago .select-plan .plan{
-    padding: 2px !important;
+    // padding: 2px !important;
 }
 
 #planes.planes-prepago .images-prepago-left{
-    margin-left: 30px;
+    // margin-left: 30px;
 }
 
 #planes.planes-prepago ul{
-    margin-top: 5px !important;
+    // margin-top: 5px !important;
 }
 
 #planes.planes-prepago .plan{
-    max-width: 280px;
+    // max-width: 280px;
 }
 
 #planes .planes-prepago .slick-next,
@@ -1271,6 +1271,10 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
 
 .content-tab-promociones{
     overflow: initial;
+}
+
+#planes .select-plan .plan{
+    margin: 0 auto; 
 }
 
 @media screen and (max-width: 480px){
@@ -1782,3 +1786,4 @@ nav#nav-bitel{
 @import './planes.scss';
 @import './sliderNew.scss';
 @import './formNew.scss';
+@import './planes-prepago.scss';

@@ -4928,7 +4928,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 767px) {
   #descripcion-equipo .content-section form .content-product .btn-comprar {
     width: 100%;
-    margin: 10px 0;
+    margin: 0px 0;
   }
 }
 @media (max-width: 320px) {
@@ -5031,7 +5031,7 @@ section#garantia .container .row .col-xs-4 .text-center p {
 @media (max-width: 767px) {
   #descripcion-equipo .content-section form .content-product .btn-comprar-prepago {
     width: 100%;
-    margin: 10px 0;
+    margin: 0px 0;
   }
 }
 @media (max-width: 320px) {

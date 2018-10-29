@@ -95,7 +95,7 @@
                   <div class="content-product">
                     <div class="row">
 
-                      <div class="col-xs-12 col-sm-12 col-md-3">
+                      <div class="col-xs-12 col-sm-12 col-md-11 col-lg-3">
                         <div id="box-select-cambiate">
                           <div class="select-product"><span class="title-select">Lo quieres en</span>
                             {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
@@ -117,7 +117,7 @@
                     <!-- </div>
                     <div class="row"> -->
 
-                      <div class="col-xs-12 col-sm-12 col-md-5 col-12-mob" v-if="Object.keys(product).length == 0">
+                      <div class="col-xs-12 col-sm-12 col-md-11 col-lg-5 col-12-mob" v-if="Object.keys(product).length == 0">
                         {{--<div class="detalle-product" v-cloak>--}}
                         <div class="detalle-product">
                           {{--<div class="price-product" v-if="filters.affiliation.value == 1"><span>S/.</span>@{{selectedPlan.product_variation_price.portability}}</div>
@@ -138,7 +138,7 @@
                         </div>
                       </div>
                       <postpaid-price-plan v-if="Object.keys(product).length != 0" :product="product.product"></postpaid-price-plan>
-                      <div class="col-xs-12 col-sm-3">
+                    <div class="col-xs-12 col-sm-12 col-md-11 col-lg-3">
                         <div id="box-button-comprar">
                           {{-- <form action="{{route('add_to_cart')}}" method="post"> --}}
                           {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
