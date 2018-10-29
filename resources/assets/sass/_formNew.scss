@@ -16,6 +16,23 @@
 #form-cliente{
   margin-top: 38px;
   font-family: $fontfamilyroboto;
+  button{
+    width: 100% !important;
+  }
+  a.regresar{
+    width: 100% !important;
+    margin-right: 0;
+  }
+  .separacion-bloque{
+    height: 45px;
+  }
+  .title-modalidad{
+    margin-bottom: 27px;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4a4a4a;
+  }
   .title-page{
     margin-top: 0 !important;
     margin-bottom: 0 !important;
@@ -24,11 +41,18 @@
       padding-left: 0;
       margin-top: 0;
       font-size: 16px;
+      font-family: $fontfamilyroboto;
+
     }
   }
   .form-group{
     width: 100% !important;
     margin-bottom: 20px !important;
+    p{
+      font-size: 12px;
+      margin-top: 7px;
+      margin-bottom: 20px;
+    }
     label{
       font-size: 14px !important;
       color: #4a4a4a !important;
@@ -39,6 +63,10 @@
     input{
       border-radius: 4px;
       border: 1px solid #d5d5d5 !important;
+      font-size: 13px;
+      font-style: italic;
+      font-family: $fontfamilyroboto;
+
       &::placeholder{
         font-size: 13px;
         font-style: italic;
@@ -47,6 +75,26 @@
       }
 
 
+    }
+    select{
+      border-radius: 4px !important;
+      font-family: $fontfamilyroboto;
+      font-size: 13px !important;
+      font-style: italic !important;
+      text-transform: initial !important;
+    }
+    &.terminos-condiciones{
+      padding: 26px 0 0 0 !important;
+      display: flex;
+      align-items: center;
+      margin: 0 !important;
+      height: auto;
+      input{
+        margin-top: 0;
+      }
+      a{
+        color: #129ea2;
+      }
     }
   }
 

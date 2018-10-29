@@ -2901,6 +2901,27 @@ nav#nav-bitel {
   font-family: "Roboto", sans-serif;
 }
 
+#form-cliente button {
+  width: 100% !important;
+}
+
+#form-cliente a.regresar {
+  width: 100% !important;
+  margin-right: 0;
+}
+
+#form-cliente .separacion-bloque {
+  height: 45px;
+}
+
+#form-cliente .title-modalidad {
+  margin-bottom: 27px;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a4a4a;
+}
+
 #form-cliente .title-page {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -2911,11 +2932,18 @@ nav#nav-bitel {
   padding-left: 0;
   margin-top: 0;
   font-size: 16px;
+  font-family: "Roboto", sans-serif;
 }
 
 #form-cliente .form-group {
   width: 100% !important;
   margin-bottom: 20px !important;
+}
+
+#form-cliente .form-group p {
+  font-size: 12px;
+  margin-top: 7px;
+  margin-bottom: 20px;
 }
 
 #form-cliente .form-group label {
@@ -2928,6 +2956,9 @@ nav#nav-bitel {
 #form-cliente .form-group input {
   border-radius: 4px;
   border: 1px solid #d5d5d5 !important;
+  font-size: 13px;
+  font-style: italic;
+  font-family: "Roboto", sans-serif;
 }
 
 #form-cliente .form-group input::-webkit-input-placeholder {
@@ -2956,5 +2987,33 @@ nav#nav-bitel {
   font-style: italic;
   color: #9b9b9b;
   font-weight: 300;
+}
+
+#form-cliente .form-group select {
+  border-radius: 4px !important;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px !important;
+  font-style: italic !important;
+  text-transform: initial !important;
+}
+
+#form-cliente .form-group.terminos-condiciones {
+  padding: 26px 0 0 0 !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 !important;
+  height: auto;
+}
+
+#form-cliente .form-group.terminos-condiciones input {
+  margin-top: 0;
+}
+
+#form-cliente .form-group.terminos-condiciones a {
+  color: #129ea2;
 }
 

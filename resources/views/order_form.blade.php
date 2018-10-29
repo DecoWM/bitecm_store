@@ -32,7 +32,7 @@
 @endif
       <div class="container">
         <div class="row">
-          <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+          <div class="col-xs-12 col-sm-12 col-lg-offset-1 col-lg-11">
             <div id="nav-carrito">
               <ul class="list-unstyled">
                 <li class="col-xs-4 col-sm-4 is-completed"><span>Carrito de compras </span></li>
@@ -42,9 +42,15 @@
             </div>
           </div>
         </div>
+       
         <div class="row">
-          <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+          <div class="col-xs-12 col-sm-12 col-lg-offset-1 col-lg-11">
             <div id="form-cliente">
+              <div class="col-xs-12">
+                <div class="title-modalidad">
+                  <p>Portabilidad</p>
+                </div>
+              </div>
               <div id="form-vue-validator">
                 <form @submit.prevent="validateInfoCliente" action="{{route('store_order')}}" method="POST" ref="orderform">
                   {{ csrf_field() }}
@@ -89,7 +95,7 @@
 
 
 
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                       <label for="document_number">Número de documento</label>
                       <input id="document_number" type="text" name="document_number" placeholder="Documento del titular" v-bind:maxlength="select_document == 1 ? '8' : '12'" v-model="number_document" v-validate="select_document == 1 ? 'required|numeric|min:8|max:8' : 'required|alpha_num|min:8|max:12'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
@@ -98,7 +104,7 @@
                     </div>
 
 
-                    <div class="col-xs-12">
+                    <!-- <div class="col-xs-12">
                       <div class="form-group form-select">
                         <label for="district">Lugar de domicilio</label>
                         <select id="district" name="district" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('district')}">
@@ -109,7 +115,7 @@
                         </select>
                         {{-- <span v-show="errors.has('distrito')" class="help is-danger">@{{ errors.first('distrito') }}</span> --}}
                       </div>
-                    </div>
+                    </div> -->
 
 
                     <!--  LINEA NUEVA Y RENOVACIÓN -->
@@ -128,6 +134,9 @@
                       <div class="form-group" v-if="affiliation == 1">
                         <input id="phone_number" type="hidden" name="phone_number" value="920654734">
                       </div>
+                    </div>
+                    <div class="col-xs-12">
+                      <div class="separacion-bloque"></div>
                     </div>
 
                     <div class="col-xs-12">
@@ -208,11 +217,14 @@
                       </div>
                       @endif
                     </div>
+                    <div class="col-xs-12">
+                      <div class="separacion-bloque"></div>
+                    </div>
 
 
                     <div class="col-xs-12">
                       <div class="title-page">
-                        <h2>INFORMACIÓN DE RECOJO/DELIVERY</h3>
+                        <h2>INFORMACIÓN DE DELIVERY</h3>
                       </div>
                     </div>
 
@@ -265,7 +277,7 @@
                       </div>
                     </div>
 
-                    <div class="col-xs-6">
+                    <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                         <label for="delivery_address">Dirección de delivery</label>
                         <!--input id="delivery_address" type="hidden" name="delivery_address" value="PREVENTA HUAWEI"-->
@@ -315,20 +327,8 @@
                     </div>
                   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
                   <div class="col-xs-12 col-sm-6">
-                    <div class="form-group form-checkbox">
+                    <div class="form-group form-checkbox terminos-condiciones">
                         <!-- <label> -->
                           <input id="terminos_condiciones" name="terminos_condiciones" type="checkbox" v-validate="'required'" checked>
                         <!-- </label> -->
@@ -337,6 +337,10 @@
                       </div>
                     </div>
 
+                  </div>
+
+                  <div class="col-xs-12">
+                    <div class="separacion-bloque"></div>
                   </div>
 
 
@@ -388,12 +392,19 @@
                     <input type="hidden" name="payment_method" value="4">
                     <div class="btn-detalle">
                       <div class="row">
-                        <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                        <div class="col-xs-6 col-md-3 col-md-offset-3">
                           <a href="{{route('show_cart')}}" class="btn btn-default regresar">REGRESAR</a>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
                           {{-- <button type="button" class="btn btn-default regresar"></button> --}}
                           {{-- <button type="submit" href="https://bitel.clientes-forceclose.com/bitel_frontend/dist/pedido_completo.html" class="redirect-href btn btn-default comprar">continuar</button> --}}
                           <button id="submitOrder" type="submit" class="btn btn-default comprar">continuar</button>
                         </div>
+                        <!-- <div class="col-xs-12 col-sm-8 col-sm-push-2">
+                          
+
+                          
+                        </div> -->
                       </div>
                     </div>
                   </div>
