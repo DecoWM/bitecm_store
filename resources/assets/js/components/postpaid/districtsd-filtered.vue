@@ -1,8 +1,8 @@
 <template lang="html">
   <div id="delivery_districts-select">
-    <select id="delivery_district" name="delivery_district" v-model="delivery_district" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_district')}" @change="selectDistrictd($event)">
+    <select id="delivery_district_1" name="delivery_district_1" v-model="delivery_district_1" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_district_1')}" @change="selectDistrictd($event)">
       <option value="" selected>Seleccione Distrito</option>
-      <option value="0">Regresar...</option>
+      <!--<option value="0">Regresar...</option>-->
       <option v-for="districtd in delivery_districts" :value="districtd.district_id">{{districtd.district_name}}</option>
    </select>   
   </div>  

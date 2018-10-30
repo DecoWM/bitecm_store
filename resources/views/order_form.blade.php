@@ -48,7 +48,15 @@
             <div id="form-cliente">
               <div class="col-xs-12">
                 <div class="title-modalidad">
+                  @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 1)
                   <p>Portabilidad</p>
+                  @endif
+                  @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 2)
+                  <p>Linea nueva</p>
+                  @endif
+                  @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
+                  <p>Renovación</p>
+                  @endif
                 </div>
               </div>
               <div id="form-vue-validator">
@@ -93,8 +101,6 @@
                       </div>
                     </div>
 
-
-
                     <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                       <label for="document_number">Número de documento</label>
@@ -102,7 +108,6 @@
                       <span v-show="errors.has('document_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres Alfanuméricos</span>
                       </div>
                     </div>
-
 
                     <!-- <div class="col-xs-12">
                       <div class="form-group form-select">
@@ -116,7 +121,6 @@
                         {{-- <span v-show="errors.has('distrito')" class="help is-danger">@{{ errors.first('distrito') }}</span> --}}
                       </div>
                     </div> -->
-
 
                     <!--  LINEA NUEVA Y RENOVACIÓN -->
                     <div class="form-group" v-if="affiliation == 2 || affiliation == 3">
@@ -141,7 +145,7 @@
 
                     <div class="col-xs-12">
                       <div class="title-page">
-                        <h2>INFORMACIÓN DE PORTABILIDAD</h2>
+                        <h2>INFORMACIÓN DE AFILIACIÓN</h2>
                       </div>
                     </div>
 
@@ -177,7 +181,6 @@
                       @else
                       <div class="form-group form-select" v-if="affiliation == 1">
                       @endif
-
                         <label for="type_number_carry">Tipo de número a portar:</label>
                         <select id="type_number_carry" name="type_number_carry" v-model="type_number_carry" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_number_carry') }">
                           <option value="" selected>Seleccione un tipo de número a portar</option>
@@ -213,14 +216,12 @@
                           <input id="porting_phone" type="text" name="porting_phone" maxlength="11" placeholder="Número del titular a portar (ejemplo 985636512)" v-model="porting_phone" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                           {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                           <span v-show="errors.has('porting_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
-
                       </div>
                       @endif
                     </div>
                     <div class="col-xs-12">
                       <div class="separacion-bloque"></div>
                     </div>
-
 
                     <div class="col-xs-12">
                       <div class="title-page">
@@ -250,7 +251,6 @@
                           <div v-if="delivery_provinces.length == 0" id="delivery_provinces-select" class="select-delivery_province">
                             <select id="delivery_province" name="delivery_province" v-model="delivery_province" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_province')}" @change="selectProvinced($event)">
                               <option value="" selected>Seleccione Provincia</option>
-                              <option value="0">Regresar...</option>
                               @foreach ($provincias as $provincia)
                               <option value="{{$provincia->province_id}}">{{$provincia->province_name}}</option>
                               @endforeach
@@ -266,9 +266,8 @@
                         <label for="delivery_district">Distrito</label>
                         <districtsd-filtered v-if="delivery_districts.length > 0" :delivery_districts="delivery_districts" :deptprovdist="dept_prov_dist_branch_list"></districtsd-filtered>
                           <div v-if="delivery_districts.length == 0" id="delivery_districts-select" class="select-delivery_district">
-                            <select id="delivery_district" name="delivery_district" v-model="delivery_district" v-validate data-vv-rules="required" :class="{'input': true, 'is-danger': errors.has('delivery_district')}" @change="selectDistrictd($event)">
+                            <select id="delivery_district_1" name="delivery_district_1" v-model="delivery_district_1" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('delivery_district_1')}" @change="selectDistrictd($event)">
                               <option value="" selected>Seleccione Distrito</option>
-                              <option value="0">Regresar...</option>
                               @foreach ($distritos as $distrito)
                               <option value="{{$distrito->district_id}}">{{$distrito->district_name}}</option>
                               @endforeach
@@ -288,7 +287,6 @@
                       </div>
                     </div>
 
-
                     <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                         <label for="contact_phone">Número de contacto</label>
@@ -296,7 +294,6 @@
                         {{-- <span v-show="errors.has('number_contact')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                         <span v-show="errors.has('contact_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                       </div>
-
                     </div>
 
                     <div class="col-xs-12 col-sm-6">
@@ -309,11 +306,6 @@
                     </div>
 
                   <!-- <div class="section-form"> -->
-
-
-
-
-
                   <div class="col-xs-12 col-sm-6">
                     <!-- HORARIO CONTACTO -->
                     <div class="form-group form-select">
@@ -342,8 +334,6 @@
                   <div class="col-xs-12">
                     <div class="separacion-bloque"></div>
                   </div>
-
-
 
                   <!-- </div> -->
                     <!-- <div class="title-page" style="display:none;">
@@ -401,8 +391,6 @@
                           <button id="submitOrder" type="submit" class="btn btn-default comprar">continuar</button>
                         </div>
                         <!-- <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                          
-
                           
                         </div> -->
                       </div>

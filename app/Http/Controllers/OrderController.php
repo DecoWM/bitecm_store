@@ -576,15 +576,15 @@ class OrderController extends Controller
 
     $order_detail['idtype_id'] = $request->document_type;
     $order_detail['payment_method_id'] = $request->payment_method;
-    $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district);
+    $order_detail['branch_id'] = $this->shared->branchByDistrict($request->delivery_district_1);
     $order_detail['first_name'] = $request->first_name;
     $order_detail['last_name'] = ''; //$request->last_name;
     $order_detail['id_number'] = $request->document_number;
     $order_detail['tracking_code'] = $request->document_number;
-    $order_detail['billing_district'] = $request->district;
+    $order_detail['billing_district'] = 0; //$request->district; por el nuevo diseño
     //$order_detail['billing_phone'] = $request->phone_number;
     $order_detail['delivery_address'] = $request->delivery_address;
-    $order_detail['delivery_district'] = $request->delivery_district;
+    $order_detail['delivery_district'] = $request->delivery_district_1;
     $order_detail['contact_email'] = $request->email;
     $order_detail['contact_phone'] = $request->contact_phone;
 
@@ -692,6 +692,8 @@ class OrderController extends Controller
     $order_detail['total_igv'] = $total_igv;
 
     $order_detail['credit_status'] = DB::table('tbl_sentinel_check')->first() ? 'Aprobada' : 'Pendiente';
+
+    error_log(print_r($order_detail, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 
     try {
       DB::beginTransaction();

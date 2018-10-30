@@ -59,8 +59,6 @@ const form = new Vue({
     distrito:'',
     number_phone:'',
     delivery:'',
-    delivery_departament: '',
-    delivery_district:'',
     email:'',
     number_contact:'',
     mediopago:'',
@@ -76,8 +74,9 @@ const form = new Vue({
     districts: '',
     delivery_provinces: '',
     delivery_districts: '',
+    delivery_departament: '',
     delivery_province: '',
-    delivery_district: '',
+    delivery_district_1: '',
     delivery_schedule: '',
     terminos_condiciones: false
   },
@@ -202,9 +201,11 @@ const form = new Vue({
     selectDepartamentd: function(event) {
           if(event.target.value.length > 0) {
             route = event.target.value;
+            /*
             console.log(route);
             $("#departamentodelivery").css("display","none");
             $("#provinciadelivery").css("display","block");
+            */
             this.getProvincesByDepartamentd(route);
           }
     },
@@ -248,24 +249,26 @@ const form = new Vue({
           }
            
           // carga los valores en el combobox 
-          console.log(aux2);
+          //console.log(aux2);
           self.delivery_provinces = aux2; 
 
     },
     selectProvinced: function(event) {
           if(event.target.value.length > 0) {
             route = event.target.value;
+            /*
             if(route != 0){
               $("#departamentodelivery").css("display","none");
               $("#provinciadelivery").css("display","none");
-              $("#distritodelivery").css("display","block");
+              $("#distritodelivery").css("display","block");*/
               this.getDistricsByProvinced(route);
-            }
+            /*}
             else{
               $("#departamentodelivery").css("display","block");
               $("#provinciadelivery").css("display","none");
               $("#distritodelivery").css("display","none");
             }
+            */
           }
     },
     getDistricsByProvinced: function(route) {
@@ -286,11 +289,13 @@ const form = new Vue({
           if(event.target.value.length > 0) {
             route = event.target.value;
             // si se selecciona REGRESAR
+            /*
             if(route == 0){
               $("#departamentodelivery").css("display","none");
               $("#provinciadelivery").css("display","block");
               $("#distritodelivery").css("display","none");
             }
+            */
           }
     },
     terminoscondiciones: function(event){

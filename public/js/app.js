@@ -11758,8 +11758,6 @@ var form = new Vue({
     distrito: '',
     number_phone: '',
     delivery: '',
-    delivery_departament: '',
-    delivery_district: '',
     email: '',
     number_contact: '',
     mediopago: '',
@@ -11769,7 +11767,7 @@ var form = new Vue({
     porting_phone: '',
     departamento: '',
     provincia: ''
-  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district', ''), _defineProperty(_data, 'delivery_schedule', ''), _defineProperty(_data, 'terminos_condiciones', false), _data),
+  }, _defineProperty(_data, 'distrito', ''), _defineProperty(_data, 'type_number_carry', ''), _defineProperty(_data, 'provinces', ''), _defineProperty(_data, 'districts', ''), _defineProperty(_data, 'delivery_provinces', ''), _defineProperty(_data, 'delivery_districts', ''), _defineProperty(_data, 'delivery_departament', ''), _defineProperty(_data, 'delivery_province', ''), _defineProperty(_data, 'delivery_district_1', ''), _defineProperty(_data, 'delivery_schedule', ''), _defineProperty(_data, 'terminos_condiciones', false), _data),
   methods: {
     validateInfoCliente: function validateInfoCliente() {
       var _this = this;
@@ -11888,9 +11886,11 @@ var form = new Vue({
     selectDepartamentd: function selectDepartamentd(event) {
       if (event.target.value.length > 0) {
         route = event.target.value;
+        /*
         console.log(route);
-        $("#departamentodelivery").css("display", "none");
-        $("#provinciadelivery").css("display", "block");
+        $("#departamentodelivery").css("display","none");
+        $("#provinciadelivery").css("display","block");
+        */
         this.getProvincesByDepartamentd(route);
       }
     },
@@ -11934,22 +11934,25 @@ var form = new Vue({
       }
 
       // carga los valores en el combobox 
-      console.log(aux2);
+      //console.log(aux2);
       self.delivery_provinces = aux2;
     },
     selectProvinced: function selectProvinced(event) {
       if (event.target.value.length > 0) {
         route = event.target.value;
-        if (route != 0) {
-          $("#departamentodelivery").css("display", "none");
-          $("#provinciadelivery").css("display", "none");
-          $("#distritodelivery").css("display", "block");
-          this.getDistricsByProvinced(route);
-        } else {
-          $("#departamentodelivery").css("display", "block");
-          $("#provinciadelivery").css("display", "none");
-          $("#distritodelivery").css("display", "none");
+        /*
+        if(route != 0){
+          $("#departamentodelivery").css("display","none");
+          $("#provinciadelivery").css("display","none");
+          $("#distritodelivery").css("display","block");*/
+        this.getDistricsByProvinced(route);
+        /*}
+        else{
+          $("#departamentodelivery").css("display","block");
+          $("#provinciadelivery").css("display","none");
+          $("#distritodelivery").css("display","none");
         }
+        */
       }
     },
     getDistricsByProvinced: function getDistricsByProvinced(route) {
@@ -11970,11 +11973,13 @@ var form = new Vue({
       if (event.target.value.length > 0) {
         route = event.target.value;
         // si se selecciona REGRESAR
-        if (route == 0) {
-          $("#departamentodelivery").css("display", "none");
-          $("#provinciadelivery").css("display", "block");
-          $("#distritodelivery").css("display", "none");
+        /*
+        if(route == 0){
+          $("#departamentodelivery").css("display","none");
+          $("#provinciadelivery").css("display","block");
+          $("#distritodelivery").css("display","none");
         }
+        */
       }
     },
     terminoscondiciones: function terminoscondiciones(event) {
@@ -58905,8 +58910,6 @@ var render = function() {
           _vm._v("Seleccione Provincia")
         ]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "0" } }, [_vm._v("Regresar...")]),
-        _vm._v(" "),
         _vm._l(_vm.delivery_provinces, function(province) {
           return _c("option", { domProps: { value: province.province_id } }, [
             _vm._v(_vm._s(province.province_name))
@@ -59051,20 +59054,21 @@ var render = function() {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.delivery_district,
-            expression: "delivery_district"
+            value: _vm.delivery_district_1,
+            expression: "delivery_district_1"
           },
-          { name: "validate", rawName: "v-validate" }
+          {
+            name: "validate",
+            rawName: "v-validate",
+            value: "required",
+            expression: "'required'"
+          }
         ],
         class: {
           input: true,
-          "is-danger": _vm.errors.has("delivery_district")
+          "is-danger": _vm.errors.has("delivery_district_1")
         },
-        attrs: {
-          id: "delivery_district",
-          name: "delivery_district",
-          "data-vv-rules": "required"
-        },
+        attrs: { id: "delivery_district_1", name: "delivery_district_1" },
         on: {
           change: [
             function($event) {
@@ -59076,7 +59080,7 @@ var render = function() {
                   var val = "_value" in o ? o._value : o.value
                   return val
                 })
-              _vm.delivery_district = $event.target.multiple
+              _vm.delivery_district_1 = $event.target.multiple
                 ? $$selectedVal
                 : $$selectedVal[0]
             },
@@ -59090,8 +59094,6 @@ var render = function() {
         _c("option", { attrs: { value: "", selected: "" } }, [
           _vm._v("Seleccione Distrito")
         ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "0" } }, [_vm._v("Regresar...")]),
         _vm._v(" "),
         _vm._l(_vm.delivery_districts, function(districtd) {
           return _c("option", { domProps: { value: districtd.district_id } }, [
