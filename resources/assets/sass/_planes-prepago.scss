@@ -14,6 +14,7 @@
             }
         }
         .btn-comprar-prepago {
+            margin-bottom: 20px;
             button{
 
                 line-height: 70px !important;
@@ -52,4 +53,26 @@
         
         
     }
+}
+@media (min-width: 1200px){
+
+    .col-lg-3{
+        &.col-lg-3-color{
+            width: 125px;
+        }
+    }
+
+    .col-lg-3{
+        &.col-lg-3-precio{
+            width: 170px;
+        }
+    }
+    
+    .col-lg-4{
+        &.col-lg-4-button{
+            width: 240px;
+        }
+    }
+
+    
 }

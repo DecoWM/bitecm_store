@@ -1,41 +1,85 @@
 @extends('layouts.master')
 @section('content')
     <div class="container">
+    <div class="content-box-shadow">
+    
       <div class="row">
-        <div class="col-xs-12 col-sm-4">
-          <div id="content-page">
-            <div class="title">
-              <h2>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h2>
-            </div>
-            @include('products.tag',['product' => $product])
-            <div id="image-equipo">
-              @if(count($product_images)>0)
-                <div class="image-product text-center"><img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
-                </div>
-                @if(count($product_images)>1)
-                <div id="gallery_01" class="galeria-min">
-                  @foreach($product_images as $image)
-                  <a href="javascript:void(0)" data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
-                    <img src="{{asset(Storage::url($image->product_image_url))}}" alt="{{$product->product_model}}">
-                  </a>
-                  @endforeach
-                  <div class="clearfix"></div>
-                </div>
+        <div class="col-xs-12 col-sm-12">
+          
+          <div class="container-section-new-information">
+            <div id="content-page">
+              <div id="image-equipo">
+                  <div class="img-loading">
+                    <img src="/images/planes/placeholder.png" alt="">
+                  </div>
+                                   
+                   @if(count($product_images)>0)
+                     <div class="new-slider">
+                        <!-- <div class="image-product text-center">
+                          <img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
+                        </div> -->
+                        @if(count($product_images)>0)
+                         <ul>
+                          @foreach($product_images as $image)
+                          <li>
+                            <img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">
+                          </li>
+                          @endforeach
+                        </ul>
+                        @else
+                        @endif
+                      </div> 
+                      @else
+                      <div class="new-slider-one">
+                        <img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">
+                      </div>
+                      @endif
+                    
+                    <!-- <ul>
+                      <li><img src="http://via.placeholder.com/340x320" alt=""></li>
+                      <li><img src="http://via.placeholder.com/340x320" alt=""></li>
+                      <li><img src="http://via.placeholder.com/340x320" alt=""></li>
+                      <li><img src="http://via.placeholder.com/340x320" alt=""></li>
+                    </ul> -->
+                <!-- @if(count($product_images)>0)
+                  <div class="image-product text-center"><img id="zoom_01" src="{{asset(Storage::url($product_images[0]->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product_images[0]->product_image_url))}}">--}}
+                  </div>
+                  @if(count($product_images)>1)
+                  <div id="gallery_01" class="galeria-min">
+                    @foreach($product_images as $image)
+                    <a href="javascript:void(0)" data-image="{{asset(Storage::url($image->product_image_url))}}">{{-- data-zoom-image="{{asset(Storage::url($image->product_image_url))}}">--}}
+                      <img src="{{asset(Storage::url($image->product_image_url))}}" alt="{{$product->product_model}}">
+                    </a>
+                    @endforeach
+                    <div class="clearfix"></div>
+                  </div>
+                  @else
+                  {{--<div id="gallery_01" class="galeria-min"></div>--}}
+                  @endif
                 @else
+                <div class="image-product text-center"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
+                </div>
                 {{--<div id="gallery_01" class="galeria-min"></div>--}}
-                @endif
-              @else
-              <div class="image-product text-center"><img src="{{asset(Storage::url($product->product_image_url))}}" alt="{{$product->product_model}}">{{-- data-zoom-image="{{asset(Storage::url($product->product_image_url))}}">--}}
+                @endif -->
               </div>
-              {{--<div id="gallery_01" class="galeria-min"></div>--}}
-              @endif
             </div>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-8">
           <section id="descripcion-equipo">
-            <div class="header-section">
-              <div class="title">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-11">
+                    <div class="header-section">
+                      <div class="title">
+                        <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
+                        @include('products.tag',['product' => $product])
+                      </div>
+                      <div class="descripcion">
+                        <p>{$product->product_description}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <!-- <div class="header-section">
+              <div class="title p9">
                 <h1>{{$product->brand_name}} {{$product->product_model}} {{isset($product->color_id) ? $product->color_name : ''}}</h1>
                 @include('products.tag',['product' => $product])
               </div>
@@ -43,6 +87,7 @@
                 <p>{{$product->product_description}}</p>
               </div>
             </div>
+             -->
             <div class="content-section">
               <form form id="purchase-form" action="{{route('add_to_cart')}}" method="POST">
                 {{ csrf_field() }}
@@ -53,35 +98,45 @@
                 <input type="hidden" name="sentinel" value="{{isset($product->product_sentinel) ? $product->product_sentinel : 0 }}">
                 <div class="content-product equipo-prepago">
                   <div class="row">
-                    <div class="col-xs-12 col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-7 col-xs-push-5 col-sm-12">
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 col-lg-3-color">
+                      <div id="box-color-product">
+                        @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
+                      </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-5 col-lg-3 col-lg-3-precio">
+                      <!-- <div class="row"> -->
+                        <!-- <div class="col-xs-7 col-xs-push-5 col-sm-12"> -->
+                        <div id="box-detalle-product">
                           <div class="detalle-product">
                             <div class="price-product">
+                              @if(isset($product->promo_id))
+                              <p>Precio del Equipo</p>
+                              <div class="preci-cant">
+
+                                <span class="moneda">S/{{$product->promo_price}}</span><span>S/{{$product->product_price}}</span>
+                              </div>
+                              @else
+                              <p>Precio del Chip</p>
+                              <div class="preci-cant">
+                                <span class="moneda">S/</span><span>{{$product->product_price}}</span>
+                              </div>
+                              @endif
+                            </div>
+                            <!-- <div class="price-product">
                               @if(isset($product->promo_id))
                               <span>S/.{{$product->promo_price}}</span><span class="normal-price">S/.{{$product->product_price}}</span>
                               @else
                               <span>S/.{{$product->product_price}}</span>
                               @endif
-                            </div>
+                            </div> -->
                           </div>
                         </div>
-                        <div class="col-xs-5 col-xs-pull-7 col-sm-12">
-                          @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
-                        </div>
-                      </div>
+                        <!-- </div> -->
+                        
+                      <!-- </div> -->
                     </div>
-                    <div class="col-xs-12 col-sm-6">
-                      {{--@if($product->stock_model_id)
-                      <div class="btn-carrito">
-                        <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
-                      </div>
-                      @endif--}}
-                      <div class="btn-linea">
-                        @if(isset($product->route_postpago))
-                        <a href="{{$product->route_postpago}}" class="btn-default">QUIERO MI LÍNEA EN POSTPAGO</a>
-                        @endif
-                      </div>
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3">
                       @if($product->stock_model_id)
                       <div class="btn-comprar-prepago">
                         <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
@@ -92,82 +147,411 @@
                         </div>
                       @endif
                     </div>
+                    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 col-lg-4-button">
+                      {{--@if($product->stock_model_id)
+                      <div class="btn-carrito">
+                        <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
+                      </div>
+                      @endif--}}
+                      <div class="btn-linea btn-mas-options">
+                        @if(isset($product->route_postpago))
+                        <a href="{{$product->route_postpago}}" class="btn-default">Lo quiero en postpago</a>
+                        @endif
+                      </div>
+                    </div>
+
                   </div>
                 </div>
-                {{-- <div class="movil-select-product">
-                  <select>
-                    <option name="" value="">Lo quieres en</option>
-                    <option name="prepago" value="prepago">Portabilidad</option>
-                    <option name="linea nueva" value="linea nueva">Linea nueva</option>
-                    <option name="renovacion" value="renovacion">Renovación</option>
-                  </select>
-                </div> --}}
+                
               </form>
             </div>
           </section>
-          <div id="planes" class="planes-prepago">
-            <h3 class="title-plan">Recarga y disfruta de estos beneficios</h3><br/>
-            <div class="select-plan just-3">
-                <label for="">
-                  <div class="plan">
-                    <div class="content-plan">
-                      <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
-                      <ul class="list-unstyled">
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
-                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
-                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
-                      </ul>
-                    </div>
-                  </div>
-                </label>
-                <label for="">
-                  <div class="plan plan-active">
-                    <div class="content-plan">
-                      <div class="precio-plan"><span class="recarga">Recarga</span> s/5</div>
-                      <ul class="list-unstyled">
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
-                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
-                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 3er día de recarga</span></li>
-                      </ul>
-                    </div>
-                  </div>
-                </label>
-                <label for="">
-                  <div class="plan">
-                    <div class="content-plan"> 
-                      <div class="precio-plan"><span class="recarga">Recarga</span> s/10</div>
-                      <ul class="list-unstyled">
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span> </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
-                        <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
-                        <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
-                        <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube">Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
-                        <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del 7mo día de recarga</span></li>
-                      </ul>
-                    </div>
-                  </div>
-                </label>
-            </div>
+
           </div>
-          <section class="descrip-consideracion">
-            <!-- <h1>Consideraciones comerciales</h1> -->
-            <p>Nota:</p>
-            <p>Acceso a app gratuita Cineplanet, Tu ruta, Aló bodega, Mi Media Manzana, También recibirá sin condición y valido mientras que la línea este activa Facebook Flex o Facebook en Modo Gratuito</p>
-          </section>
+          
         </div>
+        <div class="col-xs-12 col-sm-12">
+          
+            <div id="planes" class="planes-prepago planes-prepago-detalle">
+              <h3 class="title-plan">Recarga y disfruta de estos beneficios</h3><br/>
+              <div class="select-plan just-3">
+                  <label for="">
+                    <div class="plan">
+                     
+                      <div class="content-plan">
+                        <div class="header-box">
+                          <div class="box-recarga">
+                            <div class="preci-cant">
+                              <span class="moneda">S/</span><span>3.00</span>
+                            </div>
+                            <span class="text-span">Recarga</span>
+                          </div>
+                          <div class="box-vigencia">
+                              <p><strong>24 horas</strong></p>
+                              <span class="text-span">Vigencia</span>
+                          </div>
+                        </div>
+                        <div style="padding: 20px 25px">
+
+                        <div class="box-plan-content-comercial">
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Internet</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-icon">
+                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                              </div>
+                            </div>
+                        </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Llamadas</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Mensajes</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+
+                        </div>
+
+                       <div class="box-plan-content-apps-sociales">
+                        <p>Tus apps favoritas <span>ilimitadas</span></p>
+                        <ul>
+                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                        </ul>
+                        <span class="color-secundary">Foto</span>
+                        </div>
+                        <div class="box-plan-content-apps">
+                        <div class="items-box-content box-video">
+                          <p>Video y Musica</p>
+                          <ul>
+                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                          </ul>
+                          <span class="color-secundary">Bono 1GB</span>
+                        </div>
+                        <div class="items-box-content box-juegos">
+                          <p>Juegos</p>
+                          <ul>
+                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                        </div>
+
+
+
+                         
+
+
+
+                        <!-- <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
+                        <ul class="list-unstyled">
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                          <li><img class="images-prepago-left" src="/images/enquipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                          <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                          <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                          <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
+                        </ul> -->
+                      </div>
+                    </div>
+                  </label>
+                  <label for="">
+                    <div class="plan">
+                     
+                      <div class="content-plan">
+                        <div class="header-box">
+                          <div class="box-recarga">
+                            <div class="preci-cant">
+                              <span class="moneda">S/</span><span>5.00</span>
+                            </div>
+                            <span class="text-span">Recarga</span>
+                          </div>
+                          <div class="box-vigencia">
+                              <p><strong>3 días</strong></p>
+                              <span class="text-span">Vigencia</span>
+                          </div>
+                        </div>
+                        <div style="padding: 20px 25px">
+
+                        <div class="box-plan-content-comercial">
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Internet</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-icon">
+                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                              </div>
+                            </div>
+                        </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Llamadas</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Mensajes</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+
+                        </div>
+
+                       <div class="box-plan-content-apps-sociales">
+                        <p>Tus apps favoritas <span>ilimitadas</span></p>
+                        <ul>
+                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                        </ul>
+                        <span class="color-secundary">Foto</span>
+                        </div>
+                        <div class="box-plan-content-apps">
+                        <div class="items-box-content box-video">
+                          <p>Video y Musica</p>
+                          <ul>
+                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                          </ul>
+                          <span class="color-secundary">Bono 1GB</span>
+                        </div>
+                        <div class="items-box-content box-juegos">
+                          <p>Juegos</p>
+                          <ul>
+                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                        </div>
+
+
+
+                         
+
+
+
+                        <!-- <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
+                        <ul class="list-unstyled">
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                          <li><img class="images-prepago-left" src="/images/enquipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                          <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                          <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                          <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
+                        </ul> -->
+                      </div>
+                    </div>
+                  </label>
+                  <label for="">
+                    <div class="plan">
+                     
+                      <div class="content-plan">
+                        <div class="header-box">
+                          <div class="box-recarga">
+                            <div class="preci-cant">
+                              <span class="moneda">S/</span><span>10.00</span>
+                            </div>
+                            <span class="text-span">Recarga</span>
+                          </div>
+                          <div class="box-vigencia">
+                              <p><strong>7 días</strong></p>
+                              <span class="text-span">Vigencia</span>
+                          </div>
+                        </div>
+                        <div style="padding: 20px 25px">
+
+                        <div class="box-plan-content-comercial">
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Internet</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-icon">
+                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                              </div>
+                            </div>
+                        </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Llamadas</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+                          <div class="box-item-comercial">
+                            <div class="box-column">
+                              <div class="item-comercial">
+                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <span>Mensajes</span>
+                              </div>
+                            </div>
+                            <div class="box-column">
+                              <div class="item-comercial-detalle">
+                                <span>Ilimitado</span>
+                                <span></span>
+                              </div>
+                            </div>
+                            
+                          </div>
+
+                        </div>
+
+                       <div class="box-plan-content-apps-sociales">
+                        <p>Tus apps favoritas <span>ilimitadas</span></p>
+                        <ul>
+                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                        </ul>
+                        <span class="color-secundary">Foto</span>
+                        </div>
+                        <div class="box-plan-content-apps">
+                        <div class="items-box-content box-video">
+                          <p>Video y Musica</p>
+                          <ul>
+                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                          </ul>
+                          <span class="color-secundary">Bono 1GB</span>
+                        </div>
+                        <div class="items-box-content box-juegos">
+                          <p>Juegos</p>
+                          <ul>
+                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                          </ul>
+                        </div>
+                      </div>
+
+                        </div>
+
+
+
+                         
+
+
+
+                        <!-- <div class="precio-plan"><span class="recarga">Recarga</span> s/3</div>
+                        <ul class="list-unstyled">
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/llamadas.svg" alt="Llamadas"><span>Llamadas ilimitadas</span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/internet.svg" alt="Internet"><span>100MB Alta disponible </span></li>
+                          <li><img class="images-prepago-left" src="/images/enquipo/svg/planes/rpb.svg" alt="RPB"><span>RPB ilimitado </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/sms.svg" alt="SMS"><span>SMS ilimitado (**) </span></li>
+                          <li><img class="images-prepago-left" src="/images/equipo/svg/planes/facebook.svg" alt="Facebook"><span>Facebook Gratis </span></li>
+                          <li><img src="/images/equipo/svg/planes/whatsapp-line.svg" alt="WhatsApp"><span>WhatsApp & Line Ilimitado </span></li>
+                          <li><img src="/images/equipo/svg/planes/video.svg" alt="Youtube"><span>Youtube & Viki gratis desde las 00:00hrs a las 05:00hrs </span></li>
+                          <li class="text-center">Apps gratis Hasta 23 hrs 59:59 del día de recarga</span></li>
+                        </ul> -->
+                      </div>
+                    </div>
+                  </label>
+              </div>
+            </div>
+                 </div>
       </div>
+    </div>
       <div class="row">
         <div class="col-xs-12">
           <div id="especificaciones-tecnicas">

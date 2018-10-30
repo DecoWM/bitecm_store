@@ -80,8 +80,8 @@
                       <div class="content-product equipo-prepago">
                         <div class="row">
                           <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <div class="row">
-                              <div class="col-xs-12 col-sm-12">
+                            <!-- <div class="row"> -->
+                              <!-- <div class="col-xs-12 col-sm-12"> -->
                                 <div id="box-detalle-product">
 
                                   <div class="detalle-product">
@@ -101,11 +101,11 @@
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                              <div class="col-xs-12 col-xs-pull-7 col-sm-12">
+                              <!-- </div> -->
+                              <!-- <div class="col-xs-12 col-xs-pull-7 col-sm-12">
                                 @include('products.colors',['product' => $product, 'stock_models' => $stock_models])
-                              </div>
-                            </div>
+                              </div> -->
+                            <!-- </div> -->
                           </div>
                         
                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-3">
@@ -119,6 +119,7 @@
                               </div>
                             @endif
                           </div>
+                          
                           <div class="col-xs-12 col-sm-12 col-md-11 col-lg-5">
                             {{--@if($product->stock_model_id)
                             <div class="btn-carrito btn-mas-options">
