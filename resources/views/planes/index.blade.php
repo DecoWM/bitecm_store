@@ -97,7 +97,12 @@
 
                       <div class="col-xs-12 col-sm-12 col-md-11 col-lg-3">
                         <div id="box-select-cambiate">
-                          <div class="select-product"><span class="title-select">Lo quieres en</span>
+                          <div class="select-product">
+                            <!-- <span class="title-select">Lo quieres en</span> -->
+                            <div class="box-title-select-cambiate">
+                              <img src="/images/planes/4g.svg" width="12" alt="">
+                              <span class="title-select">Modalidad</span>
+                            </div>
                             {{--<select form="purchase-form" name="affiliation" v-model="filters.affiliation.value"--}}
                             {{-- <select form="purchase-form" name="affiliation" @change="selectAffiliation({
                               @foreach ($affiliations as $affiliation)
