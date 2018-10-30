@@ -104,7 +104,7 @@
                     <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                       <label for="document_number">Número de documento</label>
-                      <input id="document_number" type="text" name="document_number" placeholder="Documento del titular" v-bind:maxlength="select_document == 1 ? '8' : '12'" v-model="number_document" v-validate="select_document == 1 ? 'required|numeric|min:8|max:8' : 'required|alpha_num|min:8|max:12'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
+                      <input id="document_number" type="text" name="document_number" placeholder="Documento del titular" v-bind:maxlength="document_type == 1 ? '8' : '12'" v-model="number_document" v-validate="document_type == 1 ? 'required|numeric|min:8|max:8' : 'required|alpha_num|min:8|max:12'" :class="{'input': true, 'is-danger': errors.has('document_number')}"><i v-cloak v-show="errors.has('document_number')" class="fa fa-warning"></i>
                       <span v-show="errors.has('document_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres Alfanuméricos</span>
                       </div>
                     </div>
@@ -123,14 +123,16 @@
                     </div> -->
 
                     <!--  LINEA NUEVA Y RENOVACIÓN -->
-                    <div class="form-group" v-if="affiliation == 2 || affiliation == 3">
-                      @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
-                      <label for="phone_number">Número de telefono de Bitel</label>
-                      @else
-                      <label for="phone_number">Número de telefono</label>
-                      @endif
-                      <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
-                      <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
+                    <div class="col-xs-12">
+                      <div class="form-group" v-if="affiliation == 2 || affiliation == 3">
+                        @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
+                        <label for="phone_number">Número de telefono de Bitel</label>
+                        @else
+                        <label for="phone_number">Número de telefono</label>
+                        @endif
+                        <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
+                      </div>
                     </div>
 
                     <!--  PORTABILIDAD -->
@@ -391,7 +393,6 @@
                           <button id="submitOrder" type="submit" class="btn btn-default comprar">continuar</button>
                         </div>
                         <!-- <div class="col-xs-12 col-sm-8 col-sm-push-2">
-                          
                         </div> -->
                       </div>
                     </div>

@@ -11754,6 +11754,7 @@ var form = new Vue({
     last_name: '',
     select_document: '',
     document_type: '',
+    document_number: '',
     number_document: '',
     distrito: '',
     number_phone: '',
@@ -55097,10 +55098,6 @@ var render = function() {
               : _vm._e(),
             _vm._v(" "),
             _vm.product.promo_id
-              ? _c("span", [_vm._v("s/." + _vm._s(_vm.product.promo_price))])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.product.promo_id
               ? _c("span", { staticClass: "normal-price" }, [
                   _vm._v("s/." + _vm._s(_vm.product.product_price))
                 ])
@@ -56949,7 +56946,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56960,6 +56957,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57017,23 +57022,19 @@ var render = function() {
           _c("div", { staticClass: "preci-cant" }, [
             _vm.product.promo_id
               ? _c("div", { staticClass: "preci-cant" }, [
-                  _c("span", [_vm._v("S")]),
-                  _c("span", [_vm._v("product.promo_price}}")])
+                  _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
                 ])
               : _vm._e(),
             _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "preci-cant",
-                class: { "normal-price": _vm.product.promo_id != null }
-              },
-              [
-                _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-                _vm._v(" "),
-                _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
-              ]
-            )
+            !_vm.product.promo_id
+              ? _c("div", { staticClass: "preci-cant" }, [
+                  _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                  _vm._v(" "),
+                  _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+                ])
+              : _vm._e()
           ])
         ]),
         _vm._v(" "),
@@ -57227,7 +57228,7 @@ var render = function() {
               _vm.product.promo_id
                 ? _c("div", { staticClass: "preci-cant" }, [
                     _c("span", [_vm._v("S")]),
-                    _c("span", [_vm._v("product.promo_price}}")])
+                    _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
                   ])
                 : _vm._e(),
               _vm._v(" "),

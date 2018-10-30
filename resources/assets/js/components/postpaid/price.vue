@@ -6,12 +6,20 @@
           <p>Precio del equipo</p>
           <div class="preci-cant">
             
-            <div v-if="product.promo_id" class="preci-cant"><span>S</span><span>product.promo_price}}</span></div>
-            <div :class="{'normal-price': product.promo_id != null}" class="preci-cant">
+            <div v-if="product.promo_id" class="preci-cant">
+              <span class="moneda">S/</span>
+              <span>{{product.promo_price}}</span>
+            </div>
+            <div v-if="!product.promo_id" class="preci-cant">
               <span class="moneda">S/</span>
               <span>{{product.product_price}}</span>
             </div>
-          
+            <!--
+            <div :class="{'normal-price': product.promo_id != null}" class="preci-cant">
+              <span class="moneda">BS/</span>
+              <span>{{product.product_price}}</span>
+            </div>
+            -->
           </div>
         </div>
         <div class="plan-product">

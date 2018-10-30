@@ -55,6 +55,7 @@ const form = new Vue({
     last_name:'',
     select_document: '',
     document_type: '',
+    document_number: '',
     number_document: '',
     distrito:'',
     number_phone:'',

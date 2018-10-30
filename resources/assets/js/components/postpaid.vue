@@ -26,7 +26,7 @@
         </div>
         <div class="price-product">
           <span v-if="!product.promo_id">s/.{{product.product_price}}</span>
-          <span v-if="product.promo_id">s/.{{product.promo_price}}</span>
+          <!--<span v-if="product.promo_id">s/.{{product.promo_price}}</span>-->
           <span v-if="product.promo_id" class="normal-price">s/.{{product.product_price}}</span>
         </div>
         <div class="plan-product">

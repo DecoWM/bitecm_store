@@ -72,7 +72,7 @@
                         @include('products.tag',['product' => $product])
                       </div>
                       <div class="descripcion">
-                        <p>{$product->product_description}</p>
+                        <p>{{$product->product_description}}</p>
                       </div>
                     </div>
                   </div>
