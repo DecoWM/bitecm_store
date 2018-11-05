@@ -88,16 +88,14 @@
                     </div>
                     -->
                     <div class="col-xs-12 col-sm-6">
-                      <div class="form-group">
-                          <div class="form-select">
-                            <label for="document_type">Tipo de documento</label>
-                            <select id="document_type" name="document_type" v-model="document_type" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }">
-                              <option value="" selected>Tipo de Documento</option>
-                              <option value="1">DNI</option>
-                              <option value="2">CARNÉ DE EXTRANJERÍA</option>
-                              <option value="3">PASAPORTE</option>
-                            </select>
-                          </div>
+                      <div class="form-group form-select">
+                          <label for="document_type">Tipo de documento</label>
+                          <select id="document_type" name="document_type" v-model="document_type" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('document_type') }">
+                            <option value="" selected>Tipo de Documento</option>
+                            <option value="1">DNI</option>
+                            <option value="2">CARNÉ DE EXTRANJERÍA</option>
+                            <option value="3">PASAPORTE</option>
+                          </select>
                       </div>
                     </div>
 
@@ -130,7 +128,7 @@
                         @else
                         <label for="phone_number">Número de telefono</label>
                         @endif
-                        <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                        <input id="phone_number" type="text" name="phone_number" v-model="number_phone" v-validate="'required|numeric|max:9'" maxlength="9" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                         <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                       </div>
                     </div>
@@ -215,7 +213,7 @@
                       <div class="form-group" v-if="affiliation == 1">
                         @endif
                           <label for="porting_phone">Número a portar</label>
-                          <input id="porting_phone" type="text" name="porting_phone" maxlength="11" placeholder="Número del titular a portar (ejemplo 985636512)" v-model="porting_phone" v-validate="'required|numeric|max:11'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
+                          <input id="porting_phone" type="text" name="porting_phone" maxlength="9" placeholder="Número del titular a portar (ejemplo 985636512)" v-model="porting_phone" v-validate="'required|numeric|max:9'" :class="{'input': true, 'is-danger': errors.has('porting_phone')}"><i v-cloak v-show="errors.has('porting_phone')" class="fa fa-warning"></i>
                           {{-- <span v-show="errors.has('number_phone')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                           <span v-show="errors.has('porting_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                       </div>

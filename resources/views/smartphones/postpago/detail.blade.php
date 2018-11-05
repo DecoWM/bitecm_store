@@ -223,9 +223,9 @@
 
                     <div class="box-plan-content-plan">
                       <!-- <span class="title-plan">{{$plan->plan_name}}</span> -->
-                      <span class="precio-title-plan color-secundary">Precio del plan</span>
+                      <span class="precio-title-plan color-secundary">Precio del plan {{$plan->plan_name}}</span>
                       <div class="precio-plan"><span>S/ </span> {{$plan->plan_price}}</div>
-                      <span class="box-contrato">Sin contrato de permanencia</span>
+                      <span class="box-contrato">{{$plan->contract_name}} de permanencia</span>
                     </div>
 
                     <!-- PRIMERA CATEGORIA -->

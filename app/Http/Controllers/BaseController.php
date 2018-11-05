@@ -510,7 +510,7 @@ class BaseController extends Controller
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
       ->orderBy('tbl_plan.plan_price')
-      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
+      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
       ->get();
     
     $unique = [];
@@ -674,7 +674,7 @@ class BaseController extends Controller
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
       ->orderBy('tbl_plan.plan_price')
-      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_slug'))
+      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
       ->get();
     
     $unique = [];

@@ -56946,7 +56946,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56957,6 +56957,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -57038,28 +57039,21 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "plan-product" }, [
+          _c("p", { staticStyle: { color: "#9f5ed9" } }, [
+            _vm._v("Precio del Plan")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "preci-cant" }, [
+            _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+            _c("span", [_vm._v(_vm._s(_vm.product.plan_price))])
+          ])
+        ])
       ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "plan-product" }, [
-      _c("p", { staticStyle: { color: "#9f5ed9" } }, [
-        _vm._v("Precio del Plan")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "preci-cant" }, [
-        _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-        _c("span", [_vm._v("29.90")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57156,7 +57150,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57167,7 +57161,6 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -57247,29 +57240,22 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(0)
+          _c("div", { staticClass: "plan-product" }, [
+            _c("p", { staticStyle: { color: "#9f5ed9" } }, [
+              _vm._v("Precio del Plan")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "preci-cant" }, [
+              _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+              _c("span", [_vm._v(_vm._s(_vm.product.plan_price))])
+            ])
+          ])
         ])
       ])
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "plan-product" }, [
-      _c("p", { staticStyle: { color: "#9f5ed9" } }, [
-        _vm._v("Precio del Plan")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "preci-cant" }, [
-        _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-        _c("span", [_vm._v("29.90")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -58062,15 +58048,15 @@ var render = function() {
                   _c(
                     "span",
                     { staticClass: "precio-title-plan color-secundary" },
-                    [_vm._v("Precio del plan")]
+                    [_vm._v("Precio del plan " + _vm._s(plan.plan_name))]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "precio-plan hola" }, [
+                  _c("div", { staticClass: "precio-plan" }, [
                     _vm._v("S/ " + _vm._s(plan.plan_price))
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "box-contrato" }, [
-                    _vm._v("Sin contrato de permanencia")
+                    _vm._v(_vm._s(plan.contract_name) + " de permanencia")
                   ])
                 ]),
                 _vm._v(" "),
