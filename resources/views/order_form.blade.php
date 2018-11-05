@@ -290,7 +290,7 @@
                     <div class="col-xs-12 col-sm-6">
                       <div class="form-group">
                         <label for="contact_phone">Número de contacto</label>
-                        <input id="contact_phone" type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric|max:11'" maxlength="11" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-cloak v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
+                        <input id="contact_phone" type="text" name="contact_phone" v-model="number_contact" v-validate="'required|numeric|max:9'" maxlength="9" :class="{'input': true, 'is-danger': errors.has('contact_phone')}"><i v-cloak v-show="errors.has('contact_phone')" class="fa fa-warning"></i>
                         {{-- <span v-show="errors.has('number_contact')" class="help is-danger">@{{ errors.first('number_phone') }}</span> --}}
                         <span v-show="errors.has('contact_phone')" class="help is-danger" v-cloak>Sólo se permiten caracteres numéricos</span>
                       </div>
