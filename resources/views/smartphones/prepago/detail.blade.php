@@ -112,8 +112,13 @@
                               @if(isset($product->promo_id))
                               <p>Precio del Equipo</p>
                               <div class="preci-cant">
-
-                                <span class="moneda">S/{{$product->promo_price}}</span><span>S/{{$product->product_price}}</span>
+                                @if(isset($product->promo_id))
+                                  <span class="moneda">S/</span>
+                                  <span>{{$product->promo_price}}</span>
+                                @else
+                                  <span class="moneda">S/</span>
+                                  <span>{{$product->product_price}}</span>
+                                @endif
                               </div>
                               @else
                               <p>Precio del Chip</p>
