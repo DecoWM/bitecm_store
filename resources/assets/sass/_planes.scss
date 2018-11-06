@@ -75,6 +75,7 @@
     color: #9b9b9b;
     display: flex;
     align-items: flex-start;
+    justify-content: center;
     span{
         color: #9b9b9b;
         font-size: 18px;
@@ -100,15 +101,26 @@
 }
 
 #planes .title-plan{
-    font-size: 23px;
-    margin-bottom: 24px;
+    font-size: 24px;
+    margin-bottom: 14px;
     font-family: 'arialrounded_mt';
+    font-weight: bold;
+    line-height: 29px;
+    br{
+        display: none
+    }
+    @media screen and (max-width : 768px) {
+        br{
+            display: block;
+        }
+    }
 }
 
 // ----------------------
 
 
 .box-plan-content-plan{
+    text-align: center;
     padding-bottom: 18px;
     border-bottom: 1px dashed #d9d9d9;
     .precio-title-plan{

@@ -177,7 +177,7 @@
         <div class="col-xs-12 col-sm-12">
           
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
-            <h3 class="title-plan">Escoge el plan que prefieras:</h3>
+            <h3 class="title-plan">¡Elige el plan que <br> más te guste!</h3>
 
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
             <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>
@@ -194,9 +194,9 @@
                   <div class="precio-plan">S/. {{$plan->plan_price}}<span>al mes</span></div> -->
                   <div class="box-plan-content-plan">
                       <!-- <span class="title-plan">{{$plan->plan_name}}</span> -->
-                      <span class="precio-title-plan color-secundary">Precio del plan {{$plan->plan_name}}</span>
+                      <span class="precio-title-plan color-secundary">Plan {{$plan->plan_name}}</span>
                       <div class="precio-plan"><span>S/ </span> {{$plan->plan_price}}</div>
-                      <span class="box-contrato">{{$plan->contract_name}} de permanencia</span>
+                      <!-- <span class="box-contrato">{{$plan->contract_name}} de permanencia</span> -->
                   </div>
 
                   <!-- @foreach ($info_comercial as $info)

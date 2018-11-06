@@ -58048,15 +58048,11 @@ var render = function() {
                   _c(
                     "span",
                     { staticClass: "precio-title-plan color-secundary" },
-                    [_vm._v("Precio del plan " + _vm._s(plan.plan_name))]
+                    [_vm._v("Precio del Plan " + _vm._s(plan.plan_name))]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "precio-plan" }, [
                     _vm._v("S/ " + _vm._s(plan.plan_price))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "box-contrato" }, [
-                    _vm._v(_vm._s(plan.contract_name) + " de permanencia")
                   ])
                 ]),
                 _vm._v(" "),
