@@ -178,6 +178,7 @@ class PrepaidController extends Controller
       'stock_models' => $stock_models,
       'available' => $available
     ];
+
     return view('smartphones.prepago.detail', $response);
   }
 

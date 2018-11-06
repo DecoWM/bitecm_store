@@ -510,7 +510,9 @@ class BaseController extends Controller
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
       ->orderBy('tbl_plan.plan_price')
-      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
+      ->select(DB::raw('tbl_plan.*, SUBSTRING(`plan_price`, 1, (POSITION("." IN `plan_price`) - 1)) AS plan_price_integer,
+    SUBSTRING(`plan_price`, (POSITION("." IN `plan_price`) + 1), 2) AS plan_price_decimal,
+    REVERSE(SUBSTRING(REVERSE(`plan_name`), POSITION(" " IN REVERSE(`plan_name`)) + 1, LENGTH(`plan_name`))) AS plan_name_name, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
       ->get();
     
     $unique = [];
@@ -674,7 +676,7 @@ class BaseController extends Controller
       ->orderBy('tbl_plan.weight')
       ->orderBy('tbl_plan.plan_id')
       ->orderBy('tbl_plan.plan_price')
-      ->select(DB::raw('tbl_plan.*, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
+      ->select(DB::raw('tbl_plan.*, SUBSTRING(`plan_price`, 1, (POSITION("." IN `plan_price`) - 1)) AS plan_price_integer, SUBSTRING(`plan_price`, (POSITION("." IN `plan_price`) + 1), 2) AS plan_price_decimal, REVERSE(SUBSTRING(REVERSE(`plan_name`), POSITION(" " IN REVERSE(`plan_name`)) + 1, LENGTH(`plan_name`))) AS plan_name_name, tbl_affiliation.affiliation_id, tbl_affiliation.affiliation_slug, tbl_contract.contract_id, tbl_contract.contract_name, tbl_contract.contract_slug'))
       ->get();
     
     $unique = [];

@@ -89,13 +89,15 @@
                                       @if(isset($product->promo_id))
                                       <p>Precio del Chip</p>
                                       <div class="preci-cant">
-
-                                        <span class="moneda">S/{{$product->promo_price}}</span><span>S/{{$product->product_price}}</span>
+                                        <span class="moneda">S/{{$product->promo_price}}</span>
+                                        <span>S/{{$product->product_price}}</span>
                                       </div>
                                       @else
                                       <p>Precio del Chip</p>
                                       <div class="preci-cant">
-                                        <span class="moneda">S/</span><span>{{$product->product_price}}</span>
+                                        <span class="moneda">S/</span>
+                                        <span>{{$product->product_price_integer}}</span>
+                                        <span class="moneda">.{{$product->product_price_decimal}}</span><span>
                                       </div>
                                       @endif
                                     </div>
@@ -158,7 +160,9 @@
                         <div class="header-box">
                           <div class="box-recarga">
                             <div class="preci-cant">
-                              <span class="moneda">S/</span><span>3.00</span>
+                              <span class="moneda">S/</span>
+                              <span>3</span>
+                              <span class="moneda">.00</span>
                             </div>
                             <span class="text-span">Recarga</span>
                           </div>
@@ -282,7 +286,9 @@
                         <div class="header-box">
                           <div class="box-recarga">
                             <div class="preci-cant">
-                              <span class="moneda">S/</span><span>5.00</span>
+                              <span class="moneda">S/</span>
+                              <span>5</span>
+                              <span class="moneda">.00</span>
                             </div>
                             <span class="text-span">Recarga</span>
                           </div>
@@ -406,7 +412,9 @@
                         <div class="header-box">
                           <div class="box-recarga">
                             <div class="preci-cant">
-                              <span class="moneda">S/</span><span>10.00</span>
+                              <span class="moneda">S/</span>
+                              <span>10</span>
+                              <span class="moneda">.00</span>
                             </div>
                             <span class="text-span">Recarga</span>
                           </div>

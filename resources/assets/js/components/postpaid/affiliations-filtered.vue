@@ -2,7 +2,7 @@
   <div id="affiliations-select">
     <select id="affsel" form="purchase-form" name="affiliation" @change="setAffiliation($event)">
       <option v-for="(affiliation, ix) in affiliations" :id="'aff'+affiliation.affiliation_id" :data-ix="ix" :value="affiliation.affiliation_id">{{affiliation.affiliation_name}}</option>
-   </select>   
+    </select>   
   </div>  
 </template>
 

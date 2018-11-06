@@ -6,9 +6,13 @@
         <div class="content-plan" v-on:click="setPlan(plan.plan_id)">
           
           <div class="box-plan-content-plan">
-            <span class="precio-title-plan color-secundary">Precio del plan {{plan.plan_name}}</span>
-            <div class="precio-plan">S/ {{plan.plan_price}}</div>
-            <span class="box-contrato">{{plan.contract_name}} de permanencia</span>
+            <span class="precio-title-plan color-secundary">Plan {{plan.plan_name_name}}</span>
+            <div class="precio-plan">
+              <span>S/</span> 
+              {{plan.plan_price_integer}}
+              <span>.{{plan.plan_price_decimal}}</span>
+            </div>
+            <!--<span class="box-contrato">{{plan.contract_name}} de permanencia</span>-->
           </div>
 
             <span v-for="item in plan.info_comercial">

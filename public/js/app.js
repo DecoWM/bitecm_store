@@ -56946,7 +56946,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56957,6 +56957,10 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -57025,7 +57029,11 @@ var render = function() {
               ? _c("div", { staticClass: "preci-cant" }, [
                   _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
+                  _c("span", [_vm._v(_vm._s(_vm.product.promo_price_integer))]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "moneda" }, [
+                    _vm._v("." + _vm._s(_vm.product.promo_price_decimal))
+                  ])
                 ])
               : _vm._e(),
             _vm._v(" "),
@@ -57033,7 +57041,13 @@ var render = function() {
               ? _c("div", { staticClass: "preci-cant" }, [
                   _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.product.product_price_integer))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "moneda" }, [
+                    _vm._v("." + _vm._s(_vm.product.product_price_decimal))
+                  ])
                 ])
               : _vm._e()
           ])
@@ -57041,12 +57055,17 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "plan-product" }, [
           _c("p", { staticStyle: { color: "#9f5ed9" } }, [
-            _vm._v("Precio del Plan")
+            _vm._v("Precio del Plan " + _vm._s(_vm.product.plan_name_name))
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "preci-cant" }, [
             _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-            _c("span", [_vm._v(_vm._s(_vm.product.plan_price))])
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(_vm.product.plan_price_integer))]),
+            _vm._v(" "),
+            _c("span", { staticClass: "moneda" }, [
+              _vm._v("." + _vm._s(_vm.product.plan_price_decimal))
+            ])
           ])
         ])
       ])
@@ -57150,7 +57169,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57161,6 +57180,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -57221,6 +57246,7 @@ var render = function() {
               _vm.product.promo_id
                 ? _c("div", { staticClass: "preci-cant" }, [
                     _c("span", [_vm._v("S")]),
+                    _vm._v(" "),
                     _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
                   ])
                 : _vm._e(),
@@ -57234,7 +57260,13 @@ var render = function() {
                 [
                   _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.product.product_price))])
+                  _c("span", [
+                    _vm._v(_vm._s(_vm.product.product_price_integer))
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "moneda" }, [
+                    _vm._v("." + _vm._s(_vm.product.product_price_decimal))
+                  ])
                 ]
               )
             ])
@@ -57242,12 +57274,17 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "plan-product" }, [
             _c("p", { staticStyle: { color: "#9f5ed9" } }, [
-              _vm._v("Precio del Plan")
+              _vm._v("Precio del Plan " + _vm._s(_vm.product.plan_name_name))
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "preci-cant" }, [
               _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-              _c("span", [_vm._v(_vm._s(_vm.product.plan_price))])
+              _vm._v(" "),
+              _c("span", [_vm._v(_vm._s(_vm.product.plan_price_integer))]),
+              _vm._v(" "),
+              _c("span", { staticClass: "moneda" }, [
+                _vm._v("." + _vm._s(_vm.product.plan_price_decimal))
+              ])
             ])
           ])
         ])
@@ -57950,6 +57987,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -58048,15 +58089,17 @@ var render = function() {
                   _c(
                     "span",
                     { staticClass: "precio-title-plan color-secundary" },
-                    [_vm._v("Precio del plan " + _vm._s(plan.plan_name))]
+                    [_vm._v("Plan " + _vm._s(plan.plan_name_name))]
                   ),
                   _vm._v(" "),
                   _c("div", { staticClass: "precio-plan" }, [
-                    _vm._v("S/ " + _vm._s(plan.plan_price))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "box-contrato" }, [
-                    _vm._v(_vm._s(plan.contract_name) + " de permanencia")
+                    _c("span", [_vm._v("S/")]),
+                    _vm._v(
+                      " \n            " +
+                        _vm._s(plan.plan_price_integer) +
+                        "\n            "
+                    ),
+                    _c("span", [_vm._v("." + _vm._s(plan.plan_price_decimal))])
                   ])
                 ]),
                 _vm._v(" "),
