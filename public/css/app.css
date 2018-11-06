@@ -2234,6 +2234,14 @@ nav#nav-bitel {
   margin-bottom: 16px;
 }
 
+@media screen and (max-width: 767px) {
+  #descripcion-equipo .header-section .title {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
 #descripcion-equipo .header-section .title h1 {
   font-family: 'arialrounded_mtbold';
   text-transform: initial;
@@ -2525,6 +2533,24 @@ nav#nav-bitel {
   background-color: #94d8dc;
 }
 
+#box-detalle-product .detalle-product::before {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  background: url("/images/planes/btn-mas.svg") no-repeat center center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 99;
+}
+
+@media screen and (max-width: 321px) {
+  #box-detalle-product .detalle-product::before {
+    display: none;
+  }
+}
+
 #box-detalle-product .detalle-product .price-product {
   width: 50%;
   margin-bottom: 0;
@@ -2677,6 +2703,9 @@ nav#nav-bitel {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 #planes .select-plan .plan .content-plan .precio-plan span {
@@ -2700,12 +2729,25 @@ nav#nav-bitel {
 }
 
 #planes .title-plan {
-  font-size: 23px;
-  margin-bottom: 24px;
+  font-size: 24px;
+  margin-bottom: 14px;
   font-family: 'arialrounded_mt';
+  font-weight: bold;
+  line-height: 29px;
+}
+
+#planes .title-plan br {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  #planes .title-plan br {
+    display: block;
+  }
 }
 
 .box-plan-content-plan {
+  text-align: center;
   padding-bottom: 18px;
   border-bottom: 1px dashed #d9d9d9;
 }

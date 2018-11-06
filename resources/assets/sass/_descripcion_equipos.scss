@@ -150,6 +150,20 @@
             margin-left: auto;
             background-color: #94d8dc;
         }
+        &::before{
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: url('/images/planes/btn-mas.svg') no-repeat center center;
+            left: 0;
+            right: 0;
+            margin: auto;
+            z-index: 99;
+            @media screen and (max-width: 321px) {
+                display: none;
+            }
+        }
         .price-product{
             width: 50%;
             margin-bottom: 0;

@@ -177,7 +177,7 @@
         <div class="col-xs-12 col-sm-12">
           
           <div id="planes" class="planes" data-selected="{{$selected_plan}}">
-            <h3 class="title-plan">Escoge el plan que prefieras:</h3>
+            <h3 class="title-plan">¡Elige el plan que <br> más te guste!</h3>
 
             {{-- <div v-if="Object.keys(product).length == 0" class="select-plan"> --}}
             <plans-filtered v-if="plans.length > 0" :plans="plans" :product="product"></plans-filtered>

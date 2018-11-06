@@ -1734,6 +1734,9 @@ nav#nav-bitel{
 }
 #descripcion-equipo .header-section .title{
     margin-bottom: 16px;
+    @media screen and (max-width:767px) {
+        justify-content: space-between;
+    }
 }
 
 #descripcion-equipo .header-section .title h1{
