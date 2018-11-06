@@ -86,19 +86,24 @@
 
                                   <div class="detalle-product">
                                     <div class="price-product">
-                                      @if(isset($product->promo_id))
+                                      @if(!isset($product->promo_id))
                                       <p>Precio del Chip</p>
-                                      <div class="preci-cant">
-                                        <span class="moneda">S/{{$product->promo_price}}</span>
-                                        <span>S/{{$product->product_price}}</span>
-                                      </div>
+                                      <div class="preci-prepaid">
+                                        <div class="preci-cant">
+                                          <span class="moneda">S/</span>
+                                          <span>{{$product->promo_price_integer}}</span>
+                                          <span class="moneda">.{{$product->promo_price_decimal}}</span>
+                                        </div>
+                                      </div>  
                                       @else
                                       <p>Precio del Chip</p>
-                                      <div class="preci-cant">
-                                        <span class="moneda">S/</span>
-                                        <span>{{$product->product_price_integer}}</span>
-                                        <span class="moneda">.{{$product->product_price_decimal}}</span><span>
-                                      </div>
+                                      <div class="preci-prepaid">
+                                        <div class="preci-cant">
+                                          <span class="moneda">S/</span>
+                                          <span>{{$product->product_price_integer}}</span>
+                                          <span class="moneda">.{{$product->product_price_decimal}}</span>
+                                        </div>
+                                      </div>  
                                       @endif
                                     </div>
                                   </div>

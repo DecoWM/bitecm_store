@@ -122,11 +122,13 @@
                               </div>
                               @else
                               <p>Precio del Chip</p>
-                              <div class="preci-cant">
-                                <span class="moneda">S/</span>
-                                <span>{{$product->product_price_integer}}</span>
-                                <span class="moneda">.{{$product->product_price_decimal}}</span>
-                              </div>
+                              <div class="preci-prepaid">
+                                <div class="preci-cant">
+                                  <span class="moneda">S/</span>
+                                  <span>{{$product->product_price_integer}}</span>
+                                  <span class="moneda">.{{$product->product_price_decimal}}</span>
+                                </div>
+                               </div> 
                               @endif
                             </div>
                             <!-- <div class="price-product">
