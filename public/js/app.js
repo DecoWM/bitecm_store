@@ -56841,7 +56841,7 @@ var render = function() {
                 staticClass: "btn btn-default",
                 attrs: { href: product.route }
               },
-              [_vm._v("comprar")]
+              [_vm._v("Solicitalo")]
             )
           ])
         ])

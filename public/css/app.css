@@ -2114,7 +2114,7 @@ nav#nav-bitel {
   padding-bottom: 9px;
   padding-top: 5px;
   z-index: 9998;
-  /*margin-bottom: 33px;*/
+  margin-bottom: 0px;
 }
 
 .box-bitel {
@@ -2221,8 +2221,8 @@ nav#nav-bitel {
           box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.07);
   border: solid 1px #e4e4e4;
   border-radius: 4px;
-  position: relative;
   margin-top: 33px;
+  position: relative;
 }
 
 #descripcion-equipo .content-section form .content-product .select-product:after {
@@ -2472,7 +2472,7 @@ nav#nav-bitel {
       -ms-flex-align: center;
           align-items: center;
   height: 70px;
-  padding-left: 25px;
+  padding-left: 10px;
   margin-bottom: 30px;
 }
 
@@ -2504,7 +2504,8 @@ nav#nav-bitel {
   font-size: 16px !important;
   font-weight: 600 !important;
   color: #4a4a4a !important;
-  padding-left: 25px !important;
+  padding-left: 0px !important;
+  max-width: 128px;
 }
 
 #box-detalle-product {
@@ -2588,13 +2589,13 @@ nav#nav-bitel {
 }
 
 #box-detalle-product .detalle-product .price-product .preci-cant span {
-  font-size: 32px !important;
+  font-size: 28px !important;
 }
 
 #box-detalle-product .detalle-product .price-product .preci-cant span.moneda {
-  padding-top: 7px;
+  padding-top: 6px;
   font-size: 18px !important;
-  line-height: 13px;
+  line-height: 18px;
 }
 
 #box-detalle-product .detalle-product .plan-product {
@@ -2612,7 +2613,7 @@ nav#nav-bitel {
 #box-detalle-product .detalle-product .plan-product .preci-cant {
   font-family: 'multicolore';
   color: #000000;
-  font-size: 32px;
+  font-size: 28px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2625,7 +2626,7 @@ nav#nav-bitel {
 }
 
 #box-detalle-product .detalle-product .plan-product .preci-cant span.moneda {
-  padding-top: 7px;
+  padding-top: 3px;
   font-size: 18px;
 }
 
@@ -3068,7 +3069,11 @@ nav#nav-bitel {
   border: solid 1px #e4e4e4;
 }
 
-#image-equipo.images-chip {
+#image-equipo.image-equipo-chip {
+  height: 200px;
+}
+
+#image-equipo.image-equipo-chip .new-slider-one {
   height: 200px;
 }
 

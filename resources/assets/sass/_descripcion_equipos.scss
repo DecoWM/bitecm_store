@@ -99,7 +99,7 @@
     display: flex;
     align-items: center;
     height: 70px;
-    padding-left: 25px;
+    padding-left: 10px;
     margin-bottom: 30px;
     .box-title-select-cambiate{
         display: flex;
@@ -122,7 +122,8 @@
         font-size: 16px !important;
         font-weight: 600 !important;
         color: #4a4a4a !important;
-        padding-left: 25px !important;
+        padding-left: 0px !important;
+        max-width: 128px
     }
 
 }
@@ -183,11 +184,11 @@
                 align-items: flex-start;
                 justify-content: center;
                 span{
-                    font-size: 32px !important;
+                    font-size: 28px !important;
                     &.moneda{
-                        padding-top: 7px;
+                        padding-top: 6px;
                         font-size: 18px !important;
-                        line-height: 13px;
+                        line-height: 18px;
                     }
                 }
             }
@@ -204,13 +205,13 @@
             .preci-cant{
                 font-family: 'multicolore';
                 color: #000000;
-                font-size: 32px;
+                font-size: 28px;
                 display: flex;
                 align-items: flex-start;
                 justify-content: center;
                 span{
                     &.moneda{
-                        padding-top: 7px;
+                        padding-top: 3px;
                         font-size: 18px;
                     }
                 }

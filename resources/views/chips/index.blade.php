@@ -9,7 +9,7 @@
 
               <div id="content-page">
 
-                <div id="image-equipo">
+                <div id="image-equipo" class="image-equipo-chip">
                   <div class="img-loading">
                     <img src="/images/planes/placeholder.png" alt="icono">
                   </div>    
@@ -118,7 +118,7 @@
                           <div class="col-xs-12 col-sm-6 col-md-5 col-lg-3">
                             @if($product->stock_model_id)
                               <div class="btn-comprar-prepago">
-                                <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
+                                <button id="addToCart" type="submit" class="btn-default btn-buy">Solicitalo Ahora</button>
                               </div>
                             @else
                               <div class="btn-comprar-prepago">
@@ -613,7 +613,7 @@
                     <span>S/{{$item->product_price}}</span>
                     @endif
                   </div>
-                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">Solicitalo</a></div>
                 </div>
               </div>
               @endforeach

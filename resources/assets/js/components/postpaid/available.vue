@@ -23,7 +23,7 @@
           <div class="plan-product">
             <p>en plan <span>{{product.plan_name}}</span></p>
           </div>
-          <div class="btn-comprar"><a :href="product.route" class="btn btn-default">comprar</a></div>
+          <div class="btn-comprar"><a :href="product.route" class="btn btn-default">Solicitalo</a></div>
         </div>
       </div>
     </div>

@@ -78,7 +78,7 @@
                         <button type="submit" class="btn-default">AGREGAR AL CARRITO</button>
                       </div>--}}
                       <div class="btn-comprar-prepago">
-                        <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
+                        <button id="addToCart" type="submit" class="btn-default btn-buy">Solicitalo Ahora</button>
                       </div>
                       @else
                       <div class="stock-exhausted">

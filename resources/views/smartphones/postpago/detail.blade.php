@@ -176,11 +176,11 @@
                             {{-- <form id="purchase-form"purchase form action="{{route('carrito', ['product'=>$product->product_id])}}" method="get"> --}}
                             @if($product->stock_model_id)
                             <div class="btn-comprar">
-                              <button id="addToCart" type="submit" class="btn-default btn-buy">Comprar Ahora</button>
+                              <button id="addToCart" type="submit" class="btn-default btn-buy">Solicitalo Ahora</button>
                             </div>
                             @else
                             <div class="btn-comprar">
-                              <button class="btn-default" disabled>Comprar Ahora</button>
+                              <button class="btn-default" disabled>Solicitalo Ahora</button>
                             </div>
                             {{-- <div class="stock-exhausted">
                               Agotado
@@ -188,8 +188,8 @@
                             @endif
                             {{-- </form> --}}
                             {{-- <div class="btn-comprar">
-                              <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Comprar Ahora</a> --}}
-                              {{-- <button type="submit" class="btn-default">Comprar Ahora</button> --}}
+                              <a href="{{route('carrito', ['product'=>$product->product_id])}}" class="btn-default">Solicitalo Ahora</a> --}}
+                              {{-- <button type="submit" class="btn-default">Solicitalo Ahora</button> --}}
                             {{-- </div> --}}
                           </div>
                         </div>
@@ -419,7 +419,7 @@
                   <div class="plan-product">
                     <p>en plan <span>{{$item->plan_name}}</span></p>
                   </div>
-                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">Solicitalo</a></div>
                 </div>
               </div>
               @endforeach
