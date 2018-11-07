@@ -114,10 +114,12 @@
                               <div class="preci-cant">
                                 @if(isset($product->promo_id))
                                   <span class="moneda">S/</span>
-                                  <span>{{$product->promo_price}}</span>
+                                  <span>{{$product->promo_price_integer}}</span>
+                                  <span class="moneda">.{{$product->promo_price_decimal}}</span>
                                 @else
                                   <span class="moneda">S/</span>
-                                  <span>{{$product->product_price}}</span>
+                                  <span>{{$product->product_price_integer}}</span>
+                                  <span class="moneda">.{{$product->product_price_decimal}}</span>
                                 @endif
                               </div>
                               @else
