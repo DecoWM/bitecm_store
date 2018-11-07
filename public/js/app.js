@@ -57249,7 +57249,7 @@ var render = function() {
           { staticClass: "detalle-product detalle-plan-chip-postpago" },
           [
             _c("div", { staticClass: "price-product" }, [
-              _c("p", [_vm._v("Precio del equipo")]),
+              _c("p", [_vm._v("Precio del simcard")]),
               _vm._v(" "),
               _c("div", { staticClass: "preci-cant" }, [
                 _vm.product.promo_id

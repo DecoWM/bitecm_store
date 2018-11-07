@@ -3,7 +3,7 @@
     <div id="box-detalle-product">
       <div class="detalle-product detalle-plan-chip-postpago">
         <div class="price-product">
-          <p>Precio del equipo</p>
+          <p>Precio del simcard</p>
           <div class="preci-cant">
             <div v-if="product.promo_id" class="preci-cant">
               <span>S</span>
