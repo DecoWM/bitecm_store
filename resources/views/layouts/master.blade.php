@@ -75,7 +75,7 @@
   <body>
   <div id="{{ Request::segment(1) != 'envio' ? 'app' : 'master' }}">
     @include('layouts.header')
-    @include('layouts.nav')
+    @include('layouts.nav') 
     @yield('content')
     @include('layouts.footer')
   </div>

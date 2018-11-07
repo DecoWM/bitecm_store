@@ -2114,7 +2114,7 @@ nav#nav-bitel {
   padding-bottom: 9px;
   padding-top: 5px;
   z-index: 9998;
-  margin-bottom: 33px;
+  /*margin-bottom: 33px;*/
 }
 
 .box-bitel {
@@ -2222,6 +2222,7 @@ nav#nav-bitel {
   border: solid 1px #e4e4e4;
   border-radius: 4px;
   position: relative;
+  margin-top: 33px;
 }
 
 #descripcion-equipo .content-section form .content-product .select-product:after {
