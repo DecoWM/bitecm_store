@@ -12525,7 +12525,7 @@ var app = new Vue({
           breakpoint: 1200,
           settings: {
             arrows: true,
-            dots: false,
+            dots: true,
             centerMode: false,
             infinite: false,
             slidesToShow: 2
@@ -12534,7 +12534,7 @@ var app = new Vue({
           breakpoint: 990,
           settings: {
             arrows: true,
-            dots: false,
+            // dots: false,
             centerMode: false,
             infinite: false,
             slidesToShow: 1
@@ -12554,7 +12554,7 @@ var app = new Vue({
           breakpoint: 768,
           settings: {
             arrows: true,
-            dots: false,
+            dots: true,
             centerMode: false,
             infinite: false,
             slidesToShow: 2
@@ -12563,7 +12563,7 @@ var app = new Vue({
           breakpoint: 745,
           settings: {
             arrows: true,
-            dots: false,
+            dots: true,
             centerMode: false,
             infinite: false,
             slidesToShow: 1
@@ -56946,7 +56946,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56957,6 +56957,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -57065,7 +57068,9 @@ var render = function() {
             _vm._v(" "),
             _c("span", { staticClass: "moneda" }, [
               _vm._v("." + _vm._s(_vm.product.plan_price_decimal))
-            ])
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "tagciclo" }, [_vm._v("x Ciclo")])
           ])
         ])
       ])
@@ -57169,7 +57174,7 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57180,6 +57185,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -57238,56 +57244,62 @@ var render = function() {
     { staticClass: "col-xs-12 col-sm-12 col-md-11 col-lg-5 col-12-mob" },
     [
       _c("div", { attrs: { id: "box-detalle-product" } }, [
-        _c("div", { staticClass: "detalle-product" }, [
-          _c("div", { staticClass: "price-product" }, [
-            _c("p", [_vm._v("Precio del equipo")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "preci-cant" }, [
-              _vm.product.promo_id
-                ? _c("div", { staticClass: "preci-cant" }, [
-                    _c("span", [_vm._v("S")]),
-                    _vm._v(" "),
-                    _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
-                  ])
-                : _vm._e(),
+        _c(
+          "div",
+          { staticClass: "detalle-product detalle-plan-chip-postpago" },
+          [
+            _c("div", { staticClass: "price-product" }, [
+              _c("p", [_vm._v("Precio del equipo")]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "preci-cant",
-                  class: { "normal-price": _vm.product.promo_id != null }
-                },
-                [
-                  _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
-                  _vm._v(" "),
-                  _c("span", [
-                    _vm._v(_vm._s(_vm.product.product_price_integer))
-                  ]),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "moneda" }, [
-                    _vm._v("." + _vm._s(_vm.product.product_price_decimal))
-                  ])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "plan-product" }, [
-            _c("p", { staticStyle: { color: "#9f5ed9" } }, [
-              _vm._v("Precio del Plan " + _vm._s(_vm.product.plan_name_name))
+              _c("div", { staticClass: "preci-cant" }, [
+                _vm.product.promo_id
+                  ? _c("div", { staticClass: "preci-cant" }, [
+                      _c("span", [_vm._v("S")]),
+                      _vm._v(" "),
+                      _c("span", [_vm._v(_vm._s(_vm.product.promo_price))])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "preci-cant",
+                    class: { "normal-price": _vm.product.promo_id != null }
+                  },
+                  [
+                    _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                    _vm._v(" "),
+                    _c("span", [
+                      _vm._v(_vm._s(_vm.product.product_price_integer))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "moneda" }, [
+                      _vm._v("." + _vm._s(_vm.product.product_price_decimal))
+                    ])
+                  ]
+                )
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "preci-cant" }, [
-              _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+            _c("div", { staticClass: "plan-product" }, [
+              _c("p", { staticStyle: { color: "#9f5ed9" } }, [
+                _vm._v("Precio del Plan " + _vm._s(_vm.product.plan_name_name))
+              ]),
               _vm._v(" "),
-              _c("span", [_vm._v(_vm._s(_vm.product.plan_price_integer))]),
-              _vm._v(" "),
-              _c("span", { staticClass: "moneda" }, [
-                _vm._v("." + _vm._s(_vm.product.plan_price_decimal))
+              _c("div", { staticClass: "preci-cant" }, [
+                _c("span", { staticClass: "moneda" }, [_vm._v("S/")]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.product.plan_price_integer))]),
+                _vm._v(" "),
+                _c("span", { staticClass: "moneda" }, [
+                  _vm._v("." + _vm._s(_vm.product.plan_price_decimal))
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "tagciclo" }, [_vm._v("x Ciclo")])
               ])
             ])
-          ])
-        ])
+          ]
+        )
       ])
     ]
   )

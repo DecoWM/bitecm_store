@@ -228,6 +228,7 @@
                         <span>S/ </span> 
                         {{$plan->plan_price_integer}}
                         <span>.{{$plan->plan_price_decimal}} </span>
+                        <span class="tagciclo list-ciclo">x Ciclo</span>
                       </div>
                       <!--<span class="box-contrato">{{$plan->contract_name}} de permanencia</span>-->
 

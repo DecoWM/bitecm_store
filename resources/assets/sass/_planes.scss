@@ -154,8 +154,12 @@
     .box-item-comercial{
         margin: 10px 0;
         display: flex;
-        // justify-content: space-between;
-        align-items: center;
+        justify-content: space-between;
+        // align-items: center;
+        .box-column{
+            display: flex;
+            align-items: center
+        }
         .item-comercial{
             display: flex;
             align-items: center;
@@ -174,7 +178,7 @@
         .item-comercial-detalle{
             display: flex;
             flex-direction: column;
-            margin-right: 10px;
+            margin-left: 10px;
             span{
                 color: #129ea2;
                 font-weight: normal;
@@ -308,11 +312,13 @@
             height: 100%;
             border-right: 1px solid #c5c5c5;
             .preci-cant{
+                height: 40px;
                 color: #000000;
                 display: flex;
                 align-items: flex-start;
                 font-size: 32px;
                 justify-content: center;
+                font-family: 'multicolore';
                 span.moneda{
                     color: #000000;
                     font-size: 18px;
@@ -331,10 +337,12 @@
         .box-vigencia{
             width: 50%;
             text-align: center;
+            font-family: $fontfamilyroboto;
             p{
                 margin: 0;
                 color: #9f5ed9;
                 font-size: 20px;
+                line-height: 40px;
             }
             span.text-span{
                 font-family: $fontfamilyroboto;
@@ -358,5 +366,24 @@
     }
     .select-plan{
         max-height: 540px !important;
+    }
+}
+
+.tagciclo{
+    font-size: 12px !important;
+    padding-top: 22px !important;
+    text-transform: initial !important;
+    font-weight: 600 !important;
+    font-family: $fontfamilyroboto !important;
+    margin: 0 !important;
+    &.list-ciclo{
+        padding-top: 18px !important;
+    }
+}
+
+.detalle-plan-chip-postpago{
+    &:before,
+    &:after{
+        right: 14px !important;
     }
 }

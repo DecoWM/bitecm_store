@@ -26,9 +26,16 @@
 #planes .select-plan{
     padding-right: 15px;
     padding-left: 15px;
+    padding-bottom: 30px;
+
+}
+
+.slick-dots{
+    bottom: 0;
 }
 
 #planes.planes-prepago-detalle .select-plan{
+    padding-bottom: 30px;
     padding-right: 15px;
     padding-left: 15px;
     @media screen and (min-width: 1200px) {

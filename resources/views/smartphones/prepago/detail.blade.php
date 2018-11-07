@@ -121,7 +121,7 @@
                                 @endif
                               </div>
                               @else
-                              <p>Precio del Chip</p>
+                              <p>Precio del Equipo</p>
                               <div class="preci-prepaid">
                                 <div class="preci-cant">
                                   <span class="moneda">S/</span>
@@ -208,11 +208,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-internet.svg" alt="" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -220,18 +220,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-llamada.svg" alt="" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -242,11 +242,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-mensaje.svg" alt="" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -267,7 +267,7 @@
                           <li><img src="/images/planes/app5.png" alt="" width="32"></li>
                           <li><img src="/images/planes/app6.png" alt="" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
@@ -277,7 +277,7 @@
                             <li><img src="/images/planes/video2.png" alt="" width="32"></li>
                             <li><img src="/images/planes/video3.png" alt="" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>
@@ -334,11 +334,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-internet.svg" alt="" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -346,18 +346,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                              <img src="/images/planes/icon-llamada.svg" alt="" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -368,11 +368,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                              <img src="/images/planes/icon-mensaje.svg" alt="" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -393,7 +393,7 @@
                           <li><img src="/images/planes/app5.png" alt="" width="32"></li>
                           <li><img src="/images/planes/app6.png" alt="" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
@@ -403,7 +403,7 @@
                             <li><img src="/images/planes/video2.png" alt="" width="32"></li>
                             <li><img src="/images/planes/video3.png" alt="" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>
@@ -457,14 +457,14 @@
                         <div style="padding: 20px 25px">
 
                         <div class="box-plan-content-comercial">
-                          <div class="box-item-comercial">
+                          <div class="box-item-comercial box-item-comercial-info">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                              <img src="/images/planes/icon-internet.svg" alt="" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -472,18 +472,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="/images/planes/icon-info.png" alt=""></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                              <img src="/images/planes/icon-llamada.svg" alt="" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -494,11 +494,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-mensaje.svg" alt="" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -519,7 +519,7 @@
                           <li><img src="/images/planes/app5.png" alt="" width="32"></li>
                           <li><img src="/images/planes/app6.png" alt="" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
@@ -529,7 +529,7 @@
                             <li><img src="/images/planes/video2.png" alt="" width="32"></li>
                             <li><img src="/images/planes/video3.png" alt="" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>

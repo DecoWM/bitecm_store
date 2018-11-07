@@ -11,7 +11,7 @@
 
                 <div id="image-equipo">
                   <div class="img-loading">
-                    <img src="/images/planes/placeholder.png" alt="">
+                    <img src="/images/planes/placeholder.png" alt="icono">
                   </div>    
                   @if(count($product_images)>0)
                       <div class="new-slider">
@@ -182,11 +182,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-internet.svg" alt="icono" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -194,18 +194,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="images/planes/icon-info.png" alt="icono"></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-llamada.svg" alt="icono" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -216,11 +216,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-mensaje.svg" alt="icono" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -234,30 +234,30 @@
                        <div class="box-plan-content-apps-sociales">
                         <p>Tus apps favoritas <span>ilimitadas</span></p>
                         <ul>
-                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app1.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="icono" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
                           <p>Video y Musica</p>
                           <ul>
-                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="icono" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>
                           <ul>
-                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="icono" width="32"></li>
                           </ul>
                         </div>
                       </div>
@@ -308,11 +308,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-internet.svg" alt="icono" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -320,18 +320,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="images/planes/icon-info.png" alt="icono"></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-llamada.svg" alt="icono" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -342,11 +342,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-mensaje.svg" alt="icono" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -360,30 +360,30 @@
                        <div class="box-plan-content-apps-sociales">
                         <p>Tus apps favoritas <span>ilimitadas</span></p>
                         <ul>
-                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app1.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="icono" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
                           <p>Video y Musica</p>
                           <ul>
-                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="icono" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>
                           <ul>
-                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="icono" width="32"></li>
                           </ul>
                         </div>
                       </div>
@@ -434,11 +434,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-internet.svg" alt="icono" width="25">
                                 <span>Internet</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -446,18 +446,18 @@
                             </div>
                             <div class="box-column">
                               <div class="item-comercial-icon">
-                                <span class="icon"><img src="images/planes/icon-info.png" alt=""></span>
+                                <span class="icon"><img src="images/planes/icon-info.png" alt="icono"></span>
                               </div>
                             </div>
                         </div>
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-llamada.svg" alt="icono" width="25">
                                 <span>Llamadas</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -468,11 +468,11 @@
                           <div class="box-item-comercial">
                             <div class="box-column">
                               <div class="item-comercial">
-                                <img src="/images/planes/icon.png" alt="" width="32">
+                                <img src="/images/planes/icon-mensaje.svg" alt="icono" width="25">
                                 <span>Mensajes</span>
                               </div>
-                            </div>
-                            <div class="box-column">
+                            <!-- </div> -->
+                            <!-- <div class="box-column"> -->
                               <div class="item-comercial-detalle">
                                 <span>Ilimitado</span>
                                 <span></span>
@@ -486,30 +486,30 @@
                        <div class="box-plan-content-apps-sociales">
                         <p>Tus apps favoritas <span>ilimitadas</span></p>
                         <ul>
-                          <li><img src="/images/planes/app1.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app2.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app3.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app4.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app5.png" alt="" width="32"></li>
-                          <li><img src="/images/planes/app6.png" alt="" width="32"></li>
+                          <li><img src="/images/planes/app1.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app2.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app3.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app4.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app5.png" alt="icono" width="32"></li>
+                          <li><img src="/images/planes/app6.png" alt="icono" width="32"></li>
                         </ul>
-                        <span class="color-secundary">Foto</span>
+                        <!-- <span class="color-secundary">Foto</span> -->
                         </div>
                         <div class="box-plan-content-apps">
                         <div class="items-box-content box-video">
                           <p>Video y Musica</p>
                           <ul>
-                            <li><img src="/images/planes/video1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video2.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/video3.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/video1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video2.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/video3.png" alt="icono" width="32"></li>
                           </ul>
-                          <span class="color-secundary">Bono 1GB</span>
+                          <!-- <span class="color-secundary">Bono 1GB</span> -->
                         </div>
                         <div class="items-box-content box-juegos">
                           <p>Juegos</p>
                           <ul>
-                            <li><img src="/images/planes/juego1.png" alt="" width="32"></li>
-                            <li><img src="/images/planes/juego2.png" alt="" width="32"></li>
+                            <li><img src="/images/planes/juego1.png" alt="icono" width="32"></li>
+                            <li><img src="/images/planes/juego2.png" alt="icono" width="32"></li>
                           </ul>
                         </div>
                       </div>

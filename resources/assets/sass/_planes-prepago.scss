@@ -46,6 +46,7 @@
         }
 
         .detalle-product{
+            &::before,
             &::after{
                 display: none;
             }
@@ -75,4 +76,18 @@
     }
 
     
+}
+
+.box-item-comercial{
+    &.box-item-comercial-info{
+        .box-column:last-child{
+            // width: 100px;
+            // .item-comercial-icon{
+            //     float: right;
+            // }
+            // @media screen  and (max-width: 410px){
+            //     width: 90px;
+            // }
+        }
+    }
 }

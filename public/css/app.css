@@ -111,9 +111,15 @@
 #planes .select-plan {
   padding-right: 15px;
   padding-left: 15px;
+  padding-bottom: 30px;
+}
+
+.slick-dots {
+  bottom: 0;
 }
 
 #planes.planes-prepago-detalle .select-plan {
+  padding-bottom: 30px;
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -2108,7 +2114,7 @@ nav#nav-bitel {
   padding-bottom: 9px;
   padding-top: 5px;
   z-index: 9998;
-  /*margin-bottom: 33px;*/
+  margin-bottom: 33px;
 }
 
 .box-bitel {
@@ -2772,6 +2778,15 @@ nav#nav-bitel {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.box-plan-content-comercial .box-item-comercial .box-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -2805,7 +2820,7 @@ nav#nav-bitel {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-right: 10px;
+  margin-left: 10px;
 }
 
 .box-plan-content-comercial .box-item-comercial .item-comercial-detalle span {
@@ -2960,6 +2975,7 @@ nav#nav-bitel {
 }
 
 .plan .header-box .box-recarga .preci-cant {
+  height: 40px;
   color: #000000;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2971,6 +2987,7 @@ nav#nav-bitel {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  font-family: 'multicolore';
 }
 
 .plan .header-box .box-recarga .preci-cant span.moneda {
@@ -2991,12 +3008,14 @@ nav#nav-bitel {
 .plan .header-box .box-vigencia {
   width: 50%;
   text-align: center;
+  font-family: "Roboto", sans-serif;
 }
 
 .plan .header-box .box-vigencia p {
   margin: 0;
   color: #9f5ed9;
   font-size: 20px;
+  line-height: 40px;
 }
 
 .plan .header-box .box-vigencia span.text-span {
@@ -3021,6 +3040,24 @@ nav#nav-bitel {
 
 .planes-prepago .select-plan {
   max-height: 540px !important;
+}
+
+.tagciclo {
+  font-size: 12px !important;
+  padding-top: 22px !important;
+  text-transform: initial !important;
+  font-weight: 600 !important;
+  font-family: "Roboto", sans-serif !important;
+  margin: 0 !important;
+}
+
+.tagciclo.list-ciclo {
+  padding-top: 18px !important;
+}
+
+.detalle-plan-chip-postpago:before,
+.detalle-plan-chip-postpago:after {
+  right: 14px !important;
 }
 
 #image-equipo {
@@ -3108,14 +3145,73 @@ nav#nav-bitel {
 
 #image-equipo .new-slider ul .slick-prev {
   left: 25px;
+  width: 30px;
+  height: 30px;
 }
 
 #image-equipo .new-slider ul .slick-next {
   right: 25px;
+  width: 30px;
+  height: 30px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+  border: solid 1px #d9d9d9;
+  background-color: #ffffff;
+  border-radius: 100%;
 }
 
 #image-equipo .new-slider ul .slick-dots {
   bottom: 20px;
+}
+
+#planes .select-plan .slick-prev {
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+  border: solid 1px #d9d9d9;
+  background-color: #ffffff;
+  border-radius: 100%;
+}
+
+#planes .select-plan .slick-prev:before {
+  width: 8px;
+  top: 16px;
+  right: 10px;
+  background-color: #129ea2;
+}
+
+#planes .select-plan .slick-prev:after {
+  width: 8px;
+  top: 10px;
+  right: 10px;
+  background-color: #129ea2;
+}
+
+#planes .select-plan .slick-next {
+  right: 15px;
+  width: 30px;
+  height: 30px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+  border: solid 1px #d9d9d9;
+  background-color: #ffffff;
+  border-radius: 100%;
+}
+
+#planes .select-plan .slick-next:before {
+  width: 8px;
+  top: 10px;
+  right: 8px;
+  background-color: #129ea2;
+}
+
+#planes .select-plan .slick-next:after {
+  width: 8px;
+  top: 16px;
+  right: 8px;
+  background-color: #129ea2;
 }
 
 .form-checkbox {
@@ -3288,6 +3384,7 @@ nav#nav-bitel {
   width: 100%;
 }
 
+#descripcion-equipo .equipo-prepago .detalle-product::before,
 #descripcion-equipo .equipo-prepago .detalle-product::after {
   display: none;
 }

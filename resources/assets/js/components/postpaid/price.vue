@@ -15,6 +15,8 @@
               <span class="moneda">S/</span>
               <span>{{product.product_price_integer}}</span>
               <span class="moneda">.{{product.product_price_decimal}}</span>
+              <!-- <span class="moneda">hola</span> -->
+              
             </div>
             <!--
             <div :class="{'normal-price': product.promo_id != null}" class="preci-cant">
@@ -31,6 +33,7 @@
             <span class="moneda">S/</span>
             <span>{{product.plan_price_integer}}</span>
             <span class="moneda">.{{product.plan_price_decimal}}</span>
+            <span class="tagciclo">x Ciclo</span>
           </div>
         </div>
       </div>
