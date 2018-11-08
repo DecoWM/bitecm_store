@@ -67,7 +67,7 @@
                       'affiliation'=>$smartphone->affiliation_slug,
                       'plan'=>$smartphone->plan_slug,
                       'contract'=>$smartphone->contract_slug
-                    ])}}" class="btn btn-default">comprar</a></div>
+                    ])}}" class="btn btn-default">solicitalo</a></div>
                   <div class="checkbox btn-comparar">
                     <label>
                       <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_variation_id: {{$smartphone->product_variation_id}}, picture_url: '{{asset(Storage::url($smartphone->picture_url))}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])">comparar
