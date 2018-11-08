@@ -71,7 +71,13 @@
                 @foreach ($filters['affiliation_list'] as $affiliation)
                 <div class="item">
                   <input id="type-opt-{{$affiliation->affiliation_id}}" type="radio" name="affiliation" value="{{$affiliation->affiliation_id}}" v-model="filters[type].affiliation.value" v-on:change="searchProduct(1)">
-                  <label for="type-opt-{{$affiliation->affiliation_id}}" style="max-width: 150px;">{{$affiliation->affiliation_name}}</label>
+                  <label for="type-opt-{{$affiliation->affiliation_id}}" style="max-width: 150px;">
+                    @if($affiliation->affiliation_name != 'Portabilidad')
+                      {{$affiliation->affiliation_name}}
+                    @else
+                      Cambiate a Bitel (Portabilidad)
+                    @endif
+                  </label>
                 </div>
                 @endforeach
               </div>
