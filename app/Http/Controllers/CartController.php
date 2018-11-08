@@ -167,7 +167,16 @@ class CartController extends Controller
       }
     }
     $this->preventHistory();
-    return redirect()->route('show_cart');
+
+    // prepago
+    if($cart[0]["type_id"] == 1){
+      return redirect()->route('prepaid');
+    }
+    // postpago
+    elseif($cart[0]["type_id"] == 2){
+      return redirect()->route('postpaid');
+    }
+    //return redirect()->route('show_cart');
   }
 
   public function updateCart(Request $request) {

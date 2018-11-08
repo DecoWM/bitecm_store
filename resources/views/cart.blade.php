@@ -190,15 +190,26 @@
                 <div class="col-xs-12 col-sm-6 col-sm-offset-6">
                 @endif
                   @if (count($products) > 0)
-                  <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a>
-                  {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
-                  {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
-                  @if (isset($equipo) && $equipo->product_sentinel)
-                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">COMPRAR</a>
-                  @else
-                  <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">COMPRAR</a>
-                  @endif
-                  @endif
+              
+                  <form action="{{route('remove_from_cart')}}" method="POST">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
+                    @if(isset($product->product_variation_id))
+                      <input type="hidden" name="product_variation" value="{{$product->product_variation_id}}">
+                    @endif
+                    <button type="submit" class="btn btn-default regresar">CANCELAR</button>
+                  
+                    {{-- <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a> --}}
+                    {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
+                    {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
+                    @if (isset($equipo) && $equipo->product_sentinel)
+                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">COMPRAR</a>
+                    @else
+                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">COMPRAR</a>
+                    @endif
+                    @endif
+                  </form>
+
                 </div>
               </div>
             </div>
