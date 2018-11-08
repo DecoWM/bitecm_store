@@ -34,7 +34,7 @@
         </div>
         <div class="btn-product form-inline">
           <div class="form-group btn-comprar">
-            <a v-bind:href="product.route" class="btn btn-default">comprar</a>
+            <a v-bind:href="product.route" class="btn btn-default">solicitalo</a>
           </div>
           <div class="checkbox btn-comparar">
             <label>

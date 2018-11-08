@@ -55119,7 +55119,7 @@ var render = function() {
                   staticClass: "btn btn-default",
                   attrs: { href: _vm.product.route }
                 },
-                [_vm._v("comprar")]
+                [_vm._v("solicitalo")]
               )
             ]),
             _vm._v(" "),
@@ -55437,7 +55437,7 @@ var render = function() {
                   staticClass: "btn btn-default",
                   attrs: { href: _vm.product.route }
                 },
-                [_vm._v("comprar")]
+                [_vm._v("solicitalo")]
               )
             ]),
             _vm._v(" "),
@@ -55732,7 +55732,7 @@ var render = function() {
                     staticClass: "btn btn-default",
                     attrs: { href: _vm.product.route }
                   },
-                  [_vm._v("comprar")]
+                  [_vm._v("solicitalo")]
                 )
               ])
             ]
@@ -56003,7 +56003,7 @@ var render = function() {
                       staticClass: "btn btn-default",
                       attrs: { href: _vm.product.route }
                     },
-                    [_vm._v("comprar")]
+                    [_vm._v("solicitalo")]
                   )
                 ])
               ]
