@@ -2477,6 +2477,12 @@ nav#nav-bitel {
   bottom: 0;
 }
 
+@media screen and (max-width: 1200px) {
+  #box-select-contrato select {
+    padding: 30px 47px 10px 20px !important;
+  }
+}
+
 #box-select-cambiate {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
@@ -2529,6 +2535,20 @@ nav#nav-bitel {
   bottom: 0;
 }
 
+#box-select-cambiate .affiliations-select {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 1200px) {
+  #box-select-cambiate .affiliations-select select {
+    padding: 30px 47px 10px 20px !important;
+  }
+}
+
 #box-select-cambiate select {
   font-family: 'Roboto', sans-serif !important;
   border: none;
@@ -2542,6 +2562,12 @@ nav#nav-bitel {
   padding: 30px 87px 10px 20px !important;
   border: solid 1px rgba(16, 168, 176, 0.45) !important;
   background: transparent !important;
+}
+
+@media screen and (max-width: 1200px) {
+  #box-select-cambiate select {
+    padding: 30px 47px 10px 20px !important;
+  }
 }
 
 #box-select-cambiate.planes-chip .select-product:after,
