@@ -58400,29 +58400,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "affiliations-select" } }, [
-    _c(
-      "select",
-      {
-        attrs: { id: "affsel", form: "purchase-form", name: "affiliation" },
-        on: {
-          change: function($event) {
-            _vm.setAffiliation($event)
+  return _c(
+    "div",
+    {
+      staticClass: "affiliations-select",
+      attrs: { id: "affiliations-select" }
+    },
+    [
+      _c(
+        "select",
+        {
+          attrs: { id: "affsel", form: "purchase-form", name: "affiliation" },
+          on: {
+            change: function($event) {
+              _vm.setAffiliation($event)
+            }
           }
-        }
-      },
-      _vm._l(_vm.affiliations, function(affiliation, ix) {
-        return _c(
-          "option",
-          {
-            attrs: { id: "aff" + affiliation.affiliation_id, "data-ix": ix },
-            domProps: { value: affiliation.affiliation_id }
-          },
-          [_vm._v(_vm._s(affiliation.affiliation_name))]
-        )
-      })
-    )
-  ])
+        },
+        _vm._l(_vm.affiliations, function(affiliation, ix) {
+          return _c(
+            "option",
+            {
+              attrs: { id: "aff" + affiliation.affiliation_id, "data-ix": ix },
+              domProps: { value: affiliation.affiliation_id }
+            },
+            [_vm._v(_vm._s(affiliation.affiliation_name))]
+          )
+        })
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

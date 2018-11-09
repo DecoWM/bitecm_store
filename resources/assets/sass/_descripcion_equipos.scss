@@ -115,6 +115,11 @@
         position: absolute;
         top: 0;
         bottom: 0;
+        @media screen and (max-width: 1200px){
+            // select{
+                padding: 30px 47px 10px 20px !important;
+            // }
+        }
     }
 
 }
@@ -157,6 +162,18 @@
         top: 0;
         bottom: 0;
     }
+    .affiliations-select{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        @media screen and (max-width: 1200px){
+            select{
+                padding: 30px 47px 10px 20px !important;
+            }
+        }
+    }
     select{
         font-family: 'Roboto', sans-serif !important;
         border: none;
@@ -171,7 +188,13 @@
         padding: 30px 87px 10px 20px !important;
         // border:  1px rgba(16, 168, 176, 0.45);
         border: solid 1px rgba(16, 168, 176, 0.45) !important;
-        background: transparent !important
+        background: transparent !important;
+        @media screen and (max-width: 1200px){
+            // select{
+                padding: 30px 47px 10px 20px !important;
+            // }
+        }
+       
     }
     &.planes-chip{
         .select-product{
