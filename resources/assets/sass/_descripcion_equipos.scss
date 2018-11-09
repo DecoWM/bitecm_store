@@ -173,6 +173,19 @@
         border: solid 1px rgba(16, 168, 176, 0.45) !important;
         background: transparent !important
     }
+    &.planes-chip{
+        .select-product{
+            &:after,
+            &:before{
+                top: 20px !important
+            }
+        }
+        select{
+            padding: 30px 27px 10px 20px !important;
+            position: absolute;
+            top: 0;
+        }
+    }
 
 }
 

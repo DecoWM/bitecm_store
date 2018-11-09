@@ -96,7 +96,7 @@
                     <div class="row">
 
                       <div class="col-xs-12 col-sm-12 col-md-11 col-lg-3">
-                        <div id="box-select-cambiate">
+                        <div id="box-select-cambiate" class="planes-chip">
                           <div class="select-product">
                             <!-- <span class="title-select">Lo quieres en</span> -->
                             <div class="box-title-select-cambiate">
