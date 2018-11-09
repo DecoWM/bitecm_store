@@ -201,11 +201,11 @@
                   
                     {{-- <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a> --}}
                     {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
-                    {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">comprar</button> --}}
+                    {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">solicitalo</button> --}}
                     @if (isset($equipo) && $equipo->product_sentinel)
-                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">COMPRAR</a>
+                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">solicitalo</a>
                     @else
-                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">COMPRAR</a>
+                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">solicitalo</a>
                     @endif
                     @endif
                   </form>

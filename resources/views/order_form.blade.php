@@ -137,7 +137,11 @@
                       </div>
                     </div>
 
+                    @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
+                    <div class="col-xs-12 col-sm-6">
+                    @else
                     <div class="col-xs-12">
+                    @endif  
                       @if(isset($item))
                       <div class="form-group form-select">
                         <label for="affiliation">Tipo de afiliación</label>
@@ -163,11 +167,31 @@
                       </div>
                     </div>
 
+                    @if(isset($item['affiliation_id']) && $item['affiliation_id'] == 3)
+                    <div class="col-xs-12 col-sm-6">
+                      <div class="form-group">
+                        <label for="phone_number">Ingresa tu número de Bitel</label>
+                        <input id="phone_number" type="text" name="phone_number" maxlength="9" v-model="phone_number" v-validate="'required|numeric|min:9|max:9'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten 9 caracteres numéricos</span>
+                      </div>
+                    </div>
+                    @endif
+
                     <!--  LINEA NUEVA Y RENOVACIÓN -->
+                    <!--
                     <div class="col-xs-12 col-sm-6" v-if="affiliation == 2 || affiliation == 3">
                       <div class="form-group">
                         <label for="phone_number" v-if="affiliation == 3">Número de teléfono de Bitel</label>
                         <label for="phone_number" v-if="affiliation == 2">Número de teléfono</label>
+                        <input id="phone_number" type="text" name="phone_number" maxlength="9" v-model="phone_number" v-validate="'required|numeric|min:9|max:9'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
+                        <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten 9 caracteres numéricos</span>
+                      </div>
+                    </div>
+                    -->
+
+                    <div class="col-xs-12 col-sm-6" v-if="affiliation == 3">
+                      <div class="form-group">
+                        <label for="phone_number">Número de teléfono de Bitel</label>
                         <input id="phone_number" type="text" name="phone_number" maxlength="9" v-model="phone_number" v-validate="'required|numeric|min:9|max:9'" :class="{'input': true, 'is-danger': errors.has('phone_number')}"><i v-cloak v-show="errors.has('phone_number')" class="fa fa-warning"></i>
                         <span v-show="errors.has('phone_number')" class="help is-danger" v-cloak>Sólo se permiten 9 caracteres numéricos</span>
                       </div>
@@ -182,8 +206,8 @@
                         <label for="type_number_carry">Tipo de número a portar:</label>
                         <select id="type_number_carry" name="type_number_carry" v-model="type_number_carry" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_number_carry') }">
                           <option value="" selected>Seleccione un tipo de número a portar</option>
-                          <option value="Prepaid">Prepaid</option>
-                          <option value="Postpaid">Postpaid</option>
+                          <option value="Postpaid">Postpago</option>
+                          <option value="Prepaid">Prepago</option>
                         </select>
                       </div>
                     </div>
