@@ -87,6 +87,7 @@
                       <span v-show="errors.has('last_name')" class="help is-danger" v-cloak>Sólo se permiten caracteres alfabeticos</span>
                     </div>
                     -->
+                    
                     <div class="col-xs-12 col-sm-6">
                       <div class="form-group form-select">
                           <label for="document_type">Tipo de documento</label>
