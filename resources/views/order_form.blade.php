@@ -207,8 +207,8 @@
                         <label for="type_number_carry">Tipo de número a portar:</label>
                         <select id="type_number_carry" name="type_number_carry" v-model="type_number_carry" v-validate="'required'" :class="{'input': true, 'is-danger': errors.has('type_number_carry') }">
                           <option value="" selected>Seleccione un tipo de número a portar</option>
-                          <option value="Postpaid">Postpago</option>
-                          <option value="Prepaid">Prepago</option>
+                          <option value="02">Postpago</option>
+                          <option value="01">Prepago</option>
                         </select>
                       </div>
                     </div>

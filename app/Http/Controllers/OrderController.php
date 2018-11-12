@@ -152,6 +152,7 @@ class OrderController extends Controller
   * @var portingRequestId: id for request created
   */
  // 'sourcePayment' => strval($order_detail['type_number_carry']),
+ // 'sourcePayment' => strval($order_detail['type_id'])
   protected function createConsultantRequest(&$order_detail) {
     try {
       $req = [
@@ -161,7 +162,7 @@ class OrderController extends Controller
           'dni' => strval($order_detail['id_number']),
           'isdn' => strval($order_detail['porting_phone']),
           'sourceOperator' => isset($order_detail['source_operator_id']) ? strval($order_detail['source_operator_id']) : '',
-          'sourcePayment' => strval($order_detail['type_id']),
+          'sourcePayment' => strval($order_detail['type_number_carry']),
           'email' => strval($order_detail['contact_email']),
           'phone' => strval($order_detail['contact_phone']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
@@ -169,8 +170,6 @@ class OrderController extends Controller
           'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : ''
         )
       ];
-
-      //error_log(print_r($req, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 
       $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
 
@@ -692,6 +691,16 @@ class OrderController extends Controller
             'message' => 'Ocurrió un error creando la solicitud de portabilidad.'
           ]));
         }
+
+        // si va a portar desde un prepago
+        if($request->type_number_carry == '01'){
+          $order_detail['type_number_carry'] = 'Prepaid';
+        }
+        // si va a portar desde un postpago
+        elseif($request->type_number_carry == '02'){
+          $order_detail['type_number_carry'] = 'Postpaid';
+        }
+
       }
     }
 
