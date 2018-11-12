@@ -109,8 +109,8 @@
 }
 
 #planes .select-plan {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
   padding-bottom: 30px;
 }
 
@@ -120,8 +120,8 @@
 
 #planes.planes-prepago-detalle .select-plan {
   padding-bottom: 30px;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 @media screen and (min-width: 1200px) {
@@ -1846,6 +1846,24 @@ select {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .form-carrito {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+
+  .form-carrito .btn-default {
+    width: 45% !important;
+    height: 41px;
+    line-height: 41px !important;
+    margin-bottom: 0 !important;
+  }
+}
+
 .postpago-item {
   margin-right: 20px;
   display: -webkit-box;
@@ -2719,6 +2737,12 @@ nav#nav-bitel {
   margin-top: 0;
 }
 
+@media screen and (max-width: 990px) {
+  #planes {
+    padding: 28px 10px;
+  }
+}
+
 #planes .select-plan {
   max-height: 520px;
 }
@@ -2741,10 +2765,21 @@ nav#nav-bitel {
   padding: 20px 25px;
 }
 
+@media screen and (max-width: 330px) {
+  #planes .select-plan .plan .content-plan {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+}
+
 #planes .select-plan .plan.plan-active {
   border: none !important;
   -webkit-box-shadow: none !important;
           box-shadow: none !important;
+}
+
+#planes.planes-prepago .select-plan .plan.plan-active .content-plan {
+  border: 1px solid #cecece !important;
 }
 
 #planes .select-plan .plan {
@@ -2978,6 +3013,14 @@ nav#nav-bitel {
   }
 }
 
+@media screen and (max-width: 480px) {
+  .box-plan-content-apps {
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+
 .box-plan-content-apps p {
   font-weight: normal;
 }
@@ -2985,6 +3028,12 @@ nav#nav-bitel {
 @media screen and (max-width: 1200px) {
   .box-plan-content-apps .items-box-content:first-child {
     margin-right: 50px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .box-plan-content-apps .items-box-content:first-child {
+    margin-right: 0;
   }
 }
 
@@ -3012,6 +3061,13 @@ nav#nav-bitel {
 
 .box-plan-content-apps span {
   font-weight: normal;
+}
+
+@media screen and (max-width: 330px) {
+  .plan .box-body-content-plan {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
 }
 
 .plan .header-box {
@@ -3243,7 +3299,7 @@ nav#nav-bitel {
 }
 
 #planes .select-plan .slick-prev {
-  left: 15px;
+  left: 0px;
   width: 30px;
   height: 30px;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
@@ -3268,7 +3324,7 @@ nav#nav-bitel {
 }
 
 #planes .select-plan .slick-next {
-  right: 15px;
+  right: 0px;
   width: 30px;
   height: 30px;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);

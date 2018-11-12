@@ -191,7 +191,7 @@
                 @endif
                   @if (count($products) > 0)
               
-                  <form action="{{route('remove_from_cart')}}" method="POST">
+                  <form action="{{route('remove_from_cart')}}" method="POST" class="form-carrito">
                     {{ csrf_field() }}
                     <input type="hidden" name="stock_model" value="{{$product->stock_model_id}}">
                     @if(isset($product->product_variation_id))
@@ -200,13 +200,17 @@
                     <button type="submit" class="btn btn-default regresar">CANCELAR</button>
                   
                     {{-- <a href="{{session('back_button')}}" class="btn btn-default regresar">REGRESAR</a> --}}
+                    <!-- <div class="row">
+
+                    </div> -->
                     {{-- <button type="submit" class="btn btn-default regresar">REGRESAR</button> --}}
                     {{-- <button type="submit" href="{{route('envio', ['product'=>$product->product_id])}}" class="redirect-href btn btn-default comprar">solicitalo</button> --}}
+                    
                     @if (isset($equipo) && $equipo->product_sentinel)
-                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">solicitalo</a>
-                    @else
-                    <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">solicitalo</a>
-                    @endif
+                      <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar" {{ !$equipo->sentinel_check ? 'disabled="disabled"' : ''}} ref="initiateCheckout">solicitalo</a>
+                      @else
+                      <a id="initiateCheckout" href="{{route('create_order')}}" class="btn btn-default comprar">solicitalo</a>
+                      @endif
                     @endif
                   </form>
 

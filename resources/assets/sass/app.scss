@@ -24,8 +24,8 @@
 }
 
 #planes .select-plan{
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 0px;
+    padding-left: 0px;
     padding-bottom: 30px;
 
 }
@@ -36,8 +36,8 @@
 
 #planes.planes-prepago-detalle .select-plan{
     padding-bottom: 30px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 0px;
+    padding-left: 0px;
     @media screen and (min-width: 1200px) {
         padding-right: 0px;
         padding-left: 0px;
@@ -1382,6 +1382,19 @@ section#equipos-vendidos .container .row .content-tab-pro .list-productos{
     margin-top: 9px;
     @media screen and (max-width: 1170px){
         display: block;
+    }
+}
+
+.form-carrito{
+    @media screen and (max-width: 768px){
+        display: flex;
+        justify-content: space-between;
+        .btn-default{
+            width: 45% !important;
+            height: 41px;
+            line-height: 41px !important;
+            margin-bottom: 0 !important;
+        }
     }
 }
 

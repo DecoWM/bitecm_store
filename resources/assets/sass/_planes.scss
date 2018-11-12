@@ -1,6 +1,9 @@
 #planes{
     background: #f5f7f9;
     padding: 28px 20px;
+    @media screen and  (max-width: 990px){
+        padding: 28px 10px;
+    }
     margin-top: 0;
     .select-plan{
         max-height: 520px;
@@ -34,6 +37,10 @@
 
 #planes .select-plan .plan .content-plan{
     padding: 20px 25px;
+    @media screen and (max-width: 330px){
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
 }
 
 #planes .select-plan .plan.plan-active{
@@ -41,6 +48,11 @@
     // box-shadow: 0 0px 4px rgba(0,0,0,0.3);
     box-shadow: none !important;
 }
+
+#planes.planes-prepago  .select-plan .plan.plan-active .content-plan{
+    border: 1px solid #cecece !important; 
+}
+
 
 
 #planes .select-plan .plan{
@@ -249,13 +261,19 @@
     @media screen and (max-width:1200px) {
         justify-content: flex-start
     }
+    @media screen and (max-width:480px) {
+        justify-content: space-between
+    }
     p{
         font-weight: normal
     }
     .items-box-content{
-        @media screen and (max-width:1200px){
-            &:first-child{
+        &:first-child{
+            @media screen and (max-width:1200px){
                 margin-right: 50px;
+            }
+            @media screen and (max-width:480px){
+                margin-right: 0;
             }
         }
         ul{
@@ -283,6 +301,12 @@
 
 
 .plan{
+    .box-body-content-plan{
+        @media screen and  (max-width:330px) {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+        }
+    }
     .header-box{
         height: 100px;
         display: flex;

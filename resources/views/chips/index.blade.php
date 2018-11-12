@@ -176,7 +176,7 @@
                               <span class="text-span">Vigencia</span>
                           </div>
                         </div>
-                        <div style="padding: 20px 25px">
+                        <div style="padding: 20px 25px" class="box-body-content-plan">
 
                         <div class="box-plan-content-comercial">
                           <div class="box-item-comercial">
@@ -302,7 +302,7 @@
                               <span class="text-span">Vigencia</span>
                           </div>
                         </div>
-                        <div style="padding: 20px 25px">
+                        <div style="padding: 20px 25px" class="box-body-content-plan">
 
                         <div class="box-plan-content-comercial">
                           <div class="box-item-comercial">
@@ -428,7 +428,7 @@
                               <span class="text-span">Vigencia</span>
                           </div>
                         </div>
-                        <div style="padding: 20px 25px">
+                        <div style="padding: 20px 25px" class="box-body-content-plan">
 
                         <div class="box-plan-content-comercial">
                           <div class="box-item-comercial">
