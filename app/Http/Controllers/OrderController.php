@@ -70,6 +70,7 @@ class OrderController extends Controller
   * @var isOverQuota: 0 -> return false
   *                  else -> return true
   **/
+  // funciona OK con los cambios realizados
   protected function checkIsOverQouta($order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.checkOverQoutaIdNo', [
@@ -94,6 +95,7 @@ class OrderController extends Controller
   * @var result: if exists -> return object result
   *              else -> return false: Not have debt
   */
+  // funciona bien con los cambios realizados
   protected function getInfoCustomer($order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoap.getCustomer', [
@@ -122,9 +124,10 @@ class OrderController extends Controller
   * @var errorCode: -1 -> return true
   *                 else -> return false: Not have debt
   */
+  // verificar si esta funcionando bien ya que esta devolviendo 1
   protected function checkHaveDebit($custId) {
     try {
-      $response = $this->soapWrapper->call('bitelSoap.getInfoDebitByCustId', [
+      $response = $this->soapWrapper->call('bitelSoap.  ', [
         'getInfoDebitByCustId' => array(
           'custId' => strval($custId)
         )
@@ -149,7 +152,6 @@ class OrderController extends Controller
   * @var portingRequestId: id for request created
   */
  // 'sourcePayment' => strval($order_detail['type_number_carry']),
-
   protected function createConsultantRequest(&$order_detail) {
     try {
       $req = [
@@ -162,12 +164,13 @@ class OrderController extends Controller
           'sourcePayment' => strval($order_detail['type_id']),
           'email' => strval($order_detail['contact_email']),
           'phone' => strval($order_detail['contact_phone']),
-          'sourcePayment' => strval($order_detail['type_number_carry']),
           'custName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'contactName' => strval($order_detail['first_name'] . ' ' . $order_detail['last_name']),
           'reasonId' => isset($order_detail['reason_code']) ? strval($order_detail['reason_code']) : ''
         )
       ];
+
+      //error_log(print_r($req, true), 3, 'c:/nginx-1.12.2/logs/bitel-store.log');
 
       $response = $this->soapWrapper->call('bitelSoap.createConsultantRequest', $req);
 
@@ -181,7 +184,8 @@ class OrderController extends Controller
 
       Log::warning('Respuesta bitelSoap.createConsultantRequest: ', (array) $response->return);
       return false;
-    } catch (\Exception $e) {
+    } 
+    catch (\Exception $e) {
       Log::error('El método createConsultantRequest no se encuentra disponible o recibió parametros erroneos');
       Log::error($e->getMessage());
       return true;
@@ -222,6 +226,7 @@ class OrderController extends Controller
     }
   }
 
+  // RENOVACION
   protected function checkIsRenovationUnavailable(&$order_detail) {
     try {
       $response = $this->soapWrapper->call('bitelSoapGW.gwOperation', [
@@ -649,6 +654,7 @@ class OrderController extends Controller
       }
 
       // Check if have many lines
+      // funciona OK con los cambios realizados
       if(isset($order_detail['product_code']) && $this->checkIsOverQouta($order_detail)) {
         return redirect()->route('create_order')->with('ws_result', json_encode([
           'title' => 'te comunica que',
@@ -659,6 +665,7 @@ class OrderController extends Controller
       // check if is client
       if($data_customer = $this->getInfoCustomer($order_detail)) {
         // check if have debt
+        // varificar si esta funcionando bien ya que esta devolviendo 1
         if($this->checkHaveDebit($data_customer->custId)){
           return redirect()->route('create_order')->with('ws_result', json_encode([
             'title' => 'te recuerda que',

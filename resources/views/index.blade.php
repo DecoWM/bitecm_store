@@ -71,7 +71,7 @@
                           </div>
                           @endif
                           <div class="btn-comprar">
-                            <a href="{{$tablet->route}}" class="btn btn-default">COMPRAR</a>
+                            <a href="{{$tablet->route}}" class="btn btn-default">SOLICITALO</a>
                           </div>
                         </div>
                       </div>
@@ -112,7 +112,7 @@
                           </div>
                           @endif
                           <div class="btn-comprar">
-                            <a href="{{$smartphone->route}}" class="btn btn-default">COMPRAR</a>
+                            <a href="{{$smartphone->route}}" class="btn btn-default">SOLICITALO</a>
                           </div>
                         </div>
                       </div>
@@ -134,7 +134,7 @@
                 <div class="content-product text-center">
                   <div class="btn-comprar">
 
-                    <a href="{{$home_images[1]->image_link}}" class="btn btn-default">COMPRAR</a>
+                    <a href="{{$home_images[1]->image_link}}" class="btn btn-default">SOLICITALO</a>
                   </div>
                 </div>
               </div>
@@ -144,7 +144,7 @@
                 <img src="{{$home_images[2]->image_url}}" alt="promoción Lg G6">
                 <div class="content-product text-center">
                   <div class="btn-comprar">
-                    <a href="{{$home_images[2]->image_link}}" class="btn btn-default">COMPRAR</a>
+                    <a href="{{$home_images[2]->image_link}}" class="btn btn-default">SOLICITALO</a>
                   </div>
                 </div>
               </div>

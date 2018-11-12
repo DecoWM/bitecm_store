@@ -152,7 +152,7 @@
                     <span>S/.{{$item->product_price}}</span>
                     @endif
                   </div>
-                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">comprar</a></div>
+                  <div class="btn-comprar"><a href="{{$item->route}}" class="btn btn-default">solicitalo</a></div>
                 </div>
               </div>
               @endforeach
