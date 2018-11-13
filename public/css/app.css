@@ -2342,6 +2342,19 @@ nav#nav-bitel {
   }
 }
 
+.not-stock:before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+}
+
 #box-color-product {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
