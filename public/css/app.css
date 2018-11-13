@@ -2355,6 +2355,11 @@ nav#nav-bitel {
   z-index: 99999;
 }
 
+.not-stock .btn-default {
+  background-color: #e0e0e0 !important;
+  color: #727272 !important;
+}
+
 #box-color-product {
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.04);
