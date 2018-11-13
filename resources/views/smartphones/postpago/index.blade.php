@@ -61,7 +61,6 @@
                 </div>
                 <div class="btn-product form-inline">
                   <div class="form-group btn-comprar">
-                    <!--
                     <a href="{{route('postpaid_detail', [
                       'brand'=>$smartphone->brand_slug,
                       'product'=>$smartphone->product_slug,
@@ -69,8 +68,9 @@
                       'plan'=>$smartphone->plan_slug,
                       'contract'=>$smartphone->contract_slug
                     ])}}" class="btn btn-default">solicitalo</a>
-                  -->
+                  <!--
                    @include('products.agotado',['product' => $smartphone, 'smartphone' => $smartphone])
+                 -->
                   </div>
                   <div class="checkbox btn-comparar">
                     <label>
