@@ -61,13 +61,17 @@
                 </div>
                 <div class="btn-product form-inline">
                   <div class="form-group btn-comprar">
+                    <!--
                     <a href="{{route('postpaid_detail', [
                       'brand'=>$smartphone->brand_slug,
                       'product'=>$smartphone->product_slug,
                       'affiliation'=>$smartphone->affiliation_slug,
                       'plan'=>$smartphone->plan_slug,
                       'contract'=>$smartphone->contract_slug
-                    ])}}" class="btn btn-default">solicitalo</a></div>
+                    ])}}" class="btn btn-default">solicitalo</a>
+                  -->
+                   @include('products.agotado',['product' => $smartphone, 'smartphone' => $smartphone])
+                  </div>
                   <div class="checkbox btn-comparar">
                     <label>
                       <input type="checkbox" class="checkbox-compare" v-model="compare" v-bind:value="{ product_variation_id: {{$smartphone->product_variation_id}}, picture_url: '{{asset(Storage::url($smartphone->picture_url))}}'}" v-bind:disabled="compare.length==4 && !_.find(compare, ['product_variation_id', {{$smartphone->product_variation_id}}])">comparar
