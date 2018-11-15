@@ -92,6 +92,7 @@ class BaseController extends Controller
   }
 
   public function searchProductPostpaid($category_id=1, $affiliation_id=1, $plan_id=7, $contract_id=1, $product_brands='', $pag_total_by_page=20, $pag_actual=1, $sort_by="", $sort_direction="", $product_price_ini=0, $product_price_end=0, $product_string_search="", $product_tag="", $product_ignore_ids = "") {
+
     $products = DB::select('call PA_productSearchPostpago(
       :product_categories,
       :product_brands,

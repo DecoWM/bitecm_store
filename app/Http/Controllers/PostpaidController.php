@@ -31,10 +31,8 @@ class PostpaidController extends Controller
     $items_per_page = 12;
     $current_page = ($request->has('pag')) ? $request->pag : 1 ;
 
-
     $search_result = $this->shared->searchProductPostpaid(1, $affiliation_id, $plan_post_id, $contract_id, null, $items_per_page, $current_page, "publish_at", "desc", 0 , 0, $searched_string);
     
-
     $filtered_product = null;
     foreach ($search_result['products'] as $ix => $prod) {
       $prod_full_name = strtolower($prod->brand_name.' '.$prod->product_model);

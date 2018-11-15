@@ -91,6 +91,7 @@ class SearchController extends Controller
   }
 
   public function searchPostpaid (Request $request) {
+    
     $request->validate([
       'searched_string' => 'nullable|max:30|regex:/(^[A-Za-z0-9.\+\- ]+$)+/',
       'items_per_page' => 'required|integer|min:0'
