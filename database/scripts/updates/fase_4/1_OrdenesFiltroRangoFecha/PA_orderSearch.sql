@@ -13,6 +13,7 @@ BEGIN
   DECLARE select_query TEXT;
   DECLARE from_query TEXT;
   DECLARE where_query TEXT;
+  DECLARE extras_query TEXT;
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
   SET pag_total_by_page = IFNULL(pag_total_by_page, 0); 
@@ -68,14 +69,13 @@ BEGIN
       ON ORD.`branch_id` = BCH.`branch_id`';
   SET where_query = CONCAT('
   WHERE ORD.created_at BETWEEN \'', start_date, '\' AND \'', finish_date, '\'
-    GROUP BY ORD.`order_id`
-    ORDER BY ORD.`created_at` DESC
   ');
+  SET extras_query = 'ORDER BY ORD.`created_at` DESC';
   
   IF (sort_by <> '') THEN
-    SET where_query = CONCAT(where_query, ', ORD.', sort_by);
+    SET extras_query = CONCAT(extras_query, ', ORD.', sort_by);
     IF(sort_direction IN ('ASC','DESC')) THEN
-      SET where_query = CONCAT(where_query, " ", sort_direction);
+      SET extras_query = CONCAT(extras_query, " ", sort_direction);
     END IF;
   END IF;
   
@@ -88,13 +88,13 @@ BEGIN
   SET pag_end = pag_actual * pag_total_by_page;
   
   IF (pag_ini > 0 AND pag_total_by_page > 0) THEN
-    SET where_query = CONCAT(where_query, ' LIMIT ', pag_ini, ',', pag_total_by_page);
+    SET extras_query = CONCAT(extras_query, ' LIMIT ', pag_ini, ',', pag_total_by_page);
   ELSE
     IF (pag_total_by_page > 0) THEN
-      SET where_query = CONCAT(where_query, ' LIMIT ', pag_total_by_page);
+      SET extras_query = CONCAT(extras_query, ' LIMIT ', pag_total_by_page);
     END IF;
   END IF;
-  SET stored_query = CONCAT(select_query, from_query, where_query);
+  SET stored_query = CONCAT(select_query, from_query, where_query, extras_query);
   
   SET @consulta = stored_query;
   
