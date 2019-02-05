@@ -249,7 +249,13 @@ class PostpaidController extends Controller
       'just_3' => $i <= 3
     ];
 
-    return view('smartphones.postpago.detail', $response);
+    $chip_cat_id = \Config::get('filter.category_id');
+
+    if ($product->category_id == $chip_cat_id) {
+      return view('planes.index', $response);
+    } else {
+      return view('smartphones.postpago.detail', $response);
+    }
   }
 
   public function compare (Request $request) {

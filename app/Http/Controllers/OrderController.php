@@ -533,8 +533,10 @@ class OrderController extends Controller
       $total_igv += $subtotal_igv;
 
       $equipo_plan = 0;
+
+      $chip_cat_id = \Config::get('filter.category_id');
       // si es solo un chip (producto de categoria chip)
-      if($product->category_id === 4){
+      if($product->category_id == $chip_cat_id){
         $equipo_plan = 1;
       }
 

@@ -16,8 +16,8 @@ BEGIN
   DECLARE extras_query TEXT;
   DECLARE pag_ini INT;
   DECLARE pag_end INT;
-  SET pag_total_by_page = IFNULL(pag_total_by_page, 0); 
-  SET pag_actual = IFNULL(pag_actual, 0); 
+  SET pag_total_by_page = IFNULL(pag_total_by_page, 0);
+  SET pag_actual = IFNULL(pag_actual, 0);
   
   SET sort_by = IFNULL(sort_by, '');
   SET sort_direction = IFNULL(sort_direction, '');
